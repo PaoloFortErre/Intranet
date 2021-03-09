@@ -9,4 +9,5 @@ public interface ServiceUtente {
 
 	public void saveUtente(Utente u);
 	public List<Utente> getAll();
+	public Utente findByEmail(String email);
 }
