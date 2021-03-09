@@ -6,8 +6,13 @@
 </head>
 <body>
 <div sec:authorize="isAuthenticated()">
-  This content is only shown to authenticated users.
-</div>
+	<p th:utext="${session.id}"></p>
+		This content is only shown to authenticated users.<br><br>
+		<b>Logged user: </b><span sec:authentication="name"></span> <br>
+		<b>Roles: </b><span sec:authentication="principal.authorities"></span>
+		<br>
+		<br>
+	</div>
 <div sec:authorize="!isAuthenticated()">
   non autenticato
 </div>
