@@ -47,12 +47,12 @@ public class HomeController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/setSession", method = RequestMethod.GET)
+	@RequestMapping(value = "/setSession", method = {RequestMethod.POST})
 	public String setSession(HttpSession session) {
 		final String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
 		session.setAttribute("id", serviceUtente.findByEmail(currentUserName).getId());
 		System.out.println(session.getAttribute("id"));
-		return "info";
+		return "redirect:/";
 	}
 
 	// Login form with error
