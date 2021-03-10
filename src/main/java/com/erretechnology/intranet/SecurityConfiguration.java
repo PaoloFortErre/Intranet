@@ -30,6 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		        +"INNER JOIN users_permissions ON users.id = users_permissions.id_user "
 		        +"INNER JOIN permissions ON permissions.nome = users_permissions.id_permission "
 		        +"WHERE users.email = ?  ");
+		
 		/*
 		.authoritiesByUsernameQuery("select username, authority "
 				+ "from authorities "
@@ -63,7 +64,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         .successForwardUrl("/setSession")
         .and()
         .logout()
-        .logoutSuccessUrl("/user");;
+        .logoutSuccessUrl("/login");
 	}
 	
 	@Bean
