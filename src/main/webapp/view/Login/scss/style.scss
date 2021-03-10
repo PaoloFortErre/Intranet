@@ -3,7 +3,7 @@
 @import 'bootstrap/mixins';
 
 $font-primary: 'Lato',Arial, sans-serif;
-$primary: #fbceb5;
+$primary: #1c54cf;
 
 
 body{
@@ -97,6 +97,7 @@ h1, h2, h3, h4, h5,
 
 .form-group{
 	position: relative;
+	justify-content: center;
 }
 
 .field-icon {
@@ -145,9 +146,6 @@ textarea.form-control {
 	height: inherit!important;
 }
 
-
-
-
 //CHECKBOX STYLE
 .checkbox-wrap {
   display: block;
@@ -178,7 +176,6 @@ textarea.form-control {
   top: 0;
   left: 0;
 }
-
 
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
@@ -213,7 +210,6 @@ textarea.form-control {
 	}
 }
 
-
 //BUTTON
 .btn {
 	cursor: pointer;
@@ -225,21 +221,21 @@ textarea.form-control {
 		outline: none;
 	}
 	&.btn-primary {
-		background: $primary !important;
-		border: 1px solid $primary !important;
+		background: #1C54CF!important;
+		border: 1px solid black !important;
 		color: $black !important;
 		&:hover {
-			border: 1px solid $primary;
+			border: 1px solid #1C54CF;
 			background: transparent;
-			color :$primary;
+			color :white;
 		}
 		&.btn-outline-primary {
-			border: 1px solid $primary;
+			border: 1px solid black;
 			background: transparent;
 			color :$primary;
 			&:hover {
 				border: 1px solid transparent;
-				background: $primary;
+				background: #1C54CF;
 				color :$white;
 			}
 		}

@@ -1,55 +1,57 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="it">
-  <head>
-  	<title>Login 10</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+  <title>Login 10</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-	<link rel="stylesheet" href="/view/Login/css/style.css">
+  <link rel="stylesheet" href="/view/Login/css/style.css">
+  <link rel="stylesheet" href="view/Login/scss/style.scss">
+</head>
+<body class="img js-fullheight" style="background-image: url(/view/Login/images/bg.jpg);">
+  <section class="ftco-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6 text-center mb-1">
+          <img class="img-fluid" src="/view/Login/images/title.png" alt="thegate.png">
+          <h2 class = "h5 pt-4" style="color: #fff">Rete aziendale di ERRE Technologies</h2>
+        </div>
+      </div>
+      <div class="row justify-content-center pt-5">
+        <div class="col-md-6 col-lg-4">
+          <div class="login-wrap pt-5">
+            <form th:action="@{/login}" method="post" class="signin-form">
+              <p id="error" th:if="${loginError}"style="text-align: center ; color: #EC2B24">Hai sbagliato email o password
+              </p>
 
-	</head>
-	<body class="img js-fullheight" style="background-image: url(/view/Login/images/bg.jpg);">
-	<section class="ftco-section">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-md-6 text-center mb-5">
-					<h1 class="heading-section">THE GATE</h1>
-				</div>
-			</div>
-			<div class="row justify-content-center">
-				<div class="col-md-6 col-lg-4">
-					<div class="login-wrap p-0">
-		      	<h3 class="mb-4 text-center"></h3>
-		      	<form th:action="@{/login}" method="post" class="signin-form">
-		      	<p th:if="${loginError}" class="error">Hai sbagliato email o password</p>
-		      		<div class="form-group">
-		      			<input type="email" class="form-control" name="username" placeholder="Email" required>
-		      		</div>
-	            <div class="form-group">
-	              <input id="password-field" name="password" type="password" class="form-control" placeholder="Password" required>
-	              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
-	            </div>
-	            <div class="form-group">
-	            	<button type="submit" class="form-control btn btn-primary submit px-3">ACCEDI</button>
-	            </div>
-	            <div class="form-group d-md-flex">
-								<a href="#" style="color: #fff">Hai dimenticato la password?</a>
-	            </div>
-	          </form>
-		      </div>
-				</div>
-			</div>
-		</div>
-	</section>
+              <div class="form-group">
+                <input type="email" class="form-control" name="username" placeholder="Email" required>
+              </div>
+              <div class="form-group">
+                <input id="password-field" name="password" type="password" class="form-control" placeholder="Password" required>
+                <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="form-control btn btn-primary submit px-3" style="background: #1C54CF !important; border: 1px solid black !important; font-size: 20px"><b>ACCEDI</b></button>
+              </div>
+              <div class="form-group justify-content-center d-md-flex">
+                <a href="#" style="color: #fff">Password dimenticata?</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-	<script src="/view/Login/js/jquery.min.js"></script>
+  <script src="/view/Login/js/jquery.min.js"></script>
   <script src="/view/Login/js/popper.js"></script>
   <script src="/view/Login/js/bootstrap.min.js"></script>
   <script src="/view/Login/js/main.js"></script>
 
-	</body>
+</body>
 </html>
