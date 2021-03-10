@@ -23,6 +23,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		//super.configure(auth);
 		auth.jdbcAuthentication()
 		.dataSource(dataSource)
+		.usersByUsernameQuery("select username,password,enabled from auth where username = ?");
+		
+		//loginquery -> "select username,password,enabled from users where username = ?"
+		//authorities query -> "select username,authority from authorities where username = ?"
+		/*
 		.usersByUsernameQuery("select email as username, password, attivo as enabled "
 				+ "from users "
 				+ "where email = ?")
@@ -31,7 +36,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		        +"INNER JOIN users_permissions ON users.id = users_permissions.id_user "
 		        +"INNER JOIN permissions ON permissions.nome = users_permissions.id_permission "
 		        +"WHERE users.email = ?  ");
-		
+		*/
 		/*
 		.authoritiesByUsernameQuery("select username, authority "
 				+ "from authorities "

@@ -16,6 +16,8 @@ public class Permesso {
 	@Id
 	private String nome;
 	
+	private String descrizione;
+	
 	@ManyToMany
 	@JoinTable(name = "users_permissions",
     joinColumns = @JoinColumn(name = "id_permission"),
@@ -23,7 +25,7 @@ public class Permesso {
 	Set<Utente> setUtenti;
 	@ManyToMany
 	@JoinTable(name = "roles_permissions",
-    joinColumns = @JoinColumn(name = "id_permesso"),
+    joinColumns = @JoinColumn(name = "id_permission"),
     inverseJoinColumns = @JoinColumn(name = "id_role"))
 	Set<Ruolo> setRuoli;
 	
@@ -45,6 +47,14 @@ public class Permesso {
 	}
 
 	public void setNome(String nome) {
-		this.nome = "ROLE_" + nome.toUpperCase();
+		this.nome = nome.toUpperCase();
+	}
+
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
 	}
 }
