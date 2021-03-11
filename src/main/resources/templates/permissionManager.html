@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  
+</head>
+<body>
+  <div class="container">
+  
+  <div class="row">
+  
+  <div class= "col" >
+  
+   <p>User: Paolo <button type="button" onclick="loadDoc()">Assegna permesso</button>
+  
+
+  
+  
+  </div>
+
+
+
+
+
+
+ <div class= "col" ng-show="myTable">
+ 
+ 
+ <div id="demo">
+ 
+  <p> Permessi </p> 
+ </div>
+ 
+ <!-- <table>
+ 	<tr> 
+ 		<th> Acronimo </th>
+ 			<th> Descrizione </th>
+ 				<tr>
+ 	
+ 		<td> JSON </td>
+ 	
+ 	</table> -->	
+  </div>
+  
+  </div>
+  
+  </div>
+  
+  <script>
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML =
+      this.responseText;
+    }
+  };
+  xhttp.open("GET", "permessi.txt", true);
+  xhttp.send();
+}
+</script> 
+
+</body>
+</html>
