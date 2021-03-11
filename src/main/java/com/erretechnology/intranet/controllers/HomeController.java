@@ -34,9 +34,9 @@ public class HomeController {
 		return ("info");
 	}
 
-	@GetMapping("/admin")
+	@GetMapping("/forbidden")
 	public String admin() {
-		return ("info");
+		return ("forbidden");
 	}
 
 	// Login form
