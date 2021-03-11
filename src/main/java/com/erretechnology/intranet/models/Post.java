@@ -1,7 +1,9 @@
 
 package com.erretechnology.intranet.models;
 
+import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,19 +27,24 @@ public class Post {
 	@JoinColumn(name = "id_autore")
 	private Utente autore;
 	@OneToMany(mappedBy = "post")
-	private Set<Commento> setCommenti;
+	private List<Commento> setCommenti;
 	
-	public Set<Commento> getSetCommenti() {
+	//private Set<Commento> setCommentiOrdinati = new TreeSet<Commento>();
+	
+	public List<Commento> getSetCommenti() {
 		return setCommenti;
 	}
+	
+	
 
-	public void setSetCommenti(Set<Commento> setCommenti) {
+	public void setSetCommenti(List<Commento> setCommenti) {
 		this.setCommenti = setCommenti;
 	}
 
 	public Post(String testo) {
 		this.setTesto(testo);
 	}
+	
 	
 	public Post() {}
 
