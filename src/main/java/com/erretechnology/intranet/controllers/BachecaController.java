@@ -6,14 +6,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.Commento;
-import com.erretechnology.intranet.models.Permesso;
 import com.erretechnology.intranet.models.Post;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.services.ServiceAuthority;
@@ -50,7 +47,6 @@ public class BachecaController {
 		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
 		//int autoreId = servicePost.findById(id).getAutore().getId();
 		Utente autore = servicePost.findById(id).getAutore();
-		Utente utenteLoggato = serviceUtente.findById(sessionId);
 		if(sessionId == autore.getId() || serviceAuthority.findByUsertId(sessionId).stream().filter(x -> x.getIdPermesso().equals("DPS")).count() == 1) {
 			Post p = servicePost.findById(id);
 			p.setVisibile(false);
