@@ -16,6 +16,7 @@ import com.erretechnology.intranet.models.Commento;
 import com.erretechnology.intranet.models.Permesso;
 import com.erretechnology.intranet.models.Post;
 import com.erretechnology.intranet.models.Utente;
+import com.erretechnology.intranet.services.ServiceAuthority;
 import com.erretechnology.intranet.services.ServiceCommento;
 import com.erretechnology.intranet.services.ServicePost;
 import com.erretechnology.intranet.services.ServiceUtente;
@@ -32,6 +33,9 @@ public class BachecaController {
 	@Autowired
 	ServiceCommento serviceCommento;
 	
+	@Autowired
+	ServiceAuthority serviceAuthority;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView primaPagina() {
 	//	List<Post> messaggi = service.getLastMessage();
@@ -47,7 +51,7 @@ public class BachecaController {
 		//int autoreId = servicePost.findById(id).getAutore().getId();
 		Utente autore = servicePost.findById(id).getAutore();
 		Utente utenteLoggato = serviceUtente.findById(sessionId);
-		if(sessionId == autore.getId() || utenteLoggato.getSetPermessi().stream().filter(x -> x.getNome().equals("DPS")).count() == 1) {
+		if(sessionId == autore.getId() || serviceAuthority.findByUsertId(sessionId).stream().filter(x -> x.getIdPermesso().equals("DPS")).count() == 1) {
 			Post p = servicePost.findById(id);
 			p.setVisibile(false);
 			servicePost.save(p);
@@ -65,11 +69,10 @@ public class BachecaController {
 		// int autoreId = serviceCommento.findById(id).getAutore().getId();
 		Utente autoreCommento = serviceCommento.findById(id).getAutore();
 		Utente autorePost = serviceCommento.findById(id).getPost().getAutore();
-		Utente utenteLoggato = serviceUtente.findById(sessionId);
-		//Permesso p = serviceUtente.getPermessi(utenteLoggato, "DCS").get(0);
+		//Utente utenteLoggato = serviceUtente.findById(sessionId);
 		if(sessionId == autoreCommento.getId() || 
-				utenteLoggato.getSetPermessi().stream().filter(x -> x.getNome().equals("DCS")).count() == 1 ||
-				autorePost.getId() == utenteLoggato.getId()) {
+				serviceAuthority.findByUsertId(sessionId).stream().filter(x-> x.getIdPermesso().equals("DCS")).count() == 1 ||
+				autorePost.getId() == sessionId) {
 			Commento c = serviceCommento.findById(id);
 			c.setVisibile(false);
 			serviceCommento.save(c);

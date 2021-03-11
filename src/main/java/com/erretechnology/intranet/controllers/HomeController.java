@@ -83,7 +83,7 @@ public class HomeController {
 	
 	@RequestMapping("/aggiungi")
 	public String aggiungi() {
-		Utente utente = new Utente();
+		/*Utente utente = new Utente();
 		utente.setAttivo(true);
 		utente.setCognome("Agostini");
 		utente.setNome("Marco");
@@ -100,6 +100,18 @@ public class HomeController {
 		utente2.setCognome("Paoletti");
 		utente2.setNome("Mario");
 		utente2.setEmail("mario.paoletti@errepro.tech");
+		utente2.setPassword("asd");
+		Permesso permesso2 = new Permesso();
+		permesso2.setNome("User");
+		utente2.addPermesso(permesso2);
+		permesso2.addUtente(utente2);
+		serviceUtente.saveUtente(utente2);
+		servicePermesso.savePermesso(permesso2);*/
+		Utente utente2 = new Utente();
+		utente2.setAttivo(true);
+		utente2.setCognome("Pippo");
+		utente2.setNome("Pippo");
+		utente2.setEmail("pippo@errepro.tech");
 		utente2.setPassword("asd");
 		Permesso permesso2 = new Permesso();
 		permesso2.setNome("User");

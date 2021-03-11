@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 
@@ -25,6 +26,8 @@ public class Utente{
 
 	private String nome;
 	private String cognome;
+	
+	@Column(unique=true)
 	private String email;
 	private String password;
 	private Boolean attivo;

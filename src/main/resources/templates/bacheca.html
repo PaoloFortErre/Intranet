@@ -55,7 +55,7 @@
 							<td th:text="${commento.autore.cognome}" />
 							<td th:text="${commento.testo}" />
 							<td th:text="${#dates.format(commento.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"/>
-							<td th:if="${DCS} or ${commento.autore.id} == ${session.id} or ${post.id} == ${session.id}">
+							<td th:if="${DCS} or ${commento.autore.id} == ${session.id} or ${post.autore.id} == ${session.id}">
 								<form th:action="@{/bacheca/deleteCommento(id=${commento.id})}" method="post">
 									<button name="button" type="submit">Elimina</button>
 								</form>
