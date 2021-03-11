@@ -26,14 +26,14 @@ public class HomeController {
 	private ServicePermesso servicePermesso;
 	@Autowired
 	private ServiceAuthority authorityService;
-	
+
 	@GetMapping("/")
 	public String home() {
 		/*
 		authorityService.getAll().forEach(x->{
 			System.out.println(x.getEmail() + " " + x.getDescrizione());
 		});
-		*/
+		 */
 		authorityService.findByUsertId(2).forEach(x->{
 			System.out.println(x.getEmail() + " " + x.getDescrizione());
 		});
@@ -59,13 +59,21 @@ public class HomeController {
 		return mav;
 	}
 	// Password Dimenticata da login
-		@RequestMapping(value = "/password_dimenticata", method = RequestMethod.GET)
-		public ModelAndView passwordLost() {
-			ModelAndView mav = new ModelAndView();
-			mav.setViewName("password_lost");
-			return mav;
-		}
-	
+	@RequestMapping(value = "/password_dimenticata", method = RequestMethod.GET)
+	public ModelAndView passwordLost() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("password_lost");
+		return mav;
+	}
+
+	// Login form
+	@RequestMapping(value = "/homepageAdmin", method = RequestMethod.GET)
+	public ModelAndView homepageAdmin() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("homepage_admin");
+		return mav;
+	}
+
 	@RequestMapping(value = "/setSession", method = {RequestMethod.POST})
 	public String setSession(HttpSession session) {
 		final String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -80,7 +88,7 @@ public class HomeController {
 		model.addAttribute("loginError", true);
 		return "loginPage";
 	}
-	
+
 	@RequestMapping("/aggiungi")
 	public String aggiungi() {
 		/*Utente utente = new Utente();
@@ -119,8 +127,8 @@ public class HomeController {
 		permesso2.addUtente(utente2);
 		serviceUtente.saveUtente(utente2);
 		servicePermesso.savePermesso(permesso2);
-		
-		
+
+
 		return "loginPage";
 	}
 }
