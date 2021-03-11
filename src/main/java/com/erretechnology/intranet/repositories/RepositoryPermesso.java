@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository(value = "RepositoryPermesso")
 public interface RepositoryPermesso extends JpaRepository<Permesso, String>{
-
+	
 }

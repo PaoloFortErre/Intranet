@@ -22,6 +22,11 @@ public class ServicePermessoImpl implements ServicePermesso{
 	public List<Permesso> getAll() {
 		return repositoryPermesso.findAll();
 	}
+
+	@Override
+	public List<Permesso> getFromUser() {
+		return null;
+	}
 	
 	
 	

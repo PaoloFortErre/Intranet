@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.Permesso;
 import com.erretechnology.intranet.models.Utente;
+import com.erretechnology.intranet.services.ServiceAuthority;
 import com.erretechnology.intranet.services.ServicePermesso;
 import com.erretechnology.intranet.services.ServiceUtente;
 
@@ -23,9 +24,20 @@ public class HomeController {
 	private ServiceUtente serviceUtente;
 	@Autowired
 	private ServicePermesso servicePermesso;
+	@Autowired
+	private ServiceAuthority authorityService;
 	
 	@GetMapping("/")
 	public String home() {
+		/*
+		authorityService.getAll().forEach(x->{
+			System.out.println(x.getEmail() + " " + x.getDescrizione());
+		});
+		*/
+		authorityService.findByUsertId(2).forEach(x->{
+			System.out.println(x.getEmail() + " " + x.getDescrizione());
+		});
+		System.out.println();
 		return ("info");
 	}
 

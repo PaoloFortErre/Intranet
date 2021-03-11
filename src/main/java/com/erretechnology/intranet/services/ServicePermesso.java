@@ -9,4 +9,5 @@ public interface ServicePermesso {
 
 	public void savePermesso(Permesso p);
 	public List<Permesso> getAll();
+	public List<Permesso> getFromUser();
 }
