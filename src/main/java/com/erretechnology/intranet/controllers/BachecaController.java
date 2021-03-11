@@ -37,7 +37,10 @@ public class BachecaController {
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public String deleteMessaggio(/*@ModelAttribute Post post*/ int id, HttpSession session) {
 		if(Integer.parseInt(session.getAttribute("id").toString()) == servicePost.findById(id).getAutore().getId()) {
-			servicePost.delete(servicePost.findById(id));
+			Post p = servicePost.findById(id);
+			p.setVisibile(false);
+			servicePost.save(p);
+			//servicePost.delete(servicePost.findById(id));
 			return "redirect:/bacheca/";
 		}
 		System.out.println("ERRORE");	
@@ -54,7 +57,7 @@ public class BachecaController {
 		post.setAutore(autore);
 		
 		post.setTimestamp(Instant.now().getEpochSecond());
-
+		post.setVisibile(true);
 		servicePost.save(post);
 		return "redirect:/bacheca/";
 

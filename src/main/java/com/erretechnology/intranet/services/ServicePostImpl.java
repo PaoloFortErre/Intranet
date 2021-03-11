@@ -17,7 +17,7 @@ public class ServicePostImpl implements ServicePost{
 	
 	@Override
 	public List<Post> getLastMessage() {
-		return repositoryPost.findAll().stream().sorted(Comparator.comparingInt(Post::getId).reversed()).collect(Collectors.toList());
+		return repositoryPost.findAll().stream().filter(x->x.isVisibile()).sorted(Comparator.comparingInt(Post::getId).reversed()).collect(Collectors.toList());
 	}
 
 	@Override

@@ -17,6 +17,7 @@ public class Post {
 	private int id;
 	private String testo;
 	private long timestamp;
+	private boolean visibile;
 	@ManyToOne
 	@JoinColumn(name = "id_autore")
 	private Utente autore;
@@ -57,5 +58,13 @@ public class Post {
 
 	public void setTimestamp(long timestamp) {
 		this.timestamp = timestamp;
+	}
+
+	public boolean isVisibile() {
+		return visibile;
+	}
+
+	public void setVisibile(boolean visibile) {
+		this.visibile = visibile;
 	}
 }
