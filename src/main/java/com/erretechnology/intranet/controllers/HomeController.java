@@ -65,6 +65,13 @@ public class HomeController {
 		mav.setViewName("password_lost");
 		return mav;
 	}
+	//Permission manager
+	@RequestMapping(value = "/permission_manager", method = RequestMethod.GET)
+	public ModelAndView permissionManager() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("permissionManager");
+		return mav;
+	}
 
 	// Login form
 	@RequestMapping(value = "/homepageAdmin", method = RequestMethod.GET)
