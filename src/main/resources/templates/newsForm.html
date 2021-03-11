@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="#" th:action="@{/news/insert}" th:object="${news}" method="post" enctype="multipart/form-data">
+	  <label for="titolo">Titolo:</label><br>
+	  <input type="text" id="titolo" name="titolo" th:field="*{titolo}"><br>
+	  <label for="contenuto">Contenuto:</label><br>  
+	  <input type="text" id="contenuto" name="contenuto" th:field="*{contenuto}"><br>
+	  <input type="file" name="immagine" accept="image/png, image/jpeg"/>
+	  <br>
+	  <input type="submit" value="Pubblica">
+	</form>
+
+
+
+</body>
+</html>

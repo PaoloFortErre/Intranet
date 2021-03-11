@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<p th:text="${#dates.format(news.dataPubblicazione*1000, 'dd/MM/yyyy, HH:mm')}" />
+	<h2 th:text="${news.titolo}" />
+	<p th:text="${news.contenuto}" />
+	<!--   <img th:src="@{/image/} + ${news.copertina}"> -->
+</body>
+</html>
+
+
