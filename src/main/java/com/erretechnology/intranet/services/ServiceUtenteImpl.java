@@ -28,5 +28,10 @@ public class ServiceUtenteImpl implements ServiceUtente{
 	public Utente findByEmail(String email) {
 		return getAll().stream().filter(x -> x.getEmail().equals(email)).findFirst().get();
 	}
+	
+	@Override
+	public Utente findById(int id) {
+		return userRepository.findById(id).get();
+	}
 
 }

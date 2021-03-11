@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>
+.testo {
+	resize : none;
+}
+</style>
+<meta charset="ISO-8859-1">
+<title>Bacheca Erre Technology Group</title>
+</head>
+<body>
+<div align = "center">
+Benvenuto nella bacheca di Erre Technology!
+</div>
+<div sec:authorize="hasAuthority('RS')">
+  <table>
+		<tr th:each="post: ${messaggi}">
+			<td th:text="${post.autore.id}"/>
+			<td th:text="${post.autore.email}"/> 
+		    <td th:text="${post.testo}" />
+            <td th:text="${#dates.format(post.timestamp*1000, 'dd/MM/yyyy, HH:mm')}">/>
+		    <td th:if="${post.autore.id} == ${session.id}">
+		    <div sec:authorize="hasAuthority('DCS')">
+		    <form th:action="@{/bacheca/delete(id=${post.id})}"  method="post">
+		    	<button name="button" type="submit" >Elimina</button>
+		    </form>
+		    </div>	
+		    </td>
+	    </tr>
+    </table>
+</div>
+<div sec:authorize="hasAuthority('WPS')">
+	<form th:action="@{/bacheca/addMessaggio}" method="post">
+		<textarea class="testo" name="testo" placeholder="Inserisci un post" cols="50" rows="2.5" required></textarea>
+		<input type = "submit" value = "Invia"/>
+	</form>
+</div>
+<!--  
+<form method = "POST" id = "form2" th:action="@{/bacheca/addMessaggio}" th:objects="${Post}">
+<label for = "testo">Messaggio</label>
+<textarea cols="50" rows="2.5" class="testo" th:filed="${Post.testo}" required></textarea>
+ <input type = "submit" id = "testo" value = "Invia"/>
+ </form>
+ -->
+</body>
+</html>
