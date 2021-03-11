@@ -19,15 +19,31 @@
 	<div th:if="${RS}">
 		<table>
 			<tr th:each="post: ${messaggi}">
-				<td th:text="${post.autore.id}" />
-				<td th:text="${post.autore.email}" />
-				<td th:text="${post.testo}" />
-				<td th:text="${#dates.format(post.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"/>
-				<td th:if="${DPS} or ${post.autore.id} == ${session.id}">
-					<form th:action="@{/bacheca/delete(id=${post.id})}" method="post">
-						<button name="button" type="submit">Elimina</button>
-					</form>
-				</td>
+			<td>
+				<table>
+					<thead>
+						<tr>
+							<td th:text="${post.autore.id}" />
+							<td th:text="${post.autore.email}" />
+							<td th:text="${post.testo}" />
+							<td th:text="${#dates.format(post.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"/>
+							<td th:if="${DPS} or ${post.autore.id} == ${session.id}">
+								<form th:action="@{/bacheca/delete(id=${post.id})}" method="post">
+									<button name="button" type="submit">Elimina</button>
+								</form>
+							</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Autore Commento</td>
+							<td>Testo Commento</td>
+						</tr>
+					</tbody>
+					
+				</table>
+			</td>
+				
 			</tr>
 		</table>
 	</div>
