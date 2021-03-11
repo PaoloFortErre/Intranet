@@ -36,7 +36,9 @@ public class BachecaController {
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public String deleteMessaggio(/*@ModelAttribute Post post*/ int id, HttpSession session) {
-		if(Integer.parseInt(session.getAttribute("id").toString()) == servicePost.findById(id).getAutore().getId()) {
+		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
+		int autoreId = servicePost.findById(id).getAutore().getId();
+		if(sessionId == autoreId) {
 			Post p = servicePost.findById(id);
 			p.setVisibile(false);
 			servicePost.save(p);

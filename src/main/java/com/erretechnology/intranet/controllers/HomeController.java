@@ -34,9 +34,9 @@ public class HomeController {
 		return ("info");
 	}
 
-	@GetMapping("/admin")
+	@GetMapping("/forbidden")
 	public String admin() {
-		return ("info");
+		return ("forbidden");
 	}
 
 	// Login form
@@ -46,6 +46,13 @@ public class HomeController {
 		mav.setViewName("loginPage");
 		return mav;
 	}
+	// Password Dimenticata da login
+		@RequestMapping(value = "/password_dimenticata", method = RequestMethod.GET)
+		public ModelAndView passwordLost() {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("password_lost");
+			return mav;
+		}
 	
 	@RequestMapping(value = "/setSession", method = {RequestMethod.POST})
 	public String setSession(HttpSession session) {
