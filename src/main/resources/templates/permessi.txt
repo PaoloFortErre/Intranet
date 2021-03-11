@@ -1,3 +1,0 @@
-<h1>PERMESSI</h1>
-<p>Scrittura.</p>
-<p>Lettura.</p>
