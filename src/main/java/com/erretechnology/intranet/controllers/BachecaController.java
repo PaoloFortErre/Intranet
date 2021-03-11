@@ -40,11 +40,11 @@ public class BachecaController {
 			Post p = servicePost.findById(id);
 			p.setVisibile(false);
 			servicePost.save(p);
-			//servicePost.delete(servicePost.findById(id));
+			System.out.println("cancellazione post: RIUSCITO");
 			return "redirect:/bacheca/";
 		}
-		System.out.println("ERRORE");	
-		return "redirect:/";
+		System.out.println("cancellazione post: PERMESSO NEGATO");	
+		return "redirect:/forbidden";
 		
 	}
 	
