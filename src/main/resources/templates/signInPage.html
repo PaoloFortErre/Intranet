@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form th:action="@{/eseguiRegistrazione}" method="post" enctype="utf8">
+    <div>
+        <label >first</label>
+        <input th:field="${user.nome}"/>
+    </div>
+    <div>
+        <label >last</label>
+        <input th:field="${user.cognome}"/>
+    </div>
+    <div>
+        <label >email</label>
+        <input type="email" th:field="${utente.email}"/>
+    </div>
+    <div>
+        <label >password</label>
+        <input type="password" th:field="${utente.password}"/>
+    </div>
+    <div>
+        <label >nascita</label>
+        <input type="date" th:field="${date.date}"/>
+    </div>
+    <div>
+    	<label >descrizione</label>
+        <textarea th:field="${user.descrizione}"></textarea>
+    </div>
+    <div>
+        <select th:field="${user.settore}">
+		    <option th:value="'Erre Technology'" th:text="ErreTechnology"></option>
+		    <option th:value="'Erre GES'" th:text="ErreGES"></option>
+		    <option th:value="'Erre PRO'" th:text="ErrePRO"></option>
+		    <option th:value="'Erre LAB'" th:text="ErreLAB"></option>
+		</select>
+    </div>
+    <button type="submit">submit</button>
+</form>
+
+<a th:href="@{/login}" >login</a>
+</body>
+</html>

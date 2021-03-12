@@ -4,15 +4,10 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -30,6 +25,8 @@ public class UtenteDatiPersonali implements Serializable{
 	private long dataNascita;
 	private String nome;
 	private String cognome;
+	private String settore;
+	private Boolean passwordCambiata;
 
 
 	public UtenteDatiPersonali(){	}
@@ -80,5 +77,21 @@ public class UtenteDatiPersonali implements Serializable{
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getSettore() {
+		return settore;
+	}
+
+	public void setSettore(String settore) {
+		this.settore = settore;
+	}
+
+	public boolean isPasswordCambiata() {
+		return passwordCambiata;
+	}
+
+	public void setPasswordCambiata(boolean passwordCambiata) {
+		this.passwordCambiata = passwordCambiata;
 	}
 }
