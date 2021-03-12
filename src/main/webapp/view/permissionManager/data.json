@@ -3,12 +3,15 @@
 "nome" :"AM",
  
 "descrizione": "Creazione nuovo profilo, eliminazione, modifica dati e assegnazione permessi"
-}, 
-{
-"nome" :"CPS",
+},
+
+{"nome" :"CPS",
  
 "descrizione": "Aggiunta dei commenti ai post ed eliminazione (SOLO dei propri commenti)"
+},
 
+{
+"nome": "EP",
+"descrizione": "Modifica il proprio profilo"
 }
 ]
-

@@ -2,6 +2,6 @@
 
 "nome" : "Paolo",
 "cognome" : "C",
-"permessi": ["scrivere news"]
+"permessi": ["AM", "CPS"]
 
 }
