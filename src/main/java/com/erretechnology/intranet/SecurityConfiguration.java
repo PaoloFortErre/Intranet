@@ -60,10 +60,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		//super.configure(http);
+		
 		http.authorizeRequests()
+		
 		.antMatchers("/admin").hasRole("ADMIN")
 		.antMatchers("/user").hasAnyRole("ADMIN","USER")
 		.antMatchers("/").permitAll()
+		.antMatchers("/uploadImage").permitAll()
 		.and().formLogin()
         .loginPage("/login")
         .failureUrl("/login-error")
@@ -71,7 +74,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         .and()
         .logout()
         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-        .logoutSuccessUrl("/login");
+        .logoutSuccessUrl("/login")
+        ;
+		http.csrf().disable();
+        
 	}
 	
 	@Bean
