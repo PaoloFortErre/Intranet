@@ -24,8 +24,7 @@ public class Utente{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
-	private String nome;
-	private String cognome;
+	
 	
 	@Column(unique=true)
 	private String email;
@@ -56,18 +55,6 @@ public class Utente{
 	}
 	public void setId(Integer id) {
 		this.id = id;
-	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public String getCognome() {
-		return cognome;
-	}
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
 	}
 	public Set<Ruolo> getSetGruppi() {
 		return setRuoli;
