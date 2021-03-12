@@ -71,10 +71,10 @@ public class HomeController {
 	}
 
 	// Login form
-	@RequestMapping(value = "/homepageAdmin", method = RequestMethod.GET)
+	@RequestMapping(value = "/homepage", method = RequestMethod.GET)
 	public ModelAndView homepageAdmin() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("homepage_admin");
+		mav.setViewName("homepage");
 		return mav;
 	}
 
@@ -93,5 +93,5 @@ public class HomeController {
 		return "loginPage";
 	}
 
-	
+
 }
