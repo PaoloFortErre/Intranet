@@ -75,6 +75,64 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Table structure for table `comment`
+--
+
+DROP TABLE IF EXISTS `comment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `comment` (
+  `id_commento` int NOT NULL,
+  `testo` varchar(255) DEFAULT NULL,
+  `timestamp` bigint NOT NULL,
+  `visibile` bit(1) NOT NULL,
+  `id_autore` int DEFAULT NULL,
+  `id_post` int DEFAULT NULL,
+  PRIMARY KEY (`id_commento`),
+  KEY `FKgqruet2cbymnge1n8nijxtpn8` (`id_autore`),
+  KEY `FK5d3jnie61rlb5an9r4hm9wq9n` (`id_post`),
+  CONSTRAINT `FK5d3jnie61rlb5an9r4hm9wq9n` FOREIGN KEY (`id_post`) REFERENCES `post` (`id`),
+  CONSTRAINT `FKgqruet2cbymnge1n8nijxtpn8` FOREIGN KEY (`id_autore`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comment`
+--
+
+LOCK TABLES `comment` WRITE;
+/*!40000 ALTER TABLE `comment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `comment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `dati_utente`
+--
+
+DROP TABLE IF EXISTS `dati_utente`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `dati_utente` (
+  `id_user` int NOT NULL,
+  `cognome` varchar(255) DEFAULT NULL,
+  `data_nascita` bigint NOT NULL,
+  `descrizione` varchar(255) DEFAULT NULL,
+  `nome` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_user`),
+  CONSTRAINT `FKinv52fgneosdl8j8dqy4s2x9t` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `dati_utente`
+--
+
+LOCK TABLES `dati_utente` WRITE;
+/*!40000 ALTER TABLE `dati_utente` DISABLE KEYS */;
+/*!40000 ALTER TABLE `dati_utente` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `hibernate_sequence`
 --
 
@@ -92,8 +150,91 @@ CREATE TABLE `hibernate_sequence` (
 
 LOCK TABLES `hibernate_sequence` WRITE;
 /*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
-INSERT INTO `hibernate_sequence` VALUES (3);
+INSERT INTO `hibernate_sequence` VALUES (13);
 /*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `news`
+--
+
+DROP TABLE IF EXISTS `news`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `news` (
+  `id` int NOT NULL,
+  `contenuto` varchar(255) NOT NULL,
+  `copertina` varchar(255) DEFAULT NULL,
+  `data_pubblicazione` bigint NOT NULL,
+  `titolo` varchar(255) NOT NULL,
+  `autore_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK6krg9ofhij7l6a7cyyual6h25` (`autore_id`),
+  CONSTRAINT `FK6krg9ofhij7l6a7cyyual6h25` FOREIGN KEY (`autore_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `news`
+--
+
+LOCK TABLES `news` WRITE;
+/*!40000 ALTER TABLE `news` DISABLE KEYS */;
+/*!40000 ALTER TABLE `news` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `old_comment`
+--
+
+DROP TABLE IF EXISTS `old_comment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `old_comment` (
+  `id` int NOT NULL,
+  `testo` varchar(255) DEFAULT NULL,
+  `timestamp` bigint NOT NULL,
+  `id_commento` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKcn0wgauj3i9f2bdg0kinoeo3g` (`id_commento`),
+  CONSTRAINT `FKcn0wgauj3i9f2bdg0kinoeo3g` FOREIGN KEY (`id_commento`) REFERENCES `comment` (`id_commento`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `old_comment`
+--
+
+LOCK TABLES `old_comment` WRITE;
+/*!40000 ALTER TABLE `old_comment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `old_comment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `old_post`
+--
+
+DROP TABLE IF EXISTS `old_post`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `old_post` (
+  `id` int NOT NULL,
+  `testo` varchar(255) DEFAULT NULL,
+  `timestamp` bigint NOT NULL,
+  `id_post` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKoibh1w9fg9gwpxn3gp1khrskt` (`id_post`),
+  CONSTRAINT `FKoibh1w9fg9gwpxn3gp1khrskt` FOREIGN KEY (`id_post`) REFERENCES `post` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `old_post`
+--
+
+LOCK TABLES `old_post` WRITE;
+/*!40000 ALTER TABLE `old_post` DISABLE KEYS */;
+/*!40000 ALTER TABLE `old_post` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -118,6 +259,35 @@ LOCK TABLES `permissions` WRITE;
 /*!40000 ALTER TABLE `permissions` DISABLE KEYS */;
 INSERT INTO `permissions` VALUES ('AM','Creazione nuovo profilo, eliminazione, modifica dati e assegnazione permessi'),('CPS','Aggiunta dei commenti ai post ed eliminazione (SOLO dei propri commenti)'),('DCS','Eliminazione commenti altrui'),('DPS','Cancellazione dei post altrui'),('EP','Modifica il proprio profilo'),('PM','Creazione nuovo ruolo, eliminazione, assegnazione permessi al ruolo e visualizzazione dei permessi assegnati'),('RP','Visualizza il proprio profilo'),('RS','Lettura social (post in myLife)'),('WNML','Aggiunta news in myLife, modifica ed eliminazione'),('WNMW','Aggiunta news in myWork, modifica ed eliminazione'),('WPS','Aggiungere post su myLife, modifica ed eliminazione (SOLO dei propri post)');
 /*!40000 ALTER TABLE `permissions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `post`
+--
+
+DROP TABLE IF EXISTS `post`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `post` (
+  `id` int NOT NULL,
+  `testo` varchar(255) DEFAULT NULL,
+  `timestamp` bigint NOT NULL,
+  `id_autore` int DEFAULT NULL,
+  `visibile` bit(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK72s04kuk68aasnla0mn5l6y7t` (`id_autore`),
+  CONSTRAINT `FK72s04kuk68aasnla0mn5l6y7t` FOREIGN KEY (`id_autore`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `post`
+--
+
+LOCK TABLES `post` WRITE;
+/*!40000 ALTER TABLE `post` DISABLE KEYS */;
+INSERT INTO `post` VALUES (4,'primo post da admin',1615460374,1,_binary '\0'),(5,'secondo post da admin',1615460381,1,_binary '\0'),(6,'aaaa',1615460485,2,_binary '\0'),(7,'primo post da admin',1615461069,1,_binary ''),(8,'secondo post da admin',1615461078,1,_binary ''),(9,'terzo post da admin',1615461086,1,_binary ''),(10,'primo post da user',1615461112,2,_binary '\0'),(11,'secondo post da user',1615461120,2,_binary ''),(12,'yesss',1615462925,1,_binary '');
+/*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -180,9 +350,7 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int NOT NULL,
   `attivo` bit(1) DEFAULT NULL,
-  `cognome` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `nome` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -194,7 +362,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,_binary '','Agostini','marco.agostini@errepro.tech','Marco','$2a$10$x4OLz12.Cw0PAvoWhS/35eJpUEd5v8612u/2SiddDkEO7nPt17wMm'),(2,_binary '','Paoletti','mario.paoletti@errepro.tech','Mario','$2a$10$cjZVepk8dtlHvLJgGT5lbefa1XbLGWtd56ttQN/GghC86gS/bk/FW');
+INSERT INTO `users` VALUES (1,_binary '','marco.agostini@errepro.tech','$2a$10$x4OLz12.Cw0PAvoWhS/35eJpUEd5v8612u/2SiddDkEO7nPt17wMm'),(2,_binary '','mario.paoletti@errepro.tech','$2a$10$cjZVepk8dtlHvLJgGT5lbefa1XbLGWtd56ttQN/GghC86gS/bk/FW');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -333,4 +501,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-10 15:41:50
+-- Dump completed on 2021-03-12 12:34:03

@@ -18,33 +18,22 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "DatiUtente")
 public class UtenteDatiPersonali implements Serializable{
-
-	//private ?? immagineProfilo;
-	
-/*	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name= "IdTmp")
-	private int idTMP;
-*/
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -828732162220395783L;
-	private String descrizione;
-	private long dataNascita;
-	
 	@Id
 	@Column(name="id_user") 
 	private Integer id;
-	
-	
 	@MapsId	
 	@OneToOne()
 	@JoinColumn(name = "id_user")
 	private Utente utente;
-	
+	private String descrizione;
+	private long dataNascita;
+	private String nome;
+	private String cognome;
+
+
 	public UtenteDatiPersonali(){	}
-	
+
 	public long getDataNascita() {
 		return dataNascita;
 	}
@@ -68,7 +57,7 @@ public class UtenteDatiPersonali implements Serializable{
 	public void setUtente(Utente utente) {
 		this.utente = utente;
 	}
-/*
+	/*
 	public int getIdTMP() {
 		return idTMP;
 	}
@@ -76,4 +65,20 @@ public class UtenteDatiPersonali implements Serializable{
 	public void setIdTMP(int idTMP) {
 		this.idTMP = idTMP;
 	}*/
+
+	public String getCognome() {
+		return cognome;
+	}
+
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 }
