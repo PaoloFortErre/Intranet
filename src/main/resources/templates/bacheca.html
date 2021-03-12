@@ -6,6 +6,16 @@
 	resize: none;
 }
 </style>
+
+<script>
+	function showAreaCommento(id){
+		document.getElementsByClassName('commentoModificato' + id)[0].style.display = "block";
+	}
+	
+	function showAreaPost(id){
+		document.getElementsByClassName('postModificato' + id)[0].style.display = "block";
+	}
+</script>
 <meta charset="ISO-8859-1">
 <title>Bacheca Erre Technology Group</title>
 </head>
@@ -42,6 +52,13 @@
 									<button name="button" type="submit">Elimina</button>
 								</form>
 							</td>
+							<td th:if="${post.autore.id} == ${session.id}">
+								<form th:action="@{/bacheca/editPost(id=${post.id})}" method="post">
+									<button name="button" type="submit" th:onclick="'showAreaPost(' + ${post.id} + ')'">Modifica Post</button>
+									<textarea th:class="postModificato + ${post.id}" name="testo" placeholder="Modifica commento"
+											cols="50" rows="2.5" style="display:none" required></textarea>
+								</form>
+							</td>
 						</tr>
 					</thead>
 					<tbody border="1">
@@ -58,6 +75,14 @@
 							<td th:if="${DCS} or ${commento.autore.id} == ${session.id} or ${post.autore.id} == ${session.id}">
 								<form th:action="@{/bacheca/deleteCommento(id=${commento.id})}" method="post">
 									<button name="button" type="submit">Elimina</button>
+								</form>
+							</td>
+							
+							<td th:if="${commento.autore.id} == ${session.id}">
+								<form th:action="@{/bacheca/editCommento(id=${commento.id})}" method="post">
+									<button name="button" type="submit" th:onclick="'showAreaCommento(' + ${commento.id} + ')'">Modifica Commento</button>
+									<textarea th:class="commentoModificato + ${commento.id}" name="testo" placeholder="Modifica commento"
+											cols="50" rows="2.5" style="display:none" required></textarea>
 								</form>
 							</td>
 						</tr>

@@ -1,5 +1,6 @@
 package com.erretechnology.intranet.controllers;
 
+import java.sql.PseudoColumnUsage;
 import java.time.Instant;
 
 import javax.servlet.http.HttpSession;
@@ -11,11 +12,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.Commento;
+import com.erretechnology.intranet.models.CommentoModificato;
 import com.erretechnology.intranet.models.Post;
+import com.erretechnology.intranet.models.PostModificato;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.services.ServiceAuthority;
 import com.erretechnology.intranet.services.ServiceCommento;
+import com.erretechnology.intranet.services.ServiceCommentoModificato;
 import com.erretechnology.intranet.services.ServicePost;
+import com.erretechnology.intranet.services.ServicePostModificato;
 import com.erretechnology.intranet.services.ServiceUtente;
 
 @Controller
@@ -33,6 +38,13 @@ public class BachecaController {
 	@Autowired
 	ServiceAuthority serviceAuthority;
 	
+	@Autowired
+	ServicePostModificato servicePostModificato;
+	
+	@Autowired
+	ServiceCommentoModificato serviceCommentoModificato;
+	
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView primaPagina() {
 	//	List<Post> messaggi = service.getLastMessage();
@@ -40,6 +52,50 @@ public class BachecaController {
 		mav.setViewName("bacheca");
 		mav.addObject("messaggi", servicePost.getLastMessage());
 		return mav;
+	}
+	
+	@RequestMapping(value = "/editPost", method = RequestMethod.POST)
+	public String updatePost(int id, HttpSession session, Post post) {
+		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
+		Post p = servicePost.findById(id);
+		Utente autore = p.getAutore();
+		if(sessionId == autore.getId()) {
+			String tmp = p.getTesto();
+			p.setTesto(post.getTesto());
+			PostModificato pm = new PostModificato();
+			pm.setTesto(tmp);
+			pm.setTimestamp(p.getTimestamp());
+			pm.setPost(p);
+			pm.setTimestamp(p.getTimestamp());
+			p.setTimestamp(Instant.now().getEpochSecond());
+			servicePost.save(p);
+			servicePostModificato.save(pm);
+			
+			return "redirect:/bacheca/";
+		}
+		return "redirect:/forbidden";
+	}
+	
+	@RequestMapping(value = "/editCommento", method = RequestMethod.POST)
+	public String updateCommento(int id, HttpSession session, Commento commento) {
+		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
+		Commento c = serviceCommento.findById(id);
+		Utente autore = c.getAutore();
+		if(sessionId == autore.getId()) {
+			String tmp = c.getTesto();
+			c.setTesto(commento.getTesto());
+			CommentoModificato cm = new CommentoModificato();
+			cm.setTesto(tmp);
+			cm.setTimestamp(c.getTimestamp());
+			c.setTimestamp(Instant.now().getEpochSecond());
+			cm.setCommento(c);
+			cm.setTimestamp(c.getTimestamp());
+			c.setTimestamp(Instant.now().getEpochSecond());
+			serviceCommento.save(c);
+			serviceCommentoModificato.save(cm);
+			return "redirect:/bacheca/";
+		}
+		return "redirect:/forbidden";
 	}
 	
 	@RequestMapping(value = "/deletePost", method = RequestMethod.POST)
