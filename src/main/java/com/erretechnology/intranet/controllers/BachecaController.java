@@ -45,6 +45,13 @@ public class BachecaController {
 	ServiceCommentoModificato serviceCommentoModificato;
 	
 	
+	@RequestMapping(value="/myLife", method= RequestMethod.GET)
+	public ModelAndView myLife() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("myLife");
+		return mav;
+	}
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView primaPagina() {
 	//	List<Post> messaggi = service.getLastMessage();

@@ -3,64 +3,85 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Permission manager</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-  
-  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  
+<link
+	href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap"
+	rel="stylesheet">
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
-<body>
+<body onload="loadUse(); loadDoc();">
 
-  <p>User <button type="button" onclick="loadUse()"> Mostra utenti </button>
-  <div id="demo1"></div>
-   <p style="text-align: right">Permessi: <button type="button" onclick="loadDoc()"> Mostra permesso </button>
-   <p id="p"></p>
-  
- <div id="demo" style="text-align: right">
+	<p>User</p>
+	<div id="demo1"></div>
+	<div style="text-align: center;">
+		Permessi:
+		<form method="POST">
+    		<select id="Select" onclick="formSubmit()">
+			</select>	
+		</form>
+		<p id="resulted"></p>
+	
+</div>
 
-  </div>
-    
-  <script type="text/javascript">
-  
-  function loadUse(){
-	  const xhttp = new XMLHttpRequest();
-	  xhttp.onreadystatechange = function() {
-	    if (this.readyState == 4 && this.status == 200) {
-	    	
-	    var risposta=this.responseText;
-	      var ob= JSON.parse(risposta); 
-	      document.getElementById("demo1").innerHTML =
-	    	 ob.nome ;
-	      document.getElementById("p").innerHTML =
-		    	 ob.permessi ;
-	 
-	    }
-	    
-	    
-	  };
-	  xhttp.open("GET", "/view/permissionManager/user.json", true);
-	  xhttp.send();
-  }
-  
-  
-  function loadDoc() {
-	  const xhttp = new XMLHttpRequest();
-	  xhttp.onreadystatechange = function() {
-	    if (this.readyState == 4 && this.status == 200) {
-		      var risposta= this.responseText;
-			var obj = JSON.parse(risposta)
-			
-	      document.getElementById("demo").innerHTML =  
-	     " <label for='huey'>"+obj.nome +"</label><input type='radio' value='" + obj.nome +"'>"+ " <br>" + obj.descrizione
-	    }
-	  };
-	  xhttp.open("GET", "/view/permissionManager/data.json", true);
-	  xhttp.send();
-	}
- 
-  
-</script> 
+	<script type="text/javascript">
+	
+		
+		function loadUse() {
+			const xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+
+					var risposta = this.responseText;
+					
+					var obj = JSON.parse(risposta);
+					
+					//var obj2 = { "permessi": ["X"] }; 
+					//obj.push(obj2);
+					
+					document.getElementById("demo1").innerHTML = "<strong>"
+							+ obj.nome + "</strong>&nbsp;&nbsp;&nbsp;&nbsp;"
+							+ obj.permessi;
+
+				}
+
+			};
+			xhttp.open("GET", "/view/permissionManager/user.json", true);
+			xhttp.send();
+		}
+
+		function loadDoc() {
+			const xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					var risposta = this.responseText;
+					var obj = JSON.parse(risposta)
+					for (var i = 0; i < obj.length; i++) {
+						var select = document.getElementById("Select");
+						var option = document.createElement("option");
+						option.text = obj[i].nome + " " + obj[i].descrizione ;
+						option.value = obj[i].nome;
+						select.add(option);
+						
+					}
+				}
+			};
+			xhttp.open("GET", "/view/permissionManager/data.json", true);
+			xhttp.send();
+		}
+		
+		function formSubmit(){
+			  var x = document.getElementById("Select").value;
+			  document.getElementById("resulted").innerHTML = "Hai selezionato '" + x +"'";
+		}
+		
+		
+	</script>
 
 </body>
 </html>
