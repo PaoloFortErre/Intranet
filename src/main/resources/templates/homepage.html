@@ -1,51 +1,55 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" lang="it">
+<html lang="it">
 <head>
-
+  <!-- Required meta tags -->
   <meta charset="utf-8">
-  <title>Homepage_admin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
-  <link rel="stylesheet" content-type="" href="/view/Login/css/style.css">
+  <title>Homepage</title>
+  <style media="screen">
 
+  </style>
 </head>
-<style>
-.img-responsive{
-  width:100% !important;
-  border-radius:0 0 5px 5px !important;
-}
-</style>
 <body>
-
-  <div class="container-fluid headerimage" style="padding:0 !important">
-    <div class="col-md-12" style="padding:0 !important">
-      <img src="view/Login/images/homepage/my_work_1.png" alt="mywork1" class="img-responsive" >
-    </div>
-    <div class="container">
-      <button type="button" class="btn btn-primary">Entra</button>
-    </div>
-   </div>
-
-    <div class="container-fluid headerimage" style="padding:0 !important">
-      <div class="col-md-12" style="padding:0 !important">
-        <img class="img-fluid" alt="my_life_1" src="view/Login/images/homepage/my_life_1.jpg" class="img-responsive" >
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col float-left" style="padding-right: 0px; padding-left: 0px;">
+        <div id="img_container">
+          <img src="/view/Login/images/homepage/my_work_1.png" class="img-fluid" alt="mywork1">
+          <button class="button"> click here </button>
+        </div>
       </div>
-      <div class="container">
-        <button type="button" class="btn btn-primary">Entra</button>
+      <div class="col float-right" style="padding-right: 0px; padding-left: 0px;">
+        <div id="img_container">
+          <img src="/view/Login/images/homepage/my_life_1.jpg" class="img-fluid" alt="mylife1">
+          <button class="button"> click here </button>
+        </div>
       </div>
     </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-1">
+        1 of 3
+      </div>
+      <div class="col">
+        2 of 3 (wider)
+      </div>
+      <div class="col-1">
+        3 of 3
+      </div>
+    </div>
+  </div>
 
 
 
-  </body>
 
-  <script src="view/Login/js/jquery.min.js"></script>
-  <script src="view/Login/js/popper.js"></script>
-  <script src="view/Login/js/bootstrap.min.js"></script>
-  <script src="view/Login/js/main.js"></script>
 
-  </html>
+  <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+</body>
+</html>
