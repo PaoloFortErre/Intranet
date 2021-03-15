@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,26 +34,26 @@ public class NewsController {
 	private ServiceFileSystem fileSystemService;
 	private String imageFolder = "news";
 	
-	@RequestMapping("/{id}")
+	@GetMapping("/{id}")
 	public String get(@PathVariable int id, Model model) {
 		
 		model.addAttribute("news", repoNews.findById(id).get());
 		return "news";
 	}
 	
-	@RequestMapping("/list")
+	@GetMapping("/list")
 	public String getList(Model model) {
 		model.addAttribute("newsList", repoNews.findByOrderByDataPubblicazioneDesc());
 		return "newsList";
 	}
 	
-	@RequestMapping("/new")
+	@GetMapping("/new")
 	public String form(Model model) {
 		model.addAttribute("news", new News()); 
 		return "newsForm";
 	}
 	
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	@PostMapping(value = "/insert")
 	public String post(@ModelAttribute("news") News news, @RequestParam(required=false) MultipartFile immagine, HttpSession session, ModelMap model) throws IOException {
 		
 		Long date = Instant.now().getEpochSecond();
@@ -73,7 +75,7 @@ public class NewsController {
         return "news";
 	}
 	
-	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+	@PostMapping(value = "/update/{id}")
 	public String update(@PathVariable int id, @RequestParam("titolo") String titolo, @RequestParam("contenuto") String contenuto) {
 		News news = repoNews.findById(id).get();
 		news.setTitolo(titolo);
@@ -81,7 +83,7 @@ public class NewsController {
 		return "news";
 	}
 	
-	@RequestMapping("/delete/{id}")
+	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable int id) {
 		repoNews.deleteById(id);
 		return "newsForm";

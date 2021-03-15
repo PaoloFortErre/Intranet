@@ -1,18 +1,22 @@
 package com.erretechnology.intranet.controllers;
 
+import java.sql.Timestamp;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
+import com.erretechnology.intranet.models.Utility;
 import com.erretechnology.intranet.services.ServiceUtente;
 import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 
@@ -25,7 +29,7 @@ public class UtenteController {
 	@Autowired
 	ServiceUtente serviceUtente;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@GetMapping(value = "/")
 	public ModelAndView primaPagina(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("profilo");
@@ -34,7 +38,7 @@ public class UtenteController {
 	}
 
 
-	@RequestMapping(value = "/modificaDescrizione", method = RequestMethod.POST)
+	@PostMapping(value = "/modificaDescrizione")
 	public String modificaDescrizione(@ModelAttribute("utente")UtenteDatiPersonali utente, HttpSession session) {
 		System.out.println("test");
 		int id_utente = Integer.parseInt(session.getAttribute("id").toString());
@@ -44,7 +48,7 @@ public class UtenteController {
 		return "redirect:/utente/";
 	}
 
-	@RequestMapping(value = "cambioPassword" , method = RequestMethod.POST)
+	@PostMapping(value = "cambioPassword")
 	public ModelAndView cambioPassword() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("cambiaPassword");
@@ -54,7 +58,7 @@ public class UtenteController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/paginaModificaPassword", method = RequestMethod.POST)
+	@PostMapping(value = "/paginaModificaPassword")
 	public String cambiaPaginaModificaPagina(@RequestParam("vecchiaPassword") String vPsw, @RequestParam("nuovaPassword") String nPsw,
 			@RequestParam("cNuovaPassword") String cNPsw, HttpSession session) {
 		

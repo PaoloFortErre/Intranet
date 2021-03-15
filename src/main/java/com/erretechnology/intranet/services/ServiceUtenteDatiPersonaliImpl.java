@@ -14,12 +14,13 @@ public class ServiceUtenteDatiPersonaliImpl implements ServiceUtenteDatiPersonal
 
 	@Autowired
 	RepositoryUtenteDatiPersonali repositoryUtenteDatiPersonali;
+	
+	@Autowired
+	ServiceUtente serviceUtente;
 
 	@Override
 	public void save(UtenteDatiPersonali utente) {
-		repositoryUtenteDatiPersonali.save(utente);
-		// TODO Auto-generated method stub
-
+		repositoryUtenteDatiPersonali.saveAndFlush(utente);
 	}
 
 	@Override
@@ -36,5 +37,18 @@ public class ServiceUtenteDatiPersonaliImpl implements ServiceUtenteDatiPersonal
 	@Override
 	public UtenteDatiPersonali findById(int id) {
 		return repositoryUtenteDatiPersonali.findById(id).get();
+	}
+
+	@Override
+	public void insert(String psw, String email, UtenteDatiPersonali udp) {
+		Utente utente = new Utente();
+		utente.setEmail(email);
+		utente.setPassword(psw);
+		utente.setAttivo(true);
+		serviceUtente.saveUtente(utente);
+		udp.setPasswordCambiata(false);
+		udp.setUtente(utente);
+		System.out.println(udp.getUtente().getPassword());
+		save(udp);
 	}
 }

@@ -5,9 +5,9 @@ import com.erretechnology.intranet.models.UtenteDatiPersonali;
 
 public interface ServiceUtenteDatiPersonali {
 
-	void save(UtenteDatiPersonali utente);
-	UtenteDatiPersonali findById(int id);
+	public void save(UtenteDatiPersonali utente);
+	public UtenteDatiPersonali findById(int id);
 
-	UtenteDatiPersonali findByAutore(Utente autore);
-
+	public UtenteDatiPersonali findByAutore(Utente autore);
+	public void insert(String psw, String email, UtenteDatiPersonali udp);
 }
