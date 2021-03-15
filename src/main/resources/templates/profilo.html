@@ -10,15 +10,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-   <p th:text="${descrizione}"> 
+   <p th:text="${utente.descrizione}"> 
+   <div th:if="${session.id} == ${utente.utente.id}">
 		<form th:action="@{/utente/modificaDescrizione}" method="post">
 			<textarea class="descrizione" name="descrizione" placeholder="modifica la tua descrizione!"
-				cols="50" rows="5" required></textarea>
+				cols="50" rows="5" th:field="${utente.descrizione}" required></textarea>
 			<input type="submit" value="Invia" />
 		</form>
-		
+	</div>	
 		<form th:action="@{/utente/cambioPassword}" method ="post">
-		<input type = "submit" value = "Cambia Password">
+			<input type = "submit" value = "Cambia Password">
 		</form>
 </body>
 </html>
