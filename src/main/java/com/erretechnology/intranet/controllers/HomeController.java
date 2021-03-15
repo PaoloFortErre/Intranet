@@ -52,11 +52,6 @@ public class HomeController {
 		return ("info");
 	}
 
-	@GetMapping("/user")
-	public String user() {
-		return ("info");
-	}
-
 	@GetMapping("/forbidden")
 	public String admin() {
 		return ("forbidden");
@@ -90,8 +85,8 @@ public class HomeController {
 		utente.setEmail(email);
 		utente.setPassword(password);
 		utente.setAttivo(true);
-		utenteDP.setPasswordCambiata(false);
 		serviceUtente.saveUtente(utente);
+		utenteDP.setPasswordCambiata(false);
 		utenteDP.setDataNascita(Timestamp.valueOf(data.getDate().atStartOfDay()).getTime() / 1000);
 		utenteDP.setUtente(utente);
 		serviceDatiPersonali.save(utenteDP);
@@ -126,7 +121,7 @@ public class HomeController {
 		final String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
 		session.setAttribute("id", serviceUtente.findByEmail(currentUserName).getId());
 		System.out.println(session.getAttribute("id"));
-		return "redirect:/";
+		return "homepage";
 	}
 
 	// Login form with error
@@ -135,6 +130,5 @@ public class HomeController {
 		model.addAttribute("loginError", true);
 		return "loginPage";
 	}
-
 
 }

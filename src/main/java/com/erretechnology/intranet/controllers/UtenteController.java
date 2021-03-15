@@ -29,13 +29,13 @@ public class UtenteController {
 	public ModelAndView primaPagina(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("profilo");
-		mav.addObject("descrizione", serviceUtenteDati.findById(Integer.parseInt(session.getAttribute("id").toString())).getDescrizione());
+		mav.addObject("utente", serviceUtenteDati.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return mav;
 	}
 
 
 	@RequestMapping(value = "/modificaDescrizione", method = RequestMethod.POST)
-	public String modificaDescrizione(UtenteDatiPersonali utente, HttpSession session) {
+	public String modificaDescrizione(@ModelAttribute("utente")UtenteDatiPersonali utente, HttpSession session) {
 		System.out.println("test");
 		int id_utente = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato= serviceUtenteDati.findById(id_utente);
