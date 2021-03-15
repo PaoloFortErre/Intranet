@@ -56,6 +56,9 @@ function showAreaPost(id){
 								<td th:if="${post.autore.id} == ${session.id}">
 									<form th:action="@{/bacheca/editPost(id=${post.id})}" method="post">
 										<button name="button" type="submit" th:onclick="'showAreaPost(' + ${post.id} + ')'">Modifica Post</button>
+										
+										
+										
 										<textarea th:class="postModificato + ${post.id}" name="testo" placeholder="Modifica commento"
 										cols="50" rows="2.5" style="display:none" required></textarea>
 									</form>

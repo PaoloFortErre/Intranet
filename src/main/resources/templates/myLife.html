@@ -177,6 +177,11 @@ textarea {
 	background: linear-gradient(90deg, rgba(117, 176, 245, 1) 0%,
 		rgba(57, 147, 252, 1) 18%, rgba(0, 117, 255, 1) 37%);
 }
+#commento{
+border-radius: 5px 5px 5px 5px;
+padding: 10px;
+width:350px;
+background-color: #3D3A3A;}
 </style>
 
 </head>
@@ -284,9 +289,9 @@ textarea {
 						</div>
 						<div class="col-sm-11 col-md-10 col-lg-10">
 							<div class="form-group">
-								<form action="/myLife/addPost"  method="post">
+								<form action="/myLife/addPost" id="myForm" method="post">
 									<label for="testo"></label>
-									<textarea class="form-control" rows="2" cols="30" name="testo"
+									<textarea class="form-control" rows="2" cols="30" name="testo" required
 										style="width: 98%" placeholder="Scrivi un post..." id="post"></textarea>
 									<p
 										style="display: inline-block; margin-top: 10px; font-size: 17px;">
@@ -299,15 +304,12 @@ textarea {
 											style="width: 20px; height: 20px; display: inline-block">
 									</p>
 									<br> <br>
-									<p>
-										Acconsenti la pubblicazione in bacheca: &nbsp;&nbsp;&nbsp; <input
-											type="checkbox" ng-model="myVar" ng-init="myVar = false">
-									</p>
+									
 
 
-									<input type="submit" ng-if="myVar" value="Condividi"
+									<input type="submit"  value="Condividi"
 										id="submitPost"
-										style="float: right; margin-right: 10px; margin-bottom: 8px" />
+										style="float: right; margin-right: 10px; margin-bottom: 8px" onclick="submitForm()" />
 								</form>
 							</div>
 						</div>
@@ -333,7 +335,7 @@ textarea {
 
 
 				<div class="col-sinistra" style="margin-top: 20px">
-					<div class="row">
+					<div class="row" >
 
 						<!-- FOTO PROFILO -->
 
@@ -343,25 +345,59 @@ textarea {
 						</div>
 
 						<!-- INFORMAZIONI SU UTENTE E POST -->
-
-						<div class="col-sm-11 col-md-10 col-lg-10"  th:each="post:${messaggi}">
+	
+						<div class="col-sm-11 col-md-10 col-lg-10"  th:each="post:${messaggi}" style="margin-top:30px;" >
 						
 									
 							<h3 th:text="${post.autore.nome}" style="display: inline-block"> </h3> &nbsp;<h3 style="display: inline-block" th:text= "${post.autore.cognome}"> </h3>
+							<!-- ELIMINA POST -->
+							
+							<div th:if="${DPS} or ${post.autore.id} == ${session.id}" style="display:inline-block">
+						
+									<form th:action="@{/myLife/deletePost(id=${post.id})}" method="post" >
+										<button name="button" type="submit"  style="display:inline-block">Elimina</button>
+									</form>
+								</div>	
+								
+							<!-- MODIFICA POST -->	
+							
+							<div th:if="${DPS} or ${post.autore.id} == ${session.id}" style="display:inline-block">		
+									<form th:action="@{/myLife/editPost(id=${post.id})}" method="post">
+										<button name="button" type="submit" style="display:inline-block"  th:onclick="'showAreaPost(' + ${post.id} + ')'" >Modifica</button>
+											
+											<textarea th:class="postModificato + ${post.id}" name="testo" placeholder="Modifica commento"
+										cols="50" rows="2.5"  style="display:none" required></textarea>
+									</form>
+								
+							</div>
 							
 							<p style="font-size: 12px" th:text="${#dates.format(post.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"></p>
 							<img src="/view/MyLife/images/errepro.png" width="20px"
 								height="20px" style="display: inline-block">
-							<p style="display: inline-block; margin-left: 5px">Erre Pro</p>
+							<p style="display: inline-block; margin-left: 5px">ERRE Pro</p>
 							<!-- CONTENUTO DEL POST -->
-							<div>
+							<div >
 								<br>
 								<br>
-								<p style="margin-right: 15px" th:text="${post.testo}">
+								<p style="margin-right: 15px;" th:text="${post.testo}">
 									<a href="">vedi altro</a>
 								</p>
 								<!--  <img src="/view/MyLife/images/post1.png" width="70%"
 									height="40%">-->
+								<div th:each="commento : ${post.setCommenti}"
+									th:if="${commento.visibile}" id="commento">
+								
+								<p style="display: inline-block"th:text="${commento.autore.nome}" > </p>
+								<p style="display: inline-block"th:text="${commento.autore.cognome}"> </p>
+								<p style="display: inline-block"th:text="${#dates.format(commento.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"> </p>
+								<p th:text="${commento.testo}"> </p>
+								</div> <br>
+								<form th:action="@{/myLife/addCommento(idPost=${post.id})}" method="post">
+									<label for="testo"></label>
+									<textarea id="post" name="testo" rows="1" cols="30"
+										style="width: 56%" placeholder="Lascia un commento..."
+										required></textarea>
+									<input type="submit" value="Commenta" id="submitPost"/></form>
 							</div>
 						</div>
 					</div>
@@ -404,10 +440,6 @@ textarea {
 							<td>Amazon Prime</td>
 						</tr>
 					</table>
-
-
-
-
 				</div>
 			</div>
 		</div>
@@ -432,6 +464,9 @@ textarea {
 		</div>
 	</footer>
 	<script>
+	
+	
+	
 		$(document).ready(function() {
 			// Activate Carousel
 			$("#myCarousel").carousel();
