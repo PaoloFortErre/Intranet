@@ -25,7 +25,7 @@ public class Post {
 	private boolean visibile;
 	@ManyToOne
 	@JoinColumn(name = "id_autore")
-	private Utente autore;
+	private UtenteDatiPersonali autore;
 	@OneToMany(mappedBy = "post")
 	private List<Commento> setCommenti;
 	
@@ -64,11 +64,11 @@ public class Post {
 		this.id = id;
 	}
 
-	public Utente getAutore() {
+	public UtenteDatiPersonali getAutore() {
 		return autore;
 	}
 
-	public void setAutore(Utente autore) {
+	public void setAutore(UtenteDatiPersonali autore) {
 		this.autore = autore;
 	}
 

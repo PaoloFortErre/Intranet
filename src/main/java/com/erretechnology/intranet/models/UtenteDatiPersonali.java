@@ -15,8 +15,8 @@ import javax.persistence.Table;
 public class UtenteDatiPersonali implements Serializable{
 	private static final long serialVersionUID = -828732162220395783L;
 	@Id
-	@Column(name="id_user") 
-	private Integer id;
+	@Column(name="id") 
+	private int id;
 	@MapsId	
 	@OneToOne()
 	@JoinColumn(name = "id_user")
@@ -28,6 +28,21 @@ public class UtenteDatiPersonali implements Serializable{
 	private String settore;
 	private Boolean passwordCambiata;
 
+
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Boolean getPasswordCambiata() {
+		return passwordCambiata;
+	}
+
+	public void setPasswordCambiata(Boolean passwordCambiata) {
+		this.passwordCambiata = passwordCambiata;
+	}
 
 	public UtenteDatiPersonali(){	}
 

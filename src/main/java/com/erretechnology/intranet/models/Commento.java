@@ -20,7 +20,7 @@ public class Commento /*extends Post*/ {
 	private long timestamp;
 	@ManyToOne
 	@JoinColumn(name = "id_autore")
-	private Utente autore;
+	private UtenteDatiPersonali autore;
 	@ManyToOne
 	@JoinColumn(name = "id_post")
 	private Post post;
@@ -32,10 +32,10 @@ public class Commento /*extends Post*/ {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Utente getAutore() {
+	public UtenteDatiPersonali getAutore() {
 		return autore;
 	}
-	public void setAutore(Utente autore) {
+	public void setAutore(UtenteDatiPersonali autore) {
 		this.autore = autore;
 	}
 	public Post getPost() {

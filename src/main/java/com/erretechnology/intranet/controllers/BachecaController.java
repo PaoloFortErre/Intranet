@@ -16,12 +16,14 @@ import com.erretechnology.intranet.models.CommentoModificato;
 import com.erretechnology.intranet.models.Post;
 import com.erretechnology.intranet.models.PostModificato;
 import com.erretechnology.intranet.models.Utente;
+import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.services.ServiceAuthority;
 import com.erretechnology.intranet.services.ServiceCommento;
 import com.erretechnology.intranet.services.ServiceCommentoModificato;
 import com.erretechnology.intranet.services.ServicePost;
 import com.erretechnology.intranet.services.ServicePostModificato;
 import com.erretechnology.intranet.services.ServiceUtente;
+import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 
 @Controller
 @RequestMapping(value = "bacheca")
@@ -44,6 +46,9 @@ public class BachecaController {
 	@Autowired
 	ServiceCommentoModificato serviceCommentoModificato;
 	
+	@Autowired
+	ServiceUtenteDatiPersonali serviceUtenteDatiPersonali;
+	
 	
 	@RequestMapping(value="/myLife", method= RequestMethod.GET)
 	public ModelAndView myLife() {
@@ -65,7 +70,7 @@ public class BachecaController {
 	public String updatePost(int id, HttpSession session, Post post) {
 		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
 		Post p = servicePost.findById(id);
-		Utente autore = p.getAutore();
+		UtenteDatiPersonali autore = p.getAutore();
 		if(sessionId == autore.getId()) {
 			String tmp = p.getTesto();
 			p.setTesto(post.getTesto());
@@ -87,7 +92,7 @@ public class BachecaController {
 	public String updateCommento(int id, HttpSession session, Commento commento) {
 		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
 		Commento c = serviceCommento.findById(id);
-		Utente autore = c.getAutore();
+		UtenteDatiPersonali autore = c.getAutore();
 		if(sessionId == autore.getId()) {
 			String tmp = c.getTesto();
 			c.setTesto(commento.getTesto());
@@ -109,7 +114,7 @@ public class BachecaController {
 	public String deletePost(/*@ModelAttribute Post post*/ int id, HttpSession session) {
 		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
 		//int autoreId = servicePost.findById(id).getAutore().getId();
-		Utente autore = servicePost.findById(id).getAutore();
+		UtenteDatiPersonali autore = servicePost.findById(id).getAutore();
 		if(sessionId == autore.getId() || serviceAuthority.findByUsertId(sessionId).stream().filter(x -> x.getIdPermesso().equals("DPS")).count() == 1) {
 			Post p = servicePost.findById(id);
 			p.setVisibile(false);
@@ -126,8 +131,8 @@ public class BachecaController {
 	public String deleteCommento(/*@ModelAttribute Post post*/ int id, HttpSession session) {
 		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
 		// int autoreId = serviceCommento.findById(id).getAutore().getId();
-		Utente autoreCommento = serviceCommento.findById(id).getAutore();
-		Utente autorePost = serviceCommento.findById(id).getPost().getAutore();
+		UtenteDatiPersonali autoreCommento = serviceCommento.findById(id).getAutore();
+		UtenteDatiPersonali autorePost = serviceCommento.findById(id).getPost().getAutore();
 		//Utente utenteLoggato = serviceUtente.findById(sessionId);
 		if(sessionId == autoreCommento.getId() || 
 				serviceAuthority.findByUsertId(sessionId).stream().filter(x-> x.getIdPermesso().equals("DCS")).count() == 1 ||
@@ -146,7 +151,7 @@ public class BachecaController {
 	@RequestMapping(value = "/addCommento", method = RequestMethod.POST)
 	public String inserisciCommento(Commento commento, HttpSession session, int idPost) {
 		int id = Integer.parseInt(session.getAttribute("id").toString());
-		Utente autore = serviceUtente.findById(id);
+		UtenteDatiPersonali autore = serviceUtenteDatiPersonali.findById(id);
 		commento.setAutore(autore);
 		commento.setTimestamp(Instant.now().getEpochSecond());
 		commento.setPost(servicePost.findById(idPost));
@@ -160,7 +165,7 @@ public class BachecaController {
 		System.out.println("test");
 	//	String mail = session.getAttribute("email").toString();
 		int id = Integer.parseInt(session.getAttribute("id").toString());
-		Utente autore = serviceUtente.findById(id);
+		UtenteDatiPersonali autore = serviceUtenteDatiPersonali.findById(id);
 		post.setAutore(autore);
 		
 		post.setTimestamp(Instant.now().getEpochSecond());

@@ -92,7 +92,7 @@ CREATE TABLE `comment` (
   KEY `FKgqruet2cbymnge1n8nijxtpn8` (`id_autore`),
   KEY `FK5d3jnie61rlb5an9r4hm9wq9n` (`id_post`),
   CONSTRAINT `FK5d3jnie61rlb5an9r4hm9wq9n` FOREIGN KEY (`id_post`) REFERENCES `post` (`id`),
-  CONSTRAINT `FKgqruet2cbymnge1n8nijxtpn8` FOREIGN KEY (`id_autore`) REFERENCES `users` (`id`)
+  CONSTRAINT `FKgqruet2cbymnge1n8nijxtpn8` FOREIGN KEY (`id_autore`) REFERENCES `dati_utente` (`id_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -118,6 +118,8 @@ CREATE TABLE `dati_utente` (
   `data_nascita` bigint NOT NULL,
   `descrizione` varchar(255) DEFAULT NULL,
   `nome` varchar(255) DEFAULT NULL,
+  `password_cambiata` bit(1) DEFAULT b'0',
+  `settore` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_user`),
   CONSTRAINT `FKinv52fgneosdl8j8dqy4s2x9t` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -129,6 +131,7 @@ CREATE TABLE `dati_utente` (
 
 LOCK TABLES `dati_utente` WRITE;
 /*!40000 ALTER TABLE `dati_utente` DISABLE KEYS */;
+INSERT INTO `dati_utente` VALUES (1,'Agostini',826879387,'aaaaaaa','Marco',_binary '',NULL),(2,'Paoletti',490524187,'bbbbbbbb','Mario',_binary '',NULL);
 /*!40000 ALTER TABLE `dati_utente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,7 +153,7 @@ CREATE TABLE `hibernate_sequence` (
 
 LOCK TABLES `hibernate_sequence` WRITE;
 /*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
-INSERT INTO `hibernate_sequence` VALUES (13);
+INSERT INTO `hibernate_sequence` VALUES (14);
 /*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -170,7 +173,7 @@ CREATE TABLE `news` (
   `autore_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK6krg9ofhij7l6a7cyyual6h25` (`autore_id`),
-  CONSTRAINT `FK6krg9ofhij7l6a7cyyual6h25` FOREIGN KEY (`autore_id`) REFERENCES `users` (`id`)
+  CONSTRAINT `FK6krg9ofhij7l6a7cyyual6h25` FOREIGN KEY (`autore_id`) REFERENCES `dati_utente` (`id_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -276,7 +279,7 @@ CREATE TABLE `post` (
   `visibile` bit(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK72s04kuk68aasnla0mn5l6y7t` (`id_autore`),
-  CONSTRAINT `FK72s04kuk68aasnla0mn5l6y7t` FOREIGN KEY (`id_autore`) REFERENCES `users` (`id`)
+  CONSTRAINT `FK72s04kuk68aasnla0mn5l6y7t` FOREIGN KEY (`id_autore`) REFERENCES `dati_utente` (`id_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -286,7 +289,7 @@ CREATE TABLE `post` (
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
-INSERT INTO `post` VALUES (4,'primo post da admin',1615460374,1,_binary '\0'),(5,'secondo post da admin',1615460381,1,_binary '\0'),(6,'aaaa',1615460485,2,_binary '\0'),(7,'primo post da admin',1615461069,1,_binary ''),(8,'secondo post da admin',1615461078,1,_binary ''),(9,'terzo post da admin',1615461086,1,_binary ''),(10,'primo post da user',1615461112,2,_binary '\0'),(11,'secondo post da user',1615461120,2,_binary ''),(12,'yesss',1615462925,1,_binary '');
+INSERT INTO `post` VALUES (4,'primo post da admin',1615460374,1,_binary '\0'),(5,'secondo post da admin',1615460381,1,_binary '\0'),(6,'aaaa',1615460485,2,_binary '\0'),(7,'primo post da admin',1615461069,1,_binary ''),(8,'secondo post da admin',1615461078,1,_binary ''),(9,'terzo post da admin',1615461086,1,_binary ''),(10,'primo post da user',1615461112,2,_binary '\0'),(11,'secondo post da user',1615461120,2,_binary '\0'),(12,'yesss',1615462925,1,_binary '\0'),(13,'sadfgdfsgsdfg',1615797927,1,_binary '\0');
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -501,4 +504,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-12 12:34:03
+-- Dump completed on 2021-03-15  9:46:44

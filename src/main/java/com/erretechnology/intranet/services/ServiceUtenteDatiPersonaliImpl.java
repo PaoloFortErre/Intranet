@@ -32,4 +32,9 @@ public class ServiceUtenteDatiPersonaliImpl implements ServiceUtenteDatiPersonal
 	public List<UtenteDatiPersonali> getAll() {
 		return repositoryUtenteDatiPersonali.findAll();
 	}
+
+	@Override
+	public UtenteDatiPersonali findById(int id) {
+		return repositoryUtenteDatiPersonali.findById(id).get();
+	}
 }
