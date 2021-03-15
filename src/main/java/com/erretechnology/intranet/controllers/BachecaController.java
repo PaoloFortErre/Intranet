@@ -28,37 +28,37 @@ import com.erretechnology.intranet.services.ServiceUtente;
 import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 
 @Controller
-@RequestMapping(value = "bacheca")
+@RequestMapping(value = "myLife")
 public class BachecaController {
 	@Autowired
 	ServicePost servicePost;
-	
+
 	@Autowired
 	ServiceUtente serviceUtente;
-	
+
 	@Autowired
 	ServiceCommento serviceCommento;
-	
+
 	@Autowired
 	ServiceAuthority serviceAuthority;
-	
+
 	@Autowired
 	ServicePostModificato servicePostModificato;
-	
+
 	@Autowired
 	ServiceCommentoModificato serviceCommentoModificato;
-	
+
 	@Autowired
 	ServiceUtenteDatiPersonali serviceUtenteDatiPersonali;
-	
-	
+
+
 	@GetMapping(value="/myLife")
 	public ModelAndView myLife() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myLife");
 		return mav;
 	}
-	
+
 	@GetMapping(value = "/")
 	public ModelAndView primaPagina() {
 	//	List<Post> messaggi = service.getLastMessage();
@@ -67,7 +67,7 @@ public class BachecaController {
 		mav.addObject("messaggi", servicePost.getLastMessage());
 		return mav;
 	}
-	
+
 	@PostMapping(value = "/editPost")
 	public String updatePost(int id, HttpSession session, Post post) {
 		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
@@ -84,12 +84,12 @@ public class BachecaController {
 			p.setTimestamp(Instant.now().getEpochSecond());
 			servicePost.save(p);
 			servicePostModificato.save(pm);
-			
+
 			return "redirect:/bacheca/";
 		}
 		return "redirect:/forbidden";
 	}
-	
+
 	@PostMapping(value = "/editCommento")
 	public String updateCommento(int id, HttpSession session, Commento commento) {
 		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
@@ -111,7 +111,7 @@ public class BachecaController {
 		}
 		return "redirect:/forbidden";
 	}
-	
+
 	@PostMapping(value = "/deletePost")
 	public String deletePost(/*@ModelAttribute Post post*/ int id, HttpSession session) {
 		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
@@ -124,11 +124,11 @@ public class BachecaController {
 			System.out.println("cancellazione post: RIUSCITO");
 			return "redirect:/bacheca/";
 		}
-		System.out.println("cancellazione post: PERMESSO NEGATO");	
+		System.out.println("cancellazione post: PERMESSO NEGATO");
 		return "redirect:/forbidden";
-		
+
 	}
-	
+
 	@PostMapping(value = "/deleteCommento")
 	public String deleteCommento(/*@ModelAttribute Post post*/ int id, HttpSession session) {
 		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
@@ -136,7 +136,7 @@ public class BachecaController {
 		UtenteDatiPersonali autoreCommento = serviceCommento.findById(id).getAutore();
 		UtenteDatiPersonali autorePost = serviceCommento.findById(id).getPost().getAutore();
 		//Utente utenteLoggato = serviceUtente.findById(sessionId);
-		if(sessionId == autoreCommento.getId() || 
+		if(sessionId == autoreCommento.getId() ||
 				serviceAuthority.findByUsertId(sessionId).stream().filter(x-> x.getIdPermesso().equals("DCS")).count() == 1 ||
 				autorePost.getId() == sessionId) {
 			Commento c = serviceCommento.findById(id);
@@ -145,11 +145,11 @@ public class BachecaController {
 			System.out.println("cancellazione post: RIUSCITO");
 			return "redirect:/bacheca/";
 		}
-		System.out.println("cancellazione post: PERMESSO NEGATO");	
+		System.out.println("cancellazione post: PERMESSO NEGATO");
 		return "redirect:/forbidden";
-		
+
 	}
-	
+
 	@PostMapping(value = "/addCommento")
 	public String inserisciCommento(Commento commento, HttpSession session, int idPost) {
 		int id = Integer.parseInt(session.getAttribute("id").toString());
@@ -161,7 +161,7 @@ public class BachecaController {
 		serviceCommento.save(commento);
 		return "redirect:/bacheca/";
 	}
-	
+
 	@PostMapping(value = "/addPost")
 	public String inserisciPost(Post post, HttpSession session) {
 		System.out.println("test");
@@ -169,7 +169,7 @@ public class BachecaController {
 		int id = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali autore = serviceUtenteDatiPersonali.findById(id);
 		post.setAutore(autore);
-		
+
 		post.setTimestamp(Instant.now().getEpochSecond());
 		post.setVisibile(true);
 		servicePost.save(post);

@@ -21,14 +21,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
 	@Autowired
 	DataSource dataSource;
-	
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		//super.configure(auth);
 		auth.jdbcAuthentication()
 		.dataSource(dataSource)
 		.usersByUsernameQuery("select username,password,enabled from auth where username = ?");
-		
+
 		/*.usersByUsernameQuery("select email as username, password, attivo as enabled "
 				+ "from users "
 				+ "where email = ?");*/
@@ -71,7 +71,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
 		http.authorizeRequests()
 
-		.antMatchers("/bacheca/*", "/utente/*", "/homepage").access("isAuthenticated()")
+		.antMatchers("/myLife/*", "/utente/*", "/homepage").access("isAuthenticated()")
 		.antMatchers("/").permitAll()
 		.antMatchers("/uploadImage").permitAll()
 		.and().formLogin()

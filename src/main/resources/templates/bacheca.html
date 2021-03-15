@@ -1,125 +1,129 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<style>
-.testo {
-	resize: none;
-}
+	<style>
+	.testo {
+		resize: none;
+	}
 </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
-<script>
-	function showAreaCommento(id){
-		document.getElementsByClassName('commentoModificato' + id)[0].style.display = "block";
-	}
-	
-	function showAreaPost(id){
-		document.getElementsByClassName('postModificato' + id)[0].style.display = "block";
-	}
-</script>
 <meta charset="ISO-8859-1">
 <title>Bacheca Erre Technology Group</title>
 </head>
+<script>
+function showAreaCommento(id){
+	document.getElementsByClassName('commentoModificato' + id)[0].style.display = "block";
+}
+
+function showAreaPost(id){
+	document.getElementsByClassName('postModificato' + id)[0].style.display = "block";
+}
+</script>
 <body>
-<div th:with="DPS = ${#authorization.expression('hasAuthority(''DPS'')')}, 
-			  RS = ${#authorization.expression('hasAuthority(''RS'')')},
-			  WPS = ${#authorization.expression('hasAuthority(''WPS'')')},
-			  DCS = ${#authorization.expression('hasAuthority(''DCS'')')},
-			  CPS = ${#authorization.expression('hasAuthority(''CPS'')')}">
+	<div th:with="DPS = ${#authorization.expression('hasAuthority(''DPS'')')},
+	RS = ${#authorization.expression('hasAuthority(''RS'')')},
+	WPS = ${#authorization.expression('hasAuthority(''WPS'')')},
+	DCS = ${#authorization.expression('hasAuthority(''DCS'')')},
+	CPS = ${#authorization.expression('hasAuthority(''CPS'')')}">
 	<div align="center">Benvenuto nella bacheca di Erre Technology!</div>
 	<div th:if="${RS}">
 		<table>
-			
+
 			<tr th:each="post: ${messaggi}">
-				
-			<td>
-				<table>
-					<thead>
-					<tr>
+
 				<td>
-				------------------------------------------------------------------------------------------------------
-				</td>
-			</tr>
-						<tr>
-							<td th:text="${post.autore.nome}" />
-							<td th:text="${post.autore.cognome}" />
-							<td th:text="${#dates.format(post.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"/>
-						</tr>
-						<tr>
-							<td th:text="${post.testo}" />
-							
-							<td th:if="${DPS} or ${post.autore.id} == ${session.id}">
-								<form th:action="@{/bacheca/deletePost(id=${post.id})}" method="post">
-									<button name="button" type="submit">Elimina</button>
-								</form>
-							</td>
-							<td th:if="${post.autore.id} == ${session.id}">
-								<form th:action="@{/bacheca/editPost(id=${post.id})}" method="post">
-									<button name="button" type="submit" th:onclick="'showAreaPost(' + ${post.id} + ')'">Modifica Post</button>
-									<textarea th:class="postModificato + ${post.id}" name="testo" placeholder="Modifica commento"
-											cols="50" rows="2.5" style="display:none" required></textarea>
-								</form>
-							</td>
-						</tr>
-					</thead>
-					<tbody border="1">
-						<tr>
-							<td>
-								Commenti:
-							</td>
-						</tr>
-						<tr th:each="commento : ${post.setCommenti}" th:if="${commento.visibile}">
-							<td th:text="${commento.autore.nome}" />
-							<td th:text="${commento.autore.cognome}" />
-							<td th:text="${commento.testo}" />
-							<td th:text="${#dates.format(commento.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"/>
-							<td th:if="${DCS} or ${commento.autore.id} == ${session.id} or ${post.autore.id} == ${session.id}">
-								<form th:action="@{/bacheca/deleteCommento(id=${commento.id})}" method="post">
-									<button name="button" type="submit">Elimina</button>
-								</form>
-							</td>
-							
-							<td th:if="${commento.autore.id} == ${session.id}">
-								<form th:action="@{/bacheca/editCommento(id=${commento.id})}" method="post">
-									<button name="button" type="submit" th:onclick="'showAreaCommento(' + ${commento.id} + ')'">Modifica Commento</button>
-									<textarea th:class="commentoModificato + ${commento.id}" name="testo" placeholder="Modifica commento"
-											cols="50" rows="2.5" style="display:none" required></textarea>
-								</form>
-							</td>
-						</tr>
-						<tr>
-							<td>
-						 		<div th:if="${CPS}">
-									<form th:action="@{/bacheca/addCommento(idPost=${post.id})}" method="post">
-										<textarea class="testo" name="testo" placeholder="Inserisci un commento"
-											cols="50" rows="2.5" required></textarea>
-										<input type="submit" value="Invia" />
+					<table>
+						<thead>
+							<tr>
+								<td>
+									------------------------------------------------------------------------------------------------------
+								</td>
+							</tr>
+							<tr>
+								<td th:text="${post.autore.nome}" />
+								<td th:text="${post.autore.cognome}" />
+								<td th:text="${#dates.format(post.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"/>
+							</tr>
+							<tr>
+								<td th:text="${post.testo}" />
+
+								<td th:if="${DPS} or ${post.autore.id} == ${session.id}">
+									<form th:action="@{/bacheca/deletePost(id=${post.id})}" method="post">
+										<button name="button" type="submit">Elimina</button>
 									</form>
-								</div>
-						 	</td>
-						</tr>
-					</tbody>
-				</table>
-			</td>
-			
-				
+								</td>
+								<td th:if="${post.autore.id} == ${session.id}">
+									<form th:action="@{/bacheca/editPost(id=${post.id})}" method="post">
+										<button name="button" type="submit" th:onclick="'showAreaPost(' + ${post.id} + ')'">Modifica Post</button>
+										<textarea th:class="postModificato + ${post.id}" name="testo" placeholder="Modifica commento"
+										cols="50" rows="2.5" style="display:none" required></textarea>
+									</form>
+								</td>
+							</tr>
+						</thead>
+						<tbody border="1">
+							<tr>
+								<td>
+									Commenti:
+								</td>
+							</tr>
+							<tr th:each="commento : ${post.setCommenti}" th:if="${commento.visibile}">
+								<td th:text="${commento.autore.nome}" />
+								<td th:text="${commento.autore.cognome}" />
+								<td th:text="${commento.testo}" />
+								<td th:text="${#dates.format(commento.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"/>
+								<td th:if="${DCS} or ${commento.autore.id} == ${session.id} or ${post.autore.id} == ${session.id}">
+									<form th:action="@{/bacheca/deleteCommento(id=${commento.id})}" method="post">
+										<button name="button" type="submit">Elimina</button>
+									</form>
+								</td>
+
+								<td th:if="${commento.autore.id} == ${session.id}">
+									<form th:action="@{/bacheca/editCommento(id=${commento.id})}" method="post">
+										<button name="button" type="submit" th:onclick="'showAreaCommento(' + ${commento.id} + ')'">Modifica Commento</button>
+										<textarea th:class="commentoModificato + ${commento.id}" name="testo" placeholder="Modifica commento"
+										cols="50" rows="2.5" style="display:none" required></textarea>
+									</form>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div th:if="${CPS}">
+										<form th:action="@{/bacheca/addCommento(idPost=${post.id})}" method="post">
+											<textarea class="testo" name="testo" placeholder="Inserisci un commento"
+											cols="50" rows="2.5" required></textarea>
+											<input type="submit" value="Invia" />
+										</form>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+
+
 			</tr>
-			
+
 		</table>
 	</div>
 	<div th:if="${WPS}">
 		<form th:action="@{/bacheca/addPost}" method="post">
 			<textarea class="testo" name="testo" placeholder="Inserisci un post"
-				cols="50" rows="2.5" required></textarea>
+			cols="50" rows="2.5" required></textarea>
 			<input type="submit" value="Invia" />
 		</form>
 	</div>
-	<!--  
-<form method = "POST" id = "form2" th:action="@{/bacheca/addMessaggio}" th:objects="${Post}">
-<label for = "testo">Messaggio</label>
-<textarea cols="50" rows="2.5" class="testo" th:filed="${Post.testo}" required></textarea>
- <input type = "submit" id = "testo" value = "Invia"/>
- </form>
- -->
- </div>
+	<!--
+	<form method = "POST" id = "form2" th:action="@{/bacheca/addMessaggio}" th:objects="${Post}">
+	<label for = "testo">Messaggio</label>
+	<textarea cols="50" rows="2.5" class="testo" th:filed="${Post.testo}" required></textarea>
+	<input type = "submit" id = "testo" value = "Invia"/>
+</form>
+-->
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 </body>
 </html>

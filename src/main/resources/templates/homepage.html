@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="it">
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -87,7 +87,7 @@
                 <p>Scopri cosa fare il prossimo fine settimana </p>
             </span>
             <div class="button">
-              <a class="btn btn-outline-success btn-lg" href="#" role="button"><b>ENTRA</b></a>
+              <a class="btn btn-outline-success btn-lg" th:href="@{/bacheca/myLife}" role="button"><b>ENTRA</b></a>
             </div>
           </div>
         </div>
