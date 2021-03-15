@@ -6,8 +6,10 @@
 </head>
 <body>
 <div th:each="news: ${newsList}">
+	<p th:text="${#dates.format(news.dataPubblicazione*1000, 'dd/MM/yyyy, HH:mm')}" />
     <h1 th:text="${news.titolo}" />
     <p th:text="${news.contenuto}" />
+    <img th:src="@{/image/news/{image}(image = ${news.copertina})}">
     <br>
 </div>
 </body>
