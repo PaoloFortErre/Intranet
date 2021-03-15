@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<style>
+.descrizione {
+	resize: none;
+}
+</style>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+   <p th:text="${descrizione}"> 
+		<form th:action="@{/utente/modificaDescrizione}" method="post">
+			<textarea class="descrizione" name="descrizione" placeholder="modifica la tua descrizione!"
+				cols="50" rows="5" required></textarea>
+			<input type="submit" value="Invia" />
+		</form>
+		
+		<form th:action="@{/utente/paginaModificaPassword}" method ="post">
+		<input type = "submit" value = "Cambia Password">
+		</form>
+</body>
+</html>
