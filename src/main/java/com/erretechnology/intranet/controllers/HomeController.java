@@ -121,7 +121,7 @@ public class HomeController {
 		final String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
 		session.setAttribute("id", serviceUtente.findByEmail(currentUserName).getId());
 		System.out.println(session.getAttribute("id"));
-		return "homepage";
+		return "redirect:/homepage";
 	}
 
 	// Login form with error
