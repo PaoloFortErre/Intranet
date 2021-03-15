@@ -3,13 +3,22 @@
 <head>
 <title>MyLife</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
 <style>
+
+p{ font-family: 'Noto Sans', sans-serif;
+
+color:#F3F3F3; }
 body {
 	background-color: #303030
 }
@@ -25,9 +34,10 @@ body {
 }
 
 .font-caption {
-	font-size: 80px;
+	font-size: 300%;
 	letter-spacing: 5px;
 	word-spacing: 11px;
+	text-align: center;
 }
 
 #c>.item>a>img {
@@ -37,7 +47,7 @@ body {
 #col-sinistra {
 	border-radius: 6px 6px 6px 6px;
 	background-color: black;
-	height: 100%;
+	
 }
 
 #col-destra {
@@ -52,8 +62,31 @@ body {
 	text-shadow: 0.5px 0.5px #ECF260;
 }
 
-a {
+.content>a {
+	color: #F3F3F3;
+}
+
+.content>a:link {
 	text-decoration: none;
+}
+
+.content>a:hover {
+	color: blue;;
+}
+
+nav {
+	position: absolute;
+	font-size: 25px;
+	float: right;
+	text-align: right;
+	margin-top: 20px;
+	margin-right: 50px;
+	padding: 5px;
+	color: #F3F3F3;
+}
+
+.content {
+	padding: 15px;
 }
 
 .top-right {
@@ -91,22 +124,6 @@ a {
 	color: #F3F3F3;
 }
 
-div.top-right4:hover {
-	color: blue;
-}
-
-div.top-right:hover {
-	color: blue;
-}
-
-div.top-right2:hover {
-	color: blue;
-}
-
-div.top-right3:hover {
-	color: blue;
-}
-
 footer {
 	margin-top: 10%;
 	background-color: #2EC4B6;
@@ -116,16 +133,59 @@ footer {
 
 #didascalieFilm {
 	width: 100%;
-	height: 100px;
 	background: #F3F3F3;
 	display: inline-block;
+}
+
+#film {
+	width: 100%;
+}
+
+td {
+	vertical-align: middle;
+	text-align: center;
+}
+
+.immagineUtente {
+border-radius:  50%;
+height: 80px;
+width: 80px;
+box-shadow:
+  0 26.1px 11.1px rgba(0, 0, 0, 0.18),
+  0 69px 89px rgba(0, 0, 0, 0.36)
+;
+
+}
+#post{
+
+background-color: black;
+border-radius: 4px;
+border: 2px solid #F3F3F3;
+}
+textarea{
+
+resize: none;
+
+}
+
+
+
+#submitPost {
+border-radius: 2px 2px 2px 2px;
+color:  white;
+height: 30px;
+border: 0px;
+width: 100px;
+background: rgb(117,176,245);
+background: linear-gradient(90deg, rgba(117,176,245,1) 0%, rgba(57,147,252,1) 18%, rgba(0,117,255,1) 37%);
 }
 </style>
 
 </head>
-<body>
+<body ng-app="">
 
 	<div class="container-fluid">
+
 
 		<div class="row">
 			<div id="myCarousel" class="carousel slide">
@@ -145,10 +205,24 @@ footer {
 						<div class="carousel-caption">
 							<h1 class="font-caption">"Sii il cambiamento che vuoi vedere
 								nel mondo"</h1>
-							<div class="top-right">HOME</div>
-							<div class="top-right2">COMUNICAZIONI HR</div>
-							<div class="top-right3">MODULI</div>
-							<div class="top-right4">POLYEDRO</div>
+
+
+
+
+							<nav class="navbar navbar-fixed-top">
+								<div class="content" style="display: inline-block">
+									<a href="#">HOME</a>
+								</div>
+								<div class="content" style="display: inline-block">
+									<a href="#">COMUNICAZIONI HR</a>
+								</div>
+								<div class="content" style="display: inline-block">
+									<a href="#">MODULI</a>
+								</div>
+								<div class="content" style="display: inline-block">
+									<a href="#">POLYEDRO</a>
+								</div>
+							</nav>
 						</div>
 					</div>
 
@@ -157,10 +231,20 @@ footer {
 						<div class="carousel-caption">
 							<h1 class="font-caption">"Sii il cambiamento che vuoi vedere
 								nel mondo"</h1>
-							<div class="top-right">HOME</div>
-							<div class="top-right2">COMUNICAZIONI HR</div>
-							<div class="top-right3">MODULI</div>
-							<div class="top-right4">POLYEDRO</div>
+							<nav class="navbar navbar-fixed-top">
+								<div class="content" style="display: inline-block">
+									<a href="#">HOME</a>
+								</div>
+								<div class="content" style="display: inline-block">
+									<a href="#">COMUNICAZIONI HR</a>
+								</div>
+								<div class="content" style="display: inline-block">
+									<a href="#">MODULI</a>
+								</div>
+								<div class="content" style="display: inline-block">
+									<a href="#">POLYEDRO</a>
+								</div>
+							</nav>
 						</div>
 					</div>
 
@@ -178,6 +262,109 @@ footer {
 
 
 	</div>
+
+
+	<!-- ************
+      FINE HEADER 
+   ***************** -->		
+	<div class="container">
+
+		<!-- **** 
+	          COLONNA SINISTRA
+	                            **** -->
+
+		<div class="row" style="margin-top: 5%">
+			<div class="col-sm-8 col-lg-8">
+				
+				<!--  WRITE A POST  -->
+				<div id="col-sinistra">
+				
+				<div class="row">
+				<div class="col-sm-1 col-md-2 col-lg-2">
+				<img src="/view/MyLife/images/avatar.png" alt="utente" 
+				title="utente" class="immagineUtente" style="margin:20px;"> </div>
+				<div class="col-sm-11 col-md-10 col-lg-10" >
+				<div class="form-group" >
+				<form action="">
+      			<label for="post"></label>
+     			<textarea class="form-control" rows="2" cols="30" style="width:98%" placeholder="Scrivi un post..." id="post"></textarea>
+     			<p style=" display:inline-block; margin-top:10px;font-size:17px;"> Immagine <img src="/view/MyLife/images/imh.png" style="width:20px; height:20px; display:inline-block"> </p> <p style="display:inline-block; margin-top:10px; margin-left:20px; font-size:17px;"> Documento <img src="/view/MyLife/images/DOC.png" style="width:20px; height:20px; display:inline-block"></p>
+    			<br> <br> 
+    			<p> Acconsenti la pubblicazione in bacheca: &nbsp;&nbsp;&nbsp; <input type="checkbox" ng-model="myVar" ng-init="myVar = false"> </p>
+    			
+    			
+    			<input type="submit" ng-if="myVar"value="Condividi" id="submitPost" style="float:right; margin-right: 10px; margin-bottom: 8px"/>
+    			</form></div></div>
+    			</div>
+				
+				</div> 
+
+
+			</div>
+			
+			<!-- **** 
+	          COLONNA DESTRA
+	                            **** -->
+
+			<div class="col-sm-4 col-lg-4" id="col-destra">
+				<h3 id="culturaPiemonte" style="margin-top: 30px">Cultura in
+					Piemonte</h3>
+				<p style="color: #F3F3F3; text-align: center; font-size: 13px">
+					Se sei un tipo da eventi in citta' o da sagre:</p>
+				<img src="/view/MyLife/images/to.jpg" width="99%" height="300px"
+					style="margin: auto;">
+
+				<h3 id="culturaPiemonte" style="margin-top: 70px">Film</h3>
+				<p style="color: #F3F3F3; text-align: center; font-size: 13px">
+					Se sei un tipo da cinema o serie TV:</p>
+				<img src="/view/MyLife/images/filmq.jpg" width="32%" height="230px"
+					style="display: inline;"> <img
+					src="/view/MyLife/images/film2.jpg" width="32%" height="230px"
+					style="display: inline;"> <img
+					src="/view/MyLife/images/film3.jpg" width="33%" height="230px"
+					style="display: inline;">
+
+				<div id="didascalieFilm">
+					<table id="film">
+						<tr>
+							<td>Freaks Out</td>
+							<td>Call Me By <br> Your Name
+							</td>
+							<td>Lost</td>
+						</tr>
+						<tr style="color: blue;">
+							<td>Cinema</td>
+							<td>Netflix</td>
+							<td>Amazon Prime</td>
+						</tr>
+					</table>
+
+
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-4 col-lg-4">
+					<img src="/view/MyLife/images/erre.png" height="80px"
+						style="margin: auto">
+				</div>
+				<div class="col-sm-4 col-lg-4">
+					<p style="color: #F3F3F3; text-align: center; font-size: 20px;">
+						Supporto: +39 011 197 429 00</p>
+				</div>
+				<div class="col-sm-4 col-lg-4">
+					<img src="/view/MyLife/images/fblogo.png" height="60px"> <img
+						src="/view/MyLife/images/linkedin.png" height="80px ">
+				</div>
+			</div>
+		</div>
+	</footer>
 	<script>
 		$(document).ready(function() {
 			// Activate Carousel
@@ -200,72 +387,5 @@ footer {
 
 		});
 	</script>
-
-	<!-- ************
-      FINE HEADER 
-   ***************** -->
-	<div class="container">
-		<div class="row" style="margin-top: 5%">
-			<div class="col-sm-7 col-lg-7" id="col-sinistra">
-				<p style="color: blue;">ciao</p>
-			</div>
-			<div class="col-sm-1 col-lg-1"></div>
-			<div class="col-sm-4 col-lg-4" id="col-destra">
-				<h3 id="culturaPiemonte" style="margin-top: 30px">Cultura in
-					Piemonte</h3>
-				<p style="color: #F3F3F3; text-align: center; font-size: 13px">
-					Se sei un tipo da eventi in citta' o da sagre:</p>
-				<img src="/view/MyLife/images/to.jpg" width="99%" height="300px"
-					style="margin: auto;">
-
-				<h3 id="culturaPiemonte" style="margin-top: 70px">Film</h3>
-				<p style="color: #F3F3F3; text-align: center; font-size: 13px">
-					Se sei un tipo da cinema o serie TV:</p>
-				<img src="/view/MyLife/images/filmq.jpg" width="32%" height="230px"
-					style="display: inline;"> <img
-					src="/view/MyLife/images/film2.jpg" width="32%" height="230px"
-					style="display: inline;"> <img
-					src="/view/MyLife/images/film3.jpg" width="33%" height="230px"
-					style="display: inline;">
-
-				<div id="didascalieFilm">
-					<p style="display: inline-block;margin-left: 5px;">Freaks Out</p>
-					<p style="display: inline-block; margin-left: 73px; margin-top:5px;">
-						Call Me By <br> Your Name
-					</p>
-					<p style="display: inline-block; margin-left: 50px;">Lost</p>
-					<br>
-					<p style="display: inline-block;margin-top:10px; margin-left: 5px;color: blue">Cinema</p>
-					<p style="margin-top:10px;display: inline-block; margin-left: 73px;color: blue">
-						Netflix
-					</p>
-					<p style="margin-top:10px;display: inline-block; margin-left: 50px;color: blue">Amazon Prime</p>
-
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<footer>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-sm-4 col-lg-4">
-					<img src="/view/MyLife/images/erre.png" height="80px"
-						style="margin: auto">
-				</div>
-				<div class="col-sm-4 col-lg-4">
-					<p
-						style="color: #F3F3F3; text-align: center; font-size: 20px; ">
-						Supporto: +39 011 197 429 00</p>
-				</div>
-				<div class="col-sm-4 col-lg-4">
-					<img src="/view/MyLife/images/fblogo.png" height="60px"
-						>
-					<img src="/view/MyLife/images/linkedin.png" height="80px "
-						>
-				</div>
-			</div>
-		</div>
-	</footer>
 </body>
 </html>
