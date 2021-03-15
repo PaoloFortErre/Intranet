@@ -20,7 +20,7 @@ public class ServiceUtenteImpl implements ServiceUtente{
 	@Override
 	public void saveUtente(Utente u) {
 		u.setPassword(new BCryptPasswordEncoder().encode(u.getPassword()) );
-		userRepository.save(u);
+		userRepository.saveAndFlush(u);
 	}
 
 	@Override
