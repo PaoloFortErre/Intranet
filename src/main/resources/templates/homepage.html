@@ -10,6 +10,7 @@
 
   <title>Homepage</title>
   <style>
+
   body{
     font-family: Noto Sans, sans-serif;
     background-color: #303030;
@@ -29,7 +30,7 @@
     text-shadow: 0px 9px 5px #303030;
     -webkit-text-stroke: 0.3px #303030;
     bottom: 40%;
-    right: 40%;
+    right: 28%;
   }
 
   .button{
@@ -37,13 +38,17 @@
     bottom: 15%;
     right: 47%;
   }
+
   .descrizione{
+    position: absolute;
     color: #FFFFFF;
     font-size: 30px;
     font-weight: 400;
     font-family: Noto Sans, sans-serif;
     text-shadow: 0px 3px 6px #303030;
     -webkit-text-stroke: 0.3px #303030;
+    margin-top: -200px;
+    left: 18%;
   }
 
   footer {
@@ -60,29 +65,29 @@
     <div class="row">
       <div class="col float-left" style="padding-right: 0px; padding-left: 0px;">
         <div class="img_container">
-          <img src="/view/Homepage/Images/my_work_1.png" class="img-fluid" alt="mywork1">
+          <img src="/view/Homepage/Images/my_work_1.png" class="rounded img-fluid" alt="mywork1">
           <div class=" h1 text-center">
-            <h1 class="title"style="">My work</h1>
+            <h1 class="title"style="right: 25%">My work</h1>
           </div>
-          <div class="descrizione h3">
+          <span class="descrizione h3" style="margin-top: -205px;">
             <p>Scopri cos'è successo di recente in Erre </p>
-          </div>
+          </span>
           <!-- BOTTONI PER ENTRARE IN MY WORK & MY LIFE-->
           <div class="button">
-            <a class="btn btn-primary" href="#" role="button"><b>ENTRA</b></a>
+            <a class="btn btn-outline-primary btn-lg" href="#" role="button"><b>ENTRA</b></a>
           </div>
         </div>
       </div>
       <div class="col float-right" style="padding-right: 0px; padding-left: 0px;">
         <div class="img_container">
-          <img src="/view/Homepage/Images/my_life_1.jpg" class="img-fluid" alt="mylife1">
+          <img src="/view/Homepage/Images/my_life_1.jpg" class="rounded img-fluid" alt="mylife1">
           <div class=" h1 text-center">
             <h1 class="title">My life</h1>
-            <div class="descrizione h3 ">
+            <span class="descrizione h3 ">
                 <p>Scopri cosa fare il prossimo fine settimana </p>
-            </div>
+            </span>
             <div class="button">
-              <a class="btn btn-success" href="#" role="button"><b>ENTRA</b></a>
+              <a class="btn btn-outline-success btn-lg" href="#" role="button"><b>ENTRA</b></a>
             </div>
           </div>
         </div>
@@ -95,10 +100,10 @@
     <div class="col">
     </div>
     <div class="col">
-      <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:6774562982606184448" height="900" width="770" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
+      <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:6774562982606184448" height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
     </div>
     <div class="col">
-      <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:6772419225500835840" height="900" width="770" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
+      <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:6772419225500835840" height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
     </div>
     <div class="col">
     </div>
@@ -113,7 +118,12 @@
 
     </div>
     <div class="col">
-      <div class="container">
+      <img src="view/Homepage/Images/phone_person.PNG" class="img-fluid mt-3" alt="phoneAndHuman.png">
+    </div>
+    <div class="col">
+      <div class="container mt-5">
+        <p style="color: #FFFFFF; ">Se desideri vedere le tue informazioni dettagliate, vai alla gestione del tuo profilo: </p>
+        <a class="btn btn-outline-primary btn-lg" href="#" role="button">PROFILO</a>
 
       </div>
     </div>
