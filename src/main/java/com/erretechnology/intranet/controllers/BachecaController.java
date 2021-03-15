@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -50,14 +52,14 @@ public class BachecaController {
 	ServiceUtenteDatiPersonali serviceUtenteDatiPersonali;
 	
 	
-	@RequestMapping(value="/myLife", method= RequestMethod.GET)
+	@GetMapping(value="/myLife")
 	public ModelAndView myLife() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myLife");
 		return mav;
 	}
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@GetMapping(value = "/")
 	public ModelAndView primaPagina() {
 	//	List<Post> messaggi = service.getLastMessage();
 		ModelAndView mav = new ModelAndView();
@@ -66,7 +68,7 @@ public class BachecaController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/editPost", method = RequestMethod.POST)
+	@PostMapping(value = "/editPost")
 	public String updatePost(int id, HttpSession session, Post post) {
 		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
 		Post p = servicePost.findById(id);
@@ -88,7 +90,7 @@ public class BachecaController {
 		return "redirect:/forbidden";
 	}
 	
-	@RequestMapping(value = "/editCommento", method = RequestMethod.POST)
+	@PostMapping(value = "/editCommento")
 	public String updateCommento(int id, HttpSession session, Commento commento) {
 		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
 		Commento c = serviceCommento.findById(id);
@@ -110,7 +112,7 @@ public class BachecaController {
 		return "redirect:/forbidden";
 	}
 	
-	@RequestMapping(value = "/deletePost", method = RequestMethod.POST)
+	@PostMapping(value = "/deletePost")
 	public String deletePost(/*@ModelAttribute Post post*/ int id, HttpSession session) {
 		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
 		//int autoreId = servicePost.findById(id).getAutore().getId();
@@ -127,7 +129,7 @@ public class BachecaController {
 		
 	}
 	
-	@RequestMapping(value = "/deleteCommento", method = RequestMethod.POST)
+	@PostMapping(value = "/deleteCommento")
 	public String deleteCommento(/*@ModelAttribute Post post*/ int id, HttpSession session) {
 		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
 		// int autoreId = serviceCommento.findById(id).getAutore().getId();
@@ -148,7 +150,7 @@ public class BachecaController {
 		
 	}
 	
-	@RequestMapping(value = "/addCommento", method = RequestMethod.POST)
+	@PostMapping(value = "/addCommento")
 	public String inserisciCommento(Commento commento, HttpSession session, int idPost) {
 		int id = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali autore = serviceUtenteDatiPersonali.findById(id);
@@ -160,7 +162,7 @@ public class BachecaController {
 		return "redirect:/bacheca/";
 	}
 	
-	@RequestMapping(value = "/addPost", method = RequestMethod.POST)
+	@PostMapping(value = "/addPost")
 	public String inserisciPost(Post post, HttpSession session) {
 		System.out.println("test");
 	//	String mail = session.getAttribute("email").toString();
