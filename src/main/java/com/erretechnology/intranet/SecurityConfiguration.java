@@ -28,6 +28,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		auth.jdbcAuthentication()
 		.dataSource(dataSource)
 		.usersByUsernameQuery("select username,password,enabled from auth where username = ?");
+		
+		/*.usersByUsernameQuery("select email as username, password, attivo as enabled "
+				+ "from users "
+				+ "where email = ?");*/
 
 		//loginquery -> "select username,password,enabled from users where username = ?"
 		//authorities query -> "select username,authority from authorities where username = ?"
@@ -67,7 +71,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
 		http.authorizeRequests()
 
-		.antMatchers("/bacheca/*", "/utente/*").access("isAuthenticated()")
+		.antMatchers("/bacheca/*", "/utente/*", "/homepage").access("isAuthenticated()")
 		.antMatchers("/").permitAll()
 		.antMatchers("/uploadImage").permitAll()
 		.and().formLogin()
