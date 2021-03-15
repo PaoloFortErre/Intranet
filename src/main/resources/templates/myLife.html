@@ -4,7 +4,8 @@
 <title>MyLife</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -12,13 +13,16 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap"
+	rel="stylesheet">
 <style>
+h1, h2, h3, h4, h5, textarea, p, label, input {
+	font-family: 'Noto Sans', sans-serif;
+	color: #F3F3F3;
+}
 
-p{ font-family: 'Noto Sans', sans-serif;
-
-color:#F3F3F3; }
 body {
 	background-color: #303030
 }
@@ -44,10 +48,9 @@ body {
 	height: 50px;
 }
 
-#col-sinistra {
+.col-sinistra {
 	border-radius: 6px 6px 6px 6px;
 	background-color: black;
-	
 }
 
 #col-destra {
@@ -147,37 +150,32 @@ td {
 }
 
 .immagineUtente {
-border-radius:  50%;
-height: 80px;
-width: 80px;
-box-shadow:
-  0 26.1px 11.1px rgba(0, 0, 0, 0.18),
-  0 69px 89px rgba(0, 0, 0, 0.36)
-;
-
-}
-#post{
-
-background-color: black;
-border-radius: 4px;
-border: 2px solid #F3F3F3;
-}
-textarea{
-
-resize: none;
-
+	border-radius: 50%;
+	height: 80px;
+	width: 80px;
+	box-shadow: 0 26.1px 11.1px rgba(0, 0, 0, 0.18), 0 69px 89px
+		rgba(0, 0, 0, 0.36);
 }
 
+#post {
+	background-color: black;
+	border-radius: 4px;
+	border: 2px solid #F3F3F3;
+}
 
+textarea {
+	resize: none;
+}
 
 #submitPost {
-border-radius: 2px 2px 2px 2px;
-color:  white;
-height: 30px;
-border: 0px;
-width: 100px;
-background: rgb(117,176,245);
-background: linear-gradient(90deg, rgba(117,176,245,1) 0%, rgba(57,147,252,1) 18%, rgba(0,117,255,1) 37%);
+	border-radius: 2px 2px 2px 2px;
+	color: white;
+	height: 30px;
+	border: 0px;
+	width: 100px;
+	background: rgb(117, 176, 245);
+	background: linear-gradient(90deg, rgba(117, 176, 245, 1) 0%,
+		rgba(57, 147, 252, 1) 18%, rgba(0, 117, 255, 1) 37%);
 }
 </style>
 
@@ -266,7 +264,7 @@ background: linear-gradient(90deg, rgba(117,176,245,1) 0%, rgba(57,147,252,1) 18
 
 	<!-- ************
       FINE HEADER 
-   ***************** -->		
+   ***************** -->
 	<div class="container">
 
 		<!-- **** 
@@ -275,33 +273,101 @@ background: linear-gradient(90deg, rgba(117,176,245,1) 0%, rgba(57,147,252,1) 18
 
 		<div class="row" style="margin-top: 5%">
 			<div class="col-sm-8 col-lg-8">
-				
+
 				<!--  WRITE A POST  -->
-				<div id="col-sinistra">
-				
-				<div class="row">
-				<div class="col-sm-1 col-md-2 col-lg-2">
-				<img src="/view/MyLife/images/avatar.png" alt="utente" 
-				title="utente" class="immagineUtente" style="margin:20px;"> </div>
-				<div class="col-sm-11 col-md-10 col-lg-10" >
-				<div class="form-group" >
-				<form action="">
-      			<label for="post"></label>
-     			<textarea class="form-control" rows="2" cols="30" style="width:98%" placeholder="Scrivi un post..." id="post"></textarea>
-     			<p style=" display:inline-block; margin-top:10px;font-size:17px;"> Immagine <img src="/view/MyLife/images/imh.png" style="width:20px; height:20px; display:inline-block"> </p> <p style="display:inline-block; margin-top:10px; margin-left:20px; font-size:17px;"> Documento <img src="/view/MyLife/images/DOC.png" style="width:20px; height:20px; display:inline-block"></p>
-    			<br> <br> 
-    			<p> Acconsenti la pubblicazione in bacheca: &nbsp;&nbsp;&nbsp; <input type="checkbox" ng-model="myVar" ng-init="myVar = false"> </p>
-    			
-    			
-    			<input type="submit" ng-if="myVar"value="Condividi" id="submitPost" style="float:right; margin-right: 10px; margin-bottom: 8px"/>
-    			</form></div></div>
-    			</div>
-				
-				</div> 
+				<div class="col-sinistra">
+
+					<div class="row">
+						<div class="col-sm-1 col-md-2 col-lg-2">
+							<img src="/view/MyLife/images/avatar.png" alt="utente"
+								title="utente" class="immagineUtente" style="margin: 20px;">
+						</div>
+						<div class="col-sm-11 col-md-10 col-lg-10">
+							<div class="form-group">
+								<form action="/myLife/addPost"  method="post">
+									<label for="testo"></label>
+									<textarea class="form-control" rows="2" cols="30" name="testo"
+										style="width: 98%" placeholder="Scrivi un post..." id="post"></textarea>
+									<p
+										style="display: inline-block; margin-top: 10px; font-size: 17px;">
+										Immagine <img src="/view/MyLife/images/imh.png"
+											style="width: 20px; height: 20px; display: inline-block">
+									</p>
+									<p
+										style="display: inline-block; margin-top: 10px; margin-left: 20px; font-size: 17px;">
+										Documento <img src="/view/MyLife/images/DOC.png"
+											style="width: 20px; height: 20px; display: inline-block">
+									</p>
+									<br> <br>
+									<p>
+										Acconsenti la pubblicazione in bacheca: &nbsp;&nbsp;&nbsp; <input
+											type="checkbox" ng-model="myVar" ng-init="myVar = false">
+									</p>
 
 
+									<input type="submit" ng-if="myVar" value="Condividi"
+										id="submitPost"
+										style="float: right; margin-right: 10px; margin-bottom: 8px" />
+								</form>
+							</div>
+						</div>
+					</div>
+
+
+					<!-- **************** 
+				     
+				      POST PUBBLICATI 
+				        IN BACHECA 
+				      
+				     **************** -->
+
+
+
+
+
+				</div>
+
+
+				<hr>
+
+
+
+				<div class="col-sinistra" style="margin-top: 20px">
+					<div class="row">
+
+						<!-- FOTO PROFILO -->
+
+						<div class="col-sm-1 col-md-2 col-lg-2">
+							<img src="/view/MyLife/images/avatar2.png" alt="utente"
+								title="utente" class="immagineUtente" style="margin: 20px;">
+						</div>
+
+						<!-- INFORMAZIONI SU UTENTE E POST -->
+
+						<div class="col-sm-11 col-md-10 col-lg-10"  th:each="post:${messaggi}">
+						
+									
+							<h3 th:text="${post.autore.nome}" style="display: inline-block"> </h3> &nbsp;<h3 style="display: inline-block" th:text= "${post.autore.cognome}"> </h3>
+							
+							<p style="font-size: 12px" th:text="${#dates.format(post.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"></p>
+							<img src="/view/MyLife/images/errepro.png" width="20px"
+								height="20px" style="display: inline-block">
+							<p style="display: inline-block; margin-left: 5px">Erre Pro</p>
+							<!-- CONTENUTO DEL POST -->
+							<div>
+								<br>
+								<br>
+								<p style="margin-right: 15px" th:text="${post.testo}">
+									<a href="">vedi altro</a>
+								</p>
+								<!--  <img src="/view/MyLife/images/post1.png" width="70%"
+									height="40%">-->
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			
+
 			<!-- **** 
 	          COLONNA DESTRA
 	                            **** -->

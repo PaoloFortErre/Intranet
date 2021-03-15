@@ -52,18 +52,18 @@ public class BachecaController {
 	ServiceUtenteDatiPersonali serviceUtenteDatiPersonali;
 
 
-	@GetMapping(value="/myLife")
-	public ModelAndView myLife() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("myLife");
-		return mav;
-	}
+//	@GetMapping(value="/myLife")
+//	public ModelAndView myLife() {
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("myLife");
+//		return mav;
+//	}
 
 	@GetMapping(value = "/")
 	public ModelAndView primaPagina() {
 	//	List<Post> messaggi = service.getLastMessage();
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("bacheca");
+		mav.setViewName("myLife");
 		mav.addObject("messaggi", servicePost.getLastMessage());
 		return mav;
 	}
@@ -85,7 +85,7 @@ public class BachecaController {
 			servicePost.save(p);
 			servicePostModificato.save(pm);
 
-			return "redirect:/bacheca/";
+			return "redirect:/myLife/";
 		}
 		return "redirect:/forbidden";
 	}
@@ -107,7 +107,7 @@ public class BachecaController {
 			c.setTimestamp(Instant.now().getEpochSecond());
 			serviceCommento.save(c);
 			serviceCommentoModificato.save(cm);
-			return "redirect:/bacheca/";
+			return "redirect:/myLife/";
 		}
 		return "redirect:/forbidden";
 	}
@@ -122,7 +122,7 @@ public class BachecaController {
 			p.setVisibile(false);
 			servicePost.save(p);
 			System.out.println("cancellazione post: RIUSCITO");
-			return "redirect:/bacheca/";
+			return "redirect:/myLife/";
 		}
 		System.out.println("cancellazione post: PERMESSO NEGATO");
 		return "redirect:/forbidden";
@@ -143,7 +143,7 @@ public class BachecaController {
 			c.setVisibile(false);
 			serviceCommento.save(c);
 			System.out.println("cancellazione post: RIUSCITO");
-			return "redirect:/bacheca/";
+			return "redirect:/myLife/";
 		}
 		System.out.println("cancellazione post: PERMESSO NEGATO");
 		return "redirect:/forbidden";
@@ -159,7 +159,7 @@ public class BachecaController {
 		commento.setPost(servicePost.findById(idPost));
 		commento.setVisibile(true);
 		serviceCommento.save(commento);
-		return "redirect:/bacheca/";
+		return "redirect:/myLife/";
 	}
 
 	@PostMapping(value = "/addPost")
@@ -173,7 +173,7 @@ public class BachecaController {
 		post.setTimestamp(Instant.now().getEpochSecond());
 		post.setVisibile(true);
 		servicePost.save(post);
-		return "redirect:/bacheca/";
+		return "redirect:/myLife/";
 
 	}
 }
