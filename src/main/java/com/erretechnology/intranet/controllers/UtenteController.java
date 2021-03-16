@@ -1,6 +1,5 @@
 package com.erretechnology.intranet.controllers;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -59,7 +58,9 @@ public class UtenteController {
 		serviceUtenteDati.save(utenteLoggato);
 		return "redirect:/profile/";
 	}
-
+	
+	
+	@GetMapping(value = "cambioPassword")
 	@PostMapping(value = "cambioPassword")
 	public ModelAndView cambioPassword() {
 		ModelAndView mav = new ModelAndView();
@@ -81,10 +82,15 @@ public class UtenteController {
 				Utente u = serviceUtente.findById(Integer.parseInt(session.getAttribute("id").toString()));
 				u.setPassword(nPsw);
 				serviceUtente.saveUtente(u);
+				UtenteDatiPersonali udp = serviceUtenteDati.findById(u.getId());
+				if(!udp.isPasswordCambiata()) {
+					udp.setPasswordCambiata(true);
+					serviceUtenteDati.save(udp);
+				}
+				return "redirect:/profile/";
 			}else {
 				return "redirect:/profile/paginaModificaPassword";
 			}
-			return "redirect:/profile/";
 		}else{
 			return "redirect:/profile/cambioPassword";
 		}
