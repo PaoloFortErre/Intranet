@@ -23,7 +23,7 @@ import com.erretechnology.intranet.services.ServiceUtente;
 import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 
 @Controller
-@RequestMapping(value = "utente")
+@RequestMapping(value = "profile")
 public class UtenteController {
 
 	@Autowired
@@ -49,7 +49,7 @@ public class UtenteController {
 		UtenteDatiPersonali utenteLoggato= serviceUtenteDati.findById(id_utente);
 		utenteLoggato.setDescrizione(utente.getDescrizione());
 		serviceUtenteDati.save(utenteLoggato);
-		return "redirect:/utente/";
+		return "redirect:/profile/";
 	}
 
 	@PostMapping(value = "cambioPassword")
@@ -65,26 +65,26 @@ public class UtenteController {
 	@PostMapping(value = "/paginaModificaPassword")
 	public String cambiaPaginaModificaPagina(@RequestParam("vecchiaPassword") String vPsw, @RequestParam("nuovaPassword") String nPsw,
 			@RequestParam("cNuovaPassword") String cNPsw, HttpSession session) {
-		
+
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		
+
 		if(passwordEncoder.matches(vPsw, serviceUtente.findById(Integer.parseInt(session.getAttribute("id").toString())).getPassword())){
 			if(nPsw.equals(cNPsw)) {
-				Utente u = serviceUtente.findById(Integer.parseInt(session.getAttribute("id").toString())); 
+				Utente u = serviceUtente.findById(Integer.parseInt(session.getAttribute("id").toString()));
 				u.setPassword(nPsw);
 				serviceUtente.saveUtente(u);
 			}else {
-				return "redirect:/utente/paginaModificaPassword";
+				return "redirect:/profile/paginaModificaPassword";
 			}
-			return "redirect:/utente/";
+			return "redirect:/profile/";
 		}else{
-			return "redirect:/utente/cambioPassword";
+			return "redirect:/profile/cambioPassword";
 		}
 		//System.out.println("ok ci sono");
 		//return "cambiaPassword";
 	}
-	
-	
+
+
 	@PostMapping(value = "/cambiaFotoProfilo")
 	public String modificaFoto(@RequestParam(required=false) MultipartFile immagine, HttpSession session) {
 		String imageFolder = "fotoProfilo";
@@ -98,8 +98,8 @@ public class UtenteController {
 				System.err.println("File caricato");
 			} catch (Exception e) {
 				System.err.println("Non riesco a caricare il file");
-			}	
+			}
 		}
-		return "redirect:/utente/";
+		return "redirect:/profile/";
 	}
 }
