@@ -1,6 +1,5 @@
 package com.erretechnology.intranet.controllers;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -59,7 +58,9 @@ public class UtenteController {
 		serviceUtenteDati.save(utenteLoggato);
 		return "redirect:/profile/";
 	}
-
+	
+	
+	@GetMapping(value = "cambioPassword")
 	@PostMapping(value = "cambioPassword")
 	public ModelAndView cambioPassword() {
 		ModelAndView mav = new ModelAndView();
