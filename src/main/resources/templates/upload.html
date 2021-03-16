@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Boot & Thymeleaf File Upload</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+	<div sec:authorize="hasAuthority('WNMW')">
+		<section class="my-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 mx-auto">
+						<h2>Upload File Example</h2>
+						<p th:text="${message}" th:if="${message ne null}"
+							class="alert alert-primary"></p>
+						<form method="post" th:action="@{/file/upload}"
+							th:object="${filePdf}" enctype="multipart/form-data">
+							<div class="form-group">
+								<input type="file" name="file" class="form-control-file"
+									accept="application/pdf" multiple>
+							</div>
+							<div>
+								<select th:field="*{settore}" class="form-select">
+									<option th:value="'Erre Technology'" th:text="ErreTechnology"></option>
+									<option th:value="'Erre GES'" th:text="ErreGES"></option>
+									<option th:value="'Erre PRO'" th:text="ErrePRO"></option>
+									<option th:value="'Erre LAB'" th:text="ErreLAB"></option>
+								</select>
+							</div>
+							<br>
+							<button type="submit" class="btn btn-primary">Upload
+								File</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+</body>
+</html>

@@ -30,7 +30,6 @@ public class HomeController {
 
 	@GetMapping("/")
 	public String home() {
-		System.out.println();
 		return ("info");
 	}
 
@@ -93,9 +92,12 @@ public class HomeController {
 	@PostMapping(value = "/setSession")
 	public String setSession(HttpSession session) {
 		final String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
-		session.setAttribute("id", serviceUtente.findByEmail(currentUserName).getId());
+		Utente u  = serviceUtente.findByEmail(currentUserName);
+		session.setAttribute("id", u.getId());
 		System.out.println(session.getAttribute("id"));
-		return "redirect:/homepage";
+		if(serviceDatiPersonali.findById(u.getId()).getPasswordCambiata())
+			return "redirect:/homepage";
+		else return "redirect:/profile/cambioPassword";
 	}
 
 	// Login form with error

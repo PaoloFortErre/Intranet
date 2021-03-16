@@ -59,14 +59,15 @@ body {
 }
 
 nav {
-	position: absolute;
+	position: fixed;
 	font-size: 25px;
 	float: right;
 	text-align: right;
 	margin-top: 20px;
 	margin-right: 50px;
 	padding: 5px;
-	color: #F3F3F3;
+	color: #F3F3F3; 
+	height: 10px;
 }
 
 .content {
@@ -209,8 +210,23 @@ opacity: 0.3;
 }
 
 .custom-file-upload {
-	  border: 1px solid #ccc;
+	border: 1px solid #ccc;
     display: inline-block;
     padding: 6px 12px;
     cursor: pointer;
+}
+.assunti  {
+	color: black;
+	background-color: #F3F3F3;
+	margin-top: 60px;
+	width: 40%;
+}
+#tableAssunti {
+	
+	color: black;
+	text-align:center;
+}
+.modal-header {
+	
+	border-bottom: 1px solid black;
 }

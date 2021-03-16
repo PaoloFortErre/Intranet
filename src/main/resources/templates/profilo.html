@@ -14,10 +14,14 @@
 <img th:src="@{/image/fotoProfilo/{image}(image = ${utente.immagine})}">
 </div>
 <form th:action="@{/profile/cambiaFotoProfilo}" method ="post" enctype="multipart/form-data">
-
 <input type="file" name="immagine" accept="image/png, image/jpeg"/>
 	<input type = "submit" value = "Salva">
 	</form>
+<div>
+	<form th:action="@{/profile/eliminaFotoProfilo}" method ="post">
+	<input type = "submit" value = "Se sei troppo brutto, puoi eliminare la tua immagine!">
+	</form>
+</div>
    <p th:text="${utente.descrizione}">
    <div th:if="${session.id} == ${utente.utente.id}">
 		<form th:action="@{/profile/modificaDescrizione}" method="post">

@@ -1,6 +1,5 @@
 package com.erretechnology.intranet.controllers;
 
-import java.sql.PseudoColumnUsage;
 import java.time.Instant;
 
 import javax.servlet.http.HttpSession;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,7 +17,6 @@ import com.erretechnology.intranet.models.Commento;
 import com.erretechnology.intranet.models.CommentoModificato;
 import com.erretechnology.intranet.models.Post;
 import com.erretechnology.intranet.models.PostModificato;
-import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.services.ServiceAuthority;
 import com.erretechnology.intranet.services.ServiceCommento;
@@ -32,7 +29,7 @@ import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 
 @Controller
 @RequestMapping(value = "myLife")
-public class BachecaController {
+public class MyLifeController {
 	@Autowired
 	ServicePost servicePost;
 

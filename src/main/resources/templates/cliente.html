@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2 th:text="${cliente.nome}" />
+	
+	<img th:src="@{/image/cliente/{image}(image = ${cliente.logo})}">
+	<p th:text="${#dates.format(cliente.dataInizio, 'MMMM yyyy')}" />
+	
+</body>
+</html>
+
+

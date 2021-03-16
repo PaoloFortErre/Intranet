@@ -18,7 +18,7 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap"
 	rel="stylesheet">
 
-<link rel="stylesheet" content-type="" href="/view/MyLife/css/style.css">
+<link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
 <style>
 </style>
 
@@ -38,7 +38,7 @@
 						</a>
 					</div>
 					<div class="content" style="display: inline-block">
-						<a href="#">MY WORK</a>
+						<a th:href="@{/myWork/}">MY WORK</a>
 					</div>
 					<div class="content" style="display: inline-block">
 						<a href="#">COMUNICAZIONI HR</a>
@@ -99,7 +99,7 @@
 				<div class="col-sinistra">
 
 					<div class="row">
-						<div class="col-sm-1 col-md-2 col-lg-2">
+						<div class="col-sm-1 col-md-1 col-lg-2">
 
 
 							<img
@@ -120,19 +120,19 @@
 
 
 
-									<label for="document" style="width: 20px; height: 20px; display: inline-block; margin-top:15px;" class="custom-file-upload">
+									<label for="document" style="width: 20px; height: 20px; display: inline-block; margin-top:15px;" >
 									
 										Immagine</label><img src="/view/MyLife/images/imh.png" style="width: 20px; height: 20px; display: inline-block; margin-left: 50px;">
 									
 									<input type="file" name="document" accept="image/png, image/jpeg" />
-									<!-- <input type = "submit" value = "Salva"> -->
+									<!--  <input type = "submit" value = "Salva"> -->
 
 
-									<p
+									<!-- <p
 										style="display: inline-block; margin-top: 10px; margin-left: 20px; font-size: 17px;">
 										Documento <img src="/view/MyLife/images/DOC.png"
 											style="width: 20px; height: 20px; display: inline-block">
-									</p>
+									</p> -->
 									<br> <br> <input type="submit" value="Condividi"
 										id="submitPost"
 										style="float: right; margin-right: 10px; margin-bottom: 8px" />
@@ -150,29 +150,16 @@
 				      
 				     **************** -->
 
-
-
-
-
 				</div>
-
-
 				<hr>
-
-
-
 				<div class="col-sinistra" style="margin-top: 20px">
 					<div class="container-fluid">
 						<div class="row">
-
-							<!-- FOTO PROFILO -->
-
-
-
+						
 							<!-- INFORMAZIONI SU UTENTE E POST -->
 
 							<div th:each="post:${messaggi}" style="margin-top: 30px">
-
+							<!-- FOTO PROFILO -->
 								<div class="col-sm-1 col-md-1 col-lg-2">
 									<img
 										th:src="@{/image/fotoProfilo/{image}(image = ${post.autore.immagine})}"
@@ -214,11 +201,8 @@
 												placeholder="Modifica post" cols="50" rows="2.5" id="post"
 												style="display: none" required></textarea>
 										</form>
-
 									</div>
-
-									<p
-										style="font-size: 12px; background-color: #161616; width: 80px;"
+									<p style="font-size: 12px; background-color: #161616; width: 80px;"
 										th:text="${#dates.format(post.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"></p>
 									<img src="/view/MyLife/images/errepro.png" width="20px"
 										height="20px" style="display: inline-block;">
@@ -237,8 +221,7 @@
 											th:src="@{/image/fotoPost/{image}(image = ${post.immagine})}"
 											width="70%" height="40%">
 										</div>
-									
-										
+																			
 
 										<!-- 같같같같 COMMENTO 같같같�-->
 										<div class="col-sm-5 col-md-5 col-lg-5"
@@ -256,8 +239,6 @@
 															style="display: inline-block; font-style: italic; font-size: 10px;"
 															th:text="${#dates.format(commento.timestamp*1000, 'dd/MM/yyyy, HH:mm')}">
 														</p>
-
-
 													</td>
 													<td
 														th:if="${DCS} or ${commento.autore.id} == ${session.id} or ${post.autore.id} == ${session.id}">
@@ -309,7 +290,6 @@
 			<!-- **** 
 	          COLONNA DESTRA
 	                            **** -->
-
 			<div class="col-sm-4 col-lg-4" id="col-destra">
 				<h3 id="culturaPiemonte" style="margin-top: 30px">Cultura in
 					Piemonte</h3>
@@ -346,7 +326,6 @@
 			</div>
 		</div>
 	</div>
-
 	<footer>
 		<div class="container-fluid">
 			<div class="row">
@@ -364,6 +343,7 @@
 				</div>
 			</div>
 		</div>
+		
 	</footer>
 	<script>
 		$(document).ready(function() {
@@ -397,6 +377,8 @@
 			document.getElementsByClassName('postModificato' + id)[0].style.display = "block";
 
 		}
+	
 	</script>
+	
 </body>
 </html>
