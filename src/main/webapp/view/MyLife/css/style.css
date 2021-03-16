@@ -174,3 +174,36 @@ background-color: #3D3A3A;
 	
 	text-align: left;
 }
+hr#linea {
+	
+opacity: 0.3;
+}
+.submitCommento{
+	border-radius: 2px 2px 2px 2px;
+	color: white;
+	height: 30px;
+	border: 0px;
+	width: 80px;
+	background: rgb(117, 176, 245);
+	background: linear-gradient(90deg, rgba(117, 176, 245, 1) 0%,
+		rgba(57, 147, 252, 1) 18%, rgba(0, 117, 255, 1) 37%);
+	
+}
+#bottoneElimina{
+	background-color:  #3D3A3A;
+	border: 0px  #3D3A3A;
+	color: white; 
+	margin-left: 26px;
+	font-size:13px;
+}
+
+#bottoneModifica{
+	background-color:  #3D3A3A;
+	border: 0px  #3D3A3A;
+	color: white; 
+	margin-left: 2px;
+	font-size:13px;
+}
+.buttonAzioni:hover{
+	background-color: blue;
+}

@@ -60,11 +60,12 @@ public class BachecaController {
 //	}
 
 	@GetMapping(value = "/")
-	public ModelAndView primaPagina() {
+	public ModelAndView primaPagina(HttpSession session) {
 	//	List<Post> messaggi = service.getLastMessage();
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myLife");
 		mav.addObject("messaggi", servicePost.getLastMessage());
+		mav.addObject("utenteDati", serviceUtenteDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return mav;
 	}
 
