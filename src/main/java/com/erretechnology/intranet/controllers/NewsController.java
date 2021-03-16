@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.erretechnology.intranet.models.News;
+import com.erretechnology.intranet.models.NewsModificato;
 import com.erretechnology.intranet.repositories.RepositoryNews;
+import com.erretechnology.intranet.repositories.RepositoryNewsModificato;
 import com.erretechnology.intranet.repositories.RepositoryUtente;
 import com.erretechnology.intranet.services.ServiceFileSystem;
 
@@ -30,6 +32,8 @@ public class NewsController {
 	private RepositoryNews repoNews;
 	@Autowired
 	private RepositoryUtente repoUtente;
+	@Autowired
+	private RepositoryNewsModificato repoOldNews;
 	@Autowired
 	private ServiceFileSystem fileSystemService;
 	private String imageFolder = "news";
@@ -75,17 +79,48 @@ public class NewsController {
         return "news";
 	}
 	
-	@PostMapping(value = "/update/{id}")
-	public String update(@PathVariable int id, @RequestParam("titolo") String titolo, @RequestParam("contenuto") String contenuto) {
+	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
+	public String updateForm(@PathVariable int id, Model model) {
 		News news = repoNews.findById(id).get();
+		model.addAttribute("news", news);
+		return "newsFormUpdate";
+	}
+	
+	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+	public String update(@PathVariable int id, @RequestParam("titolo") String titolo, @RequestParam("contenuto") String contenuto, @RequestParam(required=false) MultipartFile immagine, HttpSession session, Model model) {
+		News news = repoNews.findById(id).get();
+		NewsModificato nm = new NewsModificato();
+		nm.setTitolo(news.getTitolo());
+		nm.setContenuto(news.getContenuto());
+		nm.setCopertina(news.getCopertina());
+		nm.setNews(news);
 		news.setTitolo(titolo);
 		news.setContenuto(contenuto);
+		
+		if(!immagine.isEmpty()) {
+			int idUser = Integer.parseInt(session.getAttribute("id").toString());
+			try {
+				String fileName = fileSystemService.saveImage(imageFolder, immagine, idUser);
+				news.setCopertina(fileName);
+				System.err.println("File caricato");
+			} catch (Exception e) {
+				System.err.println("Non riesco a caricare il file");
+			}	
+		}
+		
+		repoNews.save(news);
+		repoOldNews.save(nm);
+		model.addAttribute("news", news);
 		return "news";
 	}
 	
-	@GetMapping("/delete/{id}")
+	@RequestMapping("/delete/{id}")
 	public String delete(@PathVariable int id) {
+		News news = repoNews.findById(id).get();
+		fileSystemService.deleteImage(imageFolder, news.getCopertina());
 		repoNews.deleteById(id);
-		return "newsForm";
+		return "newsList";
 	}
+	
+
 }

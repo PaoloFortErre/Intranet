@@ -30,7 +30,7 @@ public class FileController {
 			System.err.println("Non ho trovato l'immagine");
 			
 			InputStream in = getClass()
-					.getResourceAsStream("/com/erretechnology/intranet/image/" + "not_found_image.jpg");
+					.getResourceAsStream("/com/erretechnology/intranet/storage/" + "not_found_image.jpg");
 			return IOUtils.toByteArray(in);
 		}
 

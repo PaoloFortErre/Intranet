@@ -39,4 +39,16 @@ public class ServiceFileSystemImpl implements ServiceFileSystem{
 		
 	}
 	
+	@Override
+	public void deleteImage(String subFolder, String fileName) {
+		File file = new File(destination.getImagePath() + subFolder + "/" + fileName); 
+		if(file.delete()) 
+        { 
+            System.out.println("File deleted successfully"); 
+        } 
+        else
+        { 
+            System.out.println("Failed to delete the file"); 
+        } 
+	}
 }
