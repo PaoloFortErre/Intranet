@@ -1,10 +1,9 @@
 package com.erretechnology.intranet.services;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.erretechnology.intranet.models.Ruolo;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.repositories.RepositoryUtenteDatiPersonali;
@@ -14,13 +13,14 @@ public class ServiceUtenteDatiPersonaliImpl implements ServiceUtenteDatiPersonal
 
 	@Autowired
 	RepositoryUtenteDatiPersonali repositoryUtenteDatiPersonali;
-	
 	@Autowired
 	ServiceUtente serviceUtente;
-
+	@Autowired
+	ServiceRuolo serviceRuolo;
+	
 	@Override
 	public void save(UtenteDatiPersonali utente) {
-		repositoryUtenteDatiPersonali.saveAndFlush(utente);
+		repositoryUtenteDatiPersonali.save(utente);
 	}
 
 	@Override
@@ -40,12 +40,15 @@ public class ServiceUtenteDatiPersonaliImpl implements ServiceUtenteDatiPersonal
 	}
 
 	@Override
-	public void insert(String psw, String email, UtenteDatiPersonali udp) {
+	public void insert(String psw, String email, UtenteDatiPersonali udp){
 		Utente utente = new Utente();
 		utente.setEmail(email);
 		utente.setPassword(psw);
 		utente.setAttivo(true);
+		Ruolo r = serviceRuolo.getById("USER");
 		serviceUtente.saveUtente(utente);
+		r.addUtente(utente);
+		utente.addRuolo(r);
 		udp.setPasswordCambiata(false);
 		udp.setUtente(utente);
 		System.out.println(udp.getUtente().getPassword());
