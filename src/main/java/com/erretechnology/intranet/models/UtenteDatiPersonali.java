@@ -28,6 +28,7 @@ public class UtenteDatiPersonali implements Serializable{
 	private String settore;
 	private Boolean passwordCambiata;
 	private String immagine;
+	private boolean visualizzaDataNascita;
 
 
 	public Integer getId() {
@@ -115,5 +116,11 @@ public class UtenteDatiPersonali implements Serializable{
 	}
 	public void setImmagine(String immagine) {
 		this.immagine = immagine;
+	}
+	public boolean isVisualizzaDataNascita() {
+		return visualizzaDataNascita;
+	}
+	public void setVisualizzaDataNascita(boolean visualizzaDataNascita) {
+		this.visualizzaDataNascita = visualizzaDataNascita;
 	}
 }

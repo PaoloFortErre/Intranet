@@ -26,6 +26,18 @@
 			<input type="submit" value="Invia" />
 		</form>
 	</div>
+	<form th:action="@{/profile/setVisualizzazione}" method ="post">
+	<div>
+	Vuoi visulizzare la tua data di nascita? <br>
+  <input type="checkbox" id="set" name="set" value="Si">
+  <label for="set">Eja</label><br>
+  <input type="checkbox" id="set" name="set" value="No">
+  <label for="set"> Ma quando mai...</label><br>
+	<input type="submit" value="Cambia!">
+	</div>
+	</form>
+	
+	
 		<form th:action="@{/profile/cambioPassword}" method ="post">
 			<input type = "submit" value = "Cambia Password">
 		</form>

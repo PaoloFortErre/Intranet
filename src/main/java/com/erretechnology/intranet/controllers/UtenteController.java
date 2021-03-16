@@ -1,10 +1,10 @@
 package com.erretechnology.intranet.controllers;
 
-import java.sql.Timestamp;
-
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
-import com.erretechnology.intranet.models.Utility;
 import com.erretechnology.intranet.services.ServiceFileSystem;
 import com.erretechnology.intranet.services.ServiceUtente;
 import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
@@ -100,6 +99,19 @@ public class UtenteController {
 				System.err.println("Non riesco a caricare il file");
 			}
 		}
+		return "redirect:/profile/";
+	}
+	
+	
+	@PostMapping(value = "/setVisualizzazione")
+	public String modificaVisualizazzioneDataNascita(HttpSession session, HttpServletRequest request) {
+		String value = request.getParameter("set");
+		int id_utente = Integer.parseInt(session.getAttribute("id").toString());
+		UtenteDatiPersonali utenteLoggato= serviceUtenteDati.findById(id_utente);
+		if(value.equals("Si")) {
+			utenteLoggato.setVisualizzaDataNascita(true);
+		} else utenteLoggato.setVisualizzaDataNascita(false);
+		serviceUtenteDati.save(utenteLoggato);
 		return "redirect:/profile/";
 	}
 }
