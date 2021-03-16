@@ -27,6 +27,7 @@ public class UtenteDatiPersonali implements Serializable{
 	private String cognome;
 	private String settore;
 	private Boolean passwordCambiata;
+	private String immagine;
 
 
 	public Integer getId() {
@@ -108,5 +109,11 @@ public class UtenteDatiPersonali implements Serializable{
 
 	public void setPasswordCambiata(boolean passwordCambiata) {
 		this.passwordCambiata = passwordCambiata;
+	}
+	public String getImmagine() {
+		return immagine;
+	}
+	public void setImmagine(String immagine) {
+		this.immagine = immagine;
 	}
 }

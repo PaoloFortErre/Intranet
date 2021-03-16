@@ -10,6 +10,14 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div>
+<img th:src="@{/image/fotoProfilo/{image}(image = ${utente.immagine})}">
+</div>
+<form th:action="@{/utente/cambiaFotoProfilo}" method ="post" enctype="multipart/form-data">
+
+<input type="file" name="immagine" accept="image/png, image/jpeg"/>
+	<input type = "submit" value = "Salva">
+	</form>
    <p th:text="${utente.descrizione}"> 
    <div th:if="${session.id} == ${utente.utente.id}">
 		<form th:action="@{/utente/modificaDescrizione}" method="post">

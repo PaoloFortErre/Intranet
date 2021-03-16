@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.models.Utility;
+import com.erretechnology.intranet.services.ServiceFileSystem;
 import com.erretechnology.intranet.services.ServiceUtente;
 import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 
@@ -28,6 +30,8 @@ public class UtenteController {
 	ServiceUtenteDatiPersonali serviceUtenteDati;
 	@Autowired
 	ServiceUtente serviceUtente;
+	@Autowired
+	ServiceFileSystem serviceFileSystem;
 
 	@GetMapping(value = "/")
 	public ModelAndView primaPagina(HttpSession session) {
@@ -78,5 +82,24 @@ public class UtenteController {
 		}
 		//System.out.println("ok ci sono");
 		//return "cambiaPassword";
+	}
+	
+	
+	@PostMapping(value = "/cambiaFotoProfilo")
+	public String modificaFoto(@RequestParam(required=false) MultipartFile immagine, HttpSession session) {
+		String imageFolder = "fotoProfilo";
+		int idUser = Integer.parseInt(session.getAttribute("id").toString());
+		if(!immagine.isEmpty()) {
+			try {
+				UtenteDatiPersonali utenteLoggato= serviceUtenteDati.findById(idUser);
+				String fileName = serviceFileSystem.saveImage(imageFolder, immagine, idUser);
+				utenteLoggato.setImmagine(fileName);
+				serviceUtenteDati.save(utenteLoggato);
+				System.err.println("File caricato");
+			} catch (Exception e) {
+				System.err.println("Non riesco a caricare il file");
+			}	
+		}
+		return "redirect:/utente/";
 	}
 }
