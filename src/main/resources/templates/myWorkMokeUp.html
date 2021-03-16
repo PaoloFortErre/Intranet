@@ -27,6 +27,16 @@ Salutiamo i nuovi colleghi, tranne quelli antipatici
    </th:block>
 </table>
 
+Nuovi clienti:
+<table>
+   <th:block th:each="cliente: ${nuoviClienti}">
+      <tr>
+         <td th:text="${cliente.nome}"></td>
+         <td th:text="${#dates.format(cliente.dataInizio, 'MMMM yyyy')}"></td>
+		  <td><img th:src="@{/image/cliente/{image}(image = ${cliente.logo})}">      </td>
+		</tr>
+   </th:block>
+</table>
 
 </body>
 </html>

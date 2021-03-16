@@ -5,7 +5,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="#" th:action="@{/news/update/{id}(id = ${news.id})}" th:object="${news}" method="post" enctype="multipart/form-data">
+	<form th:action="@{/news/update/{id}(id = ${news.id})}" th:object="${news}" method="post" enctype="multipart/form-data">
 	  <label for="titolo">Titolo:</label><br>
 	  <input type="text" id="titolo" name="titolo" th:field="*{titolo}"><br>
 	  <label for="contenuto">Contenuto:</label><br>  

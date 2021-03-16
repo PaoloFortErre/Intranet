@@ -119,7 +119,7 @@ public class NewsController {
 		News news = repoNews.findById(id).get();
 		fileSystemService.deleteImage(imageFolder, news.getCopertina());
 		repoNews.deleteById(id);
-		return "newsList";
+		return "redirect:/news/list";
 	}
 	
 

@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.Post;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
+import com.erretechnology.intranet.repositories.RepositoryCliente;
 import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 
 @Controller
@@ -23,6 +24,8 @@ public class MyWorkController {
 	
 	@Autowired
 	ServiceUtenteDatiPersonali serviceUtenteDati;
+	@Autowired
+	private RepositoryCliente repoCliente;
 
 	@GetMapping(value = "/")
 	public ModelAndView primaPagina() {
@@ -61,6 +64,7 @@ public class MyWorkController {
 		 * 
 		 * PARTE FORM NUOVI CLIENTI
 		 */
+		mav.addObject("nuoviClienti", repoCliente.findTop3ByOrderByIdDesc());
 		return mav;
 	}
 }
