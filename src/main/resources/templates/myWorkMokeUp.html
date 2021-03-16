@@ -14,5 +14,19 @@ Ecco chi fa gli anni oggi:
       </tr>
    </th:block>
 </table>
+
+<br><br><br>
+Salutiamo i nuovi colleghi, tranne quelli antipatici
+<table>
+   <th:block th:each="nuovoUtente: ${nuoviAssunti}">
+      <tr>
+         <td th:text="${nuovoUtente.nome}"></td>
+         <td th:text="${nuovoUtente.cognome}"></td>
+		  <td><img th:src="@{/image/fotoProfilo/{image}(image = ${nuovoUtente.immagine})}">      </td>
+		</tr>
+   </th:block>
+</table>
+
+
 </body>
 </html>
