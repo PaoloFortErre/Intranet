@@ -1,10 +1,11 @@
 package com.erretechnology.intranet.controllers;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,10 +44,18 @@ public class UtenteController {
 
 	@PostMapping(value = "/modificaDescrizione")
 	public String modificaDescrizione(@ModelAttribute("utente")UtenteDatiPersonali utente, HttpSession session) {
-		System.out.println("test");
 		int id_utente = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato= serviceUtenteDati.findById(id_utente);
 		utenteLoggato.setDescrizione(utente.getDescrizione());
+		serviceUtenteDati.save(utenteLoggato);
+		return "redirect:/profile/";
+	}
+	
+	@PostMapping(value = "/eliminaFotoProfilo")
+	public String eliminaFotoProfilo(@ModelAttribute("utente")UtenteDatiPersonali utente, HttpSession session) {
+		int id_utente = Integer.parseInt(session.getAttribute("id").toString());
+		UtenteDatiPersonali utenteLoggato= serviceUtenteDati.findById(id_utente);
+		utenteLoggato.setImmagine("blank_profile.png");
 		serviceUtenteDati.save(utenteLoggato);
 		return "redirect:/profile/";
 	}
