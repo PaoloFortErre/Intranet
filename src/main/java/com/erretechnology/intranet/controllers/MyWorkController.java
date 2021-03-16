@@ -34,7 +34,7 @@ public class MyWorkController {
 		 * PARTE CARICAMENTO FORM COMPLEANNI
 		 * 
 		 * */
-		mav.setViewName("myWorkMokeUp");
+		mav.setViewName("myWork");
 		Calendar calendar = Calendar.getInstance(), calUtente = Calendar.getInstance();
 		calendar.setTimeInMillis(Instant.now().getEpochSecond()*1000);
 		List<UtenteDatiPersonali> utenti = serviceUtenteDati.getAll(), utentiCompleanno = new LinkedList<UtenteDatiPersonali>();

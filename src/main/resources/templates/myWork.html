@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+<head>
+<title>MyLife</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap"
+	rel="stylesheet">
+
+<link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
+<style>
+
+td{
+color: white;
+}
+</style>
+</head>
+<body>
+<body ng-app="">
+
+	<div class="container-fluid">
+
+
+		<div class="row">
+
+			<div id="myCarousel" class="carousel slide">
+				<nav class="navbar navbar-fixed-top">
+					<div class="content" style="display: inline-block">
+						<a th:href="@{/homepage/}"><img
+							src="/view/MyLife/images/home.png" width="50px" height="50px">
+						</a>
+					</div>
+					<div class="content" style="display: inline-block">
+						<a th:href="@{/myLife/}">MY LIFE</a>
+					</div>
+					<div class="content" style="display: inline-block">
+						<a href="#">COMUNICAZIONI HR</a>
+					</div>
+					<div class="content" style="display: inline-block">
+						<a href="#">MODULI</a>
+					</div>
+					<div class="content" style="display: inline-block">
+						<a href="http://polyedro.erretechnology.com/www/" target="blank">POLYEDRO</a>
+					</div>
+				</nav>
+				<!-- Indicators -->
+				<ol class="carousel-indicators">
+					<li class="item1 active"></li>
+					<li class="item2"></li>
+
+				</ol>
+
+				<!-- Wrapper for slides -->
+				<div class="carousel-inner" role="listbox">
+
+
+					<div class="item active">
+						<img src="/view/MyWork/images/ferrari.png" alt="Città"
+							width="100%">
+						<div class="carousel-caption">
+							<h1 class="font-caption">"Il brand Ferrari entra a far parte
+								del team di Erre"</h1>
+
+
+						</div>
+					</div>
+
+					<div class="item">
+						<img src="/view/MyWork/images/adidas.png" alt="Lago" width="100%">
+						<div class="carousel-caption">
+							<h1 class="font-caption">Italian Tech Week: riparte a Torino
+								in autunno</h1>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ************
+      FINE HEADER 
+   ***************** -->
+	<div class="container">
+		<div class="row">
+			<table>
+				<th:block th:each="utente: ${utente}">
+					<tr>
+						<td th:text="${utente.nome}"></td>
+						<td th:text="${utente.cognome}"></td>
+					</tr>
+				</th:block>
+			</table>
+
+
+
+			<div class="assunti">
+				<div class="modal-header">
+					<div class="title">
+						<h3 style="color: black;text-align:center;font-weight:900">Nuove assunzioni</h3>
+					</div>
+
+				</div>
+				<div class="modal-body">
+				
+				
+					<table id="tableAssunti">
+						<th:block >
+						<tr> <td th:each="nuovoUtente: ${nuoviAssunti}"><img th:src="@{/image/fotoProfilo/{image}(image = ${nuovoUtente.immagine})}" style="margin-right:30px;" class="img-fluid" width="120px" height="120px">
+								</td> </tr>
+								</th:block>
+						<th:block >
+							<tr>
+								<td th:each="nuovoUtente: ${nuoviAssunti}"> <p th:text="${nuovoUtente.nome}" style="display:inline-block;color: black;">    </p> <p th:text="${nuovoUtente.cognome}" style="display:inline-block;color: black;" ></p> </td>
+								
+								
+							</tr>
+						</th:block>
+					</table>
+				</div>
+			</div>
+
+
+
+
+
+
+
+
+
+
+		</div>
+
+	</div>
+
+
+
+
+
+
+
+	<script>
+		$(document).ready(function() {
+			// Activate Carousel
+			$("#myCarousel").carousel();
+
+			// Enable Carousel Indicators
+			$(".item1").click(function() {
+				$("#myCarousel").carousel(0);
+			});
+			$(".item2").click(function() {
+				$("#myCarousel").carousel(1);
+			});
+			// Enable Carousel Controls
+			$(".left").click(function() {
+				$("#myCarousel").carousel("prev");
+			});
+			$(".right").click(function() {
+				$("#myCarousel").carousel("next");
+			});
+
+		});
+	</script>
+</body>
+</html>
