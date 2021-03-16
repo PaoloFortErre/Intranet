@@ -29,7 +29,7 @@ public class ServiceUtenteDatiPersonaliImpl implements ServiceUtenteDatiPersonal
 		return getAll().stream().filter(x-> x.getUtente().getId().equals(autore.getId())).findFirst().get();
 		return null;
 	}
-
+	@Override
 	public List<UtenteDatiPersonali> getAll() {
 		return repositoryUtenteDatiPersonali.findAll();
 	}
@@ -51,4 +51,5 @@ public class ServiceUtenteDatiPersonaliImpl implements ServiceUtenteDatiPersonal
 		System.out.println(udp.getUtente().getPassword());
 		save(udp);
 	}
+
 }
