@@ -81,10 +81,15 @@ public class UtenteController {
 				Utente u = serviceUtente.findById(Integer.parseInt(session.getAttribute("id").toString()));
 				u.setPassword(nPsw);
 				serviceUtente.saveUtente(u);
+				UtenteDatiPersonali udp = serviceUtenteDati.findById(u.getId());
+				if(!udp.isPasswordCambiata()) {
+					udp.setPasswordCambiata(true);
+					serviceUtenteDati.save(udp);
+				}
+				return "redirect:/profile/";
 			}else {
 				return "redirect:/profile/paginaModificaPassword";
 			}
-			return "redirect:/profile/";
 		}else{
 			return "redirect:/profile/cambioPassword";
 		}

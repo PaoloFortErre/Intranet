@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Modulistica</title>
+</head>
+<body>
+<div th:with="admin = ${#authorization.expression('hasAuthority(''WNMW'')')}">
+<table>
+	<tr th:each="pdf: ${filePdf}">
+		<td th:if="${pdf.settore} == ${user.settore} or ${admin}"><a th:href="@{/file/downloadFile(id=${pdf.id})}" th:text="${pdf.nomeFile}" th:download="${pdf.nomeFile}"></a></td>
+	</tr>
+	
+</table>
+</div>
+</body>
+</html>
