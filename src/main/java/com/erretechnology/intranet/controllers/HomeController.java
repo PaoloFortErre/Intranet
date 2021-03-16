@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.models.Utility;
 import com.erretechnology.intranet.services.ServiceUtente;
@@ -28,14 +30,6 @@ public class HomeController {
 
 	@GetMapping("/")
 	public String home() {
-		/*
-		authorityService.getAll().forEach(x->{
-			System.out.println(x.getEmail() + " " + x.getDescrizione());
-		});
-		authorityService.findByUsertId(2).forEach(x->{
-			System.out.println(x.getEmail() + " " + x.getDescrizione());
-		});
-		*/
 		System.out.println();
 		return ("info");
 	}
@@ -67,13 +61,10 @@ public class HomeController {
 	
 	@PostMapping(value = "/eseguiRegistrazione")
 	public String addUtente(@ModelAttribute("user")UtenteDatiPersonali utenteDP,
-			@RequestParam("email") String email, @RequestParam("password") String password,
-			Utility data) {
-		
+			@RequestParam("email") String email, @RequestParam("password") String password, Utility data) {
 		utenteDP.setDataNascita(Timestamp.valueOf(data.getDate().atStartOfDay()).getTime() / 1000);
 		serviceDatiPersonali.insert(password, email, utenteDP);
-		
-		return "info";
+		return "redirect:login";
 	}
 	
 	// Password Dimenticata da login
@@ -109,7 +100,7 @@ public class HomeController {
 
 	// Login form with error
 	@GetMapping("/login-error")
-	public String loginError(Model model) {
+	public String loginError(Model model, Utente utente) {
 		model.addAttribute("loginError", true);
 		return "loginPage";
 	}

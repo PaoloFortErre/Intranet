@@ -30,6 +30,10 @@ public class Ruolo {
 		setPermessi = new HashSet<Permesso>();
 	}
 	
+	public void addUtente(Utente utente) {
+		setUtenti.add(utente);
+	}
+	
 	public String getNome() {
 		return nome;
 	}
