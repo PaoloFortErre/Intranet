@@ -23,6 +23,7 @@ public class Post {
 	private String testo;
 	private long timestamp;
 	private boolean visibile;
+	private String immagine;
 	@ManyToOne
 	@JoinColumn(name = "id_autore")
 	private UtenteDatiPersonali autore;
@@ -87,4 +88,20 @@ public class Post {
 	public void setVisibile(boolean visibile) {
 		this.visibile = visibile;
 	}
+
+
+
+	public String getImmagine() {
+		return immagine;
+	}
+
+
+
+	public void setImmagine(String immagine) {
+		this.immagine = immagine;
+	}
+
+
+
+	
 }

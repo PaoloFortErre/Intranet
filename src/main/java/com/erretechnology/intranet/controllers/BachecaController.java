@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.Commento;
@@ -22,6 +24,7 @@ import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.services.ServiceAuthority;
 import com.erretechnology.intranet.services.ServiceCommento;
 import com.erretechnology.intranet.services.ServiceCommentoModificato;
+import com.erretechnology.intranet.services.ServiceFileSystem;
 import com.erretechnology.intranet.services.ServicePost;
 import com.erretechnology.intranet.services.ServicePostModificato;
 import com.erretechnology.intranet.services.ServiceUtente;
@@ -50,6 +53,9 @@ public class BachecaController {
 
 	@Autowired
 	ServiceUtenteDatiPersonali serviceUtenteDatiPersonali;
+	
+	@Autowired
+	ServiceFileSystem serviceFileSystem;
 
 
 //	@GetMapping(value="/myLife")
@@ -164,7 +170,7 @@ public class BachecaController {
 	}
 
 	@PostMapping(value = "/addPost")
-	public String inserisciPost(Post post, HttpSession session) {
+	public String inserisciPost(Post post, HttpSession session, @RequestParam(required=false) MultipartFile document) {
 		System.out.println("test");
 	//	String mail = session.getAttribute("email").toString();
 		int id = Integer.parseInt(session.getAttribute("id").toString());
@@ -173,6 +179,18 @@ public class BachecaController {
 
 		post.setTimestamp(Instant.now().getEpochSecond());
 		post.setVisibile(true);
+		
+		if(!document.isEmpty()) {
+			try {
+				String imageFolder = "fotoPost";
+				String fileName = serviceFileSystem.saveImage(imageFolder, document, id);
+				post.setImmagine(fileName);
+				
+				System.err.println("File caricato");
+			} catch (Exception e) {
+				System.err.println("Non riesco a caricare il file");
+			}
+		}
 		servicePost.save(post);
 		return "redirect:/myLife/";
 

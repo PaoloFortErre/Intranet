@@ -55,7 +55,7 @@ body {
 }
 
 .content>a:hover {
-	color: blue;;
+	color: #ECF260;;
 }
 
 nav {
@@ -206,4 +206,11 @@ opacity: 0.3;
 }
 .buttonAzioni:hover{
 	background-color: blue;
+}
+
+.custom-file-upload {
+	  border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
 }
