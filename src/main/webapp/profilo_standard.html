@@ -5,6 +5,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1,
   shrink-to-fit=no">
+
+  <!-- Add icon library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   <!-- Bootstrap CSS -->
   <link rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
@@ -16,10 +20,12 @@
   <style media="screen">
   body{
     font-family: Noto Sans, sans-serif;
+    color: white;
     background-color: #303030;
   }
   #logo{
-    width: 13%;
+    width: 20%;
+    background-color: white;
   }
   nav {
     font-size: 25px;
@@ -58,8 +64,16 @@
   }
   /*Profile Pic End*/
 
-  .bi-camera{
-
+  .camera {
+    width: 40px !important;
+    height: 40px !important;
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    cursor: pointer; /* Mouse pointer on hover */
+  }
+  /* Darker background on mouse-over */
+  .camera:hover {
+    color: yellow;
   }
   </style>
 
@@ -94,18 +108,16 @@
   <!-- PANNELLO CON IMMAGINE PROFILO E NOME -->
 
   <div class="container-fluid">
-    <div class="row mt-5">
-      <div class="col-lg-2 col-md-4 ml-5 ">
-        <div class="img_container">
-          <img class="picture img rounded-circle mt-5 mb-2"
+    <div class="row">
+      <div class="col-lg-3 col-md-4 ml-5 ">
+        <div class="container">
+          <img class="picture img rounded-circle mt-4"
           src="view/Profile/Images/blank_profile.png" alt="profile_pic"
           style="width: 260px;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-camera ml-5" viewBox="0 0 16 16">
-            <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
-            <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
-          </svg>
+          <button class="btn camera"><a href="#"><i class="fa fa-camera"></i></a></button>
         </div>
       </div>
+
       <div class="col-6 mt-5">
         <span class="anagrafica">Ennio Annio</span><br><br>
         <span class="anagrafica">ennio.annio@********</span>
@@ -115,6 +127,31 @@
     </div>
   </div>
 
+  <!-- PANNELLO CON DESCRIZIONE E DASHBOARD -->
+
+  <div class="container">
+    <div class="row mt-4">
+      <div class="col-1 col-lg-1">
+        <div class="container">
+          <span>Logo</span><br>
+          <div class="form">
+            <form class="" action="" method="post">
+              <button type="button" class="btn btn-info mt-3">Cambia Password</button>
+              <button type="button" class="btn btn-info mt-3">Cambia impostazioni personali</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="container-fluid dashboard">
+
+        </div>
+      </div>
+      <div class="col-1">
+        3 of 3
+      </div>
+    </div>
+  </div>
 
 
 
