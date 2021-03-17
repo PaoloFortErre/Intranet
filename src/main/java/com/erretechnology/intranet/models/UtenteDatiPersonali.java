@@ -28,7 +28,7 @@ public class UtenteDatiPersonali implements Serializable{
 	private String settore;
 	private Boolean passwordCambiata;
 	@OneToOne()
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "id_immagine")
 	private FileImmagini immagine;
 	private boolean visualizzaDataNascita;
 

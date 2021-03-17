@@ -25,7 +25,7 @@ public class Post {
 	private long timestamp;
 	private boolean visibile;
 	@OneToOne()
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "id_immagine")
 	private FileImmagini immagine;
 	
 	@ManyToOne

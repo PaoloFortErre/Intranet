@@ -162,7 +162,7 @@
 							<!-- FOTO PROFILO -->
 								<div class="col-sm-1 col-md-1 col-lg-2">
 									<img
-										th:src="'data:image/jpeg;base64,' + ${img.getImgData(post.autore.immagine.data)}"
+										th:src="'data:image/jpeg;base64,' + ${img.getImgData(img.data)}"
 										title="utente" class="immagineUtente" style="margin: 20px;">
 								</div>
 
@@ -218,7 +218,7 @@
 										
 										<div th:if="${post.immagine!=null}">
 												<img
-											th:src="'data:image/jpeg;base64,' + ${img.getImgData(post.immagine.data)}"
+											th:src="'data:image/jpeg;base64,' + ${img.getImgData(post.autore.immagine.data)}"
 											width="70%" height="40%">
 										</div>
 																			
