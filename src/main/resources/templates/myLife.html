@@ -103,7 +103,7 @@
 
 
 							<img
-								th:src="@{/image/fotoProfilo/{image}(image = ${utenteDati.immagine})}"
+								th:src="'data:image/jpeg;base64,' + ${img.getImgData(img.data)}"
 								alt="utente" title="utente" class="immagineUtente"
 								style="margin: 20px;">
 						</div>
@@ -162,7 +162,7 @@
 							<!-- FOTO PROFILO -->
 								<div class="col-sm-1 col-md-1 col-lg-2">
 									<img
-										th:src="@{/image/fotoProfilo/{image}(image = ${post.autore.immagine})}"
+										th:src="'data:image/jpeg;base64,' + ${img.getImgData(post.autore.immagine.data)}"
 										title="utente" class="immagineUtente" style="margin: 20px;">
 								</div>
 
@@ -218,7 +218,7 @@
 										
 										<div th:if="${post.immagine!=null}">
 												<img
-											th:src="@{/image/fotoPost/{image}(image = ${post.immagine})}"
+											th:src="'data:image/jpeg;base64,' + ${img.getImgData(post.immagine.data)}"
 											width="70%" height="40%">
 										</div>
 																			

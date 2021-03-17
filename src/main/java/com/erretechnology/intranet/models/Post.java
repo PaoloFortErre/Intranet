@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,7 +24,10 @@ public class Post {
 	private String testo;
 	private long timestamp;
 	private boolean visibile;
-	private String immagine;
+	@OneToOne()
+	@JoinColumn(name = "id")
+	private FileImmagini immagine;
+	
 	@ManyToOne
 	@JoinColumn(name = "id_autore")
 	private UtenteDatiPersonali autore;
@@ -35,8 +39,6 @@ public class Post {
 	public List<Commento> getSetCommenti() {
 		return setCommenti;
 	}
-	
-	
 
 	public void setSetCommenti(List<Commento> setCommenti) {
 		this.setCommenti = setCommenti;
@@ -89,19 +91,11 @@ public class Post {
 		this.visibile = visibile;
 	}
 
-
-
-	public String getImmagine() {
+	public FileImmagini getImmagine() {
 		return immagine;
 	}
 
-
-
-	public void setImmagine(String immagine) {
+	public void setImmagine(FileImmagini immagine) {
 		this.immagine = immagine;
-	}
-
-
-
-	
+	}	
 }

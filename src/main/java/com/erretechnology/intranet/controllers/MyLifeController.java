@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.Commento;
 import com.erretechnology.intranet.models.CommentoModificato;
+import com.erretechnology.intranet.models.FileImmagini;
 import com.erretechnology.intranet.models.Log;
 import com.erretechnology.intranet.models.Post;
 import com.erretechnology.intranet.models.PostModificato;
@@ -33,16 +35,16 @@ import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 @RequestMapping(value = "myLife")
 public class MyLifeController extends BaseController {
 
-//	@GetMapping(value="/myLife")
-//	public ModelAndView myLife() {
-//		ModelAndView mav = new ModelAndView();
-//		mav.setViewName("myLife");
-//		return mav;
-//	}
+	//	@GetMapping(value="/myLife")
+	//	public ModelAndView myLife() {
+	//		ModelAndView mav = new ModelAndView();
+	//		mav.setViewName("myLife");
+	//		return mav;
+	//	}
 
 	@GetMapping(value = "/")
 	public ModelAndView primaPagina(HttpSession session) {
-	//	List<Post> messaggi = service.getLastMessage();
+		//	List<Post> messaggi = service.getLastMessage();
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myLife");
@@ -151,30 +153,39 @@ public class MyLifeController extends BaseController {
 	}
 
 	@PostMapping(value = "/addPost")
-	public String inserisciPost(Post post, HttpSession session, @RequestParam(required=false) MultipartFile document) {
+	public String inserisciPost(Post post, HttpSession session, @RequestParam(required=false) MultipartFile immagine) {
 		System.out.println("test");
-	//	String mail = session.getAttribute("email").toString();
+		//	String mail = session.getAttribute("email").toString();
 		int id = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(id);
 		post.setAutore(autore);
 		post.setTimestamp(Instant.now().getEpochSecond());
 		post.setVisibile(true);
-		
-		if(!document.isEmpty()) {
+		if(immagine != null) {
 			try {
-				String imageFolder = "fotoPost";
-				String fileName = serviceFileSystem.saveImage(imageFolder, document, id);
-				post.setImmagine(fileName);
-				
+				//String imageFolder = "fotoPost";
+				//String fileName = serviceFileSystem.saveImage(imageFolder, document, id);
+				//post.setImmagine(fileName);
+				FileImmagini img = new FileImmagini();
+				UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(id);
+				img.setAutore(utenteLoggato);
+				img.setData(immagine.getBytes());
+				img.setTimestamp(Instant.now().getEpochSecond());
+				img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
+				serviceFileImmagine.insert(img);
+				post.setImmagine(img);
+
 				System.err.println("File caricato");
 			} catch (Exception e) {
 				System.err.println("Non riesco a caricare il file");
 			}
 		}
-		servicePost.save(post);
-		saveLog("scritto in bacheca", autore);
-		return "redirect:/myLife/";
-	}
-	
-	
+			servicePost.save(post);
+			saveLog("scritto in bacheca", autore);
+			return "redirect:/myLife/";
+		
+		}
+		
+
+
 }
