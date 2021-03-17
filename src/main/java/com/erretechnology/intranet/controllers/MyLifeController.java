@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.Commento;
 import com.erretechnology.intranet.models.CommentoModificato;
-import com.erretechnology.intranet.models.FileImmagini;
+import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.Log;
 import com.erretechnology.intranet.models.Post;
 import com.erretechnology.intranet.models.PostModificato;
@@ -166,7 +166,7 @@ public class MyLifeController extends BaseController {
 				//String imageFolder = "fotoPost";
 				//String fileName = serviceFileSystem.saveImage(imageFolder, document, id);
 				//post.setImmagine(fileName);
-				FileImmagini img = new FileImmagini();
+				FileImmagine img = new FileImmagine();
 				UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(id);
 				img.setAutore(utenteLoggato);
 				img.setData(document.getBytes());

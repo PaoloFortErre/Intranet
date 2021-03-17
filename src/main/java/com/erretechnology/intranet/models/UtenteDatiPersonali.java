@@ -25,11 +25,13 @@ public class UtenteDatiPersonali implements Serializable{
 	private long dataNascita;
 	private String nome;
 	private String cognome;
-	private String settore;
+	@OneToOne()
+	@JoinColumn(name = "settore")
+	private Settore settore;
 	private Boolean passwordCambiata;
 	@OneToOne()
 	@JoinColumn(name = "id_immagine")
-	private FileImmagini immagine;
+	private FileImmagine immagine;
 	private boolean visualizzaDataNascita;
 
 
@@ -90,11 +92,11 @@ public class UtenteDatiPersonali implements Serializable{
 		this.nome = nome;
 	}
 
-	public String getSettore() {
+	public Settore getSettore() {
 		return settore;
 	}
 
-	public void setSettore(String settore) {
+	public void setSettore(Settore settore) {
 		this.settore = settore;
 	}
 
@@ -111,10 +113,10 @@ public class UtenteDatiPersonali implements Serializable{
 	public void setVisualizzaDataNascita(boolean visualizzaDataNascita) {
 		this.visualizzaDataNascita = visualizzaDataNascita;
 	}
-	public FileImmagini getImmagine() {
+	public FileImmagine getImmagine() {
 		return immagine;
 	}
-	public void setImmagine(FileImmagini immagine) {
+	public void setImmagine(FileImmagine immagine) {
 		this.immagine = immagine;
 	}
 }

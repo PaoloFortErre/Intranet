@@ -26,7 +26,7 @@ public class Post {
 	private boolean visibile;
 	@OneToOne()
 	@JoinColumn(name = "id_immagine")
-	private FileImmagini immagine;
+	private FileImmagine immagine;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_autore")
@@ -91,11 +91,11 @@ public class Post {
 		this.visibile = visibile;
 	}
 
-	public FileImmagini getImmagine() {
+	public FileImmagine getImmagine() {
 		return immagine;
 	}
 
-	public void setImmagine(FileImmagini immagine) {
+	public void setImmagine(FileImmagine immagine) {
 		this.immagine = immagine;
 	}	
 }

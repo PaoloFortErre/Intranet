@@ -19,14 +19,12 @@ public class ServiceLogImpl implements ServiceLog{
 	
 	@Override
 	public Log save(Log log) {
-		// TODO Auto-generated method stub
 		return repositoryLog.save(log);
 	}
 
 
 	@Override
 	public List<Log> findLogById(int id) {
-		// TODO Auto-generated method stub
 		return repositoryLog.findAll().stream()
 				.filter(x-> x.getUtente().getId() == id)
 				.sorted(Comparator.comparingInt(Log::getId).reversed())

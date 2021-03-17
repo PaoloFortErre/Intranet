@@ -3,22 +3,18 @@ package com.erretechnology.intranet.services;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.erretechnology.intranet.controllers.BaseController;
 import com.erretechnology.intranet.models.Ruolo;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.repositories.RepositoryUtenteDatiPersonali;
 
 @Service("serviceUtenteDati")
-public class ServiceUtenteDatiPersonaliImpl implements ServiceUtenteDatiPersonali {
+public class ServiceUtenteDatiPersonaliImpl extends BaseController implements ServiceUtenteDatiPersonali {
 
 	@Autowired
 	RepositoryUtenteDatiPersonali repositoryUtenteDatiPersonali;
-	@Autowired
-	ServiceUtente serviceUtente;
-	@Autowired
-	ServiceRuolo serviceRuolo;
-	@Autowired
-	ServiceFileImmagini serviceFileImmagine;
 	
 	@Override
 	public void save(UtenteDatiPersonali utente) {
@@ -42,7 +38,7 @@ public class ServiceUtenteDatiPersonaliImpl implements ServiceUtenteDatiPersonal
 	}
 
 	@Override
-	public void insert(String psw, String email, UtenteDatiPersonali udp){
+	public void insert(String psw, String email, String settore ,UtenteDatiPersonali udp){
 		Utente utente = new Utente();
 		utente.setEmail(email);
 		utente.setPassword(psw);
@@ -51,10 +47,10 @@ public class ServiceUtenteDatiPersonaliImpl implements ServiceUtenteDatiPersonal
 		serviceUtente.saveUtente(utente);
 		r.addUtente(utente);
 		utente.addRuolo(r);
+		udp.setSettore(serviceSettore.findById(settore));
 		udp.setPasswordCambiata(false);
 		udp.setUtente(utente);
 		udp.setImmagine(serviceFileImmagine.getImmagine(63));
-		System.out.println(udp.getUtente().getPassword());
 		save(udp);
 	}
 

@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "fileImmagini")
-public class FileImmagini{
+public class FileImmagine{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;

@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.erretechnology.intranet.models.FileImmagini;
+import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.repositories.RepositoryFileImmagine;
 
@@ -17,23 +17,23 @@ public class ServiceFileImmagineImpl implements ServiceFileImmagini{
 	RepositoryFileImmagine repositoryFileImmagine;
 
 	@Override
-	public void insert(FileImmagini file) {
+	public void insert(FileImmagine file) {
 		repositoryFileImmagine.save(file);
 	}
 
 	@Override
-	public FileImmagini getImmagine(int id) {
+	public FileImmagine getImmagine(int id) {
 		return repositoryFileImmagine.findById(id).get();
 	}
 	
 	@Override
-	public FileImmagini getLastImmagineByUtente(UtenteDatiPersonali u) {
+	public FileImmagine getLastImmagineByUtente(UtenteDatiPersonali u) {
 		return getAll().stream().filter(x-> x.getAutore().equals(u))
-				.sorted(Comparator.comparingLong(FileImmagini::getTimestamp).reversed()).findFirst().get();
+				.sorted(Comparator.comparingLong(FileImmagine::getTimestamp).reversed()).findFirst().get();
 	}
 
 	@Override
-	public List<FileImmagini> getAll() {
+	public List<FileImmagine> getAll() {
 		return repositoryFileImmagine.findAll();
 	}
 	
@@ -43,7 +43,7 @@ public class ServiceFileImmagineImpl implements ServiceFileImmagini{
 	}
 
 	@Override
-	public FileImmagini getImmagineByData(byte[] data) {
+	public FileImmagine getImmagineByData(byte[] data) {
 		return getAll().stream().filter(x->Arrays.equals(x.getData(), (data))).findFirst().get();
 	}
 

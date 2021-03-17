@@ -31,7 +31,7 @@
         <textarea th:field="${user.descrizione}"></textarea>
     </div>
     <div>
-        <select th:field="${user.settore}">
+        <select th:name="settore">
 		    <option th:value="'Erre Technology'" th:text="ErreTechnology"></option>
 		    <option th:value="'Erre GES'" th:text="ErreGES"></option>
 		    <option th:value="'Erre PRO'" th:text="ErrePRO"></option>

@@ -17,36 +17,39 @@ import com.erretechnology.intranet.services.ServicePermesso;
 import com.erretechnology.intranet.services.ServicePost;
 import com.erretechnology.intranet.services.ServicePostModificato;
 import com.erretechnology.intranet.services.ServiceRuolo;
+import com.erretechnology.intranet.services.ServiceSettore;
 import com.erretechnology.intranet.services.ServiceUtente;
 import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 
 public abstract class BaseController {
 	@Autowired
-	ServiceAuthority serviceAuthority;
+	protected ServiceAuthority serviceAuthority;
 	@Autowired
-	ServiceCommento serviceCommento;
+	protected ServiceCommento serviceCommento;
 	@Autowired
-	ServiceCommentoModificato serviceCommentoModificato;
+	protected ServiceCommentoModificato serviceCommentoModificato;
 	@Autowired
-	ServiceFileImmagini serviceFileImmagine;
+	protected ServiceFileImmagini serviceFileImmagine;
 	@Autowired
-	ServiceFilePdf serviceFilePdf;
+	protected ServiceFilePdf serviceFilePdf;
 	@Autowired
-	ServiceFileSystem serviceFileSystem;
+	protected ServiceFileSystem serviceFileSystem;
 	@Autowired
-	ServiceLog serviceLog;
+	protected ServiceLog serviceLog;
 	@Autowired
-	ServicePermesso servicePermesso;
+	protected ServicePermesso servicePermesso;
 	@Autowired
-	ServicePost servicePost;
+	protected ServicePost servicePost;
 	@Autowired
-	ServicePostModificato servicePostModificato;
+	protected ServicePostModificato servicePostModificato;
 	@Autowired
-	ServiceRuolo serviceRuolo;
+	protected ServiceRuolo serviceRuolo;
 	@Autowired
-	ServiceUtente serviceUtente;
+	protected ServiceUtente serviceUtente;
 	@Autowired
-	ServiceUtenteDatiPersonali serviceDatiPersonali;
+	protected ServiceUtenteDatiPersonali serviceDatiPersonali;
+	@Autowired
+	protected ServiceSettore serviceSettore;
 	
 	protected void saveLog(String testo, UtenteDatiPersonali autore) {
 		Log log = new Log();
