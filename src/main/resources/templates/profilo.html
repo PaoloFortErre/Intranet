@@ -11,7 +11,7 @@
 </head>
 <body>
 <div>
-<img th:src="@{/image/fotoProfilo/{image}(image = ${utente.immagine})}">
+<img class='img-thumbnail' th:src="'data:image/jpeg;base64,' + ${img.getImgData(img.data)}" />
 </div>
 <form th:action="@{/profile/cambiaFotoProfilo}" method ="post" enctype="multipart/form-data">
 <input type="file" name="immagine" accept="image/png, image/jpeg"/>

@@ -1,13 +1,9 @@
 package com.erretechnology.intranet.services;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.erretechnology.intranet.models.FilePdf;
 import com.erretechnology.intranet.repositories.RepositoryFilePdf;
 @Service("ServiceFilePdf")
@@ -16,12 +12,12 @@ public class ServiceFilePdfImpl implements ServiceFilePdf {
 	RepositoryFilePdf repositoryFilePdf;
 
 	@Override
-	public FilePdf insert(FilePdf file) {
-		return repositoryFilePdf.save(file);
+	public void insert(FilePdf file) {
+		repositoryFilePdf.save(file);
 	}
 
 	@Override
-	public FilePdf get(int id) {
+	public FilePdf getPdf(int id) {
 		return repositoryFilePdf.findById(id).get();
 	}
 

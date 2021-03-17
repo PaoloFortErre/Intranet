@@ -1,5 +1,7 @@
 package com.erretechnology.intranet.controllers;
 
+import java.time.Instant;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.erretechnology.intranet.models.FileImmagini;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
+import com.erretechnology.intranet.services.ServiceFileImmagini;
 import com.erretechnology.intranet.services.ServiceFileSystem;
 import com.erretechnology.intranet.services.ServiceUtente;
 import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
@@ -31,12 +36,16 @@ public class UtenteController {
 	ServiceUtente serviceUtente;
 	@Autowired
 	ServiceFileSystem serviceFileSystem;
+	@Autowired
+	ServiceFileImmagini serviceFileImmagine;
 
 	@GetMapping(value = "/")
 	public ModelAndView primaPagina(HttpSession session) {
+		UtenteDatiPersonali u = serviceUtenteDati.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("profilo");
-		mav.addObject("utente", serviceUtenteDati.findById(Integer.parseInt(session.getAttribute("id").toString())));
+		mav.addObject("utente", u);
+		mav.addObject("img", serviceFileImmagine.getLastImmagineByUtente(u));
 		return mav;
 	}
 
@@ -101,14 +110,20 @@ public class UtenteController {
 
 	@PostMapping(value = "/cambiaFotoProfilo")
 	public String modificaFoto(@RequestParam(required=false) MultipartFile immagine, HttpSession session) {
-		String imageFolder = "fotoProfilo";
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
+		FileImmagini img = null;
 		if(!immagine.isEmpty()) {
 			try {
+				img = new FileImmagini();
 				UtenteDatiPersonali utenteLoggato= serviceUtenteDati.findById(idUser);
-				String fileName = serviceFileSystem.saveImage(imageFolder, immagine, idUser);
-				utenteLoggato.setImmagine(fileName);
-				serviceUtenteDati.save(utenteLoggato);
+				img.setAutore(utenteLoggato);
+				img.setData(immagine.getBytes());
+				img.setTimestamp(Instant.now().getEpochSecond());
+				img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
+				serviceFileImmagine.insert(img);
+				//String fileName = serviceFileSystem.saveImage(imageFolder, immagine, idUser);
+				//utenteLoggato.setImmagine(fileName);
+				//serviceUtenteDati.save(utenteLoggato);
 				System.err.println("File caricato");
 			} catch (Exception e) {
 				System.err.println("Non riesco a caricare il file");

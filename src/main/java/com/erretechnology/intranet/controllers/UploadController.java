@@ -87,7 +87,7 @@ public class UploadController {
 	
 	@GetMapping(value = "/downloadFile")
 	public ResponseEntity<Resource> downloadFile(int id) {
-		FilePdf pdf = serviceFilePdf.get(id);
+		FilePdf pdf = serviceFilePdf.getPdf(id);
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Content-Disposition", String.format("attachment; filename=" + pdf.getNomeFile()));    
 		return ResponseEntity.ok()
