@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="it">
 <head>
 <title>MyLife</title>
+<meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <script
@@ -18,16 +19,17 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap"
 	rel="stylesheet">
 
+
+
 <link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
 <style>
-
-td{
-color: white;
+td {
+	color: white;
 }
 </style>
 </head>
 <body>
-<body ng-app="">
+<body ng-app="" onload="data()">
 
 	<div class="container-fluid">
 
@@ -66,7 +68,7 @@ color: white;
 
 
 					<div class="item active">
-						<img src="/view/MyWork/images/ferrari.png" alt="Citt�"
+						<img src="/view/MyWork/images/ferrari1.png" alt="ferrari"
 							width="100%">
 						<div class="carousel-caption">
 							<h1 class="font-caption">"Il brand Ferrari entra a far parte
@@ -77,7 +79,8 @@ color: white;
 					</div>
 
 					<div class="item">
-						<img src="/view/MyWork/images/adidas.png" alt="Lago" width="100%">
+						<img src="/view/MyWork/images/adidas.png" alt="techweek"
+							width="100%">
 						<div class="carousel-caption">
 							<h1 class="font-caption">Italian Tech Week: riparte a Torino
 								in autunno</h1>
@@ -92,63 +95,180 @@ color: white;
       FINE HEADER 
    ***************** -->
 	<div class="container">
-		<div class="row">
-			<table>
-				<th:block th:each="utente: ${utente}">
-					<tr>
-						<td th:text="${utente.nome}"></td>
-						<td th:text="${utente.cognome}"></td>
-					</tr>
-				</th:block>
-			</table>
 
 
 
-			<div class="assunti">
-				<div class="modal-header">
-					<div class="title">
-						<h3 style="color: black;text-align:center;font-weight:900">Nuove assunzioni</h3>
+		<div class="row" style="margin-top: 50px;">
+			<div class="col-sm-12 col-md-5 col-lg-5">
+
+
+
+				<div class="assunti">
+					<div class="modal-header">
+						<div class="title">
+							<h3 style="color: black; text-align: center; font-weight: 900">Nuove
+								assunzioni</h3>
+						</div>
+
 					</div>
+					<div class="modal-body">
 
+
+						<table id="tableAssunti">
+							<th:block>
+								<tr>
+									<td th:each="nuovoUtente: ${nuoviAssunti}">
+										<img th:src="'data:image/png;base64,' + ${nuovoUtente.immagine.getImgData(nuovoUtente.immagine.data)}" alt="fotoProfiloUtente"
+										class="img-fluid" width="120px" height="120px"></td>
+								</tr>
+							</th:block>
+							<th:block>
+								<tr>
+									<td th:each="nuovoUtente: ${nuoviAssunti}">
+										<p th:text="${nuovoUtente.nome}"
+											style="display: inline-block; color: black;"></p>
+										<p th:text="${nuovoUtente.cognome}"
+											style="display: inline-block; color: black;"></p>
+									</td>
+
+
+								</tr>
+								<tr style="text-align: right">
+									<td><a href="" id="vedi" onclick="mostraAssunzioni()">
+											vedi altri</a></td>
+								</tr>
+							</th:block>
+						</table>
+
+						<table id="tableAssunti2">
+							<th:block>
+								<tr>
+									<td th:each="nuovoUtente: ${nuoviAssunti2}"><img th:src="'data:image/png;base64,' + ${nuovoUtente.immagine.getImgData(nuovoUtente.immagine.data)}" alt="fotoProfiloUtente"
+										class="img-fluid" width="120px" height="120px"></td>
+								</tr>
+							</th:block>
+							<th:block>
+								<tr>
+									<td th:each="nuovoUtente: ${nuoviAssunti2}">
+										<p th:text="${nuovoUtente.nome}"
+											style="display: inline-block; color: black;"></p>
+										<p th:text="${nuovoUtente.cognome}"
+											style="display: inline-block; color: black;"></p>
+									</td>
+
+
+								</tr>
+							</th:block>
+						</table>
+					</div>
 				</div>
-				<div class="modal-body">
-				
-				
-					<table id="tableAssunti">
-						<th:block >
-						<tr> <td th:each="nuovoUtente: ${nuoviAssunti}"><img th:src="@{/image/fotoProfilo/{image}(image = ${nuovoUtente.immagine})}" style="margin-right:30px;" class="img-fluid" width="120px" height="120px">
-								</td> </tr>
-								</th:block>
-						<th:block >
+
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+				<div id="quadrato-compleanno">
+
+					<h2
+						style="line-height: 45px; display: inline-block; font-weight: 900;">Oggi
+						è il compleanno di:</h2>
+
+					<div th:each="utente: ${utente}">
+											<img th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}" alt="fotoProfiloUtente" title="Foto profilo dell'utente" width="28%" height="28%" style="margin-top:10px;">
+					
+						<h4 th:text="${utente.nome}"
+							style="display: inline-block; color: blue"></h4>
+						<h4 th:text="${utente.cognome}"
+							style="display: inline-block; color: blue"></h4>
+					</div>
+					<img src="/view/MyWork/images/torta.png" class="img-fluid"
+						width="20%" height="20%" style="display: inline-block;">
+					<h4 id="data" style="DISPLAY: INLINE-BLOCK;"></h4>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-4 bcol-lg-4">
+				<div id="quadrato-podcast">
+					<h2
+						style="line-height: 45px; display: inline-block; font-weight: 900;">
+						I podcast di <span style="color: #FFC931"><br>Rosario</span>
+					</h2>
+					<img src="/view/MyWork/images/radice.jpg" class="img-fluid"
+						width="40%" height="40%" style="float: right" id="imgRosario">
+					<p>16 febbraio 2021</p>
+					<audio controls>
+						<source src="" type="audio/ogg">
+					
+					
+					</audio>
+				</div>
+			</div>
+		</div>
+		<!-- °°°°°°°°°°° NUOVI CLIENTI °°°°°°°°°°-->
+
+		<div class="row">
+			<div class="col-sm-8 col-md-6 col-lg-5">
+				<div class="assunti2">
+					<div class="modal-header2">
+						<div class="title2">
+							<h3 style="text-align: center; font-weight: 900">Nuovi
+								clienti</h3>
+						</div>
+
+					</div>
+					<table class="nuoviClienti">
+						<th:block>
 							<tr>
-								<td th:each="nuovoUtente: ${nuoviAssunti}"> <p th:text="${nuovoUtente.nome}" style="display:inline-block;color: black;">    </p> <p th:text="${nuovoUtente.cognome}" style="display:inline-block;color: black;" ></p> </td>
-								
-								
+								<td th:each="cliente: ${nuoviClienti}"><img
+									th:src="@{/image/cliente/{image}(image = ${cliente.logo})}"
+									class="img-fluid" width="120px" height="120px"></td>
+							</tr>
+						</th:block>
+						<th:block>
+							<tr>
+								<td th:each="cliente: ${nuoviClienti}">
+									<p th:text="${cliente.nome}"></p>
+								</td>
+							</tr>
+							<tr>
+								<td th:each="cliente: ${nuoviClienti}"><p
+										th:text="${#dates.format(cliente.dataInizio, 'MMMM yyyy')}">
+									</p></td>
+
 							</tr>
 						</th:block>
 					</table>
+
+
 				</div>
 			</div>
-
-
-
-
-
-
-
-
-
-
 		</div>
+
+
+		<!-- °°°°°°°°°°° NUOVE ASSUNZIONI °°°°°°°°°°-->
+
+
+
 
 	</div>
 
 
+	<footer>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-4 col-lg-4">
+					<img src="/view/MyLife/images/erre.png" height="80px"
+						style="margin: auto">
+				</div>
+				<div class="col-sm-4 col-lg-4">
+					<p style="color: #F3F3F3; text-align: center; font-size: 20px;">
+						Supporto: +39 011 197 429 00</p>
+				</div>
+				<div class="col-sm-4 col-lg-4">
+					<img src="/view/MyLife/images/fblogo.png" height="60px"> <img
+						src="/view/MyLife/images/linkedin.png" height="80px ">
+				</div>
+			</div>
+		</div>
 
-
-
-
-
+	</footer>
 	<script>
 		$(document).ready(function() {
 			// Activate Carousel
@@ -170,6 +290,33 @@ color: white;
 			});
 
 		});
+
+		function mostraAssunzioni() {
+			document.getElementById("tableAssunti2").style.display = "block";
+			document.getElementById("vedi").style.display = "none";
+
+		}
+
+		function data() {
+			var d = new Date();
+			var giorno = d.getDate()
+
+			var month = new Array();
+			month[0] = "Gennaio";
+			month[1] = "Febbraio";
+			month[2] = "Marzo";
+			month[3] = "Aprile";
+			month[4] = "Maggio";
+			month[5] = "Giugno";
+			month[6] = "Luglio";
+			month[7] = "Agosto";
+			month[8] = "Settembre";
+			month[9] = "Ottobre";
+			month[10] = "Novembre";
+			month[11] = "Dicembre";
+			var mese = month[d.getMonth()];
+			document.getElementById("data").innerHTML = giorno + " " + mese;
+		}
 	</script>
 </body>
 </html>

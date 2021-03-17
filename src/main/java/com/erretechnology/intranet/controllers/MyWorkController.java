@@ -35,12 +35,15 @@ public class MyWorkController extends BaseController {
 		Calendar calendar = Calendar.getInstance(), calUtente = Calendar.getInstance();
 		calendar.setTimeInMillis(Instant.now().getEpochSecond()*1000);
 		List<UtenteDatiPersonali> utenti = serviceDatiPersonali.getAll(), utentiCompleanno = new LinkedList<UtenteDatiPersonali>();
+		
 		for(UtenteDatiPersonali u : utenti) {
 			calUtente.setTimeInMillis(u.getDataNascita()*1000);
-			if((calendar.get(Calendar.MONTH))==(calUtente.get(Calendar.MONTH)) && (calendar.get(Calendar.DAY_OF_MONTH))==(calUtente.get(Calendar.DAY_OF_MONTH)) && u.isVisualizzaDataNascita() == true) {
+			
+			if((calendar.get(Calendar.MONTH))==(calUtente.get(Calendar.MONTH)) && (calendar.get(Calendar.DAY_OF_MONTH))==(calUtente.get(Calendar.DAY_OF_MONTH)) /*&& u.isVisualizzaDataNascita() == true*/) {
 				utentiCompleanno.add(u);
 			}
 		}
+		System.out.println(utentiCompleanno.size());
 		mav.addObject("utente", utentiCompleanno);
 		/*
 		 * PARTE CARICAMENTO FORM NUOVI UTENTI
@@ -52,8 +55,8 @@ public class MyWorkController extends BaseController {
 				.limit(6)
 				.collect(Collectors.toList());
 		
-		mav.addObject("nuoviAssunti", nuoviUtenti.subList(0, 2));
-		mav.addObject("nuoviAssunti2", nuoviUtenti.subList(3, 5));
+		mav.addObject("nuoviAssunti", nuoviUtenti.subList(0, 3));
+		mav.addObject("nuoviAssunti2", nuoviUtenti.subList(3, 6));
 		
 		///////////
 		

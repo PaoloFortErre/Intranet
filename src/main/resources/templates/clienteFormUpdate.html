@@ -9,7 +9,7 @@
 	  <label for="nome">Nome:</label><br>
 	  <input type="text" id="nome" name="nome" th:field="*{nome}"><br>
 	  <label for="dataInizio">Data inizio:</label><br>  
-	  <input type=month id="dataInizio" name="dataInizio" th:value="${#dates.format(date, 'yyyy-MM')}"><br>
+	  <input type="month" id="dataInizio" name="dataInizio" th:value="${#dates.format(date, 'yyyy-MM')}"><br>
 	  <input type="file" name="immagine" accept="image/png, image/jpeg"/>
 	  <br>
 	  <input type="submit" value="Pubblica">
