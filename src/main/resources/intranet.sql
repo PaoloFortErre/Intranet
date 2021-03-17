@@ -244,6 +244,33 @@ INSERT INTO `hibernate_sequence` VALUES (61);
 UNLOCK TABLES;
 
 --
+-- Table structure for table `log`
+--
+
+DROP TABLE IF EXISTS `log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `log` (
+  `id` int NOT NULL,
+  `azione` varchar(255) DEFAULT NULL,
+  `timestamp` bigint NOT NULL,
+  `id_autore` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKarqlavbygocq165h1i1aen311` (`id_autore`),
+  CONSTRAINT `FKarqlavbygocq165h1i1aen311` FOREIGN KEY (`id_autore`) REFERENCES `dati_utente` (`id_user`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `log`
+--
+
+LOCK TABLES `log` WRITE;
+/*!40000 ALTER TABLE `log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `log` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `news`
 --
 
@@ -622,4 +649,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-17  9:55:47
+-- Dump completed on 2021-03-17 10:06:28
