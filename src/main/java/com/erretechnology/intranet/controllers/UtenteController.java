@@ -51,7 +51,7 @@ public class UtenteController extends BaseController{
 		saveLog("aggiornato la descrizione", utenteLoggato);
 		return "redirect:/profile/";
 	}
-	
+
 	@PostMapping(value = "/eliminaFotoProfilo")
 	public String eliminaFotoProfilo(@ModelAttribute("utente")UtenteDatiPersonali utente, HttpSession session) {
 		int id_utente = Integer.parseInt(session.getAttribute("id").toString());
@@ -61,9 +61,8 @@ public class UtenteController extends BaseController{
 		saveLog("eliminato la foto profilo", utenteLoggato);
 		return "redirect:/profile/";
 	}
+
 	
-	
-	@GetMapping(value = "cambioPassword")
 	@PostMapping(value = "cambioPassword")
 	public ModelAndView cambioPassword() {
 		ModelAndView mav = new ModelAndView();
@@ -98,7 +97,7 @@ public class UtenteController extends BaseController{
 		}else{
 			return "redirect:/profile/cambioPassword";
 		}
-		
+
 
 		//System.out.println("ok ci sono");
 		//return "cambiaPassword";
@@ -129,8 +128,8 @@ public class UtenteController extends BaseController{
 		}
 		return "redirect:/profile/";
 	}
-	
-	
+
+
 	@PostMapping(value = "/setVisualizzazione")
 	public String modificaVisualizazzioneDataNascita(HttpSession session, HttpServletRequest request) {
 		String value = request.getParameter("set");

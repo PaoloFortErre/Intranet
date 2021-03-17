@@ -1,60 +1,206 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="it" dir="ltr">
 <head>
-<style>
-.descrizione {
-	resize: none;
-}
-</style>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-<div>
-<img class='img-thumbnail' th:src="'data:image/jpeg;base64,' + ${img.getImgData(img.data)}" />
-</div>
-<form th:action="@{/profile/cambiaFotoProfilo}" method ="post" enctype="multipart/form-data">
-<input type="file" name="immagine" accept="image/png, image/jpeg"/>
-	<input type = "submit" value = "Salva">
-	</form>
-<div>
-	<form th:action="@{/profile/eliminaFotoProfilo}" method ="post">
-	<input type = "submit" value = "Se sei troppo brutto, puoi eliminare la tua immagine!">
-	</form>
-</div>
-   <p th:text="${utente.descrizione}">
-   <div th:if="${session.id} == ${utente.utente.id}">
-		<form th:action="@{/profile/modificaDescrizione}" method="post">
-			<textarea class="descrizione" name="descrizione" placeholder="modifica la tua descrizione!"
-				cols="50" rows="5" th:field="${utente.descrizione}" required></textarea>
-			<input type="submit" value="Invia" />
-		</form>
-	</div>
-	
-	
-	<div th:each="log:${log}">
-		<p th:text="Hai + ' ' + ${log.azione}">
-		<p th:text="${#dates.format(log.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"/>
-	</div>
-	
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1,
+  shrink-to-fit=no">
 
-	
-	
-	
-	<form th:action="@{/profile/setVisualizzazione}" method ="post">
-	<div>
-	Vuoi visulizzare la tua data di nascita? <br>
-  <input type="checkbox" id="set" name="set" value="Si">
-  <label for="set">Eja</label><br>
-  <input type="checkbox" id="set" name="set" value="No">
-  <label for="set"> Ma quando mai...</label><br>
-	<input type="submit" value="Cambia!">
-	</div>
-	</form>
-	
-	
-		<form th:action="@{/profile/cambioPassword}" method ="post">
-			<input type = "submit" value = "Cambia Password">
-		</form>
+  <!-- Add icon library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+  integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+  crossorigin="anonymous">
+
+  <title>standard_profile</title>
+
+  <style media="screen">
+  body{
+    font-family: Noto Sans, sans-serif;
+    color: white;
+    background-color: #303030;
+  }
+  #logo{
+    width: 20%;
+    background-color: white;
+  }
+  nav {
+    font-size: 25px;
+    margin-right: 15px;
+    color: #F3F3F3;
+  }
+
+  .content>a {
+    color: #F3F3F3;
+  }
+
+  .content>a:link {
+    text-decoration: none;
+  }
+
+  .content>a:hover {
+    color: blue;;
+  }
+
+  .anagrafica{
+    color: #F3F3F3;
+  }
+
+  /*Profile Pic Start*/
+  .picture{
+    background-color: #999999;
+    border: 3px solid #CCCCCC;
+    color: #FFFFFF;
+    border-radius: 50%;
+    overflow: hidden;
+    transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+  }
+  .picture:hover{
+    border-color: yellow;
+  }
+  /*Profile Pic End*/
+
+  .camera {
+    width: 45px !important;
+    height: 45px !important;
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    cursor: pointer; /* Mouse pointer on hover */
+  }
+  /* Darker background on mouse-over */
+  .camera:hover {
+    color: yellow;
+  }
+
+  .card-text{
+    font-size: 13px;
+  }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <div class="row">
+    <div class="col">
+      <img id="logo" class="img-fluid rounded float-left mt-5 ml-5"
+      src="view/Login/images/erre_group.png" alt="erre_logo" >
+    </div>
+    <div class="col-lg-8 col-sm-5">
+      <nav class="navbar float-right mt-5 mr-5">
+        <div class="content mr-5" >
+          <a href="#">HOME</a>
+        </div>
+        <div class="content mr-5" >
+          <a href="#">COMUNICAZIONI HR</a>
+        </div>
+        <div class="content mr-5" >
+          <a href="#">MODULI</a>
+        </div>
+        <div class="content mr-5" >
+          <a href="#">POLYEDRO</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <!-- PANNELLO CON IMMAGINE PROFILO E NOME -->
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3 col-md-4 ml-5 ">
+        <div class="container">
+          <img class="picture img rounded-circle mt-4"
+          th:src="'data:image/jpeg;base64,' + ${img.getImgData(img.data)}" alt="profile_pic"
+          style="width: 260px;">
+          <button type="button" class="btn camera" data-toggle="tooltip"
+          data-placement="right" title="Modifica immagine del profilo"><a th:href="@{/profile/cambiaFotoProfilo}"
+          method ="post" enctype="multipart/form-data">
+          <i class="fa fa-camera"></i></a>
+        </button>
+        <form th:action="@{/profile/eliminaFotoProfilo}" method ="post">
+          <input type = "submit" value = "Elimina foto">
+        </form>
+      </div>
+    </div>
+
+
+    <div class="col-6 mt-5">
+      <span class="anagrafica" th:text="${utente.nome} + ' ' + ${utente.cognome} "></span><br><br>
+      <span class="anagrafica" th:text="${utente.utente.email}"></span>
+    </div>
+    <div class="col-1 mt-5">
+    </div>
+  </div>
+</div>
+
+<!-- PANNELLO CON DESCRIZIONE E DASHBOARD -->
+
+<div class="container-fluid ">
+  <div class="row mt-4">
+    <div class="col-lg-2 col-md-2 col-sm-2 ml-5  ">
+      <div class="container-fluid">
+        <img class="w-75" src="view/Profile/Images/Erre_pro_rgb-264x100.png" alt="logo-agency">
+      </div>
+      <div class="form ml-3">
+        <form th:action="@{/profile/cambioPassword}" method="post">
+          <button type="submit" class="btn btn-info justify-content-center mt-4">Cambia Password</button>
+        </form>
+      </div>
+    </div>
+    <div class="col-lg-2 col-md-3 col-sm-3 ml-3 mr-5 mt-3">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h6 class="card-title" style="color:#303030">Una breve descrizione di me stesso</h6>
+          <p class="card-text" th:text="${utente.descrizione}" style="color:#303030"></p>
+          <div th:if="${session.id} == ${utente.utente.id}">
+            <form th:action="@{/profile/modificaDescrizione}" method="post">
+              <textarea class="" name="descrizione" placeholder="Modifica la tua descrizione"
+              cols="50" rows="5" th:field="${utente.descrizione}" required></textarea>
+              <input type="submit" value="Modifica descrizione"/>
+            </form>
+          </div>
+          <a href="#" class="btn btn-primary">Profilo Linkedin</a>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-8 mt-3 ml-5">
+      <div class="card ml-4" style="color:#303030;" >
+        <div class="card-header">
+          <h5>ATTIVITA' RECENTI</h5>
+          <small>Anteprima di quello che hai fatto di recente</small>
+        </div>
+        <div class="card-body h-100 text-justify" th:each="log:${log}">
+          <p class="card-text" th:text="Hai + ' ' + ${log.azione}"><br>
+            <small th:utext="${#dates.format(log.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"/></small>
+          </p>
+        </div>
+        <a href="#" class="btn btn-primary w-25">Vedi tutte</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+crossorigin="anonymous"></script>
+
 </body>
 </html>

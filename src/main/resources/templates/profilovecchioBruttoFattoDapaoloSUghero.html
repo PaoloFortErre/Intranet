@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<style>
+.descrizione {
+	resize: none;
+}
+</style>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<div>
+<img class='img-thumbnail' th:src="'data:image/jpeg;base64,' + ${img.getImgData(img.data)}" />
+</div>
+<form th:action="@{/profile/cambiaFotoProfilo}" method ="post" enctype="multipart/form-data">
+<input type="file" name="immagine" accept="image/png, image/jpeg"/>
+	<input type = "submit" value = "Salva">
+	</form>
+<div>
+	<form th:action="@{/profile/eliminaFotoProfilo}" method ="post">
+	<input type = "submit" value = "Se sei troppo brutto, puoi eliminare la tua immagine!">
+	</form>
+</div>
+   <p th:text="${utente.descrizione}">
+   <div th:if="${session.id} == ${utente.utente.id}">
+		<form th:action="@{/profile/modificaDescrizione}" method="post">
+			<textarea class="descrizione" name="descrizione" placeholder="modifica la tua descrizione!"
+				cols="50" rows="5" th:field="${utente.descrizione}" required></textarea>
+			<input type="submit" value="Invia" />
+		</form>
+	</div>
+	
+	
+	<div th:each="log:${log}">
+		<p th:text="Hai + ' ' + ${log.azione}">
+		<p th:text="${#dates.format(log.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"/>
+	</div>
+	
+
+	
+	
+	
+	<form th:action="@{/profile/setVisualizzazione}" method ="post">
+	<div>
+	Vuoi visulizzare la tua data di nascita? <br>
+  <input type="checkbox" id="set" name="set" value="Si">
+  <label for="set">Eja</label><br>
+  <input type="checkbox" id="set" name="set" value="No">
+  <label for="set"> Ma quando mai...</label><br>
+	<input type="submit" value="Cambia!">
+	</div>
+	</form>
+	
+	
+		<form th:action="@{/profile/cambioPassword}" method ="post">
+			<input type = "submit" value = "Cambia Password">
+		</form>
+</body>
+</html>
