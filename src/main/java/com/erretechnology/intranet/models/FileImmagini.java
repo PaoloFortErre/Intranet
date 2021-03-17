@@ -1,14 +1,24 @@
 package com.erretechnology.intranet.models;
 
-import javax.persistence.*;
+import java.util.Base64;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-@Table(name = "filePdf")
-public class FilePdf{
+@Table(name = "fileImmagini")
+public class FileImmagini{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	private String settore;
+	private long timestamp;
+	
 	private String nomeFile;
 	@Lob
     private byte[] data;
@@ -40,19 +50,16 @@ public class FilePdf{
 		this.nomeFile = nomeFile;
 	}
 	
-	public Integer getId() {
-		return id;
+	public long getTimestamp() {
+		return timestamp;
 	}
 	
-	public void setId(Integer id) {
-		this.id = id;
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
 	}
 	
-	public String getSettore() {
-		return settore;
-	}
+	public String getImgData(byte[] byteData) {
+        return Base64.getMimeEncoder().encodeToString(byteData);
+    }
 	
-	public void setSettore(String settore) {
-		this.settore = settore;
-	}
 }
