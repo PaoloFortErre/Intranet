@@ -17,6 +17,8 @@ public class ServiceUtenteDatiPersonaliImpl implements ServiceUtenteDatiPersonal
 	ServiceUtente serviceUtente;
 	@Autowired
 	ServiceRuolo serviceRuolo;
+	@Autowired
+	ServiceFileImmagini serviceFileImmagine;
 	
 	@Override
 	public void save(UtenteDatiPersonali utente) {
@@ -51,6 +53,7 @@ public class ServiceUtenteDatiPersonaliImpl implements ServiceUtenteDatiPersonal
 		utente.addRuolo(r);
 		udp.setPasswordCambiata(false);
 		udp.setUtente(utente);
+		udp.setImmagine(serviceFileImmagine.getImmagine(63));
 		System.out.println(udp.getUtente().getPassword());
 		save(udp);
 	}

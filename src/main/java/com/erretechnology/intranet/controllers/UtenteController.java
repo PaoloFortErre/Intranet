@@ -21,10 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.erretechnology.intranet.models.FileImmagini;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
-import com.erretechnology.intranet.services.ServiceFileImmagini;
-import com.erretechnology.intranet.services.ServiceFileSystem;
-import com.erretechnology.intranet.services.ServiceUtente;
-import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 
 @Controller
 @RequestMapping(value = "profile")
