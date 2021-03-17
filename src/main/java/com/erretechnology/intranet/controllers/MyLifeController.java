@@ -153,7 +153,7 @@ public class MyLifeController extends BaseController {
 	}
 
 	@PostMapping(value = "/addPost")
-	public String inserisciPost(Post post, HttpSession session, @RequestParam(required=false) MultipartFile immagine) {
+	public String inserisciPost(Post post, HttpSession session, @RequestParam(required=false) MultipartFile document) {
 		System.out.println("test");
 		//	String mail = session.getAttribute("email").toString();
 		int id = Integer.parseInt(session.getAttribute("id").toString());
@@ -161,7 +161,7 @@ public class MyLifeController extends BaseController {
 		post.setAutore(autore);
 		post.setTimestamp(Instant.now().getEpochSecond());
 		post.setVisibile(true);
-		if(immagine != null) {
+		if(document != null) {
 			try {
 				//String imageFolder = "fotoPost";
 				//String fileName = serviceFileSystem.saveImage(imageFolder, document, id);
@@ -169,9 +169,9 @@ public class MyLifeController extends BaseController {
 				FileImmagini img = new FileImmagini();
 				UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(id);
 				img.setAutore(utenteLoggato);
-				img.setData(immagine.getBytes());
+				img.setData(document.getBytes());
 				img.setTimestamp(Instant.now().getEpochSecond());
-				img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
+				img.setNomeFile(StringUtils.cleanPath(document.getOriginalFilename()));
 				serviceFileImmagine.insert(img);
 				post.setImmagine(img);
 
