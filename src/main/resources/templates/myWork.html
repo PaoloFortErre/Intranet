@@ -71,7 +71,7 @@ td {
 						<img src="/view/MyWork/images/ferrari1.png" alt="ferrari"
 							width="100%">
 						<div class="carousel-caption">
-							<h1 class="font-caption">"Il brand Ferrari entra a far parte
+							<h1 class="font-caption" style="font-weight:900">"Il brand Ferrari entra a far parte
 								del team di Erre"</h1>
 
 
@@ -79,11 +79,11 @@ td {
 					</div>
 
 					<div class="item">
-						<img src="/view/MyWork/images/adidas.png" alt="techweek"
+						<img src="/view/MyWork/images/scarpe.png" alt="techweek"
 							width="100%">
 						<div class="carousel-caption">
-							<h1 class="font-caption">Italian Tech Week: riparte a Torino
-								in autunno</h1>
+							<h1 class="font-caption" style="font-weight:900">"Italian Tech Week: riparte a Torino
+								in autunno"</h1>
 
 						</div>
 					</div>
@@ -168,8 +168,7 @@ td {
 				<div id="quadrato-compleanno">
 
 					<h2
-						style="line-height: 45px; display: inline-block; font-weight: 900;">Oggi
-						è il compleanno di:</h2>
+						style="line-height: 45px; display: inline-block; font-weight: 900;">Oggi è il compleanno di:</h2>
 
 					<div th:each="utente: ${utente}">
 											<img th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}" alt="fotoProfiloUtente" title="Foto profilo dell'utente" width="28%" height="28%" style="margin-top:10px;">
@@ -213,12 +212,12 @@ td {
 						</div>
 
 					</div>
-					<table class="nuoviClienti">
+					<table class="nuoviClienti" style="margin-top:15px;">
 						<th:block>
 							<tr>
 								<td th:each="cliente: ${nuoviClienti}"><img
 									th:src="@{/image/cliente/{image}(image = ${cliente.logo})}"
-									class="img-fluid" width="120px" height="120px"></td>
+									class="img-fluid" width="120px" height="120px" ></td>
 							</tr>
 						</th:block>
 						<th:block>
