@@ -20,11 +20,14 @@
   <style media="screen">
   body{
     font-family: Noto Sans, sans-serif;
-    color: white;
+    color: #F3F3F3;
     background-color: #303030;
   }
   #logo{
     width: 20%;
+    background-color: white;
+  }
+  #logo2{
     background-color: white;
   }
   nav {
@@ -43,10 +46,6 @@
 
   .content>a:hover {
     color: blue;;
-  }
-
-  .anagrafica{
-    color: #F3F3F3;
   }
 
   /*Profile Pic Start*/
@@ -87,14 +86,15 @@
 
   <!-- NAVBAR -->
   <div class="row">
-    <div class="col">
+    <div class="col ml-5">
       <img id="logo" class="img-fluid rounded float-left mt-5 ml-5"
-      src="view/Login/images/erre_group.png" alt="erre_logo" >
+      src="/view/Profile/Images/erre_group.png" alt="erre_logo" >
     </div>
+
     <div class="col-lg-8 col-sm-5">
       <nav class="navbar float-right mt-5 mr-5">
         <div class="content mr-5" >
-          <a href="#">HOME</a>
+          <a th:href="@{/homepage}">HOME</a>
         </div>
         <div class="content mr-5" >
           <a href="#">COMUNICAZIONI HR</a>
@@ -107,12 +107,13 @@
         </div>
       </nav>
     </div>
+
   </div>
 
   <!-- PANNELLO CON IMMAGINE PROFILO, NOME E EMAIL -->
 
   <div class="container-fluid">
-    <div class="row">
+    <div class="row mt-3">
       <div class="col-lg-3 col-md-4 ml-5 ">
         <div class="container-fluid">
           <img class="picture img rounded-circle mt-4"
@@ -130,51 +131,54 @@
           </form>
 
         </div>
-
-        <div class="col-6 mt-5">
-          <span class="anagrafica" th:text="${utente.nome} + ' ' + ${utente.cognome} "></span><br><br>
-          <span class="anagrafica" th:text="${utente.utente.email}"></span>
-        </div>
-        <div class="col-1 mt-5">
-        </div>
       </div>
+
+      <div class="col-6 mt-5">
+        <span class="anagrafica" th:text="${utente.nome} + ' ' + ${utente.cognome} "></span><br><br>
+        <span class="anagrafica" th:text="${utente.utente.email}"></span>
+      </div>
+
     </div>
+
   </div>
 
-  <!-- PANNELLO CON GESTIONE PROFILO, DESCRIZIONE E DASHBOARD -->
 
+  <!-- PANNELLO CON GESTIONE PROFILO, DESCRIZIONE E DASHBOARD -->
   <div class="container-fluid ">
-    <div class="row mt-4">
+    <div class="row mt-2">
 
       <div class="col-lg-2 col-md-2 col-sm-2 ml-5  ">
         <div class="container-fluid">
-          <img class="w-75" src="view/Profile/Images/Erre_pro_rgb-264x100.png" alt="logo-agency">
+          <img id="logo2" class="img-fluid rounded w-75" src="/view/Profile/Images/Erre_pro_rgb-264x100.png" alt="logo-agency">
         </div>
         <div class="form ml-3">
           <form th:action="@{/profile/cambioPassword}" method="post">
             <button type="submit" class="btn btn-info justify-content-center mt-4">Cambia Password</button>
           </form>
         </div>
+        <a class="ml-3 mt-2" href="#" class="btn btn-primary">Profilo Linkedin</a>
       </div>
 
-      <div class="col-lg-2 col-md-3 col-sm-3 ml-3 mr-5 mt-1">
+      <div class="col-lg-2 col-md-3 col-sm-3 ml-3 mr-5">
         <div class="card" style="width: 18rem;">
           <div class="card-body">
             <h6 class="card-title" style="color:#303030">Una breve descrizione di me stesso</h6>
             <p class="card-text" th:text="${utente.descrizione}" style="color:#303030"></p>
             <div th:if="${session.id} == ${utente.utente.id}">
               <form th:action="@{/profile/modificaDescrizione}" method="post">
-                <textarea class="" name="descrizione" placeholder="Modifica la tua descrizione"
-                cols="50" rows="5" th:field="${utente.descrizione}" required></textarea>
-                <input type="submit" value="Modifica descrizione"/>
+                <div class="form-group">
+                  <label for="exampleFormControlTextarea1">Example textarea</label>
+                  <textarea class="form-control" id="exampleFormControlTextarea1"name="descrizione" placeholder="Modifica la tua descrizione"
+                  cols="50" rows="5" th:field="${utente.descrizione}" required></textarea>
+                </div>
+                <input class="btn btn-primary " type="submit" value="Modifica descrizione"/>
               </form>
             </div>
-            <a href="#" class="btn btn-primary">Profilo Linkedin</a>
           </div>
         </div>
       </div>
 
-      <div class="col-lg-6 col-md-6 col-sm-8 mt-1 ml-5">
+      <div class="col-lg-6 col-md-6 col-sm-8 ml-5">
         <div class="card ml-4" style="color:#303030;" >
           <div class="card-header">
             <h5>ATTIVITA' RECENTI</h5>
@@ -188,6 +192,7 @@
           <a href="#" class="btn btn-primary w-25">Vedi tutte</a>
         </div>
       </div>
+
     </div>
   </div>
 
