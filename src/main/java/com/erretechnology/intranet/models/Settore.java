@@ -1,5 +1,7 @@
 package com.erretechnology.intranet.models;
 
+import java.util.Base64;
+
 import javax.persistence.*;
 
 @Entity
@@ -23,5 +25,7 @@ public class Settore {
 		this.logo = logo;
 	}
 	
-	
+	public String getImgData(byte[] byteData) {
+        return Base64.getMimeEncoder().encodeToString(byteData);
+    }
 }
