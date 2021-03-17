@@ -6,10 +6,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.Table;
+import javax.persistence.InheritanceType;
 
 @Entity
 @Table(name = "client")
-//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
