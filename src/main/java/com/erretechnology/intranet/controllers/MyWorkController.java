@@ -49,9 +49,11 @@ public class MyWorkController extends BaseController {
 		
 		List<UtenteDatiPersonali> nuoviUtenti = utenti.stream()
 				.sorted(Comparator.comparingInt(UtenteDatiPersonali::getId).reversed())
-				.limit(3)
+				.limit(6)
 				.collect(Collectors.toList());
-		mav.addObject("nuoviAssunti", nuoviUtenti);
+		
+		mav.addObject("nuoviAssunti", nuoviUtenti.subList(0, 2));
+		mav.addObject("nuoviAssunti2", nuoviUtenti.subList(3, 5));
 		
 		///////////
 		
