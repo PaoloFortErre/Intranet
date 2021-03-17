@@ -34,12 +34,7 @@ import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 
 @Controller
 @RequestMapping(value = "file")
-public class UploadController {
-
-	@Autowired
-	ServiceFilePdf serviceFilePdf;
-	@Autowired
-	ServiceUtenteDatiPersonali serviceUtenteDatiPersonali;
+public class UploadController extends BaseController{
 
 	@GetMapping(value = "/")
 	public ModelAndView uploadMAV() {
@@ -81,7 +76,7 @@ public class UploadController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("downloadPdf");
 		mav.addObject("filePdf", serviceFilePdf.getAll());
-		mav.addObject("user", serviceUtenteDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+		mav.addObject("user", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return mav;
 	}
 	

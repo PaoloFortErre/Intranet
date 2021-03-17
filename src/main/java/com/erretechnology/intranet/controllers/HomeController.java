@@ -20,14 +20,7 @@ import com.erretechnology.intranet.services.ServiceUtente;
 import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 
 @Controller
-public class HomeController {
-
-	@Autowired
-	private ServiceUtente serviceUtente;
-
-	@Autowired
-	private ServiceUtenteDatiPersonali serviceDatiPersonali;
-
+public class HomeController extends BaseController{
 	@GetMapping("/")
 	public String home() {
 		return ("info");

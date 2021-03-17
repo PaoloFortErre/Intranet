@@ -27,15 +27,13 @@ import com.erretechnology.intranet.services.ServiceFileSystem;
 
 @Controller
 @RequestMapping("news")
-public class NewsController {
+public class NewsController extends BaseController {
 	@Autowired
 	private RepositoryNews repoNews;
 	@Autowired
 	private RepositoryUtente repoUtente;
 	@Autowired
 	private RepositoryNewsModificato repoOldNews;
-	@Autowired
-	private ServiceFileSystem fileSystemService;
 	private String imageFolder = "news";
 	
 	@GetMapping("/{id}")
@@ -67,7 +65,7 @@ public class NewsController {
 		
 		if(!immagine.isEmpty()) {
 			try {
-				String fileName = fileSystemService.saveImage(imageFolder, immagine, idUser);
+				String fileName = serviceFileSystem.saveImage(imageFolder, immagine, idUser);
 				news.setCopertina(fileName);
 				System.err.println("File caricato");
 			} catch (Exception e) {
@@ -100,7 +98,7 @@ public class NewsController {
 		if(!immagine.isEmpty()) {
 			int idUser = Integer.parseInt(session.getAttribute("id").toString());
 			try {
-				String fileName = fileSystemService.saveImage(imageFolder, immagine, idUser);
+				String fileName = serviceFileSystem.saveImage(imageFolder, immagine, idUser);
 				news.setCopertina(fileName);
 				System.err.println("File caricato");
 			} catch (Exception e) {
@@ -117,7 +115,7 @@ public class NewsController {
 	@RequestMapping("/delete/{id}")
 	public String delete(@PathVariable int id) {
 		News news = repoNews.findById(id).get();
-		fileSystemService.deleteImage(imageFolder, news.getCopertina());
+		serviceFileSystem.deleteImage(imageFolder, news.getCopertina());
 		repoNews.deleteById(id);
 		return "redirect:/news/list";
 	}

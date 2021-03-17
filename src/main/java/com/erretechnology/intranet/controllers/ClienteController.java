@@ -29,11 +29,9 @@ import com.erretechnology.intranet.services.ServiceFileSystem;
 
 @Controller
 @RequestMapping("cliente")
-public class ClienteController {
+public class ClienteController extends BaseController{
 	@Autowired
 	private RepositoryCliente repoCliente;
-	@Autowired
-	private ServiceFileSystem fileSystemService;
 	@Autowired
 	private RepositoryClienteModificato repoOldCliente;
 	private String imageFolder = "cliente";
@@ -70,7 +68,7 @@ public class ClienteController {
 		if(!immagine.isEmpty()) {
 			int idUser = Integer.parseInt(session.getAttribute("id").toString());
 			try {
-				String fileName = fileSystemService.saveImage(imageFolder, immagine, idUser);
+				String fileName = serviceFileSystem.saveImage(imageFolder, immagine, idUser);
 				cliente.setLogo(fileName);
 				System.err.println("File caricato");
 			} catch (Exception e) {
@@ -110,7 +108,7 @@ public class ClienteController {
 		if(!immagine.isEmpty()) {
 			int idUser = Integer.parseInt(session.getAttribute("id").toString());
 			try {
-				String fileName = fileSystemService.saveImage(imageFolder, immagine, idUser);
+				String fileName = serviceFileSystem.saveImage(imageFolder, immagine, idUser);
 				cliente.setLogo(fileName);
 				System.err.println("File caricato");
 			} catch (Exception e) {
@@ -127,7 +125,7 @@ public class ClienteController {
 	@RequestMapping("/delete/{id}")
 	public String delete(@PathVariable int id) {
 		Cliente cliente = repoCliente.findById(id).get();
-		fileSystemService.deleteImage(imageFolder, cliente.getLogo());
+		serviceFileSystem.deleteImage(imageFolder, cliente.getLogo());
 		repoCliente.deleteById(id);
 		return "redirect:/cliente/list";
 	}

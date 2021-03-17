@@ -20,10 +20,7 @@ import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 
 @Controller
 @RequestMapping(value = "myWork")
-public class MyWorkController {
-	
-	@Autowired
-	ServiceUtenteDatiPersonali serviceUtenteDati;
+public class MyWorkController extends BaseController {
 	@Autowired
 	private RepositoryCliente repoCliente;
 
@@ -37,7 +34,7 @@ public class MyWorkController {
 		mav.setViewName("myWork");
 		Calendar calendar = Calendar.getInstance(), calUtente = Calendar.getInstance();
 		calendar.setTimeInMillis(Instant.now().getEpochSecond()*1000);
-		List<UtenteDatiPersonali> utenti = serviceUtenteDati.getAll(), utentiCompleanno = new LinkedList<UtenteDatiPersonali>();
+		List<UtenteDatiPersonali> utenti = serviceDatiPersonali.getAll(), utentiCompleanno = new LinkedList<UtenteDatiPersonali>();
 		for(UtenteDatiPersonali u : utenti) {
 			calUtente.setTimeInMillis(u.getDataNascita()*1000);
 			if((calendar.get(Calendar.MONTH))==(calUtente.get(Calendar.MONTH)) && (calendar.get(Calendar.DAY_OF_MONTH))==(calUtente.get(Calendar.DAY_OF_MONTH)) && u.isVisualizzaDataNascita() == true) {

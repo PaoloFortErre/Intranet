@@ -28,20 +28,11 @@ import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 
 @Controller
 @RequestMapping(value = "profile")
-public class UtenteController {
-
-	@Autowired
-	ServiceUtenteDatiPersonali serviceUtenteDati;
-	@Autowired
-	ServiceUtente serviceUtente;
-	@Autowired
-	ServiceFileSystem serviceFileSystem;
-	@Autowired
-	ServiceFileImmagini serviceFileImmagine;
+public class UtenteController extends BaseController{
 
 	@GetMapping(value = "/")
 	public ModelAndView primaPagina(HttpSession session) {
-		UtenteDatiPersonali u = serviceUtenteDati.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("profilo");
 		mav.addObject("utente", u);
@@ -53,18 +44,18 @@ public class UtenteController {
 	@PostMapping(value = "/modificaDescrizione")
 	public String modificaDescrizione(@ModelAttribute("utente")UtenteDatiPersonali utente, HttpSession session) {
 		int id_utente = Integer.parseInt(session.getAttribute("id").toString());
-		UtenteDatiPersonali utenteLoggato= serviceUtenteDati.findById(id_utente);
+		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(id_utente);
 		utenteLoggato.setDescrizione(utente.getDescrizione());
-		serviceUtenteDati.save(utenteLoggato);
+		serviceDatiPersonali.save(utenteLoggato);
 		return "redirect:/profile/";
 	}
 	
 	@PostMapping(value = "/eliminaFotoProfilo")
 	public String eliminaFotoProfilo(@ModelAttribute("utente")UtenteDatiPersonali utente, HttpSession session) {
 		int id_utente = Integer.parseInt(session.getAttribute("id").toString());
-		UtenteDatiPersonali utenteLoggato= serviceUtenteDati.findById(id_utente);
+		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(id_utente);
 		utenteLoggato.setImmagine("blank_profile.png");
-		serviceUtenteDati.save(utenteLoggato);
+		serviceDatiPersonali.save(utenteLoggato);
 		return "redirect:/profile/";
 	}
 	
@@ -91,10 +82,10 @@ public class UtenteController {
 				Utente u = serviceUtente.findById(Integer.parseInt(session.getAttribute("id").toString()));
 				u.setPassword(nPsw);
 				serviceUtente.saveUtente(u);
-				UtenteDatiPersonali udp = serviceUtenteDati.findById(u.getId());
+				UtenteDatiPersonali udp = serviceDatiPersonali.findById(u.getId());
 				if(!udp.isPasswordCambiata()) {
 					udp.setPasswordCambiata(true);
-					serviceUtenteDati.save(udp);
+					serviceDatiPersonali.save(udp);
 				}
 				return "redirect:/profile/";
 			}else {
@@ -115,7 +106,7 @@ public class UtenteController {
 		if(!immagine.isEmpty()) {
 			try {
 				img = new FileImmagini();
-				UtenteDatiPersonali utenteLoggato= serviceUtenteDati.findById(idUser);
+				UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
 				img.setAutore(utenteLoggato);
 				img.setData(immagine.getBytes());
 				img.setTimestamp(Instant.now().getEpochSecond());
@@ -137,11 +128,11 @@ public class UtenteController {
 	public String modificaVisualizazzioneDataNascita(HttpSession session, HttpServletRequest request) {
 		String value = request.getParameter("set");
 		int id_utente = Integer.parseInt(session.getAttribute("id").toString());
-		UtenteDatiPersonali utenteLoggato= serviceUtenteDati.findById(id_utente);
+		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(id_utente);
 		if(value.equals("Si")) {
 			utenteLoggato.setVisualizzaDataNascita(true);
 		} else utenteLoggato.setVisualizzaDataNascita(false);
-		serviceUtenteDati.save(utenteLoggato);
+		serviceDatiPersonali.save(utenteLoggato);
 		return "redirect:/profile/";
 	}
 }

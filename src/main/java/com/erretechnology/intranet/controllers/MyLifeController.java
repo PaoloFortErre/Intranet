@@ -31,33 +31,7 @@ import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 
 @Controller
 @RequestMapping(value = "myLife")
-public class MyLifeController {
-	@Autowired
-	ServicePost servicePost;
-
-	@Autowired
-	ServiceUtente serviceUtente;
-
-	@Autowired
-	ServiceCommento serviceCommento;
-
-	@Autowired
-	ServiceAuthority serviceAuthority;
-
-	@Autowired
-	ServicePostModificato servicePostModificato;
-
-	@Autowired
-	ServiceCommentoModificato serviceCommentoModificato;
-
-	@Autowired
-	ServiceUtenteDatiPersonali serviceUtenteDatiPersonali;
-	
-	@Autowired
-	ServiceFileSystem serviceFileSystem;
-	
-	@Autowired
-	ServiceLog serviceLog;
+public class MyLifeController extends BaseController {
 
 //	@GetMapping(value="/myLife")
 //	public ModelAndView myLife() {
@@ -72,7 +46,7 @@ public class MyLifeController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myLife");
 		mav.addObject("messaggi", servicePost.getLastMessage());
-		mav.addObject("utenteDati", serviceUtenteDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+		mav.addObject("utenteDati", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return mav;
 	}
 
@@ -92,11 +66,7 @@ public class MyLifeController {
 			p.setTimestamp(Instant.now().getEpochSecond());
 			servicePost.save(p);
 			servicePostModificato.save(pm);
-			Log log = new Log();
-			log.setTimestamp(Instant.now().getEpochSecond());
-			log.setUtente(autore);
-			log.setAzione("modificato un post in bacheca");
-			serviceLog.save(log);
+			log("modificato un post in bacheca", autore);
 			return "redirect:/myLife/";
 		}
 		return "redirect:/forbidden";
@@ -119,11 +89,7 @@ public class MyLifeController {
 			c.setTimestamp(Instant.now().getEpochSecond());
 			serviceCommento.save(c);
 			serviceCommentoModificato.save(cm);
-			Log log = new Log();
-			log.setTimestamp(Instant.now().getEpochSecond());
-			log.setUtente(autore);
-			log.setAzione("modificato un commento in bacheca");
-			serviceLog.save(log);
+			log("modificato un commento in bacheca" ,  autore);
 			return "redirect:/myLife/";
 		}
 		return "redirect:/forbidden";
@@ -139,11 +105,7 @@ public class MyLifeController {
 			p.setVisibile(false);
 			servicePost.save(p);
 			System.out.println("cancellazione post: RIUSCITO");
-			Log log = new Log();
-			log.setTimestamp(Instant.now().getEpochSecond());
-			log.setUtente(autore);
-			log.setAzione("cancellato un post in bacheca");
-			serviceLog.save(log);
+			log("cancellato un post in bacheca", autore);
 			return "redirect:/myLife/";
 		}
 		System.out.println("cancellazione post: PERMESSO NEGATO");
@@ -165,16 +127,7 @@ public class MyLifeController {
 			c.setVisibile(false);
 			serviceCommento.save(c);
 			System.out.println("cancellazione post: RIUSCITO");
-			Log log = new Log();
-			log.setTimestamp(Instant.now().getEpochSecond());
-			log.setAzione("cancellato un post in bacheca");
-			if(sessionId == autoreCommento.getId()) {
-				log.setUtente(autorePost);
-			} else if (sessionId == autorePost.getId()) {
-				log.setUtente(autoreCommento);
-			}
-		
-			serviceLog.save(log);
+			log("cancellato un commento in bacheca", serviceDatiPersonali.findById(sessionId));
 			return "redirect:/myLife/";
 		}
 		System.out.println("cancellazione post: PERMESSO NEGATO");
@@ -185,17 +138,13 @@ public class MyLifeController {
 	@PostMapping(value = "/addCommento")
 	public String inserisciCommento(Commento commento, HttpSession session, int idPost) {
 		int id = Integer.parseInt(session.getAttribute("id").toString());
-		UtenteDatiPersonali autore = serviceUtenteDatiPersonali.findById(id);
+		UtenteDatiPersonali autore = serviceDatiPersonali.findById(id);
 		commento.setAutore(autore);
 		commento.setTimestamp(Instant.now().getEpochSecond());
 		commento.setPost(servicePost.findById(idPost));
 		commento.setVisibile(true);
 		serviceCommento.save(commento);
-		Log log = new Log();
-		log.setTimestamp(Instant.now().getEpochSecond());
-		log.setUtente(autore);
-		log.setAzione("risposto a un post in bacheca");
-		serviceLog.save(log);
+		log("risposto a un post in bacheca", autore);
 		return "redirect:/myLife/";
 	}
 
@@ -204,7 +153,7 @@ public class MyLifeController {
 		System.out.println("test");
 	//	String mail = session.getAttribute("email").toString();
 		int id = Integer.parseInt(session.getAttribute("id").toString());
-		UtenteDatiPersonali autore = serviceUtenteDatiPersonali.findById(id);
+		UtenteDatiPersonali autore = serviceDatiPersonali.findById(id);
 		post.setAutore(autore);
 		post.setTimestamp(Instant.now().getEpochSecond());
 		post.setVisibile(true);
@@ -221,11 +170,7 @@ public class MyLifeController {
 			}
 		}
 		servicePost.save(post);
-		Log log = new Log();
-		log.setTimestamp(Instant.now().getEpochSecond());
-		log.setUtente(autore);
-		log.setAzione("scritto in bacheca");
-		serviceLog.save(log);
+		log("scritto in bacheca", autore);
 		return "redirect:/myLife/";
 	}
 	
