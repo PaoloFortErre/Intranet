@@ -54,7 +54,7 @@ public class UtenteController extends BaseController{
 	public String eliminaFotoProfilo(@ModelAttribute("utente")UtenteDatiPersonali utente, HttpSession session) {
 		int id_utente = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(id_utente);
-		utenteLoggato.setImmagine("blank_profile.png");
+		utenteLoggato.setImmagine(serviceFileImmagine.getImmagine(63));
 		serviceDatiPersonali.save(utenteLoggato);
 		return "redirect:/profile/";
 	}
