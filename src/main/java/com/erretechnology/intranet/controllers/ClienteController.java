@@ -26,6 +26,7 @@ import com.erretechnology.intranet.models.ClienteModificato;
 import com.erretechnology.intranet.repositories.RepositoryCliente;
 import com.erretechnology.intranet.repositories.RepositoryClienteModificato;
 import com.erretechnology.intranet.services.ServiceFileSystem;
+import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 
 @Controller
 @RequestMapping("cliente")
@@ -77,6 +78,7 @@ public class ClienteController extends BaseController{
 		}
 		
 		repoCliente.save(cliente);
+		saveLog("inserito un nuovo cliente", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
         return "cliente";
 	}
 	
@@ -119,14 +121,16 @@ public class ClienteController extends BaseController{
 		repoCliente.save(cliente);
 		repoOldCliente.save(cm);
 		model.addAttribute("cliente", cliente);
+		saveLog("modificato le informazioni di un cliente", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "cliente";
 	}
 	
 	@RequestMapping("/delete/{id}")
-	public String delete(@PathVariable int id) {
+	public String delete(@PathVariable int id, HttpSession session) {
 		Cliente cliente = repoCliente.findById(id).get();
 		serviceFileSystem.deleteImage(imageFolder, cliente.getLogo());
 		repoCliente.deleteById(id);
+		saveLog("inserito un nuovo cliente", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/cliente/list";
 	}
 }

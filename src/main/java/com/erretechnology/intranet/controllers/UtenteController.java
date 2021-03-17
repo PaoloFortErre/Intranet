@@ -47,6 +47,7 @@ public class UtenteController extends BaseController{
 		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(id_utente);
 		utenteLoggato.setDescrizione(utente.getDescrizione());
 		serviceDatiPersonali.save(utenteLoggato);
+		saveLog("aggiornato la descrizione", utenteLoggato);
 		return "redirect:/profile/";
 	}
 	
@@ -56,6 +57,7 @@ public class UtenteController extends BaseController{
 		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(id_utente);
 		utenteLoggato.setImmagine(serviceFileImmagine.getImmagine(63));
 		serviceDatiPersonali.save(utenteLoggato);
+		saveLog("eliminato la foto profilo", utenteLoggato);
 		return "redirect:/profile/";
 	}
 	
@@ -87,6 +89,7 @@ public class UtenteController extends BaseController{
 					udp.setPasswordCambiata(true);
 					serviceDatiPersonali.save(udp);
 				}
+				saveLog("modificato la password", udp);
 				return "redirect:/profile/";
 			}else {
 				return "redirect:/profile/paginaModificaPassword";
@@ -94,6 +97,8 @@ public class UtenteController extends BaseController{
 		}else{
 			return "redirect:/profile/cambioPassword";
 		}
+		
+
 		//System.out.println("ok ci sono");
 		//return "cambiaPassword";
 	}
@@ -112,6 +117,7 @@ public class UtenteController extends BaseController{
 				img.setTimestamp(Instant.now().getEpochSecond());
 				img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
 				serviceFileImmagine.insert(img);
+				saveLog("modificato l'immagine del profilo", utenteLoggato);
 				//String fileName = serviceFileSystem.saveImage(imageFolder, immagine, idUser);
 				//utenteLoggato.setImmagine(fileName);
 				//serviceUtenteDati.save(utenteLoggato);
@@ -133,6 +139,7 @@ public class UtenteController extends BaseController{
 			utenteLoggato.setVisualizzaDataNascita(true);
 		} else utenteLoggato.setVisualizzaDataNascita(false);
 		serviceDatiPersonali.save(utenteLoggato);
+		saveLog("modoficato le impostazioni del suo compleanno", utenteLoggato);
 		return "redirect:/profile/";
 	}
 }

@@ -74,6 +74,7 @@ public class NewsController extends BaseController {
 		}
 		
 		repoNews.save(news);
+		saveLog("aggiunto una news", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
         return "news";
 	}
 	
@@ -109,14 +110,16 @@ public class NewsController extends BaseController {
 		repoNews.save(news);
 		repoOldNews.save(nm);
 		model.addAttribute("news", news);
+		saveLog("modificato una news", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "news";
 	}
 	
 	@RequestMapping("/delete/{id}")
-	public String delete(@PathVariable int id) {
+	public String delete(@PathVariable int id, HttpSession session) {
 		News news = repoNews.findById(id).get();
 		serviceFileSystem.deleteImage(imageFolder, news.getCopertina());
 		repoNews.deleteById(id);
+		saveLog("eliminato una news", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/news/list";
 	}
 	
