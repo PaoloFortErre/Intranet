@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.erretechnology.intranet.models.Cliente;
+import com.erretechnology.intranet.models.ClienteModificato;
 import com.erretechnology.intranet.repositories.RepositoryCliente;
+import com.erretechnology.intranet.repositories.RepositoryClienteModificato;
 import com.erretechnology.intranet.services.ServiceFileSystem;
 
 @Controller
@@ -32,6 +34,8 @@ public class ClienteController {
 	private RepositoryCliente repoCliente;
 	@Autowired
 	private ServiceFileSystem fileSystemService;
+	@Autowired
+	private RepositoryClienteModificato repoOldCliente;
 	private String imageFolder = "cliente";
 	
 	@GetMapping("/{id}")
@@ -90,12 +94,12 @@ public class ClienteController {
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	public String update(@PathVariable int id, @RequestParam("nome") String nome, @RequestParam("dataInizio") String dataInizio, @RequestParam(required=false) MultipartFile immagine, HttpSession session, Model model) {
 		Cliente cliente = repoCliente.findById(id).get();
-		//ClienteModificato cm = new ClienteModificato();
-		//cm.setNome(cliente.getNome());
-		//cm.setLogo(cliente.getLogo());
-		//cm.setDataInizio(cliente.getDataInizio());
-		//cm.setCliente(cliente);
-		//cliente.setNome(nome);
+		ClienteModificato cm = new ClienteModificato();
+		cm.setNome(cliente.getNome());
+		cm.setLogo(cliente.getLogo());
+		cm.setDataInizio(cliente.getDataInizio());
+		cm.setCliente(cliente);
+		cliente.setNome(nome);
 		
 		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM");
 		YearMonth yearMonth = YearMonth.parse(dataInizio, dateFormat);
@@ -115,7 +119,7 @@ public class ClienteController {
 		}
 		
 		repoCliente.save(cliente);
-		//repoOldCliente.save(cm);
+		repoOldCliente.save(cm);
 		model.addAttribute("cliente", cliente);
 		return "cliente";
 	}
