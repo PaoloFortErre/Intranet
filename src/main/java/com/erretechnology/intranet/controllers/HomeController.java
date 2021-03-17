@@ -3,7 +3,6 @@ package com.erretechnology.intranet.controllers;
 import java.sql.Timestamp;
 
 import javax.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,8 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.models.Utility;
-import com.erretechnology.intranet.services.ServiceUtente;
-import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 
 @Controller
 public class HomeController extends BaseController{
