@@ -92,7 +92,11 @@ public class MyLifeController {
 			p.setTimestamp(Instant.now().getEpochSecond());
 			servicePost.save(p);
 			servicePostModificato.save(pm);
-
+			Log log = new Log();
+			log.setTimestamp(Instant.now().getEpochSecond());
+			log.setUtente(autore);
+			log.setAzione("modificato un post in bacheca");
+			serviceLog.save(log);
 			return "redirect:/myLife/";
 		}
 		return "redirect:/forbidden";
@@ -115,6 +119,11 @@ public class MyLifeController {
 			c.setTimestamp(Instant.now().getEpochSecond());
 			serviceCommento.save(c);
 			serviceCommentoModificato.save(cm);
+			Log log = new Log();
+			log.setTimestamp(Instant.now().getEpochSecond());
+			log.setUtente(autore);
+			log.setAzione("modificato un commento in bacheca");
+			serviceLog.save(log);
 			return "redirect:/myLife/";
 		}
 		return "redirect:/forbidden";
@@ -130,6 +139,11 @@ public class MyLifeController {
 			p.setVisibile(false);
 			servicePost.save(p);
 			System.out.println("cancellazione post: RIUSCITO");
+			Log log = new Log();
+			log.setTimestamp(Instant.now().getEpochSecond());
+			log.setUtente(autore);
+			log.setAzione("cancellato un post in bacheca");
+			serviceLog.save(log);
 			return "redirect:/myLife/";
 		}
 		System.out.println("cancellazione post: PERMESSO NEGATO");
@@ -151,6 +165,16 @@ public class MyLifeController {
 			c.setVisibile(false);
 			serviceCommento.save(c);
 			System.out.println("cancellazione post: RIUSCITO");
+			Log log = new Log();
+			log.setTimestamp(Instant.now().getEpochSecond());
+			log.setAzione("cancellato un post in bacheca");
+			if(sessionId == autoreCommento.getId()) {
+				log.setUtente(autorePost);
+			} else if (sessionId == autorePost.getId()) {
+				log.setUtente(autoreCommento);
+			}
+		
+			serviceLog.save(log);
 			return "redirect:/myLife/";
 		}
 		System.out.println("cancellazione post: PERMESSO NEGATO");
@@ -167,6 +191,11 @@ public class MyLifeController {
 		commento.setPost(servicePost.findById(idPost));
 		commento.setVisibile(true);
 		serviceCommento.save(commento);
+		Log log = new Log();
+		log.setTimestamp(Instant.now().getEpochSecond());
+		log.setUtente(autore);
+		log.setAzione("risposto a un post in bacheca");
+		serviceLog.save(log);
 		return "redirect:/myLife/";
 	}
 
@@ -177,7 +206,6 @@ public class MyLifeController {
 		int id = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali autore = serviceUtenteDatiPersonali.findById(id);
 		post.setAutore(autore);
-
 		post.setTimestamp(Instant.now().getEpochSecond());
 		post.setVisibile(true);
 		
@@ -199,6 +227,7 @@ public class MyLifeController {
 		log.setAzione("scritto in bacheca");
 		serviceLog.save(log);
 		return "redirect:/myLife/";
-
 	}
+	
+	
 }
