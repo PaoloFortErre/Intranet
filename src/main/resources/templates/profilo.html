@@ -114,6 +114,7 @@
 
   <div class="container-fluid">
     <div class="row mt-3">
+
       <div class="col-lg-3 col-md-4 ml-5 ">
         <div class="container-fluid">
           <img class="picture img rounded-circle mt-4"
@@ -123,40 +124,39 @@
           <form th:action="@{/profile/cambiaFotoProfilo}" method ="post" enctype="multipart/form-data">
             <input class="btn camera fa fa-camera" data-toggle="tooltip"
             data-placement="right" title="Modifica immagine del profilo" type="file" name="immagine" accept="image/png, image/jpeg"/><br>
-            <input type="submit" value="Salva" id="save" />
+            <input class="btn btn-success" type="submit" value="Salva" id="save" />
           </form>
 
           <form th:action="@{/profile/eliminaFotoProfilo}" method ="post">
-            <input type = "submit" value = "elimina">
+            <input class="btn btn-danger mt-2" type="submit" value="elimina">
           </form>
 
         </div>
       </div>
 
       <div class="col-6 mt-5">
-        <span class="anagrafica" th:text="${utente.nome} + ' ' + ${utente.cognome} "></span><br><br>
-        <span class="anagrafica" th:text="${utente.utente.email}"></span>
+        <h5 class="anagrafica" th:text="${utente.nome} + ' ' + ${utente.cognome} "></h5><br><br>
+        <h6 class="anagrafica" th:text="${utente.utente.email}"></h6>
       </div>
 
     </div>
-
   </div>
 
 
   <!-- PANNELLO CON GESTIONE PROFILO, DESCRIZIONE E DASHBOARD -->
   <div class="container-fluid ">
-    <div class="row mt-2">
+    <div class="row mt-1">
 
-      <div class="col-lg-2 col-md-2 col-sm-2 ml-5  ">
+      <div class="col-lg-2 col-md-2 col-sm-2 ml-5 mt-5">
         <div class="container-fluid">
           <img id="logo2" class="img-fluid rounded w-75" src="/view/Profile/Images/Erre_pro_rgb-264x100.png" alt="logo-agency">
         </div>
         <div class="form ml-3">
           <form th:action="@{/profile/cambioPassword}" method="post">
-            <button type="submit" class="btn btn-info justify-content-center mt-4">Cambia Password</button>
+            <button type="submit" class="btn btn-warning justify-content-center mt-4">Cambia Password</button>
           </form>
         </div>
-        <a class="ml-3 mt-2" href="#" class="btn btn-primary">Profilo Linkedin</a>
+        <a class="btn btn-primary ml-3 mt-2" href="#" >Profilo Linkedin</a>
       </div>
 
       <div class="col-lg-2 col-md-3 col-sm-3 ml-3 mr-5">
@@ -167,9 +167,8 @@
             <div th:if="${session.id} == ${utente.utente.id}">
               <form th:action="@{/profile/modificaDescrizione}" method="post">
                 <div class="form-group">
-                  <label for="exampleFormControlTextarea1">Example textarea</label>
                   <textarea class="form-control" id="exampleFormControlTextarea1"name="descrizione" placeholder="Modifica la tua descrizione"
-                  cols="50" rows="5" th:field="${utente.descrizione}" required></textarea>
+                  cols="70" rows="7" th:field="${utente.descrizione}" required></textarea>
                 </div>
                 <input class="btn btn-primary " type="submit" value="Modifica descrizione"/>
               </form>
