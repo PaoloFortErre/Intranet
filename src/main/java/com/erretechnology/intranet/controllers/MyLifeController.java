@@ -43,10 +43,12 @@ public class MyLifeController extends BaseController {
 	@GetMapping(value = "/")
 	public ModelAndView primaPagina(HttpSession session) {
 	//	List<Post> messaggi = service.getLastMessage();
+		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myLife");
 		mav.addObject("messaggi", servicePost.getLastMessage());
-		mav.addObject("utenteDati", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+		mav.addObject("utenteDati", u);
+		mav.addObject("img", serviceFileImmagine.getLastImmagineByUtente(u));
 		return mav;
 	}
 
