@@ -116,7 +116,7 @@
       <div class="col-lg-3 col-md-4 ml-5 ">
         <div class="container-fluid">
           <img class="picture img rounded-circle mt-4"
-          th:src="'data:image/jpeg;base64,' + ${img.getImgData(img.data)}" alt="profile_pic"
+          th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}" alt="profile_pic"
           style="width: 260px;">
 
           <form th:action="@{/profile/cambiaFotoProfilo}" method ="post" enctype="multipart/form-data">

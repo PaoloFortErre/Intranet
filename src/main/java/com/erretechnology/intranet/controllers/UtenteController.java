@@ -33,7 +33,7 @@ public class UtenteController extends BaseController{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("profilo");
 		mav.addObject("utente", u);
-		mav.addObject("img", u.getImmagine());
+		//mav.addObject("img", u.getImmagine());
 		mav.addObject("log", serviceLog.findLogById(Integer.parseInt(session.getAttribute("id").toString())));
 		return mav;
 	}
