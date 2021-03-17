@@ -66,7 +66,7 @@ public class MyLifeController extends BaseController {
 			p.setTimestamp(Instant.now().getEpochSecond());
 			servicePost.save(p);
 			servicePostModificato.save(pm);
-			log("modificato un post in bacheca", autore);
+			saveLog("modificato un post in bacheca", autore);
 			return "redirect:/myLife/";
 		}
 		return "redirect:/forbidden";
@@ -89,7 +89,7 @@ public class MyLifeController extends BaseController {
 			c.setTimestamp(Instant.now().getEpochSecond());
 			serviceCommento.save(c);
 			serviceCommentoModificato.save(cm);
-			log("modificato un commento in bacheca" ,  autore);
+			saveLog("modificato un commento in bacheca" ,  autore);
 			return "redirect:/myLife/";
 		}
 		return "redirect:/forbidden";
@@ -105,7 +105,7 @@ public class MyLifeController extends BaseController {
 			p.setVisibile(false);
 			servicePost.save(p);
 			System.out.println("cancellazione post: RIUSCITO");
-			log("cancellato un post in bacheca", autore);
+			saveLog("cancellato un post in bacheca", autore);
 			return "redirect:/myLife/";
 		}
 		System.out.println("cancellazione post: PERMESSO NEGATO");
@@ -127,7 +127,7 @@ public class MyLifeController extends BaseController {
 			c.setVisibile(false);
 			serviceCommento.save(c);
 			System.out.println("cancellazione post: RIUSCITO");
-			log("cancellato un commento in bacheca", serviceDatiPersonali.findById(sessionId));
+			saveLog("cancellato un commento in bacheca", serviceDatiPersonali.findById(sessionId));
 			return "redirect:/myLife/";
 		}
 		System.out.println("cancellazione post: PERMESSO NEGATO");
@@ -144,7 +144,7 @@ public class MyLifeController extends BaseController {
 		commento.setPost(servicePost.findById(idPost));
 		commento.setVisibile(true);
 		serviceCommento.save(commento);
-		log("risposto a un post in bacheca", autore);
+		saveLog("risposto a un post in bacheca", autore);
 		return "redirect:/myLife/";
 	}
 
@@ -170,7 +170,7 @@ public class MyLifeController extends BaseController {
 			}
 		}
 		servicePost.save(post);
-		log("scritto in bacheca", autore);
+		saveLog("scritto in bacheca", autore);
 		return "redirect:/myLife/";
 	}
 	

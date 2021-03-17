@@ -48,7 +48,7 @@ public abstract class BaseController {
 	@Autowired
 	ServiceUtenteDatiPersonali serviceDatiPersonali;
 	
-	protected void log(String testo, UtenteDatiPersonali autore) {
+	protected void saveLog(String testo, UtenteDatiPersonali autore) {
 		Log log = new Log();
 		log.setTimestamp(Instant.now().getEpochSecond());
 		log.setUtente(autore);
