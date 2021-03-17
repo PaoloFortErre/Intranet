@@ -1,5 +1,6 @@
 package com.erretechnology.intranet.services;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -34,6 +35,16 @@ public class ServiceFileImmagineImpl implements ServiceFileImmagini{
 	@Override
 	public List<FileImmagini> getAll() {
 		return repositoryFileImmagine.findAll();
+	}
+	
+	@Override
+	public boolean contains(byte[] data) {
+		return getAll().stream().filter(x->Arrays.equals(x.getData(), (data))).count() > 0;
+	}
+
+	@Override
+	public FileImmagini getImmagineByData(byte[] data) {
+		return getAll().stream().filter(x->Arrays.equals(x.getData(), (data))).findFirst().get();
 	}
 
 }

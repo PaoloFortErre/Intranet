@@ -13,4 +13,8 @@ public interface ServiceFileImmagini {
 	public List<FileImmagini> getAll();
 
 	public FileImmagini getLastImmagineByUtente(UtenteDatiPersonali u);
+	
+	public boolean contains(byte[] data);
+	
+	public FileImmagini getImmagineByData(byte[] data);
 }

@@ -32,7 +32,7 @@ public class UtenteController extends BaseController{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("profilo");
 		mav.addObject("utente", u);
-		mav.addObject("img", serviceFileImmagine.getLastImmagineByUtente(u));
+		mav.addObject("img", u.getImmagine());
 		mav.addObject("log", serviceLog.findLogById(Integer.parseInt(session.getAttribute("id").toString())));
 		return mav;
 	}
@@ -104,20 +104,22 @@ public class UtenteController extends BaseController{
 	public String modificaFoto(@RequestParam(required=false) MultipartFile immagine, HttpSession session) {
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		FileImmagini img = null;
-		if(!immagine.isEmpty()) {
+		if(immagine != null) {
 			try {
 				img = new FileImmagini();
-				UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
-				img.setAutore(utenteLoggato);
 				img.setData(immagine.getBytes());
-				img.setTimestamp(Instant.now().getEpochSecond());
-				img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
-				serviceFileImmagine.insert(img);
+				UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
+				if(!serviceFileImmagine.contains(img.getData())) {
+					img.setAutore(utenteLoggato);
+					img.setTimestamp(Instant.now().getEpochSecond());
+					img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
+					serviceFileImmagine.insert(img);
+					utenteLoggato.setImmagine(img);
+				}else {
+					utenteLoggato.setImmagine(serviceFileImmagine.getImmagineByData(img.getData()));
+				}
+				serviceDatiPersonali.save(utenteLoggato);
 				saveLog("modificato l'immagine del profilo", utenteLoggato);
-				//String fileName = serviceFileSystem.saveImage(imageFolder, immagine, idUser);
-				//utenteLoggato.setImmagine(fileName);
-				//serviceUtenteDati.save(utenteLoggato);
-				System.err.println("File caricato");
 			} catch (Exception e) {
 				System.err.println("Non riesco a caricare il file");
 			}
