@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.Commento;
 import com.erretechnology.intranet.models.CommentoModificato;
+import com.erretechnology.intranet.models.Log;
 import com.erretechnology.intranet.models.Post;
 import com.erretechnology.intranet.models.PostModificato;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
@@ -22,6 +23,7 @@ import com.erretechnology.intranet.services.ServiceAuthority;
 import com.erretechnology.intranet.services.ServiceCommento;
 import com.erretechnology.intranet.services.ServiceCommentoModificato;
 import com.erretechnology.intranet.services.ServiceFileSystem;
+import com.erretechnology.intranet.services.ServiceLog;
 import com.erretechnology.intranet.services.ServicePost;
 import com.erretechnology.intranet.services.ServicePostModificato;
 import com.erretechnology.intranet.services.ServiceUtente;
@@ -53,7 +55,9 @@ public class MyLifeController {
 	
 	@Autowired
 	ServiceFileSystem serviceFileSystem;
-
+	
+	@Autowired
+	ServiceLog serviceLog;
 
 //	@GetMapping(value="/myLife")
 //	public ModelAndView myLife() {
@@ -189,6 +193,11 @@ public class MyLifeController {
 			}
 		}
 		servicePost.save(post);
+		Log log = new Log();
+		log.setTimestamp(Instant.now().getEpochSecond());
+		log.setUtente(autore);
+		log.setAzione("scritto in bacheca");
+		serviceLog.save(log);
 		return "redirect:/myLife/";
 
 	}
