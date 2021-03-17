@@ -30,6 +30,17 @@
 			<input type="submit" value="Invia" />
 		</form>
 	</div>
+	
+	
+	<div th:each="log:${log}">
+		<p th:text="Hai + ' ' + ${log.azione}">
+		<p th:text="${#dates.format(log.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"/>
+	</div>
+	
+
+	
+	
+	
 	<form th:action="@{/profile/setVisualizzazione}" method ="post">
 	<div>
 	Vuoi visulizzare la tua data di nascita? <br>
