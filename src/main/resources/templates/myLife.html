@@ -115,24 +115,42 @@
 									<textarea class="form-control" rows="2" cols="30" name="testo"
 										required style="width: 98%" placeholder="Scrivi un post..."
 										id="post"></textarea>
+										
+										<button type="button" data-toggle="modal" id="bottoneImmagine"
+										data-target="#myModal">
+										Immagine<img src="/view/MyLife/images/imh.png"
+											style="width: 20px; height: 20px; display: inline-block; margin-left: 50px;">
+									</button>
+
+									<!-- Modal -->
+									<div class="modal fade" id="myModal" role="dialog">
+										<div class="modal-dialog">
+
+											<!-- Modal content-->
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h4 class="modal-title" style="color:black">Scegli un'immagine da
+														condividere</h4>
+												</div>
+												<div class="modal-body">
+													<input type="file" name="document"
+														accept="image/png, image/jpeg" />
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-default"
+														data-dismiss="modal">Close</button>
+												</div>
+											</div>
+
+										</div>
+									</div>
+										
 
 
 
 
 
-									<label for="document" style="width: 20px; height: 20px; display: inline-block; margin-top:15px;" >
-									
-										Immagine</label><img src="/view/MyLife/images/imh.png" style="width: 20px; height: 20px; display: inline-block; margin-left: 50px;">
-									
-									<input type="file" name="document" accept="image/png, image/jpeg" />
-									<!--  <input type = "submit" value = "Salva"> -->
-
-
-									<!-- <p
-										style="display: inline-block; margin-top: 10px; margin-left: 20px; font-size: 17px;">
-										Documento <img src="/view/MyLife/images/DOC.png"
-											style="width: 20px; height: 20px; display: inline-block">
-									</p> -->
 									<br> <br> <input type="submit" value="Condividi"
 										id="submitPost"
 										style="float: right; margin-right: 10px; margin-bottom: 8px" />
