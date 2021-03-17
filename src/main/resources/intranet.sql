@@ -160,7 +160,7 @@ CREATE TABLE `dati_utente` (
 
 LOCK TABLES `dati_utente` WRITE;
 /*!40000 ALTER TABLE `dati_utente` DISABLE KEYS */;
-INSERT INTO `dati_utente` VALUES (1,'Agostini',826879387,'dfghdfgghcfghdghf','Marco',_binary '',NULL,_binary '\0',63),(2,'Paoletti',490524187,'sdfsadfasdfadsfsdfasdfadsf','Mario',_binary '',NULL,_binary '\0',63),(46,'Zaffalon',975884400,'dfgdsfgsdf','Alberto',_binary '','Erre PRO',_binary '\0',63),(54,'Forteleoni',746920800,'asdfasdfdas','Paolo',_binary '\0','Erre PRO',_binary '\0',63);
+INSERT INTO `dati_utente` VALUES (1,'Agostini',826879387,'dfghdfgghcfghdghf','Marco',_binary '',NULL,_binary '\0',59),(2,'Paoletti',490524187,'sdfsadfasdfadsfsdfasdfadsf','Mario',_binary '',NULL,_binary '\0',63),(46,'Zaffalon',975884400,'dfgdsfgsdf','Alberto',_binary '','Erre PRO',_binary '\0',63),(54,'Forteleoni',746920800,'asdfasdfdas','Paolo',_binary '\0','Erre PRO',_binary '\0',63),(85,'pippo',318207600,'dsfsdfsdfasd','Pippo',_binary '\0','Erre LAB',_binary '\0',63);
 /*!40000 ALTER TABLE `dati_utente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -240,7 +240,7 @@ CREATE TABLE `hibernate_sequence` (
 
 LOCK TABLES `hibernate_sequence` WRITE;
 /*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
-INSERT INTO `hibernate_sequence` VALUES (82);
+INSERT INTO `hibernate_sequence` VALUES (103);
 /*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -268,7 +268,7 @@ CREATE TABLE `log` (
 
 LOCK TABLES `log` WRITE;
 /*!40000 ALTER TABLE `log` DISABLE KEYS */;
-INSERT INTO `log` VALUES (62,'scritto in bacheca',1615976050,1),(65,'scritto in bacheca',1615977730,1),(67,'scritto in bacheca',1615978090,1),(69,'scritto in bacheca',1615978384,1),(71,'scritto in bacheca',1615978540,1),(73,'scritto in bacheca',1615978572,1),(75,'scritto in bacheca',1615978752,1),(77,'scritto in bacheca',1615978756,1),(79,'scritto in bacheca',1615978762,1),(81,'scritto in bacheca',1615979043,1);
+INSERT INTO `log` VALUES (62,'scritto in bacheca',1615976050,1),(65,'scritto in bacheca',1615977730,1),(67,'scritto in bacheca',1615978090,1),(69,'scritto in bacheca',1615978384,1),(71,'scritto in bacheca',1615978540,1),(73,'scritto in bacheca',1615978572,1),(75,'scritto in bacheca',1615978752,1),(77,'scritto in bacheca',1615978756,1),(79,'scritto in bacheca',1615978762,1),(81,'scritto in bacheca',1615979043,1),(84,'scritto in bacheca',1615979795,1),(86,'eliminato la foto profilo',1615988426,1),(87,'eliminato la foto profilo',1615988430,1),(88,'eliminato la foto profilo',1615988431,1),(89,'eliminato la foto profilo',1615988433,1),(91,'modificato l\'immagine del profilo',1615989138,1),(92,'eliminato la foto profilo',1615989147,1),(94,'modificato l\'immagine del profilo',1615989154,1),(96,'modificato l\'immagine del profilo',1615989284,1),(98,'modificato l\'immagine del profilo',1615989965,1),(99,'eliminato la foto profilo',1615990008,1),(101,'modificato l\'immagine del profilo',1615990148,1),(102,'modificato l\'immagine del profilo',1615990803,1);
 /*!40000 ALTER TABLE `log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -538,7 +538,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,_binary '','marco.agostini@errepro.tech','$2a$10$x4OLz12.Cw0PAvoWhS/35eJpUEd5v8612u/2SiddDkEO7nPt17wMm'),(2,_binary '','mario.paoletti@errepro.tech','asd'),(46,_binary '','alberto.zaffalon@errepro.tech','$2a$10$Nli5sGpi4/msoUVIYawjdu7KqllSTfsSHbrkfytwjrNsRS8cqimBa'),(54,_binary '','paolo.forteleoni@errepro.tech','$2a$10$TIrI84CvRZezvExNuw.x8uohQmJ5T0V1nr8uwORxSoNB2TvbQN4hq');
+INSERT INTO `users` VALUES (1,_binary '','marco.agostini@errepro.tech','$2a$10$x4OLz12.Cw0PAvoWhS/35eJpUEd5v8612u/2SiddDkEO7nPt17wMm'),(2,_binary '','mario.paoletti@errepro.tech','asd'),(46,_binary '','alberto.zaffalon@errepro.tech','$2a$10$Nli5sGpi4/msoUVIYawjdu7KqllSTfsSHbrkfytwjrNsRS8cqimBa'),(54,_binary '','paolo.forteleoni@errepro.tech','$2a$10$TIrI84CvRZezvExNuw.x8uohQmJ5T0V1nr8uwORxSoNB2TvbQN4hq'),(85,_binary '','pippo@errepro.tech','$2a$10$L5HD6eYho.2XcnQq8tL42.icozdACLFIJ18Oy1WSOOiBLxtaLam1C');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -592,7 +592,7 @@ CREATE TABLE `users_roles` (
 
 LOCK TABLES `users_roles` WRITE;
 /*!40000 ALTER TABLE `users_roles` DISABLE KEYS */;
-INSERT INTO `users_roles` VALUES ('ADMIN',1),('USER',1),('USER',2),('USER',46),('USER',54);
+INSERT INTO `users_roles` VALUES ('ADMIN',1),('USER',1),('USER',2),('USER',46),('USER',54),('USER',85);
 /*!40000 ALTER TABLE `users_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -677,4 +677,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-17 12:09:44
+-- Dump completed on 2021-03-17 15:28:00
