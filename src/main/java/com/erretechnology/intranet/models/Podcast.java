@@ -10,13 +10,27 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "post")
+@Table(name = "podcast")
 public class Podcast {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String nome;
+	@Lob
+    private byte[] podcast;
+	private long timestamp;
+	@ManyToOne
+	@JoinColumn(name = "id_autore")
+	private UtenteDatiPersonali utente;
+	
+	
+	public UtenteDatiPersonali getUtente() {
+		return utente;
+	}
+	public void setUtente(UtenteDatiPersonali utente) {
+		this.utente = utente;
+	}
 	public int getId() {
 		return id;
 	}
@@ -41,16 +55,6 @@ public class Podcast {
 	public void setTimestamp(long timestamp) {
 		this.timestamp = timestamp;
 	}
-	public Utente getUtente() {
-		return utente;
-	}
-	public void setUtente(Utente utente) {
-		this.utente = utente;
-	}
-	@Lob
-    private byte[] podcast;
-	private long timestamp;
-	@ManyToOne
-	@JoinColumn(name = "id_autore")
-	private Utente utente;
+
+
 }
