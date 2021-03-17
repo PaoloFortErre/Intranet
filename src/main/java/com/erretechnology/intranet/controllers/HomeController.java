@@ -44,15 +44,17 @@ public class HomeController extends BaseController{
 		mav.addObject("user", new UtenteDatiPersonali());
 		mav.addObject("email", new String());
 		mav.addObject("password", new String());
+		mav.addObject("settore", new String());
 		mav.addObject("date", new Utility());
 		return mav;
 	}
 	
 	@PostMapping(value = "/eseguiRegistrazione")
 	public String addUtente(@ModelAttribute("user")UtenteDatiPersonali utenteDP,
-			@RequestParam("email") String email, @RequestParam("password") String password, Utility data) {
+			@RequestParam("email") String email, @RequestParam("password") String password,
+			@RequestParam("settore") String settore , Utility data) {
 		utenteDP.setDataNascita(Timestamp.valueOf(data.getDate().atStartOfDay()).getTime() / 1000);
-		serviceDatiPersonali.insert(password, email, utenteDP);
+		serviceDatiPersonali.insert(password, email, settore, utenteDP);
 		return "redirect:login";
 	}
 	

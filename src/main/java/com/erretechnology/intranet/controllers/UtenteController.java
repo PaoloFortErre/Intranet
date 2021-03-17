@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.erretechnology.intranet.models.FileImmagini;
+import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 
@@ -104,10 +104,10 @@ public class UtenteController extends BaseController{
 	@PostMapping(value = "/cambiaFotoProfilo")
 	public String modificaFoto(@RequestParam(required=false) MultipartFile immagine, HttpSession session) {
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
-		FileImmagini img = null;
+		FileImmagine img = null;
 		if(immagine != null) {
 			try {
-				img = new FileImmagini();
+				img = new FileImmagine();
 				img.setData(immagine.getBytes());
 				UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
 				if(!serviceFileImmagine.contains(img.getData())) {
