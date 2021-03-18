@@ -1,5 +1,7 @@
 package com.erretechnology.intranet.models;
 
+import java.util.Base64;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -55,6 +57,10 @@ public class Podcast {
 	public void setTimestamp(long timestamp) {
 		this.timestamp = timestamp;
 	}
+	
+	public String getAudioData(byte[] byteData) {
+        return Base64.getMimeEncoder().encodeToString(byteData);
+    }
 
 
 }
