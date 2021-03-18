@@ -127,7 +127,7 @@ public class MyWorkController extends BaseController {
 		s.setVisibile(false);
 		serviceSondaggio.save(s);
 		saveLog("cancellato un sondaggio", autore);
-		return "redirect:sondaggi";
+		return "redirect:/myWork/sondaggi";
 	}
 	
 	@GetMapping(value = "/addSondaggio")
