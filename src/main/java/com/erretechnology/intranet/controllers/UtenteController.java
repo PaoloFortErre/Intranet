@@ -59,7 +59,7 @@ public class UtenteController extends BaseController{
 		return "redirect:/profile/";
 	}
 
-	
+
 	@RequestMapping(value = "/cambioPassword", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView cambioPassword() {
 		ModelAndView mav = new ModelAndView();
@@ -130,15 +130,15 @@ public class UtenteController extends BaseController{
 
 
 	@PostMapping(value = "/setVisualizzazione")
-	public String modificaVisualizazzioneDataNascita(HttpSession session, HttpServletRequest request) {
-		String value = request.getParameter("set");
+	public String modificaVisualizazzioneDataNascita(HttpSession session, /*HttpServletRequest request*/ @RequestParam("set") String value) {
+		//String value = request.getParameter("set");
 		int id_utente = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(id_utente);
 		if(value.equals("Si")) {
 			utenteLoggato.setVisualizzaDataNascita(true);
 		} else utenteLoggato.setVisualizzaDataNascita(false);
 		serviceDatiPersonali.save(utenteLoggato);
-		saveLog("modoficato le impostazioni del suo compleanno", utenteLoggato);
+		saveLog("modificato la visualizzazione del compleanno", utenteLoggato);
 		return "redirect:/profile/";
 	}
 }

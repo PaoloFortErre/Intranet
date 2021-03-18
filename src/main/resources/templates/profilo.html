@@ -83,6 +83,12 @@
   .card-text{
     font-size: 13px;
   }
+  #immagine{
+    display: none;
+  }
+  .scegli_immagine{
+    cursor: pointer;
+  }
   </style>
 
 </head>
@@ -92,7 +98,7 @@
   <!-- ROW CON NAVBAR -->
   <div class="row">
     <div class="col ml-5">
-      <img id="logo" class="img-fluid rounded float-left mt-5 ml-5"
+      <img id="logo" class="img-fluid rounded float-left mt-2 ml-2"
       src="/view/Profile/Images/erre_group.png" alt="erre_logo" >
     </div>
 
@@ -125,27 +131,43 @@
           <img class="picture img-fluid rounded-circle mt-4"
           th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}" alt="profile_pic"
           style="width: 260px;">
+          <div class="dropdown fa fa-camera mt-4">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Gestisci la foto profilo
+            </button>
+            <div class="dropdown-menu mr-2 ml-2" aria-labelledby="dropdownMenuButton">
+              <form th:action="@{/profile/cambiaFotoProfilo}" method ="post" enctype="multipart/form-data">
+                <label class="scegli_immagine button btn-info ml-3 pt-2 pb-2 pr-3 pl-2 rounded" for="immagine">Scegli la foto profilo</label>
+                <input id="immagine" class="mb-2" data-toggle="tooltip"
+                data-placement="right" title="Modifica immagine del profilo"
+                type="file" name="immagine" accept="image/png, image/jpeg"/>
+                <input class="btn btn-success ml-3" type="submit" value="Salva foto profilo    " id="save" />
+              </form>
+              <form th:action="@{/profile/eliminaFotoProfilo}" method ="post">
+                <input class="btn btn-danger mt-2 ml-3" type="submit" value="Elimina foto profilo">
+              </form>
 
-          <form th:action="@{/profile/cambiaFotoProfilo}" method ="post" enctype="multipart/form-data">
-            <div class="input--file">
-              <span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="3.2"/>
-                  <path d="M9 2l-1.83 2h-3.17c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-12c0-1.1-.9-2-2-2h-3.17l-1.83-2h-6zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
-                  <path d="M0 0h24v24h-24z" fill="none"/>
-                </svg>
-              </span>
-              <input data-toggle="tooltip"
-              data-placement="right" title="Modifica immagine del profilo"
-              type="file" name="immagine" accept="image/png, image/jpeg"/>
             </div>
-            <input class="btn btn-success" type="submit" value="Salva foto profilo" id="save" />
-          </form>
-
-          <form th:action="@{/profile/eliminaFotoProfilo}" method ="post">
-            <input class="btn btn-danger mt-2" type="submit" value="Elimina foto profilo">
-          </form>
-
+          </div>
+          <div class="dropdown mt-3 ml-4">
+            <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Impostazioni
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <form th:action ="@{/profile/setVisualizzazione}" method="POST">
+                <div class=" align-items-center">
+                    <select id="set" th:name="set" class="custom-select mr-sm-2" >
+                      <option selected>CONDIVIDI COMPLEANNO</option>
+                      <option value="Si">SI</option>
+                      <option value="No">NO</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary">INVIA</button>
+                </div>
+              </form>
+              <a class="dropdown-item" th:href="@{/profile/cambioPassword}" method="post">Cambio password</a>
+              <a class="dropdown-item" th:href="@{/logout}">Logout</a>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -154,11 +176,19 @@
           <h1 class="h1" th:text="${utente.nome}"></h1>
           <h1 class="h1" th:text="${utente.cognome}" style="color: #ECF260"></h1><br><br>
           <h6 class="h6" th:text="${utente.utente.email}"></h6>
-          <div class="container-fluid mt-3 pr-4">
-            <img id="logo2" class="img-fluid rounded-pill mw-25"  th:src="'data:image/png;base64,' + ${utente.settore.getImgData(utente.settore.logo)}" alt="logo-agency">
-          </div>
         </div>
+      </div>
 
+      <div class="col mt-5 ">
+        <div class="container mt-3 pr-4">
+          <img id="logo2" class="img-fluid rounded-pill mw-25"  th:src="'data:image/png;base64,' + ${utente.settore.getImgData(utente.settore.logo)}" alt="logo-agency">
+        </div>
+      </div>
+
+      <div class="col-5">
+      </div>
+
+      <div class="col-5">
 
       </div>
 
@@ -166,24 +196,12 @@
   </div>
 
 
-  <!-- ROW CON GESTIONE PROFILO, DESCRIZIONE E DASHBOARD -->
+  <!-- ROW DESCRIZIONE E DASHBOARD -->
   <div class="container-fluid ">
-    <div class="row">
+    <div class="row mb-5 mt-2">
 
-      <div class="col-lg-2 col-md-2 col-sm-2 ml-5 mt-5">
-        <div class="dropdown">
-          <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Impostazioni
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" th:href="@{/profile/cambioPassword}" method="post">Cambio password</a>
-            <a class="dropdown-item" th:href="@{/logout}">Logout</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-2 col-md-3 col-sm-3 ml-3 mr-5">
-        <div class="card" style="width: 18rem;">
+      <div class="col ml-5 mr-2">
+        <div class="card ml-5" style="width: 18rem;">
           <div class="card-body">
             <h6 class="card-title" style="color:#303030">Una breve descrizione di me stesso</h6>
             <p class="card-text" th:text="${utente.descrizione}" style="color:#303030"></p>
@@ -200,19 +218,20 @@
         </div>
       </div>
 
-      <div class="col-lg-6 col-md-6 col-sm-8 ml-5 pt-n5">
-        <div class="card ml-5 text-center h-75 pt-n5" style="color:#303030;" >
+      <div class="col-lg-8 col-md-6 col-sm-8 ml-5 mr-5 pt-n5 ">
+        <div class="card ml-5 text-center h-50 pt-n5" style="color:#303030;" >
           <div class="card-header">
             <h5>ATTIVITA' RECENTI</h5>
             <small>Anteprima di quello che hai fatto di recente</small>
           </div>
-          <div class="card-body h-100 text-justify mr-2 ml-2" th:each="log:${log}">
-            <p class="card-text" th:text="Hai + ' ' + ${log.azione}" style="font-size: 13px"><br>
-              <p th:utext="${#dates.format(log.timestamp*1000, 'dd/MM/yyyy, HH:mm')}" style="font-size: 10px"/></p>
+          <div class="card-body text-justify mr-4 ml-4" th:each="log:${log}">
+            <p class="card-text" th:text="Hai + ' ' + ${log.azione}" style="font-size: 13px">
+              <p class="mb-2" th:utext="${#dates.format(log.timestamp*1000, 'dd/MM/yyyy, HH:mm')}" style="font-size: 10px"/>
             </p>
-          </div>
-          <div class="text-align-center">
-            <a href="#" class="btn btn-primary w-25 ">Vedi tutte</a>
+          </p>
+        </div>
+        <div class="text-align-center">
+          <button href="#" class="btn btn-primary w-25 ">Vedi tutte</a>
           </div>
         </div>
       </div>
