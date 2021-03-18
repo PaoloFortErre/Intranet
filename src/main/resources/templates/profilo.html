@@ -73,6 +73,7 @@
     top: 0;
     left: 0;
     opacity: 0;
+    cursor: pointer;
   }
   /* Darker background on mouse-over */
   .camera:hover {
@@ -81,33 +82,6 @@
 
   .card-text{
     font-size: 13px;
-  }
-
-
-  #imageUpload
-  {
-    display: none;
-  }
-
-  #profileImage
-  {
-    cursor: pointer;
-  }
-
-  #profile-container {
-    width: 150px;
-    height: 150px;
-    overflow: hidden;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    border-radius: 50%;
-  }
-
-  #profile-container img {
-    width: 150px;
-    height: 150px;
   }
   </style>
 
@@ -144,9 +118,9 @@
   <!-- ROW CON IMMAGINE PROFILO, NOME E EMAIL -->
 
   <div class="container-fluid">
-    <div class="row mt-3">
+    <div class="row mt-1">
 
-      <div class="col-lg-3 col-md-4 ml-5 ">
+      <div class="col-lg-2 col-md-3 ml-4 ">
         <div class="container-fluid">
           <img class="picture img-fluid rounded-circle mt-4"
           th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}" alt="profile_pic"
@@ -165,22 +139,27 @@
               data-placement="right" title="Modifica immagine del profilo"
               type="file" name="immagine" accept="image/png, image/jpeg"/>
             </div>
-            <input class="btn btn-success" type="submit" value="Salva" id="save" />
+            <input class="btn btn-success" type="submit" value="Salva foto profilo" id="save" />
           </form>
 
           <form th:action="@{/profile/eliminaFotoProfilo}" method ="post">
-            <input class="btn btn-danger mt-2" type="submit" value="elimina">
+            <input class="btn btn-danger mt-2" type="submit" value="Elimina foto profilo">
           </form>
 
         </div>
       </div>
 
-      <div class="col-6 mt-5 align-text-center">
-        <h5 class="anagrafica" th:text="${utente.nome} + ' ' + ${utente.cognome} "></h5><br><br>
-        <h6 class="anagrafica" th:text="${utente.utente.email}"></h6>
-        <div class="container-fluid">
-          <img id="logo2" class="img-fluid rounded mw-50"  th:src="'data:image/png;base64,' + ${utente.settore.getImgData(utente.settore.logo)}" alt="logo-agency">
+      <div class="col-5 mt-5 mb-3 align-text-center">
+        <div class="align-text-center ">
+          <h1 class="h1" th:text="${utente.nome}"></h1>
+          <h1 class="h1" th:text="${utente.cognome}" style="color: #ECF260"></h1><br><br>
+          <h6 class="h6" th:text="${utente.utente.email}"></h6>
+          <div class="container-fluid mt-3 pr-4">
+            <img id="logo2" class="img-fluid rounded-pill mw-25"  th:src="'data:image/png;base64,' + ${utente.settore.getImgData(utente.settore.logo)}" alt="logo-agency">
+          </div>
         </div>
+
+
       </div>
 
     </div>
@@ -189,16 +168,18 @@
 
   <!-- ROW CON GESTIONE PROFILO, DESCRIZIONE E DASHBOARD -->
   <div class="container-fluid ">
-    <div class="row mt-1">
+    <div class="row">
 
       <div class="col-lg-2 col-md-2 col-sm-2 ml-5 mt-5">
-
-        <div class="form ml-3">
-          <form th:action="@{/profile/cambioPassword}" method="post">
-            <button type="submit" class="btn btn-warning justify-content-center mt-4">Cambia Password</button>
-          </form>
+        <div class="dropdown">
+          <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Impostazioni
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" th:href="@{/profile/cambioPassword}" method="post">Cambio password</a>
+            <a class="dropdown-item" th:href="@{/logout}">Logout</a>
+          </div>
         </div>
-        <a class="btn btn-primary ml-3 mt-2" href="#" >Profilo Linkedin</a>
       </div>
 
       <div class="col-lg-2 col-md-3 col-sm-3 ml-3 mr-5">
@@ -219,8 +200,8 @@
         </div>
       </div>
 
-      <div class="col-lg-6 col-md-6 col-sm-8 ml-5">
-        <div class="card ml-5 text-center h-75" style="color:#303030;" >
+      <div class="col-lg-6 col-md-6 col-sm-8 ml-5 pt-n5">
+        <div class="card ml-5 text-center h-75 pt-n5" style="color:#303030;" >
           <div class="card-header">
             <h5>ATTIVITA' RECENTI</h5>
             <small>Anteprima di quello che hai fatto di recente</small>
@@ -233,7 +214,6 @@
           <div class="text-align-center">
             <a href="#" class="btn btn-primary w-25 ">Vedi tutte</a>
           </div>
-
         </div>
       </div>
 
