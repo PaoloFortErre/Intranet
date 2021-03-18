@@ -1,11 +1,13 @@
 package com.erretechnology.intranet.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.erretechnology.intranet.models.Sondaggio;
+import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.repositories.RepositorySondaggio;
 
 @Service("ServiceSondaggio")
@@ -24,5 +26,9 @@ public class ServiceSondaggioImpl implements ServiceSondaggio{
 	@Override
 	public void save(Sondaggio sondaggio) {
 		repositorySondaggio.save(sondaggio);		
+	}
+	@Override
+	public List<Sondaggio> findByAutore(UtenteDatiPersonali autore) {
+		return findAll().stream().filter(x-> x.getAutore().equals(autore)).collect(Collectors.toList());
 	}
 }

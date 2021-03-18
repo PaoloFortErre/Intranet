@@ -1,18 +1,10 @@
 package com.erretechnology.intranet.controllers;
 
-import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -29,10 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.erretechnology.intranet.models.FilePdf;
-import com.erretechnology.intranet.models.Sondaggio;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
-import com.erretechnology.intranet.services.ServiceFilePdf;
-import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 
 @Controller
 @RequestMapping(value = "file")
@@ -79,7 +68,7 @@ public class UploadController extends BaseController{
 	public ModelAndView downloadMAV(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("downloadPdf");
-		mav.addObject("filePdf", serviceFilePdf.getAll());
+		mav.addObject("filePdf", serviceFilePdf.findAll());
 		mav.addObject("user", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return mav;
 	}
@@ -87,16 +76,19 @@ public class UploadController extends BaseController{
 	@PostMapping(value = "/deleteFilePdf")
 	public String deleteMessaggio(int id, HttpSession session) {
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
-		FilePdf pdf =serviceFilePdf.getPdf(id);
-		pdf.setVisibile(false);
-		serviceFilePdf.insert(pdf);
-		saveLog("cancellato un modulo", autore);
-		return "redirect:/file/moduli";
+		if(serviceFilePdf.findByAutore(autore).stream().filter(x-> x.getId() == id).count() > 0) {
+			FilePdf pdf =serviceFilePdf.findById(id);
+			pdf.setVisibile(false);
+			serviceFilePdf.insert(pdf);
+			saveLog("cancellato un modulo", autore);
+			return "redirect:/file/moduli";
+		} return "redirect:forbidden";
+		
 	}
 	
 	@GetMapping(value = "/downloadFile")
 	public ResponseEntity<Resource> downloadFile(int id, HttpSession session) {
-		FilePdf pdf = serviceFilePdf.getPdf(id);
+		FilePdf pdf = serviceFilePdf.findById(id);
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Content-Disposition", String.format("attachment; filename=" + pdf.getNomeFile()));    
 		saveLog("scaricato un pdf", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
