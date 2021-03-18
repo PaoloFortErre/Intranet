@@ -114,9 +114,20 @@ public class MyWorkController extends BaseController {
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		sondaggio.setAutore(autore);
 		sondaggio.setTimestamp(Instant.now().getEpochSecond());
+		sondaggio.setVisibile(true);
 		serviceSondaggio.save(sondaggio);
 		saveLog("creato un nuovo sondaggio", autore);
 		return "redirect:/myWork/sondaggi";
+	}
+	
+	@PostMapping(value = "/deleteSondaggio")
+	public String deleteMessaggio(int id, HttpSession session) {
+		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		Sondaggio s =serviceSondaggio.findById(id);
+		s.setVisibile(false);
+		serviceSondaggio.save(s);
+		saveLog("cancellato un sondaggio", autore);
+		return "redirect:sondaggi";
 	}
 	
 	@GetMapping(value = "/addSondaggio")

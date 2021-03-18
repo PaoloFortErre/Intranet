@@ -9,19 +9,25 @@
 <div th:with="admin = ${#authorization.expression('hasAuthority(''WNMW'')')}">
 	<div th:if="${admin}">
 		<form th:action="@{/myWork/addSondaggio}" method="get">
-			<button type="submit" value="inserisci nuovo sondaggio">Invia</button>
+			<button type="submit">Inserisci Nuovo Sondaggio</button>
 		</form>
 		
 	</div>
-</div>
+	<br>
+	<br>
 	
 	<table>
-	<tr th:each="sondaggio: ${sondaggi}">
-		<td>
-			<a th:href="@{${sondaggio.link}}" th:text="${sondaggio.nomeSondaggio}" target="blank"></a>
-		</td>
-	</tr>
-	
-</table>
+		<tr th:each="sondaggio: ${sondaggi}">
+			<td th:if="${sondaggio.visibile}">
+				<a th:href="@{${sondaggio.link}}" th:text="${sondaggio.nomeSondaggio}" target="blank"></a>
+				<div th:if="${admin}">
+					<form th:action="@{/myWork/deleteSondaggio(id=${sondaggio.id})}" method="post">
+						<button type="submit">Elimina</button>
+					</form>
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>
 </body>
 </html>

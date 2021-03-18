@@ -6,11 +6,17 @@ import javax.persistence.*;
 @Table(name = "sondaggio")
 public class Sondaggio {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
 	private String nomeSondaggio;
 	private String link;
 	private long timestamp;
+	private boolean visibile;
+	
+	public int getId() {
+		return id;
+	}
 	@OneToOne
 	@JoinColumn(name = "id_autore")
 	private UtenteDatiPersonali autore;
@@ -38,6 +44,12 @@ public class Sondaggio {
 	}
 	public void setTimestamp(long timestamp) {
 		this.timestamp = timestamp;
+	}
+	public boolean isVisibile() {
+		return visibile;
+	}
+	public void setVisibile(boolean visibile) {
+		this.visibile = visibile;
 	}
 	
 	
