@@ -106,6 +106,7 @@ public class EventoController extends BaseController {
 		}
 		
 		repoEvento.save(evento);
+		saveLog("inserito un nuovo post", serviceDatiPersonali.findById(idUser));
         return "evento";
 	}
 	
@@ -158,6 +159,7 @@ public class EventoController extends BaseController {
 		Evento evento = repoEvento.findById(id).get();
 		evento.setVisibile(false);
 		repoEvento.save(evento);
+		saveLog("eliminato un post", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/evento/list";
 	}
 }

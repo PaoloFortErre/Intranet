@@ -129,7 +129,7 @@ public class ClienteController extends BaseController{
 		Cliente cliente = repoCliente.findById(id).get();
 		cliente.setVisibile(false);
 		repoCliente.save(cliente);
-		saveLog("inserito un nuovo cliente", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+		saveLog("cancellato un nuovo cliente", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/cliente/list";
 	}
 }

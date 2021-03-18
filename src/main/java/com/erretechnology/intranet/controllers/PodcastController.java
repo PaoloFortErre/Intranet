@@ -29,7 +29,7 @@ public class PodcastController extends BaseController {
 	}
 	
 	@PostMapping(value = "/uploadPodcast")
-	public String uploadPdf(@RequestParam("file") MultipartFile file,
+	public String uploadPodcast(@RequestParam("file") MultipartFile file,
 			@ModelAttribute("podcast") Podcast podcast, HttpSession session) {
 		if (file.isEmpty()) {
 			System.out.println("file vuoto");
@@ -42,10 +42,11 @@ public class PodcastController extends BaseController {
 			podcast.setUtente(serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 			podcast.setNome(StringUtils.cleanPath(file.getOriginalFilename()));
 			servicePodcast.save(podcast);
+			saveLog("inserito un nuovo podcast",serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+			
 		return "redirect:/podcast/";
 	}
 }

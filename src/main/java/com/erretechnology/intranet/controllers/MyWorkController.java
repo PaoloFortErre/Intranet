@@ -115,6 +115,7 @@ public class MyWorkController extends BaseController {
 		sondaggio.setAutore(autore);
 		sondaggio.setTimestamp(Instant.now().getEpochSecond());
 		serviceSondaggio.save(sondaggio);
+		saveLog("creato un nuovo sondaggio", autore);
 		return "redirect:/myWork/sondaggi";
 	}
 	

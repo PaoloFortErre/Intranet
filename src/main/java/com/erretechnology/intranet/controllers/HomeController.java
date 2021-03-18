@@ -158,6 +158,7 @@ public class HomeController extends BaseController{
 		    	utente.setPassword(psw);
 		    	utente.setTokenResetPassword(null);
 		        serviceUtente.saveUtente(utente);
+		        saveLog("cambiato password via \"Password dimenticata\"", serviceDatiPersonali.findByAutore(utente));
 		    }
 		     
 		    return "redirect:login";
