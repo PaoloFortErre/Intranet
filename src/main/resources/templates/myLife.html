@@ -239,7 +239,7 @@
 
 					<div th:if="${post.immagine!=null}">
 						<img
-						th:src="'data:image/jpeg;base64,' + ${img.getImgData(post.immagine.data)}"
+						th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(post.immagine.data)}"
 						width="70%" height="40%">
 					</div>
 
