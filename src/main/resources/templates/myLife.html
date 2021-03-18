@@ -62,7 +62,7 @@
 
 					<div class="top-right">Top Right</div>
 					<div class="item active">
-						<img src="/view/MyLife/images/barc.jpg" alt="Città" width="100%">
+						<img src="/view/MyLife/images/barc.jpg" alt="Cittï¿½" width="100%">
 						<div class="carousel-caption">
 							<h1 class="font-caption" style="font-weight:900">"Sii il cambiamento che vuoi vedere
 								nel mondo"</h1>
@@ -84,11 +84,11 @@
 		</div>
 	</div>
 	<!-- ************
-      FINE HEADER 
+      FINE HEADER
    ***************** -->
 	<div class="container">
 
-		<!-- **** 
+		<!-- ****
 	          COLONNA SINISTRA
 	                            **** -->
 
@@ -115,7 +115,7 @@
 									<textarea class="form-control" rows="2" cols="30" name="testo"
 										required style="width: 98%" placeholder="Scrivi un post..."
 										id="post"></textarea>
-										
+
 										<button type="button" data-toggle="modal" id="bottoneImmagine"
 										data-target="#myModal">
 										Immagine<img src="/view/MyLife/images/imh.png"
@@ -145,7 +145,7 @@
 
 										</div>
 									</div>
-										
+
 
 
 
@@ -161,11 +161,11 @@
 					</div>
 
 
-					<!-- **************** 
-				     
-				      POST PUBBLICATI 
-				        IN BACHECA 
-				      
+					<!-- ****************
+
+				      POST PUBBLICATI
+				        IN BACHECA
+
 				     **************** -->
 
 				</div>
@@ -173,7 +173,7 @@
 				<div class="col-sinistra" style="margin-top: 20px">
 					<div class="container-fluid">
 						<div class="row">
-						
+
 							<!-- INFORMAZIONI SU UTENTE E POST -->
 
 							<div th:each="post:${messaggi}" style="margin-top: 30px">
@@ -232,16 +232,16 @@
 											th:text="${post.testo}">
 											<a href="">vedi altro</a>
 										</p>
-										
-										
+
+
 										<div th:if="${post.immagine!=null}">
 												<img
 											th:src="'data:image/jpeg;base64,' + ${img.getImgData(post.immagine.data)}"
 											width="70%" height="40%">
 										</div>
-																			
 
-										<!-- °°°°°°°° COMMENTO °°°°°°°-->
+
+										<!-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ COMMENTO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-->
 										<div class="col-sm-5 col-md-5 col-lg-5"
 											style="margin-top: 10px;"
 											th:each="commento : ${post.setCommenti}"
@@ -305,7 +305,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- **** 
+			<!-- ****
 	          COLONNA DESTRA
 	                            **** -->
 			<div class="col-sm-4 col-lg-4" id="col-destra">
@@ -344,25 +344,28 @@
 			</div>
 		</div>
 	</div>
-	<footer>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-sm-4 col-lg-4">
-					<img src="/view/MyLife/images/erre.png" height="80px"
-						style="margin: auto">
-				</div>
-				<div class="col-sm-4 col-lg-4">
-					<p style="color: #F3F3F3; text-align: center; font-size: 20px;">
-						Supporto: +39 011 197 429 00</p>
-				</div>
-				<div class="col-sm-4 col-lg-4">
-					<img src="/view/MyLife/images/fblogo.png" height="60px"> <img
-						src="/view/MyLife/images/linkedin.png" height="80px ">
-				</div>
-			</div>
-		</div>
-		
-	</footer>
+
+	<!-- PANNELLO FOOTER CON INFO-->
+  <footer class="align-items-center">
+    <div class="container align-items-center mt-4">
+      <div class="row justify-content-center align-items-center mt-3 pt-4">
+        <div class="col-sm-4 col-lg-4">
+          <img src="/view/MyLife/images/erre.png" height="80px" alt="erre_logo"
+          style="margin: auto">
+        </div>
+        <div class="col-sm-4 col-lg-4">
+          <p
+          style="color: #F3F3F3; text-align: center; font-size: 20px; ">
+          Supporto: +39 011 197 429 00</p>
+        </div>
+        <div class="col-sm-4 col-lg-4 pl-5">
+          <a class="rounded-circle fa fa-facebook" href="https://www.facebook.com/erretechnologygroup/"></a>
+          <a class="rounded-circle fa fa-linkedin ml-2" href="https://www.linkedin.com/company/erretechnologygroup/"></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+	
 	<script>
 		$(document).ready(function() {
 			// Activate Carousel
@@ -395,8 +398,8 @@
 			document.getElementsByClassName('postModificato' + id)[0].style.display = "block";
 
 		}
-	
+
 	</script>
-	
+
 </body>
 </html>
