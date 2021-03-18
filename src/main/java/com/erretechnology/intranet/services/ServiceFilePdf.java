@@ -1,14 +1,15 @@
 package com.erretechnology.intranet.services;
 
 import java.util.List;
-
-import org.springframework.web.multipart.MultipartFile;
 import com.erretechnology.intranet.models.FilePdf;
+import com.erretechnology.intranet.models.UtenteDatiPersonali;
 
 public interface ServiceFilePdf {
 	public void insert(FilePdf file);
 	
-	public FilePdf getPdf(int id);
+	public FilePdf findById(int id);
 	
-	public List<FilePdf> getAll();
+	public List<FilePdf> findAll();
+	
+	public List<FilePdf> findByAutore(UtenteDatiPersonali autore);
 }

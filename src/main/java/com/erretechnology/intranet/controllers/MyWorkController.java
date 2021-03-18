@@ -33,12 +33,14 @@ public class MyWorkController extends BaseController {
 	private RepositoryNews repoNews;
 
 	@GetMapping(value = "/")
-	public ModelAndView primaPagina() {
+	public ModelAndView primaPagina(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		/*
 		 * PARTE CARICAMENTO FORM COMPLEANNI
 		 * 
 		 * */
+		UtenteDatiPersonali u1 = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		mav.addObject("utenteDati", u1);
 		mav.setViewName("myWork");
 		Calendar calendar = Calendar.getInstance(), calUtente = Calendar.getInstance();
 		calendar.setTimeInMillis(Instant.now().getEpochSecond()*1000);
@@ -123,11 +125,14 @@ public class MyWorkController extends BaseController {
 	@PostMapping(value = "/deleteSondaggio")
 	public String deleteMessaggio(int id, HttpSession session) {
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
-		Sondaggio s =serviceSondaggio.findById(id);
-		s.setVisibile(false);
-		serviceSondaggio.save(s);
-		saveLog("cancellato un sondaggio", autore);
-		return "redirect:/myWork/sondaggi";
+		if(serviceSondaggio.findByAutore(autore).stream().filter(x-> x.getId() == id).count() > 0) {
+			Sondaggio s =serviceSondaggio.findById(id);
+			s.setVisibile(false);
+			serviceSondaggio.save(s);
+			saveLog("cancellato un sondaggio", autore);
+			return "redirect:/myWork/sondaggi";
+		}return "redirect:forbidden";
+		
 	}
 	
 	@GetMapping(value = "/addSondaggio")
