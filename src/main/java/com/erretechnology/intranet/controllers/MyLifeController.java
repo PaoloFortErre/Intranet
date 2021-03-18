@@ -39,7 +39,7 @@ public class MyLifeController extends BaseController {
 		mav.setViewName("myLife");
 		mav.addObject("messaggi", servicePost.getLastMessage());
 		mav.addObject("utenteDati", u);
-		mav.addObject("img", serviceFileImmagine.getLastImmagineByUtente(u));
+	//	mav.addObject("img", serviceFileImmagine.getLastImmagineByUtente(u));
 		return mav;
 	}
 

@@ -26,6 +26,7 @@ public class Evento {
 	@ManyToOne
 	@JoinColumn(name="autore_id")
 	private Utente autore;
+	private boolean visibile;
 	
 	public Evento() {
 
@@ -85,6 +86,14 @@ public class Evento {
 
 	public void setAutore(Utente autore) {
 		this.autore = autore;
+	}
+
+	public boolean isVisibile() {
+		return visibile;
+	}
+
+	public void setVisibile(boolean visibile) {
+		this.visibile = visibile;
 	}
 	
 }

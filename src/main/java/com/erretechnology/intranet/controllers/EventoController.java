@@ -48,7 +48,7 @@ public class EventoController extends BaseController {
 	
 	@GetMapping("/list")
 	public String getList(Model model) {
-		model.addAttribute("eventoList", repoEvento.findByOrderByIdDesc());
+		model.addAttribute("eventoList", repoEvento.findAllOrderByIdDesc());
 		return "eventoList";
 	}
 	
@@ -93,6 +93,7 @@ public class EventoController extends BaseController {
 
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		evento.setAutore(repoUtente.findById(idUser).get());
+		evento.setVisibile(true);
 		
 		if(!immagine.isEmpty()) {
 			try {
@@ -155,8 +156,8 @@ public class EventoController extends BaseController {
 	@RequestMapping("/delete/{id}")
 	public String delete(@PathVariable int id, HttpSession session) {
 		Evento evento = repoEvento.findById(id).get();
-		serviceFileSystem.deleteImage(imageFolder, evento.getCopertina());
-		repoEvento.deleteById(id);
+		evento.setVisibile(false);
+		repoEvento.save(evento);
 		return "redirect:/evento/list";
 	}
 }
