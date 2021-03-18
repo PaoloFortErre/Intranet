@@ -67,13 +67,15 @@ public class MyWorkController extends BaseController {
 		/*
 		 * PARTE PODCAST
 		 * 
-		 */
+		
+		 */	
 		List<Podcast> listPodcast = servicePodcast.getAll();
-		Podcast primoPodcast = listPodcast.get(0);
-		mav.addObject("primoPodcast", primoPodcast);
-		listPodcast.remove(0);
-		mav.addObject("altriPodcast", listPodcast);
-
+		if(listPodcast.size() != 0) {
+			Podcast primoPodcast = listPodcast.get(0);
+			mav.addObject("primoPodcast", primoPodcast);
+			listPodcast.remove(0);
+			mav.addObject("altriPodcast", listPodcast);
+		}
 		/*
 		 * 
 		 * 
