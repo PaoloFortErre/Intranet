@@ -1,10 +1,9 @@
 package com.erretechnology.intranet.controllers;
 
+import java.io.IOException;
 import java.time.Instant;
 
 import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,19 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.erretechnology.intranet.models.Commento;
 import com.erretechnology.intranet.models.CommentoModificato;
 import com.erretechnology.intranet.models.FileImmagine;
-import com.erretechnology.intranet.models.Log;
 import com.erretechnology.intranet.models.Post;
 import com.erretechnology.intranet.models.PostModificato;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
-import com.erretechnology.intranet.services.ServiceAuthority;
-import com.erretechnology.intranet.services.ServiceCommento;
-import com.erretechnology.intranet.services.ServiceCommentoModificato;
-import com.erretechnology.intranet.services.ServiceFileSystem;
-import com.erretechnology.intranet.services.ServiceLog;
-import com.erretechnology.intranet.services.ServicePost;
-import com.erretechnology.intranet.services.ServicePostModificato;
-import com.erretechnology.intranet.services.ServiceUtente;
-import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 
 @Controller
 @RequestMapping(value = "myLife")
@@ -153,15 +142,14 @@ public class MyLifeController extends BaseController {
 	}
 
 	@PostMapping(value = "/addPost")
-	public String inserisciPost(Post post, HttpSession session, @RequestParam(required=false) MultipartFile document) {
-		System.out.println("test");
+	public String inserisciPost(Post post, HttpSession session, @RequestParam(required=false) MultipartFile document) throws IOException {
 		//	String mail = session.getAttribute("email").toString();
 		int id = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(id);
 		post.setAutore(autore);
 		post.setTimestamp(Instant.now().getEpochSecond());
 		post.setVisibile(true);
-		if(document != null) {
+		if(!document.getOriginalFilename().isEmpty()) {
 			try {
 				//String imageFolder = "fotoPost";
 				//String fileName = serviceFileSystem.saveImage(imageFolder, document, id);

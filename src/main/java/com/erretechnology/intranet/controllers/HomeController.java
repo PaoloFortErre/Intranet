@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -104,7 +105,7 @@ public class HomeController extends BaseController{
 	    MimeMessage message = mailSender.createMimeMessage();              
 	    MimeMessageHelper helper = new MimeMessageHelper(message);
 	     
-	    helper.setFrom("noreply@test.com", "Shopme Support");
+	    helper.setFrom("noreply@test.com", "No Reply Erre Technology");
 	    helper.setTo(recipientEmail);
 	     
 	    String subject = "Modulo di cambio password per Intranet The Gate";
@@ -125,6 +126,43 @@ public class HomeController extends BaseController{
 	    helper.setText(content, true);
 	     
 	    mailSender.send(message);
+	}
+	
+	@GetMapping("/reset_password")
+	public ModelAndView showResetPasswordForm(@Param(value = "token") String token, Model model) {
+	    Utente utente = serviceUtente.findByResetPasswordToken(token);
+	    ModelAndView mav = new ModelAndView();
+	     
+	    if (utente == null) {
+	        
+	    }else {
+	    	mav.setViewName("reset_password_form");
+	    	mav.addObject("token", token);
+	    }
+	     
+	    return mav;
+	}
+	
+	@PostMapping("/reset_password")
+	public String processResetPassword(HttpServletRequest request, @RequestParam("password") String psw ,
+			@RequestParam("cPassword") String cPsw) {
+		if(psw.equals(cPsw)) {
+			String token = request.getParameter("token");
+
+		     
+		    Utente utente = serviceUtente.findByResetPasswordToken(token);
+		     
+		    if (utente == null) {
+		    	
+		    } else {  
+		    	utente.setPassword(psw);
+		    	utente.setTokenResetPassword(null);
+		        serviceUtente.saveUtente(utente);
+		    }
+		     
+		    return "redirect:login";
+		}
+	    return "redirect:forbidden";
 	}
 	
 	//Permission manager

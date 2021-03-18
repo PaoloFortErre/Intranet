@@ -11,6 +11,6 @@ import com.erretechnology.intranet.models.News;
 @Repository
 public interface RepositoryNews extends CrudRepository<News, Integer>{
 	@Query("SELECT n FROM News n WHERE n.visibile = true ORDER BY n.dataPubblicazione DESC")
-	List<News> findByOrderByDataPubblicazioneDesc();
+	List<News> findAllOrderByDataPubblicazioneDesc();
 }
  
