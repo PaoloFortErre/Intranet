@@ -4,6 +4,10 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="linkedin:" content="">
+
+  <!-- Add icon library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -52,99 +56,123 @@
   }
 
   footer {
-    margin-top: 5%;
     background-color: #2EC4B6;
     width: 100%;
     height: 160px;
+  }
+  /* Style all font awesome icons */
+  .fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  /* Add a hover effect if you want */
+  .fa:hover {
+    opacity: 0.9;
+  }
+
+  /* Set a specific color for each brand */
+
+  /* Facebook */
+  .fa-facebook {
+    background: #3B5998;
+    color: white;
+  }
+
+  /* Twitter */
+  .fa-linkedin {
+    background: #55ACEE;
+    color: white;
   }
   </style>
 </head>
 <body>
   <!-- PANNELLO IMMAGINI CON SCELTA-->
   <div class="container-fluid">
-    <div class="row">
+    <div class="row mt-2 mb-5">
 
-      <div class="col-lg-5 col-md-4 col-sm-3 float-left">
-        <div class="img-fluid img_container">
-          <img src="/view/Homepage/Images/my_work_1.png" class="rounded img-fluid" alt="mywork1">
-          <div class=" h1 text-center">
-            <h1 class="title"style="right: 25%">My work</h1>
-          </div>
-          <span class="descrizione h3" style="margin-top: -205px;">
-            <p>Scopri cos'è successo di recente in Erre </p>
+      <div class="col float-left">
+        <img src="/view/Homepage/Images/my_work_1.jpg" class="img-fluid rounded-lg " alt="mywork1">
+        <div class="h1 text-center">
+          <h1 class="title"style="right: 25%">My work</h1>
+        </div>
+        <span class="descrizione h3">
+          <p>Scopri cos'è successo di recente in Erre </p>
+        </span>
+
+        <!-- BOTTONI PER ENTRARE IN MY WORK & MY LIFE-->
+        <div class="button">
+          <a class="btn btn-outline-primary btn-lg" th:href="@{/myWork/}" role="button"><b>ENTRA</b></a>
+        </div>
+
+      </div>
+
+      <div class="col float-right">
+        <img src="/view/Homepage/Images/my_life_1.jpg" class="img-fluid rounded-lg " alt="mylife1">
+        <div class=" h1 text-center">
+          <h1 class="title">My life</h1>
+          <span class="descrizione h3">
+            <p>Scopri cosa fare il prossimo fine settimana </p>
           </span>
-          <!-- BOTTONI PER ENTRARE IN MY WORK & MY LIFE-->
           <div class="button">
-            <a class="btn btn-outline-primary btn-lg" th:href="@{/myWork/}" role="button"><b>ENTRA</b></a>
+            <a class="btn btn-outline-success btn-lg" th:href="@{/myLife/}" role="button"><b>ENTRA</b></a>
           </div>
         </div>
       </div>
-
-      <div class="col-lg-5 col-md-4 col-sm-3 float-right" style="padding-right: 0px; padding-left: 0px;">
-        <div class="img-fluid img_container">
-          <img src="/view/Homepage/Images/my_life_1.jpg" class="rounded img-fluid" alt="mylife1">
-          <div class=" h1 text-center">
-            <h1 class="title">My life</h1>
-            <span class="descrizione h3 ">
-              <p>Scopri cosa fare il prossimo fine settimana </p>
-            </span>
-            <div class="button">
-              <a class="btn btn-outline-success btn-lg" th:href="@{/myLife/}" role="button"><b>ENTRA</b></a>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 
   <!-- PANNELLO LINKEDIN-->
-  <div class="row mt-5 pt-5">
-    <div class="col">
-    </div>
-    <div class="col">
-      <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:6774562982606184448" height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
-    </div>
-    <div class="col">
-      <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:6772419225500835840" height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
-    </div>
-    <div class="col">
+  <div class="container-fluid">
+    <div class="row mt-5">
+      <div class="col">
+        <div class="container-fluid">
+          <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:6777974764054032384"
+          height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="container-fluid">
+          <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:6777857210736230400"
+          height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="container-fluid">
+          <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:6772419225500835840"
+          height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
+        </div>
+      </div>
     </div>
   </div>
 
+
   <!-- PANNELLO CON LINK AL PROFILO-->
-  <div class="row mt-2">
-    <div class="col">
+  <div class="row justify-content-center mt-3">
+    <div class="col-4">
+      <img src="/view/Homepage/Images/phone_person.png" class="img-fluid mt-3" alt="phoneAndHuman.png">
+    </div>
 
-    </div>
-    <div class="col">
-
-    </div>
-    <div class="col">
-      <img src="view/Homepage/Images/phone_person.PNG" class="img-fluid mt-3" alt="phoneAndHuman.png">
-    </div>
-    <div class="col">
+    <div class="col-2 mt-5">
       <div class="container mt-5">
         <p style="color: #FFFFFF; ">Se desideri vedere le tue informazioni dettagliate, vai alla gestione del tuo profilo: </p>
-        <a class="btn btn-outline-primary btn-lg" th:href="@{/profile/}">PROFILO</a>
-
+        <a class="btn btn-info btn-lg" th:href="@{/profile/}">PROFILO</a>
       </div>
     </div>
-    <div class="col">
-
-    </div>
-    <div class="col">
-
-    </div>
-
   </div>
 
   <!-- PANNELLO FOOTER CON INFO-->
-  <footer>
-    <div class="container-fluid">
-      <div class="row">
+  <footer class="align-items-center">
+    <div class="container align-items-center mt-4">
+      <div class="row justify-content-center align-items-center mt-3 pt-4">
         <div class="col-sm-4 col-lg-4">
-          <img src="/view/MyLife/images/erre.png" height="80px"
+          <img src="/view/MyLife/images/erre.png" height="80px" alt="erre_logo"
           style="margin: auto">
         </div>
         <div class="col-sm-4 col-lg-4">
@@ -152,9 +180,9 @@
           style="color: #F3F3F3; text-align: center; font-size: 20px; ">
           Supporto: +39 011 197 429 00</p>
         </div>
-        <div class="col-sm-4 col-lg-4">
-          <img src="/view/MyLife/images/fblogo.png" height="60px">
-          <img src="/view/MyLife/images/linkedin.png" height="80px ">
+        <div class="col-sm-4 col-lg-4 pl-5">
+          <a class="rounded-circle fa fa-facebook" href="https://www.facebook.com/erretechnologygroup/"></a>
+          <a class="rounded-circle fa fa-linkedin ml-2" href="https://www.linkedin.com/company/erretechnologygroup/"></a>
         </div>
       </div>
     </div>
