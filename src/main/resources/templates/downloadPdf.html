@@ -8,8 +8,13 @@
 <div th:with="admin = ${#authorization.expression('hasAuthority(''WNMW'')')}">
 <table>
 	<tr th:each="pdf: ${filePdf}">
-		<td th:if="${pdf.settore} == ${user.settore} or ${admin}">
+		<td th:if="(${pdf.settore} == ${user.settore} or ${admin}) and ${pdf.visibile}">
 			<a th:href="@{/file/downloadFile(id=${pdf.id})}" th:text="${pdf.nomeFile}" th:download="${pdf.nomeFile}"></a>
+							<div th:if="${admin}">
+					<form th:action="@{/file/deleteFilePdf(id=${pdf.id})}" method="post">
+						<button type="submit">Elimina</button>
+					</form>
+				</div>
 		</td>
 	</tr>
 	

@@ -29,6 +29,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.erretechnology.intranet.models.FilePdf;
+import com.erretechnology.intranet.models.Sondaggio;
+import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.services.ServiceFilePdf;
 import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 
@@ -46,7 +48,7 @@ public class UploadController extends BaseController{
 
 	@PostMapping(value = "/upload")
 	public String uploadPdf(@RequestParam("file") MultipartFile file, RedirectAttributes attributes, 
-			@ModelAttribute("filePdf") FilePdf filePdf) {
+			@ModelAttribute("filePdf") FilePdf filePdf, HttpSession session) {
 		// check if file is empty
 		if (file.isEmpty()) {
 			attributes.addFlashAttribute("message", "Please select a file to upload.");
@@ -60,7 +62,9 @@ public class UploadController extends BaseController{
 		try {
 			filePdf.setNomeFile(fileName);
 			filePdf.setData(file.getBytes());
+			filePdf.setVisibile(true);
 			serviceFilePdf.insert(filePdf);
+			saveLog("Inserito un nuovo modulo", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -80,11 +84,22 @@ public class UploadController extends BaseController{
 		return mav;
 	}
 	
+	@PostMapping(value = "/deleteFilePdf")
+	public String deleteMessaggio(int id, HttpSession session) {
+		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		FilePdf pdf =serviceFilePdf.getPdf(id);
+		pdf.setVisibile(false);
+		serviceFilePdf.insert(pdf);
+		saveLog("cancellato un modulo", autore);
+		return "redirect:/file/moduli";
+	}
+	
 	@GetMapping(value = "/downloadFile")
-	public ResponseEntity<Resource> downloadFile(int id) {
+	public ResponseEntity<Resource> downloadFile(int id, HttpSession session) {
 		FilePdf pdf = serviceFilePdf.getPdf(id);
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Content-Disposition", String.format("attachment; filename=" + pdf.getNomeFile()));    
+		saveLog("scaricato un pdf", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_PDF_VALUE)
                 .body(new ByteArrayResource(pdf.getData()));

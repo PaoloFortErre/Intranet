@@ -15,6 +15,7 @@ public class FilePdf{
 	@ManyToOne
 	@JoinColumn(name = "id_autore")
 	private UtenteDatiPersonali autore;
+	private boolean visibile;
 
 	public UtenteDatiPersonali getAutore() {
 		return autore;
@@ -54,5 +55,13 @@ public class FilePdf{
 	
 	public void setSettore(String settore) {
 		this.settore = settore;
+	}
+
+	public boolean isVisibile() {
+		return visibile;
+	}
+
+	public void setVisibile(boolean visibile) {
+		this.visibile = visibile;
 	}
 }
