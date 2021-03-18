@@ -1,6 +1,7 @@
 package com.erretechnology.intranet.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
@@ -33,7 +34,8 @@ public class ServiceUtenteImpl implements ServiceUtente{
 	}
 	@Override
 	public Utente findByResetPasswordToken(String token) {
-		return getAll().stream().filter(x -> x.getTokenResetPassword().equals(token)).findFirst().get();
+		//List<Utente> a = getAll().stream().filter(x-> x.getTokenResetPassword() != null).filter(x -> x.getTokenResetPassword().equals(token)).collect(Collectors.toList());
+		return getAll().stream().filter(x-> x.getTokenResetPassword() != null).filter(x -> x.getTokenResetPassword().equals(token)).findFirst().get();
 	}
 	@Override
 	public void updateResetPasswordToken(String token, String email) /*throws CustomerNotFoundException*/ {
@@ -44,13 +46,6 @@ public class ServiceUtenteImpl implements ServiceUtente{
 		} /*else {
 	        throw new CustomerNotFoundException("Could not find any customer with the email " + email);
 	    }*/
-	}
-
-	public void updatePassword(Utente utente, String newPassword) {
-		String encodedPassword = new BCryptPasswordEncoder().encode(newPassword);
-		utente.setPassword(encodedPassword);
-		utente.setTokenResetPassword(null);
-		saveUtente(utente);
 	}
 	
 	@Override
