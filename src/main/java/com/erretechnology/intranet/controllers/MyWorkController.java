@@ -33,12 +33,14 @@ public class MyWorkController extends BaseController {
 	private RepositoryNews repoNews;
 
 	@GetMapping(value = "/")
-	public ModelAndView primaPagina() {
+	public ModelAndView primaPagina(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		/*
 		 * PARTE CARICAMENTO FORM COMPLEANNI
 		 * 
 		 * */
+		UtenteDatiPersonali u1 = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		mav.addObject("utenteDati", u1);
 		mav.setViewName("myWork");
 		Calendar calendar = Calendar.getInstance(), calUtente = Calendar.getInstance();
 		calendar.setTimeInMillis(Instant.now().getEpochSecond()*1000);

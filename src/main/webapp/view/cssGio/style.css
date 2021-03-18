@@ -10,12 +10,13 @@ body {
 
 .carousel-inner>.item>img, .carousel-inner>.item>a>img {
 	width: 100%;
-	height: 600px;
+	height: 830px;
 	margin: auto;
 }
 
 .carousel-caption {
-	padding: 210px 0;
+	font-size: 24px;
+	padding: 270px 0;
 }
 
 .font-caption {
@@ -74,43 +75,11 @@ nav {
 	padding: 15px;
 }
 
-.top-right {
-	position: absolute;
-	top: 8px;
-	right: 480px;
-	font-size: 20px;
-	color: #F3F3F3;
-}
 
-.top-right2 {
-	position: absolute;
-	top: 8px;
-	right: 180px;
-	font-size: 20px;
-	text-decoration: none;
-	color: #F3F3F3;
-}
-
-.top-right3 {
-	position: absolute;
-	top: 8px;
-	right: 20px;
-	font-size: 20px;
-	text-decoration: none;
-	color: #F3F3F3;
-}
-
-.top-right4 {
-	position: absolute;
-	top: 8px;
-	right: -210px;
-	font-size: 20px;
-	text-decoration: none;
-	color: #F3F3F3;
-}
 
 /*START FOOTER*/
 footer {
+	margin-top:150px;
 	background-color: #2EC4B6;
 	width: 100%;
 	height: 160px;
@@ -294,6 +263,7 @@ hr#linea {
 	display: none;
 	color: black;
 	text-align:center;
+	width:100%;
 }
 .modal-header {
 
@@ -350,4 +320,59 @@ audio{
 #eventoBody {
 	color: black;
 	margin-bottom:50px;
+}
+
+#vedi{
+	box-shadow:inset 0px 1px 0px 0px #97c4fe;
+	background:linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
+	background-color:#3d94f6;
+	border-radius:6px;
+	border:1px solid #337fed;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #1570cd;
+
+	margin-bottom:30px;
+}
+
+#vedi2{
+	
+	box-shadow:inset 0px 1px 0px 0px #97c4fe;
+	background:linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
+	background-color:#3d94f6;
+	border-radius:6px;
+	border:1px solid #337fed;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #1570cd;
+	margin-left:300px;
+	margin-top:20px;
+	margin-bottom:30px;
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
+	background-color:#1e62d0;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+
+}
+
+#utente-foto-profilo {
+	-webkit-box-shadow: 10px 10px 6px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 10px 10px 6px 0px rgba(0,0,0,0.75);
+	box-shadow: 10px 10px 6px 0px rgba(0,0,0,0.75);
 }
