@@ -19,18 +19,16 @@ import javax.persistence.FetchType;
 @Entity
 @Table(name = "users", uniqueConstraints={@UniqueConstraint(columnNames={"email"})})
 public class Utente{
-
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-
-	
 	
 	@Column(unique=true)
 	private String email;
 	private String password;
 	private Boolean attivo;
+	@Column(name = "reset_password_token")
+	private String tokenResetPassword;
 
 	@ManyToMany(mappedBy = "setUtenti",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	Set<Ruolo> setRuoli;
@@ -86,5 +84,15 @@ public class Utente{
 	}
 	public void setAttivo(Boolean attivo) {
 		this.attivo = attivo;
+	}
+
+
+	public String getTokenResetPassword() {
+		return tokenResetPassword;
+	}
+
+
+	public void setTokenResetPassword(String tokenResetPassword) {
+		this.tokenResetPassword = tokenResetPassword;
 	}
 }

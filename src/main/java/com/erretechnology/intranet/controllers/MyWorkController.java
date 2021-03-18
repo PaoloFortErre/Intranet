@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.erretechnology.intranet.models.Podcast;
 import com.erretechnology.intranet.models.Post;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.repositories.RepositoryCliente;
@@ -59,8 +60,16 @@ public class MyWorkController extends BaseController {
 		mav.addObject("nuoviAssunti2", nuoviUtenti.subList(3, 6));
 		
 		///////////
-		
-		
+		/*
+		 * PARTE PODCAST
+		 * 
+		 */
+		List<Podcast> listPodcast = servicePodcast.getAll();
+		Podcast primoPodcast = listPodcast.get(0);
+		mav.addObject("primoPodcast", primoPodcast);
+		listPodcast.remove(0);
+		mav.addObject("altriPodcast", listPodcast);
+
 		/*
 		 * 
 		 * 
@@ -68,5 +77,7 @@ public class MyWorkController extends BaseController {
 		 */
 		mav.addObject("nuoviClienti", repoCliente.findTop3ByOrderByIdDesc());
 		return mav;
+		
+		
 	}
 }

@@ -1,8 +1,16 @@
 package com.erretechnology.intranet.controllers;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,8 +24,14 @@ import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.models.Utility;
 
+import net.bytebuddy.utility.RandomString;
+
 @Controller
 public class HomeController extends BaseController{
+	
+	@Autowired
+    private JavaMailSender mailSender;
+	
 	@GetMapping("/")
 	public String home() {
 		return ("info");
@@ -65,6 +79,54 @@ public class HomeController extends BaseController{
 		mav.setViewName("password_lost");
 		return mav;
 	}
+	
+	@PostMapping(value = "/password_dimenticata")
+	public String processForgotPassword(HttpServletRequest request,@RequestParam("email") String email/*, Model model*/) {
+	    String token = RandomString.make(30);
+	     
+	    try {
+	        serviceUtente.updateResetPasswordToken(token, email);
+	        String resetPasswordLink = Utility.getSiteURL(request) + "/reset_password?token=" + token;
+	        sendEmail(email, resetPasswordLink);
+	        //model.addAttribute("message", "We have sent a reset password link to your email. Please check.");
+	         
+	   /*} catch (CustomerNotFoundException ex) {
+	        model.addAttribute("error", ex.getMessage());
+	   */ } catch (UnsupportedEncodingException | MessagingException e) {
+	        //model.addAttribute("error", "Error while sending email");
+	    }
+	         
+	    return "redirect:password_dimenticata";
+	}
+	
+	public void sendEmail(String recipientEmail, String link)
+	        throws MessagingException, UnsupportedEncodingException {
+	    MimeMessage message = mailSender.createMimeMessage();              
+	    MimeMessageHelper helper = new MimeMessageHelper(message);
+	     
+	    helper.setFrom("noreply@test.com", "Shopme Support");
+	    helper.setTo(recipientEmail);
+	     
+	    String subject = "Modulo di cambio password per Intranet The Gate";
+	     
+	    String content = "<p>Car* collega</p>"
+	            + "<p>Questa mail è stata inviata automaticamente in seguito alla sua richiesta.</p>"
+	            + "<p>clicca sul seguente link per cambiare password:</p>"
+	            + "<p><a href=\"" + link + "\">Cambia la tua password</a></p>"
+	            + "<br>"
+	            + "<p>Se non sei stato tu a richiedere il cambio password, "
+	            + "sei pregato di contattare l'amministratore."
+	            + "Si prega di non rispondere a questa mail."
+	            + "Gruppo ErreTechnology</p>"
+	             ;
+	     
+	    helper.setSubject(subject);
+	     
+	    helper.setText(content, true);
+	     
+	    mailSender.send(message);
+	}
+	
 	//Permission manager
 	@GetMapping(value = "/permission_manager")
 	public ModelAndView permissionManager() {

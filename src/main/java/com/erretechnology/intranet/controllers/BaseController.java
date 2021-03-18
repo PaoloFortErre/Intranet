@@ -14,6 +14,7 @@ import com.erretechnology.intranet.services.ServiceFilePdf;
 import com.erretechnology.intranet.services.ServiceFileSystem;
 import com.erretechnology.intranet.services.ServiceLog;
 import com.erretechnology.intranet.services.ServicePermesso;
+import com.erretechnology.intranet.services.ServicePodcast;
 import com.erretechnology.intranet.services.ServicePost;
 import com.erretechnology.intranet.services.ServicePostModificato;
 import com.erretechnology.intranet.services.ServiceRuolo;
@@ -50,6 +51,8 @@ public abstract class BaseController {
 	protected ServiceUtenteDatiPersonali serviceDatiPersonali;
 	@Autowired
 	protected ServiceSettore serviceSettore;
+	@Autowired
+	protected ServicePodcast servicePodcast;
 	
 	protected void saveLog(String testo, UtenteDatiPersonali autore) {
 		Log log = new Log();

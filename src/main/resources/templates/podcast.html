@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title></title>
+</head>
+<body>
+	
+		<section class="my-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 mx-auto">
+						<h2>Upload File Example</h2>
+						<form method="post" th:action="@{/podcast/uploadPodcast}"
+							th:object="${podcast}" enctype="multipart/form-data">
+							<div class="form-group">
+								<input type="file" name="file" class="form-control-file"
+									accept=".mp3,audio/*" multiple>
+							</div>
+							<br>
+							<button type="submit" class="btn btn-primary">Upload
+								File</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+	
+				<div class="col-xs-6 col-sm-6 col-md-4 bcol-lg-4">
+				<div id="quadrato-podcast">
+					<h2
+						style="line-height: 45px; display: inline-block; font-weight: 900;">
+						I podcast di <span style="color: #FFC931"><br>Rosario</span>
+					</h2>
+					<img src="/view/MyWork/images/radice.jpg" class="img-fluid"
+						width="40%" height="40%" style="float: right" id="imgRosario">
+					<p>16 febbraio 2021</p>
+					<audio controls>
+						<source th:src="'data:audio/mp3;base64,' + ${audioPodcast.getAudioData(audioPodcast.podcast)}" type="audio/ogg">
+					
+					
+					</audio>
+				</div>
+			</div>
+
+</body>
+</html>
