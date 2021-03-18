@@ -48,7 +48,7 @@ public class EventoController extends BaseController {
 	
 	@GetMapping("/list")
 	public String getList(Model model) {
-		model.addAttribute("eventoList", repoEvento.findByOrderByDataPubblicazioneDesc());
+		model.addAttribute("eventoList", repoEvento.findByOrderByIdDesc());
 		return "eventoList";
 	}
 	
@@ -91,8 +91,6 @@ public class EventoController extends BaseController {
 		Timestamp timestamp = new Timestamp(formettedDate.getTime()/1000);  
 		evento.setData(timestamp.getTime());
 
-		Long now = Instant.now().getEpochSecond();
-		evento.setDataPubblicazione(now);
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		evento.setAutore(repoUtente.findById(idUser).get());
 		

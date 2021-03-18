@@ -16,5 +16,5 @@ public interface RepositoryEvento extends CrudRepository<Evento, Integer>{
 	@Query("SELECT e FROM Evento e WHERE e.data < ?1 ORDER BY e.data DESC")
 	Collection<Evento> findRecentEvents(long date);
 	
-	List<News> findByOrderByDataPubblicazioneDesc();
+	List<Evento> findByOrderByIdDesc();
 }

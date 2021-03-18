@@ -23,7 +23,7 @@ import com.erretechnology.intranet.models.NewsModificato;
 import com.erretechnology.intranet.repositories.RepositoryNews;
 import com.erretechnology.intranet.repositories.RepositoryNewsModificato;
 import com.erretechnology.intranet.repositories.RepositoryUtente;
-import com.erretechnology.intranet.services.ServiceFileSystem;
+
 
 @Controller
 @RequestMapping("news")
@@ -62,6 +62,7 @@ public class NewsController extends BaseController {
 		news.setDataPubblicazione(date);
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		news.setAutore(repoUtente.findById(idUser).get());
+		news.setVisibile(true);
 		
 		if(!immagine.isEmpty()) {
 			try {
@@ -117,8 +118,8 @@ public class NewsController extends BaseController {
 	@RequestMapping("/delete/{id}")
 	public String delete(@PathVariable int id, HttpSession session) {
 		News news = repoNews.findById(id).get();
-		serviceFileSystem.deleteImage(imageFolder, news.getCopertina());
-		repoNews.deleteById(id);
+		news.setVisibile(false);
+		repoNews.save(news);
 		saveLog("eliminato una news", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/news/list";
 	}

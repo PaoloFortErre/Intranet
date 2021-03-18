@@ -25,8 +25,6 @@ import com.erretechnology.intranet.models.Cliente;
 import com.erretechnology.intranet.models.ClienteModificato;
 import com.erretechnology.intranet.repositories.RepositoryCliente;
 import com.erretechnology.intranet.repositories.RepositoryClienteModificato;
-import com.erretechnology.intranet.services.ServiceFileSystem;
-import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 
 @Controller
 @RequestMapping("cliente")

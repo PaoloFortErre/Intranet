@@ -4,14 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class News {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,6 +22,7 @@ public class News {
 	@ManyToOne
 	@JoinColumn(name="autore_id")
 	private Utente autore;
+	private boolean visibile;
 	
 	public News() {
 	}
@@ -77,6 +75,13 @@ public class News {
 		this.autore = autore;
 	}
 
+	public boolean isVisibile() {
+		return visibile;
+	}
+
+	public void setVisibile(boolean visibile) {
+		this.visibile = visibile;
+	}
 
 	
 }
