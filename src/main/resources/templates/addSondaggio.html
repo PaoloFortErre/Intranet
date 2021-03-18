@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Add Sondaggio</title>
+</head>
+<body>
+	<form th:object="${sondaggio}" th:action="@{/myWork/sondaggi}" method="post">
+		<input type="text" name="nomeSondaggio" th:value="*{nomeSondaggio}" placeholder="Nome del sondaggio">
+		<input type="text" name="link" th:value="*{link}" placeholder="Link del sondaggio">
+		<input type="submit" value="Invia">
+	</form>
+</body>
+</html>

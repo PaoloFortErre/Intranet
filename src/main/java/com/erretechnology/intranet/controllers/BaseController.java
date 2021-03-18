@@ -19,6 +19,7 @@ import com.erretechnology.intranet.services.ServicePost;
 import com.erretechnology.intranet.services.ServicePostModificato;
 import com.erretechnology.intranet.services.ServiceRuolo;
 import com.erretechnology.intranet.services.ServiceSettore;
+import com.erretechnology.intranet.services.ServiceSondaggio;
 import com.erretechnology.intranet.services.ServiceUtente;
 import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 
@@ -53,6 +54,8 @@ public abstract class BaseController {
 	protected ServiceSettore serviceSettore;
 	@Autowired
 	protected ServicePodcast servicePodcast;
+	@Autowired
+	protected ServiceSondaggio serviceSondaggio;
 	
 	protected void saveLog(String testo, UtenteDatiPersonali autore) {
 		Log log = new Log();

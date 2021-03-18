@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Sondaggi</title>
+</head>
+
+<body>
+<div th:with="admin = ${#authorization.expression('hasAuthority(''WNMW'')')}">
+	<div th:if="${admin}">
+		<form th:action="@{/myWork/addSondaggio}" method="get">
+			<button type="submit" value="inserisci nuovo sondaggio">Invia</button>
+		</form>
+		
+	</div>
+</div>
+	
+	<table>
+	<tr th:each="sondaggio: ${sondaggi}">
+		<td>
+			<a th:href="@{${sondaggio.link}}" th:text="${sondaggio.nomeSondaggio}" target="blank"></a>
+		</td>
+	</tr>
+	
+</table>
+</body>
+</html>

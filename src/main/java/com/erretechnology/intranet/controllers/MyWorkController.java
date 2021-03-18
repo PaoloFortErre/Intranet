@@ -7,20 +7,21 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.Podcast;
-import com.erretechnology.intranet.models.Post;
+import com.erretechnology.intranet.models.Sondaggio;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.repositories.RepositoryCliente;
 import com.erretechnology.intranet.repositories.RepositoryNews;
-import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 
 @Controller
 @RequestMapping(value = "myWork")
@@ -98,5 +99,30 @@ public class MyWorkController extends BaseController {
 		mav.addObject("news", repoNews.findAllOrderByDataPubblicazioneDesc());
 		return mav;
 
+	}
+	
+	@GetMapping(value = "/sondaggi")
+	public ModelAndView sondaggi() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("sondaggi");
+		mav.addObject("sondaggi", serviceSondaggio.findAll());
+		return mav;		
+	}
+	
+	@PostMapping(value = "/sondaggi")
+	public String sondaggio(@ModelAttribute("sondaggio") Sondaggio sondaggio, HttpSession session) {
+		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		sondaggio.setAutore(autore);
+		sondaggio.setTimestamp(Instant.now().getEpochSecond());
+		serviceSondaggio.save(sondaggio);
+		return "redirect:/myWork/sondaggi";
+	}
+	
+	@GetMapping(value = "/addSondaggio")
+	public ModelAndView addSondaggio() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("addSondaggio");
+		mav.addObject("sondaggio", new Sondaggio());
+		return mav;		
 	}
 }

@@ -8,7 +8,9 @@
 <div th:with="admin = ${#authorization.expression('hasAuthority(''WNMW'')')}">
 <table>
 	<tr th:each="pdf: ${filePdf}">
-		<td th:if="${pdf.settore} == ${user.settore} or ${admin}"><a th:href="@{/file/downloadFile(id=${pdf.id})}" th:text="${pdf.nomeFile}" th:download="${pdf.nomeFile}"></a></td>
+		<td th:if="${pdf.settore} == ${user.settore} or ${admin}">
+			<a th:href="@{/file/downloadFile(id=${pdf.id})}" th:text="${pdf.nomeFile}" th:download="${pdf.nomeFile}"></a>
+		</td>
 	</tr>
 	
 </table>
