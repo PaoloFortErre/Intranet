@@ -44,7 +44,7 @@ public class ClienteController extends BaseController{
 	
 	@GetMapping("/list")
 	public String getList(Model model) {
-		model.addAttribute("clienteList", repoCliente.findTop3ByOrderByIdDesc());
+		model.addAttribute("clienteList", repoCliente.findLimit(1));
 		return "clienteList";
 	}
 
@@ -63,7 +63,8 @@ public class ClienteController extends BaseController{
 		LocalDate parsedDate = yearMonth.atDay(1);
 		Timestamp timestamp = Timestamp.valueOf(parsedDate.atStartOfDay());
 		cliente.setDataInizio(timestamp.getTime());
-		
+		cliente.setVisibile(true);
+
 		if(!immagine.isEmpty()) {
 			int idUser = Integer.parseInt(session.getAttribute("id").toString());
 			try {
@@ -126,8 +127,8 @@ public class ClienteController extends BaseController{
 	@RequestMapping("/delete/{id}")
 	public String delete(@PathVariable int id, HttpSession session) {
 		Cliente cliente = repoCliente.findById(id).get();
-		serviceFileSystem.deleteImage(imageFolder, cliente.getLogo());
-		repoCliente.deleteById(id);
+		cliente.setVisibile(false);
+		repoCliente.save(cliente);
 		saveLog("inserito un nuovo cliente", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/cliente/list";
 	}

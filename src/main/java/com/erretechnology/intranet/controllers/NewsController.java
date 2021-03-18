@@ -45,7 +45,7 @@ public class NewsController extends BaseController {
 	
 	@GetMapping("/list")
 	public String getList(Model model) {
-		model.addAttribute("newsList", repoNews.findByOrderByDataPubblicazioneDesc());
+		model.addAttribute("newsList", repoNews.findAllOrderByDataPubblicazioneDesc());
 		return "newsList";
 	}
 	

@@ -10,7 +10,6 @@ import javax.persistence.InheritanceType;
 
 @Entity
 @Table(name = "client")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,6 +17,7 @@ public class Cliente {
 	private String nome;
 	private String logo;
 	private long dataInizio;
+	private boolean visibile;
 	
 	public Cliente() {
 	}
@@ -53,7 +53,13 @@ public class Cliente {
 	public void setDataInizio(long dataInizio) {
 		this.dataInizio = dataInizio;
 	}
-	
-	
+
+	public boolean isVisibile() {
+		return visibile;
+	}
+
+	public void setVisibile(boolean visibile) {
+		this.visibile = visibile;
+	}
 
 }

@@ -17,6 +17,7 @@ import com.erretechnology.intranet.models.Podcast;
 import com.erretechnology.intranet.models.Post;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.repositories.RepositoryCliente;
+import com.erretechnology.intranet.repositories.RepositoryNews;
 import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 
 @Controller
@@ -24,6 +25,9 @@ import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 public class MyWorkController extends BaseController {
 	@Autowired
 	private RepositoryCliente repoCliente;
+	
+	@Autowired
+	private RepositoryNews repoNews;
 
 	@GetMapping(value = "/")
 	public ModelAndView primaPagina() {
@@ -75,9 +79,14 @@ public class MyWorkController extends BaseController {
 		 * 
 		 * PARTE FORM NUOVI CLIENTI
 		 */
-		mav.addObject("nuoviClienti", repoCliente.findTop3ByOrderByIdDesc());
+		mav.addObject("nuoviClienti", repoCliente.findLimit(3));
+		
+		/*
+		 * PARTE NEWS
+		 * 
+		 */
+		mav.addObject("news", repoNews.findAllOrderByDataPubblicazioneDesc());
 		return mav;
-		
-		
+
 	}
 }
