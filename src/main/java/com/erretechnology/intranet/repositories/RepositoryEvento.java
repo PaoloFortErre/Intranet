@@ -10,11 +10,12 @@ import com.erretechnology.intranet.models.Evento;
 import com.erretechnology.intranet.models.News;
 
 public interface RepositoryEvento extends CrudRepository<Evento, Integer>{
-	@Query("SELECT e FROM Evento e WHERE e.data >= ?1 ORDER BY e.data")
+	@Query("SELECT e FROM Evento e WHERE e.data >= ?1 AND e.visibile = true ORDER BY e.data")
 	Collection<Evento> findNextEvents(long date);
 	
-	@Query("SELECT e FROM Evento e WHERE e.data < ?1 ORDER BY e.data DESC")
+	@Query("SELECT e FROM Evento e WHERE e.data < ?1 AND e.visibile = true ORDER BY e.data DESC")
 	Collection<Evento> findRecentEvents(long date);
 	
-	List<Evento> findByOrderByIdDesc();
+	@Query("SELECT e FROM Evento e WHERE e.visibile = true ORDER BY e.id DESC")
+	List<Evento> findAllOrderByIdDesc();
 }
