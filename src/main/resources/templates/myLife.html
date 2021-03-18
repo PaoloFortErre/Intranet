@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="it">
 <head>
-<title>MyLife</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>MyLife</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<script
+	<!-- Add icon library -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
-<link rel="stylesheet"
+	<link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script
+	<script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
+	<script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap"
 	rel="stylesheet">
 
-<link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
-<style>
-</style>
+	<link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
+	<style>
+	</style>
 
 </head>
 <body ng-app="">
@@ -68,58 +71,58 @@
 								nel mondo"</h1>
 
 
+							</div>
 						</div>
-					</div>
 
-					<div class="item">
-						<img src="/view/MyLife/images/mare.png" alt="Lago" width="100%">
-						<div class="carousel-caption">
-							<h1 class="font-caption" style="font-weight:900"> "La vita non e' cercare se stessi,
-								ma creare se stessi"</h1>
+						<div class="item">
+							<img src="/view/MyLife/images/mare.png" alt="Lago" width="100%">
+							<div class="carousel-caption">
+								<h1 class="font-caption" style="font-weight:900"> "La vita non e' cercare se stessi,
+									ma creare se stessi"</h1>
 
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-	<!-- ************
-      FINE HEADER
-   ***************** -->
-	<div class="container">
+			<!-- ************
+			FINE HEADER
+			***************** -->
+			<div class="container">
 
-		<!-- ****
-	          COLONNA SINISTRA
-	                            **** -->
+				<!-- ****
+				COLONNA SINISTRA
+				**** -->
 
-		<div class="row" style="margin-top: 5%">
-			<div class="col-sm-8 col-lg-8">
+				<div class="row" style="margin-top: 5%">
+					<div class="col-sm-8 col-lg-8">
 
-				<!--  WRITE A POST  -->
-				<div class="col-sinistra">
+						<!--  WRITE A POST  -->
+						<div class="col-sinistra">
 
-					<div class="row">
-						<div class="col-sm-1 col-md-1 col-lg-2">
+							<div class="row">
+								<div class="col-sm-1 col-md-1 col-lg-2">
 
 
-							<img
-								th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
-								alt="utente" title="utente" class="immagineUtente"
-								style="margin: 20px;">
-						</div>
-						<div class="col-sm-11 col-md-10 col-lg-10">
-							<div class="form-group">
-								<form th:action="@{/myLife/addPost}"
-									enctype="multipart/form-data" id="myForm" method="post">
-									<label for="testo"></label>
-									<textarea class="form-control" rows="2" cols="30" name="testo"
+									<img
+									th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
+									alt="utente" title="utente" class="immagineUtente"
+									style="margin: 20px;">
+								</div>
+								<div class="col-sm-11 col-md-10 col-lg-10">
+									<div class="form-group">
+										<form th:action="@{/myLife/addPost}"
+										enctype="multipart/form-data" id="myForm" method="post">
+										<label for="testo"></label>
+										<textarea class="form-control" rows="2" cols="30" name="testo"
 										required style="width: 98%" placeholder="Scrivi un post..."
 										id="post"></textarea>
 
 										<button type="button" data-toggle="modal" id="bottoneImmagine"
 										data-target="#myModal">
 										Immagine<img src="/view/MyLife/images/imh.png"
-											style="width: 20px; height: 20px; display: inline-block; margin-left: 50px;">
+										style="width: 20px; height: 20px; display: inline-block; margin-left: 50px;">
 									</button>
 
 									<!-- Modal -->
@@ -132,199 +135,199 @@
 													<button type="button" class="close" data-dismiss="modal">&times;</button>
 													<h4 class="modal-title" style="color:black">Scegli un'immagine da
 														condividere</h4>
-												</div>
-												<div class="modal-body">
-													<input type="file" name="document"
+													</div>
+													<div class="modal-body">
+														<input type="file" name="document"
 														accept="image/png, image/jpeg" />
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-default"
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-default"
 														data-dismiss="modal">Close</button>
+													</div>
 												</div>
+
 											</div>
-
 										</div>
-									</div>
 
 
 
 
 
 
-									<br> <br> <input type="submit" value="Condividi"
+										<br> <br> <input type="submit" value="Condividi"
 										id="submitPost"
 										style="float: right; margin-right: 10px; margin-bottom: 8px" />
 
-								</form>
+									</form>
+								</div>
 							</div>
 						</div>
+
+
+						<!-- ****************
+
+						POST PUBBLICATI
+						IN BACHECA
+
+						**************** -->
+
 					</div>
+					<hr>
+					<div class="col-sinistra" style="margin-top: 20px">
+						<div class="container-fluid">
+							<div class="row">
 
+								<!-- INFORMAZIONI SU UTENTE E POST -->
 
-					<!-- ****************
-
-				      POST PUBBLICATI
-				        IN BACHECA
-
-				     **************** -->
-
-				</div>
-				<hr>
-				<div class="col-sinistra" style="margin-top: 20px">
-					<div class="container-fluid">
-						<div class="row">
-
-							<!-- INFORMAZIONI SU UTENTE E POST -->
-
-							<div th:each="post:${messaggi}" style="margin-top: 30px">
-							<!-- FOTO PROFILO -->
-								<div class="col-sm-1 col-md-1 col-lg-2">
-									<img
+								<div th:each="post:${messaggi}" style="margin-top: 30px">
+									<!-- FOTO PROFILO -->
+									<div class="col-sm-1 col-md-1 col-lg-2">
+										<img
 										th:src="'data:image/jpeg;base64,' + ${post.autore.immagine.getImgData(post.autore.immagine.data)}"
 										title="utente" class="immagineUtente" style="margin: 20px;">
-								</div>
+									</div>
 
-								<div class="col-sm-11 col-md-10 col-lg-10">
-									<h3 th:text="${post.autore.nome}"
+									<div class="col-sm-11 col-md-10 col-lg-10">
+										<h3 th:text="${post.autore.nome}"
 										style="display: inline-block; text-shadow: -1px -1px 1px rgba(255, 255, 255, .1), 1px 1px 1px rgba(0, 0, 0, .5), 2px 2px 2px rgba(243, 255, 54, 0.43);">
 									</h3>
 									&nbsp;
 									<h3
-										style="display: inline-block; text-shadow: -1px -1px 1px rgba(255, 255, 255, .1), 1px 1px 1px rgba(0, 0, 0, .5), 2px 2px 2px rgba(243, 255, 54, 0.43);"
-										th:text="${post.autore.cognome}"></h3>
+									style="display: inline-block; text-shadow: -1px -1px 1px rgba(255, 255, 255, .1), 1px 1px 1px rgba(0, 0, 0, .5), 2px 2px 2px rgba(243, 255, 54, 0.43);"
+									th:text="${post.autore.cognome}"></h3>
 									<!-- ELIMINA POST -->
 
 									<div th:if="${DPS} or ${post.autore.id} == ${session.id}"
-										style="display: inline-block">
+									style="display: inline-block">
 
-										<form th:action="@{/myLife/deletePost(id=${post.id})}"
-											method="post">
-											<button name="button" type="submit" class="buttonAzioni"
-												style="display: inline-block; background-color: #161616; color: white; margin-left: 120px; opacity: 0.8;">Elimina</button>
-										</form>
-									</div>
-
-									<!-- MODIFICA POST -->
-
-									<div th:if="${post.autore.id} == ${session.id}"
-										style="display: inline-block;">
-										<form th:action="@{/myLife/editPost(id=${post.id})}"
-											method="post">
-											<button name="button" type="submit"
-												style="display: inline-block; background-color: #161616; color: white; opacity: 0.8;"
-												th:onclick="'showAreaPost(' + ${post.id} + ')'"
-												class="buttonAzioni">Modifica</button>
-
-											<textarea th:class="postModificato + ${post.id}" name="testo"
-												placeholder="Modifica post" cols="50" rows="2.5" id="post"
-												style="display: none" required></textarea>
-										</form>
-									</div>
-									<p style="font-size: 12px; background-color: #161616; width: 80px;"
-										th:text="${#dates.format(post.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"></p>
-									<img src="/view/MyLife/images/errepro.png" width="20px"
-										height="20px" style="display: inline-block;">
-									<p style="display: inline-block; margin-left: 5px">ERRE Pro</p>
-									<!-- CONTENUTO DEL POST -->
-									<div>
-										<br> <br>
-										<p style="margin-right: 15px; font-size: 20px;"
-											th:text="${post.testo}">
-											<a href="">vedi altro</a>
-										</p>
-
-
-										<div th:if="${post.immagine!=null}">
-												<img
-											th:src="'data:image/jpeg;base64,' + ${img.getImgData(post.immagine.data)}"
-											width="70%" height="40%">
-										</div>
-
-
-										<!-- �������� COMMENTO �������-->
-										<div class="col-sm-5 col-md-5 col-lg-5"
-											style="margin-top: 10px;"
-											th:each="commento : ${post.setCommenti}"
-											th:if="${commento.visibile}" id="commento">
-											<table id="tableCommento">
-												<tr>
-													<td>
-														<p class="nomeCommento" th:text="${commento.autore.nome}">
-														</p>
-														<p class="nomeCommento"
-															th:text="${commento.autore.cognome}"></p>
-														<p
-															style="display: inline-block; font-style: italic; font-size: 10px;"
-															th:text="${#dates.format(commento.timestamp*1000, 'dd/MM/yyyy, HH:mm')}">
-														</p>
-													</td>
-													<td
-														th:if="${DCS} or ${commento.autore.id} == ${session.id} or ${post.autore.id} == ${session.id}">
-														<form
-															th:action="@{/myLife/deleteCommento(id=${commento.id})}"
-															method="post">
-															<button name="button" type="submit" id="bottoneElimina">Elimina</button>
-														</form>
-													</td>
-
-													<td th:if="${commento.autore.id} == ${session.id}">
-														<form
-															th:action="@{/myLife/editCommento(id=${commento.id})}"
-															method="post">
-															<button name="button" type="submit"
-																th:onclick="'showAreaCommento(' + ${commento.id} + ')'"
-																id="bottoneModifica">Modifica</button>
-															<textarea th:class="commentoModificato + ${commento.id}"
-																name="testo" id="post" placeholder="Modifica commento"
-																cols="50" rows="2.5" style="display: none" required></textarea>
-														</form>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<p th:text="${commento.testo}"></p>
-													</td>
-												</tr>
-											</table>
-										</div>
-										<br>
-										<form th:action="@{/myLife/addCommento(idPost=${post.id})}"
-											method="post">
-											<label for="testo"></label>
-											<textarea id="post" name="testo" rows="2" cols="30"
-												style="width: 59%; margin-top: 10px;"
-												placeholder="Lascia un commento..." required></textarea>
-											<input type="submit" value="Commenta" id="submitPost"
-												style="margin-bottom: 50px;" />
-											<hr id="linea">
-										</form>
-									</div>
-								</div>
+									<form th:action="@{/myLife/deletePost(id=${post.id})}"
+									method="post">
+									<button name="button" type="submit" class="buttonAzioni"
+									style="display: inline-block; background-color: #161616; color: white; margin-left: 120px; opacity: 0.8;">Elimina</button>
+								</form>
 							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- ****
-	          COLONNA DESTRA
-	                            **** -->
-			<div class="col-sm-4 col-lg-4" id="col-destra">
-				<h3 id="culturaPiemonte" style="margin-top: 30px">Cultura in
-					Piemonte</h3>
-				<p style="color: #F3F3F3; text-align: center; font-size: 13px">
-					Se sei un tipo da eventi in citta' o da sagre:</p>
-				<img src="/view/MyLife/images/to.jpg" class="img-responsive"
-					width="99%" height="300px" style="margin: auto;">
 
-				<h3 id="culturaPiemonte" style="margin-top: 70px">Film</h3>
-				<p style="color: #F3F3F3; text-align: center; font-size: 13px">
-					Se sei un tipo da cinema o serie TV:</p>
+							<!-- MODIFICA POST -->
+
+							<div th:if="${post.autore.id} == ${session.id}"
+							style="display: inline-block;">
+							<form th:action="@{/myLife/editPost(id=${post.id})}"
+							method="post">
+							<button name="button" type="submit"
+							style="display: inline-block; background-color: #161616; color: white; opacity: 0.8;"
+							th:onclick="'showAreaPost(' + ${post.id} + ')'"
+							class="buttonAzioni">Modifica</button>
+
+							<textarea th:class="postModificato + ${post.id}" name="testo"
+							placeholder="Modifica post" cols="50" rows="2.5" id="post"
+							style="display: none" required></textarea>
+						</form>
+					</div>
+					<p style="font-size: 12px; background-color: #161616; width: 80px;"
+					th:text="${#dates.format(post.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"></p>
+					<img src="/view/MyLife/images/errepro.png" width="20px"
+					height="20px" style="display: inline-block;">
+					<p style="display: inline-block; margin-left: 5px">ERRE Pro</p>
+					<!-- CONTENUTO DEL POST -->
+					<div>
+						<br> <br>
+						<p style="margin-right: 15px; font-size: 20px;"
+						th:text="${post.testo}">
+						<a href="">vedi altro</a>
+					</p>
+
+
+					<div th:if="${post.immagine!=null}">
+						<img
+						th:src="'data:image/jpeg;base64,' + ${img.getImgData(post.immagine.data)}"
+						width="70%" height="40%">
+					</div>
+
+
+					<!-- �������� COMMENTO �������-->
+					<div class="col-sm-5 col-md-5 col-lg-5"
+					style="margin-top: 10px;"
+					th:each="commento : ${post.setCommenti}"
+					th:if="${commento.visibile}" id="commento">
+					<table id="tableCommento">
+						<tr>
+							<td>
+								<p class="nomeCommento" th:text="${commento.autore.nome}">
+								</p>
+								<p class="nomeCommento"
+								th:text="${commento.autore.cognome}"></p>
+								<p
+								style="display: inline-block; font-style: italic; font-size: 10px;"
+								th:text="${#dates.format(commento.timestamp*1000, 'dd/MM/yyyy, HH:mm')}">
+							</p>
+						</td>
+						<td
+						th:if="${DCS} or ${commento.autore.id} == ${session.id} or ${post.autore.id} == ${session.id}">
+						<form
+						th:action="@{/myLife/deleteCommento(id=${commento.id})}"
+						method="post">
+						<button name="button" type="submit" id="bottoneElimina">Elimina</button>
+					</form>
+				</td>
+
+				<td th:if="${commento.autore.id} == ${session.id}">
+					<form
+					th:action="@{/myLife/editCommento(id=${commento.id})}"
+					method="post">
+					<button name="button" type="submit"
+					th:onclick="'showAreaCommento(' + ${commento.id} + ')'"
+					id="bottoneModifica">Modifica</button>
+					<textarea th:class="commentoModificato + ${commento.id}"
+					name="testo" id="post" placeholder="Modifica commento"
+					cols="50" rows="2.5" style="display: none" required></textarea>
+				</form>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p th:text="${commento.testo}"></p>
+			</td>
+		</tr>
+	</table>
+</div>
+<br>
+<form th:action="@{/myLife/addCommento(idPost=${post.id})}"
+method="post">
+<label for="testo"></label>
+<textarea id="post" name="testo" rows="2" cols="30"
+style="width: 59%; margin-top: 10px;"
+placeholder="Lascia un commento..." required></textarea>
+<input type="submit" value="Commenta" id="submitPost"
+style="margin-bottom: 50px;" />
+<hr id="linea">
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ****
+COLONNA DESTRA
+**** -->
+<div class="col-sm-4 col-lg-4" id="col-destra">
+	<h3 id="culturaPiemonte" style="margin-top: 30px">Cultura in
+		Piemonte</h3>
+		<p style="color: #F3F3F3; text-align: center; font-size: 13px">
+			Se sei un tipo da eventi in citta' o da sagre:</p>
+			<img src="/view/MyLife/images/to.jpg" class="img-responsive"
+			width="99%" height="300px" style="margin: auto;">
+
+			<h3 id="culturaPiemonte" style="margin-top: 70px">Film</h3>
+			<p style="color: #F3F3F3; text-align: center; font-size: 13px">
+				Se sei un tipo da cinema o serie TV:</p>
 				<img src="/view/MyLife/images/filmq.jpg" class="img-responsive"
-					width="32%" height="230px" style="display: inline;"> <img
-					src="/view/MyLife/images/film2.jpg" class="img-responsive"
-					width="32%" height="230px" style="display: inline;"> <img
-					src="/view/MyLife/images/film3.jpg" class="img-responsive"
-					width="33%" height="230px" style="display: inline;">
+				width="32%" height="230px" style="display: inline;"> <img
+				src="/view/MyLife/images/film2.jpg" class="img-responsive"
+				width="32%" height="230px" style="display: inline;"> <img
+				src="/view/MyLife/images/film3.jpg" class="img-responsive"
+				width="33%" height="230px" style="display: inline;">
 
 				<div id="didascalieFilm">
 					<table id="film">
@@ -346,58 +349,58 @@
 	</div>
 
 	<!-- PANNELLO FOOTER CON INFO-->
-  <footer class="align-items-center">
-    <div class="container align-items-center mt-4">
-      <div class="row justify-content-center align-items-center mt-3 pt-4">
-        <div class="col-sm-4 col-lg-4">
-          <img src="/view/MyLife/images/erre.png" height="80px" alt="erre_logo"
-          style="margin: auto">
-        </div>
-        <div class="col-sm-4 col-lg-4">
-          <p
-          style="color: #F3F3F3; text-align: center; font-size: 20px; ">
-          Supporto: +39 011 197 429 00</p>
-        </div>
-        <div class="col-sm-4 col-lg-4 pl-5">
-          <a class="rounded-circle fa fa-facebook" href="https://www.facebook.com/erretechnologygroup/"></a>
-          <a class="rounded-circle fa fa-linkedin ml-2" href="https://www.linkedin.com/company/erretechnologygroup/"></a>
-        </div>
-      </div>
-    </div>
-  </footer>
-	
+	<footer class="align-items-center">
+		<div class="container align-items-center mt-4" style="margin-top: 40px ">
+			<div class="row justify-content-center align-items-center mt-3 pt-4" style="margin-top: 15px; padding-top: 15px;">
+				<div class="col-sm-4 col-lg-4">
+					<img src="/view/MyLife/images/erre.png" height="80px" alt="erre_logo"
+					style="margin: auto">
+				</div>
+				<div class="col-sm-4 col-lg-4">
+					<p
+					style="color: #F3F3F3; text-align: center; font-size: 20px; ">
+					Supporto: +39 011 197 429 00</p>
+				</div>
+				<div class="col-sm-4 col-lg-4 pl-5" style="padding-left: 50px ">
+					<a class="rounded-circle fa fa-facebook" href="https://www.facebook.com/erretechnologygroup/"></a>
+					<a class="rounded-circle fa fa-linkedin ml-2" href="https://www.linkedin.com/company/erretechnologygroup/" style="margin-left: 10px"></a>
+				</div>
+			</div>
+		</div>
+	</footer>
+
 	<script>
-		$(document).ready(function() {
-			// Activate Carousel
-			$("#myCarousel").carousel();
+	$(document).ready(function() {
+		// Activate Carousel
+		$("#myCarousel").carousel();
 
-			// Enable Carousel Indicators
-			$(".item1").click(function() {
-				$("#myCarousel").carousel(0);
-			});
-			$(".item2").click(function() {
-				$("#myCarousel").carousel(1);
-			});
-			// Enable Carousel Controls
-			$(".left").click(function() {
-				$("#myCarousel").carousel("prev");
-			});
-			$(".right").click(function() {
-				$("#myCarousel").carousel("next");
-			});
-
+		// Enable Carousel Indicators
+		$(".item1").click(function() {
+			$("#myCarousel").carousel(0);
+		});
+		$(".item2").click(function() {
+			$("#myCarousel").carousel(1);
+		});
+		// Enable Carousel Controls
+		$(".left").click(function() {
+			$("#myCarousel").carousel("prev");
+		});
+		$(".right").click(function() {
+			$("#myCarousel").carousel("next");
 		});
 
-		function showAreaCommento(id) {
+	});
 
-			document.getElementsByClassName('commentoModificato' + id)[0].style.display = "block";
+	function showAreaCommento(id) {
 
-		}
+		document.getElementsByClassName('commentoModificato' + id)[0].style.display = "block";
 
-		function showAreaPost(id) {
-			document.getElementsByClassName('postModificato' + id)[0].style.display = "block";
+	}
 
-		}
+	function showAreaPost(id) {
+		document.getElementsByClassName('postModificato' + id)[0].style.display = "block";
+
+	}
 
 	</script>
 
