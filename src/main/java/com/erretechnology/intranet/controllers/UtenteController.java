@@ -33,6 +33,7 @@ public class UtenteController extends BaseController{
 		ModelAndView mav = new ModelAndView();
 		if(serviceUtente.findById(u.getId()).getSetGruppi().stream().filter(x-> x.getNome().equals("ADMIN")).count() == 1){
 			mav.setViewName("profilo_admin");
+			mav.addObject("attivi",serviceUtente.getAll().stream().filter(x->x.getAttivo()).count());
 			mav.addObject("log", serviceLog.findAll());
 		}
 		else {
