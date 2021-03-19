@@ -206,7 +206,7 @@ public class UtenteController extends BaseController{
 
 		}
 		mav.setViewName("forbidden");
-		return null;
+		return mav;
 		
 	}
 	@PostMapping(value = "/elimina")
