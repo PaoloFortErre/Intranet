@@ -2,6 +2,7 @@ package com.erretechnology.intranet.controllers;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -189,5 +190,30 @@ public class UtenteController extends BaseController{
 			saveLog("rimosso il permesso" + p.getNome() + " a " + u.getEmail() , utenteLoggato);
 		}
 		return "redirect:/profile/gestisciPermesso?id=" + id;
+	}
+	
+	
+	
+	@GetMapping(value = "/cancellaUtente")
+	public ModelAndView rimuoviUtente(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		if(serviceUtente.findById(utenteLoggato.getId()).getSetGruppi().stream().filter(x-> x.getNome().equals("ADMIN")).count() == 1) {
+			
+			mav.setViewName("eliminaUtente");
+			mav.addObject("utenti", serviceDatiPersonali.getAll().stream().filter(x -> x.getUtente().getAttivo()).collect(Collectors.toList()));
+			return mav;
+
+		}
+		mav.setViewName("forbidden");
+		return null;
+		
+	}
+	@PostMapping(value = "/elimina")
+	public String rimuovi(@RequestParam("id_eliminato") int id) {
+		Utente u = serviceUtente.findById(id);
+		u.setAttivo(false);
+		serviceUtente.save(u);
+		return "redirect:/profile/";
 	}
 }
