@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -150,52 +151,64 @@ public class UtenteController extends BaseController{
 		return "redirect:/profile/";
 	}
 
-	@RequestMapping(value = "/gestisciPermesso", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView Permesso(int id) {
-		List<String> permessiMancanti = servicePermesso.getAllName();
-		List<String> permessiUtente = serviceAuthority.getAllNameById(id);
-		permessiMancanti.removeAll(permessiUtente);
+	@GetMapping(value = "/gestisciPermesso")
+	public ModelAndView Permesso(/*int id*/) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("permissionManager");
-		mav.addObject("id_utente", id);
-		mav.addObject("permessiMancanti", permessiMancanti);
-		mav.addObject("permessiUtente", permessiUtente);
+		mav.addObject("utenti", serviceUtente.getAll().stream().map(x-> x.getEmail()).collect(Collectors.toList()));
+		//List<String> permessiMancanti = servicePermesso.getAllName();
+		//List<String> permessiUtente = serviceAuthority.getAllNameById(id);
+		//permessiMancanti.removeAll(permessiUtente);
+		//ModelAndView mav = new ModelAndView();
+		//mav.setViewName("permissionManager");
+		//mav.addObject("id_utente", id);
+		//mav.addObject("permessiMancanti", permessiMancanti);
+		//mav.addObject("permessiUtente", permessiUtente);
 		return mav;
 	}
+	
+	@RequestMapping(value = "/getPermessiMancanti")
+	@ResponseBody
+	public List<String> getPermessiMancanti(@RequestParam("email") String email){
+		List<String> permessiMancanti = servicePermesso.getAllName();
+		permessiMancanti.removeAll(getAllPermessi(email));
+		return permessiMancanti;
+	}
+	
+	@RequestMapping(value = "/getAllPermessi")
+	@ResponseBody
+	public List<String> getAllPermessi(@RequestParam("email") String email){
+		return serviceAuthority.getAllNameById(serviceUtente.findByEmail(email).getId());
+	}
+	
+	
 
 	@PostMapping(value = "/addPermesso")
-	public String addPermesso(int id, @RequestParam(value = "pAdd" , required=false) String permesso, HttpSession session) {
-		if(permesso != "0") {
+	public String addPermesso(String email,String flag,  @RequestParam(value = "pAdd" , required=false) String permesso,
+			@RequestParam(value = "pRemove" , required=false) String permessoRimozione , HttpSession session) {
+		if(permesso != "0" || permessoRimozione != "0") {
 			int id_utente = Integer.parseInt(session.getAttribute("id").toString());
 			UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(id_utente);
-			Permesso p = servicePermesso.findById(permesso);
-			Utente u = serviceUtente.findById(id);
-			u.addPermesso(p);
-			serviceUtente.save(u);
-			p.addUtente(u);
+			Permesso p = null;
+			Utente u = serviceUtente.findByEmail(email.substring(1));
+			if(flag.equals(",1")) {
+				p = servicePermesso.findById(permesso);
+				u.addPermesso(p);
+				serviceUtente.save(u);
+				p.addUtente(u);
+				saveLog("aggiunto il permesso" + p.getNome() +" a " + u.getEmail() , utenteLoggato);
+			}else if(flag.equals(",0")) {
+				p = servicePermesso.findById(permessoRimozione);
+				u.removePermesso(p);
+				serviceUtente.save(u);
+				p.removeUtente(u);
+				saveLog("rimosso il permesso" + p.getNome() + " a " + u.getEmail() , utenteLoggato);
+			}
+			
 			servicePermesso.savePermesso(p);
-			saveLog("aggiunto il permesso" + p.getNome() +" a " + u.getEmail() , utenteLoggato);
 		}
-		return "redirect:/profile/gestisciPermesso?id=" + id;
-	}
-
-	@PostMapping(value = "/removePermesso")
-	public String removePermesso(int id, @RequestParam(value = "pRemove" , required=false) String permesso, HttpSession session) {
-		if(permesso != "0") {
-			int id_utente = Integer.parseInt(session.getAttribute("id").toString());
-			UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(id_utente);
-			Permesso p = servicePermesso.findById(permesso);
-			Utente u = serviceUtente.findById(id);
-			u.removePermesso(p);
-			serviceUtente.save(u);
-			p.removeUtente(u);
-			servicePermesso.savePermesso(p);
-			saveLog("rimosso il permesso" + p.getNome() + " a " + u.getEmail() , utenteLoggato);
-		}
-		return "redirect:/profile/gestisciPermesso?id=" + id;
-	}
-	
-	
+		return "redirect:/profile/gestisciPermesso";
+	}	
 	
 	@GetMapping(value = "/cancellaUtente")
 	public ModelAndView rimuoviUtente(HttpSession session) {
