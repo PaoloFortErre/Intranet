@@ -27,6 +27,7 @@ public class Evento {
 	@JoinColumn(name="autore_id")
 	private Utente autore;
 	private boolean visibile;
+	private boolean isLife;
 	
 	public Evento() {
 
@@ -94,6 +95,14 @@ public class Evento {
 
 	public void setVisibile(boolean visibile) {
 		this.visibile = visibile;
+	}
+
+	public boolean isLife() {
+		return isLife;
+	}
+
+	public void setLife(boolean isLife) {
+		this.isLife = isLife;
 	}
 	
 }
