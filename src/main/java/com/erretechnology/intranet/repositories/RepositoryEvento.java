@@ -10,12 +10,21 @@ import com.erretechnology.intranet.models.Evento;
 import com.erretechnology.intranet.models.News;
 
 public interface RepositoryEvento extends CrudRepository<Evento, Integer>{
-	@Query("SELECT e FROM Evento e WHERE e.data >= ?1 AND e.visibile = true ORDER BY e.data")
-	Collection<Evento> findNextEvents(long date);
+	@Query("SELECT e FROM Evento e WHERE e.data >= ?1 AND e.isLife = true AND e.visibile = true ORDER BY e.data")
+	Collection<Evento> findNextLifeEvents(long date);
 	
-	@Query("SELECT e FROM Evento e WHERE e.data < ?1 AND e.visibile = true ORDER BY e.data DESC")
-	Collection<Evento> findRecentEvents(long date);
+	@Query("SELECT e FROM Evento e WHERE e.data < ?1 AND e.isLife = true AND e.visibile = true ORDER BY e.data DESC")
+	Collection<Evento> findRecentLifeEvents(long date);
 	
-	@Query("SELECT e FROM Evento e WHERE e.visibile = true ORDER BY e.id DESC")
-	List<Evento> findAllOrderByIdDesc();
+	@Query("SELECT e FROM Evento e WHERE e.isLife = true AND e.visibile = true ORDER BY e.id DESC")
+	List<Evento> findLifeOrderByIdDesc();
+	
+	@Query("SELECT e FROM Evento e WHERE e.data >= ?1 AND e.isLife = false AND e.visibile = true ORDER BY e.data")
+	Collection<Evento> findNextWorkEvents(long date);
+	
+	@Query("SELECT e FROM Evento e WHERE e.data < ?1 AND e.isLife = false AND e.visibile = true ORDER BY e.data DESC")
+	Collection<Evento> findRecentWorkEvents(long date);
+	
+	@Query("SELECT e FROM Evento e WHERE e.isLife = false AND e.visibile = true ORDER BY e.id DESC")
+	List<Evento> findWorkOrderByIdDesc();
 }

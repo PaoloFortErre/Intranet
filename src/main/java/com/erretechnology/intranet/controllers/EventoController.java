@@ -46,38 +46,58 @@ public class EventoController extends BaseController {
 		return "evento";
 	}
 	
-	@GetMapping("/list")
-	public String getList(Model model) {
-		model.addAttribute("eventoList", repoEvento.findAllOrderByIdDesc());
+	@GetMapping("/lifeList")
+	public String getLifeList(Model model) {
+		model.addAttribute("eventoList", repoEvento.findLifeOrderByIdDesc());
 		return "eventoList";
 	}
 	
-	@GetMapping("/next")
-	public String getNext(Model model) {
-		model.addAttribute("eventoList", repoEvento.findNextEvents(Instant.now().getEpochSecond()));
+	@GetMapping("/lifeNext")
+	public String getLifeNext(Model model) {
+		model.addAttribute("eventoList", repoEvento.findNextLifeEvents(Instant.now().getEpochSecond()));
 		return "eventoList";
 	}
 	
-	@GetMapping("/recent")
-	public String getRecent(Model model) {
-		model.addAttribute("eventoList", repoEvento.findRecentEvents(Instant.now().getEpochSecond()));
+	@GetMapping("/lifeRecent")
+	public String getLifeRecent(Model model) {
+		model.addAttribute("eventoList", repoEvento.findRecentLifeEvents(Instant.now().getEpochSecond()));
 		return "eventoList";
 	}
 	
-	@GetMapping("/new")
-	public String form(Model model) {
+	@GetMapping("/workList")
+	public String getWorkList(Model model) {
+		model.addAttribute("eventoList", repoEvento.findWorkOrderByIdDesc());
+		return "eventoList";
+	}
+	
+	@GetMapping("/workNext")
+	public String getWorkNext(Model model) {
+		model.addAttribute("eventoList", repoEvento.findNextWorkEvents(Instant.now().getEpochSecond()));
+		return "eventoList";
+	}
+	
+	@GetMapping("/workRecent")
+	public String getWorkRecent(Model model) {
+		model.addAttribute("eventoList", repoEvento.findRecentWorkEvents(Instant.now().getEpochSecond()));
+		return "eventoList";
+	}
+	
+	@GetMapping("/newLife")
+	public String formLife(Model model) {
 		model.addAttribute("evento", new Evento()); 
-		return "eventoForm";
+		return "eventoLifeForm";
+	}
+	
+	@GetMapping("/newWork")
+	public String formWork(Model model) {
+		model.addAttribute("evento", new Evento()); 
+		return "eventoWorkForm";
 	}
 	
 	@PostMapping(value = "/insert")
 	public String post(
-			@ModelAttribute("evento") Evento evento, 
-			@RequestParam(required=false) MultipartFile immagine, 
-			@RequestParam("date") String date, 
-			@RequestParam("via") String via,
-			@RequestParam("citta") String citta, 
-			@RequestParam("provincia") String provincia, 
+			@ModelAttribute("evento") Evento evento, @RequestParam(required=false) MultipartFile immagine, 
+			String date, String via, String citta, String provincia, String isLife, 
 			HttpSession session, ModelMap model) throws IOException, ParseException {
 		
 		Indirizzo indirizzo = new Indirizzo();
@@ -103,6 +123,12 @@ public class EventoController extends BaseController {
 			} catch (Exception e) {
 				System.err.println("Non riesco a caricare il file");
 			}	
+		}
+		
+		if(isLife.equals("true")) {
+			evento.setLife(true);
+		} else {
+			evento.setLife(false);
 		}
 		
 		repoEvento.save(evento);

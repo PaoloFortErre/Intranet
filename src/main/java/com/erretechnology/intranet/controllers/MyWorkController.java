@@ -21,6 +21,7 @@ import com.erretechnology.intranet.models.Podcast;
 import com.erretechnology.intranet.models.Sondaggio;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.repositories.RepositoryCliente;
+import com.erretechnology.intranet.repositories.RepositoryEvento;
 import com.erretechnology.intranet.repositories.RepositoryNews;
 
 @Controller
@@ -31,6 +32,9 @@ public class MyWorkController extends BaseController {
 	
 	@Autowired
 	private RepositoryNews repoNews;
+	
+	@Autowired
+	private RepositoryEvento repoEvento;
 
 	@GetMapping(value = "/")
 	public ModelAndView primaPagina(HttpSession session) {
@@ -99,6 +103,13 @@ public class MyWorkController extends BaseController {
 		 * 
 		 */
 		mav.addObject("news", repoNews.findAllOrderByDataPubblicazioneDesc());
+		
+		
+		/*
+		 * PARTE EVENTI
+		 * 
+		 */
+		mav.addObject("eventi", repoEvento.findNextWorkEvents(Instant.now().getEpochSecond()));
 		return mav;
 
 	}
