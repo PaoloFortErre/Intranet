@@ -105,7 +105,7 @@ public class UtenteController extends BaseController{
 	public String modificaFoto(@RequestParam(required=false) MultipartFile immagine, HttpSession session) {
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		FileImmagine img = null;
-		if(immagine != null) {
+		if(!immagine.getOriginalFilename().isEmpty()) {
 			try {
 				img = new FileImmagine();
 				img.setData(immagine.getBytes());
