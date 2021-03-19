@@ -44,32 +44,38 @@ table, th, td {
 
 		<div class="row">
 
-			<div id="myCarousel" class="carousel slide">
-			<div style="position: fixed">
 			
-			</div>
-				<nav class="navbar navbar-fixed-top">
-					<div class="content" style="display: inline-block">
-						<a th:href="@{/homepage/}"><img
-							src="/view/MyLife/images/home.png" width="50px" height="50px">
-						</a>
+			<div id="myCarousel" class="carousel slide" style="background-color: black" >
+					
+					
+				
+				 	<nav class="navbar navbar-nav navbar-right" id="navcambiante">
+						<div class="content" style="display: inline-block">
+							<a th:href="@{/homepage/}"><img
+								src="/view/MyLife/images/homebianca1.png" width="60px" style="margin-top: -10px; opacity: 0.9">
+							</a>
+						</div>
+						<div class="content" style="display: inline-block">
+							<a th:href="@{/myLife/}">MY LIFE</a>
+						</div>
+						<div class="content" style="display: inline-block">
+							<a href="#">COMUNICAZIONI HR</a>
+						</div>
+						<div class="content" style="display: inline-block">
+							<a href="#">MODULI</a>
+						</div>
+						<div class="content" style="display: inline-block">
+							<a href="http://polyedro.erretechnology.com/www/" target="blank">POLYEDRO</a>
+						</div>
+				<div style="position: relative; float: right">
+						<a th:href="@{/profile/}"><img
+							th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
+							alt="utente" title="utente" class="immagineUtente"
+							id="utente-foto-profilo"
+							style="margin: 30px; margin-right: 40px;; border-radius: 50%; margin-top: 0px;"></a>
 					</div>
-					<div class="content" style="display: inline-block">
-						<a th:href="@{/myLife/}">MY LIFE</a>
-					</div>
-					<div class="content" style="display: inline-block">
-						<a href="#">COMUNICAZIONI HR</a>
-					</div>
-					<div class="content" style="display: inline-block">
-						<a href="#">MODULI</a>
-					</div>
-					<div class="content" style="display: inline-block">
-						<a href="http://polyedro.erretechnology.com/www/" target="blank">POLYEDRO</a>
-					</div>
-					<div style="position: fixed"><a th:href="@{/profile/}"><img th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
-									alt="utente" title="utente" class="immagineUtente" id="utente-foto-profilo"
-									style="margin: 30px; margin-left:40px; margin-top:-90px; border-radius: 50%"></a></div>
-				</nav>
+					</nav> 
+				
 				<!-- Indicators -->
 				<ol class="carousel-indicators">
 					<li class="item1 active"></li>
@@ -210,7 +216,7 @@ table, th, td {
 
 					</div>
 
-<div th:if="${news.size>2}">
+				<div th:if="${news.size>2}">
 					<a href="" id="vedi2"  onclick="mostraNews()"> Vedi altri</a></div>
 					<div id="news2" style="display:none">
 					<div class="row" style="padding: 10px;"   th:each="news2:${news2}">

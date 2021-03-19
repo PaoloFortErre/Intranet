@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.erretechnology.intranet.models.News;
 import com.erretechnology.intranet.models.Podcast;
 import com.erretechnology.intranet.models.Sondaggio;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
@@ -101,8 +102,11 @@ public class MyWorkController extends BaseController {
 		/*
 		 * PARTE NEWS
 		 * 
-		 */
-		mav.addObject("news", repoNews.findAllOrderByDataPubblicazioneDesc());
+		 */	List<News> news= repoNews.findAllOrderByDataPubblicazioneDesc(); 
+			
+			mav.addObject("news", news.subList(0, 3));
+			mav.addObject("news2", news.subList(3, 6));
+		
 		
 		
 		/*
