@@ -18,7 +18,7 @@
 	  <input type="text" id="citta" name="citta" th:field="${indirizzo.citta}"><br>
 	  <label for="provincia">Provincia:</label><br>
 	  <input type="text" id="provincia" name="provincia" th:field="${indirizzo.provincia}"><br>
-	  <label for="data">Data:</label><br>
+	  <label for="date">Data:</label><br>
 	  <input type="date" id="date" name="date" th:value="${#dates.format(date, 'yyyy-MM-dd')}"><br>
 	  <input type="submit" value="Pubblica">
 	</form>

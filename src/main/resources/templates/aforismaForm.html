@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form th:action="@{/aforisma/insert}" th:object="${aforisma}" method="post">
+	  <label for="frase">Frase:</label><br>
+	  <input type="text" id="frase" name="frase" th:field="*{frase}"><br>
+	  <label for="autore">Autore:</label><br>  
+	  <input type="text" id="autore" name="autore" th:field="*{autore}"><br>
+	  <br>
+	  <input type="submit" value="Salva">
+	</form>
+
+
+
+</body>
+</html>
