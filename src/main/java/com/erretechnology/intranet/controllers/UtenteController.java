@@ -30,14 +30,15 @@ public class UtenteController extends BaseController{
 	public ModelAndView primaPagina(HttpSession session) {
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("profilo");
-		mav.addObject("utente", u);
-		//mav.addObject("img", u.getImmagine());
-		if(u.getUtente().getSetGruppi().stream().filter(x->x.getNome().equals("ADMIN")).count() == 1) {
-		mav.addObject("log", serviceLog.findAll());
-		} else {
-		mav.addObject("log", serviceLog.findLogById(Integer.parseInt(session.getAttribute("id").toString())));
+		if(serviceUtente.findById(u.getId()).getSetGruppi().stream().filter(x-> x.getNome().equals("ADMIN")).count() == 1){
+			mav.setViewName("profilo_admin");
+			mav.addObject("log", serviceLog.findAll());
 		}
+		else {
+			mav.setViewName("profilo");
+			mav.addObject("log", serviceLog.findLogById(Integer.parseInt(session.getAttribute("id").toString())));
+		}
+		mav.addObject("utente", u);
 		return mav;
 	}
 
@@ -144,7 +145,7 @@ public class UtenteController extends BaseController{
 		saveLog("modificato la visualizzazione del compleanno", utenteLoggato);
 		return "redirect:/profile/";
 	}
-	
+
 	@RequestMapping(value = "/gestisciPermesso", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView Permesso(int id) {
 		List<String> permessiMancanti = servicePermesso.getAllName();
@@ -157,7 +158,7 @@ public class UtenteController extends BaseController{
 		mav.addObject("permessiUtente", permessiUtente);
 		return mav;
 	}
-	
+
 	@PostMapping(value = "/addPermesso")
 	public String addPermesso(int id, @RequestParam(value = "pAdd" , required=false) String permesso, HttpSession session) {
 		if(permesso != "0") {
@@ -173,7 +174,7 @@ public class UtenteController extends BaseController{
 		}
 		return "redirect:/profile/gestisciPermesso?id=" + id;
 	}
-	
+
 	@PostMapping(value = "/removePermesso")
 	public String removePermesso(int id, @RequestParam(value = "pRemove" , required=false) String permesso, HttpSession session) {
 		if(permesso != "0") {

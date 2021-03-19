@@ -3,7 +3,7 @@
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
-  <meta name="description" content="Questo è un profilo standard">
+  <meta name="description" content="Questo è un profilo admin">
   <meta name="viewport" content="width=device-width, initial-scale=1,
   shrink-to-fit=no">
 
@@ -16,7 +16,7 @@
   integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
   crossorigin="anonymous">
 
-  <title>standard_profile</title>
+  <title>profilo_admin</title>
 
   <style media="screen">
   body{
@@ -176,6 +176,11 @@
             <a class="dropdown-item mt-1" th:href="@{/logout}">Logout</a>
           </div>
         </div>
+        <div> <!--  th:if="${#authorization.expression('hasAuthority(''PM'')')}"> --> 
+        	<form th:action="@{/profile/gestisciPermesso(id=${utente.id})}" method="post">
+        		<button type="submit" class="btn btn-primary w-25 ">Gestisci Permessi</button>
+       	</form>
+        </div>
       </div>
 
       <div class="col-3 mt-5 mb-3 align-text-center">
@@ -206,26 +211,7 @@
   <!-- ROW DESCRIZIONE E DASHBOARD -->
   <div class="container-fluid ">
     <div class="row mt-4">
-
-      <div class="col ml-5 ">
-        <div class="card ml-5" style="width: 18rem;">
-          <div class="card-body">
-            <h6 class="card-title" style="color:#303030">Una breve descrizione di me stesso</h6>
-            <p class="card-text" th:text="${utente.descrizione}" style="color:#303030"></p>
-            <div th:if="${session.id} == ${utente.utente.id}">
-              <form th:action="@{/profile/modificaDescrizione}" method="post">
-                <div class="form-group">
-                  <textarea class="form-control" id="exampleFormControlTextarea1"name="descrizione" placeholder="Modifica la tua descrizione"
-                  cols="70" rows="7" th:field="${utente.descrizione}" required></textarea>
-                </div>
-                <input class="btn btn-primary " type="submit" value="Modifica descrizione"/>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-8 col-md-6 col-sm-5 ml-4 mr-5 pt-n5 ">
+      <div class="col-lg-6 col-md-6 col-sm-5 ml-4 mr-5 pt-n5 ">
         <div class="card text-center h-50 pt-n5" style="color:#303030;" >
           <div class="card-header">
             <h5>ATTIVITA' RECENTI</h5>
@@ -238,17 +224,23 @@
             </div>
           </div>
           <div class="container-fluid text-align-center">
-            <button href="#" class="btn btn-primary w-25 ">Vedi tutte</a>
+            <button href="#" class="btn btn-primary w-25 ">Vedi tutte</button>
             </div>
           </div>
         </div>
-      </div>
-      
+
+        <div class="col">
+          <div class="container-fluid">
+              <form class="" action="index.html" method="post">
+
+              </form>
+              <form class="" action="index.html" method="post">
+
+              </form>
+          </div>
+        </div>
       </div>
     </div>
-
-
-
 
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
