@@ -2,8 +2,11 @@ package com.erretechnology.intranet.controllers;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,15 +18,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.Commento;
 import com.erretechnology.intranet.models.CommentoModificato;
+import com.erretechnology.intranet.models.Evento;
 import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.Post;
 import com.erretechnology.intranet.models.PostModificato;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
+import com.erretechnology.intranet.repositories.RepositoryEvento;
 
 @Controller
 @RequestMapping(value = "myLife")
 public class MyLifeController extends BaseController {
-
+	@Autowired
+	private RepositoryEvento repoEvento;
 	//	@GetMapping(value="/myLife")
 	//	public ModelAndView myLife() {
 	//		ModelAndView mav = new ModelAndView();
@@ -35,10 +41,15 @@ public class MyLifeController extends BaseController {
 	public ModelAndView primaPagina(HttpSession session) {
 		//	List<Post> messaggi = service.getLastMessage();
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		List<Evento> evento = (List<Evento>) repoEvento.findNextLifeEvents(Instant.now().getEpochSecond());
+		System.out.println(evento.size());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myLife");
 		mav.addObject("messaggi", servicePost.getLastMessage());
 		mav.addObject("utenteDati", u);
+		mav.addObject("eventilife", evento.get(0));
+		mav.addObject("eventilife1", evento.get(1));
+	//	mav.addObject("eventilife2", evento.get(2));
 	//	mav.addObject("img", serviceFileImmagine.getLastImmagineByUtente(u));
 		return mav;
 	}

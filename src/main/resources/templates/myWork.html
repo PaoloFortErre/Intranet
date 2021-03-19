@@ -59,7 +59,7 @@ table, th, td {
 							<a th:href="@{/myLife/}">MY LIFE</a>
 						</div>
 						<div class="content" style="display: inline-block">
-							<a href="#">COMUNICAZIONI HR</a>
+							<a  th:href="@{/comunicazioniHr/}">COMUNICAZIONI HR</a>
 						</div>
 						<div class="content" style="display: inline-block">
 							<a href="#">MODULI</a>
@@ -147,10 +147,10 @@ table, th, td {
 						
 							<img src="/view/MyWork/images/location.jpg" width="9%"
 								height="9%"> 
-								<p style="color: black; text-align: right; padding: 8px; display: inline-block;"  th:text="${eventi.indirizzo.via}" >
+								<p style="color: black; text-align: right; display: inline-block;"  th:text="${eventi.indirizzo.via}" >,
 						</p>
 						
-						<p style="color: black; text-align: right; padding: 8px; display:inline-block;"  th:text="${eventi.indirizzo.citta}"  >
+						<p style="color: black; text-align: right; margin-left:260px;font-weight:700; display:inline-block;"  th:text="${eventi.indirizzo.citta}"  >
 						</p> 
 						
 						
@@ -158,7 +158,7 @@ table, th, td {
 				</div>
 
 			</div>
-<a href="" STYLE="float:right; color: white; font-size: 15px; text-decoration: none;"> Mostra altro <img src="/view/MyWork/images/more.png" width="30px" style="MARGIN-right: 50px;"></A>
+					<a href="" id="vedi3"  style="float: right"onclick="mostraAssunzioni()"> Vedi altri <img src="/view/MyWork/images/more.png" width="30px" style="MARGIN-right: 50px;"></a>
 		
 </div>
 
@@ -238,7 +238,7 @@ table, th, td {
 
 
 				<div class="assunti">
-					<div class="modal-header">
+					<div class="modal-header2">
 						<div class="title">
 							<h3 style="color: black; text-align: center; font-weight: 900">Nuove
 								assunzioni</h3>

@@ -199,5 +199,14 @@ public class HomeController extends BaseController{
 		model.addAttribute("loginError", true);
 		return "loginPage";
 	}
+	
+	@GetMapping (value= "/comunicazioniHr")
+	public ModelAndView comunicazioniHr(HttpSession session) {
+		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("utenteDati", u);
+		mav.setViewName("comunicazioniHr");
+		return mav;
+	}
 
 }

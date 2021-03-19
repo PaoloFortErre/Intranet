@@ -25,6 +25,45 @@
 
 <link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
 <style>
+.caption {
+	font-family: Verdana, sans-serif;
+	font-size: 10px;
+	float: left;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	overflow: hidden;
+}
+
+.caption img {
+	float: left;
+	margin: 0;
+	padding: 0;
+	background: #fff;
+	border: none;
+}
+
+.caption h3 {
+	float: right;
+	margin: 0;
+	padding: 10px;
+	width: 100%;
+	color: #dedede;
+	background: #222; /* browser che non supportano rgba */
+	background: rgba(0, 0, 0, 0.7);
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+
+.caption p {
+	top: 20px;
+	font-weight: bold;
+	font-size: 11px;
+	text-transform: uppercase;
+	display: block;
+	padding-bottom: 5px;
+}
 </style>
 
 </head>
@@ -34,40 +73,41 @@
 
 
 		<div class="row">
-	
 
-			<div id="myCarousel" class="carousel slide" style="background-color: black" >
-					
-					
-				
-				 	<nav class="navbar navbar-nav navbar-right" id="navcambiante">
-						<div class="content" style="display: inline-block">
-							<a th:href="@{/homepage/}"><img
-								src="/view/MyLife/images/homebianca1.png" width="60px" style="margin-top: -10px; opacity: 0.9">
-							</a>
-						</div>
-						<div class="content" style="display: inline-block">
-							<a th:href="@{/myWork/}">MY WORK</a>
-						</div>
-						<div class="content" style="display: inline-block">
-							<a href="#">COMUNICAZIONI HR</a>
-						</div>
-						<div class="content" style="display: inline-block">
-							<a href="#">MODULI</a>
-						</div>
-						<div class="content" style="display: inline-block">
-							<a href="http://polyedro.erretechnology.com/www/" target="blank">POLYEDRO</a>
-						</div>
-				<div style="position: relative; float: right">
+
+			<div id="myCarousel" class="carousel slide"
+				style="background-color: black">
+
+
+
+				<nav class="navbar navbar-nav navbar-right" id="navcambiante">
+					<div class="content" style="display: inline-block">
+						<a th:href="@{/homepage/}"><img
+							src="/view/MyLife/images/homebianca1.png" width="60px"
+							style="margin-top: -10px; opacity: 0.9"> </a>
+					</div>
+					<div class="content" style="display: inline-block">
+						<a th:href="@{/myWork/}">MY WORK</a>
+					</div>
+					<div class="content" style="display: inline-block">
+						<a th:href="@{/comunicazioniHr/}">COMUNICAZIONI HR</a>
+					</div>
+					<div class="content" style="display: inline-block">
+						<a href="#">MODULI</a>
+					</div>
+					<div class="content" style="display: inline-block">
+						<a href="http://polyedro.erretechnology.com/www/" target="blank">POLYEDRO</a>
+					</div>
+					<div style="position: relative; float: right">
 						<a th:href="@{/profile/}"><img
 							th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
 							alt="utente" title="utente" class="immagineUtente"
 							id="utente-foto-profilo"
 							style="margin: 30px; margin-right: 40px;; border-radius: 50%; margin-top: 0px;"></a>
 					</div>
-					</nav> 
-				
-				
+				</nav>
+
+
 				<!-- Indicators -->
 				<ol class="carousel-indicators">
 					<li class="item1 active"></li>
@@ -80,8 +120,7 @@
 
 					<div class="top-right"></div>
 					<div class="item active">
-						<img src="/view/MyLife/images/barc.jpg" alt="Cittï¿½" width="100%"
-							>
+						<img src="/view/MyLife/images/barc.jpg" alt="Cittï¿½" width="100%">
 						<div class="carousel-caption">
 							<h1 class="font-caption" style="font-weight: 900">"Sii il
 								cambiamento che vuoi vedere nel mondo"</h1>
@@ -246,7 +285,7 @@
 										height="20px" style="display: inline-block;">
 									<p style="display: inline-block; margin-left: 5px">ERRE Pro</p>
 									<!-- CONTENUTO DEL POST -->
-									<div >
+									<div>
 										<br> <br>
 										<p style="margin-right: 15px; font-size: 20px;"
 											th:text="${post.testo}">
@@ -329,12 +368,56 @@
 COLONNA DESTRA
 **** -->
 			<div class="col-sm-4 col-lg-4" id="col-destra">
+
+
+
+
 				<h3 id="culturaPiemonte" style="margin-top: 30px">Cultura in
 					Piemonte</h3>
 				<p style="color: #F3F3F3; text-align: center; font-size: 13px">
-					Se sei un tipo da eventi in citta' o da sagre:</p>
-				<img src="/view/MyLife/images/to.jpg" class="img-responsive"
-					width="99%" height="300px" style="margin: auto;">
+					Se sei un tipo da eventi in città o da sagre:</p>
+
+
+				<div th:each="eventilife : ${eventilife}">
+					<div class="caption">
+						<img
+							th:src="@{/image/evento/{image}(image = ${eventilife.copertina})}"
+							class="img-responsive" width="99%" height="300px"
+							style="margin: auto;">
+						<h3 th:text="${eventilife.titolo}"></h3>
+
+					</div>
+
+					<p th:text="${#dates.format(eventilife.data*1000, 'dd/MM/yyyy')}"
+						style="margin-top: 10px; text-align: right"></p>
+						<p th:text="${eventilife.indirizzo.citta}" style="margin-top: 10px; text-align: right"> </p>
+				</div>
+				
+				
+
+			<div >
+					<div class="caption"th:each="eventilife1 : ${eventilife1}">
+						<img
+							th:src="@{/image/evento/{image}(image = ${eventilife1.copertina})}"
+							class="img-responsive" width="99%" height="300px"
+							style="margin: auto;">
+						<h3 th:text="${eventilife1.titolo}"></h3>
+
+					</div>
+
+					<p th:text="${#dates.format(eventilife1.data*1000, 'dd/MM/yyyy')}"
+						style="margin-top: 10px; text-align: right"></p>
+			<p th:text="${eventilife1.indirizzo.citta}" style="margin-top: 10px; text-align: right"> </p>
+						
+				</div>
+
+
+
+
+
+
+
+
 
 				<h3 id="culturaPiemonte" style="margin-top: 70px">Film</h3>
 				<p style="color: #F3F3F3; text-align: center; font-size: 13px">
@@ -426,7 +509,8 @@ COLONNA DESTRA
 			document.getElementsByClassName('postModificato' + id)[0].style.display = "block";
 
 		}
-	</script>
+		
+		</script>
 
 </body>
 </html>
