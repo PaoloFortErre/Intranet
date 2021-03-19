@@ -28,7 +28,6 @@ public class ServiceLogImpl implements ServiceLog{
 		return repositoryLog.findAll().stream()
 				.filter(x-> x.getUtente().getId() == id)
 				.sorted(Comparator.comparingInt(Log::getId).reversed())
-				.limit(5)
 				.collect(Collectors.toList());
 	}
 
@@ -37,8 +36,28 @@ public class ServiceLogImpl implements ServiceLog{
 	public List<Log> findAll() {
 		// TODO Auto-generated method stub
 		return repositoryLog.findAll().stream().sorted(Comparator.comparingInt(Log::getId).reversed())
+				.collect(Collectors.toList());
+
+	}
+
+
+	@Override
+	public List<Log> findLastFive() {
+		// TODO Auto-generated method stub
+		return repositoryLog.findAll().stream().sorted(Comparator.comparingInt(Log::getId).reversed())
 				.limit(5).collect(Collectors.toList());
 
+	}
+
+
+	@Override
+	public List<Log> findLastFiveLogById(int id) {
+		// TODO Auto-generated method stub
+		return repositoryLog.findAll().stream()
+				.filter(x-> x.getUtente().getId() == id)
+				.sorted(Comparator.comparingInt(Log::getId).reversed())
+				.limit(5)
+				.collect(Collectors.toList());
 	}
 
 }

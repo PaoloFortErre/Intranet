@@ -7,5 +7,7 @@ import com.erretechnology.intranet.models.Log;
 public interface ServiceLog {
 	public Log save(Log log);
 	public List<Log> findAll();
+	public List<Log> findLastFive();
 	public List<Log> findLogById(int id);
+	public List<Log> findLastFiveLogById(int id);
 }
