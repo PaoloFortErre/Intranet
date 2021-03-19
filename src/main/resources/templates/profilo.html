@@ -100,7 +100,7 @@
 
   <!-- ROW CON NAVBAR -->
   <div class="row mb-1">
-    <div class="col ml-5 mt-1">
+    <div class="col ml-5 mt-3">
       <img id="logo" class="img-fluid rounded float-left mt-2 ml-2"
       src="/view/Profile/Images/erre_group.png" alt="erre_logo" >
     </div>
@@ -161,7 +161,7 @@
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <form th:action="@{/profile/setVisualizzazione}" method ="post">
-              <div class="form-check">
+              <div class="form-check mr-2">
                 Vuoi condividere la tua data di nascita?
                 <input type="radio" id="set" name="set" value="Si" th:checked="${utente.visualizzaDataNascita}">
                 <label for="set">SI</label>

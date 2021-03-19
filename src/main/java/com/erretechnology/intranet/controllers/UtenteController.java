@@ -166,7 +166,7 @@ public class UtenteController extends BaseController{
 		//mav.addObject("permessiUtente", permessiUtente);
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/getPermessiMancanti")
 	@ResponseBody
 	public List<String> getPermessiMancanti(@RequestParam("email") String email){
@@ -174,14 +174,14 @@ public class UtenteController extends BaseController{
 		permessiMancanti.removeAll(getAllPermessi(email));
 		return permessiMancanti;
 	}
-	
+
 	@RequestMapping(value = "/getAllPermessi")
 	@ResponseBody
 	public List<String> getAllPermessi(@RequestParam("email") String email){
 		return serviceAuthority.getAllNameById(serviceUtente.findByEmail(email).getId());
 	}
-	
-	
+
+
 
 	@PostMapping(value = "/addPermesso")
 	public String addPermesso(String email,String flag,  @RequestParam(value = "pAdd" , required=false) String permesso,
@@ -204,18 +204,18 @@ public class UtenteController extends BaseController{
 				p.removeUtente(u);
 				saveLog("rimosso il permesso" + p.getNome() + " a " + u.getEmail() , utenteLoggato);
 			}
-			
+
 			servicePermesso.savePermesso(p);
 		}
 		return "redirect:/profile/gestisciPermesso";
-	}	
-	
+	}
+
 	@GetMapping(value = "/cancellaUtente")
 	public ModelAndView rimuoviUtente(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		if(serviceUtente.findById(utenteLoggato.getId()).getSetGruppi().stream().filter(x-> x.getNome().equals("ADMIN")).count() == 1) {
-			
+
 			mav.setViewName("eliminaUtente");
 			mav.addObject("utenti", serviceDatiPersonali.getAll().stream().filter(x -> x.getUtente().getAttivo()).collect(Collectors.toList()));
 			return mav;
@@ -223,13 +223,13 @@ public class UtenteController extends BaseController{
 		}
 		mav.setViewName("forbidden");
 		return mav;
-		
+
 	}
 	@PostMapping(value = "/elimina")
 	public String rimuovi(@RequestParam("id_eliminato") int id) {
 		Utente u = serviceUtente.findById(id);
 		u.setAttivo(false);
 		serviceUtente.save(u);
-		return "redirect:/profile/";
+		return "redirect:/profile/cancellaUtente/";
 	}
 }
