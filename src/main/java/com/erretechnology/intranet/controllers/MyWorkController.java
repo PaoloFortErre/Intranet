@@ -113,7 +113,8 @@ public class MyWorkController extends BaseController {
 		 * PARTE EVENTI
 		 * 
 		 */
-		mav.addObject("eventi", repoEvento.findNextWorkEvents(Instant.now().getEpochSecond()));
+		
+		mav.addObject("eventi", repoEvento.findNextWorkEvents(Instant.now().getEpochSecond()).stream().collect(Collectors.toList()));
 		return mav;
 
 	}
