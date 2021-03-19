@@ -34,7 +34,11 @@ public class UtenteController extends BaseController{
 		mav.setViewName("profilo");
 		mav.addObject("utente", u);
 		//mav.addObject("img", u.getImmagine());
+		if(u.getUtente().getSetGruppi().stream().filter(x->x.getNome().equals("ADMIN")).count() == 1) {
+		mav.addObject("log", serviceLog.findAll());
+		} else {
 		mav.addObject("log", serviceLog.findLogById(Integer.parseInt(session.getAttribute("id").toString())));
+		}
 		return mav;
 	}
 

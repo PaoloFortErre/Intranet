@@ -32,4 +32,13 @@ public class ServiceLogImpl implements ServiceLog{
 				.collect(Collectors.toList());
 	}
 
+
+	@Override
+	public List<Log> findAll() {
+		// TODO Auto-generated method stub
+		return repositoryLog.findAll().stream().sorted(Comparator.comparingInt(Log::getId).reversed())
+				.limit(5).collect(Collectors.toList());
+
+	}
+
 }
