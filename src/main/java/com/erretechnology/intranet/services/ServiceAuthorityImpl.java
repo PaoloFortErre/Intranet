@@ -23,4 +23,8 @@ public class ServiceAuthorityImpl implements ServiceAuthority{
 	public List<Authority> getAll() {
 		return authoritiesRepository.findAll();
 	}
+	@Override
+	public List<String> getAllNameById(int id){
+		return findByUsertId(id).stream().map(x-> x.getIdPermesso()).collect(Collectors.toList());
+	}
 }

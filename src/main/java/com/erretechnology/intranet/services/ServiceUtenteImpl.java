@@ -1,14 +1,10 @@
 package com.erretechnology.intranet.services;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import com.erretechnology.intranet.models.Permesso;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.repositories.RepositoryUtente;
 
@@ -21,6 +17,11 @@ public class ServiceUtenteImpl implements ServiceUtente{
 	@Override
 	public void saveUtente(Utente u) {
 		u.setPassword(new BCryptPasswordEncoder().encode(u.getPassword()) );
+		userRepository.saveAndFlush(u);
+	}
+	
+	@Override
+	public void save(Utente u) {
 		userRepository.saveAndFlush(u);
 	}
 

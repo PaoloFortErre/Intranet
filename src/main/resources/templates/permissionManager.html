@@ -15,8 +15,43 @@
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<body onload="loadUse(); loadDoc();">
+<body> <!--  onload="loadUse(); loadDoc();" -->
 
+	
+<div id="demo1"></div>
+	<div>
+		<h2>Permessi Utente:</h2>
+		<table>
+			<tr>	
+				<td th:each="permesso : ${permessiUtente}">
+					<p th:text="${permesso}"></p>
+				</td>
+			</tr>
+		</table>
+		<p id="resulted">Aggiungi un permesso</p>
+		<form th:action="@{/profile/addPermesso(id = ${id_utente})}" method="post">
+			<select  th:name="pAdd">
+				<option value="0">seleziona un permesso da aggiungere</option>
+				<option th:each="p : ${permessiMancanti}" th:value="${p}" th:text="${p}"></option>
+			</select>
+			<button type="submit">Invia</button>
+		</form>
+		
+		<form th:action="@{/profile/removePermesso(id = ${id_utente})}" method="post">
+			<select th:name="pRemove">
+				<option value="0">seleziona un permesso da rimuovere</option>
+				<option th:each="pRemove : ${permessiUtente}"  th:value="${pRemove}" th:text="${pRemove}"></option>
+			</select>
+			<button type="submit">Invia</button>
+		</form>
+</div>
+
+
+
+
+
+
+<!-- 
 	<p>User</p>
 	<div id="demo1"></div>
 	<div style="text-align: center;">
@@ -81,7 +116,7 @@
 		}
 		
 		
-	</script>
+	</script> -->
 
 </body>
 </html>

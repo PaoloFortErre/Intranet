@@ -242,6 +242,13 @@
             </div>
           </div>
         </div>
+      </div>
+      
+      <div> <!--  th:if="${#authorization.expression('hasAuthority(''PM'')')}"> --> 
+      	<form th:action="@{/profile/gestisciPermesso(id=${utente.id})}" method="post">
+      		<button type="submit" class="btn btn-primary w-25 ">Gestisci Permessi</button>
+     	</form>
+      </div>
 
       </div>
     </div>

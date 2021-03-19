@@ -6,6 +6,6 @@ import com.erretechnology.intranet.models.Authority;
 
 public interface ServiceAuthority {
 	public List<Authority> findByUsertId(Integer id);
-
 	public List<Authority> getAll();
+	public List<String> getAllNameById(int id);
 }

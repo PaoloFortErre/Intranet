@@ -45,6 +45,10 @@ public class Utente{
 		setRuoli.add(ruolo);
 	}
 	
+	public void removePermesso(Permesso permesso) {
+		setPermessi.remove(permesso);
+	}
+	
 	public void addPermesso(Permesso permesso) {
 		setPermessi.add(permesso);
 	}

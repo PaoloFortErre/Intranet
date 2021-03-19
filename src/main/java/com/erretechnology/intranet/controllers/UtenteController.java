@@ -1,11 +1,9 @@
 package com.erretechnology.intranet.controllers;
 
 import java.time.Instant;
+import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -21,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.Utente;
+import com.erretechnology.intranet.models.Permesso;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 
 @Controller
@@ -144,5 +143,50 @@ public class UtenteController extends BaseController{
 		serviceDatiPersonali.save(utenteLoggato);
 		saveLog("modificato la visualizzazione del compleanno", utenteLoggato);
 		return "redirect:/profile/";
+	}
+	
+	@RequestMapping(value = "/gestisciPermesso", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView Permesso(int id) {
+		List<String> permessiMancanti = servicePermesso.getAllName();
+		List<String> permessiUtente = serviceAuthority.getAllNameById(id);
+		permessiMancanti.removeAll(permessiUtente);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("permissionManager");
+		mav.addObject("id_utente", id);
+		mav.addObject("permessiMancanti", permessiMancanti);
+		mav.addObject("permessiUtente", permessiUtente);
+		return mav;
+	}
+	
+	@PostMapping(value = "/addPermesso")
+	public String addPermesso(int id, @RequestParam(value = "pAdd" , required=false) String permesso, HttpSession session) {
+		if(permesso != "0") {
+			int id_utente = Integer.parseInt(session.getAttribute("id").toString());
+			UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(id_utente);
+			Permesso p = servicePermesso.findById(permesso);
+			Utente u = serviceUtente.findById(id);
+			u.addPermesso(p);
+			serviceUtente.save(u);
+			p.addUtente(u);
+			servicePermesso.savePermesso(p);
+			saveLog("aggiunto il permesso" + p.getNome() +" a " + u.getEmail() , utenteLoggato);
+		}
+		return "redirect:/profile/gestisciPermesso?id=" + id;
+	}
+	
+	@PostMapping(value = "/removePermesso")
+	public String removePermesso(int id, @RequestParam(value = "pRemove" , required=false) String permesso, HttpSession session) {
+		if(permesso != "0") {
+			int id_utente = Integer.parseInt(session.getAttribute("id").toString());
+			UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(id_utente);
+			Permesso p = servicePermesso.findById(permesso);
+			Utente u = serviceUtente.findById(id);
+			u.removePermesso(p);
+			serviceUtente.save(u);
+			p.removeUtente(u);
+			servicePermesso.savePermesso(p);
+			saveLog("rimosso il permesso" + p.getNome() + " a " + u.getEmail() , utenteLoggato);
+		}
+		return "redirect:/profile/gestisciPermesso?id=" + id;
 	}
 }

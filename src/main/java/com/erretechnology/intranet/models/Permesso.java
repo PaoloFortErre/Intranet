@@ -41,6 +41,10 @@ public class Permesso {
 	public void addUtente(Utente utente) {
 		setUtenti.add(utente);
 	}
+	
+	public void removeUtente(Utente utente) {
+		setUtenti.remove(utente);
+	}
 
 	public String getNome() {
 		return nome;
