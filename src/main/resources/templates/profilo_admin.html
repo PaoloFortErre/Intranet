@@ -130,7 +130,6 @@
     <div class="row justify-content-center mt-1">
 
       <div class="col-lg-2 col-md-3 ml-4 ">
-        <!-- -->
         <div class="container-fluid">
           <img class="picture img rounded-circle mt-4"
           th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}" alt="profile_picca"
@@ -187,7 +186,7 @@
         </div>
       </div>
 
-      <div class="col-3 mt-5 mb-3 align-text-center">
+      <div class="col mt-5 mb-3 align-text-center">
         <div class="align-text-center ">
           <h1 class="h1" th:text="${utente.nome}"></h1>
           <h1 class="h1" th:text="${utente.cognome}" style="color: #ECF260"></h1><br><br>
@@ -195,18 +194,31 @@
         </div>
       </div>
 
-      <div class="col mt-5 ">
+      <div class="col text-left mt-5 ">
         <div class="container mt-3 pr-4">
           <img id="logo2" class="img-fluid shadow rounded-pill mw-25"  th:src="'data:image/png;base64,' + ${utente.settore.getImgData(utente.settore.logo)}" alt="logo-agency">
         </div>
       </div>
 
-      <div class="col-5">
+      <!-- DESCRIZIONE PERSONALE -->
+      <div class="col text-center mt-5 ">
+        <div class="card ml-5" style="width: 24rem;">
+          <div class="card-body">
+            <h6 class="card-title" style="color:#303030">Una breve descrizione di me stesso:</h6>
+            <p class="card-text" th:text="${utente.descrizione}" style="color:#303030"></p>
+            <div th:if="${session.id} == ${utente.utente.id}">
+              <form th:action="@{/profile/modificaDescrizione}" method="post">
+                <div class="form-group">
+                  <textarea class="form-control" id="exampleFormControlTextarea1"name="descrizione" placeholder="Modifica la tua descrizione"
+                  cols="40" rows="5" th:field="${utente.descrizione}" maxlength="255" required></textarea>
+                </div>
+                <input class="btn btn-primary " type="submit" value="Modifica descrizione"/>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="col-5">
-
-      </div>
 
     </div>
   </div>
@@ -223,7 +235,7 @@
             <small>Anteprima di quello che hai fatto di recente</small>
           </div>
           <div class="card-body text-justify mr-4 ml-5" th:each="log:${log}">
-            <p class="card-text mb-n1" th:utext="Hai + ' ' + ${log.azione}" style="font-size: 12px; font-weight: bold; margin-bottom: 5px !important;"></p>
+            <p class="card-text mb-n1" th:utext="${log.utente.nome} +' ' + ${log.utente.cognome} + ' ha ' + ${log.azione}" style="font-size: 12px; font-weight: bold; margin-bottom: 5px !important;"></p>
             <div class="container-fluid">
               <p class="mb-5" th:utext="${#dates.format(log.timestamp*1000, 'dd/MM/yyyy, HH:mm')}" style="font-size: 9px"></p>
             </div>
@@ -234,19 +246,20 @@
         </div>
       </div>
 
-      <div class="col-lg-3 col-md-3 col-sm-3 ">
-        <div class="container-fluid shadow text-center bg-info pt-3 pb-3 pl-5 mr-5">
-          <div class="container-fluid">
-              <h1 class="h1 text-center" th:text="${attivi} + ' ' + 'UTENTI REGISTRATI'">"</h1>
+      <div class="col-lg-3 col-md-3 col-sm-3 mt-3 ">
+        <div class="container-fluid shadow text-center rounded pr-n2 pl-n2" style="background-color: #2EC4B6">
+          <div class="container">
+            <h1 class="h1 text-center" th:text="${attivi}">"</h1>
+            <h3 class="h3">UTENTI REGISTRATI</h3>
           </div>
           <div class="container float-right mb-3">
-            <button type="button" class="btn btn-warning">AGGIUNGI</button>
+            <button type="button" class="btn btn-success">AGGIUNGI</button>
             <button type="button" class="btn btn-danger">DISATTIVA</button>
-          </div>
-          <div class="container mt-3">
-              <button type="button" class="btn btn-outline-dark mb-2">CREA NUOVO RUOLO</button><br>
-              <button type="button" class="btn btn-outline-dark mb-2">ASSEGNA PERMESSO</button><br>
-              <button type="button" class="btn btn-outline-dark mb-2">REVOCA PERMESSO</button>
+          </div><br>
+          <div class="container mt-5">
+            <button type="button" class="btn btn-outline-dark mb-2">CREA NUOVO RUOLO</button><br>
+            <button type="button" class="btn btn-outline-dark mb-2">ASSEGNA PERMESSO</button><br>
+            <button type="button" class="btn btn-outline-dark mb-2">REVOCA PERMESSO</button>
           </div>
         </div>
       </div>

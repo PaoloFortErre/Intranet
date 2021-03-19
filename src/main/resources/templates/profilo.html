@@ -216,7 +216,7 @@
               <form th:action="@{/profile/modificaDescrizione}" method="post">
                 <div class="form-group">
                   <textarea class="form-control" id="exampleFormControlTextarea1"name="descrizione" placeholder="Modifica la tua descrizione"
-                  cols="70" rows="7" th:field="${utente.descrizione}" required></textarea>
+                  cols="40" rows="5" th:field="${utente.descrizione}" maxlength="255" required></textarea>
                 </div>
                 <input class="btn btn-primary " type="submit" value="Modifica descrizione"/>
               </form>
@@ -243,7 +243,7 @@
           </div>
         </div>
       </div>
-      
+
       </div>
     </div>
 
