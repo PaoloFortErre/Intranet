@@ -170,9 +170,6 @@
               </div>
             </form>
             <div class="dropdown-divider bg-primary"></div>
-            <form th:action="@{/profile/gestisciPermesso}" method="get">
-              <button type="submit" class="dropdown-item mt-1 ">Gestisci Permessi</button>
-            </form>
             <div class="dropdown-divider bg-primary"></div>
             <a class="dropdown-item mt-1" th:href="@{/profile/cambioPassword}" method="post">Cambio password</a>
             <div class="dropdown-divider bg-primary"></div>
@@ -241,10 +238,10 @@
         </div>
       </div>
 
-      <div class="col-lg-3 col-md-3 col-sm-3 mt-3 ">
+      <div class="col-lg-3 col-md-3 col-sm-3 mt-5 ">
         <div class="container-fluid shadow text-center rounded pr-n2 pl-n2" style="background-color: #2EC4B6">
           <div class="container">
-            <h1 class="h1 text-center" th:text="${attivi}">"</h1>
+            <h1 class="h1 text-center mt-3" th:text="${attivi}">"</h1>
             <h3 class="h3">UTENTI REGISTRATI</h3>
           </div>
           <div class="container mb-3">
@@ -255,10 +252,10 @@
               <button type="submit" class="btn btn-danger">RIMUOVI</button>
             </form>
           </div>
-          <div class="container mt-3">
-            <button type="button" class="btn btn-outline-dark mb-2">CREA NUOVO RUOLO</button><br>
-            <button type="button" class="btn btn-outline-dark mb-2">ASSEGNA PERMESSO</button><br>
-            <button type="button" class="btn btn-outline-dark mb-2">REVOCA PERMESSO</button>
+          <div class="container mt-1 mb-2">
+            <form th:action="@{/profile/gestisciPermesso}" method="get">
+              <button type="submit" class="btn btn-warning mb-3">GESTISCI PERMESSI</button>
+            </form>
           </div>
         </div>
       </div>
