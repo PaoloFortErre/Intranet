@@ -9,6 +9,7 @@ import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.services.ServiceAuthority;
 import com.erretechnology.intranet.services.ServiceCommento;
 import com.erretechnology.intranet.services.ServiceCommentoModificato;
+import com.erretechnology.intranet.services.ServiceComunicazioniHR;
 import com.erretechnology.intranet.services.ServiceFileImmagini;
 import com.erretechnology.intranet.services.ServiceFilePdf;
 import com.erretechnology.intranet.services.ServiceFileSystem;
@@ -56,6 +57,8 @@ public abstract class BaseController {
 	protected ServicePodcast servicePodcast;
 	@Autowired
 	protected ServiceSondaggio serviceSondaggio;
+	@Autowired
+	protected ServiceComunicazioniHR serviceComunicazioni;
 	
 	protected void saveLog(String testo, UtenteDatiPersonali autore) {
 		Log log = new Log();
