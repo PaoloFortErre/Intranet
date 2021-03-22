@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.News;
 import com.erretechnology.intranet.models.NewsModificato;
+import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.repositories.RepositoryNews;
 import com.erretechnology.intranet.repositories.RepositoryNewsModificato;
 import com.erretechnology.intranet.repositories.RepositoryUtente;
@@ -30,8 +33,6 @@ import com.erretechnology.intranet.repositories.RepositoryUtente;
 public class NewsController extends BaseController {
 	@Autowired
 	private RepositoryNews repoNews;
-	@Autowired
-	private RepositoryUtente repoUtente;
 	@Autowired
 	private RepositoryNewsModificato repoOldNews;
 	private String imageFolder = "news";
@@ -61,17 +62,22 @@ public class NewsController extends BaseController {
 		Long date = Instant.now().getEpochSecond();
 		news.setDataPubblicazione(date);
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
-		news.setAutore(repoUtente.findById(idUser).get());
+		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
+		news.setAutore(utenteLoggato);
 		news.setVisibile(true);
 		
-		if(!immagine.isEmpty()) {
+		if(!immagine.getOriginalFilename().isEmpty()) {
 			try {
-				String fileName = serviceFileSystem.saveImage(imageFolder, immagine, idUser);
-				news.setCopertina(fileName);
-				System.err.println("File caricato");
+				FileImmagine img = new FileImmagine();
+				img.setData(immagine.getBytes());
+				img.setAutore(utenteLoggato);
+				img.setTimestamp(Instant.now().getEpochSecond());
+				img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
+				serviceFileImmagine.insert(img);
+				news.setCopertina(img);
 			} catch (Exception e) {
 				System.err.println("Non riesco a caricare il file");
-			}	
+			}
 		}
 		
 		repoNews.save(news);
@@ -92,20 +98,29 @@ public class NewsController extends BaseController {
 		NewsModificato nm = new NewsModificato();
 		nm.setTitolo(news.getTitolo());
 		nm.setContenuto(news.getContenuto());
-		nm.setCopertina(news.getCopertina());
 		nm.setNews(news);
 		news.setTitolo(titolo);
 		news.setContenuto(contenuto);
 		
-		if(!immagine.isEmpty()) {
+		if(!immagine.getOriginalFilename().isEmpty()) {
 			int idUser = Integer.parseInt(session.getAttribute("id").toString());
+			UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
+			
 			try {
-				String fileName = serviceFileSystem.saveImage(imageFolder, immagine, idUser);
-				news.setCopertina(fileName);
-				System.err.println("File caricato");
+				FileImmagine img = new FileImmagine();			
+				img.setData(immagine.getBytes());
+				if(!serviceFileImmagine.contains(img.getData())) {
+					img.setAutore(utenteLoggato);
+					img.setTimestamp(Instant.now().getEpochSecond());
+					img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
+					serviceFileImmagine.insert(img);
+					news.setCopertina(img);
+				}else {
+					news.setCopertina(serviceFileImmagine.getImmagineByData(img.getData()));
+				}
 			} catch (Exception e) {
 				System.err.println("Non riesco a caricare il file");
-			}	
+			}
 		}
 		
 		repoNews.save(news);

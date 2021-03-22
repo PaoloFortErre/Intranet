@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -18,10 +19,12 @@ public class News {
 	@NotNull
 	private String contenuto;
 	private long dataPubblicazione;
-	private String copertina;
+	@OneToOne()
+	@JoinColumn(name = "id_immagine")
+	private FileImmagine copertina;
 	@ManyToOne
 	@JoinColumn(name="autore_id")
-	private Utente autore;
+	private UtenteDatiPersonali autore;
 	private boolean visibile;
 	
 	public News() {
@@ -59,19 +62,19 @@ public class News {
 		this.dataPubblicazione = dataPubblicazione;
 	}
 
-	public String getCopertina() {
+	public FileImmagine getCopertina() {
 		return copertina;
 	}
 
-	public void setCopertina(String copertina) {
+	public void setCopertina(FileImmagine copertina) {
 		this.copertina = copertina;
 	}
 
-	public Utente getAutore() {
+	public UtenteDatiPersonali getAutore() {
 		return autore;
 	}
 
-	public void setAutore(Utente autore) {
+	public void setAutore(UtenteDatiPersonali autore) {
 		this.autore = autore;
 	}
 

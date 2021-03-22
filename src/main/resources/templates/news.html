@@ -8,7 +8,7 @@
 	<p th:text="${#dates.format(news.dataPubblicazione*1000, 'dd/MM/yyyy, HH:mm')}" />
 	<h2 th:text="${news.titolo}" />
 	<p th:text="${news.contenuto}" />
-	<img th:src="@{/image/news/{image}(image = ${news.copertina})}">
+	<img th:src="'data:image/png;base64,' + ${news.copertina.getImgData(news.copertina.data)}">
 </body>
 </html>
 
