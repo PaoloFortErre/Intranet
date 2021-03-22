@@ -61,6 +61,7 @@ public class HomeController extends BaseController{
 		mav.addObject("password", new String());
 		mav.addObject("settore", new String());
 		mav.addObject("date", new Utility());
+		mav.addObject("utenti_non_attivi", serviceDatiPersonali.getInattivi());
 		return mav;
 	}
 	

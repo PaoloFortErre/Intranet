@@ -1,6 +1,8 @@
 package com.erretechnology.intranet.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,6 +54,12 @@ public class ServiceUtenteDatiPersonaliImpl extends BaseController implements Se
 		udp.setUtente(utente);
 		udp.setImmagine(serviceFileImmagine.getImmagine(63));
 		save(udp);
+	}
+
+	@Override
+	public List<UtenteDatiPersonali> getInattivi() {
+		// TODO Auto-generated method stub
+		return repositoryUtenteDatiPersonali.findAll().stream().filter(x->x.getUtente().getAttivo() == false).collect(Collectors.toList());
 	}
 
 }

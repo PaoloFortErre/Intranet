@@ -232,4 +232,12 @@ public class UtenteController extends BaseController{
 		serviceUtente.save(u);
 		return "redirect:/profile/cancellaUtente/";
 	}
+	
+	@PostMapping(value = "/riattiva")
+	public String riattiva(@RequestParam("id_riattivato") int id) {
+		Utente u = serviceUtente.findById(id);
+		u.setAttivo(true);
+		serviceUtente.save(u);
+		return "redirect:/registra/";
+	}
 }
