@@ -84,6 +84,10 @@
             </div>
             <button type="submit" class="btn btn-success mb-3">Aggiungi</button>
           </form>
+          
+          <div th:if="${emailF != null}" class="row justify-content-center mt-2">
+    		<p class="p text-danger">[[${emailF}]]</p>
+	 	 </div>
         </div>
 
         <!--RIATTIVA UTENTE-->
@@ -103,6 +107,8 @@
           </div>
 
         </div>
+        
+        
 
         <div class="col">
           <img class="img-fluid rounded bg-white w-100 float-left mt-2 ml-2"

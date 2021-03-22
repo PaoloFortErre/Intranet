@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
@@ -35,7 +36,7 @@ public class HomeController extends BaseController{
 	
 	@GetMapping("/")
 	public String home() {
-		return ("info");
+		return ("redirect:login");
 	}
 
 	@GetMapping("/forbidden")
@@ -53,7 +54,11 @@ public class HomeController extends BaseController{
 	
 	// form Registrazione
 	@GetMapping(value = "/registra")
-	public ModelAndView registrazione() {
+	public ModelAndView registrazione(Model model, boolean flag) {
+		if(flag) {
+			model.addAttribute("emailF", "È già presente un account con questa email");
+			System.out.println("entrato");
+		}
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("registra_utente");
 		mav.addObject("user", new UtenteDatiPersonali());
@@ -66,12 +71,18 @@ public class HomeController extends BaseController{
 	}
 	
 	@PostMapping(value = "/eseguiRegistrazione")
-	public String addUtente(@ModelAttribute("user")UtenteDatiPersonali utenteDP,
+	public ModelAndView addUtente(@ModelAttribute("user")UtenteDatiPersonali utenteDP,
 			@RequestParam("email") String email, @RequestParam("password") String password,
-			@RequestParam("settore") String settore , Utility data) {
-		utenteDP.setDataNascita(Timestamp.valueOf(data.getDate().atStartOfDay()).getTime() / 1000);
-		serviceDatiPersonali.insert(password, email, settore, utenteDP);
-		return "redirect:login";
+			@RequestParam("settore") String settore , Utility data, Model model) {
+		if(serviceUtente.foundEmail(email)) {
+			return registrazione(model,true);
+		}else {
+			utenteDP.setDataNascita(Timestamp.valueOf(data.getDate().atStartOfDay()).getTime() / 1000);
+			serviceDatiPersonali.insert(password, email, settore, utenteDP);
+			model.addAttribute("registrazione", "registrazione effettuata con successo");
+			return login();
+		}
+		
 	}
 	
 	// Password Dimenticata da login
@@ -83,22 +94,21 @@ public class HomeController extends BaseController{
 	}
 	
 	@PostMapping(value = "/password_dimenticata")
-	public String processForgotPassword(HttpServletRequest request,@RequestParam("email") String email/*, Model model*/) {
+	public String processForgotPassword(HttpServletRequest request,@RequestParam("email") String email, Model model) {
 	    String token = RandomString.make(30);
-	     
-	    try {
-	        serviceUtente.updateResetPasswordToken(token, email);
-	        String resetPasswordLink = Utility.getSiteURL(request) + "/reset_password?token=" + token;
-	        sendEmail(email, resetPasswordLink);
-	        //model.addAttribute("message", "We have sent a reset password link to your email. Please check.");
-	         
-	   /*} catch (CustomerNotFoundException ex) {
-	        model.addAttribute("error", ex.getMessage());
-	   */ } catch (UnsupportedEncodingException | MessagingException e) {
-	        //model.addAttribute("error", "Error while sending email");
-	    }
-	         
-	    return "redirect:password_dimenticata";
+	    if(serviceUtente.foundEmail(email)) {
+	    	try {
+		        serviceUtente.updateResetPasswordToken(token, email);
+		        String resetPasswordLink = Utility.getSiteURL(request) + "/reset_password?token=" + token;
+		        sendEmail(email, resetPasswordLink);
+		        model.addAttribute("message", "Ti abbiamo inviato una mail con il link per resettare la password!");
+		    } catch (UnsupportedEncodingException | MessagingException e) {
+		    	model.addAttribute("error", "Si è verificato un errore nell'inviare la email");
+		    }
+	     }else {
+	    	 model.addAttribute("emailNF", "Non è stato trovato nessun account con la mail " + email);
+	     }
+	    return "password_lost";
 	}
 	
 	public void sendEmail(String recipientEmail, String link)

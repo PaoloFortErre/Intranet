@@ -12,4 +12,5 @@ public interface ServiceUtente {
 	public Utente findByResetPasswordToken(String token);
 	public Utente findById(int id);
 	public void updateResetPasswordToken(String token, String email);
+	public boolean foundEmail(String email);
 }

@@ -44,14 +44,17 @@ public class ServiceUtenteImpl implements ServiceUtente{
 		if (utente != null) {
 			utente.setTokenResetPassword(token);
 			userRepository.save(utente);
-		} /*else {
-	        throw new CustomerNotFoundException("Could not find any customer with the email " + email);
-	    }*/
+		}
 	}
 	
 	@Override
 	public Utente findById(int id) {
 		return userRepository.findById(id).get();
+	}
+
+	@Override
+	public boolean foundEmail(String email) {
+		return getAll().stream().filter(x-> x.getEmail().equals(email)).count() == 1;
 	}
 
 }
