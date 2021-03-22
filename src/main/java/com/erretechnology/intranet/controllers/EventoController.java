@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +24,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.erretechnology.intranet.models.Evento;
+import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.Indirizzo;
+import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.repositories.RepositoryEvento;
 import com.erretechnology.intranet.repositories.RepositoryIndirizzo;
 import com.erretechnology.intranet.repositories.RepositoryUtente;
@@ -112,17 +115,22 @@ public class EventoController extends BaseController {
 		evento.setData(timestamp.getTime());
 
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
-		evento.setAutore(repoUtente.findById(idUser).get());
+		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
+		evento.setAutore(utenteLoggato);
 		evento.setVisibile(true);
 		
-		if(!immagine.isEmpty()) {
+		if(!immagine.getOriginalFilename().isEmpty()) {
 			try {
-				String fileName = serviceFileSystem.saveImage(imageFolder, immagine, idUser);
-				evento.setCopertina(fileName);
-				System.err.println("File caricato");
+				FileImmagine img = new FileImmagine();
+				img.setData(immagine.getBytes());
+				img.setAutore(utenteLoggato);
+				img.setTimestamp(Instant.now().getEpochSecond());
+				img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
+				serviceFileImmagine.insert(img);
+				evento.setCopertina(img);
 			} catch (Exception e) {
 				System.err.println("Non riesco a caricare il file");
-			}	
+			}
 		}
 		
 		if(isLife.equals("true")) {
@@ -163,15 +171,24 @@ public class EventoController extends BaseController {
 		Timestamp timestamp = new Timestamp(formettedDate.getTime()/1000);  
 		evento.setData(timestamp.getTime());
 		
-		if(!immagine.isEmpty()) {
-			int idUser = Integer.parseInt(session.getAttribute("id").toString());
+		if(!immagine.getOriginalFilename().isEmpty()) {
 			try {
-				String fileName = serviceFileSystem.saveImage(imageFolder, immagine, idUser);
-				evento.setCopertina(fileName);
-				System.err.println("File caricato");
+				FileImmagine img = new FileImmagine();			
+				img.setData(immagine.getBytes());
+				if(!serviceFileImmagine.contains(img.getData())) {
+					int idUser = Integer.parseInt(session.getAttribute("id").toString());
+					UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
+					img.setAutore(utenteLoggato);
+					img.setTimestamp(Instant.now().getEpochSecond());
+					img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
+					serviceFileImmagine.insert(img);
+					evento.setCopertina(img);
+				}else {
+					evento.setCopertina(serviceFileImmagine.getImmagineByData(img.getData()));
+				}
 			} catch (Exception e) {
 				System.err.println("Non riesco a caricare il file");
-			}	
+			}
 		}
 		
 		repoEvento.save(evento);

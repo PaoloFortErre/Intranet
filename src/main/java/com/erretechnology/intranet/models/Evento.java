@@ -18,14 +18,16 @@ public class Evento {
 	private int id;
 	private String titolo;
 	private String contenuto;
-	private String copertina;
+	@OneToOne()
+	@JoinColumn(name = "id_immagine")
+	private FileImmagine copertina;
 	private long data;
 	@OneToOne
 	@JoinColumn(name = "id_indirizzo")
 	private Indirizzo indirizzo;
 	@ManyToOne
 	@JoinColumn(name="autore_id")
-	private Utente autore;
+	private UtenteDatiPersonali autore;
 	private boolean visibile;
 	private boolean isLife;
 	
@@ -57,11 +59,11 @@ public class Evento {
 		this.contenuto = contenuto;
 	}
 
-	public String getCopertina() {
+	public FileImmagine getCopertina() {
 		return copertina;
 	}
 
-	public void setCopertina(String copertina) {
+	public void setCopertina(FileImmagine copertina) {
 		this.copertina = copertina;
 	}
 
@@ -81,11 +83,11 @@ public class Evento {
 		this.indirizzo = indirizzo;
 	}
 
-	public Utente getAutore() {
+	public UtenteDatiPersonali getAutore() {
 		return autore;
 	}
 
-	public void setAutore(Utente autore) {
+	public void setAutore(UtenteDatiPersonali autore) {
 		this.autore = autore;
 	}
 
