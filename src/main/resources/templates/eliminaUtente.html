@@ -30,7 +30,7 @@
 
     <!-- ROW CON INPUT -->
     <div class="row mt-5">
-      <div class="col-1">
+      <div class="col">
         <button class="btn btn-primary" onclick="goBack()">TORNA INDIETRO</button>
         <script>
         function goBack() {
@@ -39,21 +39,26 @@
       </script>
     </div>
 
-    <div class="col text-center mt-5">
-      <div class="container-fluid">
-        <h1 class="h1 mb-5">SCEGLI QUALE UTENTE ELIMINARE</h1>
+    <div class="col-8 text-center mt-5">
+      <div class="container-fluid border border-white mt-5">
+        <h1 class="h1 mb-5 mt-1">SCEGLI QUALE UTENTE ELIMINARE</h1>
         <form method="post" th:action="@{/profile/elimina}">
-          <select name="id_eliminato" id="id_eliminato">
-            <option value="null">NOME E COGNOME</option>
-            <option th:each="utente : ${utenti}" th:name ="id_eliminato"
-            th:value="${utente.id}" th:text="${utente.nome} + ' ' + ${utente.cognome}">
-          </select>
-          <input type="submit" value ="Elimina">
+          <div class="form-row ">
+            <div class="form-group ml-5 col-lg-10">
+              <select class="form-control ml-2" name="id_eliminato" id="id_eliminato">
+                <option value="null">NOME E COGNOME</option>
+                <option th:each="utente : ${utenti}" th:name ="id_eliminato"
+                th:value="${utente.id}" th:text="${utente.nome} + ' ' + ${utente.cognome}">
+              </select>
+            </div>
+          </div>
+          <input class="btn btn-danger mb-3" type="submit" value ="Elimina">
         </form>
       </div>
     </div>
-    <div class="col-2">
-      <img class="img-fluid rounded bg-white w-100 float-left mt-2 ml-2"
+
+    <div class="col">
+      <img class="img-fluid rounded bg-white w-100 float-left mt-1 ml-2"
       src="/view/Profile/Images/erre_group.png" alt="erre_logo" >
     </div>
   </div>
