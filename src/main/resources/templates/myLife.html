@@ -371,9 +371,9 @@ COLONNA DESTRA
 
 
 				<div th:each="eventilife : ${eventilife}" id="evento1life">
-					<div class="caption">
+					<div class="caption" th:if="${eventilife.copertina!=null}">
 						<img
-							th:src="@{/image/evento/{image}(image = ${eventilife.copertina})}"
+							th:src="'data:image/png;base64,' + ${eventilife.copertina.getImgData(eventilife.copertina.data)}"
 							class="img-responsive" width="99%" height="300px"
 							style="margin: auto;">
 						<h3 th:text="${eventilife.titolo}"></h3>
@@ -392,24 +392,24 @@ COLONNA DESTRA
 						style="margin-top: 10px; text-align: right;"></p>
 				</div>
 				<div>
-					<a href="" > <img
-						src="/view/MyLife/images/frecciaeventi2.png" id="frecciaeventi"
-						style="float: right" width="10%">
+					<a href=""> <img src="/view/MyLife/images/frecciaeventi2.png"
+						id="frecciaeventi" style="float: right" width="10%">
 					</a>
 				</div>
 
 
-				<div id="XX">
-					<div class="caption" th:each="eventilife1 : ${eventilife1}">
-						<img
-							th:src="@{/image/evento/{image}(image = ${eventilife1.copertina})}"
-							class="img-responsive" width="99%" height="280px"
-							style="margin: auto;">
-						<h3 th:text="${eventilife1.titolo}"></h3>
+				<div id="XX" th:if="${eventilife1!=null}">
+					<div th:if="${eventilife1.copertina!=null}">
+						<div class="caption" th:each="eventilife1 : ${eventilife1}">
+							<img
+								th:src="'data:image/png;base64,' + ${eventilife.copertina.getImgData(eventilife.copertina.data)}"
+								class="img-responsive" width="99%" height="280px"
+								style="margin: auto;">
+							<h3 th:text="${eventilife1.titolo}"></h3>
 
 
+						</div>
 					</div>
-
 
 					<img src="/view/MyWork/images/location.jpg" width="9%" height="9%">
 					<p th:text="${eventilife1.indirizzo.via}"
@@ -422,9 +422,8 @@ COLONNA DESTRA
 						style="margin-top: 10px; text-align: right;"></p>
 
 					<div>
-						<a href=""> <img
-							src="/view/MyLife/images/frecciaeventi.png" id="frecciaeventi2"
-							style="float: left" width="10%">
+						<a href=""> <img src="/view/MyLife/images/frecciaeventi.png"
+							id="frecciaeventi2" style="float: left" width="10%">
 						</a>
 					</div>
 

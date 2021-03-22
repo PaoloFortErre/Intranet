@@ -128,10 +128,10 @@ table, th, td {
 				Eventi</h1>
 			<h3 style="text-align: center; margin-bottom: 50px;">Scopri gli
 				eventi a cui parteciperà l'azienda</h3>
-			<p th:if="${eventi.size==0}"
+			<p th:if="${eventi==null}"
 				style="text-align: center; margin-bottom: 50px;">Nessun evento
 				in prossimità</p>
-			<div th:if="${eventi.size>0}">
+			<div th:if="${eventi!=null}">
 				<div class="col-sm-12 col-md-6 col-lg-6" th:each="eventi:${eventi}">
 					<div class="evento" style="margin: auto">
 						<div id="evento-immagine" th:if="${eventi.copertina!=null}">
@@ -174,7 +174,7 @@ table, th, td {
 					src="/view/MyWork/images/frecciasotto.png" width="30px"
 					style="MARGIN-right: 50px;"></a>
 
-				<div id="eventoWork2">
+				<div id="eventoWork2" th:if="${eventi2!=null}">
 					<div class="col-sm-12 col-md-6 col-lg-6"
 						th:each="eventi2:${eventi2}">
 
