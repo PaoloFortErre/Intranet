@@ -59,10 +59,10 @@
                 <label >Email</label>
                 <input class="form-control" type="email" th:name="email" placeholder="*****@*****"/>
               </div>
-                <div class="form-group col-auto ml-5">
-                  <label for="date1">Data di nascita</label>
-                  <input class="form-control" id="date1" type="date" th:field="${date.date}" placeholder="Inserisci la data in formato gg/mm/aaaa">
-                </div>
+              <div class="form-group col-auto ml-5">
+                <label for="date1">Data di nascita</label>
+                <input class="form-control" id="date1" type="date" th:field="${date.date}" placeholder="Inserisci la data in formato gg/mm/aaaa">
+              </div>
             </div>
             <div class="form-row ml-2">
               <div class="form-group col-auto ml-5">
@@ -86,8 +86,8 @@
           </form>
 
           <div th:if="${emailF != null}" class="row justify-content-center mt-2">
-    		<p class="p text-danger">[[${emailF}]]</p>
-	 	 </div>
+            <p class="p text-danger">[[${emailF}]]</p>
+          </div>
         </div>
 
         <!--RIATTIVA UTENTE-->
