@@ -134,9 +134,9 @@ table, th, td {
 			<div th:if="${eventi.size>0}">
 				<div class="col-sm-12 col-md-6 col-lg-6" th:each="eventi:${eventi}">
 					<div class="evento" style="margin: auto">
-						<div id="evento-immagine">
+						<div id="evento-immagine" th:if="${eventi.copertina!=null}">
 							<img
-								th:src="@{/image/evento/{image}(image = ${eventi.copertina})}"
+								th:src="'data:image/png;base64,' + ${eventi.copertina.getImgData(eventi.copertina.data)}"
 								width="100%" height="330px">
 						</div>
 						<div id="evento-title">
@@ -145,7 +145,8 @@ table, th, td {
 								th:text="${eventi.titolo}"></h4>
 						</div>
 						<div id="eventoBody">
-							<p th:text="${eventi.contenuto}" style="padding: 8px; color: black;"></p>
+							<p th:text="${eventi.contenuto}"
+								style="padding: 8px; color: black;"></p>
 							<p
 								style="color: black; margin-right: 8px; text-align: right; font-weight: 900;"
 								th:text="${#dates.format(eventi.data*1000, 'dd/MM/yyyy')}">
@@ -167,50 +168,52 @@ table, th, td {
 					</div>
 
 				</div>
-				 <a href=""
+				<a href=""
 					style="float: right; text-decoration: none; color: #F3F3F3; opacity: 0.8;"
 					onclick="mostraEventi()" id="altriEventi"> Vedi altri <img
 					src="/view/MyWork/images/frecciasotto.png" width="30px"
 					style="MARGIN-right: 50px;"></a>
-					
-					<div id="eventoWork2">
-					<div class="col-sm-12 col-md-6 col-lg-6"  th:each="eventi2:${eventi2}" >
-					 
-					<div class="evento" style="margin: auto">
-						<div id="evento-immagine">
-							<img
-								th:src="@{/image/evento/{image}(image = ${eventi2.copertina})}"
-								width="100%" height="330px">
+
+				<div id="eventoWork2">
+					<div class="col-sm-12 col-md-6 col-lg-6"
+						th:each="eventi2:${eventi2}">
+
+						<div class="evento" style="margin: auto">
+							<div id="evento-immagine"  th:if="${eventi2.copertina!=null}">
+								<img
+									th:src="'data:image/png;base64,' + ${eventi2.copertina.getImgData(eventi2.copertina.data)}"
+									width="100%" height="330px">
+							</div>
+							<div id="evento-title">
+								<h4
+									style="color: black; padding: 8px; font-weight: 900; text-shadow: 1px 3px 2px rgba(255, 208, 69, 1);"
+									th:text="${eventi2.titolo}"></h4>
+							</div>
+							<div id="eventoBody">
+								<p th:text="${eventi2.contenuto}"
+									style="padding: 8px; color: black;"></p>
+								<p
+									style="color: black; margin-right: 8px; text-align: right; font-weight: 900;"
+									th:text="${#dates.format(eventi2.data*1000, 'dd/MM/yyyy')}">
+
+								</p>
+
+								<img src="/view/MyWork/images/location.jpg" width="9%"
+									height="9%">
+								<p
+									style="color: black; text-align: right; display: inline-block;"
+									th:text="${eventi2.indirizzo.via}">,</p>
+
+								<p
+									style="color: black; text-align: right; margin-left: 260px; font-weight: 700; display: inline-block;"
+									th:text="${eventi2.indirizzo.citta}"></p>
+
+
+							</div>
 						</div>
-						<div id="evento-title">
-							<h4
-								style="color: black; padding: 8px; font-weight: 900; text-shadow: 1px 3px 2px rgba(255, 208, 69, 1);"
-								th:text="${eventi2.titolo}"></h4>
-						</div>
-						<div id="eventoBody">
-							<p th:text="${eventi2.contenuto}" style="padding: 8px; color: black;"></p>
-							<p
-								style="color: black; margin-right: 8px; text-align: right; font-weight: 900;"
-								th:text="${#dates.format(eventi2.data*1000, 'dd/MM/yyyy')}">
 
-							</p>
-
-							<img src="/view/MyWork/images/location.jpg" width="9%"
-								height="9%">
-							<p
-								style="color: black; text-align: right; display: inline-block;"
-								th:text="${eventi2.indirizzo.via}">,</p>
-
-							<p
-								style="color: black; text-align: right; margin-left: 260px; font-weight: 700; display: inline-block;"
-								th:text="${eventi2.indirizzo.citta}"></p>
-
-
-						</div>
 					</div>
-
 				</div>
-			</div>	
 
 			</div>
 
@@ -231,10 +234,11 @@ table, th, td {
 
 
 				<div
-					style="margin-left: 70px; background-color: #232323; box-shadow: -1px 9px 8px 3px rgba(0, 0, 0, 0.76); margin-bottom: 70px;" >
+					style="margin-left: 70px; background-color: #232323; box-shadow: -1px 9px 8px 3px rgba(0, 0, 0, 0.76); margin-bottom: 70px;">
 
-					<div class="row" style="padding: 10px;" th:if="${news!=null}" th:each="news:${news}">
-						<div class="col-sm-8 col-md-8 col-lg-8"  >
+					<div class="row" style="padding: 10px;" th:if="${news!=null}"
+						th:each="news:${news}">
+						<div class="col-sm-8 col-md-8 col-lg-8">
 							<h3 style="font-weight: 900" th:text="${news.titolo}"></h3>
 							<p style="line-height: 30px; margin-top: 20px; font-size: 15px"
 								th:text="${news.contenuto}"></p>
@@ -243,8 +247,9 @@ table, th, td {
 								th:text="${#dates.format(news.dataPubblicazione*1000, 'dd/MM/yyyy, HH:mm')}">
 							</p>
 						</div>
-						<div class="col-sm-4 col-md-4 col-lg-4" >
-							 <img th:src="'data:image/png;base64,' + ${news.copertina.getImgData(news.copertina.data)}"
+						<div class="col-sm-4 col-md-4 col-lg-4">
+							<img
+								th:src="'data:image/png;base64,' + ${news.copertina.getImgData(news.copertina.data)}"
 								width="95%" height="160PX" style="float: right; top: 29px;">
 
 						</div>
@@ -255,27 +260,28 @@ table, th, td {
 
 					<div th:if="${news.size>2}">
 						<a href="" id="mostraNews"
-							style="text-align: center; text-decoration: none; color: #F3F3F3; opacity: 0.8; margin-left: 420px; "
+							style="text-align: center; text-decoration: none; color: #F3F3F3; opacity: 0.8; margin-left: 420px;"
 							onclick="mostraNews()"> Vedi altri <img
 							src="/view/MyWork/images/frecciasotto.png" width="30px"
-							id="frecciasotto" ></a>
+							id="frecciasotto"></a>
 					</div>
-					<div id="news2" style="display: none" th:if="${news2!=null}" >
+					<div id="news2" style="display: none" th:if="${news2!=null}">
 						<div th:each="news2:${news2}">
-						<div class="row" style="padding: 10px;" >
-							<div class="col-sm-8 col-md-8 col-lg-8">
-								<h3 style="font-weight: 900" th:text="${news2.titolo}"></h3>
-								<p style="line-height: 30px; margin-top: 20px; font-size: 15px"
-									th:text="${news2.contenuto}"></p>
+							<div class="row" style="padding: 10px;">
+								<div class="col-sm-8 col-md-8 col-lg-8">
+									<h3 style="font-weight: 900" th:text="${news2.titolo}"></h3>
+									<p style="line-height: 30px; margin-top: 20px; font-size: 15px"
+										th:text="${news2.contenuto}"></p>
 
-								<p style="text-align: right; margin-top: 30px;"
-									th:text="${#dates.format(news2.dataPubblicazione*1000, 'dd/MM/yyyy, HH:mm')}">
-								</p>
-							</div>
-							<div class="col-sm-4 col-md-4 col-lg-4" >
-								<img th:src="'data:image/png;base64,' + ${news2.copertina.getImgData(news2.copertina.data)}"
-									width="95%" height="160PX" style="float: right; top: 29px;">
-							</div>
+									<p style="text-align: right; margin-top: 30px;"
+										th:text="${#dates.format(news2.dataPubblicazione*1000, 'dd/MM/yyyy, HH:mm')}">
+									</p>
+								</div>
+								<div class="col-sm-4 col-md-4 col-lg-4">
+									<img
+										th:src="'data:image/png;base64,' + ${news2.copertina.getImgData(news2.copertina.data)}"
+										width="95%" height="160PX" style="float: right; top: 29px;">
+								</div>
 							</div>
 
 
@@ -329,9 +335,12 @@ table, th, td {
 								</tr>
 								<tr style="text-align: left">
 									<td><div th:if="${nuoviAssunti.size>2}">
-											<a href="" id="vedi" onclick="mostraAssunzioni()" style="text-decoration: none; color: black; font-size: 13px;"> Vedi altri <img
-							src="/view/MyWork/images/freccianera.png" width="30px"
-							id="frecciasotto" ></a>										 </div></td>
+											<a href="" id="vedi" onclick="mostraAssunzioni()"
+												style="text-decoration: none; color: black; font-size: 13px;">
+												Vedi altri <img src="/view/MyWork/images/freccianera.png"
+												width="30px" id="frecciasotto">
+											</a>
+										</div></td>
 								</tr>
 							</th:block>
 						</table>
@@ -358,7 +367,7 @@ table, th, td {
 								</tr>
 							</th:block>
 						</table>
-				
+
 					</div>
 				</div>
 
@@ -414,7 +423,8 @@ table, th, td {
 		<!-- °°°°°°°°°°° NUOVI CLIENTI °°°°°°°°°°-->
 
 		<div class="row" style="margin-top: 20px;">
-			<div class="col-sm-8 col-md-6 col-lg-5" th:if="${nuoviClienti.size!=0}">
+			<div class="col-sm-8 col-md-6 col-lg-5"
+				th:if="${nuoviClienti.size!=0}">
 				<div class="assunti2">
 					<div class="modal-header2">
 						<div class="title2">
@@ -426,9 +436,13 @@ table, th, td {
 					<table class="nuoviClienti" style="margin-top: 15px;">
 						<th:block>
 							<tr>
-								<td th:each="cliente: ${nuoviClienti}"> <div th:if="${cliente.logo!=null}"><img
-									th:src="'data:image/png;base64,' + ${cliente.logo.getImgData(cliente.logo.data)}"
-									class="img-fluid" width="120px" height="120px"></div></td>
+								<td th:each="cliente: ${nuoviClienti}">
+									<div th:if="${cliente.logo!=null}">
+										<img
+											th:src="'data:image/png;base64,' + ${cliente.logo.getImgData(cliente.logo.data)}"
+											class="img-fluid" width="120px" height="120px">
+									</div>
+								</td>
 							</tr>
 						</th:block>
 						<th:block>
@@ -470,8 +484,9 @@ table, th, td {
 					<img src="/view/MyLife/images/erre.png" height="80px"
 						alt="erre_logo" style="margin: auto">
 				</div>
-				<div class="col-sm-4 col-lg-4" style="margin:auto;">
-				<img src="/view/MyWork/images/thegate.png" width="100%" style="margin:auto;">
+				<div class="col-sm-4 col-lg-4" style="margin: auto;">
+					<img src="/view/MyWork/images/thegate.png" width="100%"
+						style="margin: auto;">
 					<p style="color: #F3F3F3; text-align: center; font-size: 20px;">
 						Supporto: +39 011 197 429 00</p>
 				</div>

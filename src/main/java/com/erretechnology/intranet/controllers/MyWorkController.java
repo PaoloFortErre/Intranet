@@ -152,8 +152,19 @@ public class MyWorkController extends BaseController {
 //		 return mav;
 		 List<Evento> eventi = (List<Evento>) repoEvento.findNextWorkEvents(Instant.now().getEpochSecond());
 		 System.out.println(eventi.size());
+		 if (eventi.size()>=4) {
 		 mav.addObject("eventi", eventi.subList(0, 2));
 		 mav.addObject("eventi2", eventi.subList(2, 4));
+		 }
+		 else if (eventi.size()<2) {
+			 mav.addObject("eventi", eventi.subList(0, eventi.size()));
+			 mav.addObject("eventi2", null);
+		 }
+		 else if (eventi.size()>2 && eventi.size()<4) {
+			 mav.addObject("eventi", eventi.subList(0, 2));
+			 mav.addObject("eventi2", eventi.subList(2, eventi.size()));
+
+		 }
 		 return mav;
 
 		 

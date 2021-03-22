@@ -392,7 +392,7 @@ COLONNA DESTRA
 						style="margin-top: 10px; text-align: right;"></p>
 				</div>
 				<div>
-					<a href="" onclick="fun()"> <img
+					<a href="" > <img
 						src="/view/MyLife/images/frecciaeventi2.png" id="frecciaeventi"
 						style="float: right" width="10%">
 					</a>
@@ -422,7 +422,7 @@ COLONNA DESTRA
 						style="margin-top: 10px; text-align: right;"></p>
 
 					<div>
-						<a href="" onclick="fun2()"> <img
+						<a href=""> <img
 							src="/view/MyLife/images/frecciaeventi.png" id="frecciaeventi2"
 							style="float: left" width="10%">
 						</a>
@@ -518,6 +518,18 @@ COLONNA DESTRA
 			$(".right").click(function() {
 				$("#myCarousel").carousel("next");
 			});
+			$("#frecciaeventi").click(function(){
+				$("#XX").fadeIn("slow");
+				$("#frecciaeventi").css("display", "none");
+				$("#frecciaeventi2").css("display", "block");
+				$("#evento1life").css("display", "none");
+			})
+			$("#frecciaeventi2").click(function(){
+				$("#evento1life").fadeIn();
+				$("#XX").css("display", "none");
+				$("#frecciaeventi").css("display", "block");
+
+			})
 
 		});
 
@@ -532,20 +544,7 @@ COLONNA DESTRA
 
 		}
 
-		function fun() {
-			document.getElementById("XX").style.display = "block";
-			document.getElementById("evento1life").style.display = "none";
-			document.getElementById("frecciaeventi").style.display = "none";
-			document.getElementById("frecciaeventi2").style.display = "block";
-
-		}
-
-		function fun2() {
-			document.getElementById("XX").style.display = "none";
-			document.getElementById("evento1life").style.display = "block";
-			document.getElementById("frecciaeventi").style.display = "block";
-
-		}
+		
 	</script>
 
 </body>
