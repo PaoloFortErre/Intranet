@@ -156,8 +156,8 @@ public class UtenteController extends BaseController{
 	@GetMapping(value = "/gestisciPermesso")
 	public ModelAndView Permesso(/*int id*/) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("permissionManager");
-		mav.addObject("utenti", serviceUtente.getAll().stream().map(x-> x.getEmail()).collect(Collectors.toList()));
+		mav.setViewName("gestisci_ruolo");
+		mav.addObject("utenti", serviceDatiPersonali.getAll());
 		//List<String> permessiMancanti = servicePermesso.getAllName();
 		//List<String> permessiUtente = serviceAuthority.getAllNameById(id);
 		//permessiMancanti.removeAll(permessiUtente);

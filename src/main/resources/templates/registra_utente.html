@@ -84,7 +84,7 @@
             </div>
             <button type="submit" class="btn btn-success mb-3">Aggiungi</button>
           </form>
-          
+
           <div th:if="${emailF != null}" class="row justify-content-center mt-2">
     		<p class="p text-danger">[[${emailF}]]</p>
 	 	 </div>
@@ -98,7 +98,7 @@
               <div class="form-group col-10 ml-4">
                 <select class="form-control" name="id_riattivato" id="id_riattivato">
                   <option value="null">Utente</option>
-                  <option th:each="utente : ${utenti_non_attivi}" th:name ="id_riattivato" th:value="${utente.id}" th:text="${utente.nome} + ' ' + ${utente.cognome}">
+                  <option th:each="utente : ${utenti_non_attivi}" th:name ="id_riattivato" th:value="${utente.id}" th:text="${utente.nome} + ' ' + ${utente.cognome} + ' '+ '_'+ ' '+ '_'+ ' '+ ${utente.utente.email} ">
                   </select>
                 </div>
               </div>
@@ -107,8 +107,8 @@
           </div>
 
         </div>
-        
-        
+
+
 
         <div class="col">
           <img class="img-fluid rounded bg-white w-100 float-left mt-2 ml-2"

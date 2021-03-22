@@ -24,14 +24,14 @@ function sendAjaxRequest() {
             $("#permessiMancanti").append(option);
         });
     });
-    
+
     $.get( "http://localhost:8080/profile/getAllPermessi?email=" + email, function( data ) {
         $.each(data, function(key, value) {
             let option = "<option value = " + key + ">" + value +  "</option>";
             $("#TuttiPermessi").append(option);
         });
     });
-    
+
 };
 
 $(document).ready(function() {
@@ -49,7 +49,7 @@ $(document).ready(function() {
 				<option value="0">Seleziona un utente per modificare i permessi</option>
 				<option th:each="utente : ${utenti}" th:value="${utente}" th:text="${utente}"></option>
 			</select>
-		  
+
 			<p>Aggiungi un permesso</p>
 			<select id="permessiMancanti" th:name="pAdd">
 				<option value="0">seleziona un permesso da aggiungere</option>
@@ -61,7 +61,7 @@ $(document).ready(function() {
 			</select>
 			<button type="submit" th:name="flag" value="0">Invia</button>
 		</form>
-		
+
 	</div>
 </body>
 </html>
