@@ -192,10 +192,10 @@ table, th, td {
 
 
 				<div
-					style="margin-left: 70px; background-color: #232323; box-shadow: -1px 9px 8px 3px rgba(0, 0, 0, 0.76); margin-bottom: 70px;">
+					style="margin-left: 70px; background-color: #232323; box-shadow: -1px 9px 8px 3px rgba(0, 0, 0, 0.76); margin-bottom: 70px;" >
 
-					<div class="row" style="padding: 10px;" th:each="news:${news}">
-						<div class="col-sm-8 col-md-8 col-lg-8">
+					<div class="row" style="padding: 10px;" th:if="${news!=null}">
+						<div class="col-sm-8 col-md-8 col-lg-8"  th:each="news:${news}">
 							<h3 style="font-weight: 900" th:text="${news.titolo}"></h3>
 							<p style="line-height: 30px; margin-top: 20px; font-size: 15px"
 								th:text="${news.contenuto}"></p>
@@ -216,12 +216,12 @@ table, th, td {
 
 					<div th:if="${news.size>2}">
 						<a href="" id="mostraNews"
-							style="text-align: center; text-decoration: none; color: #F3F3F3; opacity: 0.8; margin-left: 420px; : ;"
+							style="text-align: center; text-decoration: none; color: #F3F3F3; opacity: 0.8; margin-left: 420px; "
 							onclick="mostraNews()"> Vedi altri <img
 							src="/view/MyWork/images/frecciasotto.png" width="30px"
 							id="frecciasotto" ></a>
 					</div>
-					<div id="news2" style="display: none">
+					<div id="news2" style="display: none" th:if="${news2!=null}">
 						<div class="row" style="padding: 10px;" th:each="news2:${news2}">
 							<div class="col-sm-8 col-md-8 col-lg-8">
 								<h3 style="font-weight: 900" th:text="${news2.titolo}"></h3>
