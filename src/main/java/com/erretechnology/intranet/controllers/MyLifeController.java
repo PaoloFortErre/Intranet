@@ -67,9 +67,20 @@ public class MyLifeController extends BaseController {
 			mav.addObject("eventilife1", evento.subList(1,2));
 		}
 		
+		
+		if (aforismi.size()==0) {
+			mav.addObject("aforisma", null);
+			mav.addObject("aforisma2", null);
+
+		}
+		else if (aforismi.size()==1) {
+		mav.addObject("aforisma", aforismi.get(0));
+		mav.addObject("aforisma2", null);
+		}
+		else {
 		mav.addObject("aforisma", aforismi.get(0));
 		mav.addObject("aforisma2", aforismi.get(1));
-
+		}
 	//	mav.addObject("eventilife2", evento.get(2));
 	//	mav.addObject("img", serviceFileImmagine.getLastImmagineByUtente(u));
 		return mav;
