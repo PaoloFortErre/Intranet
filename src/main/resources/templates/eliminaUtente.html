@@ -46,9 +46,9 @@
           <div class="form-row ">
             <div class="form-group ml-5 col-lg-10">
               <select class="form-control ml-2" name="id_eliminato" id="id_eliminato">
-                <option value="null">NOME E COGNOME</option>
+                <option value="null">NOME, COGNOME ED EMAIL</option>
                 <option th:each="utente : ${utenti}" th:name ="id_eliminato"
-                th:value="${utente.id}" th:text="${utente.nome} + ' ' + ${utente.cognome}">
+                th:value="${utente.id}" th:text="${utente.nome} + ' ' + ${utente.cognome}+ ' '+ '_'+ ' '+ '_'+ ' '+ ${utente.utente.email} ">
               </select>
             </div>
           </div>
