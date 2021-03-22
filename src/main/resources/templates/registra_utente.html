@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org" lang="it">
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -18,11 +18,11 @@
 
   <title>aggiungi_utente</title>
   <style media="screen">
-    body{
-      font-family: Noto Sans, sans-serif;
-      color: #F3F3F3;
-      background-color: #303030;
-    }
+  body{
+    font-family: Noto Sans, sans-serif;
+    color: #F3F3F3;
+    background-color: #303030;
+  }
   </style>
 </head>
 <body>
@@ -33,9 +33,9 @@
       <div class="col">
         <button class="btn btn-primary" onclick="goBack()">TORNA INDIETRO</button>
         <script>
-          function goBack() {
-            window.history.back();
-          }
+        function goBack() {
+          window.history.back();
+        }
         </script>
       </div>
 
@@ -44,27 +44,27 @@
         <div class="container border border-white mt-5">
           <h1 class="h1 mb-3 mt-1">AGGIUNGI UTENTE</h1>
           <form  th:action="@{/eseguiRegistrazione}" method="post" enctype="utf8">
-            <div class="form-row">
+            <div class="form-row ml-2">
               <div class="form-group col-auto ml-5">
                 <label >Nome</label>
-                <input class="form-control" th:field="${user.nome}" placeholder="Mario"/>
+                <input class="form-control " th:field="${user.nome}"/>
               </div>
-              <div class="form-group col- ml-5">
+              <div class="form-group col-auto ml-5">
                 <label >Cognome</label>
-                <input class="form-control" th:field="${user.cognome}" placeholder="Rossi"/>
+                <input class="form-control " th:field="${user.cognome}"/>
               </div>
             </div>
-            <div class="form-row">
+            <div class="form-row ml-2">
               <div class="form-group col-auto ml-5">
                 <label >Email</label>
                 <input class="form-control" type="email" th:name="email" placeholder="*****@*****"/>
               </div>
-              <div class="form-group col-auto ml-5">
-                <label >Data di nascita</label>
-                <input class="form-control" type="date" th:field="${date.date}"/>
-              </div>
+                <div class="form-group col-auto ml-5">
+                  <label for="date1">Data di nascita</label>
+                  <input class="form-control" id="date1" type="date" th:field="${date.date}" placeholder="Inserisci la data in formato gg/mm/aaaa">
+                </div>
             </div>
-            <div class="form-row ">
+            <div class="form-row ml-2">
               <div class="form-group col-auto ml-5">
                 <label >Password</label>
                 <input class="form-control" type="password" th:name="password"/>
@@ -114,6 +114,7 @@
 
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
     crossorigin="anonymous"></script>
