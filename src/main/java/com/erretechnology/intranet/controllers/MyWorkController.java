@@ -69,8 +69,10 @@ public class MyWorkController extends BaseController {
 
 		List<UtenteDatiPersonali> nuoviUtenti = utenti.stream()
 				.sorted(Comparator.comparingInt(UtenteDatiPersonali::getId).reversed())
+				.filter(x->x.getUtente().getAttivo()==true)
 				.limit(6)
 				.collect(Collectors.toList());
+		System.out.println(nuoviUtenti.size());
 		if(nuoviUtenti.size() >= 6) {
 			mav.addObject("nuoviAssunti", nuoviUtenti.subList(0, 3));
 			mav.addObject("nuoviAssunti2", nuoviUtenti.subList(3, 6));
@@ -117,17 +119,22 @@ public class MyWorkController extends BaseController {
 		 * PARTE NEWS
 		 * 
 		 */	List<News> news= repoNews.findAllOrderByDataPubblicazioneDesc(); 
+		 System.out.println(news.size());
+
 		 if(news.size()>=6) {
 			 mav.addObject("news", news.subList(0, 3));
 			 mav.addObject("news2", news.subList(3, 6));
+			 System.out.println(news.subList(3,6).size());
 		 }
-		 else if(nuoviUtenti.size() <= 3) {
+		 else if(news.size() <= 3) {
 			 mav.addObject("news", news.subList(0, news.size()));
 			 mav.addObject("news2", null);
 
-		 }else if(nuoviUtenti.size() > 3 && nuoviUtenti.size() < 6) {
+		 }else if(news.size() > 3 && news.size() < 6) {
 			 mav.addObject("news", news.subList(0, 3));
 			 mav.addObject("news2", news.subList(3, news.size()));
+			 
+
 		 }
 
 
@@ -135,14 +142,20 @@ public class MyWorkController extends BaseController {
 		  * PARTE EVENTI
 		  * 
 		  */
-		 List<Evento> eventi = repoEvento.findNextWorkEvents(Instant.now().getEpochSecond()).stream().limit(2).collect(Collectors.toList());
-		 if(eventi.size() > 0) {
-		 mav.addObject("eventi", eventi);
-		 } else {
-			 mav.addObject("eventi", null);
-
-		 }
+//		 List<Evento> eventi = repoEvento.findNextWorkEvents(Instant.now().getEpochSecond()).stream().limit(3).collect(Collectors.toList());
+//		 if(eventi.size() > 0) {
+//		 mav.addObject("eventi", eventi);
+//		 } else {
+//			 mav.addObject("eventi", null);
+//
+//		 }
+//		 return mav;
+		 List<Evento> eventi = (List<Evento>) repoEvento.findNextWorkEvents(Instant.now().getEpochSecond());
+		 System.out.println(eventi.size());
+		 mav.addObject("eventi", eventi.subList(0, 2));
+		 mav.addObject("eventi2", eventi.subList(2, 4));
 		 return mav;
+
 		 
 
 	}

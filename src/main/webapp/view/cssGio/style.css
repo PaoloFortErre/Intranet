@@ -12,7 +12,7 @@ body {
 
 .carousel-inner>.item>img{
 	width: 100%;
-	height: 850px;
+	height: 750px;
 	margin: auto;
 }
 
@@ -418,5 +418,8 @@ audio{
 	display: block;
 }
 #frecciaeventi2 {
+	display: none;
+}
+#eventoWork2{
 	display: none;
 }

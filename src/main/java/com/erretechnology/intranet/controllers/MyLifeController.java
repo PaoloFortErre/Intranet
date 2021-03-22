@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.erretechnology.intranet.models.Aforisma;
 import com.erretechnology.intranet.models.Commento;
 import com.erretechnology.intranet.models.CommentoModificato;
 import com.erretechnology.intranet.models.Evento;
@@ -23,6 +24,7 @@ import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.Post;
 import com.erretechnology.intranet.models.PostModificato;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
+import com.erretechnology.intranet.repositories.RepositoryAforisma;
 import com.erretechnology.intranet.repositories.RepositoryEvento;
 
 @Controller
@@ -30,6 +32,8 @@ import com.erretechnology.intranet.repositories.RepositoryEvento;
 public class MyLifeController extends BaseController {
 	@Autowired
 	private RepositoryEvento repoEvento;
+	@Autowired
+	private RepositoryAforisma repoAfo;
 	//	@GetMapping(value="/myLife")
 	//	public ModelAndView myLife() {
 	//		ModelAndView mav = new ModelAndView();
@@ -42,6 +46,7 @@ public class MyLifeController extends BaseController {
 		//	List<Post> messaggi = service.getLastMessage();
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		List<Evento> evento = (List<Evento>) repoEvento.findNextLifeEvents(Instant.now().getEpochSecond());
+		List<Aforisma> aforismi = repoAfo.findAll();
 		System.out.println(evento.size());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myLife");
@@ -49,6 +54,9 @@ public class MyLifeController extends BaseController {
 		mav.addObject("utenteDati", u);
 		mav.addObject("eventilife", evento.get(0));
 		mav.addObject("eventilife1", evento.get(1));
+		mav.addObject("aforisma", aforismi.get(0));
+		mav.addObject("aforisma2", aforismi.get(1));
+
 	//	mav.addObject("eventilife2", evento.get(2));
 	//	mav.addObject("img", serviceFileImmagine.getLastImmagineByUtente(u));
 		return mav;
