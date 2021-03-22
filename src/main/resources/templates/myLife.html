@@ -362,10 +362,11 @@ COLONNA DESTRA
 			<div class="col-sm-4 col-lg-4" id="col-destra">
 
 
-
+<div th:if="${eventilife!=null}">
 
 				<h3 id="culturaPiemonte" style="margin-top: 30px">Cultura in
 					Piemonte</h3>
+					
 				<p style="color: #F3F3F3; text-align: center; font-size: 13px">
 					Se sei un tipo da eventi in città o da sagre:</p>
 
@@ -391,7 +392,7 @@ COLONNA DESTRA
 					<p th:text="${#dates.format(eventilife.data*1000, 'dd/MM/yyyy')}"
 						style="margin-top: 10px; text-align: right;"></p>
 				</div>
-				<div>
+				<div th:if="${eventilife1!=null}">
 					<a href=""> <img src="/view/MyLife/images/frecciaeventi2.png"
 						id="frecciaeventi" style="float: right" width="10%">
 					</a>
@@ -402,7 +403,7 @@ COLONNA DESTRA
 					<div th:if="${eventilife1.copertina!=null}">
 						<div class="caption" th:each="eventilife1 : ${eventilife1}">
 							<img
-								th:src="'data:image/png;base64,' + ${eventilife.copertina.getImgData(eventilife.copertina.data)}"
+								th:src="'data:image/png;base64,' + ${eventilife1.copertina.getImgData(eventilife1.copertina.data)}"
 								class="img-responsive" width="99%" height="280px"
 								style="margin: auto;">
 							<h3 th:text="${eventilife1.titolo}"></h3>
@@ -429,7 +430,7 @@ COLONNA DESTRA
 
 				</div>
 
-
+</div>
 
 
 
