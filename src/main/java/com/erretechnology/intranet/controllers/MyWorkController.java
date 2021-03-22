@@ -104,7 +104,7 @@ public class MyWorkController extends BaseController {
 		 */
 		List<Cliente> clienti = repoCliente.findLimit(3);
 		if(clienti.size() > 0) {
-		mav.addObject("nuoviClienti", clienti);
+			mav.addObject("nuoviClienti", clienti);
 		} else {
 			mav.addObject("nuoviClienti", null);
 		}
@@ -133,7 +133,23 @@ public class MyWorkController extends BaseController {
 		 }else if(news.size() > 3 && news.size() < 6) {
 			 mav.addObject("news", news.subList(0, 3));
 			 mav.addObject("news2", news.subList(3, news.size()));
-			 
+
+
+		 }
+		 if (news.size()==0) {
+			 mav.addObject( "newsSlide", null);
+			 mav.addObject( "newsSlide2", null);
+
+		 }
+		 
+		 else if(news.size()>=2) {
+			 mav.addObject( "newsSlide", news.get(0));
+			 mav.addObject( "newsSlide2", news.get(1));
+
+		 }
+		 else if (news.size()<2) {
+			 mav.addObject( "newsSlide", news.get(0));
+			 mav.addObject( "newsSlide2", null);
 
 		 }
 
@@ -142,14 +158,14 @@ public class MyWorkController extends BaseController {
 		  * PARTE EVENTI
 		  * 
 		  */
-//		 List<Evento> eventi = repoEvento.findNextWorkEvents(Instant.now().getEpochSecond()).stream().limit(3).collect(Collectors.toList());
-//		 if(eventi.size() > 0) {
-//		 mav.addObject("eventi", eventi);
-//		 } else {
-//			 mav.addObject("eventi", null);
-//
-//		 }
-//		 return mav;
+		 //		 List<Evento> eventi = repoEvento.findNextWorkEvents(Instant.now().getEpochSecond()).stream().limit(3).collect(Collectors.toList());
+		 //		 if(eventi.size() > 0) {
+		 //		 mav.addObject("eventi", eventi);
+		 //		 } else {
+		 //			 mav.addObject("eventi", null);
+		 //
+		 //		 }
+		 //		 return mav;
 		 List<Evento> eventi = (List<Evento>) repoEvento.findNextWorkEvents(Instant.now().getEpochSecond());
 		 System.out.println(eventi.size());
 		 if (eventi.size()==0) {
@@ -158,8 +174,8 @@ public class MyWorkController extends BaseController {
 
 		 }
 		 else if (eventi.size()>=4) {
-		 mav.addObject("eventi", eventi.subList(0, 2));
-		 mav.addObject("eventi2", eventi.subList(2, 4));
+			 mav.addObject("eventi", eventi.subList(0, 2));
+			 mav.addObject("eventi2", eventi.subList(2, 4));
 		 }
 		 else if (eventi.size()<2) {
 			 mav.addObject("eventi", eventi.subList(0, eventi.size()));
@@ -172,7 +188,7 @@ public class MyWorkController extends BaseController {
 		 }
 		 return mav;
 
-		 
+
 
 	}
 

@@ -79,33 +79,32 @@ table, th, td {
 
 				<!-- Indicators -->
 				<ol class="carousel-indicators">
-					<li class="item1 active"></li>
-					<li class="item2"></li>
+					<li class="item1 active" th:if="${newsSlide!=null}"></li>
+					<li class="item2" th:if="${newsSlide2!=null}"></li>
 
 				</ol>
-
+				  <div th:if="${newsSlide==null}"><img src="/view/MyWork/images/ferrari1.png" alt="ferrari"
+							width="100%" height="750px"> </div>
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner" role="listbox">
 
 
-					<div class="item active">
+					<div class="item active" th:if="${newsSlide!=null}">
 
 						<img src="/view/MyWork/images/ferrari1.png" alt="ferrari"
 							width="100%">
 						<div class="carousel-caption">
-							<h1 class="font-caption" style="font-weight: 900">"Ferrari
-								entra a far parte del team di Erre"</h1>
+							<h1 class="font-caption" style="font-weight: 900" th:text="${newsSlide.titolo}"></h1>
 
 
 						</div>
 					</div>
 
-					<div class="item">
+					<div class="item" th:if="${newsSlide2!=null}">
 						<img src="/view/MyWork/images/scarpe.png" alt="techweek"
 							width="100%">
-						<div class="carousel-caption">
-							<h1 class="font-caption" style="font-weight: 900">"Italian
-								Tech Week: riparte a Torino in autunno"</h1>
+						<div class="carousel-caption" >
+							<h1 class="font-caption" style="font-weight: 900" th:text="${newsSlide2.titolo}"></h1>
 
 						</div>
 					</div>
@@ -424,7 +423,7 @@ table, th, td {
 
 		<div class="row" style="margin-top: 20px;">
 			<div class="col-sm-8 col-md-6 col-lg-5"
-				th:if="${nuoviClienti.size!=0}">
+				th:if="${nuoviClienti!=null}">
 				<div class="assunti2">
 					<div class="modal-header2">
 						<div class="title2">
@@ -433,7 +432,7 @@ table, th, td {
 						</div>
 
 					</div>
-					<table class="nuoviClienti" style="margin-top: 15px;" th:if="${nuoviClienti!=null}">
+					<table class="nuoviClienti" style="margin-top: 15px;" >
 						<th:block>
 							<tr>
 								<td th:each="cliente: ${nuoviClienti}">
