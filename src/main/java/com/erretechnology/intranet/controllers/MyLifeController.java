@@ -52,8 +52,21 @@ public class MyLifeController extends BaseController {
 		mav.setViewName("myLife");
 		mav.addObject("messaggi", servicePost.getLastMessage());
 		mav.addObject("utenteDati", u);
-		mav.addObject("eventilife", evento.get(0));
-		mav.addObject("eventilife1", evento.get(1));
+		
+		if(evento.size()==0) {
+			mav.addObject("eventilife1", null);
+			mav.addObject("eventilife1", null);
+
+		} 
+		else if (evento.size()==1) {
+		mav.addObject("eventilife", evento.subList(0, 1));
+		mav.addObject("eventilife1", null);
+		}
+		else {
+			mav.addObject("eventilife", evento.subList(0, 1));
+			mav.addObject("eventilife1", evento.subList(1,2));
+		}
+		
 		mav.addObject("aforisma", aforismi.get(0));
 		mav.addObject("aforisma2", aforismi.get(1));
 

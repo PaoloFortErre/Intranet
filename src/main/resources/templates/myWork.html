@@ -433,7 +433,7 @@ table, th, td {
 						</div>
 
 					</div>
-					<table class="nuoviClienti" style="margin-top: 15px;">
+					<table class="nuoviClienti" style="margin-top: 15px;" th:if="${nuoviClienti!=null}">
 						<th:block>
 							<tr>
 								<td th:each="cliente: ${nuoviClienti}">
