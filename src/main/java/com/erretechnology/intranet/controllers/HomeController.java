@@ -215,8 +215,21 @@ public class HomeController extends BaseController{
 	public ModelAndView comunicazioniHr(HttpSession session) {
 		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		ModelAndView mav = new ModelAndView();
+	
 		mav.addObject("utenteDati", u);
+		mav.addObject("comunicazioni", serviceComunicazioni.getAll());
 		mav.setViewName("comunicazioniHr");
+		return mav;
+	}
+	
+	@GetMapping (value= "/moduli")
+	public ModelAndView moduli(HttpSession session) {
+		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		ModelAndView mav = new ModelAndView();
+	
+		mav.addObject("utenteDati", u);
+//		mav.addObject("comunicazioni", serviceComunicazioni.getAll());
+		mav.setViewName("moduli");
 		return mav;
 	}
 
