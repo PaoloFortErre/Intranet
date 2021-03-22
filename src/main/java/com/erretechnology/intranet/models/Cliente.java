@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,7 +15,9 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String nome;
-	private String logo;
+	@OneToOne()
+	@JoinColumn(name = "id_immagine")
+	private FileImmagine logo;
 	private long dataInizio;
 	private boolean visibile;
 	
@@ -36,11 +40,11 @@ public class Cliente {
 		this.nome = nome;
 	}
 
-	public String getLogo() {
+	public FileImmagine getLogo() {
 		return logo;
 	}
 
-	public void setLogo(String logo) {
+	public void setLogo(FileImmagine logo) {
 		this.logo = logo;
 	}
 

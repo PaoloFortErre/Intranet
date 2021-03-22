@@ -25,8 +25,6 @@ import com.erretechnology.intranet.models.NewsModificato;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.repositories.RepositoryNews;
 import com.erretechnology.intranet.repositories.RepositoryNewsModificato;
-import com.erretechnology.intranet.repositories.RepositoryUtente;
-
 
 @Controller
 @RequestMapping("news")
@@ -35,7 +33,6 @@ public class NewsController extends BaseController {
 	private RepositoryNews repoNews;
 	@Autowired
 	private RepositoryNewsModificato repoOldNews;
-	private String imageFolder = "news";
 	
 	@GetMapping("/{id}")
 	public String get(@PathVariable int id, Model model) {
@@ -103,13 +100,12 @@ public class NewsController extends BaseController {
 		news.setContenuto(contenuto);
 		
 		if(!immagine.getOriginalFilename().isEmpty()) {
-			int idUser = Integer.parseInt(session.getAttribute("id").toString());
-			UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
-			
 			try {
 				FileImmagine img = new FileImmagine();			
 				img.setData(immagine.getBytes());
 				if(!serviceFileImmagine.contains(img.getData())) {
+					int idUser = Integer.parseInt(session.getAttribute("id").toString());
+					UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
 					img.setAutore(utenteLoggato);
 					img.setTimestamp(Instant.now().getEpochSecond());
 					img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
