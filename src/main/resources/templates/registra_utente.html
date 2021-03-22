@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="description" content="Questo è un profilo admin">
+  <meta name="viewport" content="width=device-width, initial-scale=1,
+  shrink-to-fit=no">
+
+  <!-- Add icon library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+  integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+  crossorigin="anonymous">
+
+  <title>aggiungi_utente</title>
+  <style media="screen">
+    body{
+      font-family: Noto Sans, sans-serif;
+      color: #F3F3F3;
+      background-color: #303030;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- ROW CON INPUT -->
+    <div class="row mt-5 mb-5">
+      <div class="col">
+        <button class="btn btn-primary" onclick="goBack()">TORNA INDIETRO</button>
+        <script>
+          function goBack() {
+            window.history.back();
+          }
+        </script>
+      </div>
+
+      <!--AGGIUNGI UTENTE-->
+      <div class="col-8 text-center mt-5">
+        <div class="container border border-white mt-3">
+          <h1 class="h1 mb-3 mt-1">AGGIUNGI UTENTE</h1>
+          <form  th:action="@{/eseguiRegistrazione}" method="post" enctype="utf8">
+            <div class="form-row">
+              <div class="form-group col-auto">
+                <label >Nome</label>
+                <input class="form-control" th:field="${user.nome}" placeholder="Mario"/>
+              </div>
+              <div class="form-group col-auto">
+                <label >Cognome</label>
+                <input class="form-control" th:field="${user.cognome}" placeholder="Rossi"/>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-auto">
+                <label >Email</label>
+                <input class="form-control" type="email" th:name="email" placeholder="*****@*****"/>
+              </div>
+              <div class="form-group col-auto">
+                <label >Data di nascita</label>
+                <input class="form-control" type="date" th:field="${date.date}"/>
+              </div>
+            </div>
+            <div class="form-row ">
+              <div class="form-group col-auto">
+                <label >Password</label>
+                <input class="form-control" type="password" th:name="password"/>
+                <small id="passwordHelpInline" class="text-muted">
+                  Deve essere tra gli 8-20 caratteri.
+                </small>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-auto">
+                <label for="settore">Che settore è ?</label>
+                <select class="form-control" id="settore" th:name="settore">
+                  <option th:value="'Erre Technology'" th:text="ErreTechnology"></option>
+                  <option th:value="'Erre GES'" th:text="ErreGES"></option>
+                  <option th:value="'Erre PRO'" th:text="ErrePRO"></option>
+                  <option th:value="'Erre LAB'" th:text="ErreLAB"></option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-success mb-3">Aggiungi</button>
+          </form>
+        </div>
+
+        <!--RIATTIVA UTENTE-->
+        <div class="container-fluid border border-white mt-5">
+          <h1 class="h1 mb-3 mt-1">RIATTIVA UTENTE</h1>
+          <form class="" method="post" th:action="@{/profile/riattiva}">
+            <div class="form-row ml-5">
+              <div class="form-group ml-5">
+                <select class="form-control" name="id_riattivato" id="id_riattivato">
+                  <option value="null">Utente</option>
+                  <option th:each="utente : ${utenti_non_attivi}" th:name ="id_riattivato" th:value="${utente.id}" th:text="${utente.nome} + ' ' + ${utente.cognome}">
+                  </select>
+                </div>
+              </div>
+              <input class="btn btn-success mb-3" type="submit" value ="Riattiva">
+            </form>
+          </div>
+
+        </div>
+
+        <div class="col">
+          <img class="img-fluid rounded bg-white w-100 float-left mt-2 ml-2"
+          src="/view/Profile/Images/erre_group.png" alt="erre_logo" >
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+    crossorigin="anonymous"></script>
+
+  </body>
+  </html>
