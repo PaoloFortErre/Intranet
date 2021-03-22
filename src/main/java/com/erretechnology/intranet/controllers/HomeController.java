@@ -55,7 +55,7 @@ public class HomeController extends BaseController{
 	@GetMapping(value = "/registra")
 	public ModelAndView registrazione() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("signInPage");
+		mav.setViewName("registra_utente");
 		mav.addObject("user", new UtenteDatiPersonali());
 		mav.addObject("email", new String());
 		mav.addObject("password", new String());

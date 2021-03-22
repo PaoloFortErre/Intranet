@@ -2,8 +2,6 @@
 package com.erretechnology.intranet.models;
 
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

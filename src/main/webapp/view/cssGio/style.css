@@ -135,6 +135,9 @@ footer {
 	width: 80px;
 	box-shadow: 0 26.1px 11.1px rgba(0, 0, 0, 0.18), 0 69px 89px
 	rgba(0, 0, 0, 0.36);
+	-webkit-box-shadow: 10px 10px 6px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 10px 10px 6px 0px rgba(0,0,0,0.75);
+	box-shadow: 10px 10px 6px 0px rgba(0,0,0,0.75);
 }
 
 #post {
@@ -227,6 +230,7 @@ hr#linea {
 	cursor: pointer;
 }
 .assunti  {
+	padding: 5px;
 	color: black;
 	background-color: #F3F3F3;
 
@@ -273,6 +277,7 @@ hr#linea {
 	width: 100%;
 }
 #tableAssunti2 {
+	padding: 5px;
 	display: none;
 	color: black;
 	text-align:center;
@@ -355,24 +360,7 @@ audio{
 	text-decoration:none;
 	text-shadow:0px 1px 0px #1570cd;
 }
-#vedi{
-	box-shadow:inset 0px 1px 0px 0px #97c4fe;
-	background:linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
-	background-color:#3d94f6;
-	border-radius:6px;
-	border:1px solid #337fed;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:15px;
-	font-weight:bold;
-	padding:6px 24px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #1570cd;
 
-	margin-bottom:30px;
-}
 
 #vedi2{
 	
@@ -421,10 +409,14 @@ audio{
 	padding: 10px;
 	}
 
-#secondo {
+	
+#XX{
 	display: none;
-	}
-	#x{
-		display: none;
 	
 	}
+#evento1life {
+	display: block;
+}
+#frecciaeventi2 {
+	display: none;
+}
