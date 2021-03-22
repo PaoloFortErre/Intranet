@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.erretechnology.intranet.models.Cliente;
+import com.erretechnology.intranet.models.Evento;
 import com.erretechnology.intranet.models.News;
 import com.erretechnology.intranet.models.Podcast;
 import com.erretechnology.intranet.models.Sondaggio;
@@ -30,10 +32,10 @@ import com.erretechnology.intranet.repositories.RepositoryNews;
 public class MyWorkController extends BaseController {
 	@Autowired
 	private RepositoryCliente repoCliente;
-	
+
 	@Autowired
 	private RepositoryNews repoNews;
-	
+
 	@Autowired
 	private RepositoryEvento repoEvento;
 
@@ -50,10 +52,10 @@ public class MyWorkController extends BaseController {
 		Calendar calendar = Calendar.getInstance(), calUtente = Calendar.getInstance();
 		calendar.setTimeInMillis(Instant.now().getEpochSecond()*1000);
 		List<UtenteDatiPersonali> utenti = serviceDatiPersonali.getAll(), utentiCompleanno = new LinkedList<UtenteDatiPersonali>();
-		
+
 		for(UtenteDatiPersonali u : utenti) {
 			calUtente.setTimeInMillis(u.getDataNascita()*1000);
-			
+
 			if((calendar.get(Calendar.MONTH))==(calUtente.get(Calendar.MONTH)) && (calendar.get(Calendar.DAY_OF_MONTH))==(calUtente.get(Calendar.DAY_OF_MONTH)) /*&& u.isVisualizzaDataNascita() == true*/) {
 				utentiCompleanno.add(u);
 			}
@@ -64,20 +66,27 @@ public class MyWorkController extends BaseController {
 		 * PARTE CARICAMENTO FORM NUOVI UTENTI
 		 * 
 		 * */
-		
+
 		List<UtenteDatiPersonali> nuoviUtenti = utenti.stream()
 				.sorted(Comparator.comparingInt(UtenteDatiPersonali::getId).reversed())
 				.limit(6)
 				.collect(Collectors.toList());
-		
-		mav.addObject("nuoviAssunti", nuoviUtenti.subList(0, 3));
-		mav.addObject("nuoviAssunti2", nuoviUtenti.subList(3, 6));
-		
+		if(nuoviUtenti.size() >= 6) {
+			mav.addObject("nuoviAssunti", nuoviUtenti.subList(0, 3));
+			mav.addObject("nuoviAssunti2", nuoviUtenti.subList(3, 6));
+		} else if(nuoviUtenti.size() <= 3) {
+			mav.addObject("nuoviAssunti", nuoviUtenti.subList(0, nuoviUtenti.size()));
+			mav.addObject("nuoviAssunti2",null);
+
+		}else if(nuoviUtenti.size() > 3 && nuoviUtenti.size() < 6) {
+			mav.addObject("nuoviAssunti", nuoviUtenti.subList(0, 3));
+			mav.addObject("nuoviAssunti2", nuoviUtenti.subList(3, nuoviUtenti.size()));
+		}
 		///////////
 		/*
 		 * PARTE PODCAST
 		 * 
-		
+
 		 */	
 		List<Podcast> listPodcast = servicePodcast.getAll();
 		if(listPodcast.size() != 0) {
@@ -91,34 +100,53 @@ public class MyWorkController extends BaseController {
 		 * 
 		 * PARTE FORM NUOVI CLIENTI
 		 */
-		mav.addObject("nuoviClienti", repoCliente.findLimit(3));
+		List<Cliente> clienti = repoCliente.findLimit(3);
+		if(clienti.size() > 0) {
+		mav.addObject("nuoviClienti", clienti);
+		} else {
+			mav.addObject("nuoviClienti", null);
+		}
 		//alternativa con pagination
 		/*
 		 *  mav.addObject("nuoviClienti1", repoCliente.findPagination(PageRequest.of(0, 3)));
 		 *	mav.addObject("nuoviClienti2", repoCliente.findPagination(PageRequest.of(1, 3)));
 		 * 
 		 */
-		
+
 		/*
 		 * PARTE NEWS
 		 * 
 		 */	List<News> news= repoNews.findAllOrderByDataPubblicazioneDesc(); 
-			
-			mav.addObject("news", news.subList(0, 3));
-			mav.addObject("news2", news.subList(3, 6));
-		
-		
-		
-		/*
-		 * PARTE EVENTI
-		 * 
-		 */
-		
-		mav.addObject("eventi", repoEvento.findNextWorkEvents(Instant.now().getEpochSecond()).stream().limit(2).collect(Collectors.toList()));
-		return mav;
+		 if(news.size()>=6) {
+			 mav.addObject("news", news.subList(0, 3));
+			 mav.addObject("news2", news.subList(3, 6));
+		 }
+		 else if(nuoviUtenti.size() <= 3) {
+			 mav.addObject("news", news.subList(0, news.size()));
+			 mav.addObject("news2", null);
+
+		 }else if(nuoviUtenti.size() > 3 && nuoviUtenti.size() < 6) {
+			 mav.addObject("news", news.subList(0, 3));
+			 mav.addObject("news2", news.subList(3, news.size()));
+		 }
+
+
+		 /*
+		  * PARTE EVENTI
+		  * 
+		  */
+		 List<Evento> eventi = repoEvento.findNextWorkEvents(Instant.now().getEpochSecond()).stream().limit(2).collect(Collectors.toList());
+		 if(eventi.size() > 0) {
+		 mav.addObject("eventi", eventi);
+		 } else {
+			 mav.addObject("eventi", null);
+
+		 }
+		 return mav;
+		 
 
 	}
-	
+
 	@GetMapping(value = "/sondaggi")
 	public ModelAndView sondaggi() {
 		ModelAndView mav = new ModelAndView();
@@ -126,7 +154,7 @@ public class MyWorkController extends BaseController {
 		mav.addObject("sondaggi", serviceSondaggio.findAll());
 		return mav;		
 	}
-	
+
 	@PostMapping(value = "/sondaggi")
 	public String sondaggio(@ModelAttribute("sondaggio") Sondaggio sondaggio, HttpSession session) {
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
@@ -137,7 +165,7 @@ public class MyWorkController extends BaseController {
 		saveLog("creato un nuovo sondaggio", autore);
 		return "redirect:/myWork/sondaggi";
 	}
-	
+
 	@PostMapping(value = "/deleteSondaggio")
 	public String deleteMessaggio(int id, HttpSession session) {
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
@@ -148,9 +176,9 @@ public class MyWorkController extends BaseController {
 			saveLog("cancellato un sondaggio", autore);
 			return "redirect:/myWork/sondaggi";
 		}return "redirect:forbidden";
-		
+
 	}
-	
+
 	@GetMapping(value = "/addSondaggio")
 	public ModelAndView addSondaggio() {
 		ModelAndView mav = new ModelAndView();
