@@ -104,7 +104,7 @@ public class MyLifeController extends BaseController {
 		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
 		//int autoreId = servicePost.findById(id).getAutore().getId();
 		UtenteDatiPersonali autore = servicePost.findById(id).getAutore();
-		if(sessionId == autore.getId() || serviceAuthority.findByUsertId(sessionId).stream().filter(x -> x.getIdPermesso().equals("DPS")).count() == 1) {
+		if(sessionId == autore.getId() || serviceAuthority.findByUserId(sessionId).stream().filter(x -> x.getIdPermesso().equals("DPS")).count() == 1) {
 			Post p = servicePost.findById(id);
 			p.setVisibile(false);
 			servicePost.save(p);
@@ -125,7 +125,7 @@ public class MyLifeController extends BaseController {
 		UtenteDatiPersonali autorePost = serviceCommento.findById(id).getPost().getAutore();
 		//Utente utenteLoggato = serviceUtente.findById(sessionId);
 		if(sessionId == autoreCommento.getId() ||
-				serviceAuthority.findByUsertId(sessionId).stream().filter(x-> x.getIdPermesso().equals("DCS")).count() == 1 ||
+				serviceAuthority.findByUserId(sessionId).stream().filter(x-> x.getIdPermesso().equals("DCS")).count() == 1 ||
 				autorePost.getId() == sessionId) {
 			Commento c = serviceCommento.findById(id);
 			c.setVisibile(false);

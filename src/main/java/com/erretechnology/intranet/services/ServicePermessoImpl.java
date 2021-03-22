@@ -26,7 +26,7 @@ public class ServicePermessoImpl implements ServicePermesso{
 	
 	@Override
 	public List<String> getAllName(){
-		return getAll().stream().map(x-> x.getNome()).collect(Collectors.toList());
+		return getAll().stream().map(x-> x.getDescrizione()).collect(Collectors.toList());
 	}
 
 	@Override
@@ -34,7 +34,10 @@ public class ServicePermessoImpl implements ServicePermesso{
 		return repositoryPermesso.findById(id).get();
 	}
 	
-	
+	@Override
+	public Permesso findByDescrizione(String descrizione) {
+		return getAll().stream().filter(x-> x.getDescrizione().equals(descrizione)).findFirst().get();
+	}
 	
 	
 

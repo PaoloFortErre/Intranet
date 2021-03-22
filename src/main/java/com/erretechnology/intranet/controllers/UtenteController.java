@@ -2,7 +2,9 @@ package com.erretechnology.intranet.controllers;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.servlet.http.HttpSession;
 
@@ -169,16 +171,21 @@ public class UtenteController extends BaseController{
 
 	@RequestMapping(value = "/getPermessiMancanti")
 	@ResponseBody
-	public List<String> getPermessiMancanti(@RequestParam("email") String email){
-		List<String> permessiMancanti = servicePermesso.getAllName();
-		permessiMancanti.removeAll(getAllPermessi(email));
-		return permessiMancanti;
+	public Map<String,String> getPermessiMancanti(@RequestParam("email") String email){
+		List<String> list1 = servicePermesso.getAll().stream().map(x->x.getNome()).collect(Collectors.toList());
+		List<String> list2 = servicePermesso.getAll().stream().map(x->x.getDescrizione()).collect(Collectors.toList());
+		 Map<String,String> permessiMancanti = IntStream.range(0, Math.min( list1.size(), list2.size()))
+			   .boxed()
+			   .collect(Collectors.toMap(list1::get, list2::get));
+		 permessiMancanti.keySet().removeAll(getAllPermessi(email).keySet());
+		 return permessiMancanti;
+		//Map<String,String> permessiMancanti = ;
 	}
 
 	@RequestMapping(value = "/getAllPermessi")
 	@ResponseBody
-	public List<String> getAllPermessi(@RequestParam("email") String email){
-		return serviceAuthority.getAllNameById(serviceUtente.findByEmail(email).getId());
+	public Map<String,String> getAllPermessi(@RequestParam("email") String email){
+		return serviceAuthority.getMapById(serviceUtente.findByEmail(email).getId());
 	}
 
 

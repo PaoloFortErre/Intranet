@@ -19,22 +19,16 @@
 function sendAjaxRequest() {
     var email = $("#email").val();
     $.get( "http://localhost:8080/profile/getPermessiMancanti?email=" + email, function( data ) {
-        $("#permessiMancanti").empty();
-        var option1 = "<option value = " + 0 + "> Seleziona un utente per modificare i permessi </option>";
-        $("#permessiMancanti").append(option1);
-        data.forEach(function(item, i) {
-            var option2 = "<option value = " + item + ">" + item +  "</option>";
-            $("#permessiMancanti").append(option2);
+        $.each(data, function(key, value) {
+            let option = "<option value = " + key + ">" + value +  "</option>";
+            $("#permessiMancanti").append(option);
         });
     });
     
     $.get( "http://localhost:8080/profile/getAllPermessi?email=" + email, function( data ) {
-        $("#TuttiPermessi").empty();
-        var option1 = "<option value = " + 0 + "> Seleziona un permesso da rimuovere </option>";
-        $("#TuttiPermessi").append(option1);
-        data.forEach(function(item, i) {
-            var option2 = "<option value = " + item + ">" + item +  "</option>";
-            $("#TuttiPermessi").append(option2);
+        $.each(data, function(key, value) {
+            let option = "<option value = " + key + ">" + value +  "</option>";
+            $("#TuttiPermessi").append(option);
         });
     });
     
@@ -46,39 +40,24 @@ $(document).ready(function() {
     });
 });
 </script>
-<body> <!--  onload="loadUse(); loadDoc();" -->
+<body>
 
-	<div><!-- 
-		<h2>Permessi Utente:</h2>
-		<table>
-			<tr>	
-				<td th:each="permesso : ${permessiUtente}">
-					<p th:text="${permesso}"></p>
-				</td>
-			</tr>
-		</table>
-		 -->
+	<div>
 		<p>Seleziona un utente</p>
 		<form th:action="@{/profile/addPermesso(email = ${email} , flag = ${flag})}" method="post">
 			<select id="email" th:value="${email}" th:name="email">
 				<option value="0">Seleziona un utente per modificare i permessi</option>
 				<option th:each="utente : ${utenti}" th:value="${utente}" th:text="${utente}"></option>
 			</select>
-		
-		<!--  </form>-->
 		  
 			<p>Aggiungi un permesso</p>
 			<select id="permessiMancanti" th:name="pAdd">
 				<option value="0">seleziona un permesso da aggiungere</option>
-					<!-- <option th:each="p : ${permessiMancanti}" th:value="${p}" th:text="${p}"></option> -->
 			</select>
 			<button type="submit" th:name="flag" th:value="1">Invia</button>
-		<!--  </form> -->
 			<p>Rimuovi un permesso</p>
-		<!--  <form th:action="@{/profile/removePermesso(email = ${email})}" method="post">-->
 			<select id="TuttiPermessi" th:name="pRemove">
 				<option value="0">Seleziona un permesso da rimuovere</option>
-				<!--  <option th:each="pRemove : ${permessiUtente}"  th:value="${pRemove}" th:text="${pRemove}"></option> -->
 			</select>
 			<button type="submit" th:name="flag" value="0">Invia</button>
 		</form>
@@ -86,74 +65,3 @@ $(document).ready(function() {
 	</div>
 </body>
 </html>
-
-
-
-
-<!-- 
-	<p>User</p>
-	<div id="demo1"></div>
-	<div style="text-align: center;">
-		Permessi:
-		<form method="POST">
-    		<select id="Select" onclick="formSubmit()">
-			</select>	
-		</form>
-		<p id="resulted"></p>
-	
-</div>
-
-	<script type="text/javascript">
-	
-		
-		function loadUse() {
-			const xhttp = new XMLHttpRequest();
-			xhttp.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {
-
-					var risposta = this.responseText;
-					
-					var obj = JSON.parse(risposta);
-					
-					//var obj2 = { "permessi": ["X"] }; 
-					//obj.push(obj2);
-					
-					document.getElementById("demo1").innerHTML = "<strong>"
-							+ obj.nome + "</strong>&nbsp;&nbsp;&nbsp;&nbsp;"
-							+ obj.permessi;
-
-				}
-
-			};
-			xhttp.open("GET", "/view/permissionManager/user.json", true);
-			xhttp.send();
-		}
-
-		function loadDoc() {
-			const xhttp = new XMLHttpRequest();
-			xhttp.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {
-					var risposta = this.responseText;
-					var obj = JSON.parse(risposta)
-					for (var i = 0; i < obj.length; i++) {
-						var select = document.getElementById("Select");
-						var option = document.createElement("option");
-						option.text = obj[i].nome + " " + obj[i].descrizione ;
-						option.value = obj[i].nome;
-						select.add(option);
-						
-					}
-				}
-			};
-			xhttp.open("GET", "/view/permissionManager/data.json", true);
-			xhttp.send();
-		}
-		
-		function formSubmit(){
-			  var x = document.getElementById("Select").value;
-			  document.getElementById("resulted").innerHTML = "Hai selezionato '" + x +"'";
-		}
-		
-		
-	</script> -->
-
