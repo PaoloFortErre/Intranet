@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.erretechnology.intranet.models.Log;
-import com.erretechnology.intranet.models.Post;
 import com.erretechnology.intranet.repositories.RepositoryLog;
 @Service
 public class ServiceLogImpl implements ServiceLog{

@@ -10,4 +10,5 @@ public interface ServicePermesso {
 	public void savePermesso(Permesso p);
 	public List<Permesso> getAll();
 	public List<String> getAllName();
+	public Permesso findByDescrizione(String descrizione);
 }

@@ -22,8 +22,8 @@ function sendAjaxRequest() {
         $("#permessiMancanti").empty();
         var option1 = "<option value = " + 0 + "> Seleziona un utente per modificare i permessi </option>";
         $("#permessiMancanti").append(option1);
-        data.forEach(function(item, i) {
-            var option2 = "<option value = " + item + ">" + item +  "</option>";
+        $.each(data, function(key, value) {
+            let option2 = "<option value = " + key + ">" + value +  "</option>";
             $("#permessiMancanti").append(option2);
         });
     });
@@ -32,8 +32,8 @@ function sendAjaxRequest() {
         $("#TuttiPermessi").empty();
         var option1 = "<option value = " + 0 + "> Seleziona un permesso da rimuovere </option>";
         $("#TuttiPermessi").append(option1);
-        data.forEach(function(item, i) {
-            var option2 = "<option value = " + item + ">" + item +  "</option>";
+        $.each(data, function(key, value) {
+            let option2 = "<option value = " + key + ">" + value +  "</option>";
             $("#TuttiPermessi").append(option2);
         });
     });
