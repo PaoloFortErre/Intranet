@@ -136,19 +136,19 @@
 	<!-- ************
 			FINE HEADER
 			***************** -->
-	<div class="container">
+	<div class="container" th:with="GML = ${#authorization.expression('hasAuthority(''GML'')')}">
 
 		<!-- ****
 				COLONNA SINISTRA
 				**** -->
 
 		<div class="row" style="margin-top: 5%">
-			<div class="col-sm-8 col-lg-8">
+			<div class="col-sm-8 col-lg-8" th:with="UB = ${#authorization.expression('hasAuthority(''UB'')')},
+				DS = ${#authorization.expression('hasAuthority(''DS'')')}">
 
 				<!--  WRITE A POST  -->
 				<div class="col-sinistra">
-
-					<div class="row">
+					<div class="row" th:if="${UB}">
 						<div class="col-sm-1 col-md-1 col-lg-2">
 
 
@@ -157,8 +157,8 @@
 								alt="utente" title="utente" class="immagineUtente"
 								style="margin: 20px;">
 						</div>
-						<div class="col-sm-11 col-md-10 col-lg-10">
-							<div class="form-group">
+						<div class="col-sm-11 col-md-10 col-lg-10" >
+							<div class="form-group" >
 								<form th:action="@{/myLife/addPost}"
 									enctype="multipart/form-data" id="myForm" method="post">
 									<label for="testo"></label>
@@ -244,7 +244,7 @@
 										th:text="${post.autore.cognome}"></h3>
 									<!-- ELIMINA POST -->
 
-									<div th:if="${DPS} or ${post.autore.id} == ${session.id}"
+									<div th:if="(${DS} or ${post.autore.id} == ${session.id}) and ${UB}"
 										style="display: inline-block">
 
 										<form th:action="@{/myLife/deletePost(id=${post.id})}"
@@ -256,7 +256,7 @@
 
 									<!-- MODIFICA POST -->
 
-									<div th:if="${post.autore.id} == ${session.id}"
+									<div th:if="(${post.autore.id} == ${session.id}) and ${UB}"
 										style="display: inline-block;">
 										<form th:action="@{/myLife/editPost(id=${post.id})}"
 											method="post">
@@ -310,7 +310,7 @@
 														</p>
 													</td>
 													<td
-														th:if="${DCS} or ${commento.autore.id} == ${session.id} or ${post.autore.id} == ${session.id}">
+														th:if="(${DS} or ${commento.autore.id} == ${session.id} or ${post.autore.id} == ${session.id}) and ${UB}">
 														<form
 															th:action="@{/myLife/deleteCommento(id=${commento.id})}"
 															method="post">
@@ -318,7 +318,7 @@
 														</form>
 													</td>
 
-													<td th:if="${commento.autore.id} == ${session.id}">
+													<td th:if="${commento.autore.id} == ${session.id} and ${UB}">
 														<form
 															th:action="@{/myLife/editCommento(id=${commento.id})}"
 															method="post">
@@ -339,16 +339,18 @@
 											</table>
 										</div>
 										<br>
-										<form th:action="@{/myLife/addCommento(idPost=${post.id})}"
-											method="post">
-											<label for="testo"></label>
-											<textarea id="post" name="testo" rows="2" cols="30"
-												style="width: 59%; margin-top: 10px;"
-												placeholder="Lascia un commento..." required></textarea>
-											<input type="submit" value="Commenta" id="submitPost"
-												style="margin-bottom: 50px;" />
-											<hr id="linea">
-										</form>
+										<div th:if="${UB}">
+											<form th:action="@{/myLife/addCommento(idPost=${post.id})}"
+												method="post">
+												<label for="testo"></label>
+												<textarea id="post" name="testo" rows="2" cols="30"
+													style="width: 59%; margin-top: 10px;"
+													placeholder="Lascia un commento..." required></textarea>
+												<input type="submit" value="Commenta" id="submitPost"
+													style="margin-bottom: 50px;" />
+												<hr id="linea">
+											</form>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -364,7 +366,7 @@ COLONNA DESTRA
 
 <div th:if="${eventilife!=null}">
 
-				<h3 id="culturaPiemonte" style="margin-top: 30px">Cultura in
+								<h3 id="culturaPiemonte" style="margin-top: 30px">Cultura in
 					Piemonte</h3>
 					
 				<p style="color: #F3F3F3; text-align: center; font-size: 15px">
