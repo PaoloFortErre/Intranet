@@ -16,6 +16,7 @@ public class FilePdf{
 	@JoinColumn(name = "id_autore")
 	private UtenteDatiPersonali autore;
 	private boolean visibile;
+	private String nome; 
 
 	public UtenteDatiPersonali getAutore() {
 		return autore;
@@ -63,5 +64,13 @@ public class FilePdf{
 
 	public void setVisibile(boolean visibile) {
 		this.visibile = visibile;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 }

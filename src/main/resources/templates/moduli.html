@@ -50,7 +50,7 @@
 				</div>
 				<div style="position: relative; float: right">
 					<a th:href="@{/profile/}"><img
-						th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
+						th:src="'data:image/jpeg;base64,' + ${user.immagine.getImgData(user.immagine.data)}"
 						alt="utente" title="utente" class="immagineUtente"
 						id="utente-foto-profilo"
 						style="margin: 30px; margin-right: 40px; border-radius: 50%; margin-top: 0px;"></a>
@@ -62,25 +62,38 @@
 		<img src="/view/MyWork/images/comHR.png" id="headerHR">
 	</div>
 
-	<div class="container">
-		<div class="row" style="margin-top: 50px">
-			<div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+	<div class="container" th:with="admin = ${#authorization.expression('hasAuthority(''WNMW'')')}">
+		<div class="row" style="margin-top: 50px" th:if="${filePdf!=null}">
+			<div class="col-xs-6 col-sm-6 col-md-4 col-lg-4"
+				th:each="pdf: ${filePdf}">
 
-			<div class="modulo" style="margin: auto;">
-			<div id="modulo-img">
-			<img src="/view/MyWork/images/modulo.png" width="100%" height="200px">
-			</div>
-			<div id="modulo-titolo">
-			<h4 style="padding: 8px; display: inline-block;"> Modulo trasferte </h4>
-			 <img src="/view/MyWork/images/pdf-icon.png" style="float: right; margin: 8px; " width="30px">
-			</div>
-			<div id="modulo-body">
-			<a href=""  style="text-align: right; padding: 8px;">
-				 <img src="/view/MyWork/images/download.png.png" width="30px" style="float: right;" class="img-responsive"></a>
-			</div>
-			</div>
+				<div class="modulo" style="margin: auto;"
+				 th:if="(${pdf.settore} == ${user.settore} or ${admin}) and ${pdf.visibile}">	
+					<div th:if="${admin}">
+					
+					</div>
+					<div id="modulo-img">
+						<img src="/view/MyWork/images/modulo.png" width="100%"
+							height="200px">
+					</div>
+					<div id="modulo-titolo">
+						<h4 style="display: inline-block; padding-left: 8px;"><strong>Modulo:</strong></h4><h4 style="padding: 8px; display: inline-block;" th:text="${pdf.nome}"></h4>
+						<img src="/view/MyWork/images/pdf-icon.png"
+							style="float: right; margin: 8px;" width="30px">
+							<form th:action="@{/file/deleteFilePdf(id=${pdf.id})}" method="post">
+						<button type="submit"  id="bottoneModulo"> <img src="/view/MyWork/images/trash.png" width="50%"></button>
+					</form>
+					</div>
+					<div id="modulo-body">
+						<a th:href="@{/file/downloadFile(id=${pdf.id})}"
+							 th:download="${pdf.nomeFile}"
+							style="text-align: right; padding: 8px;"> <img
+							src="/view/MyWork/images/download.png.png" width="30px"
+							style="float: right;" class="img-responsive"></a>
+					</div>
+				</div>
 
-			
+
 
 			</div>
 
