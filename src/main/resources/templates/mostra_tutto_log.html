@@ -68,8 +68,15 @@
 </head>
 <body>
   <div class="container-fluid mt-3 mb-3 mr-5 ml-3">
+
     <h2 class="h2 text-center mb-3">Attività recenti degli utenti</h2>
     <div class="container-fluid text-center">
+      <button class="btn btn-primary" onclick="goBack()">TORNA INDIETRO</button>
+      <script>
+      function goBack() {
+        window.history.back();
+      }
+      </script>
       <input class="h3" type="text" id="myInput" onkeyup="myFunction()" placeholder="Filtra per cognome" title="Cerca con nome utente">
     </div>
 
