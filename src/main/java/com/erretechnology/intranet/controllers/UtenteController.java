@@ -177,14 +177,6 @@ public class UtenteController extends BaseController{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("gestisci_ruolo");
 		mav.addObject("utenti", serviceDatiPersonali.getAll());
-		//List<String> permessiMancanti = servicePermesso.getAllName();
-		//List<String> permessiUtente = serviceAuthority.getAllNameById(id);
-		//permessiMancanti.removeAll(permessiUtente);
-		//ModelAndView mav = new ModelAndView();
-		//mav.setViewName("permissionManager");
-		//mav.addObject("id_utente", id);
-		//mav.addObject("permessiMancanti", permessiMancanti);
-		//mav.addObject("permessiUtente", permessiUtente);
 		return mav;
 	}
 
@@ -198,7 +190,6 @@ public class UtenteController extends BaseController{
 			   .collect(Collectors.toMap(list1::get, list2::get));
 		 permessiMancanti.keySet().removeAll(getAllPermessi(email).keySet());
 		 return permessiMancanti;
-		//Map<String,String> permessiMancanti = ;
 	}
 
 	@RequestMapping(value = "/getAllPermessi")
@@ -250,7 +241,7 @@ public class UtenteController extends BaseController{
 				
 				u.setSetPermessi(permessiUtente);
 				serviceUtente.save(u);
-				saveLog("permessi modificati a " + u.getEmail(), utenteLoggato);
+				saveLog("modificato permessi i permessi di " + serviceDatiPersonali.findByAutore(u).getNome() +  " " +serviceDatiPersonali.findByAutore(u).getCognome(), utenteLoggato);
 			}
 		return "redirect:/profile/gestisciPermesso";
 	}
