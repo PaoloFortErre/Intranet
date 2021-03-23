@@ -5,11 +5,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form th:action="@{/libro/insert}" th:object="${libro}" method="post" enctype="multipart/form-data">
+	<form th:action="@{/cinema/insert}" th:object="${cinema}" method="post" enctype="multipart/form-data">
 	  <label for="titolo">Titolo:</label><br>
 	  <input type="text" id="titolo" name="titolo" th:field="*{titolo}"><br>
-	  <label for="autore">Autore:</label><br>
-	  <input type="text" id="autore" name="autore" th:field="*{autore}"><br>
+	  <label for="categoria">Categoria:</label><br>
+	  <select th:field="*{categoria}">
+       	<option th:each="category: ${categorie}" th:value="${category.id}" th:text="${category.nome}"></option>
+   	 </select>
 	  <input type="file" name="immagine" accept="image/png, image/jpeg"/>
 	  <br>
 	  <input type="submit" value="Pubblica">

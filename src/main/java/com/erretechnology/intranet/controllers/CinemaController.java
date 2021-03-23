@@ -20,38 +20,44 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.erretechnology.intranet.models.FileImmagine;
-import com.erretechnology.intranet.models.Libro;
+import com.erretechnology.intranet.models.CategoriaCinema;
+import com.erretechnology.intranet.models.Cinema;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
-import com.erretechnology.intranet.repositories.RepositoryLibro;
+import com.erretechnology.intranet.repositories.RepositoryCategoriaCinema;
+import com.erretechnology.intranet.repositories.RepositoryCinema;
 
 @Controller
-@RequestMapping("libro")
-public class LibroController extends BaseController {
+@RequestMapping("cinema")
+public class CinemaController extends BaseController {
 	@Autowired
-	private RepositoryLibro repoLibro;
+	private RepositoryCinema repoCinema;
+	@Autowired
+	private RepositoryCategoriaCinema repoCategoria;
 	
 	@GetMapping("/{id}")
 	public String get(@PathVariable int id, Model model) {
 		
-		model.addAttribute("libro", repoLibro.findById(id).get());
-		return "libro";
+		model.addAttribute("cinema", repoCinema.findById(id).get());
+		return "cinema";
 	}	
 	
 	@GetMapping("/list")
 	public String getList(Model model) {
-		model.addAttribute("libroList", repoLibro.findLimit(3));
-		return "libroList";
+		model.addAttribute("cinemaList", repoCinema.findLimit(3));
+		return "cinemaList";
 	}
 
 	@GetMapping("/new")
 	public String form(Model model) {
-		model.addAttribute("libro", new Libro()); 
-		return "libroForm";
+		model.addAttribute("cinema", new Cinema()); 
+		model.addAttribute("categorie", repoCategoria.findAll());
+		return "cinemaForm";
 	}
 	
 	@PostMapping(value = "/insert")
-	public String post(@ModelAttribute("libro") Libro libro, @RequestParam(required=false) MultipartFile immagine, ModelMap model, HttpSession session) throws IOException {	
-		libro.setVisibile(true);
+	public String post(@ModelAttribute("cinema") Cinema cinema, @RequestParam(required=false) MultipartFile immagine, ModelMap model, HttpSession session) throws IOException {	
+		System.out.println(immagine);
+		cinema.setVisibile(true);
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
 		
@@ -63,30 +69,32 @@ public class LibroController extends BaseController {
 				img.setTimestamp(Instant.now().getEpochSecond());
 				img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
 				serviceFileImmagine.insert(img);
-				libro.setCopertina(img);
+				cinema.setCopertina(img);
 			} catch (Exception e) {
 				System.err.println("Non riesco a caricare il file");
 			}
 		}
 		
-		repoLibro.save(libro);
-		saveLog("inserito un libro", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-        return "libro";
+		repoCinema.save(cinema);
+		saveLog("inserito un cinema", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+        return "cinema";
 	}
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable int id, Model model) {
-		Libro libro = repoLibro.findById(id).get();
-		model.addAttribute("libro", libro);
-		return "libroFormUpdate";
+		Cinema cinema = repoCinema.findById(id).get();
+		model.addAttribute("cinema", cinema);
+		model.addAttribute("categorie", repoCategoria.findAll());
+		return "cinemaFormUpdate";
 	}
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-	public String update(@PathVariable int id, String titolo, String autore ,@RequestParam(required=false) MultipartFile immagine, HttpSession session, Model model) {
-		Libro libro = repoLibro.findById(id).get();
-		libro.setTitolo(titolo);
-		libro.setAutore(autore);
-		
+	public String update(@PathVariable int id, String titolo, int categoria, @RequestParam(required=false) MultipartFile immagine, HttpSession session, Model model) {
+		System.out.println("ciao");
+		Cinema cinema = repoCinema.findById(id).get();
+		cinema.setTitolo(titolo);
+		CategoriaCinema categoriaCinema = repoCategoria.findById(categoria).get();
+		cinema.setCategoria(categoriaCinema);
 		if(!immagine.getOriginalFilename().isEmpty()) {
 			try {
 				FileImmagine img = new FileImmagine();			
@@ -98,27 +106,27 @@ public class LibroController extends BaseController {
 					img.setTimestamp(Instant.now().getEpochSecond());
 					img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
 					serviceFileImmagine.insert(img);
-					libro.setCopertina(img);
+					cinema.setCopertina(img);
 				}else {
-					libro.setCopertina(serviceFileImmagine.getImmagineByData(img.getData()));
+					cinema.setCopertina(serviceFileImmagine.getImmagineByData(img.getData()));
 				}
 			} catch (Exception e) {
 				System.err.println("Non riesco a caricare il file");
 			}
 		}
 		
-		repoLibro.save(libro);
-		model.addAttribute("libro", libro);
-		saveLog("modificato le informazioni di un libro", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		return "libro";
+		repoCinema.save(cinema);
+		model.addAttribute("cinema", cinema);
+		saveLog("modificato le informazioni di un cinema", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+		return "cinema";
 	}
 	
 	@RequestMapping("/delete/{id}")
 	public String delete(@PathVariable int id, HttpSession session) {
-		Libro libro = repoLibro.findById(id).get();
-		libro.setVisibile(false);
-		repoLibro.save(libro);
-		saveLog("cancellato un libro", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		return "redirect:/libro/list";
+		Cinema cinema = repoCinema.findById(id).get();
+		cinema.setVisibile(false);
+		repoCinema.save(cinema);
+		saveLog("cancellato un cinema", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+		return "redirect:/cinema/list";
 	}
 }
