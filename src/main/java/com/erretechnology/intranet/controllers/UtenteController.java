@@ -1,8 +1,13 @@
 package com.erretechnology.intranet.controllers;
 
 import java.time.Instant;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -34,7 +39,7 @@ public class UtenteController extends BaseController{
 	public ModelAndView primaPagina(HttpSession session) {
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		ModelAndView mav = new ModelAndView();
-		if(serviceUtente.findById(u.getId()).getSetGruppi().stream().filter(x-> x.getNome().equals("ADMIN")).count() == 1){
+		if(serviceUtente.findById(u.getId()).getRuolo().getNome().equals("ADMIN")){
 			mav.setViewName("profilo_admin");
 			mav.addObject("attivi",serviceUtente.getAll().stream().filter(x->x.getAttivo()).count());
 			mav.addObject("log", serviceLog.findLastFive());
@@ -204,30 +209,49 @@ public class UtenteController extends BaseController{
 
 
 
-	@PostMapping(value = "/addPermesso")
-	public String addPermesso(String email,String flag,  @RequestParam(value = "pAdd" , required=false) String permesso,
-			@RequestParam(value = "pRemove" , required=false) String permessoRimozione , HttpSession session) {
-		if(permesso != "0" || permessoRimozione != "0") {
+	@GetMapping(value = "/addPermesso")
+	public String addPermesso(String email, String list, HttpSession session) {
+			String[] permessi = list.split(",");
+			//Set<String> targetSet = new CopyOnWriteArraySet<String>(Arrays.asList(permessi));
 			int id_utente = Integer.parseInt(session.getAttribute("id").toString());
 			UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(id_utente);
-			Permesso p = null;
-			Utente u = serviceUtente.findByEmail(email.substring(1));
-			if(flag.equals(",1")) {
-				p = servicePermesso.findById(permesso);
-				u.addPermesso(p);
+			if(utenteLoggato.getUtente().getRuolo().getNome().equals("ADMIN")) {
+				Utente u = serviceUtente.findByEmail(email);
+				Set<Permesso> permessiUtente = new HashSet<Permesso>();
+				boolean flag;
+				Set<Permesso> pUtenti = u.getSetPermessi();
+				Set<Permesso> temp = new HashSet<Permesso>();
+				for(Permesso pUtente : pUtenti) {
+					flag = false;
+					for(String permesso : permessi) {
+						if(flag) break;
+						if(pUtente.getNome().equals(permesso)) {
+							flag = true;
+						}
+					}
+					if(!flag) {
+						temp.add(pUtente);
+					}
+				}
+				for(Permesso p : temp) {
+					u.removePermesso(p);
+					p.removeUtente(u);
+					servicePermesso.savePermesso(p);
+				}
+				for(String per : permessi) {
+					Permesso p = servicePermesso.findById(per.trim());
+					if(u.getSetPermessi().contains(p)) {
+					}else {
+						permessiUtente.add(p);
+						p.addUtente(u);
+						servicePermesso.savePermesso(p);
+					}					
+				}
+				
+				u.setSetPermessi(permessiUtente);
 				serviceUtente.save(u);
-				p.addUtente(u);
-				saveLog("aggiunto il permesso" + p.getNome() +" a " + u.getEmail() , utenteLoggato);
-			}else if(flag.equals(",0")) {
-				p = servicePermesso.findById(permessoRimozione);
-				u.removePermesso(p);
-				serviceUtente.save(u);
-				p.removeUtente(u);
-				saveLog("rimosso il permesso" + p.getNome() + " a " + u.getEmail() , utenteLoggato);
+				saveLog("permessi modificati a " + u.getEmail(), utenteLoggato);
 			}
-
-			servicePermesso.savePermesso(p);
-		}
 		return "redirect:/profile/gestisciPermesso";
 	}
 
@@ -235,7 +259,7 @@ public class UtenteController extends BaseController{
 	public ModelAndView rimuoviUtente(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
-		if(serviceUtente.findById(utenteLoggato.getId()).getSetGruppi().stream().filter(x-> x.getNome().equals("ADMIN")).count() == 1) {
+		if(serviceUtente.findById(utenteLoggato.getId()).getRuolo().getNome().equals("ADMIN")) {
 
 			mav.setViewName("eliminaUtente");
 			mav.addObject("utenti", serviceDatiPersonali.getAll().stream().filter(x -> x.getUtente().getAttivo()).collect(Collectors.toList()));

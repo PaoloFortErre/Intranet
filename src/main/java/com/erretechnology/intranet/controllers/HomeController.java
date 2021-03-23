@@ -229,8 +229,8 @@ public class HomeController extends BaseController{
 		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		ModelAndView mav = new ModelAndView();
 	
-		mav.addObject("utenteDati", u);
-//		mav.addObject("comunicazioni", serviceComunicazioni.getAll());
+		mav.addObject("user", u);
+		mav.addObject("filePdf", serviceFilePdf.findAll());
 		mav.setViewName("moduli");
 		return mav;
 	}

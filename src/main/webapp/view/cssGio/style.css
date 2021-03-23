@@ -200,12 +200,18 @@ hr#linea {
 	margin-left: 26px;
 	font-size:13px;
 }
-
+#bottoneModulo {
+	background-color:  #1C1C1C;
+	border: 0px  #3D3A3A;
+	color: white;
+	margin-left: 2px;
+	font-size:13px;
+}
 #bottoneModifica{
 	background-color:  #3D3A3A;
 	border: 0px  #3D3A3A;
 	color: white;
-	margin-left: 2px;
+
 	font-size:13px;
 }
 
@@ -422,4 +428,20 @@ audio{
 }
 #eventoWork2{
 	display: none;
+}
+.modulo {
+
+	width: 82%;
+	box-shadow: -1px 9px 8px 3px rgba(0, 0, 0, 0.76);
+	background-color: #1C1C1C;
+	color: black;
+	margin-bottom:50px;
+}
+#modulo-title {
+	color: #F3F3F3;
+}
+#modulo-body {
+	color: black;
+	margin-bottom:50px;
+	padding: 10px;
 }
