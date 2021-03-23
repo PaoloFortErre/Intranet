@@ -53,7 +53,7 @@ table, th, td {
 				<nav class="navbar navbar-nav navbar-right" id="navcambiante">
 					<div class="content" style="display: inline-block">
 						<a th:href="@{/homepage/}"><img
-							src="/view/MyLife/images/homebianca1.png" width="60px"
+							src="/view/MyLife/images/homebianca1.png" width="60px" alt="homeBianca.png"
 							style="margin-top: -10px; opacity: 0.9"> </a>
 					</div>
 					<div class="content" style="display: inline-block">
@@ -91,7 +91,7 @@ table, th, td {
 
 					<div class="item active" th:if="${newsSlide!=null}">
 
-						<img src="/view/MyWork/images/ferrari1.png" alt="ferrari"
+						<img src="/view/MyWork/images/ferrari1.png" alt="ferrari1"
 							width="100%">
 						<div class="carousel-caption">
 							<h1 class="font-caption" style="font-weight: 900" th:text="${newsSlide.titolo}"></h1>
@@ -101,7 +101,7 @@ table, th, td {
 					</div>
 
 					<div class="item" th:if="${newsSlide2!=null}">
-						<img src="/view/MyWork/images/scarpe.png" alt="techweek"
+						<img src="/view/MyWork/images/scarpe.png" alt="techweek.png"
 							width="100%">
 						<div class="carousel-caption" >
 							<h1 class="font-caption" style="font-weight: 900" th:text="${newsSlide2.titolo}"></h1>
@@ -152,7 +152,7 @@ table, th, td {
 
 							</p>
 
-							<img src="/view/MyWork/images/location.jpg" width="9%"
+							<img src="/view/MyWork/images/location.jpg" alt="location.jpg" width="9%"
 								height="9%">
 							<p
 								style="color: black; text-align: right; display: inline-block;"
@@ -170,7 +170,7 @@ table, th, td {
 				<a href=""
 					style="float: right; text-decoration: none; color: #F3F3F3; opacity: 0.8;"
 					onclick="mostraEventi()" id="altriEventi"> Vedi altri <img
-					src="/view/MyWork/images/frecciasotto.png" width="30px"
+					src="/view/MyWork/images/frecciasotto.png" alt="frecciasotto.png" width="30px"
 					style="MARGIN-right: 50px;"></a>
 
 				<div id="eventoWork2" th:if="${eventi2!=null}">
@@ -264,7 +264,7 @@ table, th, td {
 						<a href="" id="mostraNews"
 							style="text-align: center; text-decoration: none; color: #F3F3F3; opacity: 0.8; margin-left: 420px;"
 							onclick="mostraNews()"> Vedi altri <img
-							src="/view/MyWork/images/frecciasotto.png" width="30px"
+							src="/view/MyWork/images/frecciasotto.png" alt="frecciasotto.png" width="30px"
 							id="frecciasotto"></a>
 					</div>
 					<div id="news2" style="display: none" th:if="${news2!=null}">
@@ -339,7 +339,7 @@ table, th, td {
 									<td><div th:if="${nuoviAssunti.size>2}">
 											<a href="" id="vedi" onclick="mostraAssunzioni()"
 												style="text-decoration: none; color: black; font-size: 13px;">
-												Vedi altri <img src="/view/MyWork/images/freccianera.png"
+												Vedi altri <img src="/view/MyWork/images/freccianera.png" alt="freccianera.png"
 												width="30px" id="frecciasotto">
 											</a>
 										</div></td>
@@ -381,7 +381,7 @@ table, th, td {
 						style="line-height: 45px; display: inline-block; font-weight: 900;">
 						I podcast di <span style="color: #FFC931"><br>Rosario</span>
 					</h2>
-					<img src="/view/MyWork/images/radice.jpg" class="img-fluid"
+					<img src="/view/MyWork/images/radice.jpg" class="img-fluid" alt="rosarioRadice.jpg"
 						width="40%" height="100px" style="float: right" id="imgRosario">
 					<p>16 febbraio 2021</p>
 
@@ -398,7 +398,7 @@ table, th, td {
 				<div th:if="${utente!=null AND !utente.isEmpty}"
 					id="quadrato-compleanno">
 					<h4 id="data" style="DISPLAY: INLINE-BLOCK; margin-top: 20px;"></h4>
-					<img src="/view/MyWork/images/torta.png" class="img-fluid"
+					<img src="/view/MyWork/images/torta.png" alt="torta.png" class="img-fluid"
 						width="20%" height="20%" style="display: inline-block;">
 					<h2
 						style="line-height: 45px; display: inline-block; font-weight: 900;">Oggi
@@ -430,9 +430,9 @@ table, th, td {
 				<div class="assunti2">
 					<div class="modal-header2">
 						<div class="title2">
-						<!--  <div th:if="${admin}">--><a th:href="@{/cliente/new/}"> <img src="/view/MyWork/images/more.png" width=7% style="float: right">
+						<!--  <div th:if="${admin}">--><a th:href="@{/cliente/new/}"> <img src="/view/MyWork/images/more.png" alt="more.png" width=7% style="float: right">
 						</a><!--  </div> -->
-							<h3 style="text-align: center; font-weight: 900">Nuovi 
+							<h3 style="text-align: center; font-weight: 900">Nuovi
 								clienti</h3>
 						</div>
 
