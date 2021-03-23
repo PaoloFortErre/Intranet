@@ -107,8 +107,8 @@
 <body>
 
   <!-- ROW CON NAVBAR -->
-  <div class="row mb-1">
-    <div class="col ml-5 mt-1">
+  <div class="row">
+    <div class="col ml-5">
       <img id="logo" class="img-fluid rounded float-left mt-2 ml-2"
       src="/view/Profile/Images/erre_group.png" alt="erre_logo" >
     </div>
@@ -135,7 +135,7 @@
   <!-- ROW CON IMMAGINE PROFILO, NOME E EMAIL -->
 
   <div class="container-fluid">
-    <div class="row justify-content-center mt-1">
+    <div class="row justify-content-center">
 
       <div class="col-lg-2 col-md-3 ml-4 ">
         <div class="container-fluid">
@@ -229,21 +229,31 @@
     <div class="row justify-content-center mt-4 ml-5">
 
       <div class="col-lg-6 col-md-4 col-sm-5 mr-5 pt-n5 ">
-        <div class="card shadow text-center h-50 pt-n5" style="color:#303030;" >
+        <div class="card shadow text-center pt-n5 mt-n5" style="color:#303030;" >
           <div class="card-header">
-            <h5>ATTIVITA' RECENTI</h5>
+            <h5 class="h5"><b>ATTIVITA' RECENTI</b></h5>
             <small>Anteprima di quello che hai fatto di recente</small>
           </div>
-          <div class="card-body text-justify mr-4 ml-5" th:each="log:${log}">
-            <p class="card-text mb-n1" th:utext="${log.utente.nome} +' ' + ${log.utente.cognome} + ' ha ' + ${log.azione}" style="font-size: 12px; font-weight: bold; margin-bottom: 5px !important;"></p>
-            <div class="container-fluid">
-              <p class="mb-5" th:utext="${#dates.format(log.timestamp*1000, 'dd/MM/yyyy, HH:mm')}" style="font-size: 9px"></p>
+          <div class="container-fluid">
+            <table class="table table-dark">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col" style="font-size: 17px "><b>Data e Ora</b></th>
+                  <th scope="col" style="font-size: 17px "><b>Attività</b></th>
+                </tr>
+              </thead>
+              <tbody th:each="log:${log}">
+                <tr>
+                  <td th:utext="${#dates.format(log.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"></td>
+                  <td th:utext="${log.utente.nome} + ' '+ ${log.utente.cognome} + ' ' + 'ha' + ' ' + ${log.azione}"></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="container text-center">
+              <form th:action="@{/profile/mostra_log}" method="get">
+                <button type="submit" class="btn btn-primary mb-2">Vedi tutte</button>
+              </form>
             </div>
-          </div>
-          <div class="container-fluid text-align-center">
-            <form th:action="@{/profile/mostra_log}" method="get">
-              <button type="submit" class="btn btn-primary w-25 ">Vedi tutte</button>
-            </form>
           </div>
         </div>
       </div>
@@ -254,17 +264,15 @@
             <h1 class="h1 text-center mt-3" th:text="${attivi}">"</h1>
             <h3 class="h3">UTENTI REGISTRATI</h3>
           </div>
-          <div class="container mb-3">
+          <div class="container mb-2">
             <form th:action="@{/registra}" method="get">
               <button type="submit" class="btn btn-success mb-2">AGGIUNGI O RIATTIVA</button>
             </form>
             <form th:action="@{/profile/cancellaUtente}" method="get">
-              <button type="submit" class="btn btn-danger">RIMUOVI</button>
+              <button type="submit" class="btn btn-danger mb-2">RIMUOVI</button>
             </form>
-          </div>
-          <div class="container mt-1 mb-2">
             <form th:action="@{/profile/gestisciPermesso}" method="get">
-              <button type="submit" class="btn btn-warning mb-3">GESTISCI PERMESSI</button>
+              <button type="submit" class="btn btn-warning mb-2">GESTISCI PERMESSI</button>
             </form>
           </div>
         </div>
