@@ -18,7 +18,7 @@ public class Evento {
 	private int id;
 	private String titolo;
 	private String contenuto;
-	@OneToOne()
+	@OneToOne
 	@JoinColumn(name = "id_immagine")
 	private FileImmagine copertina;
 	private long data;

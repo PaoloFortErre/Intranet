@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<img th:src="'data:image/png;base64,' + ${libro.copertina.getImgData(libro.copertina.data)}">
+	<h2 th:text="${libro.titolo}" />
+</body>
+</html>
+
+

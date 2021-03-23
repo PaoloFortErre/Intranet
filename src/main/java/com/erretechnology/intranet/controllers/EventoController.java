@@ -29,7 +29,6 @@ import com.erretechnology.intranet.models.Indirizzo;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.repositories.RepositoryEvento;
 import com.erretechnology.intranet.repositories.RepositoryIndirizzo;
-import com.erretechnology.intranet.repositories.RepositoryUtente;
 
 @Controller
 @RequestMapping("evento")
@@ -37,10 +36,7 @@ public class EventoController extends BaseController {
 	@Autowired
 	private RepositoryEvento repoEvento;
 	@Autowired
-	private RepositoryUtente repoUtente;
-	@Autowired
 	private RepositoryIndirizzo repoIndirizzo;
-	private String imageFolder = "evento";
 	
 	@GetMapping("/{id}")
 	public String get(@PathVariable int id, Model model) {
