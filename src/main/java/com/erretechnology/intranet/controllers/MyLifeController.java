@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.Aforisma;
+import com.erretechnology.intranet.models.Cinema;
 import com.erretechnology.intranet.models.Commento;
 import com.erretechnology.intranet.models.CommentoModificato;
 import com.erretechnology.intranet.models.Evento;
@@ -26,6 +27,7 @@ import com.erretechnology.intranet.models.Post;
 import com.erretechnology.intranet.models.PostModificato;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.repositories.RepositoryAforisma;
+import com.erretechnology.intranet.repositories.RepositoryCinema;
 import com.erretechnology.intranet.repositories.RepositoryEvento;
 import com.erretechnology.intranet.repositories.RepositoryLibro;
 
@@ -38,6 +40,8 @@ public class MyLifeController extends BaseController {
 	private RepositoryAforisma repoAfo;
 	@Autowired
 	private RepositoryLibro repoLib;
+	@Autowired
+	private RepositoryCinema repoCine;
 	//	@GetMapping(value="/myLife")
 	//	public ModelAndView myLife() {
 	//		ModelAndView mav = new ModelAndView();
@@ -52,6 +56,7 @@ public class MyLifeController extends BaseController {
 		List<Evento> evento = (List<Evento>) repoEvento.findNextLifeEvents(Instant.now().getEpochSecond());
 		List<Libro> libri = repoLib.findAll();
 		List<Aforisma> aforismi = repoAfo.findAll();
+		List <Cinema> film = repoCine.findLimit(3);
 		System.out.println(evento.size());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myLife");
@@ -101,6 +106,29 @@ public class MyLifeController extends BaseController {
 			mav.addObject("libri1", libri.get(1));
 		}
 		
+		
+		if (film.size()==0) {
+			mav.addObject("film1", null);
+			mav.addObject("film2", null);
+			mav.addObject("film3", null);
+
+		}
+		else if (film.size()==1) {
+			mav.addObject("film1", film.get(0));
+			mav.addObject("film2", null);
+			mav.addObject("film3", null);
+
+		}
+		else if (film.size()==2) {
+			mav.addObject("film1", film.get(0));
+			mav.addObject("film2", film.get(1));
+			mav.addObject("film3", null);
+		}
+		else {
+			mav.addObject("film1", film.get(0));
+			mav.addObject("film2", film.get(1));
+			mav.addObject("film3", film.get(2));
+		}
 		
 	//	mav.addObject("eventilife2", evento.get(2));
 	//	mav.addObject("img", serviceFileImmagine.getLastImmagineByUtente(u));

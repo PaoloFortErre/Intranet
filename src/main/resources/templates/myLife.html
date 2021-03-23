@@ -442,41 +442,41 @@ COLONNA DESTRA
 
 
 
-
+			<div th:if="${film1!=null}">
 				<h3 id="culturaPiemonte" style="margin-top: 70px">Film</h3>
 				<p style="color: #F3F3F3; text-align: center; font-size: 15px">
 					Se sei un tipo da cinema o serie TV:</p>
-				<img src="/view/MyLife/images/filmq.jpg" class="img-responsive"
-					width="32%" height="230px" style="display: inline;"> <img
-					src="/view/MyLife/images/film2.jpg" class="img-responsive"
-					width="32%" height="230px" style="display: inline;"> <img
-					src="/view/MyLife/images/film3.jpg" class="img-responsive"
+				<img th:src="'data:image/png;base64,' + ${film1.copertina.getImgData(film1.copertina.data)}" class="img-responsive"
+					width="32%" height="230px" style="display: inline;"> <img th:if="${film2!=null}"
+					th:src="'data:image/png;base64,' + ${film2.copertina.getImgData(film2.copertina.data)}" class="img-responsive"
+					width="32%" height="230px" style="display: inline;"> <img th:if="${film3!=null}"
+					th:src="'data:image/png;base64,' + ${film3.copertina.getImgData(film3.copertina.data)}" class="img-responsive"
 					width="33%" height="230px" style="display: inline;">
 
 				<div id="didascalieFilm">
 					<table id="film">
 						<tr>
-							<td>Freaks Out</td>
-							<td>Call Me By <br> Your Name
+							<td th:if="${film1!=null}" > <p th:text="${film1.titolo}" style="color: black;"></p></td>
+							<td th:if="${film2!=null}"> <p th:text="${film2.titolo}" style="color: black;"> </p>
 							</td>
-							<td>Lost</td>
+							<td th:if="${film3!=null}" > <p th:text="${film3.titolo}" style="color: black;"> </p> </td>
 						</tr>
 						<tr style="color: blue;">
-							<td>Cinema</td>
-							<td>Netflix</td>
-							<td>Amazon Prime</td>
+							<td th:if="${film1!=null}"> <p th:text="${film1.categoria.nome}" style="color: blue;"> </p></td>
+							<td th:if="${film2!=null}"> <p th:text="${film2.categoria.nome}" style="color: blue;"> </p></td>
+							<td th:if="${film3!=null}"> <p th:text="${film3.categoria.nome}" style="color: blue;"> </p></td>
 						</tr>
 					</table>
 				</div>
-				
+				</div>
 				<div>
 				<h3 id="culturaPiemonte" style="margin-top: 70px">Libri</h3>
 				<p style="color: #F3F3F3; text-align: center; font-size: 15px">
 					Se sei un tipo dal classico libro cartaceo o da Kindle:</p>
 					
 				<table id="libri" th:if="${libri!=null}">
-				<tr> <td> <img th:src="'data:image/png;base64,' + ${libri.copertina.getImgData(libri.copertina.data)}" width="100px" style="padding: 5px;"> </td> <td><p th:text="${libri.titolo}"></p> <p style="FONT-size: 10px; font-style: italic; "> Giovanni </p></td> 
-					<td> <img th:src="'data:image/png;base64,' + ${libri1.copertina.getImgData(libri1.copertina.data)}" width="100px"  style="padding: 5px;"> </td> <td><p th:text="${libri1.titolo}" STYLE="margin-left: 5px;"> </p> <p style="FONT-size: 10px; font-style: italic; text-align: right"> Giovanni </p></td>
+				<tr> <td> <img th:src="'data:image/png;base64,' + ${libri.copertina.getImgData(libri.copertina.data)}" width="100px" style="padding: 5px;"> </td> <td><p th:text="${libri.titolo}"></p> <p style="FONT-size: 10px; font-style: italic; " th:text="${libri.autore}">  </p></td> 
+					<td> <img th:src="'data:image/png;base64,' + ${libri1.copertina.getImgData(libri1.copertina.data)}" width="100px"  style="padding: 5px;"> </td> <td><p th:text="${libri1.titolo}" STYLE="margin-left: 5px;"> </p> <p style="FONT-size: 10px; font-style: italic; text-align: right" th:text="${libri1.autore}"> </p></td>
 				</tr>
 				</table>
 				</div>
@@ -491,7 +491,7 @@ COLONNA DESTRA
 			<div class="row justify-content-center align-items-center mt-3 pt-4"
 				style="margin-top: 15px; padding-top: 15px;">
 				<div class="col-sm-4 col-lg-4">
-					<a href="https://erretechnology.com/" target="blank"><img src="/view/MyLife/images/erre.png" height="80px"
+					<a href="https://erretechnology.com/" target="blank"><img src="/view/MyWork/images/errelogowhite.png" height="80px"
 						alt="erre_logo" style="margin: auto"></a>
 				</div>
 				<div class="col-sm-4 col-lg-4">
