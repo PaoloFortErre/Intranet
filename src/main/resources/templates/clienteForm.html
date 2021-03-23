@@ -47,7 +47,9 @@ body{
 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" id="colForm">
 
 <h4 style="text-align: left; margin-bottom:5px;"> Inserisci un nuovo cliente:
-</h4 ><hr style="margin-bottom:50px; background-color: #F3F3F3; ">
+</h4 ><hr style="background-color: #F3F3F3; ">
+<p style="text-align: right; margin-bottom:50px;"><a th:href="@{/myWork/}" style="color: #F3F3F3;">Torna indietro </a></p>
+
 	<form th:action="@{/cliente/insert}" th:object="${cliente}"
 		method="post" enctype="multipart/form-data"  class="signin-form">
 

@@ -2,31 +2,82 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Aggiungi clienti</title>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
+
+<style>
+body{
+	background-image: url("/view/MyWork/images/background.png");
+	  background-repeat: no-repeat, repeat;
+	    background-attachment: fixed;
+	  
+	
+}
+#input {
+	background-color: #E2E2E2;
+	border-radius: 0px 0px 0px 0px;
+	border: 0px solid #E2E2E2;
+	
+}
+
+</style>
+
 </head>
-<body>
+
+<body >
+
+<div class="container">
+<div class="row">
+
+<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="background-color: #3A5497;
+	margin: auto;margin-top: 150px;
+	padding: 15px;">
+
+<h4 style="text-align: left; margin-bottom:5px;"> Inserisci un nuovo evento per la sezione <span style="color: #ECF260;;">"MyWork"</span>:
+</h4 ><hr style=" background-color: #F3F3F3; ">
+
+<p style="text-align: right; margin-bottom:50px;"><a th:href="@{/myWork/}" style="color: #F3F3F3;">Torna indietro </a></p>
 	<form th:action="@{/evento/insert}" th:object="${evento}" method="post" enctype="multipart/form-data">
 	  <label for="titolo">Titolo:</label><br>
-	  <input type="text" id="titolo" name="titolo" th:field="*{titolo}"><br>
+	  <input type="text"  name="titolo" id="input" th:field="*{titolo}"><br>
 	  <label for="contenuto">Contenuto:</label><br>  
-	  <input type="text" id="contenuto" name="contenuto" th:field="*{contenuto}"><br>
+	  <input type="text"  id="input" name="contenuto" th:field="*{contenuto}"><br>
+	  <label for="immagine">Immagine:</label><br>
 	  <input type="file" name="immagine" accept="image/png, image/jpeg"/>
 	  <br>
 	 
 	  <label for="date">Data:</label><br>
-	  <input type="date" id="date" name="date"><br>
+	  <input type="date" id="input" name="date"><br>
 	  <label for="via">Via:</label><br>
-	  <input type="text" id="via" name="via"><br>
+	  <input type="text" id="input" name="via"><br>
 	  <label for="citta">Citta:</label><br>
-	  <input type="text" id="citta" name="citta"><br>
+	  <input type="text" id="input" name="citta"><br>
 	  <label for="provincia">Provincia:</label><br>
-	  <input type="text" id="provincia" name="provincia"><br>
+	  <input type="text" id="input" name="provincia"><br>
 	  
 	  <input type="hidden" id="isLife" name="isLife" value="false">
-	  <input type="submit" value="Pubblica">
+	  <input type="submit"  id="pubblicaSubmit"  value="Pubblica">
 	</form>
+	
+</div>
 
-
-
+</div>
+</div>
 </body>
 </html>
