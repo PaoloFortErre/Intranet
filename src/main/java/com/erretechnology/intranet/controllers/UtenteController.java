@@ -150,7 +150,7 @@ public class UtenteController extends BaseController{
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("mostra_tutto_log");
 			UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
-			if(serviceUtente.findById(u.getId()).getSetGruppi().stream().filter(x-> x.getNome().equals("ADMIN")).count() == 1){
+			if(serviceUtente.findById(u.getId()).getRuolo().getNome().equals("ADMIN")){
 				mav.addObject("allLog", serviceLog.findAll());
 			}else {
 				mav.addObject("allLog", serviceLog.findLogById(Integer.parseInt(session.getAttribute("id").toString())));
