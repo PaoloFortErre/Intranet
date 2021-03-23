@@ -36,6 +36,12 @@ public class LibroController extends BaseController {
 		model.addAttribute("libro", repoLibro.findById(id).get());
 		return "libro";
 	}	
+	
+	@GetMapping("/list")
+	public String getList(Model model) {
+		model.addAttribute("libroList", repoLibro.findLimit(3));
+		return "libroList";
+	}
 
 	@GetMapping("/new")
 	public String form(Model model) {
@@ -76,9 +82,10 @@ public class LibroController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-	public String update(@PathVariable int id, String titolo, @RequestParam(required=false) MultipartFile immagine, HttpSession session, Model model) {
+	public String update(@PathVariable int id, String titolo, String autore ,@RequestParam(required=false) MultipartFile immagine, HttpSession session, Model model) {
 		Libro libro = repoLibro.findById(id).get();
 		libro.setTitolo(titolo);
+		libro.setAutore(autore);
 		
 		if(!immagine.getOriginalFilename().isEmpty()) {
 			try {
