@@ -445,3 +445,35 @@ audio{
 	margin-bottom:50px;
 	padding: 10px;
 }
+
+#colForm {
+	
+	background-color: #3A5497;
+	margin: auto;margin-top: 270px;
+	padding: 15px;
+	
+}
+#pubblicaSubmit {
+	padding: 8px;
+	background-color: #303030;
+	color: #F3F3F3;
+	margin: auto;
+    float: right;
+	-webkit-box-shadow: 5px 5px 6px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 5px 5px 6px 0px rgba(0,0,0,0.75);
+	box-shadow: 5px 5px 6px 0px rgba(0,0,0,0.75);
+	border: 0px solid #303030;
+	margin-top: 30px;
+}
+
+#pubblicaSubmit:hover {
+	background-color: blue;
+	
+}
+#libri {
+	padding: 8px;
+	margin: 20px;
+  	text-align: center;
+ 	vertical-align: center;	
+ 	color: #F3F3F3;
+}

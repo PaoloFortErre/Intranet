@@ -53,6 +53,7 @@ public class UploadController extends BaseController{
 	@PostMapping(value = "/upload")
 	public String uploadPdf(@RequestParam("file") MultipartFile file, RedirectAttributes attributes, 
 			@ModelAttribute("filePdf") FilePdf filePdf, HttpSession session) {
+		UtenteDatiPersonali u =  serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		// check if file is empty
 		if (file.isEmpty()) {
 			attributes.addFlashAttribute("message", "Please select a file to upload.");
@@ -67,8 +68,9 @@ public class UploadController extends BaseController{
 			filePdf.setNomeFile(fileName);
 			filePdf.setData(file.getBytes());
 			filePdf.setVisibile(true);
+			filePdf.setAutore(u);
 			serviceFilePdf.insert(filePdf);
-			saveLog("Inserito un nuovo modulo", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+			saveLog("Inserito un nuovo modulo", u );
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -134,7 +136,7 @@ public class UploadController extends BaseController{
 			pdf.setVisibile(false);
 			serviceFilePdf.insert(pdf);
 			saveLog("cancellato un modulo", autore);
-			return "redirect:/file/moduli";
+			return "redirect:/moduli";
 		} return "redirect:forbidden";
 
 	}
@@ -147,7 +149,7 @@ public class UploadController extends BaseController{
 			pdf.setVisibile(false);
 			serviceFilePdf.insert(pdf);
 			saveLog("cancellato un modulo", autore);
-			return "redirect:/file/moduli";
+			return "redirect:/moduli";
 		} return "redirect:forbidden";
 
 	}

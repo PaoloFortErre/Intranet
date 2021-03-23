@@ -115,7 +115,7 @@ table, th, td {
 	<!-- ************
 				FINE HEADER
 				***************** -->
-	<div class="container">
+	<div class="container" th:with="admin = ${#authorization.expression('hasAuthority(''WNMW'')')}">
 
 		<!-- °°°°°°
 					EVENTI
@@ -430,7 +430,9 @@ table, th, td {
 				<div class="assunti2">
 					<div class="modal-header2">
 						<div class="title2">
-							<h3 style="text-align: center; font-weight: 900">Nuovi
+						<!--  <div th:if="${admin}">--><a th:href="@{/cliente/new/}"> <img src="/view/MyWork/images/more.png" width=7% style="float: right">
+						</a><!--  </div> -->
+							<h3 style="text-align: center; font-weight: 900">Nuovi 
 								clienti</h3>
 						</div>
 
@@ -494,10 +496,10 @@ table, th, td {
 				</div>
 				<div class="col-sm-4 col-lg-4 pl-5" style="padding-left: 150px">
 					<a class="rounded-circle fa fa-facebook"
-						href="https://www.facebook.com/erretechnologygroup/"></a> <a
+						href="https://www.facebook.com/erretechnologygroup/" target= "blank"></a> <a
 						class="rounded-circle fa fa-linkedin ml-2"
 						href="https://www.linkedin.com/company/erretechnologygroup/"
-						style="margin-left: 10px"></a>
+						style="margin-left: 10px" target= "blank"></a>
 				</div>
 			</div>
 		</div>
