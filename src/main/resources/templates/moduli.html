@@ -30,69 +30,77 @@
 </head>
 <body>
 
-		<div class="row" style="background-color: black">
-		<div >
-		<nav class="navbar navbar-nav navbar-right">
-						<div class="content" style="display: inline-block">
-							<a th:href="@{/homepage/}"><img
-								src="/view/MyLife/images/homebianca1.png" width="60px" style="margin-top: -10px; opacity: 0.9">
-							</a>
-						</div>
-						
-						<div class="content" style="display: inline-block; color:#ECF260;">
-							<a href="@{/comunicazioniHr/}"  >COMUNICAZIONI HR</a>
-						</div>
-						<div class="content" style="display: inline-block">
-							<a href="#" style="color:#ECF260;">MODULI</a>
-						</div>
-						<div class="content" style="display: inline-block">
-							<a href="http://polyedro.erretechnology.com/www/" target="blank">POLYEDRO</a>
-						</div>
+	<div class="row" style="background-color: black">
+		<div>
+			<nav class="navbar navbar-nav navbar-right">
+				<div class="content" style="display: inline-block">
+					<a th:href="@{/homepage/}"><img
+						src="/view/MyLife/images/homebianca1.png" width="60px"
+						style="margin-top: -10px; opacity: 0.9"> </a>
+				</div>
+
+				<div class="content" style="display: inline-block; color: #ECF260;">
+					<a href="@{/comunicazioniHr/}">COMUNICAZIONI HR</a>
+				</div>
+				<div class="content" style="display: inline-block">
+					<a href="#" style="color: #ECF260;">MODULI</a>
+				</div>
+				<div class="content" style="display: inline-block">
+					<a href="http://polyedro.erretechnology.com/www/" target="blank">POLYEDRO</a>
+				</div>
 				<div style="position: relative; float: right">
-						<a th:href="@{/profile/}"><img
-							th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
-							alt="utente" title="utente" class="immagineUtente"
-							id="utente-foto-profilo"
-							style="margin: 30px; margin-right: 40px; border-radius: 50%; margin-top: 0px;"></a>
-					</div>
-					</nav> 
+					<a th:href="@{/profile/}"><img
+						th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
+						alt="utente" title="utente" class="immagineUtente"
+						id="utente-foto-profilo"
+						style="margin: 30px; margin-right: 40px; border-radius: 50%; margin-top: 0px;"></a>
+				</div>
+			</nav>
 		</div>
-		</div>
-		<div class="row">
+	</div>
+	<div class="row">
 		<img src="/view/MyWork/images/comHR.png" id="headerHR">
-		</div>
-		
-		<div class="container">
+	</div>
+
+	<div class="container">
 		<div class="row" style="margin-top: 50px">
-		<div class="col-xs-10 col-sm-10 col-md-6 col-lg-6">
-		<div id="comunicazione" th:each="comunicazione: ${comunicazioni}">
-		
-		 <img src="/view/MyWork/images/pdf-icon.png" style="float: right;" width="30px">
-		 <p th:text="${#dates.format(comunicazione.timestamp*1000, 'dd/MM/yyyy')}"> </p>
-		<h3 th:text="${comunicazione.nome}"> </h3>
-		<a th:href="@{/file/downloadFileHR(id=${comunicazione.id})}"  th:download="${comunicazione.nome}" style="text-align: right">
-				 <img src="/view/MyWork/images/download.png.png" width="30px"></a>
-		
+			<div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+
+			<div class="modulo" style="margin: auto;">
+			<div id="modulo-img">
+			<img src="/view/MyWork/images/modulo.png" width="100%" height="200px">
+			</div>
+			<div id="modulo-titolo">
+			<h4 style="padding: 8px; display: inline-block;"> Modulo trasferte </h4>
+			 <img src="/view/MyWork/images/pdf-icon.png" style="float: right; margin: 8px; " width="30px">
+			</div>
+			<div id="modulo-body">
+			<a href=""  style="text-align: right; padding: 8px;">
+				 <img src="/view/MyWork/images/download.png.png" width="30px" style="float: right;" class="img-responsive"></a>
+			</div>
+			</div>
+
+			
+
+			</div>
+
+
 		</div>
-		
-		</div>
-		
-	
-		</div>
-		
-		</div>
-<!-- PANNELLO FOOTER CON INFO-->
+
+	</div>
+	<!-- PANNELLO FOOTER CON INFO-->
 	<footer class="align-items-center">
 		<div class="container align-items-center mt-4"
 			style="margin-top: 40px">
 			<div class="row justify-content-center align-items-center mt-3 pt-4"
 				style="margin-top: 15px; padding-top: 15px;">
 				<div class="col-sm-4 col-lg-4">
-					<img src="/view/MyLife/images/erre.png" height="80px"
-						alt="erre_logo" style="margin: auto">
+					<a href="https://erretechnology.com/" target="blank"><img
+						src="/view/MyLife/images/erre.png" height="80px" alt="erre_logo"
+						style="margin: auto"></a>
 				</div>
 				<div class="col-sm-4 col-lg-4">
-				<img src="/view/MyWork/images/thegate.png" width="100%"
+					<img src="/view/MyWork/images/thegate.png" width="100%"
 						style="margin: auto;">
 					<p style="color: #F3F3F3; text-align: center; font-size: 20px;">
 						Supporto: +39 011 197 429 00</p>
@@ -107,6 +115,6 @@
 			</div>
 		</div>
 	</footer>
-	
-	</body>
+
+</body>
 </html>

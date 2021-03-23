@@ -423,3 +423,19 @@ audio{
 #eventoWork2{
 	display: none;
 }
+.modulo {
+
+	width: 82%;
+	box-shadow: -1px 9px 8px 3px rgba(0, 0, 0, 0.76);
+	background-color: #1C1C1C;
+	color: black;
+	margin-bottom:50px;
+}
+#modulo-title {
+	color: #F3F3F3;
+}
+#modulo-body {
+	color: black;
+	margin-bottom:50px;
+	padding: 10px;
+}
