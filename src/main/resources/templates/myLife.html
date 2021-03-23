@@ -367,7 +367,7 @@ COLONNA DESTRA
 				<h3 id="culturaPiemonte" style="margin-top: 30px">Cultura in
 					Piemonte</h3>
 					
-				<p style="color: #F3F3F3; text-align: center; font-size: 13px">
+				<p style="color: #F3F3F3; text-align: center; font-size: 15px">
 					Se sei un tipo da eventi in città o da sagre:</p>
 
 <div></div>
@@ -440,7 +440,7 @@ COLONNA DESTRA
 
 
 				<h3 id="culturaPiemonte" style="margin-top: 70px">Film</h3>
-				<p style="color: #F3F3F3; text-align: center; font-size: 13px">
+				<p style="color: #F3F3F3; text-align: center; font-size: 15px">
 					Se sei un tipo da cinema o serie TV:</p>
 				<img src="/view/MyLife/images/filmq.jpg" class="img-responsive"
 					width="32%" height="230px" style="display: inline;"> <img
@@ -464,6 +464,18 @@ COLONNA DESTRA
 						</tr>
 					</table>
 				</div>
+				
+				<div>
+				<h3 id="culturaPiemonte" style="margin-top: 70px">Libri</h3>
+				<p style="color: #F3F3F3; text-align: center; font-size: 15px">
+					Se sei un tipo dal classico libro cartaceo o da Kindle:</p>
+					
+				<table id="libri" th:if="${libri!=null}">
+				<tr> <td> <img th:src="'data:image/png;base64,' + ${libri.copertina.getImgData(libri.copertina.data)}" width="100px" style="padding: 5px;"> </td> <td><p th:text="${libri.titolo}"></p> <p style="FONT-size: 10px; font-style: italic; "> Giovanni </p></td> 
+					<td> <img th:src="'data:image/png;base64,' + ${libri1.copertina.getImgData(libri1.copertina.data)}" width="100px"  style="padding: 5px;"> </td> <td><p th:text="${libri1.titolo}" STYLE="margin-left: 5px;"> </p> <p style="FONT-size: 10px; font-style: italic; text-align: right"> Giovanni </p></td>
+				</tr>
+				</table>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -486,10 +498,10 @@ COLONNA DESTRA
 				</div>
 				<div class="col-sm-4 col-lg-4 pl-5" style="padding-left: 150px">
 					<a class="rounded-circle fa fa-facebook"
-						href="https://www.facebook.com/erretechnologygroup/"></a> <a
+						href="https://www.facebook.com/erretechnologygroup/" target= "blank"></a> <a
 						class="rounded-circle fa fa-linkedin ml-2"
 						href="https://www.linkedin.com/company/erretechnologygroup/"
-						style="margin-left: 10px"></a>
+						style="margin-left: 10px" target= "blank"></a>
 				</div>
 			</div>
 		</div>

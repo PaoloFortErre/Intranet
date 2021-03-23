@@ -20,33 +20,54 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
+
+<style>
+body{
+	background-image: url("/view/MyWork/images/background.png");
+	  background-repeat: no-repeat, repeat;
+	    background-attachment: fixed;
+	  
+	
+}
+#input {
+	background-color: #E2E2E2;
+	border-radius: 0px 0px 0px 0px;
+	border: 0px solid #E2E2E2;
+	
+}
+
+</style>
+
 </head>
+
 <body >
 
 <div class="container">
 <div class="row">
-<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" style="margin:auto">
+<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" id="colForm">
 
+<h4 style="text-align: left; margin-bottom:5px;"> Inserisci un nuovo cliente:
+</h4 ><hr style="margin-bottom:50px; background-color: #F3F3F3; ">
 	<form th:action="@{/cliente/insert}" th:object="${cliente}"
 		method="post" enctype="multipart/form-data"  class="signin-form">
 
 		<div class="form-group">
 			<label for="nome">Nome: </label> <input type="text" name="nome"
-				class="form-control" placeholder="Insersci cliente" id="nome" th:field="*{nome}">
+				class="form-control"  id="input" th:field="*{nome}">
 		</div>
 
 		<div class="form-group">
 			<label for="date">Mese inizio:</label>
-			 <input type="month" name="date" class="form-control" id="pwd">
+			 <input type="month" name="date"  class="form-control" id="input">
 		</div>
 
 
 			<div class="form-group">
-			<label for="immagine">Insersci il logo del cliente:</label> <input type="file"
+			<label for="immagine">Logo del cliente:</label> <input type="file"
 				class="form-control-file"
 					accept="image/png, image/jpeg" name="immagine" id="immagine">
 		</div>
-		<input type="submit" id="vedi2" value="Pubblica">
+		<input type="submit" id="pubblicaSubmit" value="Pubblica">
 	</form>
 </div>
 </div>

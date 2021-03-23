@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="it">
 <head>
-<title>Comunicazioni HR</title>
+<title>Modulistica</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -40,10 +40,10 @@
 				</div>
 
 				<div class="content" style="display: inline-block; color: #ECF260;">
-					<a href="@{/comunicazioniHr/}">COMUNICAZIONI HR</a>
+					<a th:href="@{/comunicazioniHr/}">COMUNICAZIONI HR</a>
 				</div>
 				<div class="content" style="display: inline-block">
-					<a href="#" style="color: #ECF260;">MODULI</a>
+					<a style="color: #ECF260; text-decoration: none">MODULI</a>
 				</div>
 				<div class="content" style="display: inline-block">
 					<a href="http://polyedro.erretechnology.com/www/" target="blank">POLYEDRO</a>
@@ -66,9 +66,8 @@
 		<div class="row" style="margin-top: 50px" th:if="${filePdf!=null}">
 			<div class="col-xs-6 col-sm-6 col-md-4 col-lg-4"
 				th:each="pdf: ${filePdf}">
-
 				<div class="modulo" style="margin: auto;"
-				 th:if="(${pdf.settore} == ${user.settore} or ${admin}) and ${pdf.visibile}">	
+				 th:if="((${pdf.settore} == ${user.settore.nomeSettore}) or ${admin}) and ${pdf.visibile}">	
 					<div th:if="${admin}">
 					
 					</div>
@@ -80,7 +79,7 @@
 						<h4 style="display: inline-block; padding-left: 8px;"><strong>Modulo:</strong></h4><h4 style="padding: 8px; display: inline-block;" th:text="${pdf.nome}"></h4>
 						<img src="/view/MyWork/images/pdf-icon.png"
 							style="float: right; margin: 8px;" width="30px">
-							<form th:action="@{/file/deleteFilePdf(id=${pdf.id})}" method="post">
+							<form th:action="@{/file/deleteFilePdf(id=${pdf.id})}" th:if="${admin}" method="post">
 						<button type="submit"  id="bottoneModulo"> <img src="/view/MyWork/images/trash.png" width="50%"></button>
 					</form>
 					</div>
@@ -99,7 +98,7 @@
 
 
 		</div>
-
+ <iframe width='350' height='300' src="/view/MyWork/images/ProvaGS.pdf"></iframe>
 	</div>
 	<!-- PANNELLO FOOTER CON INFO-->
 	<footer class="align-items-center">
@@ -120,10 +119,10 @@
 				</div>
 				<div class="col-sm-4 col-lg-4 pl-5" style="padding-left: 150px">
 					<a class="rounded-circle fa fa-facebook"
-						href="https://www.facebook.com/erretechnologygroup/"></a> <a
+						href="https://www.facebook.com/erretechnologygroup/" target= "blank"></a> <a
 						class="rounded-circle fa fa-linkedin ml-2"
 						href="https://www.linkedin.com/company/erretechnologygroup/"
-						style="margin-left: 10px"></a>
+						style="margin-left: 10px" target= "blank"></a>
 				</div>
 			</div>
 		</div>

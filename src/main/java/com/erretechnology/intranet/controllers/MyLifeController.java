@@ -21,11 +21,13 @@ import com.erretechnology.intranet.models.Commento;
 import com.erretechnology.intranet.models.CommentoModificato;
 import com.erretechnology.intranet.models.Evento;
 import com.erretechnology.intranet.models.FileImmagine;
+import com.erretechnology.intranet.models.Libro;
 import com.erretechnology.intranet.models.Post;
 import com.erretechnology.intranet.models.PostModificato;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.repositories.RepositoryAforisma;
 import com.erretechnology.intranet.repositories.RepositoryEvento;
+import com.erretechnology.intranet.repositories.RepositoryLibro;
 
 @Controller
 @RequestMapping(value = "myLife")
@@ -34,6 +36,8 @@ public class MyLifeController extends BaseController {
 	private RepositoryEvento repoEvento;
 	@Autowired
 	private RepositoryAforisma repoAfo;
+	@Autowired
+	private RepositoryLibro repoLib;
 	//	@GetMapping(value="/myLife")
 	//	public ModelAndView myLife() {
 	//		ModelAndView mav = new ModelAndView();
@@ -46,6 +50,7 @@ public class MyLifeController extends BaseController {
 		//	List<Post> messaggi = service.getLastMessage();
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		List<Evento> evento = (List<Evento>) repoEvento.findNextLifeEvents(Instant.now().getEpochSecond());
+		List<Libro> libri = repoLib.findAll();
 		List<Aforisma> aforismi = repoAfo.findAll();
 		System.out.println(evento.size());
 		ModelAndView mav = new ModelAndView();
@@ -81,6 +86,22 @@ public class MyLifeController extends BaseController {
 		mav.addObject("aforisma", aforismi.get(0));
 		mav.addObject("aforisma2", aforismi.get(1));
 		}
+		
+		
+		if (libri.size()==0) {
+			mav.addObject("libri", null);
+			mav.addObject("libri1", null);
+		}
+		else if (libri.size()==1) {
+			mav.addObject("libri", libri.get(0));
+			mav.addObject("libri1", null);
+			}
+		else {
+			mav.addObject("libri", libri.get(0));
+			mav.addObject("libri1", libri.get(1));
+		}
+		
+		
 	//	mav.addObject("eventilife2", evento.get(2));
 	//	mav.addObject("img", serviceFileImmagine.getLastImmagineByUtente(u));
 		return mav;
