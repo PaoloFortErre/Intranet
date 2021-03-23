@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.erretechnology.intranet.controllers.BaseController;
+import com.erretechnology.intranet.models.Permesso;
 import com.erretechnology.intranet.models.Ruolo;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
@@ -46,9 +47,14 @@ public class ServiceUtenteDatiPersonaliImpl extends BaseController implements Se
 		utente.setPassword(psw);
 		utente.setAttivo(true);
 		Ruolo r = serviceRuolo.getById("USER");
+		utente.setRuolo(r);
+		Permesso p = servicePermesso.findById("UB");
+		utente.addPermesso(p);
+		
 		serviceUtente.saveUtente(utente);
-		r.addUtente(utente);
-		utente.addRuolo(r);
+		p.addUtente(utente);
+		/*r.addUtente(utente);
+		utente.addRuolo(r);*/
 		udp.setSettore(serviceSettore.findById(settore));
 		udp.setPasswordCambiata(false);
 		udp.setUtente(utente);

@@ -4,7 +4,10 @@ package com.erretechnology.intranet.models;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -29,20 +32,22 @@ public class Utente{
 	private Boolean attivo;
 	@Column(name = "reset_password_token")
 	private String tokenResetPassword;
-
-	@ManyToMany(mappedBy = "setUtenti",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	Set<Ruolo> setRuoli;
 	@ManyToMany(mappedBy = "setUtenti", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	Set<Permesso> setPermessi;
+	@ManyToOne
+	@JoinColumn(name = "nome_ruolo")
+	private Ruolo ruolo;
 	
-	public Utente() {
-		setRuoli = new HashSet<Ruolo>();
-		setPermessi = new HashSet<Permesso>();
+	public Ruolo getRuolo() {
+		return ruolo;
 	}
-	
-	
-	public void addRuolo(Ruolo ruolo) {
-		setRuoli.add(ruolo);
+
+	public void setRuolo(Ruolo ruolo) {
+		this.ruolo = ruolo;
+	}
+
+	public Utente() {
+		setPermessi = new HashSet<Permesso>();
 	}
 	
 	public void removePermesso(Permesso permesso) {
@@ -58,12 +63,6 @@ public class Utente{
 	}
 	public void setId(Integer id) {
 		this.id = id;
-	}
-	public Set<Ruolo> getSetGruppi() {
-		return setRuoli;
-	}
-	public void setSetGruppi(Set<Ruolo> setRuoli) {
-		this.setRuoli = setRuoli;
 	}
 	public Set<Permesso> getSetPermessi() {
 		return setPermessi;
