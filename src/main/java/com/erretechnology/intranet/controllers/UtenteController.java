@@ -138,6 +138,20 @@ public class UtenteController extends BaseController{
 		}
 		return "redirect:/profile/";
 	}
+	
+	// PAGINA ATTIVITA' RECENTI 
+		@GetMapping(value = "/mostra_log")
+		public ModelAndView mostraLog(HttpSession session) {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("mostra_tutto_log");
+			UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+			if(serviceUtente.findById(u.getId()).getSetGruppi().stream().filter(x-> x.getNome().equals("ADMIN")).count() == 1){
+				mav.addObject("allLog", serviceLog.findAll());
+			}else {
+				mav.addObject("allLog", serviceLog.findLogById(Integer.parseInt(session.getAttribute("id").toString())));
+			}
+			return mav;
+		}
 
 
 	@PostMapping(value = "/setVisualizzazione")
@@ -239,7 +253,7 @@ public class UtenteController extends BaseController{
 		serviceUtente.save(u);
 		return "redirect:/profile/cancellaUtente/";
 	}
-	
+
 	@PostMapping(value = "/riattiva")
 	public String riattiva(@RequestParam("id_riattivato") int id) {
 		Utente u = serviceUtente.findById(id);

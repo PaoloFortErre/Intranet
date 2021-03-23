@@ -93,6 +93,8 @@ public class HomeController extends BaseController{
 		return mav;
 	}
 	
+	
+	
 	@PostMapping(value = "/password_dimenticata")
 	public String processForgotPassword(HttpServletRequest request,@RequestParam("email") String email, Model model) {
 	    String token = RandomString.make(30);
