@@ -47,6 +47,6 @@ public class PodcastController extends BaseController {
 			e.printStackTrace();
 		}
 			
-		return "redirect:/podcast/";
+		return "redirect:/myWork/";
 	}
 }

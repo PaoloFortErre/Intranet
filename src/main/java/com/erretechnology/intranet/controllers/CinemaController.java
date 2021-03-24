@@ -77,7 +77,7 @@ public class CinemaController extends BaseController {
 		
 		repoCinema.save(cinema);
 		saveLog("inserito un cinema", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-        return "cinema";
+        return "redirect:/myLife/";
 	}
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
