@@ -12,7 +12,6 @@ import com.erretechnology.intranet.services.ServiceCommentoModificato;
 import com.erretechnology.intranet.services.ServiceComunicazioniHR;
 import com.erretechnology.intranet.services.ServiceFileImmagini;
 import com.erretechnology.intranet.services.ServiceFilePdf;
-import com.erretechnology.intranet.services.ServiceFileSystem;
 import com.erretechnology.intranet.services.ServiceLog;
 import com.erretechnology.intranet.services.ServicePermesso;
 import com.erretechnology.intranet.services.ServicePodcast;
@@ -35,8 +34,6 @@ public abstract class BaseController {
 	protected ServiceFileImmagini serviceFileImmagine;
 	@Autowired
 	protected ServiceFilePdf serviceFilePdf;
-	@Autowired
-	protected ServiceFileSystem serviceFileSystem;
 	@Autowired
 	protected ServiceLog serviceLog;
 	@Autowired
