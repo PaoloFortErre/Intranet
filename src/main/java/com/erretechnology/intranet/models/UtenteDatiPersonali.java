@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "DatiUtente")
-public class UtenteDatiPersonali implements Serializable{
+public class UtenteDatiPersonali implements Serializable, MyWorkBean{
 	private static final long serialVersionUID = -828732162220395783L;
 	@Id
 	@Column(name="id") 

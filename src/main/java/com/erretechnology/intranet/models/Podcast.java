@@ -25,7 +25,7 @@ public class Podcast {
 	@ManyToOne
 	@JoinColumn(name = "id_autore")
 	private UtenteDatiPersonali utente;
-	
+	private long dataPodcast;
 	
 	public UtenteDatiPersonali getUtente() {
 		return utente;
@@ -61,6 +61,12 @@ public class Podcast {
 	public String getAudioData(byte[] byteData) {
         return Base64.getMimeEncoder().encodeToString(byteData);
     }
+	public long getDataPodcast() {
+		return dataPodcast;
+	}
+	public void setDataPodcast(long dataPodcast) {
+		this.dataPodcast = dataPodcast;
+	}
 
 
 }

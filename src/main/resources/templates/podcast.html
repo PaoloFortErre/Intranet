@@ -56,8 +56,8 @@ body {
 
 				<form th:action="@{/podcast/uploadPodcast}" th:object="${podcast}"
 					method="post" enctype="multipart/form-data" class="signin-form">
-
 				
+				<input class="form-control" id="date1" type="date" th:field="${date.date}" placeholder="Inserisci la data in formato gg/mm/aaaa">
 					<div class="form-group">
 			<label for="file">File:</label> <input type="file"
 				class="form-control-file"
