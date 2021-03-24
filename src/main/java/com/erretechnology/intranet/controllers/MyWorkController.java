@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.Cliente;
 import com.erretechnology.intranet.models.Evento;
+import com.erretechnology.intranet.models.MyWorkBean;
 import com.erretechnology.intranet.models.News;
 import com.erretechnology.intranet.models.Podcast;
 import com.erretechnology.intranet.models.Sondaggio;
@@ -42,10 +43,7 @@ public class MyWorkController extends BaseController {
 	@GetMapping(value = "/")
 	public ModelAndView primaPagina(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		/*
-		 * PARTE CARICAMENTO FORM COMPLEANNI
-		 * 
-		 * */
+		
 		UtenteDatiPersonali u1 = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		mav.addObject("utenteDati", u1);
 		mav.setViewName("myWork");
@@ -62,10 +60,6 @@ public class MyWorkController extends BaseController {
 		}
 		System.out.println(utentiCompleanno.size());
 		mav.addObject("utente", utentiCompleanno);
-		/*
-		 * PARTE CARICAMENTO FORM NUOVI UTENTI
-		 * 
-		 * */
 
 		List<UtenteDatiPersonali> nuoviUtenti = utenti.stream()
 				.sorted(Comparator.comparingInt(UtenteDatiPersonali::getId).reversed())
@@ -73,23 +67,9 @@ public class MyWorkController extends BaseController {
 				.limit(6)
 				.collect(Collectors.toList());
 		System.out.println(nuoviUtenti.size());
-		if(nuoviUtenti.size() >= 6) {
-			mav.addObject("nuoviAssunti", nuoviUtenti.subList(0, 3));
-			mav.addObject("nuoviAssunti2", nuoviUtenti.subList(3, 6));
-		} else if(nuoviUtenti.size() <= 3) {
-			mav.addObject("nuoviAssunti", nuoviUtenti.subList(0, nuoviUtenti.size()));
-			mav.addObject("nuoviAssunti2",null);
+		setMAV(mav, nuoviUtenti, 0, 6, "nuoviAssunti");
 
-		}else if(nuoviUtenti.size() > 3 && nuoviUtenti.size() < 6) {
-			mav.addObject("nuoviAssunti", nuoviUtenti.subList(0, 3));
-			mav.addObject("nuoviAssunti2", nuoviUtenti.subList(3, nuoviUtenti.size()));
-		}
-		///////////
-		/*
-		 * PARTE PODCAST
-		 * 
-
-		 */	
+		
 		List<Podcast> listPodcast = servicePodcast.getAll();
 		if(listPodcast.size() != 0) {
 			Podcast primoPodcast = listPodcast.get(0);
@@ -97,100 +77,51 @@ public class MyWorkController extends BaseController {
 			listPodcast.remove(0);
 			mav.addObject("altriPodcast", listPodcast);
 		}
-		/*
-		 * 
-		 * 
-		 * PARTE FORM NUOVI CLIENTI
-		 */
+		
 		List<Cliente> clienti = repoCliente.findLimit(3);
 		if(clienti.size() > 0) {
 			mav.addObject("nuoviClienti", clienti);
 		} else {
 			mav.addObject("nuoviClienti", null);
 		}
-		//alternativa con pagination
-		/*
-		 *  mav.addObject("nuoviClienti1", repoCliente.findPagination(PageRequest.of(0, 3)));
-		 *	mav.addObject("nuoviClienti2", repoCliente.findPagination(PageRequest.of(1, 3)));
-		 * 
-		 */
 
-		/*
-		 * PARTE NEWS
-		 * 
-		 */	List<News> news= repoNews.findAllOrderByDataPubblicazioneDesc(); 
-		 System.out.println(news.size());
+		List<News> news= repoNews.findAllOrderByDataPubblicazioneDesc(); 
+		System.out.println(news.size());
 
-		 if(news.size()>=6) {
-			 mav.addObject("news", news.subList(0, 3));
-			 mav.addObject("news2", news.subList(3, 6));
-			 System.out.println(news.subList(3,6).size());
-		 }
-		 else if(news.size() <= 3) {
-			 mav.addObject("news", news.subList(0, news.size()));
-			 mav.addObject("news2", null);
+		setMAV(mav, news, 0, 6, "news");
 
-		 }else if(news.size() > 3 && news.size() < 6) {
-			 mav.addObject("news", news.subList(0, 3));
-			 mav.addObject("news2", news.subList(3, news.size()));
+		if (news.size()==0) {
+			mav.addObject( "newsSlide", null);
+			mav.addObject( "newsSlide2", null);
+		}else if(news.size()>=2) {
+			mav.addObject( "newsSlide", news.get(0));
+			mav.addObject( "newsSlide2", news.get(1));
+		}else if (news.size()<2) {
+			mav.addObject( "newsSlide", news.get(0));
+			mav.addObject( "newsSlide2", null);
+		}
 
+		List<Evento> eventi = (List<Evento>) repoEvento.findNextWorkEvents(Instant.now().getEpochSecond());
+		System.out.println(eventi.size());
+		setMAV(mav, eventi, 0, 4, "eventi");
+		return mav;
+	}
 
-		 }
-		 if (news.size()==0) {
-			 mav.addObject( "newsSlide", null);
-			 mav.addObject( "newsSlide2", null);
-
-		 }
-		 
-		 else if(news.size()>=2) {
-			 mav.addObject( "newsSlide", news.get(0));
-			 mav.addObject( "newsSlide2", news.get(1));
-
-		 }
-		 else if (news.size()<2) {
-			 mav.addObject( "newsSlide", news.get(0));
-			 mav.addObject( "newsSlide2", null);
-
-		 }
-
-
-		 /*
-		  * PARTE EVENTI
-		  * 
-		  */
-		 //		 List<Evento> eventi = repoEvento.findNextWorkEvents(Instant.now().getEpochSecond()).stream().limit(3).collect(Collectors.toList());
-		 //		 if(eventi.size() > 0) {
-		 //		 mav.addObject("eventi", eventi);
-		 //		 } else {
-		 //			 mav.addObject("eventi", null);
-		 //
-		 //		 }
-		 //		 return mav;
-		 List<Evento> eventi = (List<Evento>) repoEvento.findNextWorkEvents(Instant.now().getEpochSecond());
-		 System.out.println(eventi.size());
-		 if (eventi.size()==0) {
-			 mav.addObject("eventi", null);
-			 mav.addObject("eventi2", null);
-
-		 }
-		
-		 else if (eventi.size()<=2) {
-			 mav.addObject("eventi", eventi.subList(0, eventi.size()));
-			 mav.addObject("eventi2", null);
-		 }
-		 
-		 else if (eventi.size()>2 && eventi.size()<4) {
-			 mav.addObject("eventi", eventi.subList(0, 2));
-			 mav.addObject("eventi2", eventi.subList(2, eventi.size()));
-
-		 } else if (eventi.size()>=4) {
-			 mav.addObject("eventi", eventi.subList(0, 2));
-			 mav.addObject("eventi2", eventi.subList(2, 4));
-		 }
-		 return mav;
-
-
-
+	private void setMAV(ModelAndView mav, List<? extends MyWorkBean> list, int inizio, int fine, String nomeOggetto) {
+		if (list.size()==0) {
+			mav.addObject(nomeOggetto, null);
+			mav.addObject(nomeOggetto + "2", null);
+		}else if(list.size() >= fine) {
+			mav.addObject(nomeOggetto, list.subList(inizio, ((fine + inizio) / 2)));
+			mav.addObject(nomeOggetto + "2", list.subList(((fine + inizio) / 2), fine));
+			System.out.println(list.subList(((fine + inizio) / 2),fine).size());
+		}else if(list.size() <= ((fine + inizio) / 2)) {
+			mav.addObject(nomeOggetto, list.subList(inizio, list.size()));
+			mav.addObject(nomeOggetto + "2", null);
+		}else if(list.size() > ((fine + inizio) / 2) && list.size() < fine) {
+			mav.addObject(nomeOggetto, list.subList(inizio, ((fine + inizio) / 2)));
+			mav.addObject(nomeOggetto + "2", list.subList(((fine + inizio) / 2), list.size()));
+		}
 	}
 
 	@GetMapping(value = "/sondaggi")

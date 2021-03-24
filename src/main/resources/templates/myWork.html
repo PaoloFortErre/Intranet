@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="it">
 <head>
-<title>MyW0rk!</title>
+<title>MyWork</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -204,15 +204,17 @@ table, th, td {
 					</h2>
 					<img src="/view/MyWork/images/radice.jpg" class="img-fluid"
 						width="40%" height="100px" style="float: right" id="imgRosario">
-					<p>16 febbraio 2021</p>
+						<div th:if="${primoPodcast!=null}">
+							<p th:text="${#dates.format(primoPodcast.dataPodcast *1000, 'dd/MM/yyyy')}"></p>
+							<audio controls style="margin-top: 10px">
+								<source
+									th:src="'data:audio/mp3;base64,' + ${primoPodcast.getAudioData(primoPodcast.podcast)}"
+									type="audio/ogg">
+							</audio>
+						</div>
+					
 
-					<audio controls th:if="${primoPodcast!=null}" style="margin-top: 10px">
-						<source
-							th:src="'data:audio/mp3;base64,' + ${primoPodcast.getAudioData(primoPodcast.podcast)}"
-							type="audio/ogg">
-
-
-					</audio>
+					
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">

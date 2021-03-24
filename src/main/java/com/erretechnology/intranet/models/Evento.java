@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "event")
-public class Evento {
+public class Evento implements MyWorkBean{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
