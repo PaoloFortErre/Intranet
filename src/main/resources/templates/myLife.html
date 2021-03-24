@@ -368,7 +368,7 @@ COLONNA DESTRA
 			<div class="col-sm-4 col-lg-4" id="col-destra">
 
 
-				<div th:if="${eventilife!=null}">
+				
 					<a th:href="@{/evento/newLife/}"> <img
 						src="/view/MyWork/images/more.png" width="30px"
 						style="float: right; margin-bottom: 10px;"></a>
@@ -379,8 +379,8 @@ COLONNA DESTRA
 
 					<p style="color: #F3F3F3; text-align: center; font-size: 15px; margin-bottom: 50px;">
 						Se sei un tipo da eventi in città o da sagre:</p>
-
-					<div></div>
+					<p th:if="${eventilife==null}" style="text-align: center"> Non ci sono eventi in prossimità </p> 
+					<div th:if="${eventilife!=null}">
 					<div th:each="eventilife : ${eventilife}" id="evento1life">
 						<div class="caption" th:if="${eventilife.copertina!=null}">
 							<img
@@ -448,14 +448,16 @@ COLONNA DESTRA
 
 
 
-				<div th:if="${film1!=null}">
+				
 				<a th:href="@{/cinema/new/}"> <img
 						src="/view/MyWork/images/more.png" width="30px"
 						style="float: right; margin-bottom: 10px;"></a>
 					<h2 id="culturaPiemonte" style="margin-top: 70px">Film</h2>
 					<p style="color: #F3F3F3; text-align: center; font-size: 15px; margin-bottom: 50px;">
 						Se sei un tipo da cinema o serie TV:</p>
-					<img
+					<p th:if="${film1==null}" style="text-align: center"> Non ci sono film da consigliare </p> 
+						
+					<div th:if="${film1!=null}"><img
 						th:src="'data:image/png;base64,' + ${film1.copertina.getImgData(film1.copertina.data)}"
 						class="img-responsive" width="32%" style="display: inline;">
 					<img th:if="${film2!=null}"
@@ -502,7 +504,8 @@ COLONNA DESTRA
 					<h2 id="culturaPiemonte" style="margin-top: 70px">Libri</h2>
 					<p style="color: #F3F3F3; text-align: center; font-size: 15px; margin-bottom: 50px;">
 						Se sei un tipo dal classico libro cartaceo o da Kindle:</p>
-
+					<p th:if="${libri==null}" style="text-align: center"> Non ci sono libri da consigliare </p> 
+					
 					<table id="libri" th:if="${libri!=null}">
 						<tr>
 							<td><img

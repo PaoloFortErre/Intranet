@@ -246,7 +246,7 @@ table, th, td {
 
 		<div class="row" style="margin-top: 20px;">
 			<div class="col-sm-8 col-md-6 col-lg-5"
-				th:if="${nuoviClienti!=null}">
+				>
 				<div class="assunti2">
 					<div class="modal-header2">
 						<div class="title2">
@@ -257,7 +257,8 @@ table, th, td {
 						</div>
 
 					</div>
-					<table class="nuoviClienti" style="margin-top: 15px;" >
+					<p style="text-align: center;" th:if="${nuoviClienti==null}"> Non ci sono nuovi clienti al momento </p> 
+					<table class="nuoviClienti" style="margin-top: 15px;" th:if="${nuoviClienti!=null}">
 						<th:block>
 							<tr>
 								<td th:each="cliente: ${nuoviClienti}">
