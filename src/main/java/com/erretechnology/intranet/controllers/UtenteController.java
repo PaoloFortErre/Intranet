@@ -1,13 +1,10 @@
 package com.erretechnology.intranet.controllers;
 
 import java.time.Instant;
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -26,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import com.erretechnology.intranet.controllers.*;
 import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.Permesso;
@@ -41,16 +37,15 @@ public class UtenteController extends BaseController{
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		ModelAndView mav = new ModelAndView();
 		if(serviceUtente.findById(u.getId()).getRuolo().getNome().equals("ADMIN")){
-			mav.setViewName("profilo_admin");
-			mav.addObject("attivi",serviceUtente.getAll().stream().filter(x->x.getAttivo()).count());
 			mav.addObject("log", serviceLog.findLastFive());
 			mav.addObject("allLog", serviceLog.findAll());
 		}
 		else {
-			mav.setViewName("profilo");
 			mav.addObject("log", serviceLog.findLastFiveLogById(Integer.parseInt(session.getAttribute("id").toString())));
 			mav.addObject("allLog", serviceLog.findLogById(Integer.parseInt(session.getAttribute("id").toString())));
 		}
+		mav.setViewName("profilo_admin");
+		mav.addObject("attivi",serviceUtente.getAll().stream().filter(x->x.getAttivo()).count());
 		mav.addObject("utente", u);
 		return mav;
 	}

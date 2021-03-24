@@ -105,7 +105,6 @@
 </head>
 
 <body>
-
   <!-- ROW CON NAVBAR -->
   <div class="row">
     <div class="col ml-5">
@@ -226,7 +225,7 @@
 
   <!-- ROW DESCRIZIONE E DASHBOARD -->
   <div class="container-fluid ml-5 ">
-    <div class="row justify-content-center mt-4 ml-5">
+    <div class="row justify-content-center mt-4 ml-5" th:with="AM = ${#authorization.expression('hasAuthority(''AM'')')}">
 
       <div class="col-lg-6 col-md-4 col-sm-5 mr-5 pt-n5 ">
         <div class="card shadow text-center pt-n5 mt-n5" style="color:#303030;" >
@@ -243,9 +242,13 @@
                 </tr>
               </thead>
               <tbody th:each="log:${log}">
-                <tr>
+                <tr th:if="${AM}">
                   <td th:utext="${#dates.format(log.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"></td>
                   <td th:utext="${log.utente.nome} + ' '+ ${log.utente.cognome} + ' ' + 'ha' + ' ' + ${log.azione}"></td>
+                </tr>
+                <tr th:if="${!AM}">
+                  <td th:utext="${#dates.format(log.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"></td>
+                  <td th:utext="'hai' + ' ' + ${log.azione}"></td>
                 </tr>
               </tbody>
             </table>
@@ -259,7 +262,7 @@
       </div>
 
       <div class="col-lg-3 col-md-3 col-sm-3 mt-5 ">
-        <div class="container-fluid shadow text-center rounded pr-n2 pl-n2" style="background-color: #2EC4B6">
+        <div class="container-fluid shadow text-center rounded pr-n2 pl-n2" style="background-color: #2EC4B6" th:if="${AM}">
           <div class="container">
             <h1 class="h1 text-center mt-3" th:text="${attivi}">"</h1>
             <h3 class="h3">UTENTI REGISTRATI</h3>

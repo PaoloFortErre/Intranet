@@ -62,7 +62,12 @@
 		<img src="/view/MyWork/images/giaccalogo.png" id="headerHR">
 	</div>
 
-	<div class="container" th:with="admin = ${#authorization.expression('hasAuthority(''WNMW'')')}">
+	<div class="container" th:with="GM = ${#authorization.expression('hasAuthority(''GM'')')}">
+		<div th:if="${GM}">
+			<a th:href="@{/file/}" > <img src="/view/MyWork/images/more.png" width="30px" style="float: right; margin-bottom: 10px;"></a>
+			<br>
+			<br>
+		</div>
 		<div class="row" style="margin-top: 50px" th:if="${filePdf!=null}">
 			<div class="col-xs-6 col-sm-6 col-md-4 col-lg-4"
 				th:each="pdf: ${filePdf}">

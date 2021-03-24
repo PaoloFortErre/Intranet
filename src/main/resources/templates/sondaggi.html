@@ -6,8 +6,8 @@
 </head>
 
 <body>
-<div th:with="admin = ${#authorization.expression('hasAuthority(''WNMW'')')}">
-	<div th:if="${admin}">
+<div th:with="GS = ${#authorization.expression('hasAuthority(''GS'')')}">
+	<div th:if="GS">
 		<form th:action="@{/myWork/addSondaggio}" method="get">
 			<button type="submit">Inserisci Nuovo Sondaggio</button>
 		</form>

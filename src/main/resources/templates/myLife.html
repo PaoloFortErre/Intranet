@@ -366,13 +366,11 @@
 COLONNA DESTRA
 **** -->
 			<div class="col-sm-4 col-lg-4" id="col-destra">
-
-
-				
-					<a th:href="@{/evento/newLife/}"> <img
-						src="/view/MyWork/images/more.png" width="30px"
-						style="float: right; margin-bottom: 10px;"></a>
-					
+					<div th:if="${GML}">
+						<a th:href="@{/evento/newLife/}"> <img
+							src="/view/MyWork/images/more.png" width="30px"
+							style="float: right; margin-bottom: 10px;"></a>
+					</div>
 
 					<h2 id="culturaPiemonte" style="margin-top: 30px">Cultura in
 						Piemonte</h2>
@@ -442,16 +440,11 @@ COLONNA DESTRA
 
 				</div>
 
-
-
-
-
-
-
-				
-				<a th:href="@{/cinema/new/}"> <img
-						src="/view/MyWork/images/more.png" width="30px"
-						style="float: right; margin-bottom: 10px;"></a>
+					<div th:if="${GML}">
+						<a th:href="@{/cinema/new/}"> <img
+							src="/view/MyWork/images/more.png" width="30px"
+							style="float: right; margin-bottom: 10px;"></a>
+					</div>
 					<h2 id="culturaPiemonte" style="margin-top: 70px">Film</h2>
 					<p style="color: #F3F3F3; text-align: center; font-size: 15px; margin-bottom: 50px;">
 						Se sei un tipo da cinema o serie TV:</p>
@@ -498,9 +491,11 @@ COLONNA DESTRA
 					</div>
 				</div>
 				<div>
-				<a th:href="@{/libro/new}"> <img
-						src="/view/MyWork/images/more.png" width="30px"
-						style="float: right; margin-bottom: 10px;"></a>
+					<div th:if="${GML}">
+						<a th:href="@{/libro/new}"> <img
+							src="/view/MyWork/images/more.png" width="30px"
+							style="float: right; margin-bottom: 10px;"></a>
+					</div>
 					<h2 id="culturaPiemonte" style="margin-top: 70px">Libri</h2>
 					<p style="color: #F3F3F3; text-align: center; font-size: 15px; margin-bottom: 50px;">
 						Se sei un tipo dal classico libro cartaceo o da Kindle:</p>
