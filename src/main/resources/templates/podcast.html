@@ -1,32 +1,75 @@
+
+
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title></title>
-</head>
-<body>
-	
-		<section class="my-5">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-8 mx-auto">
-						<h2>Upload File Example</h2>
-						<form method="post" th:action="@{/podcast/uploadPodcast}"
-							th:object="${podcast}" enctype="multipart/form-data">
-							<div class="form-group">
-								<input type="file" name="file" class="form-control-file"
-									accept=".mp3,audio/*" multiple>
-							</div>
-							<br>
-							<button type="submit" class="btn btn-primary">Upload
-								File</button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</section>
-	
-				
+<title>Podcast editing</title>
 
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
+
+<style>
+body {
+	background-image: url("/view/MyWork/images/background.png");
+	background-repeat: no-repeat, repeat;
+	background-attachment: fixed;
+}
+
+#input {
+	background-color: #E2E2E2;
+	border-radius: 0px 0px 0px 0px;
+	border: 0px solid #E2E2E2;
+}
+</style>
+
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" id="colForm">
+
+				<h4 style="text-align: left; margin-bottom: 5px;">Inserisci un
+					nuovo file podcast:</h4>
+				<hr style="background-color: #F3F3F3;">
+
+				<p style="text-align: right; margin-bottom: 50px;">
+					<a th:href="@{/myWork/}" style="color: #F3F3F3;">Torna indietro
+					</a>
+				</p>
+
+				<form th:action="@{/podcast/uploadPodcast}" th:object="${podcast}"
+					method="post" enctype="multipart/form-data" class="signin-form">
+
+				
+					<div class="form-group">
+			<label for="file">File:</label> <input type="file"
+				class="form-control-file"
+					accept=".mp3,audio/*" name="file" id="file">
+		</div>
+
+					
+
+					<input type="submit" id="pubblicaSubmit" value="Pubblica">
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

@@ -46,18 +46,18 @@ table, th, td {
 
 
 			<div id="myCarousel" class="carousel slide"
-				style="background-color: black">
+				style="background-color: #303030">
 
 
 
-				<nav class="navbar navbar-nav navbar-right" id="navcambiante">
+				<nav class="navbar navbar-nav navbar-right " id="navcambiante">
 					<div class="content" style="display: inline-block">
 						<a th:href="@{/homepage/}"><img
-							src="/view/MyLife/images/homebianca1.png" width="60px" alt="homeBianca.png"
+							src="/view/MyWork/images/casabianca.png" width="30px" alt="homeBianca.png"
 							style="margin-top: -10px; opacity: 0.9"> </a>
 					</div>
 					<div class="content" style="display: inline-block">
-						<a th:href="@{/myLife/}">MY LIFE</a>
+						<a th:href="@{/myLife/}" >MY LIFE</a>
 					</div>
 					<div class="content" style="display: inline-block">
 						<a th:href="@{/comunicazioniHr/}">COMUNICAZIONI HR</a>
@@ -73,7 +73,7 @@ table, th, td {
 							th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
 							alt="utente" title="utente" class="immagineUtente"
 							id="utente-foto-profilo"
-							style="margin: 30px; margin-right: 40px;; border-radius: 50%; margin-top: 0px;"></a>
+							style="margin: 30px; margin-right: 40px;; border-radius: 50%; margin-top: 0px; float: right"></a>
 					</div>
 				</nav>
 
@@ -194,6 +194,9 @@ table, th, td {
 
 			<div class="col-xs-6 col-sm-6 col-md-4 bcol-lg-4">
 				<div id="quadrato-podcast">
+				<a th:href="@{/podcast/}"> <img
+						src="/view/MyWork/images/more.png" width="30px"
+						style="float: right; margin-bottom: 10px; margin-left: 8px"></a>
 					<h2
 						style="line-height: 45px; display: inline-block; font-weight: 900;">
 						I podcast di <span style="color: #FFC931"><br>Rosario</span>
@@ -202,7 +205,7 @@ table, th, td {
 						width="40%" height="100px" style="float: right" id="imgRosario">
 					<p>16 febbraio 2021</p>
 
-					<audio controls th:if="${primoPodcast!=null}">
+					<audio controls th:if="${primoPodcast!=null}" style="margin-top: 10px">
 						<source
 							th:src="'data:audio/mp3;base64,' + ${primoPodcast.getAudioData(primoPodcast.podcast)}"
 							type="audio/ogg">
@@ -290,6 +293,7 @@ table, th, td {
 					°°°°°° -->
 		<div class="row" style="margin-top: 70px;">
 <a th:href="@{/evento/newWork/}" > <img src="/view/MyWork/images/more.png" width="30px" style="float: right; margin-bottom: 10px;"></a>
+
 			<h1
 				style="text-shadow: 2px 4px 2px rgba(0, 0, 0, 0.98); color: blue; text-align: center; font-weight: 900; font-size: 60px;">
 				Eventi</h1>
