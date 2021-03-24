@@ -64,7 +64,8 @@
 
 	<div class="container" th:with="GM = ${#authorization.expression('hasAuthority(''GM'')')}">
 		<div th:if="${GM}">
-			<a th:href="@{/file/}" > <img src="/view/MyWork/images/more.png" width="30px" style="float: right; margin-bottom: 10px;"></a>
+		<br><br><br>
+			<a th:href="@{/file/}" style="color: #F3F3F3; text-decoration: none;" > <img src="/view/MyWork/images/more.png" width="30px" style="float: left; margin-bottom: 10px;">&nbsp;&nbsp;Aggiungi nuovo modulo</a>
 			<br>
 			<br>
 		</div>
