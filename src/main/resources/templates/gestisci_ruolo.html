@@ -62,6 +62,8 @@
           <form class="" th:action="@{/profile/addPermesso(email = ${email}, permessi = )}"  method="post">
             <div class="form-row ml-5">
               <div class="form-group ml-5 pl-3">
+	            <div id="text" class="row justify-content-center mt-2">
+		        </div>
                 <select id="nome_cognome" class="form-control" th:name="email" th:value="${email}">
                   <option value="null">NOME E COGNOME</option>
                   <option th:each="utente1 : ${utenti}" th:name ="nome_cognome"
@@ -89,7 +91,7 @@
       </div>
 
     </div>
-
+</div>
     <script>
     function sendAjaxRequest() {
     	$("#gruppo_check").empty();
@@ -137,7 +139,10 @@
     	var email = $("#nome_cognome").val();
         var last_index = email.lastIndexOf(" ");
     	  email = email.substr(last_index+1);
-    	 $.get("http://localhost:8080/profile/addPermesso?email=" + email + "&list=" + sList);
+    	 $.get("http://localhost:8080/profile/addPermesso?email=" + email + "&list=" + sList, function( data) {
+    		 let checkbox = "<p class='p text-danger'>Permessi modificati</p>" + "<br>";
+	          $("#text").append(checkbox);
+    	 });
     }
   </script>
 

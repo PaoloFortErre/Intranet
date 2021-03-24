@@ -19,7 +19,7 @@
 	
 </table>
 	</div>
-	<div sec:authorize="hasAuthority('WNMW')">
+	<div sec:authorize="hasAuthority('CHR')">
 		<section class="my-5">
 			<div class="container">
 				<div class="row">
@@ -30,6 +30,7 @@
 						<form method="post" th:action="@{/file/uploadHR}"
 							th:object="${comunicazioneHR}" enctype="multipart/form-data">
 							<div class="form-group">
+							<label for="nome">Nome: </label><input type="text" name="nome" th:value="nome" placeholder="...">
 								<input type="file" name="file" class="form-control-file"
 									accept="application/pdf" multiple>
 							</div>

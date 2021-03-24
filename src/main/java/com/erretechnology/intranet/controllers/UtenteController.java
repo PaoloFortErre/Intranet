@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
+import com.erretechnology.intranet.controllers.*;
 import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.Permesso;
@@ -201,7 +202,7 @@ public class UtenteController extends BaseController{
 
 
 	@GetMapping(value = "/addPermesso")
-	public String addPermesso(String email, String list, HttpSession session) {
+	public String addPermesso(String email, String list, HttpSession session, Model model) {
 			String[] permessi = list.split(",");
 			//Set<String> targetSet = new CopyOnWriteArraySet<String>(Arrays.asList(permessi));
 			int id_utente = Integer.parseInt(session.getAttribute("id").toString());
@@ -242,8 +243,9 @@ public class UtenteController extends BaseController{
 				u.setSetPermessi(permessiUtente);
 				serviceUtente.save(u);
 				saveLog("modificato permessi i permessi di " + serviceDatiPersonali.findByAutore(u).getNome() +  " " +serviceDatiPersonali.findByAutore(u).getCognome(), utenteLoggato);
+				return "redirect:/profile/gestisciPermesso";
 			}
-		return "redirect:/profile/gestisciPermesso";
+			return "redirect:/forbidden";
 	}
 
 	@GetMapping(value = "/cancellaUtente")

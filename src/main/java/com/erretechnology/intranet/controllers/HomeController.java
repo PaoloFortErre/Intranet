@@ -40,8 +40,10 @@ public class HomeController extends BaseController{
 	}
 
 	@GetMapping("/forbidden")
-	public String admin() {
-		return ("forbidden");
+	public ModelAndView admin() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("forbidden");
+		return mav;
 	}
 
 	// Login form

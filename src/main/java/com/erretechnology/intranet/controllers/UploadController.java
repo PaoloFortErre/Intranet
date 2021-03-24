@@ -24,7 +24,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.erretechnology.intranet.models.ComunicazioneHR;
 import com.erretechnology.intranet.models.FilePdf;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
-import com.erretechnology.intranet.services.ServiceComunicazioniHR;
 
 @Controller
 @RequestMapping(value = "file")
@@ -32,6 +31,7 @@ public class UploadController extends BaseController{
 
 	@GetMapping(value = "/")
 	public ModelAndView uploadMAV() {
+		System.out.println("AAAAAAAAAAA");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("upload");
 		mav.addObject("filePdf", new FilePdf());
@@ -89,7 +89,7 @@ public class UploadController extends BaseController{
 		// check if file is empty
 		if (file.isEmpty()) {
 			attributes.addFlashAttribute("message", "Please select a file to upload.");
-			return "redirect:/file/";
+			return "redirect:/file/hr";
 		}
 
 		// normalize the file path
@@ -111,7 +111,7 @@ public class UploadController extends BaseController{
 		// return success response
 		attributes.addFlashAttribute("message", "You successfully uploaded " + fileName + '!');
 
-		return "redirect:/file/hr/";
+		return "redirect:/file/hr";
 	}
 	
 	
