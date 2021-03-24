@@ -55,7 +55,7 @@ body{
 <p style="text-align: right; margin-bottom:50px;"><a th:href="@{/myWork/}" style="color: #F3F3F3;">Torna indietro </a></p>
 	<form th:action="@{/evento/insert}" th:object="${evento}" method="post" enctype="multipart/form-data">
 	  <label for="titolo">Titolo:</label><br>
-	  <input type="text"  name="titolo" id="input" th:field="*{titolo}"><br>
+	  <input type="text"  name="titolo" id="input" th:field="*{titolo}" style="color: black"><br>
 	  <label for="contenuto">Contenuto:</label><br>  
 	  <input type="text"  id="input" name="contenuto" th:field="*{contenuto}"><br>
 	  <label for="immagine">Immagine:</label><br>

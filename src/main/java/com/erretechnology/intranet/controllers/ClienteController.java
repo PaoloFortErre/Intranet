@@ -87,7 +87,7 @@ public class ClienteController extends BaseController{
 		
 		repoCliente.save(cliente);
 		saveLog("inserito un nuovo cliente", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-        return "cliente";
+        return "redirect:/myWork/";
 	}
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)

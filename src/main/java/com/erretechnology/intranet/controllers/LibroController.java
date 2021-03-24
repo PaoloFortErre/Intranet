@@ -71,7 +71,7 @@ public class LibroController extends BaseController {
 		
 		repoLibro.save(libro);
 		saveLog("inserito un libro", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-        return "libro";
+        return "redirect:/myLife/";
 	}
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)

@@ -173,18 +173,19 @@ public class MyWorkController extends BaseController {
 			 mav.addObject("eventi2", null);
 
 		 }
-		 else if (eventi.size()>=4) {
-			 mav.addObject("eventi", eventi.subList(0, 2));
-			 mav.addObject("eventi2", eventi.subList(2, 4));
-		 }
-		 else if (eventi.size()<2) {
+		
+		 else if (eventi.size()<=2) {
 			 mav.addObject("eventi", eventi.subList(0, eventi.size()));
 			 mav.addObject("eventi2", null);
 		 }
+		 
 		 else if (eventi.size()>2 && eventi.size()<4) {
 			 mav.addObject("eventi", eventi.subList(0, 2));
 			 mav.addObject("eventi2", eventi.subList(2, eventi.size()));
 
+		 } else if (eventi.size()>=4) {
+			 mav.addObject("eventi", eventi.subList(0, 2));
+			 mav.addObject("eventi2", eventi.subList(2, 4));
 		 }
 		 return mav;
 

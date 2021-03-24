@@ -137,7 +137,13 @@ public class EventoController extends BaseController {
 		
 		repoEvento.save(evento);
 		saveLog("inserito un nuovo post", serviceDatiPersonali.findById(idUser));
-        return "evento";
+		
+		if(isLife.equals("true")) {
+			return "redirect:/myLife/";
+		} else {
+			return "redirect:/myWork/";
+		}
+        
 	}
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
