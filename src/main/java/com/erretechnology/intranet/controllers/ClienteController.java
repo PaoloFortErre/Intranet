@@ -47,7 +47,7 @@ public class ClienteController extends BaseController{
 	
 	@GetMapping("/list")
 	public String getList(Model model) {
-		model.addAttribute("clienteList", repoCliente.findLimit(1));
+		model.addAttribute("clienteList", repoCliente.findAll());
 		return "clienteList";
 	}
 

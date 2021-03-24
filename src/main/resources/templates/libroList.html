@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:each="libro: ${libroList}">
+	<h2 th:text="${libro.titolo}" />
+	<p th:text="${libro.autore}"></p>
+	</div>
+</body>
+</html>
+
+

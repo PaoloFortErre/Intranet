@@ -43,7 +43,7 @@ public class CinemaController extends BaseController {
 	
 	@GetMapping("/list")
 	public String getList(Model model) {
-		model.addAttribute("cinemaList", repoCinema.findLimit(3));
+		model.addAttribute("cinemaList", repoCinema.findAll());
 		return "cinemaList";
 	}
 

@@ -30,6 +30,12 @@ public class CategoriaCinemaController extends BaseController{
 		model.addAttribute("categoriaCinema", repoCategoria.findById(id).get());
 		return "categoriaCinema";
 	}	
+	
+	@GetMapping("/list")
+	public String getList(Model model) {
+		model.addAttribute("categoriaCinemaList", repoCategoria.findAll());
+		return "categoriaCinemaList";
+	}
 
 	@GetMapping("/new")
 	public String form(Model model) {

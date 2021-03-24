@@ -39,7 +39,7 @@ public class LibroController extends BaseController {
 	
 	@GetMapping("/list")
 	public String getList(Model model) {
-		model.addAttribute("libroList", repoLibro.findLimit(3));
+		model.addAttribute("libroList", repoLibro.findAll());
 		return "libroList";
 	}
 
