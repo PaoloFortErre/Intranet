@@ -48,7 +48,8 @@ body{
 
 <h4 style="text-align: left; margin-bottom:5px;"> Inserisci un nuovo aforisma:
 </h4 ><hr style="background-color: #F3F3F3; ">
-<p style="text-align: right; margin-bottom:50px;"><a th:href="@{/myLife/}" style="color: #F3F3F3;">Torna indietro </a></p>
+<img src="/view/MyWork/images/frecciasinistra.png" style="display: inline-block;" width="5%">
+				<p style="text-align: right; margin-bottom: 50px;display: inline-block;"><a th:href="@{/myLife/}" style="color: #F3F3F3;">Torna indietro </a></p>
 
 	<form th:action="@{/aforisma/insert}" th:object="${aforisma}"
 		method="post" enctype="multipart/form-data"  class="signin-form">
