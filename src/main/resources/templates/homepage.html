@@ -4,7 +4,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="Description" content="homepage dell'intranet di Erre Technology">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="linkedin:" content="">
 
   <!-- Add icon library -->
@@ -23,42 +23,77 @@
     background-repeat: no-repeat;
     background-size: cover;
     color:#F3F3F3;
-  }
-
-  .img_container{
-    position:relative;
-    display:inline-block;
-    text-align:center;
+    font-family: Noto Sans, sans-serif;
+    overflow-x: hidden;
   }
 
   .title{
-    position: absolute;
     font-size: 120px;
     font-family: Noto Sans, sans-serif;
     color: #094EFF;
     font-weight: 700;
-    text-shadow: 0px 9px 5px #303030;
+    text-shadow: 2px 9px 5px #303030;
     -webkit-text-stroke: 0.3px #303030;
-    bottom: 40%;
-    right: 28%;
   }
 
-  .button{
-    position:absolute;
-    bottom: 15%;
-    right: 47%;
+  @media screen and (min-width: 200px) {
+    .title {
+      font-size: 25px;
+    }
+    .descrizione{
+      font-size: 5px;
+    }
   }
+
+  @media screen and (min-width: 400px) {
+    .title {
+      font-size: 40px;
+    }
+    .descrizione{
+      font-size: 10px;
+    }
+  }
+
+  @media screen and (min-width: 800px) {
+    .title {
+      font-size: 60px;
+    }
+    .descrizione{
+      font-size: 15px;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    .title {
+      font-size: 80px;
+    }
+    .descrizione{
+      font-size: 20px;
+    }
+  }
+
+  @media screen and (min-width: 1600px) {
+    .title {
+      font-size: 100px;
+    }
+    .descrizione{
+      font-size: 25px;
+    }
+  }
+
+  .centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
   .descrizione{
-    position: absolute;
-    color: #FFFFFF;
-    font-size: 30px;
+    font-size: 35px;
     font-weight: 400;
     font-family: Noto Sans, sans-serif;
-    text-shadow: 0px 3px 6px #303030;
+    text-shadow: 9px 3px 6px #303030;
     -webkit-text-stroke: 0.3px #303030;
-    margin-top: -200px;
-    left: 18%;
   }
 
   footer {
@@ -66,6 +101,7 @@
     width: 100%;
     height: 160px;
   }
+
   /* Style all font awesome icons */
   .fa {
     padding: 20px;
@@ -99,41 +135,49 @@
 <body>
   <!-- PANNELLO IMMAGINI CON SCELTA-->
   <div class="container-fluid">
-    <div class="row mt-2 mb-5">
+    <div class="row mt-3 mb-5">
 
-      <div class="col float-left">
-        <img src="/view/Homepage/Images/my_work_1.jpg" class="img-fluid rounded-lg " alt="mywork1">
-        <div class="h1 text-center container-fluid">
-          <h1 class="title"style="right: 25%">My work</h1>
-        </div>
-        <span class="descrizione h3">
-          <p>Scopri cos'è successo di recente in Erre </p>
-        </span>
+      <div class="col">
+        <div class="container-fluid">
+          <figure class="figure position-relative">
+            <img src="/view/Homepage/Images/my_work_1.jpg" class="img-fluid rounded-lg " alt="mywork1">
 
-        <!-- BOTTONI PER ENTRARE IN MY WORK & MY LIFE-->
-        <div class="button">
-          <a class="btn btn-outline-primary btn-lg" th:href="@{/myWork/}" role="button"><b>ENTRA</b></a>
-        </div>
+            <div class="container centered text-center mt-2">
+              <h1 class="h1 title">My work</h1>
+              <h4 class="h4 descrizione mb-4">Scopri cos'è successo di recente in Erre</h4>
+              <div class="container">
+                <a class="btn btn-primary btn-lg" th:href="@{/myWork/}" role="button"><b>ENTRA</b></a>
+              </div>
+            </div>
 
-      </div>
-
-      <div class="col float-right">
-        <img src="/view/Homepage/Images/my_life_1.jpg" class="img-fluid rounded-lg " alt="mylife1">
-        <div class=" h1 text-center container-fluid">
-          <h1 class="title">My life</h1>
-          <span class="descrizione h3">
-            <p>Scopri cosa fare il prossimo fine settimana </p>
-          </span>
-          <div class="button">
-            <a class="btn btn-outline-success btn-lg" th:href="@{/myLife/}" role="button"><b>ENTRA</b></a>
-          </div>
+          </figure>
         </div>
       </div>
+
+      <div class="col">
+        <div class="container-fluid">
+
+          <figure class="figure position-relative">
+            <img src="/view/Homepage/Images/my_life_1.jpg" class="img-fluid rounded-lg " alt="mylife1">
+
+            <div class="container centered text-center mt-2">
+              <h1 class="h1 title">My life</h1>
+              <h4 class="h4 descrizione mb-4">Scopri cosa fare il prossimo fine settimana </h4>
+              <div class="container">
+                <a class="btn btn-primary btn-lg" th:href="@{/myLife/}" role="button"><b>ENTRA</b></a>
+              </div>
+            </div>
+
+          </figure>
+        </div>
+      </div>
+
     </div>
   </div>
 
+
   <!-- PANNELLO LINKEDIN-->
-  <div class="container">
+  <div class="container mt-2">
     <div class="row  ml-5">
 
       <div class="col-1">
@@ -188,10 +232,10 @@
       <img src="/view/Homepage/Images/phone_person.png" class="img-fluid mt-3" alt="phoneAndHuman.png">
     </div>
 
-    <div class="col-2 mt-5">
+    <div class="col-4 text-center mt-5">
       <div class="container mt-5">
-        <p style="color: #FFFFFF;">Se desideri vedere le tue informazioni dettagliate, vai alla gestione del tuo profilo: </p>
-        <a class="btn btn-primary btn-lg mb-5" th:href="@{/profile/}">PROFILO</a>
+        <h3 class="p text-center">Se desideri vedere le tue informazioni dettagliate, vai alla gestione del tuo profilo</h3>
+        <a class="btn btn-primary btn-lg mb-5 mt-3" th:href="@{/profile/}">PROFILO</a>
       </div>
     </div>
   </div>
