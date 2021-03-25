@@ -155,8 +155,8 @@ table, th, td {
 									<td><div th:if="${nuoviAssunti.size>2}">
 											<a href="" id="vedi" onclick="mostraAssunzioni()"
 												style="text-decoration: none; color: black; font-size: 13px;">
-												Vedi altri <img src="/view/MyWork/images/freccianera.png"
-												width="30px" id="frecciasotto">
+												<br>Vedi altri <img src="/view/MyWork/images/freccianera.png"
+												width="30px" id="frecciasotto" style="margin-left: 5px;;">
 											</a>
 										</div></td>
 								</tr>
@@ -261,7 +261,7 @@ table, th, td {
 						</div>
 
 					</div>
-					<p style="text-align: center;" th:if="${nuoviClienti==null}"> Non ci sono nuovi clienti al momento </p> 
+					<p style="text-align: center;" th:if="${nuoviClienti==null}"><br> Non ci sono nuovi clienti al momento </p> 
 					<table class="nuoviClienti" style="margin-top: 15px;" th:if="${nuoviClienti!=null}">
 						<th:block>
 							<tr>
@@ -290,6 +290,19 @@ table, th, td {
 					</table>
 
 
+				</div>
+			</div>
+			<div class="col-sm-8 col-md-5 col-lg-4"
+				>
+				<div class="assunti2">
+				<div class="modal-header2">
+						<div class="title2">
+						<h3 style="text-align: center; font-weight: 900"> Sondaggi</h3>
+						</div>
+						
+					</div><table class="nuoviClienti">
+				<tr> <td> Nome Sondaggio </td><td> Nome Sondaggio 2</td></tr>
+				</table>
 				</div>
 			</div>
 			</div>
