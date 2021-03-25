@@ -73,7 +73,10 @@ public class UtenteController extends BaseController{
 
 
 	@RequestMapping(value = "/cambioPassword", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView cambioPassword() {
+	public ModelAndView cambioPassword(boolean flag, String messaggio, Model model) {
+		if(flag) {
+			model.addAttribute("messaggio", messaggio);
+		}
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("cambiaPassword");
 		mav.addObject("vecchiaPassword", new String());
@@ -83,33 +86,32 @@ public class UtenteController extends BaseController{
 	}
 
 	@PostMapping(value = "/paginaModificaPassword")
-	public String cambiaPaginaModificaPagina(@RequestParam("vecchiaPassword") String vPsw, @RequestParam("nuovaPassword") String nPsw,
-			@RequestParam("cNuovaPassword") String cNPsw, HttpSession session) {
-
+	public ModelAndView cambiaPaginaModificaPagina(@RequestParam("vecchiaPassword") String vPsw, @RequestParam("nuovaPassword") String nPsw,
+			@RequestParam("cNuovaPassword") String cNPsw, HttpSession session, Model model) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 		if(passwordEncoder.matches(vPsw, serviceUtente.findById(Integer.parseInt(session.getAttribute("id").toString())).getPassword())){
 			if(nPsw.equals(cNPsw)) {
-				Utente u = serviceUtente.findById(Integer.parseInt(session.getAttribute("id").toString()));
-				u.setPassword(nPsw);
-				serviceUtente.saveUtente(u);
-				UtenteDatiPersonali udp = serviceDatiPersonali.findById(u.getId());
-				if(!udp.isPasswordCambiata()) {
-					udp.setPasswordCambiata(true);
-					serviceDatiPersonali.save(udp);
+				if(nPsw.equals(vPsw)) {
+					return cambioPassword(true, "la nuova password non può essere uguale alla precedente", model);
+				}else {
+					Utente u = serviceUtente.findById(Integer.parseInt(session.getAttribute("id").toString()));
+					u.setPassword(nPsw);
+					serviceUtente.saveUtente(u);
+					UtenteDatiPersonali udp = serviceDatiPersonali.findById(u.getId());
+					if(!udp.isPasswordCambiata()) {
+						udp.setPasswordCambiata(true);
+						serviceDatiPersonali.save(udp);
+					}
+					saveLog("modificato la password", udp);
+					return primaPagina(session);
 				}
-				saveLog("modificato la password", udp);
-				return "redirect:/profile/";
 			}else {
-				return "redirect:/profile/paginaModificaPassword";
+				return cambioPassword(true, "le password non corrispondono", model);
 			}
 		}else{
-			return "redirect:/profile/cambioPassword";
+			return cambioPassword(true, "la vecchia password è sbagliata", model);
 		}
-
-
-		//System.out.println("ok ci sono");
-		//return "cambiaPassword";
 	}
 
 
