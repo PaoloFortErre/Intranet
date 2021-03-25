@@ -37,7 +37,8 @@ table, th, td {
 </style>
 </head>
 <body>
-<body ng-app="" onload="data()" th:with="GMW = ${#authorization.expression('hasAuthority(''GMW'')')}">
+<body ng-app="" onload="data()"
+	th:with="GMW = ${#authorization.expression('hasAuthority(''GMW'')')}">
 
 	<div class="container-fluid">
 
@@ -53,11 +54,12 @@ table, th, td {
 				<nav class="navbar navbar-nav navbar-right " id="navcambiante">
 					<div class="content" style="display: inline-block">
 						<a th:href="@{/homepage/}"><img
-							src="/view/MyWork/images/casabianca.png" width="30px" alt="homeBianca.png"
-							style="margin-top: -10px; opacity: 0.9"> </a>
+							src="/view/MyWork/images/casabianca.png" width="30px"
+							alt="homeBianca.png" style="margin-top: -10px; opacity: 0.9">
+						</a>
 					</div>
 					<div class="content" style="display: inline-block">
-						<a th:href="@{/myLife/}" >MY LIFE</a>
+						<a th:href="@{/myLife/}">MY LIFE</a>
 					</div>
 					<div class="content" style="display: inline-block">
 						<a th:href="@{/comunicazioniHr/}">COMUNICAZIONI HR</a>
@@ -83,8 +85,10 @@ table, th, td {
 					<li class="item2" th:if="${newsSlide2!=null}"></li>
 
 				</ol>
-				  <div th:if="${newsSlide==null}"><img src="/view/MyWork/images/ferrari1.png" alt="ferrari"
-							width="100%" height="750px"> </div>
+				<div th:if="${newsSlide==null}">
+					<img src="/view/MyWork/images/ferrari1.png" alt="ferrari"
+						width="100%" height="750px">
+				</div>
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner" role="listbox">
 
@@ -94,7 +98,8 @@ table, th, td {
 						<img src="/view/MyWork/images/ferrari1.png" alt="ferrari1"
 							width="100%">
 						<div class="carousel-caption">
-							<h1 class="font-caption" style="font-weight: 900" th:text="${newsSlide.titolo}"></h1>
+							<h1 class="font-caption" style="font-weight: 900"
+								th:text="${newsSlide.titolo}"></h1>
 
 
 						</div>
@@ -103,8 +108,9 @@ table, th, td {
 					<div class="item" th:if="${newsSlide2!=null}">
 						<img src="/view/MyWork/images/scarpe.png" alt="techweek.png"
 							width="100%">
-						<div class="carousel-caption" >
-							<h1 class="font-caption" style="font-weight: 900" th:text="${newsSlide2.titolo}"></h1>
+						<div class="carousel-caption">
+							<h1 class="font-caption" style="font-weight: 900"
+								th:text="${newsSlide2.titolo}"></h1>
 
 						</div>
 					</div>
@@ -115,8 +121,9 @@ table, th, td {
 	<!-- ************
 				FINE HEADER
 				***************** -->
-	<div class="container" th:with="admin = ${#authorization.expression('hasAuthority(''WNMW'')')}">
-	<div class="row" style="margin-top: 50px;">
+	<div class="container"
+		th:with="admin = ${#authorization.expression('hasAuthority(''WNMW'')')}">
+		<div class="row" style="margin-top: 50px;">
 			<div class="col-sm-12 col-md-5 col-lg-5">
 
 
@@ -152,17 +159,18 @@ table, th, td {
 
 								</tr>
 								<tr style="text-align: left">
-									<td><div th:if="${nuoviAssunti.size>2}">
-											<a href="" id="vedi" onclick="mostraAssunzioni()"
-												style="text-decoration: none; color: black; font-size: 13px;">
-												<br>Vedi altri <img src="/view/MyWork/images/freccianera.png"
-												width="30px" id="frecciasotto" style="margin-left: 5px;;">
-											</a>
-										</div></td>
+									
 								</tr>
 							</th:block>
 						</table>
-
+										<div th:if="${nuoviAssunti.size>2}">
+											<a href="" id="vedi" onclick="mostraAssunzioni()"
+												style="text-decoration: none; color: black; font-size: 13px;">
+												<br>Vedi altri <img
+												src="/view/MyWork/images/freccianera.png" width="30px"
+												id="frecciasotto" style="margin-left: 5px;">
+											</a>
+										</div>
 						<table id="tableAssunti2" th:if="${nuoviAssunti2!= null}">
 							<th:block>
 								<tr>
@@ -204,17 +212,18 @@ table, th, td {
 					</h2>
 					<img src="/view/MyWork/images/radice.jpg" class="img-fluid"
 						width="40%" height="100px" style="float: right" id="imgRosario">
-						<div th:if="${primoPodcast!=null}">
-							<p th:text="${#dates.format(primoPodcast.dataPodcast *1000, 'dd/MM/yyyy')}"></p>
-							<audio controls style="margin-top: 10px">
-								<source
-									th:src="'data:audio/mp3;base64,' + ${primoPodcast.getAudioData(primoPodcast.podcast)}"
-									type="audio/ogg">
-							</audio>
-						</div>
-					
+					<div th:if="${primoPodcast!=null}">
+						<p
+							th:text="${#dates.format(primoPodcast.dataPodcast *1000, 'dd/MM/yyyy')}"></p>
+						<audio controls style="margin-top: 10px">
+							<source
+								th:src="'data:audio/mp3;base64,' + ${primoPodcast.getAudioData(primoPodcast.podcast)}"
+								type="audio/ogg">
+						</audio>
+					</div>
 
-					
+
+
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
@@ -248,21 +257,27 @@ table, th, td {
 		<!-- °°°°°°°°°°° NUOVI CLIENTI °°°°°°°°°°-->
 
 		<div class="row" style="margin-top: 20px;">
-			<div class="col-sm-8 col-md-6 col-lg-5"
-				>
+			<div class="col-sm-8 col-md-6 col-lg-5">
 				<div class="assunti2">
 					<div class="modal-header2">
 						<div class="title2">
-						<div th:if="${GMW}">
-						<!--  <div th:if="${admin}">--><a th:href="@{/cliente/new/}"> <img src="/view/MyWork/images/more.png" width=7% style="float: right">
-						</a> </div> 
-							<h3 style="text-align: center; font-weight: 900">Nuovi 
+							<div th:if="${GMW}">
+								<!--  <div th:if="${admin}">-->
+								<a th:href="@{/cliente/new/}"> <img
+									src="/view/MyWork/images/more.png" width=7%
+									style="float: right">
+								</a>
+							</div>
+							<h3 style="text-align: center; font-weight: 900">Nuovi
 								clienti</h3>
 						</div>
 
 					</div>
-					<p style="text-align: center;" th:if="${nuoviClienti==null}"><br> Non ci sono nuovi clienti al momento </p> 
-					<table class="nuoviClienti" style="margin-top: 15px;" th:if="${nuoviClienti!=null}">
+					<p style="text-align: center;" th:if="${nuoviClienti==null}">
+						<br> Non ci sono nuovi clienti al momento
+					</p>
+					<table class="nuoviClienti" style="margin-top: 15px;"
+						th:if="${nuoviClienti!=null}">
 						<th:block>
 							<tr>
 								<td th:each="cliente: ${nuoviClienti}">
@@ -292,27 +307,80 @@ table, th, td {
 
 				</div>
 			</div>
-			<div class="col-sm-8 col-md-5 col-lg-4"
-				>
-				<div class="assunti2">
-				<div class="modal-header2">
+
+			<!--  °°°°°°SONDAGGI°°°°°° -->
+			<div class="col-sm-8 col-md-5 col-lg-4">
+				<div class="assunti2" style="padding: 15px;">
+					<div class="modal-header2"><div th:if="${GMW}">
+								
+								<a th:href="@{/myWork/addSondaggio/}"> <img
+									src="/view/MyWork/images/more.png" width=7%
+									style="float: right">
+								</a>
+							</div>
 						<div class="title2">
-						<h3 style="text-align: center; font-weight: 900"> Sondaggi</h3>
+							<h3 style="text-align: center; font-weight: 900">Sondaggi</h3>
+							
 						</div>
-						
-					</div><table class="nuoviClienti">
-				<tr> <td> Nome Sondaggio </td><td> Nome Sondaggio 2</td></tr>
-				</table>
+
+					</div>
+
+					<table class="nuoviClienti" th:each="sondaggio: ${sondaggi}"
+					>
+						<th:block>
+							<tr th:if="${sondaggio.visibile}">
+								<td 	style="text-align: left;"><a th:href="@{${sondaggio.link}}" target="blank" ><img
+										src="/view/MyWork/images/surveymonkey.png" width="70px;"
+										style="position: static; margin: 15px;"> </a></td>
+
+
+								<td  style="text-align: right;"><a
+									th:href="@{${sondaggio.link}}" target="blank"
+									th:text="${sondaggio.nomeSondaggio}"
+									style="color: #f3f3f3; text-decoration: none; font-size: 17px;"></a></td>
+							</tr>
+						</th:block>
+					</table>
+					<div th:if="${sondaggi1!=null}">
+						<a href="" id="mostraSondaggi" onclick="mostraSondaggi()"
+							style="text-decoration: none; color: #f3f3f3; font-size: 13px;">
+							<br>Vedi altri <img
+							src="/view/MyWork/images/frecciasotto.png" width="30px"
+							id="frecciasotto" style="margin-left: 5px;">
+						</a>
+					</div>
+
+					<div id="tablesondaggi2">
+						<table class="nuoviClienti" th:each="sondaggio1: ${sondaggi1}"
+							>
+							<th:block>
+							<tr th:if="${sondaggio1.visibile}">
+								<td style="text-align: left;"><a th:href="@{${sondaggio1.link}}" target="blank"><img
+										src="/view/MyWork/images/surveymonkey.png" width="70px;"
+										style="position: static; margin: 15px;"> </a></td>
+
+
+								<td style="text-align: right;"><a
+									th:href="@{${sondaggio1.link}}" target="blank"
+									th:text="${sondaggio1.nomeSondaggio}"
+									style="color: #f3f3f3; text-decoration: none;font-size: 17px; "></a></td>
+							</tr>
+						</th:block>
+							
+						</table>
+					</div>
 				</div>
 			</div>
-			</div>
+		</div>
 		<!-- °°°°°°
 					EVENTI
 					°°°°°° -->
 		<div class="row" style="margin-top: 70px;">
-		<div th:if="${GMW}">
-			<a th:href="@{/evento/newWork/}" > <img src="/view/MyWork/images/more.png" width="30px" style="float: right; margin-bottom: 10px;"></a>
-		</div>
+			<div th:if="${GMW}">
+				<a th:href="@{/evento/newWork/}"> <img
+					src="/view/MyWork/images/more.png" width="30px"
+					style="float: right; margin-bottom: 10px;"></a>
+			</div>
 			<h1
 				style="text-shadow: 2px 4px 2px rgba(0, 0, 0, 0.98); color: blue; text-align: center; font-weight: 900; font-size: 60px;">
 				Eventi</h1>
@@ -343,8 +411,8 @@ table, th, td {
 
 							</p>
 
-							<img src="/view/MyWork/images/location.jpg" alt="location.jpg" width="9%"
-								height="9%">
+							<img src="/view/MyWork/images/location.jpg" alt="location.jpg"
+								width="9%" height="9%">
 							<p
 								style="color: black; text-align: right; display: inline-block;"
 								th:text="${eventi.indirizzo.via}">,</p>
@@ -358,18 +426,20 @@ table, th, td {
 					</div>
 
 				</div>
-				<div th:if="${eventi2!=null}"><a href=""
-					style="float: right; text-decoration: none; color: #F3F3F3; opacity: 0.8;"
-					onclick="mostraEventi()" id="altriEventi"> Vedi altri <img
-					src="/view/MyWork/images/frecciasotto.png" alt="frecciasotto.png" width="30px"
-					style="MARGIN-right: 50px;"></a></div>
+				<div th:if="${eventi2!=null}">
+					<a href=""
+						style="float: right; text-decoration: none; color: #F3F3F3; opacity: 0.8;"
+						onclick="mostraEventi()" id="altriEventi"> Vedi altri <img
+						src="/view/MyWork/images/frecciasotto.png" alt="frecciasotto.png"
+						width="30px" style="MARGIN-right: 50px;"></a>
+				</div>
 
 				<div id="eventoWork2" th:if="${eventi2!=null}">
 					<div class="col-sm-12 col-md-6 col-lg-6"
 						th:each="eventi2:${eventi2}">
 
 						<div class="evento" style="margin: auto">
-							<div id="evento-immagine"  th:if="${eventi2.copertina!=null}">
+							<div id="evento-immagine" th:if="${eventi2.copertina!=null}">
 								<img
 									th:src="'data:image/png;base64,' + ${eventi2.copertina.getImgData(eventi2.copertina.data)}"
 									width="100%" height="330px">
@@ -416,15 +486,17 @@ table, th, td {
 
 		<div class="row">
 			<div th:if="${GMW}">
-				<a th:href="@{/news/new/}" > <img src="/view/MyWork/images/more.png" width="30px" style="float: right; margin-bottom: 10px;"></a>
+				<a th:href="@{/news/new/}"> <img
+					src="/view/MyWork/images/more.png" width="30px"
+					style="float: right; margin-bottom: 10px;"></a>
 			</div>
-		
+
 			<h1
-				style="text-shadow: 2px 4px 2px rgba(0, 0, 0, 0.98); color: blue; text-align: center; font-weight: 900; font-size: 60px; ">
-				News</h1> 
+				style="text-shadow: 2px 4px 2px rgba(0, 0, 0, 0.98); color: blue; text-align: center; font-weight: 900; font-size: 60px;">
+				News</h1>
 			<h3 style="text-align: center; margin-bottom: 50px;">Non
 				perderti nessuna novità dell'azienda</h3>
-				<p th:if="${news==null}"
+			<p th:if="${news==null}"
 				style="text-align: center; margin-bottom: 50px;">Nessun evento
 				in prossimità</p>
 			<div class="col-sm-12 col-md-10 col-lg-11" style="margin: auto;">
@@ -435,7 +507,7 @@ table, th, td {
 
 					<div class="row" style="padding: 10px;" th:if="${news!=null}"
 						th:each="news:${news}">
-						
+
 						<div class="col-sm-8 col-md-8 col-lg-8">
 							<h3 style="font-weight: 900" th:text="${news.titolo}"></h3>
 							<p style="line-height: 30px; margin-top: 20px; font-size: 15px"
@@ -460,8 +532,8 @@ table, th, td {
 						<a href="" id="mostraNews"
 							style="text-align: center; text-decoration: none; color: #F3F3F3; opacity: 0.8; margin-left: 420px;"
 							onclick="mostraNews()"> Vedi altri <img
-							src="/view/MyWork/images/frecciasotto.png" alt="frecciasotto.png" width="30px"
-							id="frecciasotto"></a>
+							src="/view/MyWork/images/frecciasotto.png" alt="frecciasotto.png"
+							width="30px" id="frecciasotto"></a>
 					</div>
 					<div id="news2" style="display: none" th:if="${news2!=null}">
 						<div th:each="news2:${news2}">
@@ -496,11 +568,11 @@ table, th, td {
 
 		<!-- °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° -->
 
-	
-		</div>
+
+	</div>
 
 
-		<!-- °°°°°°°°°°° NUOVE ASSUNZIONI °°°°°°°°°°-->
+	<!-- °°°°°°°°°°° NUOVE ASSUNZIONI °°°°°°°°°°-->
 
 
 
@@ -514,7 +586,8 @@ table, th, td {
 			<div class="row justify-content-center align-items-center mt-3 pt-4"
 				style="margin-top: 15px; padding-top: 15px;">
 				<div class="col-sm-4 col-lg-4">
-					<a href="https://erretechnology.com/" target="blank"><img src="/view/MyWork/images/errelogowhite.png" height="80px"
+					<a href="https://erretechnology.com/" target="blank"><img
+						src="/view/MyWork/images/errelogowhite.png" height="80px"
 						alt="erre_logo" style="margin: auto"></a>
 				</div>
 				<div class="col-sm-4 col-lg-4" style="margin: auto;">
@@ -525,10 +598,10 @@ table, th, td {
 				</div>
 				<div class="col-sm-4 col-lg-4 pl-5" style="padding-left: 150px">
 					<a class="rounded-circle fa fa-facebook"
-						href="https://www.facebook.com/erretechnologygroup/" target= "blank"></a> <a
-						class="rounded-circle fa fa-linkedin ml-2"
+						href="https://www.facebook.com/erretechnologygroup/"
+						target="blank"></a> <a class="rounded-circle fa fa-linkedin ml-2"
 						href="https://www.linkedin.com/company/erretechnologygroup/"
-						style="margin-left: 10px" target= "blank"></a>
+						style="margin-left: 10px" target="blank"></a>
 				</div>
 			</div>
 		</div>
@@ -564,6 +637,12 @@ table, th, td {
 		function mostraNews() {
 			document.getElementById("news2").style.display = "block";
 			document.getElementById("mostraNews").style.display = "none";
+
+		}
+		
+		function mostraSondaggi() {
+			document.getElementById("tablesondaggi2").style.display = "block";
+			document.getElementById("mostraSondaggi").style.display = "none";
 
 		}
 		function mostraEventi() {

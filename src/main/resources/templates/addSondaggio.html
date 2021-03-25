@@ -1,14 +1,75 @@
+
+
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Add Sondaggio</title>
+<title>Sondaggio editing</title>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
+
+<style>
+body{
+	background-image: url("/view/MyWork/images/background.png");
+	  background-repeat: no-repeat, repeat;
+	    background-attachment: fixed;
+	  
+	
+}
+#input {
+	background-color: #E2E2E2;
+	border-radius: 0px 0px 0px 0px;
+	border: 0px solid #E2E2E2;
+	
+}
+
+</style>
+
 </head>
-<body>
-	<form th:object="${sondaggio}" th:action="@{/myWork/sondaggi}" method="post">
-		<input type="text" name="nomeSondaggio" th:value="*{nomeSondaggio}" placeholder="Nome del sondaggio">
-		<input type="text" name="link" th:value="*{link}" placeholder="Link del sondaggio">
-		<input type="submit" value="Invia">
+
+<body >
+
+<div class="container">
+<div class="row">
+<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" id="colForm">
+
+<h4 style="text-align: left; margin-bottom:5px;"> Inserisci un nuovo sondaggio:
+</h4 ><hr style="background-color: #F3F3F3; ">
+<img src="/view/MyWork/images/frecciasinistra.png" style="display: inline-block;" width="5%">
+				<p style="text-align: right; margin-bottom: 50px;display: inline-block;"><a th:href="@{/myWork/}" style="color: #F3F3F3;">Torna indietro </a></p>
+
+	<form th:object="${sondaggio}" th:action="@{/myWork/sondaggi}"
+		method="post" enctype="multipart/form-data"  class="signin-form">
+
+		<div class="form-group">
+			<label for="aforisma"> Nome sondaggio: </label> <input type="text"  name="nomeSondaggio" th:value="*{nomeSondaggio}" 
+				class="form-control"  id="input"  required>
+		</div>
+	
+		<div class="form-group">
+			<label for="autore"> Link esterno per il sondaggio: </label> <input type="text"  name="link" th:value="*{link}"
+				class="form-control"  id="input" >
+		</div>
+		
+		<input type="submit" id="pubblicaSubmit" value="Pubblica">
 	</form>
+</div>
+</div>
+</div>
 </body>
 </html>

@@ -101,10 +101,32 @@ public class MyWorkController extends BaseController {
 			mav.addObject( "newsSlide2", null);
 		}
 
+		
+		List<Sondaggio> sondaggi = serviceSondaggio.findAll();
+		if (sondaggi.size()==0) {
+			mav.addObject("sondaggi",null);
+			mav.addObject("sondaggi1",null);
+
+			
+		}
+		else if (sondaggi.size()>0 && sondaggi.size()<=3) {
+			mav.addObject("sondaggi", sondaggi.subList(0, sondaggi.size()));
+			mav.addObject("sondaggi1",null);
+		}
+		else if (sondaggi.size()>3 && sondaggi.size()<6){
+			mav.addObject("sondaggi", sondaggi.subList(0, 3));
+			mav.addObject("sondaggi1", sondaggi.subList(3, sondaggi.size()));
+		}
+		else {
+			mav.addObject("sondaggi", sondaggi.subList(0, 3));
+			mav.addObject("sondaggi1", sondaggi.subList(3, 6));
+		}
+		
 		List<Evento> eventi = (List<Evento>) repoEvento.findNextWorkEvents(Instant.now().getEpochSecond());
 		System.out.println(eventi.size());
 		setMAV(mav, eventi, 0, 4, "eventi");
 		return mav;
+		
 	}
 
 	private void setMAV(ModelAndView mav, List<? extends MyWorkBean> list, int inizio, int fine, String nomeOggetto) {
