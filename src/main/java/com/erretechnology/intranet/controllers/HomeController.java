@@ -1,7 +1,6 @@
 package com.erretechnology.intranet.controllers;
 
 import java.io.UnsupportedEncodingException;
-import java.sql.Timestamp;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -16,7 +15,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -168,7 +166,6 @@ public class HomeController extends BaseController{
 		final String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
 		Utente u  = serviceUtente.findByEmail(currentUserName);
 		session.setAttribute("id", u.getId());
-		System.out.println(session.getAttribute("id"));
 		if(serviceDatiPersonali.findById(u.getId()).getPasswordCambiata())
 			return "redirect:/homepage";
 		else return "redirect:/profile/cambioPassword";

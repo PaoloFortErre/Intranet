@@ -29,26 +29,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests()
-		//TODO Mapping aggiunta sondaggio solo se si ha il permesso 
-		.antMatchers("/podcast/", "/cliente/new", "/evento/newWork/", "/news/new/").access("hasAuthority('GMW')")
+		//TODO update e delete di tutti 
+		.antMatchers("/podcast/", "/cliente/new", "/evento/newWork/", "/news/new/", "/myWork/addSondaggio").access("hasAuthority('GMW')")
 		.antMatchers("/evento/newLife/", "/cinema/new/", "/libro/new").access("hasAuthority('GML')")
 		.antMatchers("/file/hr").access("hasAuthority('GHR')")
 		.antMatchers("/file/").access("hasAuthority('GM')")
-		.antMatchers("/profile/gestisciPermesso" , "/registra" , "/profile/cancellaUtente").access("hasAuthority('AM')")
+		.antMatchers("/profile/gestisciPermesso" , "/profile/registra" , "/profile/cancellaUtente").access("hasAuthority('AM')")
 		.antMatchers("/myLife/*", "/profile/*", "/homepage", "/file/*", "/myWork/*").access("isAuthenticated()")
 		.antMatchers("/").permitAll()
-		.antMatchers("/uploadImage").permitAll()
 		.and().formLogin()
-		.loginPage("/login")
-		.failureUrl("/login-error")
-		.successForwardUrl("/setSession")
+		.loginPage("/login").failureUrl("/login-error").successForwardUrl("/setSession")
 		.and()
-		.logout()
-		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-		.logoutSuccessUrl("/login")
+		.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
 		.and()
-		.exceptionHandling().accessDeniedPage("/forbidden")
-		;
+		.exceptionHandling().accessDeniedPage("/forbidden");
 		http.csrf().disable();
 
 	}

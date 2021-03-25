@@ -20,6 +20,7 @@ public class ServicePostImpl implements ServicePost{
 		return repositoryPost.findAll().stream()
 				.filter(x->x.isVisibile())
 				.sorted(Comparator.comparingInt(Post::getId).reversed())
+				.limit(5)
 				.collect(Collectors.toList());
 	}
 
