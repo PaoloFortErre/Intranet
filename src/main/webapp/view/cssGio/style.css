@@ -10,6 +10,7 @@ body {
 	background-position: center;
   	background-repeat: no-repeat;
   	background-size: cover;
+  	overflow-x : hidden;
 	
 }
 
@@ -39,6 +40,7 @@ body {
 .col-sinistra {
 	border-radius: 6px 6px 6px 6px;
 	background-color: #303030;
+	
 }
 
 #col-destra {
@@ -136,8 +138,8 @@ footer {
 
 .immagineUtente {
 	border-radius: 50%;
-	height: 80px;
-	width: 80px;
+	height: 70px;
+	width: 70px;
 	box-shadow: 0 26.1px 11.1px rgba(0, 0, 0, 0.18), 0 69px 89px
 	rgba(0, 0, 0, 0.36);
 	-webkit-box-shadow: 10px 10px 6px 0px rgba(0,0,0,0.75);
@@ -146,7 +148,8 @@ footer {
 }
 
 #post {
-	background-color: black;
+	width: 720px;
+	background-color: #303030;
 	border-radius: 4px;
 	border: 2px solid #F3F3F3;
 }

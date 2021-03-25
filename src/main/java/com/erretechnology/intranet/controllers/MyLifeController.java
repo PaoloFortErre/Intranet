@@ -3,10 +3,15 @@ package com.erretechnology.intranet.controllers;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,19 +55,31 @@ public class MyLifeController extends BaseController {
 	//	}
 
 	@GetMapping(value = "/")
-	public ModelAndView primaPagina(HttpSession session) {
+	public ModelAndView primaPagina(HttpSession session, @RequestParam("page") Optional<Integer> page) {
+        int currentPage = page.orElse(1);
+
 		//	List<Post> messaggi = service.getLastMessage();
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		List<Evento> evento = (List<Evento>) repoEvento.findNextLifeEvents(Instant.now().getEpochSecond());
 		List<Libro> libri = repoLib.findAll();
 		List<Aforisma> aforismi = repoAfo.findAll();
 		List <Cinema> film = repoCine.findLimit(3);
+		Page<Post> postPage= servicePost.findPaginated(PageRequest.of(currentPage - 1, 5));
+
+		
 		//System.out.println(evento.size());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myLife");
-		mav.addObject("messaggi", servicePost.getLastMessage());
+		mav.addObject("messaggi", postPage);
 		mav.addObject("utenteDati", u);
-		
+		 int totalPages = postPage.getTotalPages();
+	        if (totalPages > 0) {
+	            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+	                .boxed()
+	                .collect(Collectors.toList());	
+	            mav.addObject("pageNumbers", pageNumbers);
+	        }
+	
 		if(evento.size()==0) {
 			mav.addObject("eventilife", null);
 			mav.addObject("eventilife1", null);

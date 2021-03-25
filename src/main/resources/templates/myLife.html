@@ -144,14 +144,14 @@
 				**** -->
 
 		<div class="row" style="margin-top: 5%">
-			<div class="col-sm-8 col-lg-8"
+			<div class="col-sm-7 col-lg-7"
 				th:with="UB = ${#authorization.expression('hasAuthority(''UB'')')},
 				DS = ${#authorization.expression('hasAuthority(''DS'')')}">
 
 				<!--  WRITE A POST  -->
 				<div class="col-sinistra">
 					<div class="row" th:if="${UB}">
-						<div class="col-sm-1 col-md-1 col-lg-2">
+						<div class="col-sm-4 col-md-1 col-lg-2">
 
 
 							<img
@@ -159,7 +159,7 @@
 								alt="utente" title="utente" class="immagineUtente"
 								style="margin: 20px;">
 						</div>
-						<div class="col-sm-11 col-md-10 col-lg-10">
+						<div class="col-sm-8 col-md-10 col-lg-10">
 							<div class="form-group">
 								<form th:action="@{/myLife/addPost}"
 									enctype="multipart/form-data" id="myForm" method="post">
@@ -222,28 +222,34 @@
 
 				</div>
 				<hr>
-				<div class="col-sinistra" style="margin-top: 20px">
+				<div class="col-sinistra" style="margin-top: 20px" th:each="post:${messaggi}">
 					<div class="container-fluid">
 						<div class="row">
 
 							<!-- INFORMAZIONI SU UTENTE E POST -->
 
-							<div th:each="post:${messaggi}" style="margin-top: 30px">
+							<div  style="margin-top: 30px">
 								<!-- FOTO PROFILO -->
-								<div class="col-sm-1 col-md-1 col-lg-2">
+								<div class="col-sm-4 col-md-4 col-lg-2">
 									<img
 										th:src="'data:image/jpeg;base64,' + ${post.autore.immagine.getImgData(post.autore.immagine.data)}"
-										title="utente" class="immagineUtente" style="margin: 20px;">
+										title="utente" class="immagineUtente" style="margin: 20px; margin-top: 7px">
+										<img th:src="'data:image/png;base64,' + ${utenteDati.settore.getImgData(utenteDati.settore.logo)}" 
+									width="80%" style="opacity: 0.8; margin: 20px; margin-top: -7px">
 								</div>
 
-								<div class="col-sm-11 col-md-10 col-lg-10">
-									<h3 th:text="${post.autore.nome}"
-										style="display: inline-block; text-shadow: -1px -1px 1px rgba(255, 255, 255, .1), 1px 1px 1px rgba(0, 0, 0, .5), 2px 2px 2px rgba(243, 255, 54, 0.43);">
-									</h3>
-									&nbsp;
-									<h3
-										style="display: inline-block; text-shadow: -1px -1px 1px rgba(255, 255, 255, .1), 1px 1px 1px rgba(0, 0, 0, .5), 2px 2px 2px rgba(243, 255, 54, 0.43);"
-										th:text="${post.autore.cognome}"></h3>
+								<div class="col-sm-8 col-md-10 col-lg-10">
+									<img
+								th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
+								alt="utente" title="utente" class="immagineUtente"
+								style="margin: 20px;">
+									<h4 th:text="${post.autore.nome}"
+										style="display: inline-block; ">
+									</h4>
+									
+									<h4
+										style="display: inline-block; ;"
+										th:text="${post.autore.cognome}"></h4>
 									<!-- ELIMINA POST -->
 
 									<div
@@ -274,24 +280,26 @@
 										</form>
 									</div>
 									<p
-										style="font-size: 12px; background-color: #161616; width: 80px;"
-										th:text="${#dates.format(post.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"></p>
-									<img src="/view/MyLife/images/errepro.png" width="20px"
-										height="20px" style="display: inline-block;">
-									<p style="display: inline-block; margin-left: 5px">ERRE Pro</p>
+										style="font-size: 12px; font-style: italic "
+										th:text="${#dates.format(post.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"></p> <br>
+									<!--  <img th:src="'data:image/png;base64,' + ${utenteDati.settore.getImgData(utenteDati.settore.logo)}" 
+									width="14%" style="opacity: 0.8;">-->
+									
 									<!-- CONTENUTO DEL POST -->
 									<div>
-										<br> <br>
+										<hr id="linea"><br> 
+										<div style="width: 72%; height: 50px">
 										<p style="margin-right: 15px; font-size: 20px;"
 											th:text="${post.testo}">
 											<a href="">vedi altro</a>
 										</p>
+										</div>
 
 
 										<div th:if="${post.immagine!=null}">
 											<img
 												th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(post.immagine.data)}"
-												width="70%" height="40%">
+												width="72%" height="40%">
 										</div>
 
 
@@ -331,7 +339,7 @@
 																id="bottoneModifica">Modifica</button>
 															<textarea th:class="commentoModificato + ${commento.id}"
 																name="testo" id="post" placeholder="Modifica commento"
-																cols="50" rows="2.5" style="display: none" required></textarea>
+																 rows="2.5" style="display: none" required></textarea>
 														</form>
 													</td>
 												</tr>
@@ -348,7 +356,7 @@
 												method="post">
 												<label for="testo"></label>
 												<textarea id="post" name="testo" rows="2" cols="30"
-													style="width: 59%; margin-top: 10px;"
+													style="width: 72%; padding: 8px; margin-left: -4px;"
 													placeholder="Lascia un commento..." required></textarea>
 												<input type="submit" value="Commenta" id="submitPost"
 													style="margin-bottom: 50px;" />
@@ -357,15 +365,27 @@
 										</div>
 									</div>
 								</div>
+								
 							</div>
 						</div>
 					</div>
 				</div>
+				<div th:if="${messaggi.totalPages>0}" style="background-color: #303030; margin-top: -10px;" >
+				
+				<p style="text-align: center"> Page <span th:text="${pageNumber}" ></span> of <span th:text="${pageNumber}"></span></p>
+							<table style="margin: 0 auto; margin-bottom: 20px; background-color: #303030" >	<tr> <td th:each="pageNumber : ${pageNumbers}"><a th:href="@{/myLife/(page=${pageNumber})}"
+								
+								th:text="${pageNumber}"	th:class="${pageNumber==messaggi.number + 1 } ? active" style="color: #F3F3F3; font-size: 18px; padding: 10px;  ">
+								
+							</a><br><br>
+								 </td></tr></table> </div>
 			</div>
-			<!-- ****
+			
+			
+			<!-- ****s
 COLONNA DESTRA
 **** -->
-			<div class="col-sm-4 col-lg-4" id="col-destra">
+			<div class="col-sm-5 col-lg-5" id="col-destra">
 					<div th:if="${GML}">
 						<a th:href="@{/evento/newLife/}"> <img
 							src="/view/MyWork/images/more.png" width="30px"
