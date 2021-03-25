@@ -36,7 +36,7 @@ table, th, td {
 }
 </style>
 </head>
-<body>
+
 <body ng-app="" onload="data()"
 	th:with="GMW = ${#authorization.expression('hasAuthority(''GMW'')')}">
 
@@ -123,8 +123,8 @@ table, th, td {
 				***************** -->
 	<div class="container"
 		th:with="admin = ${#authorization.expression('hasAuthority(''WNMW'')')}">
-		<div class="row" style="margin-top: 50px;">
-			<div class="col-sm-12 col-md-5 col-lg-5">
+		<div class="row" style="margin-top: 30px;">
+			<div class="col-sm-12 col-md-5 col-lg-5" style="margin-top: 20px;">
 
 
 				<div class="assunti">
@@ -159,18 +159,18 @@ table, th, td {
 
 								</tr>
 								<tr style="text-align: left">
-									
+
 								</tr>
 							</th:block>
 						</table>
-										<div th:if="${nuoviAssunti.size>2}">
-											<a href="" id="vedi" onclick="mostraAssunzioni()"
-												style="text-decoration: none; color: black; font-size: 13px;">
-												<br>Vedi altri <img
-												src="/view/MyWork/images/freccianera.png" width="30px"
-												id="frecciasotto" style="margin-left: 5px;">
-											</a>
-										</div>
+						<div th:if="${nuoviAssunti.size>2}">
+							<a href="" id="vedi" onclick="mostraAssunzioni()"
+								style="text-decoration: none; color: black; font-size: 13px;">
+								<br>Vedi altri <img
+								src="/view/MyWork/images/freccianera.png" width="30px"
+								id="frecciasotto" style="margin-left: 5px;">
+							</a>
+						</div>
 						<table id="tableAssunti2" th:if="${nuoviAssunti2!= null}">
 							<th:block>
 								<tr>
@@ -199,7 +199,8 @@ table, th, td {
 
 			</div>
 
-			<div class="col-xs-6 col-sm-6 col-md-4 bcol-lg-4">
+			<div class="col-xs-6 col-sm-6 col-md-4 bcol-lg-4"
+				style="margin-top: 20px;">
 				<div id="quadrato-podcast">
 					<div th:if="${GMW}">
 						<a th:href="@{/podcast/}"> <img
@@ -226,7 +227,8 @@ table, th, td {
 
 				</div>
 			</div>
-			<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+			<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3"
+				style="margin-top: 20px;">
 				<div th:if="${utente!=null AND !utente.isEmpty}"
 					id="quadrato-compleanno">
 					<h4 id="data" style="DISPLAY: INLINE-BLOCK; margin-top: 20px;"></h4>
@@ -256,8 +258,8 @@ table, th, td {
 		</div>
 		<!-- °°°°°°°°°°° NUOVI CLIENTI °°°°°°°°°°-->
 
-		<div class="row" style="margin-top: 20px;">
-			<div class="col-sm-8 col-md-6 col-lg-5">
+		<div class="row">
+			<div class="col-sm-8 col-md-6 col-lg-5" style="margin-top: 20px;">
 				<div class="assunti2">
 					<div class="modal-header2">
 						<div class="title2">
@@ -309,32 +311,34 @@ table, th, td {
 			</div>
 
 			<!--  °°°°°°SONDAGGI°°°°°° -->
-			<div class="col-sm-8 col-md-5 col-lg-4">
+			<div class="col-sm-6 col-md-5 col-lg-4" style="margin-top: 20px;">
 				<div class="assunti2" style="padding: 15px;">
-					<div class="modal-header2"><div th:if="${GMW}">
-								
-								<a th:href="@{/myWork/addSondaggio/}"> <img
-									src="/view/MyWork/images/more.png" width=7%
-									style="float: right">
-								</a>
-							</div>
+					<div class="modal-header2">
+						<div th:if="${GMW}">
+
+							<a th:href="@{/myWork/addSondaggio/}"> <img
+								src="/view/MyWork/images/more.png" width=7% style="float: right">
+							</a>
+						</div>
 						<div class="title2">
 							<h3 style="text-align: center; font-weight: 900">Sondaggi</h3>
-							
+
 						</div>
 
 					</div>
-
-					<table class="nuoviClienti" th:each="sondaggio: ${sondaggi}"
-					>
+					<p style="text-align: center;" th:if="${sondaggi==null}">
+						<br> Al momento non ci sono sondaggi
+					</p>
+					<table class="nuoviClienti" th:each="sondaggio: ${sondaggi}">
 						<th:block>
 							<tr th:if="${sondaggio.visibile}">
-								<td 	style="text-align: left;"><a th:href="@{${sondaggio.link}}" target="blank" ><img
+								<td style="text-align: left;"><a
+									th:href="@{${sondaggio.link}}" target="blank"><img
 										src="/view/MyWork/images/surveymonkey.png" width="70px;"
 										style="position: static; margin: 15px;"> </a></td>
 
 
-								<td  style="text-align: right;"><a
+								<td style="text-align: right;"><a
 									th:href="@{${sondaggio.link}}" target="blank"
 									th:text="${sondaggio.nomeSondaggio}"
 									style="color: #f3f3f3; text-decoration: none; font-size: 17px;"></a></td>
@@ -351,24 +355,65 @@ table, th, td {
 					</div>
 
 					<div id="tablesondaggi2">
-						<table class="nuoviClienti" th:each="sondaggio1: ${sondaggi1}"
-							>
+						<table class="nuoviClienti" th:each="sondaggio1: ${sondaggi1}">
 							<th:block>
-							<tr th:if="${sondaggio1.visibile}">
-								<td style="text-align: left;"><a th:href="@{${sondaggio1.link}}" target="blank"><img
-										src="/view/MyWork/images/surveymonkey.png" width="70px;"
-										style="position: static; margin: 15px;"> </a></td>
+								<tr th:if="${sondaggio1.visibile}">
+									<td style="text-align: left;"><a
+										th:href="@{${sondaggio1.link}}" target="blank"><img
+											src="/view/MyWork/images/surveymonkey.png" width="70px;"
+											style="position: static; margin: 15px;"> </a></td>
 
 
-								<td style="text-align: right;"><a
-									th:href="@{${sondaggio1.link}}" target="blank"
-									th:text="${sondaggio1.nomeSondaggio}"
-									style="color: #f3f3f3; text-decoration: none;font-size: 17px; "></a></td>
-							</tr>
-						</th:block>
-							
+									<td style="text-align: right;"><a
+										th:href="@{${sondaggio1.link}}" target="blank"
+										th:text="${sondaggio1.nomeSondaggio}"
+										style="color: #f3f3f3; text-decoration: none; font-size: 17px;"></a></td>
+								</tr>
+							</th:block>
+
 						</table>
 					</div>
+				</div>
+			</div>
+			<!-- °°°°°COMUNICAZIONI HR°°°°° -->
+			<div class="col-sm-6 col-md-5 col-lg-3" style="margin-top: 20px;"
+				th:with="GHR = ${#authorization.expression('hasAuthority(''GHR'')')}">
+				<div class="assunti">
+					<div class="modal-header2">
+						<h3 style="color: black; text-align: center; font-weight: 900">Comunicazioni
+							HR</h3>
+					</div>
+					
+					<p style="text-align: center;" th:if="${comunicazioni==null}">
+						<br> Al momento non ci sono comunicazioni HR
+					</p>
+					<div th:each="comunicazione: ${comunicazioni}">
+					
+						<table style="margin: 0 auto; margin-top: 10px;">
+							<tr style="text-align: center;">
+								<td><img src="/view/MyWork/images/pdf-icon.png"
+									style="margin: 0 auto;" width="65px"></td>
+							</tr>
+							<tr>
+								<td style="text-align: center;">
+									<h4 th:text="${comunicazione.nome}" style="color: black;"></h4>
+									<a th:href="@{/file/downloadFileHR(id=${comunicazione.id})}"
+									th:download="${comunicazione.nome}" style="text-align: right">
+										<img src="/view/MyWork/images/download.png" width="30px">
+								</a>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div style="margin-left: 150px;">
+						<a th:href="@{/comunicazioniHr}"
+							style="text-decoration: none; color: black; font-size: 13px; text-align: right;">
+							<br>Vedi tutte <img
+							src="/view/MyWork/images/freccianera.png" width="30px"
+							id="frecciasotto" style="margin-left: 5px;">
+						</a>
+					</div>
+
 				</div>
 			</div>
 		</div>
@@ -639,7 +684,7 @@ table, th, td {
 			document.getElementById("mostraNews").style.display = "none";
 
 		}
-		
+
 		function mostraSondaggi() {
 			document.getElementById("tablesondaggi2").style.display = "block";
 			document.getElementById("mostraSondaggi").style.display = "none";

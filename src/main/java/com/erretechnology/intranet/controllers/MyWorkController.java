@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.Cliente;
+import com.erretechnology.intranet.models.ComunicazioneHR;
 import com.erretechnology.intranet.models.Evento;
 import com.erretechnology.intranet.models.MyWorkBean;
 import com.erretechnology.intranet.models.News;
@@ -120,6 +121,14 @@ public class MyWorkController extends BaseController {
 		else {
 			mav.addObject("sondaggi", sondaggi.subList(0, 3));
 			mav.addObject("sondaggi1", sondaggi.subList(3, 6));
+		}
+		
+		List<ComunicazioneHR> comunicazione = serviceComunicazioni.getAll();
+		if(comunicazione.size()==0) {
+			mav.addObject("comunicazioni", null);		
+		}
+		else {
+			mav.addObject("comunicazioni", comunicazione.get(0));
 		}
 		
 		List<Evento> eventi = (List<Evento>) repoEvento.findNextWorkEvents(Instant.now().getEpochSecond());
