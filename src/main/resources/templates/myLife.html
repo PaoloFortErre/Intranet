@@ -151,13 +151,13 @@
 				<!--  WRITE A POST  -->
 				<div class="col-sinistra">
 					<div class="row" th:if="${UB}">
-						<div class="col-sm-4 col-md-1 col-lg-2">
+						<div class="col-sm-4 col-md-2 col-lg-2">
 
 
 							<img
 								th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
 								alt="utente" title="utente" class="immagineUtente"
-								style="margin: 20px;">
+								style="margin: 20px; margin-left: 27px">
 						</div>
 						<div class="col-sm-8 col-md-10 col-lg-10">
 							<div class="form-group">
@@ -168,10 +168,10 @@
 										required style="width: 98%" placeholder="Scrivi un post..."
 										id="post"></textarea>
 
-									<button type="button" data-toggle="modal" id="bottoneImmagine"
+									<button type="button" data-toggle="modal" style="background-color: #303030; color: white; border: 0px solid #303030"
 										data-target="#myModal">
 										Immagine<img src="/view/MyLife/images/imh.png"
-											style="width: 20px; height: 20px; display: inline-block; margin-left: 50px;">
+											style="width: 20px; height: 20px; display: inline-block; margin-left: 5px;">
 									</button>
 
 									<!-- Modal -->
@@ -187,7 +187,7 @@
 												</div>
 												<div class="modal-body">
 													<input type="file" name="document"
-														accept="image/png, image/jpeg" />
+														accept="image/png, image/jpeg" style="color: black;" />
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-default"
@@ -235,14 +235,11 @@
 										th:src="'data:image/jpeg;base64,' + ${post.autore.immagine.getImgData(post.autore.immagine.data)}"
 										title="utente" class="immagineUtente" style="margin: 20px; margin-top: 7px">
 										<img th:src="'data:image/png;base64,' + ${utenteDati.settore.getImgData(utenteDati.settore.logo)}" 
-									width="80%" style="opacity: 0.8; margin: 20px; margin-top: -7px">
+									width="80%" style="opacity: 0.8; margin: 20px; margin-top: -7px" id="imgSettore">
 								</div>
 
 								<div class="col-sm-8 col-md-10 col-lg-10">
-									<img
-								th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
-								alt="utente" title="utente" class="immagineUtente"
-								style="margin: 20px;">
+									
 									<h4 th:text="${post.autore.nome}"
 										style="display: inline-block; ">
 									</h4>
@@ -259,7 +256,8 @@
 										<form th:action="@{/myLife/deletePost(id=${post.id})}"
 											method="post">
 											<button name="button" type="submit" class="buttonAzioni"
-												style="display: inline-block; background-color: #161616; color: white; margin-left: 120px; opacity: 0.8;">Elimina</button>
+												style="display: inline-block; background-color: #303030; color: white; margin-left: 250px; border: 0px solid #303030"> <img 
+												src="/view/MyWork/images/trash.png" width="45%"></button>
 										</form>
 									</div>
 
@@ -270,9 +268,10 @@
 										<form th:action="@{/myLife/editPost(id=${post.id})}"
 											method="post">
 											<button name="button" type="submit"
-												style="display: inline-block; background-color: #161616; color: white; opacity: 0.8;"
+												style="display: inline-block; background-color: #303030; color: white; margin-left: -26px; border: 0px solid #303030"
 												th:onclick="'showAreaPost(' + ${post.id} + ')'"
-												class="buttonAzioni">Modifica</button>
+												class="buttonAzioni">
+	<img src="/view/MyWork/images/edit.png" width="45%"></button>
 
 											<textarea th:class="postModificato + ${post.id}" name="testo"
 												placeholder="Modifica post" cols="50" rows="2.5" id="post"
@@ -359,8 +358,8 @@
 													style="width: 72%; padding: 8px; margin-left: -4px;"
 													placeholder="Lascia un commento..." required></textarea>
 												<input type="submit" value="Commenta" id="submitPost"
-													style="margin-bottom: 50px;" />
-												<hr id="linea">
+													style="margin-bottom: 50px; margin-top: -110px" />
+											
 											</form>
 										</div>
 									</div>
@@ -372,7 +371,7 @@
 				</div>
 				<div th:if="${messaggi.totalPages>0}" style="background-color: #303030; margin-top: -10px;" >
 				
-				<p style="text-align: center"> Page <span th:text="${pageNumber}" ></span> of <span th:text="${pageNumber}"></span></p>
+				<p style="text-align: center"> Pages <span th:text="${pageNumber}" ></span>  <span th:text="${pageNumber}"></span></p>
 							<table style="margin: 0 auto; margin-bottom: 20px; background-color: #303030" >	<tr> <td th:each="pageNumber : ${pageNumbers}"><a th:href="@{/myLife/(page=${pageNumber})}"
 								
 								th:text="${pageNumber}"	th:class="${pageNumber==messaggi.number + 1 } ? active" style="color: #F3F3F3; font-size: 18px; padding: 10px;  ">

@@ -60,7 +60,7 @@ public class AforismaController extends BaseController {
 		
 		repoAforisma.save(aforisma);
 		saveLog("aggiunto una aforisma", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-        return "aforisma";
+        return "redirect:/myLife/";
 	}
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
