@@ -57,7 +57,7 @@ public class MyLifeController extends BaseController {
 		List<Libro> libri = repoLib.findAll();
 		List<Aforisma> aforismi = repoAfo.findAll();
 		List <Cinema> film = repoCine.findLimit(3);
-		System.out.println(evento.size());
+		//System.out.println(evento.size());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myLife");
 		mav.addObject("messaggi", servicePost.getLastMessage());
@@ -185,15 +185,15 @@ public class MyLifeController extends BaseController {
 		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
 		//int autoreId = servicePost.findById(id).getAutore().getId();
 		UtenteDatiPersonali autore = servicePost.findById(id).getAutore();
-		if(sessionId == autore.getId() || serviceAuthority.findByUserId(sessionId).stream().filter(x -> x.getIdPermesso().equals("DPS")).count() == 1) {
+		if(sessionId == autore.getId() || serviceAuthority.findByUserId(sessionId).stream().filter(x -> x.getIdPermesso().equals("DS")).count() == 1) {
 			Post p = servicePost.findById(id);
 			p.setVisibile(false);
 			servicePost.save(p);
-			System.out.println("cancellazione post: RIUSCITO");
+			//System.out.println("cancellazione post: RIUSCITO");
 			saveLog("cancellato un post in bacheca", autore);
 			return "redirect:/myLife/";
 		}
-		System.out.println("cancellazione post: PERMESSO NEGATO");
+		//System.out.println("cancellazione post: PERMESSO NEGATO");
 		return "redirect:/forbidden";
 
 	}
@@ -206,16 +206,16 @@ public class MyLifeController extends BaseController {
 		UtenteDatiPersonali autorePost = serviceCommento.findById(id).getPost().getAutore();
 		//Utente utenteLoggato = serviceUtente.findById(sessionId);
 		if(sessionId == autoreCommento.getId() ||
-				serviceAuthority.findByUserId(sessionId).stream().filter(x-> x.getIdPermesso().equals("DCS")).count() == 1 ||
+				serviceAuthority.findByUserId(sessionId).stream().filter(x-> x.getIdPermesso().equals("DS")).count() == 1 ||
 				autorePost.getId() == sessionId) {
 			Commento c = serviceCommento.findById(id);
 			c.setVisibile(false);
 			serviceCommento.save(c);
-			System.out.println("cancellazione post: RIUSCITO");
+			//System.out.println("cancellazione post: RIUSCITO");
 			saveLog("cancellato un commento in bacheca", serviceDatiPersonali.findById(sessionId));
 			return "redirect:/myLife/";
 		}
-		System.out.println("cancellazione post: PERMESSO NEGATO");
+		//System.out.println("cancellazione post: PERMESSO NEGATO");
 		return "redirect:/forbidden";
 
 	}

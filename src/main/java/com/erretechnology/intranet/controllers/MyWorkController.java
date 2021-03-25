@@ -59,7 +59,7 @@ public class MyWorkController extends BaseController {
 				utentiCompleanno.add(u);
 			}
 		}
-		System.out.println(utentiCompleanno.size());
+		//System.out.println(utentiCompleanno.size());
 		mav.addObject("utente", utentiCompleanno);
 
 		List<UtenteDatiPersonali> nuoviUtenti = utenti.stream()
@@ -67,7 +67,7 @@ public class MyWorkController extends BaseController {
 				.filter(x->x.getUtente().getAttivo()==true)
 				.limit(6)
 				.collect(Collectors.toList());
-		System.out.println(nuoviUtenti.size());
+		//System.out.println(nuoviUtenti.size());
 		setMAV(mav, nuoviUtenti, 0, 6, "nuoviAssunti");
 
 		
@@ -87,7 +87,7 @@ public class MyWorkController extends BaseController {
 		}
 
 		List<News> news= repoNews.findAllOrderByDataPubblicazioneDesc(); 
-		System.out.println(news.size());
+		//System.out.println(news.size());
 
 		setMAV(mav, news, 0, 6, "news");
 
@@ -132,7 +132,7 @@ public class MyWorkController extends BaseController {
 		}
 		
 		List<Evento> eventi = (List<Evento>) repoEvento.findNextWorkEvents(Instant.now().getEpochSecond());
-		System.out.println(eventi.size());
+		//System.out.println(eventi.size());
 		setMAV(mav, eventi, 0, 4, "eventi");
 		return mav;
 		
@@ -145,7 +145,6 @@ public class MyWorkController extends BaseController {
 		}else if(list.size() >= fine) {
 			mav.addObject(nomeOggetto, list.subList(inizio, ((fine + inizio) / 2)));
 			mav.addObject(nomeOggetto + "2", list.subList(((fine + inizio) / 2), fine));
-			System.out.println(list.subList(((fine + inizio) / 2),fine).size());
 		}else if(list.size() <= ((fine + inizio) / 2)) {
 			mav.addObject(nomeOggetto, list.subList(inizio, list.size()));
 			mav.addObject(nomeOggetto + "2", null);
