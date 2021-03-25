@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
@@ -52,39 +51,6 @@ public class HomeController extends BaseController{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("loginPage");
 		return mav;
-	}
-	
-	// form Registrazione
-	@GetMapping(value = "/registra")
-	public ModelAndView registrazione(Model model, boolean flag) {
-		if(flag) {
-			model.addAttribute("emailF", "È già presente un account con questa email");
-			System.out.println("entrato");
-		}
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("registra_utente");
-		mav.addObject("user", new UtenteDatiPersonali());
-		mav.addObject("email", new String());
-		mav.addObject("password", new String());
-		mav.addObject("settore", new String());
-		mav.addObject("date", new Utility());
-		mav.addObject("utenti_non_attivi", serviceDatiPersonali.getInattivi());
-		return mav;
-	}
-	
-	@PostMapping(value = "/eseguiRegistrazione")
-	public ModelAndView addUtente(@ModelAttribute("user")UtenteDatiPersonali utenteDP,
-			@RequestParam("email") String email, @RequestParam("password") String password,
-			@RequestParam("settore") String settore , Utility data, Model model) {
-		if(serviceUtente.foundEmail(email)) {
-			return registrazione(model,true);
-		}else {
-			utenteDP.setDataNascita(Timestamp.valueOf(data.getDate().atStartOfDay()).getTime() / 1000);
-			serviceDatiPersonali.insert(password, email, settore, utenteDP);
-			model.addAttribute("registrazione", "registrazione effettuata con successo");
-			return login();
-		}
-		
 	}
 	
 	// Password Dimenticata da login

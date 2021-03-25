@@ -42,6 +42,11 @@
     <div class="col-8 text-center mt-5">
       <div class="container-fluid border border-white mt-5">
         <h1 class="h1 mb-5 mt-1">SCEGLI QUALE UTENTE ELIMINARE</h1>
+        
+        <div th:if="${messaggio != null}" class="row justify-content-center mt-2">
+    		<p class="p text-warning">[[${messaggio}]]</p>
+	  	</div>
+	  
         <form method="post" th:action="@{/profile/elimina}">
           <div class="form-row ">
             <div class="form-group ml-5 col-lg-10">

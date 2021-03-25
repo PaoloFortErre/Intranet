@@ -43,7 +43,7 @@
       <div class="col-8 text-center mt-5">
         <div class="container border border-white mt-5">
           <h1 class="h1 mb-3 mt-1">AGGIUNGI UTENTE</h1>
-          <form  th:action="@{/eseguiRegistrazione}" method="post" enctype="utf8">
+          <form  th:action="@{/profile/eseguiRegistrazione}" method="post" enctype="utf8">
             <div class="form-row ml-2">
               <div class="form-group col-auto ml-5">
                 <label >Nome</label>
@@ -68,9 +68,9 @@
               <div class="form-group col-auto ml-5">
                 <label >Password</label>
                 <input class="form-control" type="password" th:name="password"/>
-                <small id="passwordHelpInline" class="text-muted">
+                <!--  <small id="passwordHelpInline" class="text-muted">
                   Deve essere tra gli 8-20 caratteri.
-                </small>
+                </small> -->
               </div>
               <div class="form-group col-auto ml-5">
                 <label for="settore">Che settore è ?</label>
@@ -85,14 +85,22 @@
             <button type="submit" class="btn btn-success mb-3">Aggiungi</button>
           </form>
 
-          <div th:if="${emailF != null}" class="row justify-content-center mt-2">
-            <p class="p text-danger">[[${emailF}]]</p>
+          <div th:if="${aggiungi != null}" class="row justify-content-center mt-2">
+            <p class="p text-danger">[[${aggiungi}]]</p>
+          </div>
+          <div th:if="${aggiungi2 != null}" class="row justify-content-center mt-2">
+            <p class="p text-warning">[[${aggiungi2}]]</p>
           </div>
         </div>
 
         <!--RIATTIVA UTENTE-->
         <div class="container-fluid border border-white mt-5">
           <h1 class="h1 mb-3 mt-1">RIATTIVA UTENTE</h1>
+          
+          <div th:if="${riattiva != null}" class="row justify-content-center mt-2">
+    		<p class="p text-warning">[[${riattiva}]]</p>
+	  	  </div>
+          
           <form class="" method="post" th:action="@{/profile/riattiva}">
             <div class="form-row ml-5">
               <div class="form-group col-10 ml-4">

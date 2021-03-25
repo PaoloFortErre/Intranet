@@ -1,5 +1,6 @@
 package com.erretechnology.intranet.controllers;
 
+import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.List;
@@ -7,9 +8,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
+import java.util.regex.*;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +27,7 @@ import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.Permesso;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
+import com.erretechnology.intranet.models.Utility;
 
 @Controller
 @RequestMapping(value = "profile")
@@ -89,12 +90,17 @@ public class UtenteController extends BaseController{
 	public ModelAndView cambiaPaginaModificaPagina(@RequestParam("vecchiaPassword") String vPsw, @RequestParam("nuovaPassword") String nPsw,
 			@RequestParam("cNuovaPassword") String cNPsw, HttpSession session, Model model) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
+		String regex = "^(?=.*[0-9])"
+				+ "(?=.*[a-z])(?=.*[A-Z])"
+				+ "(?=\\S+$).{8,20}$";
 		if(passwordEncoder.matches(vPsw, serviceUtente.findById(Integer.parseInt(session.getAttribute("id").toString())).getPassword())){
 			if(nPsw.equals(cNPsw)) {
 				if(nPsw.equals(vPsw)) {
 					return cambioPassword(true, "la nuova password non può essere uguale alla precedente", model);
 				}else {
+					Pattern p = Pattern.compile(regex);
+					Matcher m = p.matcher(nPsw);
+					if(!m.matches()) {return cambioPassword(true, "La password deve contenere una lettera maiuscola, una lettera minuscola, un numero ed essere di almeno 8 caratteri", model);}
 					Utente u = serviceUtente.findById(Integer.parseInt(session.getAttribute("id").toString()));
 					u.setPassword(nPsw);
 					serviceUtente.saveUtente(u);
@@ -141,20 +147,20 @@ public class UtenteController extends BaseController{
 		}
 		return "redirect:/profile/";
 	}
-	
+
 	// PAGINA ATTIVITA' RECENTI 
-		@GetMapping(value = "/mostra_log")
-		public ModelAndView mostraLog(HttpSession session) {
-			ModelAndView mav = new ModelAndView();
-			mav.setViewName("mostra_tutto_log");
-			UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
-			if(serviceUtente.findById(u.getId()).getRuolo().getNome().equals("ADMIN")){
-				mav.addObject("allLog", serviceLog.findAll());
-			}else {
-				mav.addObject("allLog", serviceLog.findLogById(Integer.parseInt(session.getAttribute("id").toString())));
-			}
-			return mav;
+	@GetMapping(value = "/mostra_log")
+	public ModelAndView mostraLog(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("mostra_tutto_log");
+		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		if(serviceUtente.findById(u.getId()).getRuolo().getNome().equals("ADMIN")){
+			mav.addObject("allLog", serviceLog.findAll());
+		}else {
+			mav.addObject("allLog", serviceLog.findLogById(Integer.parseInt(session.getAttribute("id").toString())));
 		}
+		return mav;
+	}
 
 
 	@PostMapping(value = "/setVisualizzazione")
@@ -183,11 +189,11 @@ public class UtenteController extends BaseController{
 	public Map<String,String> getPermessiMancanti(@RequestParam("email") String email){
 		List<String> list1 = servicePermesso.getAll().stream().map(x->x.getNome()).collect(Collectors.toList());
 		List<String> list2 = servicePermesso.getAll().stream().map(x->x.getDescrizione()).collect(Collectors.toList());
-		 Map<String,String> permessiMancanti = IntStream.range(0, Math.min( list1.size(), list2.size()))
-			   .boxed()
-			   .collect(Collectors.toMap(list1::get, list2::get));
-		 permessiMancanti.keySet().removeAll(getAllPermessi(email).keySet());
-		 return permessiMancanti;
+		Map<String,String> permessiMancanti = IntStream.range(0, Math.min( list1.size(), list2.size()))
+				.boxed()
+				.collect(Collectors.toMap(list1::get, list2::get));
+		permessiMancanti.keySet().removeAll(getAllPermessi(email).keySet());
+		return permessiMancanti;
 	}
 
 	@RequestMapping(value = "/getAllPermessi")
@@ -200,53 +206,54 @@ public class UtenteController extends BaseController{
 
 	@GetMapping(value = "/addPermesso")
 	public String addPermesso(String email, String list, HttpSession session, Model model) {
-			String[] permessi = list.split(",");
-			//Set<String> targetSet = new CopyOnWriteArraySet<String>(Arrays.asList(permessi));
-			int id_utente = Integer.parseInt(session.getAttribute("id").toString());
-			UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(id_utente);
-			if(utenteLoggato.getUtente().getRuolo().getNome().equals("ADMIN")) {
-				Utente u = serviceUtente.findByEmail(email);
-				Set<Permesso> permessiUtente = new HashSet<Permesso>();
-				boolean flag;
-				Set<Permesso> pUtenti = u.getSetPermessi();
-				Set<Permesso> temp = new HashSet<Permesso>();
-				for(Permesso pUtente : pUtenti) {
-					flag = false;
-					for(String permesso : permessi) {
-						if(flag) break;
-						if(pUtente.getNome().equals(permesso)) {
-							flag = true;
-						}
-					}
-					if(!flag) {
-						temp.add(pUtente);
+		String[] permessi = list.split(",");
+		//Set<String> targetSet = new CopyOnWriteArraySet<String>(Arrays.asList(permessi));
+		int id_utente = Integer.parseInt(session.getAttribute("id").toString());
+		UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(id_utente);
+		if(utenteLoggato.getUtente().getRuolo().getNome().equals("ADMIN")) {
+			Utente u = serviceUtente.findByEmail(email);
+			Set<Permesso> permessiUtente = new HashSet<Permesso>();
+			boolean flag;
+			Set<Permesso> pUtenti = u.getSetPermessi();
+			Set<Permesso> temp = new HashSet<Permesso>();
+			for(Permesso pUtente : pUtenti) {
+				flag = false;
+				for(String permesso : permessi) {
+					if(flag) break;
+					if(pUtente.getNome().equals(permesso)) {
+						flag = true;
 					}
 				}
-				for(Permesso p : temp) {
-					u.removePermesso(p);
-					p.removeUtente(u);
-					servicePermesso.savePermesso(p);
+				if(!flag) {
+					temp.add(pUtente);
 				}
-				for(String per : permessi) {
-					Permesso p = servicePermesso.findById(per.trim());
-					if(u.getSetPermessi().contains(p)) {
-					}else {
-						permessiUtente.add(p);
-						p.addUtente(u);
-						servicePermesso.savePermesso(p);
-					}					
-				}
-				
-				u.setSetPermessi(permessiUtente);
-				serviceUtente.save(u);
-				saveLog("modificato permessi i permessi di " + serviceDatiPersonali.findByAutore(u).getNome() +  " " +serviceDatiPersonali.findByAutore(u).getCognome(), utenteLoggato);
-				return "redirect:/profile/gestisciPermesso";
 			}
-			return "redirect:/forbidden";
+			for(Permesso p : temp) {
+				u.removePermesso(p);
+				p.removeUtente(u);
+				servicePermesso.savePermesso(p);
+			}
+			for(String per : permessi) {
+				Permesso p = servicePermesso.findById(per.trim());
+				if(u.getSetPermessi().contains(p)) {
+				}else {
+					permessiUtente.add(p);
+					p.addUtente(u);
+					servicePermesso.savePermesso(p);
+				}					
+			}
+
+			u.setSetPermessi(permessiUtente);
+			serviceUtente.save(u);
+			saveLog("modificato permessi i permessi di " + serviceDatiPersonali.findByAutore(u).getNome() +  " " +serviceDatiPersonali.findByAutore(u).getCognome(), utenteLoggato);
+			return "redirect:/profile/gestisciPermesso";
+		}
+		return "redirect:/forbidden";
 	}
 
 	@GetMapping(value = "/cancellaUtente")
-	public ModelAndView rimuoviUtente(HttpSession session) {
+	public ModelAndView rimuoviUtente(HttpSession session, boolean flag, String messaggio, Model model) {
+		if(flag) model.addAttribute("messaggio", messaggio);
 		ModelAndView mav = new ModelAndView();
 		UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		if(serviceUtente.findById(utenteLoggato.getId()).getRuolo().getNome().equals("ADMIN")) {
@@ -258,21 +265,52 @@ public class UtenteController extends BaseController{
 		}
 		mav.setViewName("forbidden");
 		return mav;
-
 	}
-	@PostMapping(value = "/elimina")
-	public String rimuovi(@RequestParam("id_eliminato") int id) {
-		Utente u = serviceUtente.findById(id);
-		u.setAttivo(false);
-		serviceUtente.save(u);
-		return "redirect:/profile/cancellaUtente/";
+
+	// form Registrazione
+	@GetMapping(value = "/registra")
+	public ModelAndView registrazione(Model model, String nome, String messaggio,  boolean flag) {
+		if(flag) {
+			model.addAttribute(nome, messaggio);
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("registra_utente");
+		mav.addObject("user", new UtenteDatiPersonali());
+		mav.addObject("email", new String());
+		mav.addObject("password", new String());
+		mav.addObject("settore", new String());
+		mav.addObject("date", new Utility());
+		mav.addObject("utenti_non_attivi", serviceDatiPersonali.getInattivi());
+		return mav;
+	}
+
+	@PostMapping(value = "/eseguiRegistrazione")
+	public ModelAndView addUtente(@ModelAttribute("user")UtenteDatiPersonali utenteDP,
+			@RequestParam("email") String email, @RequestParam("password") String password,
+			@RequestParam("settore") String settore , Utility data, Model model) {
+		if(serviceUtente.foundEmail(email)) {
+			return registrazione(model, "aggiungi", "È gia presente un account con questa email", true);
+		}else {
+			utenteDP.setDataNascita(Timestamp.valueOf(data.getDate().atStartOfDay()).getTime() / 1000);
+			serviceDatiPersonali.insert(password, email, settore, utenteDP);
+			model.addAttribute("registrazione", "registrazione effettuata con successo");
+			return registrazione(model, "aggiungi2" , "Registrazione effettuata con successo", true);
+		}
 	}
 
 	@PostMapping(value = "/riattiva")
-	public String riattiva(@RequestParam("id_riattivato") int id) {
+	public ModelAndView riattiva(@RequestParam("id_riattivato") int id, Model model) {
 		Utente u = serviceUtente.findById(id);
 		u.setAttivo(true);
 		serviceUtente.save(u);
-		return "redirect:/registra/";
+		return registrazione(model,"riattiva",  "L'utente " + u.getEmail() + " è stato riattivato", true);
+	}
+	
+	@PostMapping(value = "/elimina")
+	public ModelAndView rimuovi(@RequestParam("id_eliminato") int id, Model model, HttpSession session) {
+		Utente u = serviceUtente.findById(id);
+		u.setAttivo(false);
+		serviceUtente.save(u);
+		return rimuoviUtente(session , true, "L'utente " + u.getEmail() + " è stato disattivato", model);
 	}
 }
