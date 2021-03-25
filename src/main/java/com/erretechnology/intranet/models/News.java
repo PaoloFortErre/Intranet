@@ -12,7 +12,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class News {
+public class News implements MyWorkBean{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;

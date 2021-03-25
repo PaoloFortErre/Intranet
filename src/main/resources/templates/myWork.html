@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="it">
 <head>
-<title>MyW0rk!</title>
+<title>MyWork</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -155,8 +155,8 @@ table, th, td {
 									<td><div th:if="${nuoviAssunti.size>2}">
 											<a href="" id="vedi" onclick="mostraAssunzioni()"
 												style="text-decoration: none; color: black; font-size: 13px;">
-												Vedi altri <img src="/view/MyWork/images/freccianera.png"
-												width="30px" id="frecciasotto">
+												<br>Vedi altri <img src="/view/MyWork/images/freccianera.png"
+												width="30px" id="frecciasotto" style="margin-left: 5px;;">
 											</a>
 										</div></td>
 								</tr>
@@ -204,15 +204,17 @@ table, th, td {
 					</h2>
 					<img src="/view/MyWork/images/radice.jpg" class="img-fluid"
 						width="40%" height="100px" style="float: right" id="imgRosario">
-					<p>16 febbraio 2021</p>
+						<div th:if="${primoPodcast!=null}">
+							<p th:text="${#dates.format(primoPodcast.dataPodcast *1000, 'dd/MM/yyyy')}"></p>
+							<audio controls style="margin-top: 10px">
+								<source
+									th:src="'data:audio/mp3;base64,' + ${primoPodcast.getAudioData(primoPodcast.podcast)}"
+									type="audio/ogg">
+							</audio>
+						</div>
+					
 
-					<audio controls th:if="${primoPodcast!=null}" style="margin-top: 10px">
-						<source
-							th:src="'data:audio/mp3;base64,' + ${primoPodcast.getAudioData(primoPodcast.podcast)}"
-							type="audio/ogg">
-
-
-					</audio>
+					
 				</div>
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
@@ -259,7 +261,7 @@ table, th, td {
 						</div>
 
 					</div>
-					<p style="text-align: center;" th:if="${nuoviClienti==null}"> Non ci sono nuovi clienti al momento </p> 
+					<p style="text-align: center;" th:if="${nuoviClienti==null}"><br> Non ci sono nuovi clienti al momento </p> 
 					<table class="nuoviClienti" style="margin-top: 15px;" th:if="${nuoviClienti!=null}">
 						<th:block>
 							<tr>
@@ -288,6 +290,19 @@ table, th, td {
 					</table>
 
 
+				</div>
+			</div>
+			<div class="col-sm-8 col-md-5 col-lg-4"
+				>
+				<div class="assunti2">
+				<div class="modal-header2">
+						<div class="title2">
+						<h3 style="text-align: center; font-weight: 900"> Sondaggi</h3>
+						</div>
+						
+					</div><table class="nuoviClienti">
+				<tr> <td> Nome Sondaggio </td><td> Nome Sondaggio 2</td></tr>
+				</table>
 				</div>
 			</div>
 			</div>
