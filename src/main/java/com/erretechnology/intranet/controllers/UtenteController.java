@@ -7,9 +7,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
+import java.util.regex.*;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -89,12 +88,17 @@ public class UtenteController extends BaseController{
 	public ModelAndView cambiaPaginaModificaPagina(@RequestParam("vecchiaPassword") String vPsw, @RequestParam("nuovaPassword") String nPsw,
 			@RequestParam("cNuovaPassword") String cNPsw, HttpSession session, Model model) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
+		String regex = "^(?=.*[0-9])"
+                + "(?=.*[a-z])(?=.*[A-Z])"
+                + "(?=\\S+$).{8,20}$";
 		if(passwordEncoder.matches(vPsw, serviceUtente.findById(Integer.parseInt(session.getAttribute("id").toString())).getPassword())){
 			if(nPsw.equals(cNPsw)) {
 				if(nPsw.equals(vPsw)) {
 					return cambioPassword(true, "la nuova password non può essere uguale alla precedente", model);
 				}else {
+					Pattern p = Pattern.compile(regex);
+					Matcher m = p.matcher(nPsw);
+					if(!m.matches()) {return cambioPassword(true, "La password deve contenere una lettera maiuscola, una lettera minuscola, un numero ed essere di almeno 8 caratteri", model);}
 					Utente u = serviceUtente.findById(Integer.parseInt(session.getAttribute("id").toString()));
 					u.setPassword(nPsw);
 					serviceUtente.saveUtente(u);
