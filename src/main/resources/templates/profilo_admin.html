@@ -60,6 +60,24 @@
     color: blue;;
   }
 
+  /* Top left text */
+  .top-left {
+    position: absolute;
+    width: 8%;
+    height: 9%;
+    top: 4px;
+    left: 1px;
+  }
+
+  /* Top left text */
+  .top-left2 {
+    position: absolute;
+    width: 8%;
+    height: 10%;
+    top: 4px;
+    left: 0px;
+  }
+
   /*Profile Pic Start*/
   .picture{
     width: 270px;
@@ -72,6 +90,7 @@
     transition: all 0.2s;
     -webkit-transition: all 0.2s;
   }
+
   .picture:hover{
     border-color: yellow;
   }
@@ -109,14 +128,14 @@
 
 <body>
   <!-- ROW CON NAVBAR -->
-  <div class="row justify-content-center">
-    <div class="col-3 mr-5">
+  <div class="row justify-content-start">
+    <div class="col-3 ml-5">
       <a href="https://erretechnology.com/" target="blank">
-        <img id="logo" class="img-fluid rounded mt-5 mr-5"
+        <img id="logo" class="img-fluid rounded mt-5"
         src="/view/Login/images/erre_group_white.png" alt="logoErreGroup.png">
       </div>
 
-      <div class="col-lg-6 col-sm-5">
+      <div class="col-lg-6 col-md-4 col-sm-3">
         <nav class="navbar mt-5 mr-5">
           <div class="content mr-5" >
             <a th:href="@{/homepage}">HOME</a>
@@ -148,7 +167,7 @@
           </div>
         </div>
 
-        <div class="col-2">
+        <div class="col-lg-2 col-md-2 col-sm-1">
           <div class="container text-center">
             <h1 class="h1" th:text="${utente.nome}"></h1>
             <h1 class="h1 text-primary" th:text="${utente.cognome}" ></h1><br><br>
@@ -166,15 +185,16 @@
 
         <!-- DESCRIZIONE PERSONALE -->
         <div class="col-3 justify-content-end mr-4">
-          <div class="card text-end">
+          <div class="card position-relative text-end">
+            <img class="top-left" src="/view/Profile/Images/pin_post-it.png" alt="pin-post-it">
             <div class="card-body">
-              <h6 class="card-title" style="color:#303030">Una breve descrizione di me stesso:</h6>
+              <h6 class="card-title text-center" style="color:#303030">Una breve descrizione di me stesso:</h6>
               <p class="card-text" th:text="${utente.descrizione}" style="color:#303030"></p>
               <div th:if="${session.id} == ${utente.utente.id}">
                 <form th:action="@{/profile/modificaDescrizione}" method="post">
                   <div class="form-group">
                     <textarea class="form-control" id="exampleFormControlTextarea1" name="descrizione" placeholder="Modifica la tua descrizione"
-                    cols="35" rows="4" maxlength="255" required></textarea>
+                    cols="35" rows="3" maxlength="255" required></textarea>
                   </div>
                   <input class="btn btn-primary " type="submit" value="Modifica descrizione"/>
                 </form>
@@ -198,13 +218,13 @@
             </button>
             <div class="dropdown-menu">
               <form th:action="@{/profile/cambiaFotoProfilo}" method ="post" enctype="multipart/form-data">
-                <label class="dropdown-item font-weight-bold" for="scegli">SCEGLI LA TUA FOTO PROFILO</label>
+                <label class="dropdown-item font-weight-bold" style="cursor: pointer;" for="scegli">SCEGLI LA TUA FOTO PROFILO</label>
                 <input class="d-none" type="file" name="immagine" id="scegli" accept="image/png, image/jpeg"/>
-                <label class="dropdown-item font-weight-bold" for="salva">SALVA LA FOTO PROFILO</label>
+                <label class="dropdown-item font-weight-bold" style="cursor: pointer;" for="salva">SALVA LA FOTO PROFILO</label>
                 <input class="d-none" type="submit" id="salva"/>
                 <div class="dropdown-divider"></div>
                 <form th:action="@{/profile/eliminaFotoProfilo}" method ="post">
-                  <label class="dropdown-item font-weight-bold text-danger" for="elimina">ELIMINA LA FOTO PROFILO</label>
+                  <label class="dropdown-item font-weight-bold text-danger" style="cursor: pointer;" for="elimina">ELIMINA LA FOTO PROFILO</label>
                   <input class="d-none" type="submit" value="Elimina foto profilo" id="elimina">
                 </form>
               </form>
@@ -218,12 +238,12 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <form th:action="@{/profile/setVisualizzazione}" method ="post">
-                <div class="form-check font-weight-bold">
+                <div class="form-check pr-1 font-weight-bold">
                   VUOI CONDIVIDERE LA TUA DATA DI NASCITA?<br>
-                  <input type="radio" id="set" name="set" value="Si" th:checked="${utente.visualizzaDataNascita}">
+                  <input type="radio" style="cursor: pointer;" id="set" name="set" value="Si" th:checked="${utente.visualizzaDataNascita}">
                   <label for="set"><b>SI</b></label>
-                  <input type="radio" id="set" name="set" value="No" th:checked="${!utente.visualizzaDataNascita}">
-                  <label for="set"><b>NO</b></label><br>
+                  <input type="radio" style="cursor: pointer;" id="set" name="set" value="No" th:checked="${!utente.visualizzaDataNascita}">
+                  <label for="set" ><b>NO</b></label><br>
                   <input class="btn btn-info" type="submit" value="Cambia!">
                 </div>
               </form>
@@ -239,7 +259,8 @@
         <div class="col-6 mr-5 pt-n5 ">
           <div class="container bg-gradient-warning">
 
-            <div class="card border border border-danger shadow text-center " style="color:#303030; border: 5px !important;" >
+            <div class="card position-relative border border border-danger shadow text-center " style="color:#303030; border: 5px !important;" >
+              <img class="top-left2" src="/view/Profile/Images/pin_post-it.png" alt="pin-post-it">
               <div class="card-header">
                 <h5 class="h5"><b>ATTIVITA' RECENTI</b></h5>
                 <small>Anteprima di quello che hai fatto di recente</small>
@@ -274,15 +295,15 @@
 
         </div>
 
-        <div class="col-3 mt-5 ">
-          <div class="container-fluid shadow text-center rounded-circle bg-info pr-n2 pl-n2" th:if="${AM}">
-            <div class="container text-white">
+        <div class="col-lg-3 col-md-2 col-sm-2 mt-5 ">
+          <div class="container shadow text-center rounded-circle bg-info pr-n2 pl-n2" th:if="${AM}">
+            <div class="container text-white mt-3">
               <h1 class="h1 text-center mt-3 text-dark" th:text="${attivi}">"</h1>
               <h3 class="h3">UTENTI REGISTRATI</h3>
-            </div>
+            </div><br><br>
 
             <!-- GESTIONE ACCOUNT INTRANET -->
-            <div class="btn-group mb-2">
+            <div class="btn-group mb-4">
               <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 GESTISCI GLI UTENTI
               </button>
