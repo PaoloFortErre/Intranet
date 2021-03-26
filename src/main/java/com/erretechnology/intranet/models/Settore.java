@@ -11,6 +11,8 @@ public class Settore {
 	private String nomeSettore;
 	@Lob
     private byte[] logo;
+	@Lob
+	private byte[] logoBlack;
 	
 	public String getNomeSettore() {
 		return nomeSettore;
@@ -28,4 +30,10 @@ public class Settore {
 	public String getImgData(byte[] byteData) {
         return Base64.getMimeEncoder().encodeToString(byteData);
     }
+	public byte[] getLogoBlack() {
+		return logoBlack;
+	}
+	public void setLogoBlack(byte[] logoBlack) {
+		this.logoBlack = logoBlack;
+	}
 }
