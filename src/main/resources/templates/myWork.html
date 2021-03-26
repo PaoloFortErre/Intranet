@@ -261,7 +261,9 @@ table, th, td {
 		<div class="row">
 			<div class="col-sm-8 col-md-6 col-lg-5" style="margin-top: 20px;">
 				<div class="assunti2">
+				
 					<div class="modal-header2">
+					
 						<div class="title2">
 							<div th:if="${GMW}">
 								<!--  <div th:if="${admin}">-->
@@ -270,6 +272,7 @@ table, th, td {
 									style="float: right">
 								</a>
 							</div>
+							
 							<h3 style="text-align: center; font-weight: 900">Nuovi
 								clienti</h3>
 						</div>
@@ -283,6 +286,9 @@ table, th, td {
 						<th:block>
 							<tr>
 								<td th:each="cliente: ${nuoviClienti}">
+								<form  th:action="@{'/cliente/update/'+${cliente.id}}" th:if="${GMW}" method="get">
+							<button class="btn btn-primary" type="submit" name="modifica">MODIFICA</button>
+						</form>
 									<div th:if="${cliente.logo!=null}">
 										<img
 											th:src="'data:image/png;base64,' + ${cliente.logo.getImgData(cliente.logo.data)}"
@@ -329,6 +335,7 @@ table, th, td {
 					<p style="text-align: center;" th:if="${sondaggi==null}">
 						<br> Al momento non ci sono sondaggi
 					</p>
+					
 					<table class="nuoviClienti" th:each="sondaggio: ${sondaggi}">
 						<th:block>
 							<tr th:if="${sondaggio.visibile}">

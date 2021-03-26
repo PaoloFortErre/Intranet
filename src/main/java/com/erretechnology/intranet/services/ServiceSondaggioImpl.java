@@ -1,5 +1,6 @@
 package com.erretechnology.intranet.services;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,7 +21,10 @@ public class ServiceSondaggioImpl implements ServiceSondaggio{
 	}
 	@Override
 	public List<Sondaggio> findAll(){
-		return repositorySondaggio.findAll();
+		return repositorySondaggio.findAll().stream()
+				.filter(x->x.isVisibile())
+				.sorted(Comparator.comparingInt(Sondaggio::getId).reversed())
+				.collect(Collectors.toList());
 	}
 	
 	@Override

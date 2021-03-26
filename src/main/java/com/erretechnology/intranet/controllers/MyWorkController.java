@@ -104,6 +104,7 @@ public class MyWorkController extends BaseController {
 
 		
 		List<Sondaggio> sondaggi = serviceSondaggio.findAll();
+		System.out.println(sondaggi.size());
 		if (sondaggi.size()==0) {
 			mav.addObject("sondaggi",null);
 			mav.addObject("sondaggi1",null);
@@ -154,13 +155,13 @@ public class MyWorkController extends BaseController {
 		}
 	}
 
-	@GetMapping(value = "/sondaggi")
-	public ModelAndView sondaggi() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("sondaggi");
-		mav.addObject("sondaggi", serviceSondaggio.findAll());
-		return mav;		
-	}
+//	@GetMapping(value = "/sondaggi")
+//	public ModelAndView sondaggi() {
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("sondaggi");
+//		mav.addObject("sondaggi", serviceSondaggio.findAll());
+//		return mav;		
+//	}
 
 	@PostMapping(value = "/sondaggi")
 	public String sondaggio(@ModelAttribute("sondaggio") Sondaggio sondaggio, HttpSession session) {
