@@ -210,7 +210,7 @@
 														un'immagine da condividere</h4>
 												</div>
 												<div class="modal-body">
-													<input type="file" name="document"
+													<input type="file" name="document" id="img"
 														accept="image/png, image/jpeg" style="color: black;" />
 												</div>
 												<div class="modal-footer">
@@ -222,7 +222,19 @@
 										</div>
 									</div>
 
+									<div>
+										<div id="delete" style="display: none">
+											<button type="button" class="close" aria-label="Close"
+												onclick="remove()">
+												<span aria-hidden="true" style="color: red">&times;</span>
+											</button>
+											<img id="previewImg" src="#" alt="Immagine Caricata"
+											width="70%" height="70%" />
+										</div>
+										
+										
 
+									</div>
 
 
 
@@ -651,6 +663,31 @@ COLONNA DESTRA
 		function showAreaPost(id) {
 			document.getElementsByClassName('postModificato' + id)[0].style.display = "block";
 
+		}
+		
+		function readURL(input) {
+			  if (input.files && input.files[0]) {
+			    var reader = new FileReader();
+			    
+			    reader.onload = function(e) {
+			      $('#previewImg').attr('src', e.target.result);
+			      $('#previewImg').show();
+			    }
+			    $('#delete').show();
+			    reader.readAsDataURL(input.files[0]); // convert to base64 string
+			  }
+			}
+
+			$("#img").change(function() {
+			  document.getElementById("post").required = false;
+			  readURL(this);
+			});
+			
+		function remove(){
+			$('#img').val("");
+			$('#previewImg').val("");
+			$('#delete').hide();
+			document.getElementById("post").required = true;
 		}
 	</script>
 

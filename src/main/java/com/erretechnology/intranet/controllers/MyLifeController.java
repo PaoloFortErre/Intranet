@@ -276,13 +276,12 @@ public class MyLifeController extends BaseController {
 			} catch (Exception e) {
 				System.err.println("Non riesco a caricare il file");
 			}
-		}
-			servicePost.save(post);
-			saveLog("scritto in bacheca", autore);
-			return "redirect:/myLife/";
-		
-		}
-		
 
+		}
 
+		servicePost.save(post);
+		saveLog("scritto in bacheca", autore);
+		return "redirect:/myLife/";
+
+	}
 }
