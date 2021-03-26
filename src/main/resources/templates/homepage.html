@@ -81,6 +81,11 @@
     }
   }
 
+  .magnify:hover{
+    width: 101%;
+    heigth: 101%;
+  }
+
   .centered {
   position: absolute;
   top: 50%;
@@ -96,10 +101,22 @@
     -webkit-text-stroke: 0.3px #303030;
   }
 
+  /*START FOOTER*/
   footer {
-    background-color: #2EC4B6;
-    width: 100%;
-    height: 160px;
+  	margin-top:150px;
+  	background-color: black;
+  	width: 100%;
+  	height: 160px;
+  	flex-shrink: 0;
+  }
+  /* Style all font awesome icons */
+  .fa {
+  	padding: 20px;
+  	font-size: 30px;
+  	width: 70px;
+  	height: 70px;
+  	text-align: center;
+  	text-decoration: none;
   }
 
   /* Style all font awesome icons */
@@ -138,7 +155,7 @@
     <div class="row mt-3 mb-5">
 
       <div class="col">
-        <div class="container-fluid">
+        <div class="magnify container-fluid">
 
           <figure class="figure position-relative">
             <img src="/view/Homepage/Images/my_work_1.jpg" class="img-fluid rounded-lg " alt="mywork1">
@@ -155,7 +172,7 @@
       </div>
 
       <div class="col">
-        <div class="container-fluid">
+        <div class="magnify container-fluid">
 
           <figure class="figure position-relative">
             <img src="/view/Homepage/Images/my_life_1.jpg" class="img-fluid rounded-lg " alt="mylife1">
@@ -240,29 +257,32 @@
   </div>
 
   <!-- PANNELLO FOOTER CON INFO-->
-  <footer class="align-items-center">
-    <div class="container align-items-center mt-4">
-      <div class="row justify-content-center align-items-center mt-3 pt-4">
-        <div class="col-sm-4 col-lg-4">
-          <a href="https://erretechnology.com/" target="blank">
-            <img src="/view/MyLife/images/erre.png" height="80px" alt="erre_logo"
-            style="margin: auto"></a>
-          </div>
-          <div class="col-sm-4 col-lg-4">
-            <img src="/view/MyWork/images/thegate.png" width="100%" alt="thegate.png"
-            style="margin: auto;">
-            <p
-            style="color: #F3F3F3; text-align: center; font-size: 20px; ">
-
-            Supporto: +39 011 197 429 00</p>
-          </div>
-          <div class="col-sm-4 col-lg-4 pl-5">
-            <a class="square fa fa-facebook" href="https://www.facebook.com/erretechnologygroup/"></a>
-            <a class="square fa fa-linkedin ml-2" href="https://www.linkedin.com/company/erretechnologygroup/"></a>
-          </div>
-        </div>
-      </div>
-    </footer>
+	<footer class="align-items-center">
+		<div class="container align-items-center mt-4"
+			style="margin-top: 40px">
+			<div class="row justify-content-center align-items-center mt-3 pt-4"
+				style="margin-top: 15px; padding-top: 15px;">
+				<div class="col-sm-4 col-lg-4">
+					<a href="https://erretechnology.com/" target="blank"><img
+						src="/view/MyWork/images/errelogowhite.png" height="80px"
+						alt="erre_logo" style="margin: auto"></a>
+				</div>
+				<div class="col-sm-4 col-lg-4">
+					<img src="/view/MyWork/images/thegate.png" width="100%"
+						style="margin: auto;">
+					<p style="color: #F3F3F3; text-align: center; font-size: 20px;">
+						Supporto: +39 011 197 429 00</p>
+				</div>
+				<div class="col-sm-4 col-lg-4 pl-5" style="padding-left: 150px">
+					<a class="rounded fa fa-facebook"
+						href="https://www.facebook.com/erretechnologygroup/"
+						target="blank"></a> <a class="rounded fa fa-linkedin ml-2"
+						href="https://www.linkedin.com/company/erretechnologygroup/"
+						style="margin-left: 10px" target="blank"></a>
+				</div>
+			</div>
+		</div>
+	</footer>
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
