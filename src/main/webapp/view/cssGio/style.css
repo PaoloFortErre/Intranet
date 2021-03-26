@@ -39,7 +39,7 @@ body {
 
 .col-sinistra {
 	border-radius: 6px 6px 6px 6px;
-	background-color: #303030;
+	background-color: #E8E7E7;
 	
 }
 
@@ -141,18 +141,15 @@ footer {
 	border-radius: 50%;
 	height: 70px;
 	width: 70px;
-	box-shadow: 0 26.1px 11.1px rgba(0, 0, 0, 0.18), 0 69px 89px
-	rgba(0, 0, 0, 0.36);
-	-webkit-box-shadow: 10px 10px 6px 0px rgba(0,0,0,0.75);
-	-moz-box-shadow: 10px 10px 6px 0px rgba(0,0,0,0.75);
-	box-shadow: 10px 10px 6px 0px rgba(0,0,0,0.75);
+	border: 2px solid #E8E7E7;
 }
 
 #post {
 	width: 720px;
-	background-color: #303030;
+	background-color: #E3E2E2;
 	border-radius: 4px;
-	border: 2px solid #F3F3F3;
+	border: 1px solid #6D6D6D;
+	padding-left: 10px;
 }
 
 textarea {
@@ -164,11 +161,10 @@ textarea {
 	color: white;
 	height: 30px;
 	border: 0px;
-	width: 100px;
-	background: rgb(117, 176, 245);
-	background: linear-gradient(90deg, rgba(117, 176, 245, 1) 0%,
-	rgba(57, 147, 252, 1) 18%, rgba(0, 117, 255, 1) 37%);
-	top: -30%;
+	width: 86px;
+	background: #0C4FFF;
+	margin-left: 52%;
+
 
 }
 
@@ -203,6 +199,16 @@ hr#linea {
 	rgba(57, 147, 252, 1) 18%, rgba(0, 117, 255, 1) 37%);
 
 }
+#gestisciProfilo{
+	text-decoration: none;
+	color: #3D3A3A;
+	
+}
+#gestisciProfilo:hover{
+	background-color: #b5b5b5;
+	
+}
+
 #bottoneElimina{
 	background-color:  #3D3A3A;
 	border: 0px  #3D3A3A;
@@ -260,6 +266,18 @@ hr#linea {
 
 
 }
+
+@media screen and (max-width: 999px) {
+  #submitPost {
+   margin-left: 89px;
+  }
+}
+@media screen and (max-width: 440px) {
+  #submitPost {
+   margin-left: 12px;
+  }
+}
+
 
 @media screen and (max-width: 800px) {
   #imgSettore {
