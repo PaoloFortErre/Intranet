@@ -140,15 +140,17 @@
 		th:with="GML = ${#authorization.expression('hasAuthority(''GML'')')}">
 
 
-		<!-- ****
-				COLONNA SINISTRA
-				**** -->
+	
 
 		<div class="row" style="margin-top: 5%">
 		
+		
+			<!-- ****
+				COLONNA SINISTRA
+				**** -->
 		<div class="col-xs-2 col-sm-2 col-lg-2">
 		<div class="col-sinistra">
-		<div id="copertina"> 
+		
 		<img src="/view/MyLife/images/tori.jpg" width="100%" style="border-radius: 6px 6px 0px 0px">
 			<img
 								th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
@@ -157,10 +159,11 @@
 	  <br> <br> <br> <br>
 	  <h4 Style="color: #303030; display: inline-block; text-align: center; margin-left: 17px;" th:text="${utenteDati.nome}"></h4>
 	  <h4 Style="color: #303030; display: inline-block; text-align: center;" th:text="${utenteDati.cognome}"></h4>
-	  <br> <p th:text="${utenteDati.settore.getNomeSettore}" style="text-align: center; color: #303030; font-style: italic;"> </p>
+	  <br> <p th:text="${utenteDati.settore.getNomeSettore}" style="text-align: center; color: #303030; font-style: italic;"> </p><br>
 	  <div id="prof"> <a th:href="@{/profile/}" id="gestisciProfilo"> Gestisci il tuo profilo</a></div>
-		</div>
-	
+	  	  <div id="prof"> <a th:href="@{/profile/}" id="gestisciProfilo"> Vedi il profilo dei tuoi colleghi</a></div>
+	  
+			
 		</div>
 		</div>
 		
@@ -278,7 +281,7 @@
 										<form th:action="@{/myLife/deletePost(id=${post.id})}"
 											method="post">
 											<button name="button" type="submit" class="buttonAzioni"
-												style="display: inline-block; background-color: #E8E7E7; color: white; margin-left: 250px; border: 0px solid #303030"> <img 
+												style="display: inline-block; background-color: #E8E7E7; color: white; margin-left: 290px; border: 0px solid #303030"> <img 
 												src="/view/MyLife/images/trash.png" width="45%"></button>
 										</form>
 									</div>
