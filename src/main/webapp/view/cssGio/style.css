@@ -45,12 +45,12 @@ body {
 
 #col-destra {
 	border-radius: 6px 6px 6px 6px;
-	background-color:  #303030;
+	background-color:  #E8E7E7;
 	height: 100%;
 }
 
 #culturaPiemonte {
-	color: #F3F3F3;
+	color: #303030;
 	text-align: center;
 	text-shadow: 0.5px 0.5px #ECF260;
 }
@@ -163,7 +163,7 @@ textarea {
 	border: 0px;
 	width: 86px;
 	background: #0C4FFF;
-	margin-left: 52%;
+	margin-left: 80%;
 
 
 }
@@ -171,14 +171,15 @@ textarea {
 .nomeCommento{
 	display: inline-block;
 	font-style: italic;
-	text-shadow: -1px -1px 1px rgba(255,255,255,.1), 1px 1px 1px rgba(0,0,0,.5), 2px 2px 2px rgba(243,255,54,0.43);
+	color: #303030;
 }
 
 #commento{
 	border-radius: 5px 5px 5px 5px;
 	padding: 10px;
-	width:350px;
-	background-color: #3D3A3A;
+	width:93%;
+	
+	background-color:  #c9c9c9;
 }
 #tableCommento{
 
@@ -204,17 +205,21 @@ hr#linea {
 	color: #3D3A3A;
 	
 }
-#gestisciProfilo:hover{
-	background-color: #b5b5b5;
+#prof{
+		border-top: 1px solid #c9c9c9;
+	padding: 5px;
+}
+#prof:hover{
+	background-color: #c9c9c9;
 	
 }
 
 #bottoneElimina{
-	background-color:  #3D3A3A;
-	border: 0px  #3D3A3A;
-	color: white;
-	margin-left: 26px;
-	font-size:13px;
+	background-color:  #c9c9c9;
+	border: 0px  #c9c9c9;
+	
+	margin-left: 16px;
+	
 }
 #bottoneModulo {
 	background-color:  #1C1C1C;
@@ -224,11 +229,12 @@ hr#linea {
 	font-size:13px;
 }
 #bottoneModifica{
-	background-color:  #3D3A3A;
-	border: 0px  #3D3A3A;
-	color: white;
+	background-color:  #c9c9c9;
+	border: 0px  #c9c9c9;
+	
 
-	font-size:13px;
+
+	
 }
 
 
