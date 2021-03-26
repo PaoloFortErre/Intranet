@@ -40,7 +40,7 @@ body {
 .col-sinistra {
 	border-radius: 6px 6px 6px 6px;
 	background-color: #E8E7E7;
-	
+	width: 100%
 }
 
 #col-destra {
