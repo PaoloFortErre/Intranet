@@ -30,10 +30,15 @@
     box-sizing: border-box;
   }
 
-  body{
+  body {
+    background-color: black;
+    background-image: url("/view/MyWork/images/carbonio.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain, cover;
+    color:#F3F3F3;
     font-family: Noto Sans, sans-serif;
-    color: #F3F3F3;
-    background-color: #303030;
+    overflow-x: hidden;
   }
 
   #myInput {
@@ -67,39 +72,43 @@
 </style>
 </head>
 <body>
-  <div class="container-fluid mt-3 mb-3 mr-5 ml-3">
+  <div class="container-fluid mw-75 mt-3 mb-3 mr-5 ml-3">
+    <div class="row justify-content-center">
+      <div class="col-1">
+      </div>
 
-    <h2 class="h2 text-center mb-3">Attività recenti degli utenti</h2>
-    <div class="container-fluid text-center">
-      <button class="btn btn-primary" onclick="goBack()">TORNA INDIETRO</button>
-      <script>
-      function goBack() {
-        window.history.back();
-      }
-      </script>
-      <input class="h3" type="text" id="myInput" onkeyup="myFunction()" placeholder="Filtra per cognome" title="Cerca con nome utente">
+      <div class="col">
+        <h2 class="h2 text-center mb-3">Attività recenti degli utenti</h2>
+        <div class="container text-center">
+          <a class="btn btn-primary mr-3" th:href="@{/profile/}">TORNA INDIETRO</a>
+          <input class="h3" type="text" id="myInput" onkeyup="myFunction()" placeholder="Filtra per cognome" title="Cerca con nome utente">
+        </div>
+        <table id="myTable" class="table table-dark">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col" style="font-weight: 900;">#</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Cognome</th>
+              <th scope="col">Attività</th>
+              <th scope="col">Data e ora</th>
+            </tr>
+          </thead>
+          <tbody th:each="log:${allLog}">
+            <tr>
+              <th scope="row" th:text="${log.utente.id}"></th>
+              <td th:text="${log.utente.nome}"></td>
+              <td th:text="${log.utente.cognome}"></td>
+              <td th:text="'ha' + ' ' + ${log.azione}"></td>
+              <td th:utext="${#dates.format(log.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-1">
+      </div>
     </div>
 
-    <table id="myTable" class="table table-dark">
-      <thead class="thead-light">
-        <tr>
-          <th scope="col" style="font-weight: 900;">#</th>
-          <th scope="col">Nome</th>
-          <th scope="col">Cognome</th>
-          <th scope="col">Attività</th>
-          <th scope="col">Data e ora</th>
-        </tr>
-      </thead>
-      <tbody th:each="log:${allLog}">
-        <tr>
-          <th scope="row" th:text="${log.utente.id}"></th>
-          <td th:text="${log.utente.nome}"></td>
-          <td th:text="${log.utente.cognome}"></td>
-          <td th:text="'ha' + ' ' + ${log.azione}"></td>
-          <td th:utext="${#dates.format(log.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"></td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 
   <script>

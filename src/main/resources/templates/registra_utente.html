@@ -31,12 +31,7 @@
     <!-- ROW CON INPUT -->
     <div class="row mt-5 mb-5">
       <div class="col">
-        <button class="btn btn-primary" onclick="goBack()">TORNA INDIETRO</button>
-        <script>
-        function goBack() {
-          window.history.back();
-        }
-        </script>
+        <a class="btn btn-primary" th:href="@{/profile/}">TORNA INDIETRO</a>
       </div>
 
       <!--AGGIUNGI UTENTE-->
@@ -96,11 +91,11 @@
         <!--RIATTIVA UTENTE-->
         <div class="container-fluid border border-white mt-5">
           <h1 class="h1 mb-3 mt-1">RIATTIVA UTENTE</h1>
-          
+
           <div th:if="${riattiva != null}" class="row justify-content-center mt-2">
     		<p class="p text-warning">[[${riattiva}]]</p>
 	  	  </div>
-          
+
           <form class="" method="post" th:action="@{/profile/riattiva}">
             <div class="form-row ml-5">
               <div class="form-group col-10 ml-4">
