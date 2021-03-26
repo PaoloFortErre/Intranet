@@ -196,7 +196,7 @@ public class EventoController extends BaseController {
 		repoEvento.save(evento);
 		model.addAttribute("evento", evento);
 		saveLog("modificato un evento", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		return "/myWork/";
+		return "redirect:/myWork/";
 	}
 	
 	@RequestMapping("/delete/{id}")
