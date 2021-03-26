@@ -53,21 +53,25 @@
 			</h4 ><hr style=" background-color: #F3F3F3; ">
 
 
-			<p style="text-align: right; margin-bottom: 30px;display: inline-block;"><a th:href="@{/myWork/}" style="color: #F3F3F3;"><img src="/view/MyWork/images/frecciasinistra.png" style="display: inline-block;" width="15%">Torna indietro </a></p>
+			<p style="text-align: right; margin-bottom: 30px;display: inline-block;">
+				<a class="mr-2" th:href="@{/myWork/}" style="color: #F3F3F3;">
+				<img src="/view/MyWork/images/frecciasinistra.png" style="display: inline-block;" width="20%">Torna indietro
+			</a>
+			</p>
 			<form th:action="@{/evento/update/{id}(id = ${evento.id})}" th:object="${evento}" method="post" enctype="multipart/form-data">
-				<label for="titolo">Titolo:</label><br>
-				<input type="text" id="titolo" name="titolo" th:field="*{titolo}" style="color: black"><br>
-				<label for="contenuto">Contenuto:</label><br>
+				<label for="titolo">Titolo:</label>
+				<input type="text" id="titolo" name="titolo" th:field="*{titolo}" style="color: black"><br><br>
+				<label for="contenuto">Contenuto:</label>
 				<input type="text" id="contenuto" name="contenuto" th:field="*{contenuto}" style="color: black"><br><br>
 				<input type="file" name="immagine" accept="image/png, image/jpeg"/>
 				<br><br>
-				<label for="via">Via:</label><br>
-				<input type="text" id="via" name="via" th:field="${indirizzo.via}" style="color: black"><br>
-				<label for="citta">Citta:</label><br>
-				<input type="text" id="citta" name="citta" th:field="${indirizzo.citta}" style="color: black"><br>
-				<label for="provincia">Provincia:</label><br>
-				<input type="text" id="provincia" name="provincia" th:field="${indirizzo.provincia}" style="color: black"><br>
-				<label for="date">Data:</label><br>
+				<label for="via">Via:</label>
+				<input type="text" id="via" name="via" th:field="${indirizzo.via}" style="color: black"><br><br>
+				<label for="citta">Citta:</label>
+				<input type="text" id="citta" name="citta" th:field="${indirizzo.citta}" style="color: black"><br><br>
+				<label for="provincia">Provincia:</label>
+				<input type="text" id="provincia" name="provincia" th:field="${indirizzo.provincia}" style="color: black"><br><br>
+				<label for="date">Data:</label>
 				<input type="date" id="date" name="date" th:value="${#dates.format(date, 'yyyy-MM-dd')}" style="color: black"><br><br>
 				<input type="submit" value="Pubblica" style="color: black">
 			</form>
