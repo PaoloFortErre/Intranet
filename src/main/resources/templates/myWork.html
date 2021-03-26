@@ -383,12 +383,12 @@ table, th, td {
 						<h3 style="color: black; text-align: center; font-weight: 900">Comunicazioni
 							HR</h3>
 					</div>
-					
+
 					<p style="text-align: center;" th:if="${comunicazioni==null}">
 						<br> Al momento non ci sono comunicazioni HR
 					</p>
 					<div th:each="comunicazione: ${comunicazioni}">
-					
+
 						<table style="margin: 0 auto; margin-top: 10px;">
 							<tr style="text-align: center;">
 								<td><img src="/view/MyWork/images/pdf-icon.png"
@@ -437,6 +437,10 @@ table, th, td {
 			<div th:if="${eventi!=null}">
 				<div class="col-sm-12 col-md-6 col-lg-6" th:each="eventi:${eventi}">
 					<div class="evento" style="margin: auto">
+						<form class="" th:action="@{'/evento/update/'+${eventi.id}}" method="get">
+							<button class="btn btn-primary" type="submit" name="modifica">MODIFICA</button>
+						</form>
+
 						<div id="evento-immagine" th:if="${eventi.copertina!=null}">
 							<img
 								th:src="'data:image/png;base64,' + ${eventi.copertina.getImgData(eventi.copertina.data)}"
