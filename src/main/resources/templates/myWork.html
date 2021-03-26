@@ -437,7 +437,7 @@ table, th, td {
 			<div th:if="${eventi!=null}">
 				<div class="col-sm-12 col-md-6 col-lg-6" th:each="eventi:${eventi}">
 					<div class="evento" style="margin: auto">
-						<form class="" th:action="@{'/evento/update/'+${eventi.id}}" method="get">
+						<form  th:action="@{'/evento/update/'+${eventi.id}}" th:if="${GMW}" method="get">
 							<button class="btn btn-primary" type="submit" name="modifica">MODIFICA</button>
 						</form>
 
