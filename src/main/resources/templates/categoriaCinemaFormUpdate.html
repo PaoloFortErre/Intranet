@@ -1,18 +1,72 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+	<meta charset="ISO-8859-1">
+	<title>Form update categoria film</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
+
+	<style>
+	body{
+		background-image: url("/view/MyWork/images/background.png");
+		background-repeat: no-repeat, repeat;
+		background-attachment: fixed;
+
+
+	}
+	#input {
+		background-color: #E2E2E2;
+		border-radius: 0px 0px 0px 0px;
+		border: 0px solid #E2E2E2;
+
+	}
+
+</style>
+
 </head>
-<body>
-	<form th:action="@{/categoriacinema/update/{id}(id = ${categoriaCinema.id})}" th:object="${categoriaCinema}" method="post">
-	  <label for="nome">Nome:</label><br>
-	  <input type="text" id="nome" name="nome" th:field="*{nome}"><br>
-	  <br>
-	  <input type="submit" value="Salva">
-	</form>
+
+<body >
+
+	<div class="container">
+		<div class="row">
+
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="background-color: #3A5497;
+			margin: auto;margin-top: 150px;
+			padding: 15px;">
+
+			<h4 style="text-align: left; margin-bottom:5px;">Modifica la categoria evento in <span style="color: #ECF260;;">"MyLife"</span>
+			</h4 ><hr style=" background-color: #F3F3F3; ">
 
 
+			<p style="text-align: right; margin-bottom: 30px;display: inline-block;">
+				<a class="mr-2" th:href="@{/myWork/}" style="color: #F3F3F3;">
+				<img src="/view/MyWork/images/frecciasinistra.png" style="display: inline-block;" width="20%">Torna indietro
+			</a>
+			</p>
+			<form th:action="@{/categoriacinema/update/{id}(id = ${categoriaCinema.id})}" th:object="${categoriaCinema}" method="post">
+			  <label for="nome">Nome:</label><br>
+			  <input type="text" id="nome" name="nome" th:field="*{nome}"><br>
+			  <br>
+			  <input type="submit" value="Salva">
+			</form>
+		</div>
 
+	</div>
+</div>
 </body>
 </html>
