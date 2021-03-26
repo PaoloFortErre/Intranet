@@ -170,7 +170,7 @@ public class MyWorkController extends BaseController {
 		sondaggio.setVisibile(true);
 		serviceSondaggio.save(sondaggio);
 		saveLog("creato un nuovo sondaggio", autore);
-		return "redirect:/myWork/sondaggi";
+		return "redirect:/myWork/";
 	}
 
 	@PostMapping(value = "/deleteSondaggio")
@@ -181,7 +181,7 @@ public class MyWorkController extends BaseController {
 			s.setVisibile(false);
 			serviceSondaggio.save(s);
 			saveLog("cancellato un sondaggio", autore);
-			return "redirect:/myWork/sondaggi";
+			return "redirect:/myWork/";
 		}return "redirect:forbidden";
 
 	}
