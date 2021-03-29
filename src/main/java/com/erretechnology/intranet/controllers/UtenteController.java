@@ -291,6 +291,13 @@ public class UtenteController extends BaseController{
 		if(serviceUtente.foundEmail(email)) {
 			return registrazione(model, "aggiungi", "È gia presente un account con questa email", true);
 		}else {
+			String regex = "[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}";
+
+			Pattern p = Pattern.compile(regex);
+			Matcher m = p.matcher(email);
+			if(!m.matches()) {return registrazione(model, "aggiungi", "L'email inserita non è valida", true);}
+			
+			
 			utenteDP.setDataNascita(Timestamp.valueOf(data.getDate().atStartOfDay()).getTime() / 1000);
 			serviceDatiPersonali.insert(password, email, settore, utenteDP);
 			model.addAttribute("registrazione", "registrazione effettuata con successo");
