@@ -54,6 +54,15 @@ public class PodcastController extends BaseController {
 		return "redirect:/myWork/";
 	}
 	
+	@GetMapping(value = "/deletePodcast/{id}")
+	public String deletePodcast(@PathVariable int id) {
+		Podcast p = servicePodcast.getById(id);
+		p.setVisibile(false);
+		servicePodcast.save(p);
+		saveLog("eliminato il podcast con "  + p.getNome(), p.getUtente());
+		return "redirect:/myWork/";
+	}
+	
 	@GetMapping(value = "/podcastFormUpdate/{id}")
 	public ModelAndView updatePodcast(@PathVariable int id) {
 		ModelAndView mav = new ModelAndView();

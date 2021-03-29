@@ -26,6 +26,7 @@ public class Podcast {
 	@JoinColumn(name = "id_autore")
 	private UtenteDatiPersonali utente;
 	private long dataPodcast;
+	private Boolean visibile;
 	
 	public UtenteDatiPersonali getUtente() {
 		return utente;
@@ -66,6 +67,12 @@ public class Podcast {
 	}
 	public void setDataPodcast(long dataPodcast) {
 		this.dataPodcast = dataPodcast;
+	}
+	public Boolean getVisibile() {
+		return visibile;
+	}
+	public void setVisibile(Boolean visibile) {
+		this.visibile = visibile;
 	}
 
 
