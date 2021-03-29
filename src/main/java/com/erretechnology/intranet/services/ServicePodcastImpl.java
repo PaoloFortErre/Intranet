@@ -1,6 +1,7 @@
 package com.erretechnology.intranet.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class ServicePodcastImpl implements ServicePodcast{
 
 	@Override
 	public List<Podcast> getAll() {
-		return repositoryPodcast.findAll();
+		return repositoryPodcast.findAll().stream().filter(x -> x.getVisibile()).collect(Collectors.toList());
 	}
 
 	@Override
