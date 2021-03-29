@@ -1,4 +1,3 @@
-@@ -1,102 +0,0 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
@@ -39,26 +38,32 @@
 </head>
 <body>
   <div class="container-fluid">
-    <div class="row mt-3">
+    <div class="row mt-5">
       <div class="col-6 ml-5">
-        <table class="table bg-white">
+        <h2 class="h2 text-center mb-3">Tutte le comunicazioni</h2>
+        <div class="container text-center">
+          <input class="h3" type="text" id="myInput" onkeyup="myFunction()" placeholder="Filtra per data" title="Cerca per data">
+        </div>
+        <table id="myTable" class="table bg-white">
           <thead class="thead-dark">
             <tr>
               <th scope="col">#</th>
               <th scope="col">Data</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
+              <th scope="col">Scarica</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Funzioni</th>
             </tr>
           </thead>
           <tbody>
+
             <tr th:each="comunicazione: ${comunicazioni}">
-              <th scope="row">1</th>
               <td th:text="${#dates.format(comunicazione.timestamp*1000, 'dd/MM/yyyy')}"></td>
               <td>
-                <img src="/view/MyWork/images/pdf-icon.png" style="float: left;" width="7%">
+                <img src="/view/MyWork/images/pdf-icon.png" width="7%">
                 <a th:href="@{/file/downloadFileHR(id=${comunicazione.id})}"
                 th:text="${comunicazione.nome}" th:download="${comunicazione.nome}"></a>
               </td>
+              <td></td>
               <td>
                 <form th:action="@{/file/deleteFileHR(id=${comunicazione.id})}" method="post">
                   <button class="btn btn-danger" type="submit">Elimina</button>
@@ -67,10 +72,21 @@
             </tr>
           </tbody>
         </table>
+        <script type="text/javascript">
+        var tables = document.getElementsByTagName('tbody');
+        var table = tables[tables.length - 1];
+        var rows = table.rows;
+        for(var i = 0, td; i < rows.length; i++){
+          console.log("ciao");
+          td = document.createElement('td');
+          td.appendChild(document.createTextNode(i + 1));
+          rows[i].insertBefore(td, rows[i].firstChild);
+        }
+        </script>
 
       </div>
 
-      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" id="colForm" style="margin-top:100px;">
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" id="colForm">
         <div class="container" sec:authorize="hasAuthority('GHR')">
           <h4 style="text-align: center; margin-bottom: 5px;">Inserisci una
             nuova comunicazione HR</h4>
@@ -81,13 +97,10 @@
                 <img src="/view/MyWork/images/frecciasinistra.png" style="display: inline-block;" width="20%">Torna indietro
               </a>
             </p>
-
+            <p th:text="${message}" th:if="${message ne null}"
+            class="alert alert-info"></p>
             <form th:action="@{/file/uploadHR}" th:object="${comunicazioneHR}"
             method="post" enctype="multipart/form-data" class="signin-form">
-
-            <p th:text="${message}" th:if="${message ne null}"
-            class="alert alert-primary"></p>
-
             <div class="form-group col-12">
               <label for="nome">Nome</label>
               <input type="text" name="nome" class="form-control" id="input" required>
@@ -101,11 +114,34 @@
               <input class="form-control" type="submit" id="pubblicaSubmit" value="Pubblica">
             </div>
 
+
           </form>
         </div>
       </div>
     </div>
   </div>
 
+  <script>
+
+
+  function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[2];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+</script>
 </body>
 </html>
