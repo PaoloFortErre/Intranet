@@ -118,7 +118,7 @@ public class CinemaController extends BaseController {
 		repoCinema.save(cinema);
 		model.addAttribute("cinema", cinema);
 		saveLog("modificato le informazioni di un cinema", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		return "cinema";
+		return "redirect:/myLife/";
 	}
 	
 	@RequestMapping("/delete/{id}")

@@ -124,7 +124,7 @@ public class NewsController extends BaseController {
 		repoOldNews.save(nm);
 		model.addAttribute("news", news);
 		saveLog("modificato una news", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		return "news";
+		return "redirect:/myWork/";
 	}
 	
 	@RequestMapping("/delete/{id}")

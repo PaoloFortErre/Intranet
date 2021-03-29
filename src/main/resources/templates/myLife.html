@@ -117,13 +117,17 @@
 								th:text="${aforisma.frase}"></h1>
 							<p th:text="${aforisma.autore}"></p>
 							<div th:if="${GML}">
-								<form th:action="@{'/aforisma/update/'+${aforisma.id}}"
+								<form th:action="@{'/aforisma/update/'+${aforisma.id}}" 
 									method="get">
-									<button class="btn btn-primary" type="submit" name="modifica">MODIFICA</button>
+									<button type="submit" name="modifica"
+										style="background-color: transparent; border: 0px solid #232323; display:inline-block ">
+										<img src="/view/MyWork/images/edit.png"
+											width="38%">
+									</button>
 								</form>
-								<a th:href="@{/aforisma/new/}"> <img
+								<a th:href="@{/aforisma/new/}" style="display:inline-block "> <img
 									src="/view/MyWork/images/more.png" width="30px"
-									style="margin-bottom: 10px;"></a>
+									style="margin-bottom: 10px; display:inline-block "></a>
 							</div>
 
 						</div>
@@ -138,7 +142,11 @@
 							<div th:if="${GML}">
 								<form th:action="@{'/aforisma/update/'+${aforisma.id}}"
 									method="get">
-									<button class="btn btn-primary" type="submit" name="modifica">MODIFICA</button>
+									<button type="submit" name="modifica"
+										style="background-color: transparent; border: 0px solid #232323; ">
+										<img src="/view/MyWork/images/edit.png"
+											width="38%">
+									</button>
 								</form>
 								<a th:href="@{/aforisma/new/}"> <img
 									src="/view/MyWork/images/more.png" width="30px"
@@ -483,9 +491,8 @@ COLONNA DESTRA
 **** -->
 			<div class="col-sm-4 col-lg-4" id="col-destra">
 				<div th:if="${GML}">
-				
-					<a th:href="@{/evento/newLife/}"> <img
-						src="/view/MyWork/images/more.png" width="30px"
+					<br> <a th:href="@{/evento/newLife/}"> <img
+						src="/view/MyWork/images/moreb.png" width="30px"
 						style="float: right; margin-bottom: 10px;"></a>
 				</div>
 
@@ -500,10 +507,7 @@ COLONNA DESTRA
 					in prossimità</p>
 				<div th:if="${eventilife!=null}">
 					<div th:each="eventilife : ${eventilife}" id="evento1life">
-					<form th:action="@{'/evento/update/'+${eventilife.id}}"
-									method="get">
-									<button class="btn btn-primary" type="submit" name="modifica">MODIFICA</button>
-								</form>
+
 						<div class="caption" th:if="${eventilife.copertina!=null}">
 							<img
 								th:src="'data:image/png;base64,' + ${eventilife.copertina.getImgData(eventilife.copertina.data)}"
@@ -523,9 +527,17 @@ COLONNA DESTRA
 
 						<p th:text="${#dates.format(eventilife.data*1000, 'dd/MM/yyyy')}"
 							style="margin-top: 10px; text-align: right; color: #303030; font-style: italic; font-size: 12px;"></p>
+						<form th:action="@{'/evento/update/'+${eventilife.id}}" th:if="${GML}"
+							method="get">
+							<button type="submit" name="modifica"
+								style="background-color: transparent; border: 0px solid; ">
+								<img src="/view/MyWork/images/editb.png" style="float: left"
+									width="38%">
+							</button>
+						</form>
 					</div>
 					<div th:if="${eventilife1!=null}">
-						<a href=""> <img src="/view/MyLife/images/frecciaeventi2.png"
+						<a href=""> <img src="/view/MyWork/images/freccianera.png"
 							id="frecciaeventi" style="float: right" width="10%">
 						</a>
 					</div>
@@ -553,9 +565,16 @@ COLONNA DESTRA
 
 						<p th:text="${#dates.format(eventilife1.data*1000, 'dd/MM/yyyy')}"
 							style="margin-top: 10px; text-align: right;; color: #303030;"></p>
-
+<form th:action="@{'/evento/update/'+${eventilife1.id}}" th:if="${GML}"
+							method="get">
+							<button type="submit" name="modifica"
+								style="background-color: transparent; border: 0px solid; ">
+								<img src="/view/MyWork/images/editb.png" style="float: left"
+									width="38%">
+							</button>
+						</form>
 						<div>
-							<a href=""> <img src="/view/MyLife/images/frecciaeventi.png"
+							<a href=""> <img src="/view/MyWork/images/freccianerax.png"
 								id="frecciaeventi2" style="float: left" width="10%">
 							</a>
 						</div>
@@ -564,11 +583,13 @@ COLONNA DESTRA
 
 				</div>
 
-				<div th:if="${GML}">
-					<a th:href="@{/cinema/new/}"> <img
-						src="/view/MyWork/images/more.png" width="30px"
-						style="float: right; margin-bottom: 10px;"></a>
+				<div th:if="${GML}"> 
+				<br> <br> <br><br><br>
+					<div><a th:href="@{/cinema/new/}"> <img
+						src="/view/MyWork/images/moreb.png" width="30px"
+						style="float: right; margin-bottom: 10px;"></a></div>
 				</div>
+				
 				<h2 id="culturaPiemonte" style="margin-top: 70px">Film</h2>
 				<p
 					style="color: #303030; text-align: center; font-size: 15px; margin-bottom: 50px;">
@@ -578,7 +599,7 @@ COLONNA DESTRA
 					Non ci sono film da consigliare</p>
 
 				<div th:if="${film1!=null}">
-			
+
 					<img
 						th:src="'data:image/png;base64,' + ${film1.copertina.getImgData(film1.copertina.data)}"
 						class="img-responsive" width="32%"
@@ -620,16 +641,36 @@ COLONNA DESTRA
 								</td>
 							</tr>
 							<tr th:if="${GML}">
-				
-								
+
+
 								<td>
-								<form th:action="@{'/cinema/update/'+${film1.id}}"
-									method="get">	<button class="btn btn-primary" type="submit" name="modifica">MODIFICA</button> </form>  </td> 
-															
-							 <td> <form th:action="@{'/cinema/update/'+${film2.id}}"
-									method="get">	<button class="btn btn-primary" type="submit" name="modifica">MODIFICA</button> </form> </td>
-							 <td> <form th:action="@{'/cinema/update/'+${film3.id}}"
-									method="get">	<button class="btn btn-primary" type="submit" name="modifica">MODIFICA</button> </form> </td>
+									<form th:action="@{'/cinema/update/'+${film1.id}}" th:if="${GML}" method="get">
+										<button type="submit" name="modifica"
+											style="background-color: transparent; border: 0px solid #232323; ">
+											<img src="/view/MyWork/images/editb.png" 
+												width="38%">
+										</button>
+									</form>
+								</td>
+
+								<td>
+									<form th:action="@{'/cinema/update/'+${film2.id}}" th:if="${GML}" method="get">
+										<button type="submit" name="modifica"
+											style="background-color: transparent; border: 0px solid #232323; ">
+											<img src="/view/MyWork/images/editb.png" 
+												width="38%">
+										</button>
+									</form>
+								</td>
+								<td>
+									<form th:action="@{'/cinema/update/'+${film3.id}}" th:if="${GML}" method="get">
+										<button type="submit" name="modifica"
+											style="background-color: transparent; border: 0px solid #232323; ">
+											<img src="/view/MyWork/images/editb.png" 
+												width="38%">
+										</button>
+									</form>
+								</td>
 							</tr>
 						</table>
 					</div>
@@ -637,7 +678,7 @@ COLONNA DESTRA
 				<div>
 					<div th:if="${GML}">
 						<a th:href="@{/libro/new}"> <img
-							src="/view/MyWork/images/more.png" width="30px"
+							src="/view/MyWork/images/moreb.png" width="30px"
 							style="float: right; margin-bottom: 10px;"></a>
 					</div>
 					<h2 id="culturaPiemonte" style="margin-top: 70px">Libri</h2>
@@ -658,11 +699,17 @@ COLONNA DESTRA
 								<p
 									style="FONT-size: 10px; font-style: italic; text-align: right;; color: #303030;"
 									th:text="${libri.autore}"></p>
-									
-									<div th:if="${GML}"><form th:action="@{'/libro/update/'+${libri.id}}"
-									method="get">	<button class="btn btn-primary" type="submit" name="modifica">MODIFICA</button> </form> 
-									
-									</div></td>
+
+								<div th:if="${GML}">
+									<form th:action="@{'/libro/update/'+${libri.id}}"  th:if="${GML}"method="get">
+										<button type="submit" name="modifica"
+											style="background-color: transparent; border: 0px solid #232323; float: right;">
+											<img src="/view/MyWork/images/editb.png" style="float: right"
+												width="38%">
+										</button>
+									</form>
+
+								</div></td>
 						</tr>
 						<tr>
 							<td><img
@@ -673,12 +720,16 @@ COLONNA DESTRA
 								<p
 									style="FONT-size: 10px; font-style: italic; text-align: right; color: #303030;"
 									th:text="${libri1.autore}"></p>
-									<div th:if="${GML}"><form th:action="@{'/libro/update/'+${libri1.id}}"
-									method="get">	<button class="btn btn-primary" type="submit" name="modifica">MODIFICA</button> </form> 
-									
-									</div>
-									
-									</td>
+								<div th:if="${GML}">
+									<form th:action="@{'/libro/update/'+${libri1.id}}"  th:if="${GML}" method="get">
+										<button type="submit" name="modifica"
+											style="background-color: transparent; border: 0px solid #232323; float: right;">
+											<img src="/view/MyWork/images/editb.png" style="float: right"
+												width="38%">
+										</button>
+									</form>
+
+								</div></td>
 						</tr>
 					</table>
 				</div>

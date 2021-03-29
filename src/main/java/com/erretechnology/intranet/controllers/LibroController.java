@@ -110,7 +110,7 @@ public class LibroController extends BaseController {
 		repoLibro.save(libro);
 		model.addAttribute("libro", libro);
 		saveLog("modificato le informazioni di un libro", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		return "libro";
+		return "redirect:/myLife/";
 	}
 	
 	@RequestMapping("/delete/{id}")

@@ -138,7 +138,7 @@ public class ClienteController extends BaseController{
 		repoOldCliente.save(cm);
 		model.addAttribute("cliente", cliente);
 		saveLog("modificato le informazioni di un cliente", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		return "cliente";
+		return "redirect:/myWork/";
 	}
 	
 	@RequestMapping("/delete/{id}")
