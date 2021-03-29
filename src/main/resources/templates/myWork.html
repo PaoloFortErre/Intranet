@@ -206,8 +206,13 @@ table, th, td {
 						<a th:href="@{/podcast/}"> <img
 							src="/view/MyWork/images/more.png" width="30px"
 							style="float: right; margin-bottom: 10px; margin-left: 1px"></a>
-					</div>
+					</div>	
+					<form  action="" th:if="${GMW}" method="get">
+							<button class="btn btn-primary" type="submit" name="modifica">MODIFICA</button>
+						</form>
 					<h2
+					
+				
 						style="line-height: 45px; display: inline-block; font-weight: 900;">
 						I podcast di <span style="color: #FFC931"><br>Rosario</span>
 					</h2>
@@ -221,7 +226,7 @@ table, th, td {
 								th:src="'data:audio/mp3;base64,' + ${primoPodcast.getAudioData(primoPodcast.podcast)}"
 								type="audio/ogg">
 						</audio>
-						<div th:if="${altriPodcast!=null}"> <a href="" id="podcast" onclick="mostraPodcast()"
+						<div th:if="${altriPodcast!=null}"> <a href="" id="podcast" onclick=""
 								style="text-decoration: none; color: #f3f3f3; font-size: 13px;">
 								<br>Vedi altri <img
 								src="/view/MyWork/images/frecciasotto.png" width="30px"
@@ -353,8 +358,13 @@ table, th, td {
 					<p style="text-align: center;" th:if="${sondaggi==null}">
 						<br> Al momento non ci sono sondaggi
 					</p>
+					<div th:each="sondaggio: ${sondaggi}">
+					<form  th:action="@{'/modificaSondaggi/'+${sondaggio.id}}" th:if="${GMW}" method="get">
+							<button class="btn btn-primary" type="submit" name="modifica">MODIFICA</button>
+						</form>
+					<table class="nuoviClienti" >
 					
-					<table class="nuoviClienti" th:each="sondaggio: ${sondaggi}">
+					
 						<th:block>
 							<tr th:if="${sondaggio.visibile}">
 								<td style="text-align: left;"><a
@@ -370,6 +380,7 @@ table, th, td {
 							</tr>
 						</th:block>
 					</table>
+					</div>
 					<div th:if="${sondaggi1!=null}">
 						<a href="" id="mostraSondaggi" onclick="mostraSondaggi()"
 							style="text-decoration: none; color: #f3f3f3; font-size: 13px;">
@@ -581,6 +592,9 @@ table, th, td {
 
 					<div class="row" style="padding: 10px;" th:if="${news!=null}"
 						th:each="news:${news}">
+<form  th:action="@{'/news/update/'+${news.id}}" th:if="${GMW}" method="get">
+							<button class="btn btn-primary" type="submit" name="modifica">MODIFICA</button>
+						</form>
 
 						<div class="col-sm-8 col-md-8 col-lg-8">
 							<h3 style="font-weight: 900" th:text="${news.titolo}"></h3>

@@ -58,8 +58,8 @@
 </style>
 
 </head>
-<body ng-app="">
-
+<body ng-app=""
+	th:with="GML = ${#authorization.expression('hasAuthority(''GML'')')}">
 	<div class="container-fluid">
 
 
@@ -116,6 +116,15 @@
 							<h1 class="font-caption" style="font-weight: 900"
 								th:text="${aforisma.frase}"></h1>
 							<p th:text="${aforisma.autore}"></p>
+							<div th:if="${GML}">
+								<form th:action="@{'/aforisma/update/'+${aforisma.id}}"
+									method="get">
+									<button class="btn btn-primary" type="submit" name="modifica">MODIFICA</button>
+								</form>
+								<a th:href="@{/aforisma/new/}"> <img
+									src="/view/MyWork/images/more.png" width="30px"
+									style="margin-bottom: 10px;"></a>
+							</div>
 
 						</div>
 					</div>
@@ -126,6 +135,15 @@
 							<h1 class="font-caption" style="font-weight: 900"
 								th:text="${aforisma2.frase}"></h1>
 							<p th:text="${aforisma.autore}"></p>
+							<div th:if="${GML}">
+								<form th:action="@{'/aforisma/update/'+${aforisma.id}}"
+									method="get">
+									<button class="btn btn-primary" type="submit" name="modifica">MODIFICA</button>
+								</form>
+								<a th:href="@{/aforisma/new/}"> <img
+									src="/view/MyWork/images/more.png" width="30px"
+									style="margin-bottom: 10px;"></a>
+							</div>
 
 						</div>
 					</div>
@@ -133,41 +151,55 @@
 			</div>
 		</div>
 	</div>
+	</div>
 	<!-- ************
 			FINE HEADER
 			***************** -->
-	<div class="container"
-		th:with="GML = ${#authorization.expression('hasAuthority(''GML'')')}">
+	<div class="container">
 
 
-	
+
 
 		<div class="row" style="margin-top: 5%">
-		
-		
+
+
 			<!-- ****
 				COLONNA SINISTRA
 				**** -->
-		<div class="col-xs-2 col-sm-2 col-lg-2">
-		<div class="col-sinistra">
-		
-		<img src="/view/MyLife/images/tori.jpg" width="100%" style="border-radius: 6px 6px 0px 0px">
-			<img
-								th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
-								alt="utente" title="utente" class="immagineUtente"
-								style="margin: 0 auto; position: absolute; left: 32%; top: 57px;">
-	  <br> <br> <br> <br>
-	  <h4 Style="color: #303030; display: inline-block; text-align: center; margin-left: 17px;" th:text="${utenteDati.nome}"></h4>
-	  <h4 Style="color: #303030; display: inline-block; text-align: center;" th:text="${utenteDati.cognome}"></h4>
-	  <br> <p th:text="${utenteDati.settore.getNomeSettore}" style="text-align: center; color: #303030; font-style: italic;"> </p><br>
-	  <div id="prof"> <a th:href="@{/profile/}" id="gestisciProfilo"> Gestisci il tuo profilo</a></div>
-	  	  <div id="prof"> <a th:href="@{/profile/}" id="gestisciProfilo"> Vedi il profilo dei tuoi colleghi</a></div>
-	  
-			
-		</div>
-		</div>
-		
-		
+			<div class="col-xs-2 col-sm-2 col-lg-2">
+				<div class="col-sinistra">
+
+					<img src="/view/MyLife/images/tori.jpg" width="100%"
+						style="border-radius: 6px 6px 0px 0px"> <img
+						th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
+						alt="utente" title="utente" class="immagineUtente"
+						style="margin: 0 auto; position: absolute; left: 32%; top: 57px;">
+					<br> <br> <br> <br>
+					<h4
+						Style="color: #303030; display: inline-block; text-align: center; margin-left: 17px;"
+						th:text="${utenteDati.nome}"></h4>
+					<h4
+						Style="color: #303030; display: inline-block; text-align: center;"
+						th:text="${utenteDati.cognome}"></h4>
+					<br>
+					<p th:text="${utenteDati.settore.getNomeSettore}"
+						style="text-align: center; color: #303030; font-style: italic;">
+					</p>
+					<br>
+					<div id="prof">
+						<a th:href="@{/profile/}" id="gestisciProfilo"> Gestisci il
+							tuo profilo</a>
+					</div>
+					<div id="prof">
+						<a th:href="@{/profile/}" id="gestisciProfilo"> Vedi il
+							profilo dei tuoi colleghi</a>
+					</div>
+
+
+				</div>
+			</div>
+
+
 			<div class="col-sm-6 col-lg-6"
 				th:with="UB = ${#authorization.expression('hasAuthority(''UB'')')},
 				DS = ${#authorization.expression('hasAuthority(''DS'')')}">
@@ -192,7 +224,8 @@
 										required style="width: 98%" placeholder="Scrivi un post..."
 										id="post"></textarea>
 
-									<button type="button" data-toggle="modal" style="background-color: #E8E7E7; color: #303030; border: 0px solid #E8E7E7"
+									<button type="button" data-toggle="modal"
+										style="background-color: #E8E7E7; color: #303030; border: 0px solid #E8E7E7"
 										data-target="#myModal">
 										Immagine<img src="/view/MyLife/images/img.png"
 											style="width: 30px; height: 30px; display: inline-block; margin-left: 5px;">
@@ -229,10 +262,10 @@
 												<span aria-hidden="true" style="color: red">&times;</span>
 											</button>
 											<img id="previewImg" src="#" alt="Immagine Caricata"
-											width="70%" height="70%" />
+												width="70%" height="70%" />
 										</div>
-										
-										
+
+
 
 									</div>
 
@@ -258,189 +291,213 @@
 
 				</div>
 				<hr>
-				<div class="col-sinistra" style="margin-top: 20px" th:each="post:${messaggi}">
+				<div class="col-sinistra" style="margin-top: 20px"
+					th:each="post:${messaggi}">
 					<div class="container-fluid">
 						<div class="row">
 
 							<!-- INFORMAZIONI SU UTENTE E POST -->
 
-							<div  style="margin-top: 30px;">
+							<div style="margin-top: 30px;">
 								<!-- FOTO PROFILO -->
 								<div class="row">
-								<div class="col-sm-3 col-md-3 col-lg-2">
-									<img
-										th:src="'data:image/jpeg;base64,' + ${post.autore.immagine.getImgData(post.autore.immagine.data)}"
-										title="utente" class="immagineUtente" style="margin: 20px; margin-top: 7px">
-										<img th:src="'data:image/png;base64,' + ${utenteDati.settore.getImgData(utenteDati.settore.logoBlack)}" 
-									width="80%" style="opacity: 0.8; margin: 20px; margin-top: -7px" id="imgSettore">
-								</div>
+									<div class="col-sm-3 col-md-3 col-lg-2">
+										<img
+											th:src="'data:image/jpeg;base64,' + ${post.autore.immagine.getImgData(post.autore.immagine.data)}"
+											title="utente" class="immagineUtente"
+											style="margin: 20px; margin-top: 7px"> <img
+											th:src="'data:image/png;base64,' + ${utenteDati.settore.getImgData(utenteDati.settore.logoBlack)}"
+											width="80%"
+											style="opacity: 0.8; margin: 20px; margin-top: -7px"
+											id="imgSettore">
+									</div>
 
-								
+
 									<div class="col-sm-9 col-md-9 col-lg-9">
-									<h4 th:text="${post.autore.nome}"
-										style="display: inline-block; color: #303030;font-weight: 600 ">
-									</h4>
-									
-									<h4
-										style="display: inline-block;color: #303030; font-weight: 600 ;"
-										th:text="${post.autore.cognome}"></h4>
-									<!-- ELIMINA POST -->
+										<h4 th:text="${post.autore.nome}"
+											style="display: inline-block; color: #303030; font-weight: 600">
+										</h4>
 
-									<div
-										th:if="(${DS} or ${post.autore.id} == ${session.id}) and ${UB}"
-										style="display: inline-block; color: #303030;">
+										<h4
+											style="display: inline-block; color: #303030; font-weight: 600;"
+											th:text="${post.autore.cognome}"></h4>
+										<!-- ELIMINA POST -->
 
-										<form th:action="@{/myLife/deletePost(id=${post.id})}"
-											method="post">
-											<button name="button" type="submit" class="buttonAzioni"
-												style="display: inline-block; background-color: #E8E7E7; color: white; margin-left: 290px; border: 0px solid #303030"> <img 
-												src="/view/MyLife/images/trash.png" width="45%"></button>
-										</form>
-									</div>
+										<div
+											th:if="(${DS} or ${post.autore.id} == ${session.id}) and ${UB}"
+											style="display: inline-block; color: #303030;">
 
-									<!-- MODIFICA POST -->
+											<form th:action="@{/myLife/deletePost(id=${post.id})}"
+												method="post">
+												<button name="button" type="submit" class="buttonAzioni"
+													style="display: inline-block; background-color: #E8E7E7; color: white; margin-left: 290px; border: 0px solid #303030">
+													<img src="/view/MyLife/images/trash.png" width="45%">
+												</button>
+											</form>
+										</div>
 
-									<div th:if="(${post.autore.id} == ${session.id}) and ${UB}"
-										style="display: inline-block;">
-										<form th:action="@{/myLife/editPost(id=${post.id})}"
-											method="post">
-											<button name="button" type="submit"
-												style="display: inline-block; background-color: #E8E7E7; color: white; margin-left: -10px;border: 0px solid #303030"
-												th:onclick="'showAreaPost(' + ${post.id} + ')'"
-												class="buttonAzioni">
-	<img src="/view/MyLife/images/edit.png" width="45%"></button>
+										<!-- MODIFICA POST -->
 
-											<textarea th:class="postModificato + ${post.id}" name="testo"
-												placeholder="Modifica post" cols="50" rows="2.5" id="post"
-												style="display: none" required></textarea>
-										</form>
-									</div>
-									<p
-										style="font-size: 12px; font-style: italic; color: #303030; margin-top: -18px; "
-										th:text="${#dates.format(post.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"></p> <br>
-									
+										<div th:if="(${post.autore.id} == ${session.id}) and ${UB}"
+											style="display: inline-block;">
+											<form th:action="@{/myLife/editPost(id=${post.id})}"
+												method="post">
+												<button name="button" type="submit"
+													style="display: inline-block; background-color: #E8E7E7; color: white; margin-left: -10px; border: 0px solid #303030"
+													th:onclick="'showAreaPost(' + ${post.id} + ')'"
+													class="buttonAzioni">
+													<img src="/view/MyLife/images/edit.png" width="45%">
+												</button>
+
+												<textarea th:class="postModificato + ${post.id}"
+													name="testo" placeholder="Modifica post" cols="50"
+													rows="2.5" id="post" style="display: none" required></textarea>
+											</form>
+										</div>
+										<p
+											style="font-size: 12px; font-style: italic; color: #303030; margin-top: -18px;"
+											th:text="${#dates.format(post.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"></p>
+										<br>
+
 									</div>
 									<!--  <img th:src="'data:image/png;base64,' + ${utenteDati.settore.getImgData(utenteDati.settore.logo)}" 
 									width="14%" style="opacity: 0.8;">-->
-									</div>
-									<!-- CONTENUTO DEL POST -->
-									<div>
-										
-										<div style="width: 100%; height: 50px; padding-left: 17px; padding-right: 17px;">
-										<p style="margin-right: 15px; font-size: 18px; color: #303030; "
+								</div>
+								<!-- CONTENUTO DEL POST -->
+								<div>
+
+									<div
+										style="width: 100%; height: 50px; padding-left: 17px; padding-right: 17px;">
+										<p
+											style="margin-right: 15px; font-size: 18px; color: #303030;"
 											th:text="${post.testo}">
 											<a href="">vedi altro</a>
 										</p>
-										</div>
-
-
-										<div th:if="${post.immagine!=null}">
-											<img
-												th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(post.immagine.data)}"
-												width="100%" height="40%">
-										</div>
-
-
-										<!-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ COMMENTO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-->
-										<div class="col-sm-5 col-md-5 col-lg-5"
-											style="margin-top: 10px; margin-left: 15px;"
-											th:each="commento : ${post.setCommenti}"
-											th:if="${commento.visibile}" id="commento">
-											<table id="tableCommento">
-												<tr>
-													<td>
-													<img
-												th:src="'data:image/jpeg;base64,' + ${commento.autore.immagine.getImgData(commento.autore.immagine.data)}"
-												width="16%" style="border-radius: 50%" >
-													
-														<p class="nomeCommento" th:text="${commento.autore.nome}">
-														</p>
-														<p class="nomeCommento"
-															th:text="${commento.autore.cognome}"></p>
-														<p
-															style="display: inline-block; font-style: italic; font-size: 10px; color: #303030;"
-															th:text="${#dates.format(commento.timestamp*1000, 'dd/MM/yyyy, HH:mm')}">
-														</p>
-													</td>
-													<td
-														th:if="(${DS} or ${commento.autore.id} == ${session.id} or ${post.autore.id} == ${session.id}) and ${UB}"><br><br><br>
-														<form
-															th:action="@{/myLife/deleteCommento(id=${commento.id})}"
-															method="post">
-															<button name="button" type="submit" id="bottoneElimina"><img src="/view/MyLife/images/trash.png" width="300%"></button>
-														</form>
-													</td>
-
-													<td
-														th:if="${commento.autore.id} == ${session.id} and ${UB}">
-														<form
-															th:action="@{/myLife/editCommento(id=${commento.id})}"
-															method="post">
-															<button name="button" type="submit"
-																th:onclick="'showAreaCommento(' + ${commento.id} + ')'"
-																id="bottoneModifica"><img src="/view/MyLife/images/edit.png" width="100%"></button>
-															<textarea th:class="commentoModificato + ${commento.id}"
-																name="testo" id="post" placeholder="Modifica commento"
-																 rows="2.5" style="display: none" required></textarea>
-														</form>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<p th:text="${commento.testo}" style="color: #303030; margin-left: 60px;"></p>
-													</td>
-												</tr>
-											</table>
-										</div>
-										<br>
-										<div th:if="${UB}">
-											<form th:action="@{/myLife/addCommento(idPost=${post.id})}"
-												method="post">
-												<label for="testo"></label>
-												<textarea id="post" name="testo" rows="2" cols="30"
-													style="width: 93%; padding: 8px; margin-left: 15px; color: #303030;"
-													placeholder="Lascia un commento..." required></textarea>
-												<input type="submit" value="Commenta" id="submitPost"
-													style="margin-bottom: 50px; font-size: 13px; " />
-											
-											</form>
-										</div>
 									</div>
-								
-								
+
+
+									<div th:if="${post.immagine!=null}">
+										<img
+											th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(post.immagine.data)}"
+											width="100%" height="40%">
+									</div>
+
+
+									<!-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ COMMENTO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-->
+									<div class="col-sm-5 col-md-5 col-lg-5"
+										style="margin-top: 10px; margin-left: 15px;"
+										th:each="commento : ${post.setCommenti}"
+										th:if="${commento.visibile}" id="commento">
+										<table id="tableCommento">
+											<tr>
+												<td><img
+													th:src="'data:image/jpeg;base64,' + ${commento.autore.immagine.getImgData(commento.autore.immagine.data)}"
+													width="16%" style="border-radius: 50%">
+
+													<p class="nomeCommento" th:text="${commento.autore.nome}">
+													</p>
+													<p class="nomeCommento"
+														th:text="${commento.autore.cognome}"></p>
+													<p
+														style="display: inline-block; font-style: italic; font-size: 10px; color: #303030;"
+														th:text="${#dates.format(commento.timestamp*1000, 'dd/MM/yyyy, HH:mm')}">
+													</p></td>
+												<td
+													th:if="(${DS} or ${commento.autore.id} == ${session.id} or ${post.autore.id} == ${session.id}) and ${UB}"><br>
+													<br> <br>
+													<form
+														th:action="@{/myLife/deleteCommento(id=${commento.id})}"
+														method="post">
+														<button name="button" type="submit" id="bottoneElimina">
+															<img src="/view/MyLife/images/trash.png" width="300%">
+														</button>
+													</form></td>
+
+												<td th:if="${commento.autore.id} == ${session.id} and ${UB}">
+													<form
+														th:action="@{/myLife/editCommento(id=${commento.id})}"
+														method="post">
+														<button name="button" type="submit"
+															th:onclick="'showAreaCommento(' + ${commento.id} + ')'"
+															id="bottoneModifica">
+															<img src="/view/MyLife/images/edit.png" width="100%">
+														</button>
+														<textarea th:class="commentoModificato + ${commento.id}"
+															name="testo" id="post" placeholder="Modifica commento"
+															rows="2.5" style="display: none" required></textarea>
+													</form>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<p th:text="${commento.testo}"
+														style="color: #303030; margin-left: 60px;"></p>
+												</td>
+											</tr>
+										</table>
+									</div>
+									<br>
+									<div th:if="${UB}">
+										<form th:action="@{/myLife/addCommento(idPost=${post.id})}"
+											method="post">
+											<label for="testo"></label>
+											<textarea id="post" name="testo" rows="2" cols="30"
+												style="width: 93%; padding: 8px; margin-left: 15px; color: #303030;"
+												placeholder="Lascia un commento..." required></textarea>
+											<input type="submit" value="Commenta" id="submitPost"
+												style="margin-bottom: 50px; font-size: 13px;" />
+
+										</form>
+									</div>
+								</div>
+
+
 							</div>
 						</div>
 					</div>
 				</div>
-				<div th:if="${messaggi.totalPages>0}" style="background-color: #303030; margin-top: -10px;" >
-				
-				<p style="text-align: center"> Pages <span th:text="${pageNumber}" ></span>  <span th:text="${pageNumber}"></span></p>
-							<table style="margin: 0 auto; margin-bottom: 20px; background-color: #303030" >	<tr> <td th:each="pageNumber : ${pageNumbers}"><a th:href="@{/myLife/(page=${pageNumber})}"
-								
-								th:text="${pageNumber}"	th:class="${pageNumber==messaggi.number + 1 } ? active" style="color: #F3F3F3; font-size: 18px; padding: 10px;  ">
-								
-							</a><br><br>
-								 </td></tr></table> </div>
+				<div th:if="${messaggi.totalPages>0}"
+					style="background-color: #303030; margin-top: -10px;">
+
+					<p style="text-align: center">
+						Pages <span th:text="${pageNumber}"></span> <span
+							th:text="${pageNumber}"></span>
+					</p>
+					<table
+						style="margin: 0 auto; margin-bottom: 20px; background-color: #303030">
+						<tr>
+							<td th:each="pageNumber : ${pageNumbers}"><a
+								th:href="@{/myLife/(page=${pageNumber})}"
+								th:text="${pageNumber}"
+								th:class="${pageNumber==messaggi.number + 1 } ? active"
+								style="color: #F3F3F3; font-size: 18px; padding: 10px;"> </a><br>
+								<br></td>
+						</tr>
+					</table>
+				</div>
 			</div>
-			
-			
+
+
 			<!-- ****s
 COLONNA DESTRA
 **** -->
-			<div class="col-sm-4 col-lg-4" id="col-destra" >
-					<div th:if="${GML}">
-						<a th:href="@{/evento/newLife/}"> <img
-							src="/view/MyWork/images/more.png" width="30px"
-							style="float: right; margin-bottom: 10px;"></a>
-					</div>
+			<div class="col-sm-4 col-lg-4" id="col-destra">
+				<div th:if="${GML}">
+					<a th:href="@{/evento/newLife/}"> <img
+						src="/view/MyWork/images/more.png" width="30px"
+						style="float: right; margin-bottom: 10px;"></a>
+				</div>
 
-					<h2 id="culturaPiemonte" style="margin-top: 30px">Cultura in
-						Piemonte</h2>
+				<h2 id="culturaPiemonte" style="margin-top: 30px">Cultura in
+					Piemonte</h2>
 
-					<p style="color: #303030; text-align: center; font-size: 15px; margin-bottom: 50px;">
-						Se sei un tipo da eventi in città o da sagre:</p>
-					<p th:if="${eventilife==null}" style="text-align: center; color: #303030;"> Non ci sono eventi in prossimità </p> 
-					<div th:if="${eventilife!=null}">
+				<p
+					style="color: #303030; text-align: center; font-size: 15px; margin-bottom: 50px;">
+					Se sei un tipo da eventi in città o da sagre:</p>
+				<p th:if="${eventilife==null}"
+					style="text-align: center; color: #303030;">Non ci sono eventi
+					in prossimità</p>
+				<div th:if="${eventilife!=null}">
 					<div th:each="eventilife : ${eventilife}" id="evento1life">
 						<div class="caption" th:if="${eventilife.copertina!=null}">
 							<img
@@ -453,14 +510,14 @@ COLONNA DESTRA
 
 						<img src="/view/MyWork/images/location.jpg" width="9%" height="9%">
 						<p th:text="${eventilife.indirizzo.via}"
-							style="margin-top: 10px; text-align: left; display: inline-block; ;color: #303030;"></p>
+							style="margin-top: 10px; text-align: left; display: inline-block;; color: #303030;"></p>
 						<p style="display: inline-block; color: #303030;">-</p>
 
 						<p th:text="${eventilife.indirizzo.citta}"
 							style="margin-top: 10px; text-align: left; display: inline-block; font-weight: 900; color: #303030;"></p>
 
 						<p th:text="${#dates.format(eventilife.data*1000, 'dd/MM/yyyy')}"
-							style="margin-top: 10px; text-align: right;color: #303030; font-style: italic; font-size: 12px;"></p>
+							style="margin-top: 10px; text-align: right; color: #303030; font-style: italic; font-size: 12px;"></p>
 					</div>
 					<div th:if="${eventilife1!=null}">
 						<a href=""> <img src="/view/MyLife/images/frecciaeventi2.png"
@@ -484,13 +541,13 @@ COLONNA DESTRA
 
 						<img src="/view/MyWork/images/location.jpg" width="9%" height="9%">
 						<p th:text="${eventilife1.indirizzo.via}"
-							style="margin-top: 10px; text-align: left; display: inline-block;color: #303030;"></p>
+							style="margin-top: 10px; text-align: left; display: inline-block; color: #303030;"></p>
 						<p style="display: inline-block;">-</p>
 						<p th:text="${eventilife1.indirizzo.citta}"
-							style="margin-top: 10px; text-align: left; display: inline-block; font-weight: 900;color: #303030;"></p>
+							style="margin-top: 10px; text-align: left; display: inline-block; font-weight: 900; color: #303030;"></p>
 
 						<p th:text="${#dates.format(eventilife1.data*1000, 'dd/MM/yyyy')}"
-							style="margin-top: 10px; text-align: right; ;color: #303030;"></p>
+							style="margin-top: 10px; text-align: right;; color: #303030;"></p>
 
 						<div>
 							<a href=""> <img src="/view/MyLife/images/frecciaeventi.png"
@@ -502,25 +559,32 @@ COLONNA DESTRA
 
 				</div>
 
-					<div th:if="${GML}">
-						<a th:href="@{/cinema/new/}"> <img
-							src="/view/MyWork/images/more.png" width="30px"
-							style="float: right; margin-bottom: 10px;"></a>
-					</div>
-					<h2 id="culturaPiemonte" style="margin-top: 70px">Film</h2>
-					<p style="color: #303030; text-align: center; font-size: 15px; margin-bottom: 50px;">
-						Se sei un tipo da cinema o serie TV:</p>
-					<p th:if="${film1==null}" style="text-align: center;color: #303030; font-style: italic; font-size: 12px;"> Non ci sono film da consigliare </p> 
-						
-					<div th:if="${film1!=null}"><img
+				<div th:if="${GML}">
+					<a th:href="@{/cinema/new/}"> <img
+						src="/view/MyWork/images/more.png" width="30px"
+						style="float: right; margin-bottom: 10px;"></a>
+				</div>
+				<h2 id="culturaPiemonte" style="margin-top: 70px">Film</h2>
+				<p
+					style="color: #303030; text-align: center; font-size: 15px; margin-bottom: 50px;">
+					Se sei un tipo da cinema o serie TV:</p>
+				<p th:if="${film1==null}"
+					style="text-align: center; color: #303030; font-style: italic; font-size: 12px;">
+					Non ci sono film da consigliare</p>
+
+				<div th:if="${film1!=null}">
+					<img
 						th:src="'data:image/png;base64,' + ${film1.copertina.getImgData(film1.copertina.data)}"
-						class="img-responsive" width="32%" style="display: inline; ;color: #303030;">
-					<img th:if="${film2!=null}"
+						class="img-responsive" width="32%"
+						style="display: inline;; color: #303030;"> <img
+						th:if="${film2!=null}"
 						th:src="'data:image/png;base64,' + ${film2.copertina.getImgData(film2.copertina.data)}"
-						class="img-responsive" width="32%" style="display: inline; ;color: #303030;">
-					<img th:if="${film3!=null}"
+						class="img-responsive" width="32%"
+						style="display: inline;; color: #303030;"> <img
+						th:if="${film3!=null}"
 						th:src="'data:image/png;base64,' + ${film3.copertina.getImgData(film3.copertina.data)}"
-						class="img-responsive" width="33%" style="display: inline; ;color: #303030;">
+						class="img-responsive" width="33%"
+						style="display: inline;; color: #303030;">
 
 					<div id="didascalieFilm">
 						<table id="film">
@@ -559,27 +623,32 @@ COLONNA DESTRA
 							style="float: right; margin-bottom: 10px;"></a>
 					</div>
 					<h2 id="culturaPiemonte" style="margin-top: 70px">Libri</h2>
-					<p style="color: #303030; text-align: center; font-size: 15px; margin-bottom: 50px;">
+					<p
+						style="color: #303030; text-align: center; font-size: 15px; margin-bottom: 50px;">
 						Se sei un tipo dal classico libro cartaceo o da Kindle:</p>
-					<p th:if="${libri==null}" style="text-align: center ;color: #303030; font-style: italic; font-size: 12px;"> Non ci sono libri da consigliare </p> 
-					
+					<p th:if="${libri==null}"
+						style="text-align: center; color: #303030; font-style: italic; font-size: 12px;">
+						Non ci sono libri da consigliare</p>
+
 					<table id="libri" th:if="${libri!=null}">
 						<tr>
 							<td><img
 								th:src="'data:image/png;base64,' + ${libri.copertina.getImgData(libri.copertina.data)}"
 								width="135px" style="padding: 5px;"></td>
-							<td><p th:text="${libri.titolo}" STYLE="margin-left: 5px; ;color: #303030;"></p>
-								<p style="FONT-size: 10px; font-style: italic; text-align: right; ;color: #303030;"
+							<td><p th:text="${libri.titolo}"
+									STYLE="margin-left: 5px;; color: #303030;"></p>
+								<p
+									style="FONT-size: 10px; font-style: italic; text-align: right;; color: #303030;"
 									th:text="${libri.autore}"></p></td>
 						</tr>
 						<tr>
 							<td><img
 								th:src="'data:image/png;base64,' + ${libri1.copertina.getImgData(libri1.copertina.data)}"
 								width="135px" style="padding: 5px;"></td>
-							<td><p th:text="${libri1.titolo}" STYLE="margin-left: 5px; ;color: #303030;">
-								</p>
+							<td><p th:text="${libri1.titolo}"
+									STYLE="margin-left: 5px;; color: #303030;"></p>
 								<p
-									style="FONT-size: 10px; font-style: italic; text-align: right ;color: #303030;" 
+									style="FONT-size: 10px; font-style: italic; text-align: right; color: #303030;"
 									th:text="${libri1.autore}"></p></td>
 						</tr>
 					</table>
@@ -664,26 +733,26 @@ COLONNA DESTRA
 			document.getElementsByClassName('postModificato' + id)[0].style.display = "block";
 
 		}
-		
-		function readURL(input) {
-			  if (input.files && input.files[0]) {
-			    var reader = new FileReader();
-			    
-			    reader.onload = function(e) {
-			      $('#previewImg').attr('src', e.target.result);
-			      $('#previewImg').show();
-			    }
-			    $('#delete').show();
-			    reader.readAsDataURL(input.files[0]); // convert to base64 string
-			  }
-			}
 
-			$("#img").change(function() {
-			  document.getElementById("post").required = false;
-			  readURL(this);
-			});
-			
-		function remove(){
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+					$('#previewImg').attr('src', e.target.result);
+					$('#previewImg').show();
+				}
+				$('#delete').show();
+				reader.readAsDataURL(input.files[0]); // convert to base64 string
+			}
+		}
+
+		$("#img").change(function() {
+			document.getElementById("post").required = false;
+			readURL(this);
+		});
+
+		function remove() {
 			$('#img').val("");
 			$('#previewImg').val("");
 			$('#delete').hide();

@@ -79,9 +79,10 @@ public class MyWorkController extends BaseController {
 		
 		List<Podcast> listPodcast = servicePodcast.getAll();
 		if(listPodcast.size() != 0) {
-			Podcast primoPodcast = listPodcast.get(0);
+			Podcast primoPodcast = listPodcast.get(listPodcast.size()-1);
 			mav.addObject("primoPodcast", primoPodcast);
-			listPodcast.remove(0);
+			listPodcast.remove(listPodcast.size()-1);
+			System.out.println(listPodcast.stream().limit(3).collect(Collectors.toList()).size() + " numero podcast");
 			mav.addObject("altriPodcast", listPodcast.stream().limit(3).collect(Collectors.toList()));
 		}
 		
