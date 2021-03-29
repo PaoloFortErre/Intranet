@@ -49,7 +49,7 @@
 			margin: auto;margin-top: 150px;
 			padding: 15px;">
 
-			<h4 style="text-align: left; margin-bottom:5px;">Modifica l'evento in <span style="color: #ECF260;;">"MyWork"</span>
+			<h4 style="text-align: left; margin-bottom:5px;">Modifica il cliente in <span style="color: #ECF260;;">"MyWork"</span>
 			</h4 ><hr style=" background-color: #F3F3F3; ">
 
 
@@ -60,12 +60,12 @@
 			</p>
 			<form th:action="@{/cliente/update/{id}(id = ${cliente.id})}" th:object="${cliente}" method="post" enctype="multipart/form-data">
 			  <label for="nome">Nome:</label><br>
-			  <input type="text" id="nome" name="nome" th:field="*{nome}"><br>
+			  <input type="text" id="nome" name="nome" th:field="*{nome}" style="color: black"><br><br>
 			  <label for="dataInizio">Data inizio:</label><br>
-			  <input type="month" id="dataInizio" name="dataInizio" th:value="${#dates.format(date, 'yyyy-MM')}"><br>
-			  <input type="file" name="immagine" accept="image/png, image/jpeg"/>
-			  <br>
-			  <input type="submit" value="Pubblica">
+			  <input type="month" id="dataInizio" name="dataInizio" th:value="${#dates.format(date, 'yyyy-MM')}" style="color: black"><br><br>
+				<label for="immagine">Modifica foto</label><br>
+			  <input type="file" name="immagine" accept="image/png, image/jpeg"/><br><br>
+			  <input type="submit" value="Pubblica" style="color: black">
 			</form>
 		</div>
 
