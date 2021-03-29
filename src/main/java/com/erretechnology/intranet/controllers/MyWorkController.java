@@ -82,7 +82,7 @@ public class MyWorkController extends BaseController {
 			Podcast primoPodcast = listPodcast.get(0);
 			mav.addObject("primoPodcast", primoPodcast);
 			listPodcast.remove(0);
-			mav.addObject("altriPodcast", listPodcast);
+			mav.addObject("altriPodcast", listPodcast.stream().limit(3).collect(Collectors.toList()));
 		}
 		
 		List<Cliente> clienti = repoCliente.findLimit(3);
