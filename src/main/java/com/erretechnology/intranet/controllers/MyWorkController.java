@@ -11,10 +11,15 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.Cliente;
@@ -22,6 +27,7 @@ import com.erretechnology.intranet.models.ComunicazioneHR;
 import com.erretechnology.intranet.models.Evento;
 import com.erretechnology.intranet.models.MyWorkBean;
 import com.erretechnology.intranet.models.News;
+import com.erretechnology.intranet.models.NewsModificato;
 import com.erretechnology.intranet.models.Podcast;
 import com.erretechnology.intranet.models.Sondaggio;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
@@ -174,6 +180,25 @@ public class MyWorkController extends BaseController {
 		return "redirect:/myWork/";
 	}
 
+	
+	@GetMapping(value = "/modificaSondaggio/{id}")
+	public String modificaSondaggio(@PathVariable int id, Model model) {
+		model.addAttribute("sondaggio", serviceSondaggio.findById(id));
+		return "sondaggioFormUpdate";
+	}
+	@PostMapping(value = "/sondaggioFormUpdate/{id}")
+	public String paginaModificaSondaggio(@PathVariable int id, @RequestParam("titolo") String titolo, @RequestParam("link") String link, HttpSession session, Model model) {
+		Sondaggio sondaggio = serviceSondaggio.findById(id);
+		sondaggio.setLink(link);
+		if(titolo!=null)
+		sondaggio.setNomeSondaggio(titolo);
+		serviceSondaggio.save(sondaggio);
+		model.addAttribute("sondaggio", serviceSondaggio.findById(id));
+
+		saveLog("modificato un sondaggio", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+	
+		return "redirect:/myWork/";
+	}
 	@PostMapping(value = "/deleteSondaggio")
 	public String deleteMessaggio(int id, HttpSession session) {
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
