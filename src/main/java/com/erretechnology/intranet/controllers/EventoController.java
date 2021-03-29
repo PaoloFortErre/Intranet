@@ -99,12 +99,14 @@ public class EventoController extends BaseController {
 			String date, String via, String citta, String provincia, String isLife, 
 			HttpSession session, ModelMap model) throws IOException, ParseException {
 		
-		Indirizzo indirizzo = new Indirizzo();
-		indirizzo.setVia(via);
-		indirizzo.setCitta(citta);
-		indirizzo.setProvincia(provincia);
-		repoIndirizzo.save(indirizzo);
-		evento.setIndirizzo(indirizzo);
+		if(!via.isEmpty() || !citta.isEmpty() || !provincia.isEmpty()) {
+			Indirizzo indirizzo = new Indirizzo();
+			indirizzo.setVia(via);
+			indirizzo.setCitta(citta);
+			indirizzo.setProvincia(provincia);
+			repoIndirizzo.save(indirizzo);
+			evento.setIndirizzo(indirizzo);
+		}
 		
 		Date formettedDate = new SimpleDateFormat("yyyy-MM-dd").parse(date); 
 		Timestamp timestamp = new Timestamp(formettedDate.getTime()/1000);  
@@ -127,6 +129,8 @@ public class EventoController extends BaseController {
 			} catch (Exception e) {
 				System.err.println("Non riesco a caricare il file");
 			}
+		} else {
+			evento.setCopertina(serviceFileImmagine.getImmagine(284));
 		}
 		
 		if(isLife.equals("true")) {

@@ -75,6 +75,8 @@ public class NewsController extends BaseController {
 			} catch (Exception e) {
 				System.err.println("Non riesco a caricare il file");
 			}
+		} else {
+			news.setCopertina(serviceFileImmagine.getImmagine(334));
 		}
 		
 		repoNews.save(news);

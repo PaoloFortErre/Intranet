@@ -12,9 +12,23 @@ public class ErroreController implements ErrorController {
 	@RequestMapping("/error")
 	public ModelAndView handleError(HttpServletRequest httpRequest) {
         ModelAndView errorPage = new ModelAndView("error");
+        String errorMsg = "";
         int httpErrorCode = (Integer) httpRequest.getAttribute("javax.servlet.error.status_code");
-
-        errorPage.addObject("message", "Errore " + httpErrorCode);
+        switch (httpErrorCode) {
+		    case 400: {
+		        errorMsg = "Http Error Code: 400. Bad Request";
+		        break;
+		    }
+		    case 404: {
+		        errorMsg = "Http Error Code: 404. Resource not found";
+		        break;
+		    }
+		    case 500: {
+		        errorMsg = "Http Error Code: 500. Internal Server Error";
+		        break;
+		    }
+		}
+        errorPage.addObject("message", errorMsg);
         return errorPage;
 	}
 
