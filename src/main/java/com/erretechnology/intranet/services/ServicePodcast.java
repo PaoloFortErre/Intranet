@@ -8,4 +8,5 @@ public interface ServicePodcast{
 
 	public void save(Podcast podcast);
 	public List<Podcast> getAll();
+	public Podcast getById(int id);
 }

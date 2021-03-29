@@ -17,13 +17,15 @@ public class ServicePodcastImpl implements ServicePodcast{
 	@Override
 	public void save(Podcast podcast) {
 		repositoryPodcast.save(podcast);
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public List<Podcast> getAll() {
-		// TODO Auto-generated method stub
 		return repositoryPodcast.findAll();
+	}
+
+	@Override
+	public Podcast getById(int id) {
+		return repositoryPodcast.findById(id).get();
 	} 
 }
