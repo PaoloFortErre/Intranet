@@ -185,9 +185,9 @@ public class MyWorkController extends BaseController {
 	@GetMapping(value = "/modificaSondaggio/{id}")
 	public String modificaSondaggio(@PathVariable int id, Model model) {
 		model.addAttribute("sondaggio", serviceSondaggio.findById(id));
-		return "sondaggioFormUpdate";
+		return "sondaggiFormUpdate";
 	}
-	@PostMapping(value = "/sondaggioFormUpdate/{id}")
+	@PostMapping(value = "/sondaggiFormUpdate/{id}")
 	public String paginaModificaSondaggio(@PathVariable int id, @RequestParam("titolo") String titolo, @RequestParam("link") String link, HttpSession session, Model model) {
 		Sondaggio sondaggio = serviceSondaggio.findById(id);
 		sondaggio.setLink(link);
