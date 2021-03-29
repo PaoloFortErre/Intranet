@@ -2,7 +2,7 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
 	<meta charset="ISO-8859-1">
-	<title>Form update libro</title>
+	<title>Modifica libro</title>
 
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet"
@@ -49,24 +49,34 @@
 			margin: auto;margin-top: 150px;
 			padding: 15px;">
 
-			<h4 style="text-align: left; margin-bottom:5px;">Modifica l'evento in <span style="color: #ECF260;;">"MyWork"</span>
+			<h4 style="text-align: center; margin-bottom:5px;">Modifica il libro in
+				<span style="color: #ECF260;;">"MyLife"</span>
 			</h4 ><hr style=" background-color: #F3F3F3; ">
 
-
 			<p style="text-align: right; margin-bottom: 30px;display: inline-block;">
-				<a class="mr-2" th:href="@{/myWork/}" style="color: #F3F3F3;">
+				<a class="mr-2" th:href="@{/myLife/}" style="color: #F3F3F3;">
 				<img src="/view/MyWork/images/frecciasinistra.png" style="display: inline-block;" width="20%">Torna indietro
 			</a>
 			</p>
 
 			<form th:action="@{/libro/update/{id}(id = ${libro.id})}" th:object="${libro}" method="post" enctype="multipart/form-data">
-			  <label for="titolo">Titolo:</label><br>
-			  <input type="text" id="titolo" name="titolo" th:field="*{titolo}"><br>
-			  <label for="autore">Autore:</label><br>
-			  <input type="text" id="autore" name="autore" th:field="*{autore}"><br>
-			  <input type="file" name="immagine" accept="image/png, image/jpeg"/>
-			  <br>
-			  <input type="submit" value="Pubblica">
+				<div class="form-group col-12">
+					<label for="titolo">Titolo</label>
+				  <input class="form-control" type="text" id="titolo" name="titolo" th:field="*{titolo}">
+				</div>
+				<div class="form-group col-8">
+					<label for="autore">Autore</label><br>
+				  <input class="form-control" type="text" id="autore" name="autore" th:field="*{autore}">
+				</div>
+
+				<div class="form-group col-8">
+					<label for="immagine"></label>
+					<input class="form-control-file" type="file" name="immagine" accept="image/png, image/jpeg"/>
+				</div>
+				<div class="form-group col-4">
+					<input class="form-control" type="submit" id="pubblicaSubmit" value="Pubblica">
+				</div>
+
 			</form>
 		</div>
 

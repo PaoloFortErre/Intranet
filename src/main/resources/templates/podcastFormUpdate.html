@@ -46,8 +46,8 @@
 			margin: auto;margin-top: 150px;
 			padding: 15px;">
 
-			<h4 style="text-align: left; margin-bottom:5px;">Modifica podcast</h4 ><hr style=" background-color: #F3F3F3; ">
-
+			<h4 style="text-align: center; margin-bottom:5px;">Modifica podcast</h4 >
+				<hr style=" background-color: #F3F3F3; ">
 
 			<p style="text-align: right; margin-bottom: 30px;display: inline-block;">
 				<a class="mr-2" th:href="@{/myWork/}" style="color: #F3F3F3;">
@@ -56,13 +56,24 @@
 			</p>
 
 			<form th:action="@{/podcast/updatePodcast/{id}(id = ${podcast.id})}" th:object="${podcast}" method="get" enctype="multipart/form-data">
-			  <label for="nome">Nome:</label><br>
-			  <input type="text" id="nome" name="nome" th:field="${podcast.nome}"><br>
-			  <label for="dataPodcast">Data podcast:</label><br>
-			  <input type="date" id="dataPodcast" name="dataPodcast" th:field="${date.date}"><br>
-			  <input type="file" id="file" name="file" accept=".mp3,audio/*"/>
-			  <br>
-			  <input type="submit" value="Pubblica">
+				<div class="form-group col-12">
+					<label for="nome">Nome:</label>
+				  <input class="form-control" type="text" name="nome" th:field="${podcast.nome}">
+				</div>
+				<div class="form-group col-5">
+					<label for="dataPodcast">Data podcast:</label>
+				  <input class="form-control" type="date" name="dataPodcast" th:field="${date.date}">
+				</div>
+
+				<div class="form-group col-8">
+					<label for="file">File Audio</label>
+					<input class="form-control-file" type="file" id="file" name="file" accept=".mp3,audio/*"/>
+				</div>
+
+				<div class="form-group col-4">
+					<input class="form-control" id="pubblicaSubmit" type="submit" value="Pubblica">
+				</div>
+
 			</form>
 		</div>
 
