@@ -221,6 +221,22 @@ table, th, td {
 								th:src="'data:audio/mp3;base64,' + ${primoPodcast.getAudioData(primoPodcast.podcast)}"
 								type="audio/ogg">
 						</audio>
+						<div th:if="${altriPodcast!=null}"> <a href="" id="podcast" onclick="mostraPodcast()"
+								style="text-decoration: none; color: #f3f3f3; font-size: 13px;">
+								<br>Vedi altri <img
+								src="/view/MyWork/images/frecciasotto.png" width="30px"
+								id="frecciasotto" style="margin-left: 5px;">
+							</a> </div>
+					</div>
+					<div id="altriPodcast" th:each="altriPodcast : ${altriPodcast}">
+					<p
+							th:text="${#dates.format(altriPodcast.dataPodcast *1000, 'dd/MM/yyyy')}"></p>
+						<audio controls style="margin-top: 10px"  >
+							<source
+								th:src="'data:audio/mp3;base64,' + ${altriPodcast.getAudioData(altriPodcast.podcast)}"
+								type="audio/ogg">
+						</audio>
+					
 					</div>
 
 
@@ -327,6 +343,8 @@ table, th, td {
 							</a>
 						</div>
 						<div class="title2">
+						
+					
 							<h3 style="text-align: center; font-weight: 900">Sondaggi</h3>
 
 						</div>
@@ -705,6 +723,10 @@ table, th, td {
 			document.getElementById("eventoWork2").style.display = "block";
 			document.getElementById("altriEventi").style.display = "none";
 
+		}
+		function mostraPodcast(){
+			document.getElementById("altriPodcast").style.display = "block";
+			document.getElementById("podcast").style.display = "none";
 		}
 		function data() {
 			var d = new Date();
