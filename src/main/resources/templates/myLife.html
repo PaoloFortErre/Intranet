@@ -24,6 +24,8 @@
 	rel="stylesheet">
 
 <link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro'
+	rel='stylesheet' type='text/css'>
 <style>
 .caption {
 	font-family: Verdana, sans-serif;
@@ -117,17 +119,17 @@
 								th:text="${aforisma.frase}"></h1>
 							<p th:text="${aforisma.autore}"></p>
 							<div th:if="${GML}">
-								<form th:action="@{'/aforisma/update/'+${aforisma.id}}" 
+								<form th:action="@{'/aforisma/update/'+${aforisma.id}}"
 									method="get">
 									<button type="submit" name="modifica"
-										style="background-color: transparent; border: 0px solid #232323; display:inline-block ">
-										<img src="/view/MyWork/images/edit.png"
-											width="38%">
+										style="background-color: transparent; border: 0px solid #232323; display: inline-block">
+										<img src="/view/MyWork/images/edit.png" width="38%">
 									</button>
 								</form>
-								<a th:href="@{/aforisma/new/}" style="display:inline-block "> <img
-									src="/view/MyWork/images/more.png" width="30px"
-									style="margin-bottom: 10px; display:inline-block "></a>
+								<a th:href="@{/aforisma/new/}" style="display: inline-block">
+									<img src="/view/MyWork/images/more.png" width="30px"
+									style="margin-bottom: 10px; display: inline-block">
+								</a>
 							</div>
 
 						</div>
@@ -143,9 +145,8 @@
 								<form th:action="@{'/aforisma/update/'+${aforisma.id}}"
 									method="get">
 									<button type="submit" name="modifica"
-										style="background-color: transparent; border: 0px solid #232323; ">
-										<img src="/view/MyWork/images/edit.png"
-											width="38%">
+										style="background-color: transparent; border: 0px solid #232323;">
+										<img src="/view/MyWork/images/edit.png" width="38%">
 									</button>
 								</form>
 								<a th:href="@{/aforisma/new/}"> <img
@@ -198,12 +199,11 @@
 						<a th:href="@{/profile/}" id="gestisciProfilo"> Gestisci il
 							tuo profilo</a>
 					</div>
-					<div id="prof">
+					<div id="prof2">
 						<a th:href="@{/profile/}" id="gestisciProfilo"> Vedi il
 							profilo dei tuoi colleghi</a>
 					</div>
-
-
+					<br>
 				</div>
 			</div>
 
@@ -280,7 +280,7 @@
 
 
 
-									<br> <br> <input type="submit" value="Condividi"
+									<br>  <input type="submit" value="Condividi"
 										id="submitPost"
 										style="float: right; margin-right: 10px; margin-bottom: 8px" />
 
@@ -490,107 +490,115 @@
 COLONNA DESTRA
 **** -->
 			<div class="col-sm-4 col-lg-4" id="col-destra">
-				<div th:if="${GML}">
-					<br> <a th:href="@{/evento/newLife/}"> <img
-						src="/view/MyWork/images/moreb.png" width="30px"
-						style="float: right; margin-bottom: 10px;"></a>
-				</div>
-
-				<h2 id="culturaPiemonte" style="margin-top: 30px">Cultura in
-					Piemonte</h2>
-
-				<p
-					style="color: #303030; text-align: center; font-size: 15px; margin-bottom: 50px;">
-					Se sei un tipo da eventi in città o da sagre:</p>
-				<p th:if="${eventilife==null}"
-					style="text-align: center; color: #303030;">Non ci sono eventi
-					in prossimità</p>
-				<div th:if="${eventilife!=null}">
-					<div th:each="eventilife : ${eventilife}" id="evento1life">
-
-						<div class="caption" th:if="${eventilife.copertina!=null}">
-							<img
-								th:src="'data:image/png;base64,' + ${eventilife.copertina.getImgData(eventilife.copertina.data)}"
-								class="img-responsive" width="99%" height="300px"
-								style="margin: auto;">
-							<h3 th:text="${eventilife.titolo}"></h3>
-
-						</div>
-
-						<img src="/view/MyWork/images/location.jpg" width="9%" height="9%">
-						<p th:text="${eventilife.indirizzo.via}"
-							style="margin-top: 10px; text-align: left; display: inline-block;; color: #303030;"></p>
-						<p style="display: inline-block; color: #303030;">-</p>
-
-						<p th:text="${eventilife.indirizzo.citta}"
-							style="margin-top: 10px; text-align: left; display: inline-block; font-weight: 900; color: #303030;"></p>
-
-						<p th:text="${#dates.format(eventilife.data*1000, 'dd/MM/yyyy')}"
-							style="margin-top: 10px; text-align: right; color: #303030; font-style: italic; font-size: 12px;"></p>
-						<form th:action="@{'/evento/update/'+${eventilife.id}}" th:if="${GML}"
-							method="get">
-							<button type="submit" name="modifica"
-								style="background-color: transparent; border: 0px solid; ">
-								<img src="/view/MyWork/images/editb.png" style="float: left"
-									width="38%">
-							</button>
-						</form>
-					</div>
-					<div th:if="${eventilife1!=null}">
-						<a href=""> <img src="/view/MyWork/images/freccianera.png"
-							id="frecciaeventi" style="float: right" width="10%">
-						</a>
+			<br>
+				<div>
+					<div th:if="${GML}">
+						<br> <a th:href="@{/evento/newLife/}"> <img
+							src="/view/MyWork/images/moreb.png" width="30px"
+							style="float: right; margin-bottom: 10px;"></a>
 					</div>
 
+					<h2 id="culturaPiemonte" style="margin-top: 30px">Cultura in
+						Piemonte</h2>
 
-					<div id="XX" th:if="${eventilife1!=null}">
-						<div th:if="${eventilife1.copertina!=null}">
-							<div class="caption" th:each="eventilife1 : ${eventilife1}">
+					<p
+						style="color: #303030; text-align: center; font-size: 15px; margin-bottom: 50px;">
+						Se sei un tipo da eventi in città o da sagre:</p>
+					<p th:if="${eventilife==null}"
+						style="text-align: center; color: #303030;">Non ci sono eventi
+						in prossimità</p>
+					<div th:if="${eventilife!=null}">
+						<div th:each="eventilife : ${eventilife}" id="evento1life">
+
+							<div class="caption" th:if="${eventilife.copertina!=null}">
 								<img
-									th:src="'data:image/png;base64,' + ${eventilife1.copertina.getImgData(eventilife1.copertina.data)}"
-									class="img-responsive" width="99%" height="280px"
+									th:src="'data:image/png;base64,' + ${eventilife.copertina.getImgData(eventilife.copertina.data)}"
+									class="img-responsive" width="450px" height="300px"
 									style="margin: auto;">
-								<h3 th:text="${eventilife1.titolo}"></h3>
-
+								<h3 th:text="${eventilife.titolo}"></h3>
 
 							</div>
+
+							<img src="/view/MyWork/images/location.jpg" width="9%"
+								height="9%">
+							<p th:text="${eventilife.indirizzo.via}"
+								style="margin-top: 10px; text-align: left; display: inline-block;; color: #303030;"></p>
+							<p style="display: inline-block; color: #303030;">-</p>
+
+							<p th:text="${eventilife.indirizzo.citta}"
+								style="margin-top: 10px; text-align: left; display: inline-block; font-weight: 900; color: #303030;"></p>
+
+							<p th:text="${#dates.format(eventilife.data*1000, 'dd/MM/yyyy')}"
+								style="margin-top: 10px; text-align: right; color: #303030; font-style: italic; font-size: 12px;"></p>
+							<form th:action="@{'/evento/update/'+${eventilife.id}}"
+								th:if="${GML}" method="get">
+								<button type="submit" name="modifica"
+									style="background-color: transparent; border: 0px solid;">
+									<img src="/view/MyWork/images/editb.png" style="float: left"
+										width="38%">
+								</button>
+							</form>
 						</div>
-
-						<img src="/view/MyWork/images/location.jpg" width="9%" height="9%">
-						<p th:text="${eventilife1.indirizzo.via}"
-							style="margin-top: 10px; text-align: left; display: inline-block; color: #303030;"></p>
-						<p style="display: inline-block;">-</p>
-						<p th:text="${eventilife1.indirizzo.citta}"
-							style="margin-top: 10px; text-align: left; display: inline-block; font-weight: 900; color: #303030;"></p>
-
-						<p th:text="${#dates.format(eventilife1.data*1000, 'dd/MM/yyyy')}"
-							style="margin-top: 10px; text-align: right;; color: #303030;"></p>
-<form th:action="@{'/evento/update/'+${eventilife1.id}}" th:if="${GML}"
-							method="get">
-							<button type="submit" name="modifica"
-								style="background-color: transparent; border: 0px solid; ">
-								<img src="/view/MyWork/images/editb.png" style="float: left"
-									width="38%">
-							</button>
-						</form>
-						<div>
-							<a href=""> <img src="/view/MyWork/images/freccianerax.png"
-								id="frecciaeventi2" style="float: left" width="10%">
+						<div th:if="${eventilife1!=null}">
+							<a href=""> <img src="/view/MyWork/images/freccianera.png"
+								id="frecciaeventi" style="float: right" width="10%">
 							</a>
 						</div>
 
+
+						<div id="XX" th:if="${eventilife1!=null}">
+							<div th:if="${eventilife1.copertina!=null}">
+								<div class="caption" th:each="eventilife1 : ${eventilife1}">
+									<img
+										th:src="'data:image/png;base64,' + ${eventilife1.copertina.getImgData(eventilife1.copertina.data)}"
+										class="img-responsive" width="450px" height="100px"
+										style="margin: auto;">
+									<h3 th:text="${eventilife1.titolo}"></h3>
+
+
+								</div>
+							</div>
+
+							<img src="/view/MyWork/images/location.jpg" width="9%"
+								height="9%">
+							<p th:text="${eventilife1.indirizzo.via}"
+								style="margin-top: 10px; text-align: left; display: inline-block; color: #303030;"></p>
+							<p style="display: inline-block;">-</p>
+							<p th:text="${eventilife1.indirizzo.citta}"
+								style="margin-top: 10px; text-align: left; display: inline-block; font-weight: 900; color: #303030;"></p>
+
+							<p
+								th:text="${#dates.format(eventilife1.data*1000, 'dd/MM/yyyy')}"
+								style="margin-top: 10px; text-align: right;; color: #303030;"></p>
+							<form th:action="@{'/evento/update/'+${eventilife1.id}}"
+								th:if="${GML}" method="get">
+								<button type="submit" name="modifica"
+									style="background-color: transparent; border: 0px solid;">
+									<img src="/view/MyWork/images/editb.png" style="float: left"
+										width="38%">
+								</button>
+							</form>
+							<div>
+								<a href=""> <img src="/view/MyWork/images/freccianerax.png"
+									id="frecciaeventi2" style="float: left" width="10%">
+								</a>
+							</div>
+
+						</div>
+
 					</div>
-
 				</div>
-
-				<div th:if="${GML}"> 
-				<br> <br> <br><br><br>
-					<div><a th:href="@{/cinema/new/}"> <img
-						src="/view/MyWork/images/moreb.png" width="30px"
-						style="float: right; margin-bottom: 10px;"></a></div>
+				<br><br><hr style="border: 1px solid #c9c9c9">
+				<div th:if="${GML}">
+					<br>
+					<div>
+						<a th:href="@{/cinema/new/}"> <img
+							src="/view/MyWork/images/moreb.png" width="30px"
+							style="float: right; margin-bottom: 10px;"></a>
+					</div>
 				</div>
-				
-				<h2 id="culturaPiemonte" style="margin-top: 70px">Film</h2>
+<br>
+				<h2 id="culturaPiemonte" >Film</h2>
 				<p
 					style="color: #303030; text-align: center; font-size: 15px; margin-bottom: 50px;">
 					Se sei un tipo da cinema o serie TV:</p>
@@ -644,30 +652,30 @@ COLONNA DESTRA
 
 
 								<td>
-									<form th:action="@{'/cinema/update/'+${film1.id}}" th:if="${GML}" method="get">
+									<form th:action="@{'/cinema/update/'+${film1.id}}"
+										th:if="${GML}" method="get">
 										<button type="submit" name="modifica"
-											style="background-color: transparent; border: 0px solid #232323; ">
-											<img src="/view/MyWork/images/editb.png" 
-												width="38%">
+											style="background-color: transparent; border: 0px solid #232323;">
+											<img src="/view/MyWork/images/editb.png" width="38%">
 										</button>
 									</form>
 								</td>
 
 								<td>
-									<form th:action="@{'/cinema/update/'+${film2.id}}" th:if="${GML}" method="get">
+									<form th:action="@{'/cinema/update/'+${film2.id}}"
+										th:if="${GML}" method="get">
 										<button type="submit" name="modifica"
-											style="background-color: transparent; border: 0px solid #232323; ">
-											<img src="/view/MyWork/images/editb.png" 
-												width="38%">
+											style="background-color: transparent; border: 0px solid #232323;">
+											<img src="/view/MyWork/images/editb.png" width="38%">
 										</button>
 									</form>
 								</td>
 								<td>
-									<form th:action="@{'/cinema/update/'+${film3.id}}" th:if="${GML}" method="get">
+									<form th:action="@{'/cinema/update/'+${film3.id}}"
+										th:if="${GML}" method="get">
 										<button type="submit" name="modifica"
-											style="background-color: transparent; border: 0px solid #232323; ">
-											<img src="/view/MyWork/images/editb.png" 
-												width="38%">
+											style="background-color: transparent; border: 0px solid #232323;">
+											<img src="/view/MyWork/images/editb.png" width="38%">
 										</button>
 									</form>
 								</td>
@@ -675,20 +683,21 @@ COLONNA DESTRA
 						</table>
 					</div>
 				</div>
+			<br><br>	<hr style="border: 1px solid #c9c9c9"><br>
 				<div>
 					<div th:if="${GML}">
 						<a th:href="@{/libro/new}"> <img
 							src="/view/MyWork/images/moreb.png" width="30px"
 							style="float: right; margin-bottom: 10px;"></a>
 					</div>
-					<h2 id="culturaPiemonte" style="margin-top: 70px">Libri</h2>
+					<h2 id="culturaPiemonte" >Libri</h2>
 					<p
 						style="color: #303030; text-align: center; font-size: 15px; margin-bottom: 50px;">
 						Se sei un tipo dal classico libro cartaceo o da Kindle:</p>
 					<p th:if="${libri==null}"
 						style="text-align: center; color: #303030; font-style: italic; font-size: 12px;">
 						Non ci sono libri da consigliare</p>
-
+<br>
 					<table id="libri" th:if="${libri!=null}">
 						<tr>
 							<td><img
@@ -701,7 +710,8 @@ COLONNA DESTRA
 									th:text="${libri.autore}"></p>
 
 								<div th:if="${GML}">
-									<form th:action="@{'/libro/update/'+${libri.id}}"  th:if="${GML}"method="get">
+									<form th:action="@{'/libro/update/'+${libri.id}}"
+										th:if="${GML}" method="get">
 										<button type="submit" name="modifica"
 											style="background-color: transparent; border: 0px solid #232323; float: right;">
 											<img src="/view/MyWork/images/editb.png" style="float: right"
@@ -721,7 +731,8 @@ COLONNA DESTRA
 									style="FONT-size: 10px; font-style: italic; text-align: right; color: #303030;"
 									th:text="${libri1.autore}"></p>
 								<div th:if="${GML}">
-									<form th:action="@{'/libro/update/'+${libri1.id}}"  th:if="${GML}" method="get">
+									<form th:action="@{'/libro/update/'+${libri1.id}}"
+										th:if="${GML}" method="get">
 										<button type="submit" name="modifica"
 											style="background-color: transparent; border: 0px solid #232323; float: right;">
 											<img src="/view/MyWork/images/editb.png" style="float: right"
@@ -732,6 +743,7 @@ COLONNA DESTRA
 								</div></td>
 						</tr>
 					</table>
+					<br>
 				</div>
 			</div>
 		</div>

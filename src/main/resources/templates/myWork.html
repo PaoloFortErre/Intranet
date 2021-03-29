@@ -22,7 +22,7 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap"
 	rel="stylesheet">
-
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
 
 
 <link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
@@ -167,7 +167,7 @@ table, th, td {
 							<a href="" id="vedi" onclick="mostraAssunzioni()"
 								style="text-decoration: none; color: black; font-size: 13px;">
 								<br>Vedi altri <img
-								src="/view/MyWork/images/freccianera.png" width="30px"
+								src="/view/MyWork/images/freccianerasotto.png" width="30px"
 								id="frecciasotto" style="margin-left: 5px;">
 							</a>
 						</div>
@@ -297,9 +297,9 @@ table, th, td {
 								width="28%" height="28%" style="margin-top: 10px;">
 
 							<h4 th:text="${utente.nome}"
-								style="display: inline-block; color: blue"></h4>
+								style="display: inline-block; "></h4>
 							<h4 th:text="${utente.cognome}"
-								style="display: inline-block; color: blue"></h4>
+								style="display: inline-block; "></h4>
 						</div>
 
 
@@ -413,7 +413,7 @@ table, th, td {
 										th:text="${sondaggio.nomeSondaggio}"
 										style="color: #f3f3f3; text-decoration: none; font-size: 17px;"></a>
 										<form
-											th:action="@{'/myWork/modificaSondaggi/'+${sondaggio.id}}"
+											th:action="@{'/myWork/modificaSondaggio/'+${sondaggio.id}}"
 											th:if="${GMW}" method="get">
 											<br>
 											<button type="submit" name="modifica"
@@ -451,7 +451,7 @@ table, th, td {
 										style="color: #f3f3f3; text-decoration: none; font-size: 17px;"></a>
 
 										<form
-											th:action="@{'/myWork/modificaSondaggi/'+${sondaggio1.id}}"
+											th:action="@{'/myWork/modificaSondaggio/'+${sondaggio1.id}}"
 											th:if="${GMW}" method="get">
 											<br>
 											<button type="submit" name="modifica"

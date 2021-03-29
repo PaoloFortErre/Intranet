@@ -1,6 +1,7 @@
 @charset "ISO-8859-1";
-h1, h2, h3, h4, h5, textarea, p, label, input {
-	font-family: 'Noto Sans', sans-serif;
+h1, h2, h3, h4, h5, textarea, p, label, input, button {
+	font-family: "Source Sans Pro"
+, sans-serif;
 	color: #F3F3F3;
 }
 
@@ -40,13 +41,15 @@ body {
 .col-sinistra {
 	border-radius: 6px 6px 6px 6px;
 	background-color: #E8E7E7;
-	width: 100%
+	width: 100%;
+	border: 1px solid  #6D6D6D;
 }
 
 #col-destra {
 	border-radius: 6px 6px 6px 6px;
 	background-color:  #E8E7E7;
 	height: 100%;
+	border: 1px solid  #6D6D6D;
 }
 
 #culturaPiemonte {
@@ -206,10 +209,19 @@ hr#linea {
 	
 }
 #prof{
-		border-top: 1px solid #c9c9c9;
+	border-top: 1px solid #c9c9c9;
+	padding: 5px;
+}
+#prof2{
+	border-top: 1px solid #c9c9c9;
+	border-bottom: 1px solid #c9c9c9;
 	padding: 5px;
 }
 #prof:hover{
+	background-color: #c9c9c9;
+	
+}
+#prof2:hover{
 	background-color: #c9c9c9;
 	
 }
