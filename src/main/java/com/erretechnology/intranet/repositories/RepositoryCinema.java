@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import com.erretechnology.intranet.models.Cinema;
-import com.erretechnology.intranet.models.Cliente;
 
 public interface RepositoryCinema extends CrudRepository<Cinema, Integer>{
 	@Query("SELECT c FROM Cinema c WHERE c.visibile = true ORDER BY c.id DESC")

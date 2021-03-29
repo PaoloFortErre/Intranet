@@ -12,29 +12,9 @@ public class ErroreController implements ErrorController {
 	@RequestMapping("/error")
 	public ModelAndView handleError(HttpServletRequest httpRequest) {
         ModelAndView errorPage = new ModelAndView("error");
-        String errorMsg = "";
         int httpErrorCode = (Integer) httpRequest.getAttribute("javax.servlet.error.status_code");
 
-        switch (httpErrorCode) {
-            case 400: {
-                errorMsg = "Errore http: 400. Bad Request";
-                break;
-            }
-            case 401: {
-                errorMsg = "Errore http: 401. Unauthorized";
-                break;
-            }
-            case 404: {
-                errorMsg = "Errore http: 404. Resource not found";
-                break;
-            }
-            case 500: {
-                errorMsg = "Errore http: 500. Internal Server Error";
-                break;
-            }
-        }
-
-        errorPage.addObject("message", errorMsg);
+        errorPage.addObject("message", "Errore " + httpErrorCode);
         return errorPage;
 	}
 

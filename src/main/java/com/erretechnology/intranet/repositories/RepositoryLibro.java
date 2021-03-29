@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import com.erretechnology.intranet.models.Cliente;
 import com.erretechnology.intranet.models.Libro;
 
 public interface RepositoryLibro extends CrudRepository<Libro, Integer>{
