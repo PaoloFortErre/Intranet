@@ -41,7 +41,7 @@ public class UploadController extends BaseController{
 	@GetMapping(value = "/hr")
 	public ModelAndView hrMAV(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("ComunicazioneHR");
+		mav.setViewName("aggiungi_nuova_comunicazione");
 		mav.addObject("comunicazioneHR", new ComunicazioneHR());
 		mav.addObject("comunicazioni", serviceComunicazioni.getAll());
 		mav.addObject("user", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));

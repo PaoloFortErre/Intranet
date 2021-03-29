@@ -1,66 +1,67 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Podcast editing</title>
+	<meta charset="ISO-8859-1">
+	<title>Aggiungi modulo</title>
 
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-<!-- jQuery library -->
-<script
+	<!-- jQuery library -->
+	<script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<!-- Popper JS -->
-<script
+	<!-- Popper JS -->
+	<script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
-<!-- Latest compiled JavaScript -->
-<script
+	<!-- Latest compiled JavaScript -->
+	<script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
+	<link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
 
-<style>
-body {
-	background-image: url("/view/MyWork/images/background.png");
-	background-repeat: no-repeat, repeat;
-	background-attachment: fixed;
-}
+	<style>
+	body {
+		background-image: url("/view/MyWork/images/background.png");
+		background-repeat: no-repeat, repeat;
+		background-attachment: fixed;
+	}
 
-#input {
-	background-color: #E2E2E2;
-	border-radius: 0px 0px 0px 0px;
-	border: 0px solid #E2E2E2;
-}
+	#input {
+		background-color: #E2E2E2;
+		border-radius: 0px 0px 0px 0px;
+		border: 0px solid #E2E2E2;
+	}
 </style>
 
 </head>
 
 <body>
 
-	<div class="container" sec:authorize="hasAuthority('GM')"> 
+	<div class="container" sec:authorize="hasAuthority('GM')">
 		<div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" id="colForm">
 
-				<h4 style="text-align: left; margin-bottom: 5px;">Inserisci un
-					nuovo modulo e scegli il relativo settore:</h4>
-				<hr style="background-color: #F3F3F3;">
-				<img src="/view/MyWork/images/frecciasinistra.png"
-					style="display: inline-block;" width="5%">
-				<p
-					style="text-align: right; margin-bottom: 50px; display: inline-block;">
-					<a th:href="@{/moduli/}" style="color: #F3F3F3;">Torna indietro
-					</a>
-				</p>
-				<p th:text="${message}" th:if="${message ne null}"
+				<h4 style="text-align: center; margin-bottom: 5px;">Inserisci un
+					nuovo modulo e scegli il relativo settore</h4>
+					<hr style="background-color: #F3F3F3;">
+
+					<p style="text-align: right; margin-bottom: 30px;display: inline-block;">
+						<a class="mr-2" th:href="@{/myWork/}" style="color: #F3F3F3;">
+							<img src="/view/MyWork/images/frecciasinistra.png" style="display: inline-block;" width="20%">Torna indietro
+						</a>
+					</p>
+
+					<p th:text="${message}" th:if="${message ne null}"
 					class="alert alert-primary"></p>
-				<form th:action="@{/file/upload}" th:object="${filePdf}"
+
+					<form th:action="@{/file/upload}" th:object="${filePdf}"
 					method="post" enctype="multipart/form-data" class="signin-form">
 
 					<div class="form-group">
-						<label for="nome">Nome:</label> <input type="text"
-							class="form-control" name="nome" id="nome">
+						<label for="nome">Nome</label>
+						<input type="text" class="form-control" name="nome" id="nome">
 					</div>
 					<select  class="custom-select custom-select-lg mb-3" th:field="*{settore}" >
 						<option th:value="'Erre Technology'" th:text="ErreTechnology"></option>
@@ -70,11 +71,15 @@ body {
 					</select>
 					<div class="form-group">
 						<label for="file">File:</label> <input type="file"
-							class="form-control-file" accept="application/pdf" name="file"
-							id="file">
+						class="form-control-file" accept="application/pdf" name="file"
+						id="file">
 					</div>
-					 <input type="submit" id="pubblicaSubmit" value="Pubblica">
+					<div class="form-group">
+						<input type="submit" id="pubblicaSubmit" value="Pubblica">
+					</div>
+
 				</form>
+
 			</div>
 		</div>
 	</div>

@@ -40,7 +40,7 @@
 								src="/view/MyWork/images/casabianca.png" width="30px" style="margin-top: -10px; opacity: 0.9">
 							</a>
 						</div>
-						
+
 						<div class="content" style="display: inline-block; color:#ECF260;">
 							<a   style="color:#ECF260; text-decoration: none;">COMUNICAZIONI HR</a>
 						</div>
@@ -57,13 +57,13 @@
 							id="utente-foto-profilo"
 							style="margin: 30px; margin-right: 40px; border-radius: 50%; margin-top: 0px;"></a>
 					</div>
-					</nav> 
+					</nav>
 		</div>
 		</div>
 		<div class="row">
 		<img src="/view/MyWork/images/giaccalogo.png" id="headerHR">
 	</div>
-		
+
 		<div class="container">
 		<div class="row" style="margin-top: 50px">
 		<div class="col-xs-10 col-sm-10 col-md-6 col-lg-6" th:with="GHR = ${#authorization.expression('hasAuthority(''GHR'')')}">
@@ -72,28 +72,28 @@
 			<br>
 			<br>
 		</div>
-		
+
 		<div id="comunicazione" th:each="comunicazione: ${comunicazioni}">
-		
+
 		 <img src="/view/MyWork/images/pdf-icon.png" style="float: right;" width="30px">
 		 <p th:text="${#dates.format(comunicazione.timestamp*1000, 'dd/MM/yyyy')}"> </p>
 		<h3 th:text="${comunicazione.nome}"> </h3>
 		<a th:href="@{/file/downloadFileHR(id=${comunicazione.id})}"  th:download="${comunicazione.nome}" style="text-align: right">
 				 <img src="/view/MyWork/images/download.png.png" width="30px"></a>
-		
+
 		</div>
-		
+
 		</div>
-		
+
 		<div class="col-xs-10 col-sm-10 col-md-10 col-lg-6">
 			<div id="teamHR">
 			<div class="modal-header2">
 						<div class="title">
 							<img src="/view/MyLife/images/errelogo.png" width="40px" style="display: inline-block; "> <h2 style=" text-align: center; font-weight: 900; color: #ECF260; margin-bottom: 20px; "> Team HR</h2>
 						</div>
-			
+
 				</div>
-				
+
 					<div class="modal-body">
 
 
@@ -101,10 +101,10 @@
 							<th:block>
 								<tr>
 									<td ><img src="/view/MyWork/images/avataaars.png" alt="fotoProfiloUtente" class="img-fluid" width="120px"
-										height="120px"> </td> 
-									
+										height="120px"> </td>
+
 										<td ><img src="/view/MyWork/images/avataaars1.png" alt="fotoProfiloUtente" class="img-fluid" width="120px"
-										height="120px"> </td> 	
+										height="120px"> </td>
 										<td ><img src="/view/MyWork/images/avataaars2.png" alt="fotoProfiloUtente" class="img-fluid" width="120px"
 										height="120px"> </td> 							</tr>
 							</th:block>
@@ -112,26 +112,26 @@
 								<tr>
 									<td >
 										<p	style="display: inline-block; font-weight: 500; "> Lorem </p>
-										<p 
+										<p
 											style="display: inline-block; font-weight: 500;"> Ipsum</p>
-										
+
 									</td>
-									
+
 									<td >
 										<p	style="display: inline-block; font-weight: 500;"> Lorem </p>
-										<p 
+										<p
 											style="display: inline-block; font-weight: 500;"> Ipsum</p>
-											
+
 									</td>
-									
+
 									<td >
 										<p	style="display: inline-block; font-weight: 500;"> Lorem </p>
-										<p 
+										<p
 											style="display: inline-block; font-weight: 500;"> Ipsum</p>
-											
+
 									</td>
-									</tr> 
-									</th:block> 
+									</tr>
+									</th:block>
 
 
 						</table>
@@ -140,7 +140,7 @@
 
 			</div>
 		</div>
-		
+
 		</div>
 <!-- PANNELLO FOOTER CON INFO-->
 	<footer class="align-items-center" style="margin-top: 360px;">

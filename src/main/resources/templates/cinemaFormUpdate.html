@@ -60,22 +60,22 @@
 			</p>
 
 			<form th:action="@{/cinema/update/{id}(id = ${cinema.id})}" th:object="${cinema}" method="post" enctype="multipart/form-data">
-				<div class="form-group">
+				<div class="form-group col-10">
 					<label for="titolo">Titolo</label>
-					<input type="text" id="titolo" name="titolo" th:field="*{titolo}" >
+					<input class="form-control" type="text" id="titolo" name="titolo" th:field="*{titolo}" >
 				</div>
-				<div class="form-group">
+				<div class="form-group col-6">
 					<label for="categoria">Categoria</label>
-					<select th:field="*{categoria}">
+					<select class="form-control" th:field="*{categoria}">
 						<option th:each="category: ${categorie}" th:value="${category.id}" th:text="${category.nome}"></option>
 					</select>
 				</div>
-				<div class="form-group">
+				<div class="form-group col-8">
 					<label for="immagine">Modifica foto</label>
-					<input type="file" name="immagine" accept="image/png, image/jpeg"/>
+					<input class="form-control-file" type="file" name="immagine" accept="image/png, image/jpeg"/>
 				</div>
-				<div class="form-group">
-					<input type="submit" value="Pubblica" id="pubblicaSubmit" >
+				<div class="form-group col-4">
+					<input class="form-control" type="submit" value="Pubblica" id="pubblicaSubmit"/>
 				</div>
 
 			</form>

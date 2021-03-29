@@ -2,7 +2,7 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
 	<meta charset="ISO-8859-1">
-	<title>Form update categoria film</title>
+	<title>Form update film</title>
 
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet"
@@ -58,6 +58,7 @@
 				<img src="/view/MyWork/images/frecciasinistra.png" style="display: inline-block;" width="20%">Torna indietro
 			</a>
 			</p>
+
 			<form th:action="@{/categoriacinema/update/{id}(id = ${categoriaCinema.id})}" th:object="${categoriaCinema}" method="post">
 			  <label for="nome">Nome:</label><br>
 			  <input type="text" id="nome" name="nome" th:field="*{nome}"><br>
