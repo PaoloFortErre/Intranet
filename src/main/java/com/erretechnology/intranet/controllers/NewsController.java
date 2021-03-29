@@ -135,7 +135,7 @@ public class NewsController extends BaseController {
 		news.setVisibile(false);
 		repoNews.save(news);
 		saveLog("eliminato una news", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		return "redirect:/news/list";
+		return "redirect:/myWork/";
 	}
 	
 

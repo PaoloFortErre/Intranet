@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="it">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <title>registra utente</title>
+  <meta name="description" content="Questo è un profilo admin">
+  <meta name="viewport" content="width=device-width, initial-scale=1,
+  shrink-to-fit=no">
+
+  <!-- Add icon library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+  integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+  crossorigin="anonymous">
+
+  <title>aggiungi_utente</title>
+  <style media="screen">
+  body {
+    background-color: black;
+    background-image: url("/view/MyWork/images/carbonio.jpg");
+    background-repeat: no-repeat;
+    background-size: cover, contain;
+    color:#F3F3F3;
+    font-family: Noto Sans, sans-serif;
+  }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- ROW CON INPUT -->
+    <div class="row mt-5 mb-5">
+      <div class="col">
+        <a class="btn btn-primary" th:href="@{/profile/}">TORNA INDIETRO</a>
+      </div>
+
+      <!--AGGIUNGI UTENTE-->
+      <div class="col-8 text-center mt-5">
+        <div class="container border border-white mt-5" style="background-color: #303030;">
+          <h1 class="h1 mb-3 mt-1">AGGIUNGI UTENTE</h1>
+          <form  th:action="@{/profile/eseguiRegistrazione}" method="post" enctype="utf8">
+            <div class="form-row ml-2">
+              <div class="form-group col-auto ml-5">
+                <label >Nome</label>
+                <input class="form-control " th:field="${user.nome}"/>
+              </div>
+              <div class="form-group col-auto ml-5">
+                <label >Cognome</label>
+                <input class="form-control " th:field="${user.cognome}"/>
+              </div>
+            </div>
+            <div class="form-row ml-2">
+              <div class="form-group col-auto ml-5">
+                <label >Email</label>
+                <input class="form-control" type="email" th:name="email" placeholder="*****@*****"/>
+              </div>
+              <div class="form-group col-auto ml-5">
+                <label for="date1">Data di nascita</label>
+                <input class="form-control" id="date1" type="date" th:field="${date.date}" placeholder="Inserisci la data in formato gg/mm/aaaa">
+              </div>
+            </div>
+            <div class="form-row ml-2">
+              <div class="form-group col-auto ml-5">
+                <label >Password</label>
+                <input class="form-control" type="password" th:name="password"/>
+                <!--  <small id="passwordHelpInline" class="text-muted">
+                  Deve essere tra gli 8-20 caratteri.
+                </small> -->
+              </div>
+              <div class="form-group col-auto ml-5">
+                <label for="settore">Che settore è ?</label>
+                <select class="form-control" id="settore" th:name="settore">
+                  <option th:value="'Erre Technology'" th:text="ErreTechnology"></option>
+                  <option th:value="'Erre GES'" th:text="ErreGES"></option>
+                  <option th:value="'Erre PRO'" th:text="ErrePRO"></option>
+                  <option th:value="'Erre LAB'" th:text="ErreLAB"></option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-success mb-3">Aggiungi</button>
+          </form>
+
+          <div th:if="${aggiungi != null}" class="row justify-content-center mt-2">
+            <p class="p text-danger">[[${aggiungi}]]</p>
+          </div>
+          <div th:if="${aggiungi2 != null}" class="row justify-content-center mt-2">
+            <p class="p text-warning">[[${aggiungi2}]]</p>
+          </div>
+        </div>
+
+        <!--RIATTIVA UTENTE-->
+        <div class="container-fluid border border-white mt-5" style="background-color: #303030;">
+          <h1 class="h1 mb-3 mt-1">RIATTIVA UTENTE</h1>
+
+          <div th:if="${riattiva != null}" class="row justify-content-center mt-2">
+    		<p class="p text-warning">[[${riattiva}]]</p>
+	  	  </div>
+
+          <form class="" method="post" th:action="@{/profile/riattiva}">
+            <div class="form-row ml-5">
+              <div class="form-group col-10 ml-4">
+                <select class="form-control" name="id_riattivato" id="id_riattivato">
+                  <option value="null">Utente</option>
+                  <option th:each="utente : ${utenti_non_attivi}" th:name ="id_riattivato" th:value="${utente.id}" th:text="${utente.nome} + ' ' + ${utente.cognome} + ' '+ '_'+ ' '+ '_'+ ' '+ ${utente.utente.email} ">
+                  </select>
+                </div>
+              </div>
+              <input class="btn btn-success mb-3" type="submit" value ="Riattiva">
+            </form>
+          </div>
+
+        </div>
+
+        <div class="col">
+          <a href="https://erretechnology.com/" target="blank"><img
+            src="/view/MyWork/images/errelogowhite.png" height="80px"
+            alt="erre_logo"></a>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+    crossorigin="anonymous"></script>
+
+  </body>
+  </html>

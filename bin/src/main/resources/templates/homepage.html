@@ -1,0 +1,297 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="Description" content="homepage dell'intranet di Erre Technology">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="linkedin:" content="">
+
+  <!-- Add icon library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro'
+	rel='stylesheet' type='text/css'>
+  <title>Homepage</title>
+  <style>
+h1, h2, h3, h4, h5, textarea, p, label, input, button {
+	font-family: "Source Sans Pro"
+, sans-serif;
+	
+}
+
+  body {
+    background-color: #303030;
+    background-image: url("/view/MyWork/images/carbonio.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color:#F3F3F3;
+    font-family: Noto Sans, sans-serif;
+    overflow-x: hidden;
+  }
+
+  .title{
+    font-size: 120px;
+    font-family: Noto Sans, sans-serif;
+    color: #094EFF;
+    font-weight: 700;
+    text-shadow: 2px 9px 5px #303030;
+    -webkit-text-stroke: 0.3px #303030;
+  }
+
+  @media screen and (min-width: 200px) {
+    .title {
+      font-size: 25px;
+    }
+    .descrizione{
+      font-size: 5px;
+    }
+  }
+
+  @media screen and (min-width: 400px) {
+    .title {
+      font-size: 40px;
+    }
+    .descrizione{
+      font-size: 7px;
+    }
+  }
+
+  @media screen and (min-width: 800px) {
+    .title {
+      font-size: 60px;
+    }
+    .descrizione{
+      font-size: 10px;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    .title {
+      font-size: 80px;
+    }
+    .descrizione{
+      font-size: 15px;
+    }
+  }
+
+  @media screen and (min-width: 1600px) {
+    .title {
+      font-size: 100px;
+    }
+    .descrizione{
+      font-size: 20px;
+    }
+  }
+
+  .magnify:hover{
+    width: 101%;
+    heigth: 101%;
+  }
+
+  .centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+  .descrizione{
+    font-size: 35px;
+    font-weight: 400;
+    font-family: Noto Sans, sans-serif;
+    text-shadow: 9px 3px 6px #303030;
+    -webkit-text-stroke: 0.3px #303030;
+  }
+
+  /*START FOOTER*/
+  footer {
+  	margin-top:150px;
+  	background-color: black;
+  	width: 100%;
+  	height: 160px;
+  	flex-shrink: 0;
+  }
+  /* Style all font awesome icons */
+  .fa {
+  	padding: 20px;
+  	font-size: 30px;
+  	width: 70px;
+  	height: 70px;
+  	text-align: center;
+  	text-decoration: none;
+  }
+
+  /* Style all font awesome icons */
+  .fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  /* Add a hover effect if you want */
+  .fa:hover {
+    opacity: 0.9;
+  }
+
+  /* Set a specific color for each brand */
+
+  /* Facebook */
+  .fa-facebook {
+    background: #3B5998;
+    color: white;
+  }
+
+  /* Twitter */
+  .fa-linkedin {
+    background: #55ACEE;
+    color: white;
+  }
+  </style>
+</head>
+<body>
+  <!-- PANNELLO IMMAGINI CON SCELTA-->
+  <div class="container-fluid">
+    <div class="row mt-3 mb-5">
+
+      <div class="col">
+        <div class="magnify container-fluid">
+
+          <figure class="figure position-relative">
+            <img src="/view/Homepage/Images/my_work_1.jpg" class="img-fluid rounded-lg " alt="mywork1">
+
+            <div class="container centered text-center mt-2">
+              <h1 class="h1 title">My work</h1>
+              <h4 class="h4 descrizione mb-4">Scopri cos'è successo di recente in Erre</h4>
+              <div class="container">
+                <a class="btn btn-primary btn-lg" th:href="@{/myWork/}" role="button"><b>ENTRA</b></a>
+              </div>
+            </div>
+          </figure>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="magnify container-fluid">
+
+          <figure class="figure position-relative">
+            <img src="/view/Homepage/Images/my_life_1.jpg" class="img-fluid rounded-lg " alt="mylife1">
+
+            <div class="container centered text-center mt-2">
+              <h1 class="h1 title">My life</h1>
+              <h4 class="h4 descrizione mb-4">Scopri cosa fare il prossimo fine settimana</h4>
+              <div class="container">
+                <a class="btn btn-primary btn-lg" th:href="@{/myLife/}" role="button"><b>ENTRA</b></a>
+              </div>
+            </div>
+          </figure>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- PANNELLO LINKEDIN-->
+  <div class="container mt-2">
+    <div class="row  ml-5">
+
+      <div class="col-1">
+      </div>
+
+      <div class="col-8 ml-5">
+        <div id="carouselExampleIndicators" class="carousel slide ml-5" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active bg-primary"></li>
+            <li class="bg-primary" data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li class="bg-primary" data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <li class="bg-primary" data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+          </ol>
+          <div class="carousel-inner">
+            <div class="carousel-item active" data-interval="3000">
+              <iframe class="d-block w-100" src="https://www.linkedin.com/embed/feed/update/urn:li:share:6779727207917989888"
+              height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
+            </div>
+            <div class="carousel-item" data-interval="3000">
+              <iframe class="d-block w-100" src="https://www.linkedin.com/embed/feed/update/urn:li:share:6777974764054032384"
+              height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
+            </div>
+            <div class="carousel-item" data-interval="3000">
+              <iframe class="d-block w-100" src="https://www.linkedin.com/embed/feed/update/urn:li:share:6778281649567236098"
+              height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
+            </div>
+            <div class="carousel-item" data-interval="3000">
+              <iframe class="d-block w-100" src="https://www.linkedin.com/embed/feed/update/urn:li:share:6777857210736230400"
+              height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-1">
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PANNELLO CON LINK AL PROFILO-->
+  <div class="row justify-content-center " style="margin-top: 100px; margin-bottom: 150px;">
+    <div class="col-4">
+      <img src="/view/Homepage/Images/phone_person.png" class="img-fluid mt-3" alt="phoneAndHuman.png">
+    </div>
+
+    <div class="col-4 text-center mt-5">
+      <div class="container mt-5">
+        <h3 class="p text-center">Se desideri vedere le tue informazioni dettagliate, vai alla gestione del tuo profilo</h3>
+        <a class="btn btn-primary btn-lg mb-5 mt-3" th:href="@{/profile/}">PROFILO</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANNELLO FOOTER CON INFO-->
+	<footer class="align-items-center">
+		<div class="container align-items-center mt-4"
+			style="margin-top: 40px">
+			<div class="row justify-content-center align-items-center mt-3 pt-4"
+				style="margin-top: 15px; padding-top: 15px;">
+				<div class="col-sm-4 col-lg-4">
+					<a href="https://erretechnology.com/" target="blank"><img
+						src="/view/MyWork/images/errelogowhite.png" height="80px"
+						alt="erre_logo" style="margin: auto"></a>
+				</div>
+				<div class="col-sm-4 col-lg-4">
+					<img src="/view/MyWork/images/thegate.png" width="100%"
+						style="margin: auto;">
+					<p style="color: #F3F3F3; text-align: center; font-size: 20px;">
+						Supporto: +39 011 197 429 00</p>
+				</div>
+				<div class="col-sm-4 col-lg-4 pl-5" style="padding-left: 150px">
+					<a class="rounded fa fa-facebook"
+						href="https://www.facebook.com/erretechnologygroup/"
+						target="blank"></a> <a class="rounded fa fa-linkedin ml-2"
+						href="https://www.linkedin.com/company/erretechnologygroup/"
+						style="margin-left: 10px" target="blank"></a>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+  </body>
+  </html>

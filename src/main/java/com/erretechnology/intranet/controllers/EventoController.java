@@ -209,6 +209,6 @@ public class EventoController extends BaseController {
 		evento.setVisibile(false);
 		repoEvento.save(evento);
 		saveLog("eliminato un post", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		return "redirect:/evento/list";
+		return "redirect:/myWork/";
 	}
 }

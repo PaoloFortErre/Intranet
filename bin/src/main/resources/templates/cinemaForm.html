@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Cinema aggiungi</title>
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
+
+<style>
+body {
+	background-image: url("/view/MyWork/images/background.png");
+	background-repeat: no-repeat, repeat;
+	background-attachment: fixed;
+}
+
+#input {
+	background-color: #E2E2E2;
+	border-radius: 0px 0px 0px 0px;
+	border: 0px solid #E2E2E2;
+}
+</style>
+
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" id="colForm">
+
+				<h4 style="text-align: center; margin-bottom: 5px;">Inserisci un
+					nuovo film o serie</h4>
+				<hr style="background-color: #F3F3F3;">
+
+				<p style="text-align: right; margin-bottom: 30px;display: inline-block;">
+					<a class="mr-2" th:href="@{/myLife/}" style="color: #F3F3F3;">
+						<img src="/view/MyWork/images/frecciasinistra.png" style="display: inline-block;" width="20%">Torna indietro
+					</a>
+				</p>
+
+				<form th:action="@{/cinema/insert}" th:object="${cinema}"
+					method="post" enctype="multipart/form-data" class="signin-form">
+
+					<div class="form-group col-12">
+						<label for="titolo">Titolo </label>
+						<input class="form-control" type="text" name="titolo" id="input" th:field="*{titolo}" required>
+					</div>
+
+					<div class="form-group col-7">
+						<label for="categoria">Piattaforma</label>
+						<select class="custom-select" name="categoria" th:field="*{categoria}">
+							<option selected value=" "></option>
+							<option th:each="category: ${categorie}" th:value="${category.id}" th:text="${category.nome}"></option>
+						</select>
+					</div>
+
+					<div class="form-group col-8">
+						<label for="immagine">Immagine di Copertina</label>
+						<input type="file" class="form-control-file" accept="image/png, image/jpeg" name="immagine" id="immagine">
+					</div>
+					<div class="form-group col-4">
+						<input class="form-control" type="submit" id="pubblicaSubmit" value="Pubblica">
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

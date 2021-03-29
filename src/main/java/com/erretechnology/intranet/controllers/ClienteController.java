@@ -147,6 +147,6 @@ public class ClienteController extends BaseController{
 		cliente.setVisibile(false);
 		repoCliente.save(cliente);
 		saveLog("cancellato un nuovo cliente", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		return "redirect:/cliente/list";
+		return "redirect:/myWork/";
 	}
 }

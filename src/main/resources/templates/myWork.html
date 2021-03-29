@@ -235,6 +235,15 @@ table, th, td {
 									width="38%">
 							</button>
 						</form>
+							<form
+							th:action="@{'/podcast/deletePodcast/'+${primoPodcast.id}}"
+							th:if="${GMW}" method="get">
+							<button type="submit" name="modifica"
+								style="background-color: transparent; border: 0px solid #232323;">
+								<img src="/view/MyWork/images/trash.png" style="float: left"
+									width="38%">
+							</button>
+						</form>
 						<div th:if="${altriPodcast!=null}">
 							<a href="" id="podcast" onclick="mostraPodcast()"
 								style="text-decoration: none; color: #f3f3f3; font-size: 13px;">
@@ -364,7 +373,14 @@ table, th, td {
 											<img src="/view/MyWork/images/edit.png" style="float: right"
 												width="38%">
 										</button>
-									</form></td>
+									</form><form th:action="@{'/cliente/delete/'+${cliente.id}}"
+										th:if="${GMW}" method="get">
+										<button type="submit" name="modifica"
+											style="background-color: #232323; border: 0px solid #232323; float: right;">
+											<img src="/view/MyWork/images/trash.png" style="float: right"
+												width="38%">
+										</button>
+									</form>  </td>
 
 							</tr>
 						</th:block>
@@ -418,8 +434,18 @@ table, th, td {
 											<br>
 											<button type="submit" name="modifica"
 												style="background-color: #232323; border: 0px solid #232323; float: right; color: grey">
-												Modifica<img src="/view/MyWork/images/edit.png" style="float: right"
+												<img src="/view/MyWork/images/edit.png" style="float: right"
 													width="18%">
+											</button>
+										</form>
+										<form
+											th:action="@{'/myWork/deleteSondaggio/' +${sondaggio.id}}"
+											th:if="${GMW}" method="post">
+											<br>
+											<button type="submit" name="modifica"
+												style="background-color: #232323; border: 0px solid #232323; float: right; color: grey">
+												<img src="/view/MyWork/images/trash.png" style="float: right"
+													width="28%">
 											</button>
 										</form></td>
 								</tr>
@@ -547,6 +573,14 @@ table, th, td {
 									<img src="/view/MyWork/images/editb.png" style="float: right"
 										width="38%">
 								</button>						</form>
+								
+									<form th:action="@{'/evento/delete/'+${eventi.id}}" th:if="${GMW}"
+							method="get">
+<button type="submit" name="modifica"
+									style="background-color: #f3f3f3; border: 0px solid #232323; float: right;">
+									<img src="/view/MyLife/images/trash.png" style="float: right"
+										width="38%">
+								</button>						</form>
 						</div>
 						<div id="eventoBody">
 							<p th:text="${eventi.contenuto}"
@@ -599,6 +633,13 @@ table, th, td {
 <button type="submit" name="modifica"
 									style="background-color: #f3f3f3; border: 0px solid #232323; float: right;">
 									<img src="/view/MyWork/images/editb.png" style="float: right"
+										width="38%">
+								</button>						</form>
+								<form th:action="@{'/evento/delete/'+${eventi2.id}}" th:if="${GMW}"
+							method="get">
+<button type="submit" name="modifica"
+									style="background-color: #f3f3f3; border: 0px solid #232323; float: right;">
+									<img src="/view/MyLife/images/trash.png" style="float: right"
 										width="38%">
 								</button>						</form>
 							</div>
@@ -671,6 +712,14 @@ table, th, td {
 										width="38%">
 								</button>
 							</form>
+							<form th:action="@{'/news/delete/'+${news.id}}" th:if="${GMW}"
+								method="get">
+								<button type="submit" name="modifica"
+									style="background-color: #232323; border: 0px solid #232323; float: right;">
+									<img src="/view/MyWork/images/trash.png" style="float: right"
+										width="38%">
+								</button>
+							</form>
 							<p style="line-height: 30px; margin-top: 20px; font-size: 15px"
 								th:text="${news.contenuto}"></p>
 
@@ -706,6 +755,14 @@ table, th, td {
 								<button type="submit" name="modifica"
 									style="background-color: #232323; border: 0px solid #232323; float: right;">
 									<img src="/view/MyWork/images/edit.png" style="float: right"
+										width="38%">
+								</button>
+							</form>
+								<form th:action="@{'/news/delete/'+${news2.id}}" th:if="${GMW}"
+								method="get">
+								<button type="submit" name="modifica"
+									style="background-color: #232323; border: 0px solid #232323; float: right;">
+									<img src="/view/MyWork/images/trash.png" style="float: right"
 										width="38%">
 								</button>
 							</form>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="it" dir="ltr">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <title>Profilo Intranet</title>
+  <meta name="description" content="Questo è un profilo admin">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Add icon library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+  integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+  crossorigin="anonymous">
+
+  <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+  integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+  crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+  crossorigin="anonymous"></script>
+
+  <title>profilo</title>
+
+  <style media="screen">
+
+  body {
+    background-color: black;
+    background-image: url("/view/MyWork/images/carbonio.jpg");
+    background-repeat: no-repeat;
+    background-size: cover,contain;
+    color:#F3F3F3;
+    font-family: Noto Sans, sans-serif;
+    overflow-x: hidden;
+  }
+
+  #logo{
+    width: 25%;
+  }
+
+  nav {
+    font-size: 25px;
+    margin-right: 15px;
+    color: #F3F3F3;
+  }
+
+  .content>a {
+    color: #F3F3F3;
+  }
+
+  .content>a:link {
+    text-decoration: none;
+  }
+
+  .content>a:hover {
+    color: blue;
+  }
+
+  /* Top left pin */
+  .top-left {
+    position: absolute;
+    width: 12%;
+    height: 14%;
+    top: 4px;
+    left: 0px;
+  }
+
+  .top-left2 {
+    position: absolute;
+    width: 8%;
+    height: 12%;
+    top: 4px;
+    left: 0px;
+  }
+
+  /*Profile Pic Start*/
+  .picture{
+    width: 270px;
+    height: 270px;
+    background-color: #999999;
+    border: 3px solid #CCCCCC;
+    color: #FFFFFF;
+    border-radius: 50%;
+    overflow: hidden;
+    transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+  }
+
+  .picture:hover{
+    border-color: yellow;
+  }
+  /*Profile Pic End*/
+
+  .input--file {
+    position: relative;
+    color: #7f7f7f;
+  }
+
+  .input--file input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  /* Darker background on mouse-over */
+  .camera:hover {
+    color: yellow;
+  }
+
+  .card-text{
+    font-size: 13px;
+  }
+  #immagine{
+    display: none;
+  }
+  .scegli_immagine{
+    cursor: pointer;
+  }
+  </style>
+
+</head>
+
+<body>
+  <!-- ROW CON NAVBAR -->
+  <div class="row justify-content-start">
+    <div class="col-3 ml-5">
+      <a href="https://erretechnology.com/" target="blank">
+        <img id="logo" class="img-fluid rounded mt-5"
+        src="/view/Login/images/erre_group_white.png" alt="logoErreGroup.png">
+      </div>
+
+      <div class="col-lg-6 col-md-4 col-sm-3">
+        <nav class="navbar mt-5 mr-5">
+          <div class="content mr-5" >
+            <a th:href="@{/homepage}">HOME</a>
+          </div>
+          <div class="content mr-5" >
+            <a th:href="@{/comunicazioniHr/}">COMUNICAZIONI HR</a>
+          </div>
+          <div class="content mr-5" >
+            <a th:href="@{/moduli/}">MODULI</a>
+          </div>
+          <div class="content mr-5" >
+            <a href="http://polyedro.erretechnology.com/www/">POLYEDRO</a>
+          </div>
+        </nav>
+      </div>
+
+    </div>
+
+    <!-- ROW CON IMMAGINE PROFILO, NOME E EMAIL -->
+
+    <div class="container-fluid mt-4">
+      <div class="row justify-content-start">
+
+        <div class="col-2 mr-5">
+          <div class="container-fluid">
+            <img class="picture img rounded-circle"
+            th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}" alt="profile_picca"
+            style="width: 260px;">
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-2 col-sm-1">
+          <div class="container text-center">
+            <h1 class="h1" th:text="${utente.nome}"></h1>
+            <h1 class="h1 text-primary" th:text="${utente.cognome}" ></h1><br><br>
+            <h6 class="h6" th:text="${utente.utente.email}"></h6>
+            <img id="logo2" class="img-fluid shadow rounded-pill mw-25"  th:src="'data:image/png;base64,' + ${utente.settore.getImgData(utente.settore.logo)}" alt="logo-agency">
+          </div>
+        </div>
+
+        <!--LOGO DINAMICO -->
+        <div class="col-2">
+        </div>
+
+        <div class="col-2">
+        </div>
+
+        <!-- DESCRIZIONE PERSONALE -->
+        <div class="col-3 justify-content-end mr-4">
+          <div class="card position-relative text-end">
+            <img class="top-left" src="/view/Profile/Images/pin_post-it.png" alt="pin-post-it">
+            <div class="card-body">
+              <h6 class="card-title text-center" style="color:#303030">Una breve descrizione di me stesso:</h6>
+              <p class="card-text" th:text="${utente.descrizione}" style="color:#303030"></p>
+              <div th:if="${session.id} == ${utente.utente.id}">
+                <form th:action="@{/profile/modificaDescrizione}" method="post">
+                  <div class="form-group">
+                    <textarea class="form-control" id="exampleFormControlTextarea1" name="descrizione" placeholder="Modifica la tua descrizione"
+                    cols="35" rows="3" maxlength="255" required></textarea>
+                  </div>
+                  <input class="btn btn-primary " type="submit" value="Modifica descrizione"/>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ROW DESCRIZIONE E DASHBOARD -->
+    <div class="container-fluid">
+      <div class="row justify-content-start mt-5 ml-1" th:with="AM = ${#authorization.expression('hasAuthority(''AM'')')}">
+
+        <div class="col-2 ml-3">
+          <!-- GESTIONE FOTO -->
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              GESTISCI FOTO PROFILO
+            </button>
+            <div class="dropdown-menu">
+              <form th:action="@{/profile/cambiaFotoProfilo}" method ="post" enctype="multipart/form-data">
+                <label class="dropdown-item font-weight-bold" style="cursor: pointer;" for="scegli">SCEGLI LA TUA FOTO PROFILO</label>
+                <input class="d-none" type="file" name="immagine" id="scegli" accept="image/png, image/jpeg"/>
+                <label class="dropdown-item font-weight-bold" style="cursor: pointer;" for="salva">SALVA LA FOTO PROFILO</label>
+                <input class="d-none" type="submit" id="salva"/>
+                <div class="dropdown-divider"></div>
+                <form th:action="@{/profile/eliminaFotoProfilo}" method ="post">
+                  <label class="dropdown-item font-weight-bold text-danger" style="cursor: pointer;" for="elimina">ELIMINA LA FOTO PROFILO</label>
+                  <input class="d-none" type="submit" value="Elimina foto profilo" id="elimina">
+                </form>
+              </form>
+            </div>
+          </div>
+
+          <!-- IMPOSTAZIONI -->
+          <div class="dropdown mt-3">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              IMPOSTAZIONI
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <form th:action="@{/profile/setVisualizzazione}" method ="post">
+                <div class="form-check pr-1 font-weight-bold">
+                  VUOI CONDIVIDERE LA TUA DATA DI NASCITA?<br>
+                  <input type="radio" style="cursor: pointer;" id="set" name="set" value="Si" th:checked="${utente.visualizzaDataNascita}">
+                  <label for="set"><b>SI</b></label>
+                  <input type="radio" style="cursor: pointer;" id="set" name="set" value="No" th:checked="${!utente.visualizzaDataNascita}">
+                  <label for="set" ><b>NO</b></label><br>
+                  <input class="btn btn-info" type="submit" value="Cambia!">
+                </div>
+              </form>
+              <div class="dropdown-divider bg-primary"></div>
+              <a class="dropdown-item mt-1" th:href="@{/profile/cambioPassword}" method="post"><b>CAMBIO PASSWORD</b></a>
+              <div class="dropdown-divider bg-primary"></div>
+              <a class="dropdown-item mt-1" th:href="@{/logout}"><b>LOGOUT</b></a>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-6 mr-5 pt-n5 ">
+          <div class="container bg-gradient-warning">
+
+            <div class="card position-relative border border border-danger shadow text-center " style="color:#303030; border: 5px !important;" >
+              <img class="top-left2" src="/view/Profile/Images/pin_post-it.png" alt="pin-post-it">
+              <div class="card-header">
+                <h5 class="h5"><b>ATTIVITA' RECENTI</b></h5>
+                <small>Anteprima di quello che hai fatto di recente</small>
+              </div>
+              <div class="container-fluid">
+                <table class="table table-dark">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col" style="font-size: 17px "><b>Data e Ora</b></th>
+                      <th scope="col" style="font-size: 17px "><b>Attività</b></th>
+                    </tr>
+                  </thead>
+                  <tbody th:each="log:${log}">
+                    <tr th:if="${AM}">
+                      <td th:utext="${#dates.format(log.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"></td>
+                      <td th:utext="${log.utente.nome} + ' '+ ${log.utente.cognome} + ' ' + 'ha' + ' ' + ${log.azione}"></td>
+                    </tr>
+                    <tr th:if="${!AM}">
+                      <td th:utext="${#dates.format(log.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"></td>
+                      <td th:utext="'hai' + ' ' + ${log.azione}"></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="container text-center">
+                  <form th:action="@{/profile/mostra_log}" method="get">
+                    <button type="submit" class="btn btn-primary mb-1">Vedi tutte</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-2 col-sm-2 mt-5 ">
+          <div class="container shadow text-center rounded-circle bg-info pr-n2 pl-n2" th:if="${AM}">
+            <div class="container text-white mt-5 pt-3">
+              <h1 class="h1 text-center mt-3 text-dark" th:text="${attivi}">"</h1>
+              <h3 class="h3">UTENTI REGISTRATI</h3>
+            </div><br>
+
+            <!-- GESTIONE ACCOUNT INTRANET -->
+            <div class="btn-group mb-4">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                GESTISCI GLI UTENTI
+              </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item font-weight-bold" th:href="@{/profile/registra}">AGGIUNGI O RIATTIVA UTENTE</a>
+                <a class="dropdown-item text-danger font-weight-bold mt-2" th:href="@{/profile/cancellaUtente}">ELIMINA UTENTE</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item font-weight-bold" th:href="@{/profile/gestisciPermesso}">GESTISCI I PERMESSI DEGLI UTENTI</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </body>
+  </html>

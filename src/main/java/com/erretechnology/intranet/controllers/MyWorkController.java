@@ -200,16 +200,16 @@ public class MyWorkController extends BaseController {
 	
 		return "redirect:/myWork/";
 	}
-	@PostMapping(value = "/deleteSondaggio")
-	public String deleteMessaggio(int id, HttpSession session) {
+	@PostMapping(value = "/deleteSondaggio/{id}")
+	public String deleteMessaggio(@PathVariable int id, HttpSession session) {
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
-		if(serviceSondaggio.findByAutore(autore).stream().filter(x-> x.getId() == id).count() > 0) {
+		
 			Sondaggio s =serviceSondaggio.findById(id);
 			s.setVisibile(false);
 			serviceSondaggio.save(s);
 			saveLog("cancellato un sondaggio", autore);
 			return "redirect:/myWork/";
-		}return "redirect:forbidden";
+		//return "redirect:forbidden";
 
 	}
 

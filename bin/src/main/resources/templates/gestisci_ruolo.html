@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="it">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="description" content="Questo è un profilo admin">
+  <meta name="viewport" content="width=device-width, initial-scale=1,
+  shrink-to-fit=no">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<link
+	href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap"
+	rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+  integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+  crossorigin="anonymous">
+
+   <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+  crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+  crossorigin="anonymous"></script>
+
+
+  <title>elimina_utente</title>
+  <style media="screen">
+  body {
+    background-color: black;
+    background-image: url("/view/MyWork/images/carbonio.jpg");
+    background-repeat: no-repeat;
+    background-size: cover, contain;
+    color:#F3F3F3;
+    font-family: Noto Sans, sans-serif;
+  }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- ROW CON TASTO BACK, INPUT E LOGO -->
+    <div class="row mt-5">
+
+      <div class="col">
+        <a class="btn btn-primary" th:href="@{/profile/}">TORNA INDIETRO</a>
+      </div>
+
+      <div class="col-8 text-center mt-5">
+        <div class="container-fluid text-center border border-white mt-5" style="background-color: #303030;">
+          <h3 class="h3 text-center mb-4 mt-2">ASSEGNA PERMESSI AD UN UTENTE</h3>
+
+          <form class="" th:action="@{/profile/addPermesso(email = ${email}, permessi = )}"  method="post">
+            <div class="form-row ml-5">
+              <div class="form-group ml-5 pl-3">
+	            <div id="text" class="row justify-content-center mt-2">
+		        </div>
+                <select id="nome_cognome" class="form-control" th:name="email" th:value="${email}">
+                  <option value="null">NOME E COGNOME</option>
+                  <option th:each="utente1 : ${utenti}" th:name ="nome_cognome"
+                  th:value="${utente1.nome} + ' ' + ${utente1.cognome} + ' ' + ${utente1.utente.email}" th:text="${utente1.nome} + ' ' + ${utente1.cognome} + ' ----- ' + ${utente1.utente.email}">
+                </select>
+              </div>
+            </div>
+
+              <div class="form-row">
+                <div class="form-group text-justify ml-5" id="gruppo_check" >
+                </div>
+              </div>
+
+              <div class="container text-center">
+                <input class="btn btn-success mb-3" type="button" value ="ASSEGNA" onclick="test()">
+              </div>
+            </form>
+          </div>
+        </div>
+
+
+      <div class="col">
+        <a href="https://erretechnology.com/" target="blank"><img
+          src="/view/MyWork/images/errelogowhite.png" height="80px"
+          alt="erre_logo"></a>
+      </div>
+
+    </div>
+</div>
+    <script>
+    function sendAjaxRequest() {
+    	$("#gruppo_check").empty();
+      var email = $("#nome_cognome").val();
+      var last_index = email.lastIndexOf(" ");
+  	  email = email.substr(last_index+1);
+
+  	  $.get( "http://localhost:8080/profile/getPermessiMancanti?email=" + email, function( data ) {
+        $.each(data, function(key, value) {
+          let checkbox = "<input class='form-check-input' type='checkbox' value="+key+" id='invalidCheck"+key+"'>"+
+          "<label class='form-check-label' for='invalidCheck"+key+"'>" + value + "</label>" + "<br>";
+          $("#gruppo_check").append(checkbox);
+        });
+
+      });
+
+	  $.get( "http://localhost:8080/profile/getAllPermessi?email=" + email, function( data ) {
+	        $.each(data, function(key, value) {
+	          let checkbox = "<input class='form-check-input' type='checkbox' value="+key+" id='invalidCheck"+key+"' checked>"+
+	          "<label class='form-check-label' for='invalidCheck'"+key+">" + value + "</label>" + "<br>";
+	          $("#gruppo_check").append(checkbox);
+	        });
+
+	      });
+   }
+
+    $(document).ready(function() {
+      $("#nome_cognome").change(function() {
+        sendAjaxRequest();
+      });
+    });
+
+
+
+
+    function test(){
+    	var sList = "";
+    	$('input[type=checkbox]').each(function () {
+    		if(this.checked){
+    			sList += $(this).val() + " , ";
+    		}
+
+    	});
+    	console.log (sList);
+    	var email = $("#nome_cognome").val();
+        var last_index = email.lastIndexOf(" ");
+    	  email = email.substr(last_index+1);
+    	 $.get("http://localhost:8080/profile/addPermesso?email=" + email + "&list=" + sList, function( data) {
+    		 let checkbox = "<p class='p text-danger'>Permessi modificati</p>" + "<br>";
+	          $("#text").append(checkbox);
+    	 });
+    }
+  </script>
+
+
+
+</body>
+</html>

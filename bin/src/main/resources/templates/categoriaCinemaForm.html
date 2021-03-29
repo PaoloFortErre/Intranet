@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form th:action="@{/categoriacinema/insert}" th:object="${categoriaCinema}" method="post">
+	  <label for="nome">Nome:</label><br>
+	  <input type="text" id="nome" name="nome" th:field="*{nome}"><br>
+	  <br>
+	  <input type="submit" value="Salva">
+	</form>
+
+
+
+</body>
+</html>

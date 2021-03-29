@@ -1,0 +1,94 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+<head>
+  <meta charset="utf-8">
+  <title>Login Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" content-type="" href="/view/Login/css/style.css">
+  <link rel="stylesheet" href="view/Login/scss/style.scss">
+</head>
+<style media="screen">
+.password_lost{
+  color: #fff;
+  text-decoration-line: underline;
+  font-size: 13px !important;
+}
+</style>
+<body class="img js-fullheight" style="background-image: url(/view/Login/images/bg.jpg);">
+  <section class="ftco-section">
+    <div class="container">
+
+      <div class="row justify-content-center">
+        <div class="col-md-6 text-center mb-1">
+          <img class="img-fluid" src="/view/Login/images/title.png" alt="thegate.png">
+          <h2 class = "h5 pt-4" style="color: #fff">Intranet di ERRE Technology</h2>
+        </div>
+      </div>
+
+      <div class="row justify-content-center pt-5">
+        <div class="col-md-6 col-lg-4">
+          <div class="login-wrap pt-5">
+            <p
+            id="error"
+            th:if="${loginError}"
+            style=
+            "text-align: center !important;
+            color: red !important;
+            text-decoration-line: underline !important;
+            text-decoration-color: red !important; " > Hai sbagliato email o password </p>
+            <form th:action="@{/login}" method="post" class="signin-form">
+              <div class="form-group">
+                <input type="email" class="form-control" name="username" placeholder="Email" required>
+              </div>
+              <div class="form-group">
+                <input id="password-field" name="password" type="password" class="form-control" placeholder="Password" required>
+                <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="form-control btn btn-primary submit px-3"
+                style="background: #1C54CF !important; border: 1px solid black !important; font-size: 20px;" >
+                <b>ACCEDI</b>
+              </button>
+            </div>
+            <div class="form-group justify-content-center d-md-flex">
+              <a class="password_lost" href="/password_dimenticata">Password dimenticata?</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-between">
+      <div class="col-4">
+      </div>
+      <div class="col-3 ml-5 mt-5">
+        <div class="container ml-5 mt-5">
+          <div class="container ml-5">
+            <a href="https://erretechnology.com/" target="blank">
+              <img class="img-fluid ml-5 mt-5" src="/view/Login/images/erre_group_white.png" alt="logoErreGroup.png">
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+
+</section>
+
+<script src="view/Login/js/popper.js"></script>
+<script src="view/Login/js/bootstrap.min.js"></script>
+<script src="view/Login/js/main.js"></script>
+
+</body>
+</html>
