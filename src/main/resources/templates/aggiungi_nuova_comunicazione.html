@@ -23,84 +23,89 @@
   <link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
 
   <style>
-    body {
-      background-image: url("/view/MyWork/images/background.png");
-      background-repeat: no-repeat, repeat;
-      background-attachment: fixed;
-    }
+  body {
+    background-image: url("/view/MyWork/images/background.png");
+    background-repeat: no-repeat, repeat;
+    background-attachment: fixed;
+  }
 
-    #input {
-      background-color: #E2E2E2;
-      border-radius: 0px 0px 0px 0px;
-      border: 0px solid #E2E2E2;
-    }
+  #input {
+    background-color: #E2E2E2;
+    border-radius: 0px 0px 0px 0px;
+    border: 0px solid #E2E2E2;
+  }
   </style>
 
 </head>
 <body>
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="margin: auto;margin-top: 50px;
-      padding: 15px;">
-      <table>
-        <tr th:each="comunicazione: ${comunicazioni}">
-          <td>
-            <img src="/view/MyWork/images/pdf-icon.png" style="float: left;" width="30px"><a th:href="@{/file/downloadFileHR(id=${comunicazione.id})}" th:text="${comunicazione.nome}" th:download="${comunicazione.nome}" style="color: #F3F3F3; "></a>
-          </td>
-          <td>
-            <form th:action="@{/file/deleteFileHR(id=${comunicazione.id})}" method="post">
-              <button type="submit" id="bottoneModifica" style="float: right;">Elimina</button>
-            </form>
-          </td>
-        </tr>
+  <div class="container-fluid">
+    <div class="row mt-3">
+      <div class="col-6 ml-5">
+        <table class="table bg-white">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Data</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="comunicazione: ${comunicazioni}">
+              <th scope="row">1</th>
+              <td th:text="${#dates.format(comunicazione.timestamp*1000, 'dd/MM/yyyy')}"></td>
+              <td>
+                <img src="/view/MyWork/images/pdf-icon.png" style="float: left;" width="7%">
+                <a th:href="@{/file/downloadFileHR(id=${comunicazione.id})}"
+                th:text="${comunicazione.nome}" th:download="${comunicazione.nome}"></a>
+              </td>
+              <td>
+                <form th:action="@{/file/deleteFileHR(id=${comunicazione.id})}" method="post">
+                  <button class="btn btn-danger" type="submit">Elimina</button>
+                </form>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-      </table>
-    </div>
-  </div>
-  <div sec:authorize="hasAuthority('GHR')">
+      </div>
 
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" id="colForm" style="margin-top:100px;">
+        <div class="container" sec:authorize="hasAuthority('GHR')">
+          <h4 style="text-align: center; margin-bottom: 5px;">Inserisci una
+            nuova comunicazione HR</h4>
+            <hr style="background-color: #F3F3F3;">
 
-    <div class="row">
+            <p style="text-align: right; margin-bottom: 30px;display: inline-block;">
+              <a class="mr-2" th:href="@{/comunicazioniHr/}" style="color: #F3F3F3;">
+                <img src="/view/MyWork/images/frecciasinistra.png" style="display: inline-block;" width="20%">Torna indietro
+              </a>
+            </p>
 
+            <form th:action="@{/file/uploadHR}" th:object="${comunicazioneHR}"
+            method="post" enctype="multipart/form-data" class="signin-form">
 
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" id="colForm" style="margin-top:160px;">
+            <p th:text="${message}" th:if="${message ne null}"
+            class="alert alert-primary"></p>
 
-        <h4 style="text-align: left; margin-bottom: 5px;">Inserisci una
-          nuova comunicazione HR:</h4>
-          <hr style="background-color: #F3F3F3;">
+            <div class="form-group col-12">
+              <label for="nome">Nome</label>
+              <input type="text" name="nome" class="form-control" id="input" required>
+            </div>
 
-          <p style="text-align: right; margin-bottom: 30px;display: inline-block;">
-            <a class="mr-2" th:href="@{/myLife/}" style="color: #F3F3F3;">
-              <img src="/view/MyWork/images/frecciasinistra.png" style="display: inline-block;" width="20%">Torna indietro
-            </a>
-          </p>
+            <div class="form-group col-8">
+              <label for="file">File</label>
+              <input type="file" class="form-control-file" accept="application/pdf" name="file" id="file">
+            </div>
+            <div class="form-group col-4">
+              <input class="form-control" type="submit" id="pubblicaSubmit" value="Pubblica">
+            </div>
 
-          <form th:action="@{/file/uploadHR}" th:object="${comunicazioneHR}"
-          method="post" enctype="multipart/form-data" class="signin-form">
-          <p th:text="${message}" th:if="${message ne null}"
-          class="alert alert-primary"></p>
-          <div class="form-group">
-            <label for="nome">Nome: </label> <input type="text"
-            name="nome" class="form-control" id="input"
-            required>
-          </div>
-
-
-          <div class="form-group">
-            <label for="file">File:</label> <input type="file"
-            class="form-control-file"
-            accept="application/pdf" name="file" id="file">
-          </div>
-
-
-
-          <input type="submit" id="pubblicaSubmit" value="Pubblica">
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-
-</div>
 
 </body>
 </html>
