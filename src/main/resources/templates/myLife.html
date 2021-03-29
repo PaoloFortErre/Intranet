@@ -500,7 +500,7 @@ COLONNA DESTRA
 					in prossimità</p>
 				<div th:if="${eventilife!=null}">
 					<div th:each="eventilife : ${eventilife}" id="evento1life">
-					<form th:action="@{'/evento/update/'+${evento.id}}"
+					<form th:action="@{'/evento/update/'+${eventilife.id}}"
 									method="get">
 									<button class="btn btn-primary" type="submit" name="modifica">MODIFICA</button>
 								</form>
