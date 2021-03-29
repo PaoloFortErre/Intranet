@@ -207,9 +207,7 @@ table, th, td {
 							src="/view/MyWork/images/more.png" width="30px"
 							style="float: right; margin-bottom: 10px; margin-left: 1px"></a>
 					</div>	
-					<form  action="" th:if="${GMW}" method="get">
-							<button class="btn btn-primary" type="submit" name="modifica">MODIFICA</button>
-						</form>
+					
 					<h2
 					
 				
@@ -219,6 +217,9 @@ table, th, td {
 					<img src="/view/MyWork/images/radice.jpg" class="img-fluid"
 						width="40%" height="100px" style="float: right" id="imgRosario">
 					<div th:if="${primoPodcast!=null}">
+					<form th:action="@{'/podcast/podcastFormUpdate/'+${primoPodcast.id}}" th:if="${GMW}" method="get">
+							<button class="btn btn-primary" type="submit" name="modifica">MODIFICA</button>
+						</form>
 						<p
 							th:text="${#dates.format(primoPodcast.dataPodcast *1000, 'dd/MM/yyyy')}"></p>
 						<audio controls style="margin-top: 10px">
@@ -226,14 +227,18 @@ table, th, td {
 								th:src="'data:audio/mp3;base64,' + ${primoPodcast.getAudioData(primoPodcast.podcast)}"
 								type="audio/ogg">
 						</audio>
-						<div th:if="${altriPodcast!=null}"> <a href="" id="podcast" onclick=""
+						<div th:if="${altriPodcast!=null}"> <a href="" id="podcast" onclick="mostraPodcast()"
 								style="text-decoration: none; color: #f3f3f3; font-size: 13px;">
 								<br>Vedi altri <img
 								src="/view/MyWork/images/frecciasotto.png" width="30px"
 								id="frecciasotto" style="margin-left: 5px;">
 							</a> </div>
 					</div>
-					<div id="altriPodcast" th:each="altriPodcast : ${altriPodcast}">
+					<div id="altriPodcast">
+					<div th:each="altriPodcast : ${altriPodcast}">
+					<form th:action="@{'/podcast/podcastFormUpdate/'+${altriPodcast.id}}" th:if="${GMW}" method="get">
+							<button class="btn btn-primary" type="submit" name="modifica">MODIFICA</button>
+						</form>
 					<p
 							th:text="${#dates.format(altriPodcast.dataPodcast *1000, 'dd/MM/yyyy')}"></p>
 						<audio controls style="margin-top: 10px"  >
@@ -241,7 +246,7 @@ table, th, td {
 								th:src="'data:audio/mp3;base64,' + ${altriPodcast.getAudioData(altriPodcast.podcast)}"
 								type="audio/ogg">
 						</audio>
-					
+					</div>
 					</div>
 
 
@@ -359,7 +364,7 @@ table, th, td {
 						<br> Al momento non ci sono sondaggi
 					</p>
 					<div th:each="sondaggio: ${sondaggi}">
-					<form  th:action="@{'/modificaSondaggi/'+${sondaggio.id}}" th:if="${GMW}" method="get">
+					<form  th:action="@{'/myWork/modificaSondaggi/'+${sondaggio.id}}" th:if="${GMW}" method="get">
 							<button class="btn btn-primary" type="submit" name="modifica">MODIFICA</button>
 						</form>
 					<table class="nuoviClienti" >

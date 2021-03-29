@@ -146,6 +146,7 @@ public class MyLifeController extends BaseController {
 			mav.addObject("film2", film.get(1));
 			mav.addObject("film3", film.get(2));
 		}
+		mav.addObject("filmTutti", film);
 		
 	//	mav.addObject("eventilife2", evento.get(2));
 	//	mav.addObject("img", serviceFileImmagine.getLastImmagineByUtente(u));

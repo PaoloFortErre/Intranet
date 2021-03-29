@@ -483,6 +483,7 @@ COLONNA DESTRA
 **** -->
 			<div class="col-sm-4 col-lg-4" id="col-destra">
 				<div th:if="${GML}">
+				
 					<a th:href="@{/evento/newLife/}"> <img
 						src="/view/MyWork/images/more.png" width="30px"
 						style="float: right; margin-bottom: 10px;"></a>
@@ -499,6 +500,10 @@ COLONNA DESTRA
 					in prossimità</p>
 				<div th:if="${eventilife!=null}">
 					<div th:each="eventilife : ${eventilife}" id="evento1life">
+					<form th:action="@{'/evento/update/'+${evento.id}}"
+									method="get">
+									<button class="btn btn-primary" type="submit" name="modifica">MODIFICA</button>
+								</form>
 						<div class="caption" th:if="${eventilife.copertina!=null}">
 							<img
 								th:src="'data:image/png;base64,' + ${eventilife.copertina.getImgData(eventilife.copertina.data)}"
@@ -573,6 +578,7 @@ COLONNA DESTRA
 					Non ci sono film da consigliare</p>
 
 				<div th:if="${film1!=null}">
+			
 					<img
 						th:src="'data:image/png;base64,' + ${film1.copertina.getImgData(film1.copertina.data)}"
 						class="img-responsive" width="32%"
@@ -613,6 +619,18 @@ COLONNA DESTRA
 									</p>
 								</td>
 							</tr>
+							<tr th:if="${GML}">
+				
+								
+								<td>
+								<form th:action="@{'/cinema/update/'+${film1.id}}"
+									method="get">	<button class="btn btn-primary" type="submit" name="modifica">MODIFICA</button> </form>  </td> 
+															
+							 <td> <form th:action="@{'/cinema/update/'+${film2.id}}"
+									method="get">	<button class="btn btn-primary" type="submit" name="modifica">MODIFICA</button> </form> </td>
+							 <td> <form th:action="@{'/cinema/update/'+${film3.id}}"
+									method="get">	<button class="btn btn-primary" type="submit" name="modifica">MODIFICA</button> </form> </td>
+							</tr>
 						</table>
 					</div>
 				</div>
@@ -639,7 +657,12 @@ COLONNA DESTRA
 									STYLE="margin-left: 5px;; color: #303030;"></p>
 								<p
 									style="FONT-size: 10px; font-style: italic; text-align: right;; color: #303030;"
-									th:text="${libri.autore}"></p></td>
+									th:text="${libri.autore}"></p>
+									
+									<div th:if="${GML}"><form th:action="@{'/libro/update/'+${libri.id}}"
+									method="get">	<button class="btn btn-primary" type="submit" name="modifica">MODIFICA</button> </form> 
+									
+									</div></td>
 						</tr>
 						<tr>
 							<td><img
@@ -649,7 +672,13 @@ COLONNA DESTRA
 									STYLE="margin-left: 5px;; color: #303030;"></p>
 								<p
 									style="FONT-size: 10px; font-style: italic; text-align: right; color: #303030;"
-									th:text="${libri1.autore}"></p></td>
+									th:text="${libri1.autore}"></p>
+									<div th:if="${GML}"><form th:action="@{'/libro/update/'+${libri1.id}}"
+									method="get">	<button class="btn btn-primary" type="submit" name="modifica">MODIFICA</button> </form> 
+									
+									</div>
+									
+									</td>
 						</tr>
 					</table>
 				</div>

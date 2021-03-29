@@ -83,7 +83,7 @@ public class MyWorkController extends BaseController {
 			mav.addObject("primoPodcast", primoPodcast);
 			listPodcast.remove(listPodcast.size()-1);
 			System.out.println(listPodcast.stream().limit(3).collect(Collectors.toList()).size() + " numero podcast");
-			mav.addObject("altriPodcast", listPodcast.stream().limit(3).collect(Collectors.toList()));
+			mav.addObject("altriPodcast", listPodcast.stream().limit(3).sorted(Comparator.comparingInt(Podcast::getId).reversed()).collect(Collectors.toList()));
 		}
 		
 		List<Cliente> clienti = repoCliente.findLimit(3);
