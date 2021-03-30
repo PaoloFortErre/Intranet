@@ -45,6 +45,7 @@ public class PodcastController extends BaseController {
 			podcast.setUtente(serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 			podcast.setNome(StringUtils.cleanPath(file.getOriginalFilename()));
 			podcast.setDataPodcast(Timestamp.valueOf(data.getDate().atStartOfDay()).getTime() / 1000);
+			podcast.setVisibile(true);
 			servicePodcast.save(podcast);
 			saveLog("inserito un nuovo podcast",serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		} catch (IOException e) {

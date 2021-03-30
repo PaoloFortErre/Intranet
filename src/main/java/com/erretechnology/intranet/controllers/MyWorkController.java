@@ -58,7 +58,7 @@ public class MyWorkController extends BaseController {
 		for(UtenteDatiPersonali u : utenti) {
 			calUtente.setTimeInMillis(u.getDataNascita()*1000);
 
-			if((calendar.get(Calendar.MONTH))==(calUtente.get(Calendar.MONTH)) && (calendar.get(Calendar.DAY_OF_MONTH))==(calUtente.get(Calendar.DAY_OF_MONTH)) /*&& u.isVisualizzaDataNascita() == true*/) {
+			if((calendar.get(Calendar.MONTH))==(calUtente.get(Calendar.MONTH)) && (calendar.get(Calendar.DAY_OF_MONTH))==(calUtente.get(Calendar.DAY_OF_MONTH)) && u.isVisualizzaDataNascita() == true) {
 				utentiCompleanno.add(u);
 			}
 		}
@@ -75,7 +75,7 @@ public class MyWorkController extends BaseController {
 
 		
 		List<Podcast> listPodcast = servicePodcast.getAll();
-		if(listPodcast.size() != 0) {
+		if(listPodcast.size() != 0 && listPodcast!= null) {
 			Podcast primoPodcast = listPodcast.get(listPodcast.size()-1);
 			mav.addObject("primoPodcast", primoPodcast);
 			listPodcast.remove(listPodcast.size()-1);
@@ -133,7 +133,7 @@ public class MyWorkController extends BaseController {
 			mav.addObject("comunicazioni", null);		
 		}
 		else {
-			mav.addObject("comunicazioni", comunicazione.get(0));
+			mav.addObject("comunicazioni", comunicazione.get(comunicazione.size()-1));
 		}
 		
 		List<Evento> eventi = (List<Evento>) repoEvento.findNextWorkEvents(Instant.now().getEpochSecond());

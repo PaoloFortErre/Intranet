@@ -326,16 +326,19 @@ public class UtenteController extends BaseController{
 	@PostMapping(value = "/riattiva")
 	public ModelAndView riattiva(@RequestParam("id_riattivato") int id, Model model) {
 		Utente u = serviceUtente.findById(id);
+		UtenteDatiPersonali utente = serviceDatiPersonali.findByAutore(u);
 		u.setAttivo(true);
 		serviceUtente.save(u);
-		return registrazione(model,"riattiva",  "L'utente " + u.getEmail() + " è stato riattivato", true);
+		
+		return registrazione(model,"riattiva",  "L'utente " + utente.getNome() + " " + utente.getCognome() + " è stato riattivato", true);
 	}
 	
 	@PostMapping(value = "/elimina")
 	public ModelAndView rimuovi(@RequestParam("id_eliminato") int id, Model model, HttpSession session) {
 		Utente u = serviceUtente.findById(id);
+		UtenteDatiPersonali utente = serviceDatiPersonali.findByAutore(u);
 		u.setAttivo(false);
 		serviceUtente.save(u);
-		return rimuoviUtente(session , true, "L'utente " + u.getEmail() + " è stato disattivato", model);
+		return rimuoviUtente(session , true, "L'utente " + utente.getNome() + " " + utente.getCognome() + " è stato disattivato", model);
 	}
 }
