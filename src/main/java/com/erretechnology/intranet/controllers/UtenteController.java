@@ -51,6 +51,24 @@ public class UtenteController extends BaseController{
 		return mav;
 	}
 
+	@GetMapping(value="/userList")
+	public ModelAndView userList() {
+		System.out.println("entrato");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("usersList");
+		mav.addObject("utenti", serviceDatiPersonali.getAll().stream().filter(x->x.getUtente().getAttivo()).collect(Collectors.toList()));
+		return mav;
+	}
+	
+	@GetMapping(value = "/viewProfile")
+		public ModelAndView viewUserProfile(HttpSession session, int id) {
+		ModelAndView mav = new ModelAndView();
+		UtenteDatiPersonali u = serviceDatiPersonali.findById(id);
+		if(u.getId() == id) return primaPagina(session);
+		mav.setViewName("profilo_admin");
+		mav.addObject("utente",u);
+		return mav;
+	}
 
 	@PostMapping(value = "/modificaDescrizione")
 	public String modificaDescrizione(@ModelAttribute("utente")UtenteDatiPersonali utente, HttpSession session) {
