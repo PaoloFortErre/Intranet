@@ -34,7 +34,9 @@
 <body>
  	<div class="container-fluid">
   		<h2 class="h2 text-center mb-3">Tutte le comunicazioni</h2>
-
+		<div class="container text-center">
+          <input class="h3" type="text" id="myInput" onkeyup="myFunction()" placeholder="Filtra per nome" title="Cerca per nome" style="color:black;">
+        </div>
         <table id="myTable" class="table bg-white">
           <thead class="thead-dark">
             <tr>
@@ -54,10 +56,31 @@
                 <a th:href="@{/file/downloadFileHR(id=${comunicazione.id})}"
                 th:text="${comunicazione.nome}" th:download="${comunicazione.nome}"></a>
               </td>
-              <td></td>
+              <td th:text="${comunicazione.descrizione}"></td>
             </tr>
           </tbody>
         </table>
       </div>
+      
+        <script>
+		 function myFunction() {
+		   var input, filter, table, tr, td, i, txtValue;
+		   input = document.getElementById("myInput");
+		   filter = input.value.toUpperCase();
+		   table = document.getElementById("myTable");
+		   tr = table.getElementsByTagName("tr");
+		   for (i = 0; i < tr.length; i++) {
+		     td = tr[i].getElementsByTagName("td")[2];
+		     if (td) {
+		       txtValue = td.textContent || td.innerText;
+		       if (txtValue.toUpperCase().indexOf(filter) > -1) {
+		         tr[i].style.display = "";
+		       } else {
+		         tr[i].style.display = "none";
+		       }
+		     }
+		   }
+		 }
+		</script>
 </body>
 </html>
