@@ -154,7 +154,7 @@ public class MyLifeController extends BaseController {
 	}
 
 	@PostMapping(value = "/editPost")
-	public String updatePost(int id, HttpSession session, Post post) {
+	public String updatePost(int id, HttpSession session, Post post,  @RequestParam(required=false) MultipartFile document) throws Exception {
 		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
 		Post p = servicePost.findById(id);
 		UtenteDatiPersonali autore = p.getAutore();
@@ -165,8 +165,16 @@ public class MyLifeController extends BaseController {
 			pm.setTesto(tmp);
 			pm.setTimestamp(p.getTimestamp());
 			pm.setPost(p);
-			pm.setTimestamp(p.getTimestamp());
 			p.setTimestamp(Instant.now().getEpochSecond());
+			if(!document.getOriginalFilename().isEmpty()) {
+				FileImmagine img = new FileImmagine();
+				img.setAutore(autore);
+				img.setData(document.getBytes());
+				img.setTimestamp(Instant.now().getEpochSecond());
+				img.setNomeFile(StringUtils.cleanPath(document.getOriginalFilename()));
+				serviceFileImmagine.insert(img);
+				p.setImmagine(img);
+			}
 			servicePost.save(p);
 			servicePostModificato.save(pm);
 			saveLog("modificato un post in bacheca", autore);

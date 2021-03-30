@@ -362,7 +362,7 @@
 										<div th:if="(${post.autore.id} == ${session.id}) and ${UB}"
 											style="display: inline-block;">
 											<form th:action="@{/myLife/editPost(id=${post.id})}"
-												method="post">
+												method="post" enctype="multipart/form-data">
 												<button name="button" type="submit"
 													style="background-color: transparent; color: white; border: 0px solid #303030;"
 													th:onclick="'showAreaPost(' + ${post.id} + ')'"
@@ -374,7 +374,7 @@
 													name="testo" placeholder="Modifica post" cols="20"
 													rows="2.5" id="post" style="display: none; width: 350px; color: BLACK;"
 													required></textarea>
-												<input type="file" style="display: none; color: black;" th:class="editfoto +  ${post.id}">	
+												<input type="file" name="document" style="display: none; color: black;" th:class="editfoto +  ${post.id}">	
 											</form>
 										</div>
 
