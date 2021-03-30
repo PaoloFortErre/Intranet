@@ -44,7 +44,7 @@ public class UploadController extends BaseController{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("aggiungi_nuova_comunicazione");
 		mav.addObject("comunicazioneHR", new ComunicazioneHR());
-		mav.addObject("comunicazioni", serviceFilePdf.findAll().stream().sorted(Comparator.comparingLong(FilePdf::getTimestamp).reversed()).collect(Collectors.toList()));
+		mav.addObject("comunicazioni", serviceFilePdf.findAll().stream().filter(x->x.isVisibile()).sorted(Comparator.comparingLong(FilePdf::getTimestamp).reversed()).collect(Collectors.toList()));
 		mav.addObject("user", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return mav;
 	}
@@ -54,7 +54,7 @@ public class UploadController extends BaseController{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("aggiungi_nuova_comunicazione");
 		mav.addObject("comunicazioneHR", new ComunicazioneHR());
-		mav.addObject("comunicazioni", serviceComunicazioni.getAll().stream().sorted(Comparator.comparingLong(ComunicazioneHR::getTimestamp).reversed()).collect(Collectors.toList()));
+		mav.addObject("comunicazioni", serviceComunicazioni.getAll().stream().filter(x->x.isVisibile()).sorted(Comparator.comparingLong(ComunicazioneHR::getTimestamp).reversed()).collect(Collectors.toList()));
 		mav.addObject("user", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return mav;
 	}
@@ -132,7 +132,7 @@ public class UploadController extends BaseController{
 			pdf.setVisibile(false);
 			serviceFilePdf.insert(pdf);
 			saveLog("cancellato un modulo", autore);
-			return "redirect:/moduli";
+			return "redirect:/file/moduli";
 		} return "redirect:forbidden";
 
 	}
@@ -141,11 +141,11 @@ public class UploadController extends BaseController{
 	public String deleteComunicazioneHR(int id, HttpSession session) {
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		if(serviceComunicazioni.findByAutore(autore).stream().filter(x-> x.getId() == id).count() > 0) {
-			FilePdf pdf =serviceFilePdf.findById(id);
+			ComunicazioneHR pdf =serviceComunicazioni.findById(id);
 			pdf.setVisibile(false);
-			serviceFilePdf.insert(pdf);
-			saveLog("cancellato un modulo", autore);
-			return "redirect:/moduli";
+			serviceComunicazioni.save(pdf);
+			saveLog("cancellato una comunicazione hr", autore);
+			return "redirect:/file/hr";
 		} return "redirect:forbidden";
 
 	}

@@ -1,6 +1,8 @@
 package com.erretechnology.intranet.controllers;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.erretechnology.intranet.models.ComunicazioneHR;
+import com.erretechnology.intranet.models.Post;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.models.Utility;
@@ -184,7 +188,9 @@ public class HomeController extends BaseController{
 		ModelAndView mav = new ModelAndView();
 	
 		mav.addObject("utenteDati", u);
-		mav.addObject("comunicazioni", serviceComunicazioni.getAll());
+		mav.addObject("comunicazioni", serviceComunicazioni.getAll().stream()
+				.filter(x->x.isVisibile())
+				.sorted(Comparator.comparingLong(ComunicazioneHR::getTimestamp).reversed()).limit(5).collect(Collectors.toList()));
 		mav.setViewName("comunicazioniHr");
 		return mav;
 	}
