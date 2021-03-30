@@ -175,4 +175,12 @@ public class UploadController extends BaseController{
 				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_PDF_VALUE)
 				.body(new ByteArrayResource(data));
 	}
+	
+	@GetMapping(value = "/comunicazioniList")
+	public ModelAndView listComunicazioni() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("comunicazioniList");
+		mav.addObject("comunicazioni", serviceComunicazioni.getAll());
+		return mav;
+	}
 }

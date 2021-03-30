@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="ISO-8859-1">
+  <title>Comunicazioni HR</title>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script
+  src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <!-- Popper JS -->
+  <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script
+  src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
+
+  <style>
+  body {
+    background-image: url("/view/MyWork/images/background.png");
+    background-repeat: no-repeat, repeat;
+    background-attachment: fixed;
+  }
+
+  </style>
+</head>
+<body>
+ 	<div class="container-fluid">
+  		<h2 class="h2 text-center mb-3">Tutte le comunicazioni</h2>
+
+        <table id="myTable" class="table bg-white">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Data</th>
+              <th scope="col">Scarica</th>
+              <th scope="col">Descrizione</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr th:each="comunicazione: ${comunicazioni}">
+           	 <td></td>
+              <td th:text="${#dates.format(comunicazione.timestamp*1000, 'dd/MM/yyyy')}"></td>
+              <td>
+                <img src="/view/MyWork/images/pdf-icon.png" width="4%">
+                <a th:href="@{/file/downloadFileHR(id=${comunicazione.id})}"
+                th:text="${comunicazione.nome}" th:download="${comunicazione.nome}"></a>
+              </td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+</body>
+</html>
