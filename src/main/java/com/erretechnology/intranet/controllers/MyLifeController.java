@@ -290,5 +290,12 @@ public class MyLifeController extends BaseController {
 		mav.setViewName("profiliUtenti");
 		return mav;
 	}
+	
+	@GetMapping(value ="/cancellaPost")
+	public String eliminaPost(HttpSession session, int id) {
+		Post p = servicePost.findById(id);
+		servicePost.remove(p);
+		return "redirect:/profile/gestione_suprema";
+	}
 
 }

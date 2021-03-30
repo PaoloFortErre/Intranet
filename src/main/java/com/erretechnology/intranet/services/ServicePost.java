@@ -22,4 +22,6 @@ public interface ServicePost {
 	
 	public List<Post> getAll();
 
+	public void remove(Post p);
+
 }
