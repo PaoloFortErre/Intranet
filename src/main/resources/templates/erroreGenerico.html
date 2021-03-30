@@ -2,14 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8" />
-<title>Insert title here</title>
+<title>Error</title>
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro'
+	rel='stylesheet' type='text/css'>
 <style type="text/css">
+h1, h2, h3, h4, h5, textarea, p, label, input, button, a {
+	font-family: "Source Sans Pro", sans-serif;
+	
+}
 html,
 body {
   height: 100%;
   width: 100%;
   margin: 0px;
-  background: linear-gradient(90deg, rgba(47,54,64,1) 23%, rgba(24,27,32,1) 100%);
+  background-color: #303030;
 }
 
 .moon {
@@ -114,6 +120,8 @@ body {
 }
 
 .error__title {
+color: #2473FF;
+font-family: "Source Sans Pro", sans-serif;
   font-size: 10em;
 }
 
@@ -133,12 +141,13 @@ body {
   outline: none;
   border: 2px solid #2f3640;
   background-color: transparent;
-  border-radius: 8em;
+  
   color: #576375;
   cursor: pointer;
   transition-duration: 0.2s;
   font-size: 0.75em;
   font-family: 'Righteous', cursive;
+  text-decoration: none;
 }
 
 .error__button:hover {
@@ -146,8 +155,11 @@ body {
 }
 
 .error__button--active {
-  background-color: #e67e22;
-  border: 2px solid #e67e22;
+font-family: "Source Sans Pro", sans-serif;
+  letter-spacing: 2px;
+
+  background-color: #2473FF;
+  border: 2px solid #2473FF;
   color: white;
 }
 
@@ -310,7 +322,7 @@ body {
 }
 
 .astronaut__wrist-left {
-  background-color: #e67e22;
+  background-color: #2473FF;
   position: absolute;
   top: 122px;
   left: 6.5px;
@@ -322,7 +334,7 @@ body {
 }
 
 .astronaut__wrist-right {
-  background-color: #e67e22;
+  background-color: #2473FF;
   position: absolute;
   top: 98px;
   left: 141px;
@@ -367,7 +379,7 @@ body {
   border-radius: 3px;
   border-top-left-radius: 8em;
   border-top-right-radius: 8em;
-  border-bottom: 4px solid #e67e22;
+  border-bottom: 4px solid #2473FF;
 }
 
 .astronaut__foot-right {
@@ -382,7 +394,7 @@ body {
   border-radius: 3px;
   border-top-left-radius: 8em;
   border-top-right-radius: 8em;
-  border-bottom: 4px solid #e67e22;
+  border-bottom: 4px solid #2473FF;
 }
 
 </style>
@@ -401,10 +413,10 @@ body {
 <div class="star star5"></div>
 
 <div class="error">
-  <div class="error__title" th:text="${errorNumber}"></div>
-  <div class="error__subtitle">C'è stato un errore</div>
-  <div class="error__description">Paolo sta dormendo... come al solito</div>
-  <button class="error__button error__button--active" th:href="@{/homepage}">HOMEPAGE</button>
+  <div class="error__title" th:text="${errorNumber}"> </div>
+  <div class="error__subtitle"><p>C'è stato un errore</p></div>
+  <div class="error__description"><p>Paolo sta dormendo... come al solito</p></div><br>
+  <a class="error__button error__button--active" th:href="@{/homepage/}">HOMEPAGE</a>
 </div>
 
 <div class="astronaut">
