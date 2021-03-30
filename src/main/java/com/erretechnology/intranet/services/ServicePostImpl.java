@@ -71,4 +71,11 @@ public class ServicePostImpl implements ServicePost{
 		// TODO Auto-generated method stub
 		return repositoryPost.findAll();
 	}
+
+	@Override
+	public void remove(Post p) {
+		repositoryPost.delete(p);
+		// TODO Auto-generated method stub
+		
+	}
 }
