@@ -53,7 +53,6 @@ public class UtenteController extends BaseController{
 
 	@GetMapping(value="/userList")
 	public ModelAndView userList() {
-		System.out.println("entrato");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("usersList");
 		mav.addObject("utenti", serviceDatiPersonali.getAll().stream().filter(x->x.getUtente().getAttivo()).collect(Collectors.toList()));
@@ -61,10 +60,10 @@ public class UtenteController extends BaseController{
 	}
 	
 	@GetMapping(value = "/viewProfile")
-		public ModelAndView viewUserProfile(HttpSession session, int id) {System.out.println("entrato");
+		public ModelAndView viewUserProfile(HttpSession session, int id) {
 		ModelAndView mav = new ModelAndView();
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(id);
-		if(u.getId() == id) return primaPagina(session);
+		if(u.getId() ==  serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())).getId()) return primaPagina(session);
 		
 		mav.setViewName("profilo_admin");
 		mav.addObject("utente",u);
