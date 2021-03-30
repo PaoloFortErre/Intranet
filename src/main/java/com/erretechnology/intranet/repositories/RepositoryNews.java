@@ -12,5 +12,8 @@ import com.erretechnology.intranet.models.News;
 public interface RepositoryNews extends CrudRepository<News, Integer>{
 	@Query("SELECT n FROM News n WHERE n.visibile = true ORDER BY n.dataPubblicazione DESC")
 	List<News> findAllOrderByDataPubblicazioneDesc();
+	
+	@Query("SELECT n FROM News n WHERE n.visibile = false")
+	List<News> getAllNotVisible();
 }
  

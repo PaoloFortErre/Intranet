@@ -13,4 +13,7 @@ public interface RepositoryCinema extends CrudRepository<Cinema, Integer>{
 	
 	@Query(value = "SELECT * FROM cinema WHERE visibile = true ORDER BY id DESC LIMIT ?1", nativeQuery = true)
 	List<Cinema> findLimit(int number);
+
+	@Query("SELECT c FROM Cinema c WHERE c.visibile = false")
+	List<Cinema> getAllNotVisible();
 }

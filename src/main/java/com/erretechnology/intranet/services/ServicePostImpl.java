@@ -65,4 +65,10 @@ public class ServicePostImpl implements ServicePost{
         return PostPage;
 
     }
+
+	@Override
+	public List<Post> getAll() {
+		// TODO Auto-generated method stub
+		return repositoryPost.findAll();
+	}
 }

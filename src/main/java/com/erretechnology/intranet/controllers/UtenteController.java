@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.regex.*;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,11 +30,27 @@ import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.Permesso;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.models.Utility;
+import com.erretechnology.intranet.repositories.RepositoryCinema;
+import com.erretechnology.intranet.repositories.RepositoryCliente;
+import com.erretechnology.intranet.repositories.RepositoryEvento;
+import com.erretechnology.intranet.repositories.RepositoryLibro;
+import com.erretechnology.intranet.repositories.RepositoryNews;
 
 @Controller
 @RequestMapping(value = "profile")
 public class UtenteController extends BaseController{
 
+	@Autowired
+	RepositoryNews repositoryNews;
+	@Autowired
+	RepositoryEvento repositoryEvento;
+	@Autowired
+	RepositoryLibro repositoryLibro;
+	@Autowired
+	RepositoryCinema repositoryFilm;
+	@Autowired
+	RepositoryCliente repositoryCliente;
+	
 	@GetMapping(value = "/")
 	public ModelAndView primaPagina(HttpSession session) {
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
@@ -338,4 +356,24 @@ public class UtenteController extends BaseController{
 		serviceUtente.save(u);
 		return rimuoviUtente(session , true, "L'utente " + utente.getNome() + " " + utente.getCognome() + " è stato disattivato", model);
 	}
+	
+	@PostMapping(value= "/mostraEliminati")
+	public ModelAndView mostraNonAttivi(HttpSession session) {
+		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		if(u.getUtente().getRuolo().getNome().equals("ADMIN")) return null;
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("gestione_suprema");
+		mav.addObject("post", servicePost.getAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList()));
+		mav.addObject("commenti", serviceCommento.getAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList()));
+		mav.addObject("news", repositoryNews.getAllNotVisible());
+		mav.addObject("comunicazioniHR", serviceComunicazioni.getAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList()));
+		mav.addObject("moduli", serviceFilePdf.findAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList()));
+		mav.addObject("eventi", repositoryEvento.getAllNotVisible());
+		mav.addObject("podcast", servicePodcast.getAll().stream().filter(x->x.getVisibile() == false).collect(Collectors.toList()));
+		mav.addObject("libri", repositoryLibro.getAllNotVisible());
+		mav.addObject("film", repositoryFilm.getAllNotVisible());
+		mav.addObject("client", repositoryCliente.getAllNotVisible());
+		return new ModelAndView();
+	}
+	
 }
