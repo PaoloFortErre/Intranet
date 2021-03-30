@@ -19,5 +19,7 @@ public interface ServicePost {
 	public Post findById(int id);
 	
 	public Page<Post> findPaginated(Pageable pageable) ;
+	
+	public List<Post> getAll();
 
 }

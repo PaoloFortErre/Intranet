@@ -36,4 +36,10 @@ public class ServiceCommentoImpl implements ServiceCommento{
 	public Commento findById(int id) {
 		return repositoryCommento.findById(id).get();
 	}
+
+	@Override
+	public List<Commento> getAll() {
+		// TODO Auto-generated method stub
+		return repositoryCommento.findAll();
+	}
 }

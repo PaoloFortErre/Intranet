@@ -43,14 +43,14 @@ body {
 	border: 1px solid #6D6D6D;
 }
 
-.col-sinistra2 {
+#col-sinistra2 {
 	border-radius: 6px 6px 6px 6px;
 	background-color: #E8E7E7;
 	width: 100%;
 	border: 1px solid #6D6D6D;
 }
 
-.col-sinistra2:hover {
+#col-sinistra2:hover {
 	-webkit-box-shadow: 0px 20px 21px 3px rgbargba(255,255,255,0.11);
 	-moz-box-shadow: 0px 20px 21px 3px rgba(0, 0, 0, 0.38);
 	box-shadow: 0px 20px 21px 3px rgba(255,255,255,0.31);

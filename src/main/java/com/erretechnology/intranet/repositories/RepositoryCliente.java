@@ -19,4 +19,7 @@ public interface RepositoryCliente extends CrudRepository<Cliente, Integer>{
 
 	@Query("SELECT c FROM Cliente c WHERE c.visibile = true ORDER BY c.id DESC")
 	List<Cliente> findAll();
+
+	@Query("SELECT c FROM Cliente c WHERE c.visibile = false")
+	List<Cliente> getAllNotVisible();
 }
