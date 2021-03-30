@@ -357,10 +357,10 @@ public class UtenteController extends BaseController{
 		return rimuoviUtente(session , true, "L'utente " + utente.getNome() + " " + utente.getCognome() + " è stato disattivato", model);
 	}
 	
-	@PostMapping(value= "/mostraEliminati")
+	@GetMapping(value= "/mostraEliminati")
 	public ModelAndView mostraNonAttivi(HttpSession session) {
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
-		if(u.getUtente().getRuolo().getNome().equals("ADMIN")) return null;
+		//if(u.getUtente().getRuolo().getNome().equals("ADMIN")) return null;
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("gestione_suprema");
 		mav.addObject("post", servicePost.getAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList()));
@@ -373,7 +373,7 @@ public class UtenteController extends BaseController{
 		mav.addObject("libri", repositoryLibro.getAllNotVisible());
 		mav.addObject("film", repositoryFilm.getAllNotVisible());
 		mav.addObject("client", repositoryCliente.getAllNotVisible());
-		return new ModelAndView();
+		return mav;
 	}
 	
 }

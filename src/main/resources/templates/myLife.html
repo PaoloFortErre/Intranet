@@ -146,9 +146,9 @@
 						<div class="carousel-caption" th:if=${aforisma2!=null}>
 							<h1 class="font-caption" style="font-weight: 900"
 								th:text="${aforisma2.frase}"></h1>
-							<p th:text="${aforisma.autore}"></p>
+							<p th:text="${aforisma2.autore}"></p>
 							<div th:if="${GML}">
-								<form th:action="@{'/aforisma/update/'+${aforisma.id}}"
+								<form th:action="@{'/aforisma/update/'+${aforisma2.id}}"
 									method="get">
 									<button type="submit" name="modifica"
 										style="background-color: transparent; border: 0px solid #232323;">
@@ -161,7 +161,7 @@
 							</div>
 
 						</div>
-						<div class="carousel-caption" th:if="${aforisma==null and GML}">
+						<div class="carousel-caption" th:if="${aforisma2==null and GML}">
 							<a th:href="@{/aforisma/new/}"
 								style="display: inline-block; color: #f3f3f3; text-decoration: none;">
 								Aggiungi aforisma <img src="/view/MyWork/images/more.png"
