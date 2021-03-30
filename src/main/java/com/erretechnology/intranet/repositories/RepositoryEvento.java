@@ -26,4 +26,7 @@ public interface RepositoryEvento extends CrudRepository<Evento, Integer>{
 	
 	@Query("SELECT e FROM Evento e WHERE e.isLife = false AND e.visibile = true ORDER BY e.id DESC")
 	List<Evento> findWorkOrderByIdDesc();
+	
+	@Query("SELECT e FROM Evento e WHERE e.visibile = false")
+	List<Evento> getAllNotVisible();
 }
