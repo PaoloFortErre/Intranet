@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="it" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" shrink-to-fit="yes" >
+
+  <title>Gestione Suprema</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+  integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+  <!-- Script Js -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+
+  <style>
+  body{
+    background-image: url("C:/Users/a.lingua/Documents/GitHub/Intranet/src/main/webapp/view/MyWork/images/background.png");
+    background-repeat: no-repeat, repeat;
+    background-attachment: fixed;
+  }
+
+  </style>
+</head>
+<body>
+  <div id="header" class="container-fluid">
+    <div class="row mt-3 mb-5 justify-content-center">
+      <div class="col-2">
+        <a href="#" class="btn btn-primary" type="button" name="button">HOMEPAGE</a>
+      </div>
+      <div class="col-auto">
+        <a href="#libri"  class="btn btn-info" type="button" name="button">LIBRI</a>
+      </div>
+      <div class="col-auto">
+        <a href="#cinema" class="btn btn-info" type="button" name="button">CINEMA</a>
+      </div>
+      <div class="col-auto">
+        <a href="#clienti" class="btn btn-info" type="button" name="button">CLIENTI</a>
+      </div>
+      <div class="col-auto">
+        <a href="#commenti" class="btn btn-info" type="button" name="button">COMMENTI POST</a>
+      </div>
+      <div class="col-auto">
+        <a href="#post" class="btn btn-info" type="button" name="button">POST BACHECA</a>
+      </div>
+      <div class="col-auto">
+        <a href="#hr" class="btn btn-info" type="button" name="button">COMUNICAZIONI HR</a>
+      </div>
+      <div class="col-auto">
+        <a href="#moduli" class="btn btn-info" type="button" name="button">MODULI</a>
+      </div>
+      <div class="col-auto">
+        <a href="#podcast" class="btn btn-info" type="button" name="button">PODCAST</a>
+      </div>
+      <div class="col-auto">
+        <a href="#sondaggi" class="btn btn-info" type="button" name="button">SONDAGGI</a>
+      </div>
+      <div class="col-auto">
+        <a href="#news" class="btn btn-info" type="button" name="button">NEWS</a>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container-fluid mb-5">
+    <div class="row mt-5 ml-2 mr-2">
+      <div class="col mt-5">
+        <div class="container text-center">
+          <h2 id="libri" class="h2" style="color: white">GESTISCI LIBRI</h2>
+        </div>
+        <div class="container text-right mb-2">
+          <a href="#header" style="text-decoration: none; color: white;">Torna su<img width="35px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\up_arrow.png" alt="upArrow"> </a>
+        </div>
+        <table  class="table bg-white table-striped table-hover table-bordered">
+          <thead class="thead-dark text-center">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Titolo</th>
+              <th scope="col">Autore</th>
+              <th scope="col">Data e ora</th>
+              <th scope="col">Funzioni</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class="text-center" scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <td>
+                <div class="img-fluid text-center">
+                  <a href="#"><img title="ripristina elemento"
+                    width="27px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\restore_icon.png" alt="restore"></a>
+                    <a href="#"><img title="elimina elemento" class=""
+                      width="27px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\delete_icon.png" alt="delete"></a>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="col mt-5">
+            <div class="container text-center">
+              <h2 id="cinema" class="h2" style="color: white">GESTISCI CINEMA</h2>
+            </div>
+            <div class="container text-right mb-2">
+              <a href="#header" style="text-decoration: none; color: white;">Torna su<img width="35px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\up_arrow.png" alt="upArrow"> </a>
+            </div>
+            <table  class="table bg-white table-striped table-hover table-bordered">
+              <thead class="thead-dark text-center">
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Titolo</th>
+                  <th scope="col">Piattaforma</th>
+                  <th scope="col">Data e ora</th>
+                  <th scope="col">Funzioni</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th class="text-center" scope="row">1</th>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                  <td>
+                    <div class="img-fluid text-center">
+                      <a href="#"><img title="ripristina elemento"
+                        width="27px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\restore_icon.png" alt="restore"></a>
+                        <a href="#"><img title="elimina elemento" class=""
+                          width="27px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\delete_icon.png" alt="delete"></a>
+                        </div>
+                      </td>
+                    </tr>
+
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="container-fluid mb-5">
+            <div class="row mt-5 ml-2 mr-2">
+              <div class="col mt-5">
+                <div class="container text-center">
+                  <h2 id="clienti" class="h2" style="color: white">GESTISCI CLIENTI</h2>
+                </div>
+                <div class="container text-right mb-2">
+                  <a href="#header" style="text-decoration: none; color: white;">Torna su<img width="35px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\up_arrow.png" alt="upArrow"> </a>
+                </div>
+                <table  class="table bg-white table-striped table-hover table-bordered">
+                  <thead class="thead-dark text-center">
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Nome</th>
+                      <th scope="col">Autore</th>
+                      <th scope="col">Data e ora</th>
+                      <th scope="col">Funzioni</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th class="text-center" scope="row">1</th>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>@mdo</td>
+                      <td>
+                        <div class="img-fluid text-center">
+                          <a href="#"><img title="ripristina elemento"
+                            width="27px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\restore_icon.png" alt="restore"></a>
+                            <a href="#"><img title="elimina elemento" class=""
+                              width="27px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\delete_icon.png" alt="delete"></a>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div class="col mt-5">
+                    <div class="container text-center">
+                      <h2 id="commenti" class="h2" style="color: white">GESTISCI COMMENTI POST</h2>
+                    </div>
+                    <div class="container text-right mb-2">
+                      <a href="#header" style="text-decoration: none; color: white;">Torna su<img width="35px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\up_arrow.png" alt="upArrow"> </a>
+                    </div>
+                    <table  class="table bg-white table-striped table-hover table-bordered">
+                      <thead class="thead-dark text-center">
+                        <tr>
+                          <th scope="col">ID</th>
+                          <th scope="col">First</th>
+                          <th scope="col">Last</th>
+                          <th scope="col">Data e ora</th>
+                          <th scope="col">Handle</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th class="text-center" scope="row">1</th>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
+                          <td>
+                            <div class="img-fluid text-center">
+                              <a href="#"><img title="ripristina elemento"
+                                width="27px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\restore_icon.png" alt="restore"></a>
+                                <a href="#"><img title="elimina elemento" class=""
+                                  width="27px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\delete_icon.png" alt="delete"></a>
+                                </div>
+                              </td>
+                            </tr>
+
+                          </tbody>
+                        </table>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="container-fluid mb-5">
+                    <div class="row mt-5 ml-2 mr-2">
+                      <div class="col mt-5">
+                        <div class="container text-center">
+                          <h2 id="post" class="h2" style="color: white">GESTISCI POST BACHECA</h2>
+                        </div>
+                        <div class="container text-right mb-2">
+                          <a href="#header" style="text-decoration: none; color: white;">Torna su<img width="35px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\up_arrow.png" alt="upArrow"> </a>
+                        </div>
+                        <table  class="table bg-white table-striped table-hover table-bordered">
+                          <thead class="thead-dark text-center">
+                            <tr>
+                              <th scope="col">ID</th>
+                              <th scope="col">Titolo</th>
+                              <th scope="col">Autore</th>
+                              <th scope="col">Data e ora</th>
+                              <th scope="col">Funzioni</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th class="text-center" scope="row">1</th>
+                              <td>Mark</td>
+                              <td>Otto</td>
+                              <td>@mdo</td>
+                              <td>
+                                <div class="img-fluid text-center">
+                                  <a href="#"><img title="ripristina elemento"
+                                    width="27px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\restore_icon.png" alt="restore"></a>
+                                    <a href="#"><img title="elimina elemento" class=""
+                                      width="27px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\delete_icon.png" alt="delete"></a>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+
+                          <div class="col mt-5">
+                            <div class="container text-center">
+                              <h2 id="hr" class="h2" style="color: white">GESTISCI COMUNICAZIONI HR</h2>
+                            </div>
+                            <div class="container text-right mb-2">
+                              <a href="#header" style="text-decoration: none; color: white;">Torna su<img width="35px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\up_arrow.png" alt="upArrow"> </a>
+                            </div>
+                            <table  class="table bg-white table-striped table-hover table-bordered">
+                              <thead class="thead-dark text-center">
+                                <tr>
+                                  <th scope="col">ID</th>
+                                  <th scope="col">First</th>
+                                  <th scope="col">Last</th>
+                                  <th scope="col">Data e ora</th>
+                                  <th scope="col">Handle</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <th class="text-center" scope="row">1</th>
+                                  <td>Mark</td>
+                                  <td>Otto</td>
+                                  <td>@mdo</td>
+                                  <td>
+                                    <div class="img-fluid text-center">
+                                      <a href="#"><img title="ripristina elemento"
+                                        width="27px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\restore_icon.png" alt="restore"></a>
+                                        <a href="#"><img title="elimina elemento" class=""
+                                          width="27px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\delete_icon.png" alt="delete"></a>
+                                        </div>
+                                      </td>
+                                    </tr>
+
+                                  </tbody>
+                                </table>
+
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="container-fluid mb-5">
+                            <div class="row mt-5 ml-2 mr-2">
+                              <div class="col mt-5">
+                                <div class="container text-center">
+                                  <h2 id="moduli" class="h2" style="color: white">GESTISCI MODULI</h2>
+                                </div>
+                                <div class="container text-right mb-2">
+                                  <a href="#header" style="text-decoration: none; color: white;">Torna su<img width="35px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\up_arrow.png" alt="upArrow"> </a>
+                                </div>
+                                <table  class="table bg-white table-striped table-hover table-bordered">
+                                  <thead class="thead-dark text-center">
+                                    <tr>
+                                      <th scope="col">ID</th>
+                                      <th scope="col">Titolo</th>
+                                      <th scope="col">Autore</th>
+                                      <th scope="col">Data e ora</th>
+                                      <th scope="col">Funzioni</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <th class="text-center" scope="row">1</th>
+                                      <td>Mark</td>
+                                      <td>Otto</td>
+                                      <td>@mdo</td>
+                                      <td>
+                                        <div class="img-fluid text-center">
+                                          <a href="#"><img title="ripristina elemento"
+                                            width="27px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\restore_icon.png" alt="restore"></a>
+                                            <a href="#"><img title="elimina elemento" class=""
+                                              width="27px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\delete_icon.png" alt="delete"></a>
+                                            </div>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+
+                                  <div class="col mt-5">
+                                    <div class="container text-center">
+                                      <h2 id="podcast" class="h2" style="color: white">GESTISCI PODCAST</h2>
+                                    </div>
+                                    <div class="container text-right mb-2">
+                                      <a href="#header" style="text-decoration: none; color: white;">Torna su<img width="35px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\up_arrow.png" alt="upArrow"> </a>
+                                    </div>
+                                    <table  class="table bg-white table-striped table-hover table-bordered">
+                                      <thead class="thead-dark text-center">
+                                        <tr>
+                                          <th scope="col">ID</th>
+                                          <th scope="col">First</th>
+                                          <th scope="col">Last</th>
+                                          <th scope="col">Data e ora</th>
+                                          <th scope="col">Handle</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                          <th class="text-center" scope="row">1</th>
+                                          <td>Mark</td>
+                                          <td>Otto</td>
+                                          <td>@mdo</td>
+                                          <td>
+                                            <div class="img-fluid text-center">
+                                              <a href="#"><img title="ripristina elemento"
+                                                width="27px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\restore_icon.png" alt="restore"></a>
+                                                <a href="#"><img title="elimina elemento" class=""
+                                                  width="27px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\delete_icon.png" alt="delete"></a>
+                                                </div>
+                                              </td>
+                                            </tr>
+
+                                          </tbody>
+                                        </table>
+
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <div class="container-fluid mb-5">
+                                    <div class="row mt-5 ml-2 mr-2">
+                                      <div class="col mt-5">
+                                        <div class="container text-center">
+                                          <h2 id="sondaggi" class="h2" style="color: white">GESTISCI SONDAGGI</h2>
+                                        </div>
+                                        <div class="container text-right mb-2">
+                                          <a href="#header" style="text-decoration: none; color: white;">Torna su<img width="35px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\up_arrow.png" alt="upArrow"> </a>
+                                        </div>
+                                        <table  class="table bg-white table-striped table-hover table-bordered">
+                                          <thead class="thead-dark text-center">
+                                            <tr>
+                                              <th scope="col">ID</th>
+                                              <th scope="col">Titolo</th>
+                                              <th scope="col">Autore</th>
+                                              <th scope="col">Data e ora</th>
+                                              <th scope="col">Funzioni</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            <tr>
+                                              <th class="text-center" scope="row">1</th>
+                                              <td>Mark</td>
+                                              <td>Otto</td>
+                                              <td>@mdo</td>
+                                              <td>
+                                                <div class="img-fluid text-center">
+                                                  <a href="#"><img title="ripristina elemento"
+                                                    width="27px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\restore_icon.png" alt="restore"></a>
+                                                    <a href="#"><img title="elimina elemento" class=""
+                                                      width="27px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\delete_icon.png" alt="delete"></a>
+                                                    </div>
+                                                  </td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                          </div>
+
+                                          <div class="col mt-5">
+                                            <div class="container text-center">
+                                              <h2 id="news" class="h2" style="color: white">GESTISCI NEWS</h2>
+                                            </div>
+                                            <div class="container text-right mb-2">
+                                              <a href="#header" style="text-decoration: none; color: white;">Torna su<img width="35px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\up_arrow.png" alt="upArrow"> </a>
+                                            </div>
+                                            <table  class="table bg-white table-striped table-hover table-bordered">
+                                              <thead class="thead-dark text-center">
+                                                <tr>
+                                                  <th scope="col">ID</th>
+                                                  <th scope="col">First</th>
+                                                  <th scope="col">Last</th>
+                                                  <th scope="col">Data e ora</th>
+                                                  <th scope="col">Handle</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                <tr>
+                                                  <th class="text-center" scope="row">1</th>
+                                                  <td>Mark</td>
+                                                  <td>Otto</td>
+                                                  <td>@mdo</td>
+                                                  <td>
+                                                    <div class="img-fluid text-center">
+                                                      <a href="#"><img title="ripristina elemento"
+                                                        width="27px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\restore_icon.png" alt="restore"></a>
+                                                        <a href="#"><img title="elimina elemento" class=""
+                                                          width="27px" src="C:\Users\a.lingua\Documents\GitHub\Intranet\src\main\webapp\view\Admin\images\delete_icon.png" alt="delete"></a>
+                                                        </div>
+                                                      </td>
+                                                    </tr>
+
+                                                  </tbody>
+                                                </table>
+
+                                              </div>
+                                            </div>
+                                          </div>
+
+
+                                        </body>
+                                        </html>
