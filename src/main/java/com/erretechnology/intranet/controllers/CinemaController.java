@@ -127,6 +127,6 @@ public class CinemaController extends BaseController {
 		cinema.setVisibile(false);
 		repoCinema.save(cinema);
 		saveLog("cancellato un cinema", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		return "redirect:/cinema/list";
+		return "redirect:/myLife/";
 	}
 }

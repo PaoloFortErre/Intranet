@@ -184,16 +184,17 @@
 						alt="utente" title="utente" class="immagineUtente"
 						style="margin: 0 auto; position: absolute; left: 32%; top: 57px;">
 					<br> <br> <br> <br>
-					<h4
-						Style="color: #303030; display: inline-block; text-align: center; margin-left: 17px;"
+					<div style="margin: 0 auto; text-align: center"><h4
+						Style="color: #303030; display: inline-block; font-weight: 600; "
 						th:text="${utenteDati.nome}"></h4>
 					<h4
-						Style="color: #303030; display: inline-block; text-align: center;"
+						Style="color: #303030; display: inline-block;font-weight: 600;"
 						th:text="${utenteDati.cognome}"></h4>
 					<br>
 					<p th:text="${utenteDati.settore.getNomeSettore}"
-						style="text-align: center; color: #303030; font-style: italic;">
+						style=" color: #303030; opacity: 0.7;">
 					</p>
+					</div>
 					<br>
 					<div id="prof">
 						<a th:href="@{/profile/}" id="gestisciProfilo"> Gestisci il
@@ -329,6 +330,9 @@
 										<h4
 											style="display: inline-block; color: #303030; font-weight: 600;"
 											th:text="${post.autore.cognome}"></h4>
+																						<p
+											style="font-size: 12px; font-style: italic; color: #303030; "
+											th:text="${#dates.format(post.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"></p>
 										<!-- ELIMINA POST -->
 
 										<div
@@ -338,7 +342,7 @@
 											<form th:action="@{/myLife/deletePost(id=${post.id})}"
 												method="post">
 												<button name="button" type="submit" class="buttonAzioni"
-													style="display: inline-block; background-color: #E8E7E7; color: white; margin-left: 290px; border: 0px solid #303030">
+													style="background-color: #E8E7E7; color: white; margin-left: 290px; border: 0px solid #303030">
 													<img src="/view/MyLife/images/trash.png" width="45%">
 												</button>
 											</form>
@@ -351,21 +355,19 @@
 											<form th:action="@{/myLife/editPost(id=${post.id})}"
 												method="post">
 												<button name="button" type="submit"
-													style="display: inline-block; background-color: #E8E7E7; color: white; margin-left: -10px; border: 0px solid #303030"
+													style=" background-color:transparent; color: white ; border: 0px solid #303030; "
 													th:onclick="'showAreaPost(' + ${post.id} + ')'"
 													class="buttonAzioni">
 													<img src="/view/MyLife/images/edit.png" width="45%">
 												</button>
 
 												<textarea th:class="postModificato + ${post.id}"
-													name="testo" placeholder="Modifica post" cols="50"
-													rows="2.5" id="post" style="display: none" required></textarea>
+													name="testo" placeholder="Modifica post" cols="20"
+													rows="2.5" id="post" style="display: none; width: 350px;" required></textarea>
 											</form>
 										</div>
-										<p
-											style="font-size: 12px; font-style: italic; color: #303030; margin-top: -18px;"
-											th:text="${#dates.format(post.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"></p>
-										<br>
+										
+										
 
 									</div>
 									<!--  <img th:src="'data:image/png;base64,' + ${utenteDati.settore.getImgData(utenteDati.settore.logo)}" 
@@ -400,7 +402,7 @@
 											<tr>
 												<td><img
 													th:src="'data:image/jpeg;base64,' + ${commento.autore.immagine.getImgData(commento.autore.immagine.data)}"
-													width="16%" style="border-radius: 50%">
+													width="13%" style="border-radius: 50%">
 
 													<p class="nomeCommento" th:text="${commento.autore.nome}">
 													</p>
@@ -538,6 +540,14 @@ COLONNA DESTRA
 										width="38%">
 								</button>
 							</form>
+							<form th:action="@{'/evento/delete/'+${eventilife.id}}"
+								th:if="${GML}" method="get">
+								<button type="submit" name="modifica"
+									style="background-color: transparent; border: 0px solid;">
+									<img src="/view/MyLife/images/trash.png" style="float: left"
+										width="38%">
+								</button>
+							</form>
 						</div>
 						<div th:if="${eventilife1!=null}">
 							<a href=""> <img src="/view/MyWork/images/freccianera.png"
@@ -575,6 +585,14 @@ COLONNA DESTRA
 								<button type="submit" name="modifica"
 									style="background-color: transparent; border: 0px solid;">
 									<img src="/view/MyWork/images/editb.png" style="float: left"
+										width="38%">
+								</button>
+							</form>
+							<form th:action="@{'/evento/delete/'+${eventilife1.id}}"
+								th:if="${GML}" method="get">
+								<button type="submit" name="modifica"
+									style="background-color: transparent; border: 0px solid;">
+									<img src="/view/MyLife/images/trash.png" style="float: left"
 										width="38%">
 								</button>
 							</form>
@@ -659,6 +677,13 @@ COLONNA DESTRA
 											<img src="/view/MyWork/images/editb.png" width="38%">
 										</button>
 									</form>
+									<form th:action="@{'/cinema/delete/'+${film1.id}}"
+										th:if="${GML}" method="get">
+										<button type="submit" name="modifica"
+											style="background-color: transparent; border: 0px solid #232323;">
+											<img src="/view/MyLife/images/trash.png" width="38%">
+										</button>
+									</form>
 								</td>
 
 								<td th:if="${film2!=null}">
@@ -669,6 +694,13 @@ COLONNA DESTRA
 											<img src="/view/MyWork/images/editb.png" width="38%">
 										</button>
 									</form>
+									<form th:action="@{'/cinema/delete/'+${film2.id}}"
+										th:if="${GML}" method="get">
+										<button type="submit" name="modifica"
+											style="background-color: transparent; border: 0px solid #232323;">
+											<img src="/view/MyLife/images/trash.png" width="38%">
+										</button>
+									</form>
 								</td>
 								<td th:if="${film3!=null}">
 									<form th:action="@{'/cinema/update/'+${film3.id}}"
@@ -676,6 +708,13 @@ COLONNA DESTRA
 										<button type="submit" name="modifica"
 											style="background-color: transparent; border: 0px solid #232323;">
 											<img src="/view/MyWork/images/editb.png" width="38%">
+										</button>
+									</form>
+									<form th:action="@{'/cinema/delete/'+${film3.id}}"
+										th:if="${GML}" method="get">
+										<button type="submit" name="modifica"
+											style="background-color: transparent; border: 0px solid #232323;">
+											<img src="/view/MyLife/images/trash.png" width="38%">
 										</button>
 									</form>
 								</td>
@@ -709,7 +748,7 @@ COLONNA DESTRA
 									style="FONT-size: 10px; font-style: italic; text-align: right;; color: #303030;"
 									th:text="${libri.autore}"></p>
 
-								<div th:if="${libro!=null}">
+								<div th:if="${libri!=null}">
 									<form th:action="@{'/libro/update/'+${libri.id}}"
 										th:if="${GML}" method="get">
 										<button type="submit" name="modifica"
@@ -718,10 +757,17 @@ COLONNA DESTRA
 												width="38%">
 										</button>
 									</form>
+									<form th:action="@{'/libro/delete/'+${libri.id}}"
+										th:if="${GML}" method="get">
+										<button type="submit" name="modifica"
+											style="background-color: transparent; border: 0px solid #232323;">
+											<img src="/view/MyLife/images/trash.png" width="38%">
+										</button>
+									</form>
 
 								</div></td>
 						</tr>
-						<tr>
+						<tr th:if="${libri1!=null}">
 							<td><img
 								th:src="'data:image/png;base64,' + ${libri1.copertina.getImgData(libri1.copertina.data)}"
 								width="135px" style="padding: 5px;"></td>
@@ -737,6 +783,13 @@ COLONNA DESTRA
 											style="background-color: transparent; border: 0px solid #232323; float: right;">
 											<img src="/view/MyWork/images/editb.png" style="float: right"
 												width="38%">
+										</button>
+									</form>
+									<form th:action="@{'/libro/delete/'+${libri1.id}}"
+										th:if="${GML}" method="get">
+										<button type="submit" name="modifica"
+											style="background-color: transparent; border: 0px solid #232323;">
+											<img src="/view/MyLife/images/trash.png" width="38%">
 										</button>
 									</form>
 

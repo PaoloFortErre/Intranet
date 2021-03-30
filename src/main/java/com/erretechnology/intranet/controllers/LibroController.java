@@ -119,6 +119,6 @@ public class LibroController extends BaseController {
 		libro.setVisibile(false);
 		repoLibro.save(libro);
 		saveLog("cancellato un libro", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		return "redirect:/libro/list";
+		return "redirect:/myLife/";
 	}
 }
