@@ -13,33 +13,23 @@ import com.erretechnology.intranet.models.UtenteDatiPersonali;
 @Controller
 public class ErroreController extends BaseController implements ErrorController {
 	@RequestMapping("/error")
-	public ModelAndView handleError(HttpServletRequest httpRequest, HttpSession session) {
-        ModelAndView errorPage = new ModelAndView("error");
+	public ModelAndView handleError(HttpServletRequest httpRequest, HttpSession session) throws Exception {
+		ModelAndView errorPage = new ModelAndView();
         //System.err.println("error");
         String errorMsg = "";
-        int httpErrorCode = -1;
-        if(httpRequest.getAttribute("javax.servlet.error.status_code") != null)
-        	 httpErrorCode = (Integer) httpRequest.getAttribute("javax.servlet.error.status_code");
-        else {
+        Integer httpErrorCode;
+		if(httpRequest.getAttribute("javax.servlet.error.status_code") != null) {
+			httpErrorCode = (Integer) httpRequest.getAttribute("javax.servlet.error.status_code");
+			if( httpErrorCode == 404)
+				errorPage.setViewName("error");
+			else 
+				errorPage.setViewName("erroreGenerico");
+		}else {
+        	httpErrorCode = 403;
+        	errorPage.setViewName("erroreGenerico");
         	UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())); 
-        	errorMsg = "Tentativo di accedere ad una pagina senza i permessi necessari da parte di " + u.getNome() + " " + u.getCognome();
         }
-        	  
-        switch (httpErrorCode) {
-		    case 400: {
-		        errorMsg = "Http Error Code: 400. Bad Request";
-		        break;
-		    }
-		    case 404: {
-		        errorMsg = "Http Error Code: 404. Resource not found";
-		        break;
-		    }
-		    case 500: {
-		        errorMsg = "Http Error Code: 500. Internal Server Error";
-		        break;
-		    }
-		}
-        errorPage.addObject("message", errorMsg);
+        errorPage.addObject("errorNumber", httpErrorCode);
         return errorPage;
 	}
 
