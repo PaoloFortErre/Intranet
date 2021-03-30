@@ -697,11 +697,15 @@ table, th, td {
 
 				<div
 					style="margin-left: 70px; background-color: #232323; box-shadow: -1px 9px 8px 3px rgba(0, 0, 0, 0.76);">
-
+					
+					<div style="padding: 10px;">
+					<h4 style="opacity: 0.8">In evidenza</h4>
+					<hr style="opacity: 0.2">
+					</div>
 					<div class="row" style="padding: 10px;" th:if="${news!=null}"
 						th:each="news:${news}">
 
-
+						
 						<div class="col-sm-8 col-md-8 col-lg-8">
 							<h3 style="font-weight: 900" th:text="${news.titolo}"></h3>
 							<form th:action="@{'/news/update/'+${news.id}}" th:if="${GMW}"
@@ -799,8 +803,6 @@ table, th, td {
 
 
 	<!-- °°°°°°°°°°° NUOVE ASSUNZIONI °°°°°°°°°°-->
-
-
 
 
 
