@@ -210,6 +210,7 @@
       <div class="row justify-content-start mt-5 ml-1" th:with="AM = ${#authorization.expression('hasAuthority(''AM'')')}">
 
         <div class="col-2 ml-3">
+
           <!-- GESTIONE FOTO -->
           <div class="btn-group">
             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -222,7 +223,7 @@
                 <label class="dropdown-item font-weight-bold" style="cursor: pointer;" for="salva">SALVA LA FOTO PROFILO</label>
                 <input class="d-none" type="submit" id="salva"/>
                 <div class="dropdown-divider"></div>
-                </form> 
+                </form>
                 <form th:action="@{/profile/eliminaFotoProfilo}" method ="post">
                   <label class="dropdown-item font-weight-bold text-danger" style="cursor: pointer;" for="elimina">ELIMINA LA FOTO PROFILO</label>
                   <input class="d-none" type="submit" value="Elimina foto profilo" id="elimina">
@@ -252,6 +253,10 @@
               <a class="dropdown-item mt-1" th:href="@{/logout}"><b>LOGOUT</b></a>
             </div>
           </div>
+
+          <!-- GESTIONE SUPREMA -->
+
+          <a class="btn btn-primary mt-3" th:href="@{/profile/mostraEliminati}" method="get">GESTIONE SUPREMA</a>
 
         </div>
 
