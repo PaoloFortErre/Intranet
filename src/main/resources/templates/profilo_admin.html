@@ -255,8 +255,10 @@
           </div>
 
           <!-- GESTIONE SUPREMA -->
+          <div sec:authorize="hasRole('ADMIN')">
+            <a class="btn btn-primary mt-3" th:href="@{/profile/mostraEliminati}" method="get">GESTIONE SUPREMA</a>
+          </div>
 
-          <a class="btn btn-primary mt-3" th:href="@{/profile/mostraEliminati}" method="get">GESTIONE SUPREMA</a>
 
         </div>
 
