@@ -47,7 +47,7 @@ public class MyWorkController extends BaseController {
 	@GetMapping(value = "/")
 	public ModelAndView primaPagina(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		
+		System.out.println("");
 		UtenteDatiPersonali u1 = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		mav.addObject("utenteDati", u1);
 		mav.setViewName("myWork");
@@ -159,14 +159,6 @@ public class MyWorkController extends BaseController {
 		}
 	}
 
-//	@GetMapping(value = "/sondaggi")
-//	public ModelAndView sondaggi() {
-//		ModelAndView mav = new ModelAndView();
-//		mav.setViewName("sondaggi");
-//		mav.addObject("sondaggi", serviceSondaggio.findAll());
-//		return mav;		
-//	}
-
 	@PostMapping(value = "/sondaggi")
 	public String sondaggio(@ModelAttribute("sondaggio") Sondaggio sondaggio, HttpSession session) {
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
@@ -206,8 +198,6 @@ public class MyWorkController extends BaseController {
 			serviceSondaggio.save(s);
 			saveLog("cancellato un sondaggio", autore);
 			return "redirect:/myWork/";
-		//return "redirect:forbidden";
-
 	}
 
 	@GetMapping(value = "/addSondaggio")

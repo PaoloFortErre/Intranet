@@ -56,7 +56,7 @@ public class MyLifeController extends BaseController {
 
 	@GetMapping(value = "/")
 	public ModelAndView primaPagina(HttpSession session, @RequestParam("page") Optional<Integer> page) {
-        int currentPage = page.orElse(1);
+		int currentPage = page.orElse(1);
 
 		//	List<Post> messaggi = service.getLastMessage();
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
@@ -66,50 +66,50 @@ public class MyLifeController extends BaseController {
 		List <Cinema> film = repoCine.findLimit(3);
 		Page<Post> postPage= servicePost.findPaginated(PageRequest.of(currentPage - 1, 5));
 
-		
+
 		//System.out.println(evento.size());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myLife");
 		mav.addObject("messaggi", postPage);
 		mav.addObject("utenteDati", u);
-		 int totalPages = postPage.getTotalPages();
-	        if (totalPages > 0) {
-	            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
-	                .boxed()
-	                .collect(Collectors.toList());	
-	            mav.addObject("pageNumbers", pageNumbers);
-	        }
-	
+		int totalPages = postPage.getTotalPages();
+		if (totalPages > 0) {
+			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+					.boxed()
+					.collect(Collectors.toList());	
+			mav.addObject("pageNumbers", pageNumbers);
+		}
+
 		if(evento.size()==0) {
 			mav.addObject("eventilife", null);
 			mav.addObject("eventilife1", null);
 
 		} 
 		else if (evento.size()==1) {
-		mav.addObject("eventilife", evento.get(0));
-		mav.addObject("eventilife1", null);
+			mav.addObject("eventilife", evento.get(0));
+			mav.addObject("eventilife1", null);
 		}
 		else {
 			mav.addObject("eventilife", evento.get(0));
 			mav.addObject("eventilife1", evento.get(1));
 		}
-		
-		
+
+
 		if (aforismi.size()==0) {
 			mav.addObject("aforisma", null);
 			mav.addObject("aforisma2", null);
 
 		}
 		else if (aforismi.size()==1) {
-		mav.addObject("aforisma", aforismi.get(0));
-		mav.addObject("aforisma2", null);
+			mav.addObject("aforisma", aforismi.get(0));
+			mav.addObject("aforisma2", null);
 		}
 		else {
-		mav.addObject("aforisma", aforismi.get(0));
-		mav.addObject("aforisma2", aforismi.get(1));
+			mav.addObject("aforisma", aforismi.get(0));
+			mav.addObject("aforisma2", aforismi.get(1));
 		}
-		
-		
+
+
 		if (libri.size()==0) {
 			mav.addObject("libri", null);
 			mav.addObject("libri1", null);
@@ -117,13 +117,13 @@ public class MyLifeController extends BaseController {
 		else if (libri.size()==1) {
 			mav.addObject("libri", libri.get(0));
 			mav.addObject("libri1", null);
-			}
+		}
 		else {
 			mav.addObject("libri", libri.get(0));
 			mav.addObject("libri1", libri.get(1));
 		}
-		
-		
+
+
 		if (film.size()==0) {
 			mav.addObject("film1", null);
 			mav.addObject("film2", null);
@@ -147,9 +147,9 @@ public class MyLifeController extends BaseController {
 			mav.addObject("film3", film.get(2));
 		}
 		mav.addObject("filmTutti", film);
-		
-	//	mav.addObject("eventilife2", evento.get(2));
-	//	mav.addObject("img", serviceFileImmagine.getLastImmagineByUtente(u));
+
+		//	mav.addObject("eventilife2", evento.get(2));
+		//	mav.addObject("img", serviceFileImmagine.getLastImmagineByUtente(u));
 		return mav;
 	}
 
@@ -252,7 +252,7 @@ public class MyLifeController extends BaseController {
 	}
 
 	@PostMapping(value = "/addPost")
-	public String inserisciPost(Post post, HttpSession session, @RequestParam(required=false) MultipartFile document) throws IOException {
+	public String inserisciPost(Post post, HttpSession session, @RequestParam(required=false) MultipartFile document) throws Exception {
 		//	String mail = session.getAttribute("email").toString();
 		int id = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(id);
@@ -260,23 +260,17 @@ public class MyLifeController extends BaseController {
 		post.setTimestamp(Instant.now().getEpochSecond());
 		post.setVisibile(true);
 		if(!document.getOriginalFilename().isEmpty()) {
-			try {
-				//String imageFolder = "fotoPost";
-				//String fileName = serviceFileSystem.saveImage(imageFolder, document, id);
-				//post.setImmagine(fileName);
-				FileImmagine img = new FileImmagine();
-				UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(id);
-				img.setAutore(utenteLoggato);
-				img.setData(document.getBytes());
-				img.setTimestamp(Instant.now().getEpochSecond());
-				img.setNomeFile(StringUtils.cleanPath(document.getOriginalFilename()));
-				serviceFileImmagine.insert(img);
-				post.setImmagine(img);
+			FileImmagine img = new FileImmagine();
+			UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(id);
+			img.setAutore(utenteLoggato);
+			img.setData(document.getBytes());
+			img.setTimestamp(Instant.now().getEpochSecond());
+			img.setNomeFile(StringUtils.cleanPath(document.getOriginalFilename()));
+			serviceFileImmagine.insert(img);
+			post.setImmagine(img);
 
-				System.err.println("File caricato");
-			} catch (Exception e) {
-				System.err.println("Non riesco a caricare il file");
-			}
+			System.err.println("File caricato");
+
 
 		}
 
@@ -285,16 +279,16 @@ public class MyLifeController extends BaseController {
 		return "redirect:/myLife/";
 
 	} 
-	
+
 	@GetMapping (value= "/profiliUtenti")
 	public ModelAndView comunicazioniHr(HttpSession session) {
 		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		ModelAndView mav = new ModelAndView();
-	
+
 		mav.addObject("utenteDati", u);
 		mav.addObject("utenti", serviceDatiPersonali.getAll().stream().filter(x->x.getUtente().getAttivo()).collect(Collectors.toList()));
 		mav.setViewName("profiliUtenti");
 		return mav;
 	}
-	
+
 }

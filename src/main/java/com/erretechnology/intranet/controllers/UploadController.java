@@ -1,6 +1,5 @@
 package com.erretechnology.intranet.controllers;
 
-import java.io.IOException;
 import java.time.Instant;
 import java.util.Comparator;
 import java.util.stream.Collectors;
@@ -38,7 +37,7 @@ public class UploadController extends BaseController{
 		mav.addObject("filePdf", new FilePdf());
 		return mav;
 	}
-	
+
 	@GetMapping(value = "/moduli")
 	public ModelAndView moduliMAV(HttpSession session) {
 		ModelAndView mav = new ModelAndView(); 
@@ -59,11 +58,11 @@ public class UploadController extends BaseController{
 		return mav;
 	}
 
-	
+
 
 	@PostMapping(value = "/upload")
 	public String uploadPdf(@RequestParam("file") MultipartFile file, RedirectAttributes attributes, 
-			@ModelAttribute("filePdf") FilePdf filePdf, HttpSession session) {
+			@ModelAttribute("filePdf") FilePdf filePdf, HttpSession session) throws Exception{
 		UtenteDatiPersonali u =  serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		// check if file is empty
 		if (file.isEmpty()) {
@@ -75,29 +74,26 @@ public class UploadController extends BaseController{
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
 		// save the file on the local file system
-		try {
-			filePdf.setNome(fileName);
-			filePdf.setTimestamp(Instant.now().getEpochSecond());
-			filePdf.setData(file.getBytes());
-			filePdf.setVisibile(true);
-			filePdf.setAutore(u);
-			serviceFilePdf.insert(filePdf);
-			saveLog("Inserito un nuovo modulo", u );
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		filePdf.setNome(fileName);
+		filePdf.setTimestamp(Instant.now().getEpochSecond());
+		filePdf.setData(file.getBytes());
+		filePdf.setVisibile(true);
+		filePdf.setAutore(u);
+		serviceFilePdf.insert(filePdf);
+		saveLog("Inserito un nuovo modulo", u );
+
 
 		// return success response
 		attributes.addFlashAttribute("message", "You successfully uploaded " + fileName + '!');
 
 		return "redirect:/moduli/";
 	}
-	
-	
-	
+
+
+
 	@PostMapping(value = "/uploadHR")
 	public String uploadPdfHR(@RequestParam("file") MultipartFile file, RedirectAttributes attributes, 
-			@ModelAttribute("comunicazioneHR")  ComunicazioneHR filePdfHR, HttpSession session) {
+			@ModelAttribute("comunicazioneHR")  ComunicazioneHR filePdfHR, HttpSession session) throws Exception{
 		// check if file is empty
 		if (file.isEmpty()) {
 			attributes.addFlashAttribute("message", "Please select a file to upload.");
@@ -105,18 +101,15 @@ public class UploadController extends BaseController{
 		}
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 		// save the file on the local file system
-		try {
-			UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
-			filePdfHR.setNome(fileName);
-			filePdfHR.setData(file.getBytes());
-			filePdfHR.setTimestamp(Instant.now().getEpochSecond());
-			filePdfHR.setUtente(u);
-			filePdfHR.setVisibile(true);
-			serviceComunicazioni.save(filePdfHR);
-			saveLog("inserito una nuova Comunicazione HR", u);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		filePdfHR.setNome(fileName);
+		filePdfHR.setData(file.getBytes());
+		filePdfHR.setTimestamp(Instant.now().getEpochSecond());
+		filePdfHR.setUtente(u);
+		filePdfHR.setVisibile(true);
+		serviceComunicazioni.save(filePdfHR);
+		saveLog("inserito una nuova Comunicazione HR", u);
+
 
 		// return success response
 		attributes.addFlashAttribute("message", "Hai caricato con successo la comunicazione!");
@@ -136,7 +129,7 @@ public class UploadController extends BaseController{
 		} return "redirect:forbidden";
 
 	}
-	
+
 	@PostMapping(value = "/deleteFileHR")
 	public String deleteComunicazioneHR(int id, HttpSession session) {
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
@@ -149,25 +142,25 @@ public class UploadController extends BaseController{
 		} return "redirect:forbidden";
 
 	}
-	
-	
+
+
 	@GetMapping(value = "/downloadFile")
 	public ResponseEntity<Resource> downloadModulo(int id, HttpSession session) {
 		FilePdf pdf = serviceFilePdf.findById(id);
 		return downloadFile(pdf.getData(), pdf.getNome(), session);
-		
+
 	}
-	
+
 	@GetMapping(value = "/downloadFileHR")
 	public ResponseEntity<Resource> downloadHR(int id, HttpSession session) {
 		ComunicazioneHR pdf = serviceComunicazioni.findById(id);
 		return downloadFile(pdf.getData(), pdf.getNome(), session);
 	}
-	
-	
+
+
 
 	private ResponseEntity<Resource> downloadFile(byte[] data, String nome, HttpSession session) {
-	
+
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Content-Disposition", String.format("attachment; filename=" + nome));    
 		saveLog("scaricato il modulo " + nome, serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
@@ -175,7 +168,7 @@ public class UploadController extends BaseController{
 				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_PDF_VALUE)
 				.body(new ByteArrayResource(data));
 	}
-	
+
 	@GetMapping(value = "/comunicazioniList")
 	public ModelAndView listComunicazioni() {
 		ModelAndView mav = new ModelAndView();

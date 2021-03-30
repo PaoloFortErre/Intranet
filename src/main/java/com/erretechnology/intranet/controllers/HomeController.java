@@ -23,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.ComunicazioneHR;
 import com.erretechnology.intranet.models.FilePdf;
-import com.erretechnology.intranet.models.Post;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.models.Utility;

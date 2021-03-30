@@ -54,7 +54,8 @@ public class NewsController extends BaseController {
 	}
 	
 	@PostMapping(value = "/insert")
-	public String post(@ModelAttribute("news") News news, @RequestParam(required=false) MultipartFile immagine, HttpSession session, ModelMap model) throws IOException {
+	public String post(@ModelAttribute("news") News news, @RequestParam(required=false) MultipartFile immagine, 
+			HttpSession session, ModelMap model) throws IOException {
 		
 		Long date = Instant.now().getEpochSecond();
 		news.setDataPubblicazione(date);
@@ -62,27 +63,23 @@ public class NewsController extends BaseController {
 		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
 		news.setAutore(utenteLoggato);
 		news.setVisibile(true);
-		
+
 		if(!immagine.getOriginalFilename().isEmpty()) {
-			try {
-				FileImmagine img = new FileImmagine();
-				img.setData(immagine.getBytes());
-				img.setAutore(utenteLoggato);
-				img.setTimestamp(Instant.now().getEpochSecond());
-				img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
-				serviceFileImmagine.insert(img);
-				news.setCopertina(img);
-			} catch (Exception e) {
-				System.err.println("Non riesco a caricare il file");
-			}
+			FileImmagine img = new FileImmagine();
+			img.setData(immagine.getBytes());
+			img.setAutore(utenteLoggato);
+			img.setTimestamp(Instant.now().getEpochSecond());
+			img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
+			serviceFileImmagine.insert(img);
+			news.setCopertina(img);
 		} else {
 			news.setCopertina(serviceFileImmagine.getImmagine(334));
 		}
-		
+
 		repoNews.save(news);
 		saveLog("aggiunto una news", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		 
-        return "redirect:/myWork/";
+
+		return "redirect:/myWork/";
 	}
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
@@ -93,7 +90,8 @@ public class NewsController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-	public String update(@PathVariable int id, @RequestParam("titolo") String titolo, @RequestParam("contenuto") String contenuto, @RequestParam(required=false) MultipartFile immagine, HttpSession session, Model model) {
+	public String update(@PathVariable int id, String titolo, String contenuto,
+			@RequestParam(required=false) MultipartFile immagine, HttpSession session, Model model) throws Exception {
 		News news = repoNews.findById(id).get();
 		NewsModificato nm = new NewsModificato();
 		nm.setTitolo(news.getTitolo());
@@ -101,27 +99,23 @@ public class NewsController extends BaseController {
 		nm.setNews(news);
 		news.setTitolo(titolo);
 		news.setContenuto(contenuto);
-		
+
 		if(!immagine.getOriginalFilename().isEmpty()) {
-			try {
-				FileImmagine img = new FileImmagine();			
-				img.setData(immagine.getBytes());
-				if(!serviceFileImmagine.contains(img.getData())) {
-					int idUser = Integer.parseInt(session.getAttribute("id").toString());
-					UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
-					img.setAutore(utenteLoggato);
-					img.setTimestamp(Instant.now().getEpochSecond());
-					img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
-					serviceFileImmagine.insert(img);
-					news.setCopertina(img);
-				}else {
-					news.setCopertina(serviceFileImmagine.getImmagineByData(img.getData()));
-				}
-			} catch (Exception e) {
-				System.err.println("Non riesco a caricare il file");
+			FileImmagine img = new FileImmagine();			
+			img.setData(immagine.getBytes());
+			if(!serviceFileImmagine.contains(img.getData())) {
+				int idUser = Integer.parseInt(session.getAttribute("id").toString());
+				UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
+				img.setAutore(utenteLoggato);
+				img.setTimestamp(Instant.now().getEpochSecond());
+				img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
+				serviceFileImmagine.insert(img);
+				news.setCopertina(img);
+			}else {
+				news.setCopertina(serviceFileImmagine.getImmagineByData(img.getData()));
 			}
 		}
-		
+
 		repoNews.save(news);
 		repoOldNews.save(nm);
 		model.addAttribute("news", news);

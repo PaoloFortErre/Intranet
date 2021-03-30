@@ -21,8 +21,8 @@ class ExceptionController {
 		ErrorLog log = new ErrorLog();
 		log.setTimestamp(Instant.now().getEpochSecond());
 		log.setErrore(e.toString());
+		e.printStackTrace();
 		repoErrorLog.save(log);
-
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("message", "Internal error");
 		mav.setViewName("error");

@@ -33,14 +33,14 @@ public class CinemaController extends BaseController {
 	private RepositoryCinema repoCinema;
 	@Autowired
 	private RepositoryCategoriaCinema repoCategoria;
-	
+
 	@GetMapping("/{id}")
 	public String get(@PathVariable int id, Model model) {
-		
+
 		model.addAttribute("cinema", repoCinema.findById(id).get());
 		return "cinema";
 	}	
-	
+
 	@GetMapping("/list")
 	public String getList(Model model) {
 		model.addAttribute("cinemaList", repoCinema.findAll());
@@ -53,33 +53,30 @@ public class CinemaController extends BaseController {
 		model.addAttribute("categorie", repoCategoria.findAll());
 		return "cinemaForm";
 	}
-	
+
 	@PostMapping(value = "/insert")
-	public String post(@ModelAttribute("cinema") Cinema cinema, @RequestParam(required=false) MultipartFile immagine, ModelMap model, HttpSession session) throws IOException {	
-		System.out.println(immagine);
+	public String post(@ModelAttribute("cinema") Cinema cinema, @RequestParam(required=false) MultipartFile immagine,
+			ModelMap model, HttpSession session) throws Exception {	
 		cinema.setVisibile(true);
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
-		
+
 		if(!immagine.getOriginalFilename().isEmpty()) {
-			try {
-				FileImmagine img = new FileImmagine();
-				img.setData(immagine.getBytes());
-				img.setAutore(utenteLoggato);
-				img.setTimestamp(Instant.now().getEpochSecond());
-				img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
-				serviceFileImmagine.insert(img);
-				cinema.setCopertina(img);
-			} catch (Exception e) {
-				System.err.println("Non riesco a caricare il file");
-			}
+			FileImmagine img = new FileImmagine();
+			img.setData(immagine.getBytes());
+			img.setAutore(utenteLoggato);
+			img.setTimestamp(Instant.now().getEpochSecond());
+			img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
+			serviceFileImmagine.insert(img);
+			cinema.setCopertina(img);
+
 		}
-		
+
 		repoCinema.save(cinema);
 		saveLog("inserito un cinema", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-        return "redirect:/myLife/";
+		return "redirect:/myLife/";
 	}
-	
+
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable int id, Model model) {
 		Cinema cinema = repoCinema.findById(id).get();
@@ -87,40 +84,37 @@ public class CinemaController extends BaseController {
 		model.addAttribute("categorie", repoCategoria.findAll());
 		return "cinemaFormUpdate";
 	}
-	
+
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-	public String update(@PathVariable int id, String titolo, int categoria, @RequestParam(required=false) MultipartFile immagine, HttpSession session, Model model) {
-		System.out.println("ciao");
+	public String update(@PathVariable int id, String titolo, int categoria, @RequestParam(required=false) MultipartFile immagine, 
+			HttpSession session, Model model) throws Exception {
 		Cinema cinema = repoCinema.findById(id).get();
 		cinema.setTitolo(titolo);
 		CategoriaCinema categoriaCinema = repoCategoria.findById(categoria).get();
 		cinema.setCategoria(categoriaCinema);
 		if(!immagine.getOriginalFilename().isEmpty()) {
-			try {
-				FileImmagine img = new FileImmagine();			
-				img.setData(immagine.getBytes());
-				if(!serviceFileImmagine.contains(img.getData())) {
-					int idUser = Integer.parseInt(session.getAttribute("id").toString());
-					UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
-					img.setAutore(utenteLoggato);
-					img.setTimestamp(Instant.now().getEpochSecond());
-					img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
-					serviceFileImmagine.insert(img);
-					cinema.setCopertina(img);
-				}else {
-					cinema.setCopertina(serviceFileImmagine.getImmagineByData(img.getData()));
-				}
-			} catch (Exception e) {
-				System.err.println("Non riesco a caricare il file");
+			FileImmagine img = new FileImmagine();			
+			img.setData(immagine.getBytes());
+			if(!serviceFileImmagine.contains(img.getData())) {
+				int idUser = Integer.parseInt(session.getAttribute("id").toString());
+				UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
+				img.setAutore(utenteLoggato);
+				img.setTimestamp(Instant.now().getEpochSecond());
+				img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
+				serviceFileImmagine.insert(img);
+				cinema.setCopertina(img);
+			}else {
+				cinema.setCopertina(serviceFileImmagine.getImmagineByData(img.getData()));
 			}
+
 		}
-		
+
 		repoCinema.save(cinema);
 		model.addAttribute("cinema", cinema);
 		saveLog("modificato le informazioni di un cinema", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/myLife/";
 	}
-	
+
 	@RequestMapping("/delete/{id}")
 	public String delete(@PathVariable int id, HttpSession session) {
 		Cinema cinema = repoCinema.findById(id).get();

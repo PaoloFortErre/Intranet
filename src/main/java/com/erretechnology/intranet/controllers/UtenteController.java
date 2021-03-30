@@ -58,13 +58,13 @@ public class UtenteController extends BaseController{
 		mav.addObject("utenti", serviceDatiPersonali.getAll().stream().filter(x->x.getUtente().getAttivo()).collect(Collectors.toList()));
 		return mav;
 	}
-	
+
 	@GetMapping(value = "/viewProfile")
-		public ModelAndView viewUserProfile(HttpSession session, int id) {
+	public ModelAndView viewUserProfile(HttpSession session, int id) {
 		ModelAndView mav = new ModelAndView();
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(id);
 		if(u.getId() ==  serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())).getId()) return primaPagina(session);
-		
+
 		mav.setViewName("profilo_admin");
 		mav.addObject("utente",u);
 		return mav;
@@ -140,28 +140,25 @@ public class UtenteController extends BaseController{
 
 
 	@PostMapping(value = "/cambiaFotoProfilo")
-	public String modificaFoto(@RequestParam(required=false) MultipartFile immagine, HttpSession session) {
+	public String modificaFoto(@RequestParam(required=false) MultipartFile immagine, HttpSession session) throws Exception {
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		FileImmagine img = null;
 		if(!immagine.getOriginalFilename().isEmpty()) {
-			try {
-				img = new FileImmagine();
-				img.setData(immagine.getBytes());
-				UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
-				if(!serviceFileImmagine.contains(img.getData())) {
-					img.setAutore(utenteLoggato);
-					img.setTimestamp(Instant.now().getEpochSecond());
-					img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
-					serviceFileImmagine.insert(img);
-					utenteLoggato.setImmagine(img);
-				}else {
-					utenteLoggato.setImmagine(serviceFileImmagine.getImmagineByData(img.getData()));
-				}
-				serviceDatiPersonali.save(utenteLoggato);
-				saveLog("modificato l'immagine del profilo", utenteLoggato);
-			} catch (Exception e) {
-				System.err.println("Non riesco a caricare il file");
+			img = new FileImmagine();
+			img.setData(immagine.getBytes());
+			UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
+			if(!serviceFileImmagine.contains(img.getData())) {
+				img.setAutore(utenteLoggato);
+				img.setTimestamp(Instant.now().getEpochSecond());
+				img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
+				serviceFileImmagine.insert(img);
+				utenteLoggato.setImmagine(img);
+			}else {
+				utenteLoggato.setImmagine(serviceFileImmagine.getImmagineByData(img.getData()));
 			}
+			serviceDatiPersonali.save(utenteLoggato);
+			saveLog("modificato l'immagine del profilo", utenteLoggato);
+
 		}
 		return "redirect:/profile/";
 	}
@@ -314,8 +311,8 @@ public class UtenteController extends BaseController{
 			Pattern p = Pattern.compile(regex);
 			Matcher m = p.matcher(email);
 			if(!m.matches()) {return registrazione(model, "aggiungi", "L'email inserita non è valida", true);}
-			
-			
+
+
 			utenteDP.setDataNascita(Timestamp.valueOf(data.getDate().atStartOfDay()).getTime() / 1000);
 			serviceDatiPersonali.insert(password, email, settore, utenteDP);
 			model.addAttribute("registrazione", "registrazione effettuata con successo");
@@ -329,10 +326,10 @@ public class UtenteController extends BaseController{
 		UtenteDatiPersonali utente = serviceDatiPersonali.findByAutore(u);
 		u.setAttivo(true);
 		serviceUtente.save(u);
-		
+
 		return registrazione(model,"riattiva",  "L'utente " + utente.getNome() + " " + utente.getCognome() + " è stato riattivato", true);
 	}
-	
+
 	@PostMapping(value = "/elimina")
 	public ModelAndView rimuovi(@RequestParam("id_eliminato") int id, Model model, HttpSession session) {
 		Utente u = serviceUtente.findById(id);

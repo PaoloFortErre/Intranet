@@ -29,14 +29,14 @@ import com.erretechnology.intranet.repositories.RepositoryLibro;
 public class LibroController extends BaseController {
 	@Autowired
 	private RepositoryLibro repoLibro;
-	
+
 	@GetMapping("/{id}")
 	public String get(@PathVariable int id, Model model) {
-		
+
 		model.addAttribute("libro", repoLibro.findById(id).get());
 		return "libro";
 	}	
-	
+
 	@GetMapping("/list")
 	public String getList(Model model) {
 		model.addAttribute("libroList", repoLibro.findAll());
@@ -48,71 +48,67 @@ public class LibroController extends BaseController {
 		model.addAttribute("libro", new Libro()); 
 		return "libroForm";
 	}
-	
+
 	@PostMapping(value = "/insert")
-	public String post(@ModelAttribute("libro") Libro libro, @RequestParam(required=false) MultipartFile immagine, ModelMap model, HttpSession session) throws IOException {	
+	public String post(@ModelAttribute("libro") Libro libro, @RequestParam(required=false) MultipartFile immagine, ModelMap model, 
+			HttpSession session) throws Exception {	
 		libro.setVisibile(true);
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
-		
+
 		if(!immagine.getOriginalFilename().isEmpty()) {
-			try {
-				FileImmagine img = new FileImmagine();
-				img.setData(immagine.getBytes());
-				img.setAutore(utenteLoggato);
-				img.setTimestamp(Instant.now().getEpochSecond());
-				img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
-				serviceFileImmagine.insert(img);
-				libro.setCopertina(img);
-			} catch (Exception e) {
-				System.err.println("Non riesco a caricare il file");
-			}
+			FileImmagine img = new FileImmagine();
+			img.setData(immagine.getBytes());
+			img.setAutore(utenteLoggato);
+			img.setTimestamp(Instant.now().getEpochSecond());
+			img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
+			serviceFileImmagine.insert(img);
+			libro.setCopertina(img);
+
 		}
-		
+
 		repoLibro.save(libro);
 		saveLog("inserito un libro", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-        return "redirect:/myLife/";
+		return "redirect:/myLife/";
 	}
-	
+
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable int id, Model model) {
 		Libro libro = repoLibro.findById(id).get();
 		model.addAttribute("libro", libro);
 		return "libroFormUpdate";
 	}
-	
+
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-	public String update(@PathVariable int id, String titolo, String autore ,@RequestParam(required=false) MultipartFile immagine, HttpSession session, Model model) {
+	public String update(@PathVariable int id, String titolo, String autore ,@RequestParam(required=false) MultipartFile immagine, 
+			HttpSession session, Model model) throws Exception{
 		Libro libro = repoLibro.findById(id).get();
 		libro.setTitolo(titolo);
 		libro.setAutore(autore);
-		
+
 		if(!immagine.getOriginalFilename().isEmpty()) {
-			try {
-				FileImmagine img = new FileImmagine();			
-				img.setData(immagine.getBytes());
-				if(!serviceFileImmagine.contains(img.getData())) {
-					int idUser = Integer.parseInt(session.getAttribute("id").toString());
-					UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
-					img.setAutore(utenteLoggato);
-					img.setTimestamp(Instant.now().getEpochSecond());
-					img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
-					serviceFileImmagine.insert(img);
-					libro.setCopertina(img);
-				}else {
-					libro.setCopertina(serviceFileImmagine.getImmagineByData(img.getData()));
-				}
-			} catch (Exception e) {
-				System.err.println("Non riesco a caricare il file");
+			FileImmagine img = new FileImmagine();			
+			img.setData(immagine.getBytes());
+			if(!serviceFileImmagine.contains(img.getData())) {
+				int idUser = Integer.parseInt(session.getAttribute("id").toString());
+				UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
+				img.setAutore(utenteLoggato);
+				img.setTimestamp(Instant.now().getEpochSecond());
+				img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
+				serviceFileImmagine.insert(img);
+				libro.setCopertina(img);
+			}else {
+				libro.setCopertina(serviceFileImmagine.getImmagineByData(img.getData()));
 			}
+
 		}
-		
+
 		repoLibro.save(libro);
 		model.addAttribute("libro", libro);
 		saveLog("modificato le informazioni di un libro", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/myLife/";
 	}
-	
+
 	@RequestMapping("/delete/{id}")
 	public String delete(@PathVariable int id, HttpSession session) {
 		Libro libro = repoLibro.findById(id).get();
