@@ -184,16 +184,16 @@
 						alt="utente" title="utente" class="immagineUtente"
 						style="margin: 0 auto; position: absolute; left: 32%; top: 57px;">
 					<br> <br> <br> <br>
-					<div style="margin: 0 auto; text-align: center"><h4
-						Style="color: #303030; display: inline-block; font-weight: 600; "
-						th:text="${utenteDati.nome}"></h4>
-					<h4
-						Style="color: #303030; display: inline-block;font-weight: 600;"
-						th:text="${utenteDati.cognome}"></h4>
-					<br>
-					<p th:text="${utenteDati.settore.getNomeSettore}"
-						style=" color: #303030; opacity: 0.7;">
-					</p>
+					<div style="margin: 0 auto; text-align: center">
+						<h4
+							Style="color: #303030; display: inline-block; font-weight: 600;"
+							th:text="${utenteDati.nome}"></h4>
+						<h4
+							Style="color: #303030; display: inline-block; font-weight: 600;"
+							th:text="${utenteDati.cognome}"></h4>
+						<br>
+						<p th:text="${utenteDati.settore.getNomeSettore}"
+							style="color: #303030; opacity: 0.7;"></p>
 					</div>
 					<br>
 					<div id="prof">
@@ -281,7 +281,7 @@
 
 
 
-									<br>  <input type="submit" value="Condividi"
+									<br> <input type="submit" value="Condividi"
 										id="submitPost"
 										style="float: right; margin-right: 10px; margin-bottom: 8px" />
 
@@ -323,15 +323,15 @@
 
 
 									<div class="col-sm-9 col-md-9 col-lg-9">
-										<h4 th:text="${post.autore.nome}"
-											style="display: inline-block; color: #303030; font-weight: 600">
-										</h4>
+										<a th:href="@{/profile/viewProfile/(id=${post.autore.id})}"
+											th:text="${post.autore.nome} + ' ' + ${post.autore.cognome}"
+											style="display: inline-block; color: #303030; font-weight: 600"></a>
 
-										<h4
+										<!--  <h4
 											style="display: inline-block; color: #303030; font-weight: 600;"
-											th:text="${post.autore.cognome}"></h4>
-																						<p
-											style="font-size: 12px; font-style: italic; color: #303030; "
+											th:text="${post.autore.cognome}"></h4>-->
+										<p
+											style="font-size: 12px; font-style: italic; color: #303030;"
 											th:text="${#dates.format(post.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"></p>
 										<!-- ELIMINA POST -->
 
@@ -355,7 +355,7 @@
 											<form th:action="@{/myLife/editPost(id=${post.id})}"
 												method="post">
 												<button name="button" type="submit"
-													style=" background-color:transparent; color: white ; border: 0px solid #303030; "
+													style="background-color: transparent; color: white; border: 0px solid #303030;"
 													th:onclick="'showAreaPost(' + ${post.id} + ')'"
 													class="buttonAzioni">
 													<img src="/view/MyLife/images/edit.png" width="45%">
@@ -363,11 +363,12 @@
 
 												<textarea th:class="postModificato + ${post.id}"
 													name="testo" placeholder="Modifica post" cols="20"
-													rows="2.5" id="post" style="display: none; width: 350px;" required></textarea>
+													rows="2.5" id="post" style="display: none; width: 350px;"
+													required></textarea>
 											</form>
 										</div>
-										
-										
+
+
 
 									</div>
 									<!--  <img th:src="'data:image/png;base64,' + ${utenteDati.settore.getImgData(utenteDati.settore.logo)}" 
@@ -492,7 +493,7 @@
 COLONNA DESTRA
 **** -->
 			<div class="col-sm-4 col-lg-4" id="col-destra">
-			<br>
+				<br>
 				<div>
 					<div th:if="${GML}">
 						<br> <a th:href="@{/evento/newLife/}"> <img
@@ -606,7 +607,9 @@ COLONNA DESTRA
 
 					</div>
 				</div>
-				<br><br><hr style="border: 1px solid #c9c9c9">
+				<br>
+				<br>
+				<hr style="border: 1px solid #c9c9c9">
 				<div th:if="${GML}">
 					<br>
 					<div>
@@ -615,8 +618,8 @@ COLONNA DESTRA
 							style="float: right; margin-bottom: 10px;"></a>
 					</div>
 				</div>
-<br>
-				<h2 id="culturaPiemonte" >Film</h2>
+				<br>
+				<h2 id="culturaPiemonte">Film</h2>
 				<p
 					style="color: #303030; text-align: center; font-size: 15px; margin-bottom: 50px;">
 					Se sei un tipo da cinema o serie TV:</p>
@@ -722,21 +725,24 @@ COLONNA DESTRA
 						</table>
 					</div>
 				</div>
-			<br><br>	<hr style="border: 1px solid #c9c9c9"><br>
+				<br>
+				<br>
+				<hr style="border: 1px solid #c9c9c9">
+				<br>
 				<div>
 					<div th:if="${GML}">
 						<a th:href="@{/libro/new}"> <img
 							src="/view/MyWork/images/moreb.png" width="30px"
 							style="float: right; margin-bottom: 10px;"></a>
 					</div>
-					<h2 id="culturaPiemonte" >Libri</h2>
+					<h2 id="culturaPiemonte">Libri</h2>
 					<p
 						style="color: #303030; text-align: center; font-size: 15px; margin-bottom: 50px;">
 						Se sei un tipo dal classico libro cartaceo o da Kindle:</p>
 					<p th:if="${libri==null}"
 						style="text-align: center; color: #303030; font-style: italic; font-size: 12px;">
 						Non ci sono libri da consigliare</p>
-<br>
+					<br>
 					<table id="libri" th:if="${libri!=null}">
 						<tr>
 							<td><img

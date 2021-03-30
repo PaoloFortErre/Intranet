@@ -61,10 +61,11 @@ public class UtenteController extends BaseController{
 	}
 	
 	@GetMapping(value = "/viewProfile")
-		public ModelAndView viewUserProfile(HttpSession session, int id) {
+		public ModelAndView viewUserProfile(HttpSession session, int id) {System.out.println("entrato");
 		ModelAndView mav = new ModelAndView();
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(id);
 		if(u.getId() == id) return primaPagina(session);
+		
 		mav.setViewName("profilo_admin");
 		mav.addObject("utente",u);
 		return mav;
