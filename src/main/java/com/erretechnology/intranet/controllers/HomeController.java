@@ -125,7 +125,7 @@ public class HomeController extends BaseController{
 	     
 	    return mav;
 	}
-	
+ 
 	@PostMapping("/reset_password")
 	public String processResetPassword(HttpServletRequest request, @RequestParam("password") String psw ,
 			@RequestParam("cPassword") String cPsw) {
