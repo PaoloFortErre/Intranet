@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.ComunicazioneHR;
+import com.erretechnology.intranet.models.FilePdf;
 import com.erretechnology.intranet.models.Post;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
@@ -201,7 +202,7 @@ public class HomeController extends BaseController{
 		ModelAndView mav = new ModelAndView();
 	
 		mav.addObject("user", u);
-		mav.addObject("filePdf", serviceFilePdf.findAll());
+		mav.addObject("filePdf", serviceFilePdf.findAll().stream().filter(x->x.isVisibile()).sorted(Comparator.comparingLong(FilePdf::getTimestamp).reversed()).collect(Collectors.toList()));
 		mav.setViewName("moduli");
 		return mav;
 	}

@@ -284,5 +284,17 @@ public class MyLifeController extends BaseController {
 		saveLog("scritto in bacheca", autore);
 		return "redirect:/myLife/";
 
+	} 
+	
+	@GetMapping (value= "/profiliUtenti")
+	public ModelAndView comunicazioniHr(HttpSession session) {
+		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		ModelAndView mav = new ModelAndView();
+	
+		mav.addObject("utenteDati", u);
+		mav.addObject("utenti", serviceDatiPersonali.getAll().stream().filter(x->x.getUtente().getAttivo()).collect(Collectors.toList()));
+		mav.setViewName("profiliUtenti");
+		return mav;
 	}
+	
 }

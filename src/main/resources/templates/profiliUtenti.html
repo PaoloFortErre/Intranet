@@ -1,0 +1,148 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+<head>
+<title>Profili utenti</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Add icon library -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap"
+	rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro'
+	rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
+
+</head>
+<body>
+
+
+
+	<div class="row" style="background-color: #303030">
+		<div>
+			<nav class="navbar navbar-nav navbar-right"
+				style="margin-left: 1320px;">
+				<div class="content" style="display: inline-block">
+					<a th:href="@{/homepage/}"><img
+						src="/view/MyWork/images/casabianca.png" width="30px"
+						style="margin-top: -10px; opacity: 0.9"> </a>
+				</div>
+
+				<div class="content" style="display: inline-block; color: #ECF260;">
+					<a th:href="@{/comunicazioniHr/}">COMUNICAZIONI HR</a>
+				</div>
+				<div class="content" style="display: inline-block">
+					<a th:href="@{/moduli/}">MODULI</a>
+				</div>
+				<div class="content" style="display: inline-block">
+					<a href="http://polyedro.erretechnology.com/www/" target="blank">POLYEDRO</a>
+				</div>
+				<div style="position: relative; float: right">
+					<a th:href="@{/profile/}"><img
+						th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
+						alt="utente" title="utente" class="immagineUtente"
+						id="utente-foto-profilo"
+						style="margin: 30px; margin-right: 40px; border-radius: 50%; margin-top: 0px;"></a>
+				</div>
+			</nav>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row" style="text-align: center">
+			<div class=" col-lg-2"></div>
+			<div class="col-xs-12 col-sm-12 col-lg-8 mt-5">
+				<h1
+					style="text-shadow: 2px 4px 2px rgba(0, 0, 0, 0.98); color: blue; text-align: center; font-weight: 900; font-size: 60px;">
+					Dipendenti</h1>
+				<br>
+				<h3 style="text-align: center; margin-bottom: 50px;">Scopri i
+					profili dei colleghi</h3>
+
+				<br>
+
+			</div>
+			<div class="col-lg-2"></div>
+			</div>
+			<div class="row" > 
+			<div class="col-xs-6 col-sm-6 col-lg-3 mb-5"
+				th:each="utente:${utenti}">
+				<div class="col-sinistra2"
+					style="background-color: #E4E6E9 !important">
+
+					<img
+						th:src="'data:image/png;base64,' + ${utente.settore.getImgData(utente.settore.logoBlack)}"
+						width="100%" style="border-radius: 6px 6px 0px 0px"> <img
+						th:src="'data:image/jpeg;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}"
+						alt="utente" title="utente" class="immagineUtente"
+						style="margin: 0 auto; position: absolute; left: 37%; top: 90px; border: 1px solid #BEC3CC">
+					<br> <br> <br> <br>
+					<div style="margin: 0 auto; text-align: center">
+						<a th:href="@{/profile/viewProfile/(id=${utente.id})}"
+							th:text="${utente.nome} + ' ' + ${utente.cognome}"
+							style="color: #303030; font-weight: 600; font-size: 18px;"></a> <br>
+						<p th:text="${utenteDati.settore.getNomeSettore}"
+							style="color: #303030; opacity: 0.7;"></p>
+						<a th:href="@{/profile/viewProfile/(id=${utente.id})}"
+							id="submitPost"
+							style="margin: 0 auto; padding: 7px; padding-left: 10px; padding-right: 10px;">
+							Profilo </a>
+					</div>
+					<br>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+
+
+<footer class="align-items-center">
+		<div class="container align-items-center mt-4"
+			style="margin-top: 40px">
+			<div class="row justify-content-center align-items-center mt-3 pt-4"
+				style="margin-top: 15px; padding-top: 15px;">
+				<div class="col-sm-4 col-lg-4">
+					<a href="https://erretechnology.com/" target="blank"><img
+						src="/view/MyWork/images/errelogowhite.png" height="80px"
+						alt="erre_logo" style="margin: auto"></a>
+				</div>
+				<div class="col-sm-4 col-lg-4">
+					<img src="/view/MyWork/images/thegate.png" width="100%"
+						style="margin: auto;">
+					<p style="color: #F3F3F3; text-align: center; font-size: 20px;">
+						Supporto: +39 011 197 429 00</p>
+				</div>
+				<div class="col-sm-4 col-lg-4 pl-5" style="padding-left: 150px">
+					<a class="rounded-circle fa fa-facebook"
+						href="https://www.facebook.com/erretechnologygroup/"
+						target="blank"></a> <a class="rounded-circle fa fa-linkedin ml-2"
+						href="https://www.linkedin.com/company/erretechnologygroup/"
+						style="margin-left: 10px" target="blank"></a>
+				</div>
+			</div>
+		</div>
+	</footer>
+</body>
+</html>

@@ -22,7 +22,8 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap"
 	rel="stylesheet">
-<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro'
+	rel='stylesheet' type='text/css'>
 
 
 <link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
@@ -141,20 +142,19 @@ table, th, td {
 						<table id="tableAssunti" th:if="${nuoviAssunti!=null}">
 							<th:block>
 								<tr>
-									<td th:each="nuovoUtente: ${nuoviAssunti}"><img
-										th:src="'data:image/png;base64,' + ${nuovoUtente.immagine.getImgData(nuovoUtente.immagine.data)}"
-										alt="fotoProfiloUtente" class="img-fluid" width="120px"
-										height="120px"></td>
+									<td th:each="nuovoUtente: ${nuoviAssunti}"><a
+										th:href="@{/profile/viewProfile/(id=${nuovoUtente.id})}"><img
+											th:src="'data:image/png;base64,' + ${nuovoUtente.immagine.getImgData(nuovoUtente.immagine.data)}"
+											alt="fotoProfiloUtente" class="img-fluid" width="120px"
+											height="120px"></a></td>
 								</tr>
 							</th:block>
 							<th:block>
 								<tr>
-									<td th:each="nuovoUtente: ${nuoviAssunti}">
-										<p th:text="${nuovoUtente.nome}"
-											style="display: inline-block; color: black;"></p>
-										<p th:text="${nuovoUtente.cognome}"
-											style="display: inline-block; color: black;"></p>
-									</td>
+									<td th:each="nuovoUtente: ${nuoviAssunti}"><a
+										th:href="@{/profile/viewProfile/(id=${nuovoUtente.id})}"
+										th:text="${nuovoUtente.nome} + ' ' + ${nuovoUtente.cognome}"
+										style="color: #303030; font-size: 15px;"></a></td>
 
 
 								</tr>
@@ -174,20 +174,19 @@ table, th, td {
 						<table id="tableAssunti2" th:if="${nuoviAssunti2!= null}">
 							<th:block>
 								<tr>
-									<td th:each="nuovoUtente: ${nuoviAssunti2}"><img
-										th:src="'data:image/png;base64,' + ${nuovoUtente.immagine.getImgData(nuovoUtente.immagine.data)}"
-										alt="fotoProfiloUtente" class="img-fluid" width="120px"
-										height="120px"></td>
+									<td th:each="nuovoUtente: ${nuoviAssunti2}"><a
+										th:href="@{/profile/viewProfile/(id=${nuovoUtente.id})}"><img
+											th:src="'data:image/png;base64,' + ${nuovoUtente.immagine.getImgData(nuovoUtente.immagine.data)}"
+											alt="fotoProfiloUtente" class="img-fluid" width="120px"
+											height="120px"></a></td>
 								</tr>
 							</th:block>
 							<th:block>
 								<tr>
-									<td th:each="nuovoUtente: ${nuoviAssunti2}">
-										<p th:text="${nuovoUtente.nome}"
-											style="display: inline-block; color: black;"></p>
-										<p th:text="${nuovoUtente.cognome}"
-											style="display: inline-block; color: black;"></p>
-									</td>
+									<td th:each="nuovoUtente: ${nuoviAssunti2}"><a
+										th:href="@{/profile/viewProfile/(id=${nuovoUtente.id})}"
+										th:text="${nuovoUtente.nome} + ' ' + ${nuovoUtente.cognome}"
+										style="color: #303030; font-size: 15px;"></a></td>
 
 
 								</tr>
@@ -216,16 +215,18 @@ table, th, td {
 						width="40%" height="100px" style="float: right" id="imgRosario">
 					<div th:if="${primoPodcast!=null}">
 
-						
+
 						<br>
-						<p th:text="${primoPodcast.nome}" style="font-weight: 500;"></p><p
+						<p th:text="${primoPodcast.nome}" style="font-weight: 500;"></p>
+						<p
 							th:text="${#dates.format(primoPodcast.dataPodcast *1000, 'dd/MM/yyyy')}"
 							style="font-style: italic; font-size: 10px"></p>
 						<audio controls style="margin-top: 10px">
 							<source
 								th:src="'data:audio/mp3;base64,' + ${primoPodcast.getAudioData(primoPodcast.podcast)}"
 								type="audio/ogg">
-						</audio> <br>
+						</audio>
+						<br>
 						<form
 							th:action="@{'/podcast/podcastFormUpdate/'+${primoPodcast.id}}"
 							th:if="${GMW}" method="get">
@@ -235,8 +236,7 @@ table, th, td {
 									width="38%">
 							</button>
 						</form>
-							<form
-							th:action="@{'/podcast/deletePodcast/'+${primoPodcast.id}}"
+						<form th:action="@{'/podcast/deletePodcast/'+${primoPodcast.id}}"
 							th:if="${GMW}" method="get">
 							<button type="submit" name="modifica"
 								style="background-color: transparent; border: 0px solid #232323;">
@@ -256,16 +256,18 @@ table, th, td {
 					<div id="altriPodcast">
 						<div th:each="altriPodcast : ${altriPodcast}">
 							<br>
-							
-							
-							<p th:text="${altriPodcast.nome}"></p><p
+
+
+							<p th:text="${altriPodcast.nome}"></p>
+							<p
 								th:text="${#dates.format(altriPodcast.dataPodcast *1000, 'dd/MM/yyyy')}"
 								style="font-style: italic; font-size: 10px;"></p>
 							<audio controls style="margin-top: 10px">
 								<source
 									th:src="'data:audio/mp3;base64,' + ${altriPodcast.getAudioData(altriPodcast.podcast)}"
 									type="audio/ogg">
-							</audio><br><br>
+							</audio>
+							<br> <br>
 							<form
 								th:action="@{'/podcast/podcastFormUpdate/'+${altriPodcast.id}}"
 								th:if="${GMW}" method="get">
@@ -300,15 +302,15 @@ table, th, td {
 						è il compleanno di:</h2>
 					<div>
 						<div th:each="utente: ${utente}">
-							<img
+							<a th:href="@{/profile/viewProfile/(id=${utente.id})}"><img
 								th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}"
 								alt="fotoProfiloUtente" title="Foto profilo dell'utente"
-								width="28%" height="28%" style="margin-top: 10px;">
-
-							<h4 th:text="${utente.nome}"
-								style="display: inline-block; "></h4>
-							<h4 th:text="${utente.cognome}"
-								style="display: inline-block; "></h4>
+								width="28%" height="28%" style="margin-top: 10px;"></a>
+<a
+										th:href="@{/profile/viewProfile/(id=${utente.id})}"
+										th:text="${utente.nome} + ' ' + ${utente.cognome}"
+										style="color: #303030; font-size: 15px;"></a>
+							
 						</div>
 
 
@@ -373,14 +375,15 @@ table, th, td {
 											<img src="/view/MyWork/images/edit.png" style="float: right"
 												width="38%">
 										</button>
-									</form><form th:action="@{'/cliente/delete/'+${cliente.id}}"
+									</form>
+									<form th:action="@{'/cliente/delete/'+${cliente.id}}"
 										th:if="${GMW}" method="get">
 										<button type="submit" name="modifica"
 											style="background-color: #232323; border: 0px solid #232323; float: right;">
 											<img src="/view/MyWork/images/trash.png" style="float: right"
 												width="38%">
 										</button>
-									</form>  </td>
+									</form></td>
 
 							</tr>
 						</th:block>
@@ -444,8 +447,8 @@ table, th, td {
 											<br>
 											<button type="submit" name="modifica"
 												style="background-color: #232323; border: 0px solid #232323; float: right; color: grey">
-												<img src="/view/MyWork/images/trash.png" style="float: right"
-													width="28%">
+												<img src="/view/MyWork/images/trash.png"
+													style="float: right" width="28%">
 											</button>
 										</form></td>
 								</tr>
@@ -555,7 +558,7 @@ table, th, td {
 			<div th:if="${eventi!=null}">
 				<div class="col-sm-12 col-md-6 col-lg-6" th:each="eventi:${eventi}">
 					<div class="evento" style="margin: auto">
-						
+
 
 						<div id="evento-immagine" th:if="${eventi.copertina!=null}">
 							<img
@@ -566,21 +569,23 @@ table, th, td {
 							<h4
 								style="color: black; padding: 8px; font-weight: 900; text-shadow: 1px 3px 2px rgba(255, 208, 69, 1);"
 								th:text="${eventi.titolo}"></h4>
-								<form th:action="@{'/evento/update/'+${eventi.id}}" th:if="${GMW}"
-							method="get">
-<button type="submit" name="modifica"
+							<form th:action="@{'/evento/update/'+${eventi.id}}"
+								th:if="${GMW}" method="get">
+								<button type="submit" name="modifica"
 									style="background-color: #f3f3f3; border: 0px solid #232323; float: right;">
 									<img src="/view/MyWork/images/editb.png" style="float: right"
 										width="38%">
-								</button>						</form>
-								
-									<form th:action="@{'/evento/delete/'+${eventi.id}}" th:if="${GMW}"
-							method="get">
-<button type="submit" name="modifica"
+								</button>
+							</form>
+
+							<form th:action="@{'/evento/delete/'+${eventi.id}}"
+								th:if="${GMW}" method="get">
+								<button type="submit" name="modifica"
 									style="background-color: #f3f3f3; border: 0px solid #232323; float: right;">
 									<img src="/view/MyLife/images/trash.png" style="float: right"
 										width="38%">
-								</button>						</form>
+								</button>
+							</form>
 						</div>
 						<div id="eventoBody">
 							<p th:text="${eventi.contenuto}"
@@ -628,20 +633,22 @@ table, th, td {
 								<h4
 									style="color: black; padding: 8px; font-weight: 900; text-shadow: 1px 3px 2px rgba(255, 208, 69, 1);"
 									th:text="${eventi2.titolo}"></h4>
-									<form th:action="@{'/evento/update/'+${eventi2.id}}" th:if="${GMW}"
-							method="get">
-<button type="submit" name="modifica"
-									style="background-color: #f3f3f3; border: 0px solid #232323; float: right;">
-									<img src="/view/MyWork/images/editb.png" style="float: right"
-										width="38%">
-								</button>						</form>
-								<form th:action="@{'/evento/delete/'+${eventi2.id}}" th:if="${GMW}"
-							method="get">
-<button type="submit" name="modifica"
-									style="background-color: #f3f3f3; border: 0px solid #232323; float: right;">
-									<img src="/view/MyLife/images/trash.png" style="float: right"
-										width="38%">
-								</button>						</form>
+								<form th:action="@{'/evento/update/'+${eventi2.id}}"
+									th:if="${GMW}" method="get">
+									<button type="submit" name="modifica"
+										style="background-color: #f3f3f3; border: 0px solid #232323; float: right;">
+										<img src="/view/MyWork/images/editb.png" style="float: right"
+											width="38%">
+									</button>
+								</form>
+								<form th:action="@{'/evento/delete/'+${eventi2.id}}"
+									th:if="${GMW}" method="get">
+									<button type="submit" name="modifica"
+										style="background-color: #f3f3f3; border: 0px solid #232323; float: right;">
+										<img src="/view/MyLife/images/trash.png" style="float: right"
+											width="38%">
+									</button>
+								</form>
 							</div>
 							<div id="eventoBody">
 								<p th:text="${eventi2.contenuto}"
@@ -691,21 +698,23 @@ table, th, td {
 			<h3 style="text-align: center; margin-bottom: 50px;">Non
 				perderti nessuna novità dell'azienda</h3>
 			<p th:if="${news==null}"
-				style="text-align: center; margin-bottom: 50px;">Nessuna news recente</p>
+				style="text-align: center; margin-bottom: 50px; font-size: 16px;">Nessuna
+				news recente</p>
 			<div class="col-sm-12 col-md-10 col-lg-11" style="margin: auto;">
 
 
 				<div
-					style="margin-left: 70px; background-color: #232323; box-shadow: -1px 9px 8px 3px rgba(0, 0, 0, 0.76);">
-					
+					style="margin-left: 70px; background-color: #232323; box-shadow: -1px 9px 8px 3px rgba(0, 0, 0, 0.76);"
+					th:if="${news!=null}">
+
 					<div style="padding: 10px;">
-					<h4 style="opacity: 0.8">In evidenza</h4>
-					<hr style="opacity: 0.2">
+						<h4 style="opacity: 0.8">In evidenza</h4>
+						<hr style="opacity: 0.2">
 					</div>
 					<div class="row" style="padding: 10px;" th:if="${news!=null}"
 						th:each="news:${news}">
 
-						
+
 						<div class="col-sm-8 col-md-8 col-lg-8">
 							<h3 style="font-weight: 900" th:text="${news.titolo}"></h3>
 							<form th:action="@{'/news/update/'+${news.id}}" th:if="${GMW}"
@@ -755,21 +764,21 @@ table, th, td {
 								<div class="col-sm-8 col-md-8 col-lg-8">
 									<h3 style="font-weight: 900" th:text="${news2.titolo}"></h3>
 									<form th:action="@{'/news/update/'+${news2.id}}" th:if="${GMW}"
-								method="get">
-								<button type="submit" name="modifica"
-									style="background-color: #232323; border: 0px solid #232323; float: right;">
-									<img src="/view/MyWork/images/edit.png" style="float: right"
-										width="38%">
-								</button>
-							</form>
-								<form th:action="@{'/news/delete/'+${news2.id}}" th:if="${GMW}"
-								method="get">
-								<button type="submit" name="modifica"
-									style="background-color: #232323; border: 0px solid #232323; float: right;">
-									<img src="/view/MyWork/images/trash.png" style="float: right"
-										width="38%">
-								</button>
-							</form>
+										method="get">
+										<button type="submit" name="modifica"
+											style="background-color: #232323; border: 0px solid #232323; float: right;">
+											<img src="/view/MyWork/images/edit.png" style="float: right"
+												width="38%">
+										</button>
+									</form>
+									<form th:action="@{'/news/delete/'+${news2.id}}" th:if="${GMW}"
+										method="get">
+										<button type="submit" name="modifica"
+											style="background-color: #232323; border: 0px solid #232323; float: right;">
+											<img src="/view/MyWork/images/trash.png" style="float: right"
+												width="38%">
+										</button>
+									</form>
 									<p style="line-height: 30px; margin-top: 20px; font-size: 15px"
 										th:text="${news2.contenuto}"></p>
 

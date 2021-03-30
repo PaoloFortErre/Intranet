@@ -41,7 +41,7 @@ public class UploadController extends BaseController{
 	
 	@GetMapping(value = "/moduli")
 	public ModelAndView moduliMAV(HttpSession session) {
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView(); 
 		mav.setViewName("aggiungi_nuova_comunicazione");
 		mav.addObject("comunicazioneHR", new ComunicazioneHR());
 		mav.addObject("comunicazioni", serviceFilePdf.findAll().stream().filter(x->x.isVisibile()).sorted(Comparator.comparingLong(FilePdf::getTimestamp).reversed()).collect(Collectors.toList()));
@@ -90,7 +90,7 @@ public class UploadController extends BaseController{
 		// return success response
 		attributes.addFlashAttribute("message", "You successfully uploaded " + fileName + '!');
 
-		return "redirect:/file/";
+		return "redirect:/moduli/";
 	}
 	
 	
@@ -132,7 +132,7 @@ public class UploadController extends BaseController{
 			pdf.setVisibile(false);
 			serviceFilePdf.insert(pdf);
 			saveLog("cancellato un modulo", autore);
-			return "redirect:/file/moduli";
+			return "redirect:/moduli/";
 		} return "redirect:forbidden";
 
 	}
