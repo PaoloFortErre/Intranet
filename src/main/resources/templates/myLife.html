@@ -28,7 +28,7 @@
 	rel='stylesheet' type='text/css'>
 <style>
 .caption {
-	font-family: Verdana, sans-serif;
+	font-family: "Source Sans Pro", sans-serif;
 	font-size: 10px;
 	float: left;
 	margin: 0;
@@ -374,7 +374,7 @@
 													name="testo" placeholder="Modifica post" cols="20"
 													rows="2.5" id="post" style="display: none; width: 350px; color: BLACK;"
 													required></textarea>
-												<input type="file" style="display: none;" id="editfoto">	
+												<input type="file" style="display: none; color: black;" th:class="editfoto +  ${post.id}">	
 											</form>
 										</div>
 
@@ -445,7 +445,7 @@
 															<img src="/view/MyLife/images/edit.png" width="23px" style="margin-right: 10px;">
 														</button>
 														<textarea th:class="commentoModificato + ${commento.id}"
-															name="testo" id="post" placeholder="Modifica commento" required="suca."
+															name="testo" id="post" placeholder="Modifica commento" required
 															rows="2.5" style="display: none; color: black; width: 175px" ></textarea>
 													</form>
 												</td>
@@ -891,7 +891,7 @@ COLONNA DESTRA
 
 		function showAreaPost(id) {
 			document.getElementsByClassName('postModificato' + id)[0].style.display = "block";
-			document.getElementById("editfoto").style.display="block";
+			document.getElementsByClassName("editfoto" +id)[0].style.display="block";
 
 		}
 

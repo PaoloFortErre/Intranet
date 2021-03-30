@@ -56,7 +56,7 @@ public class MyLifeController extends BaseController {
 
 	@GetMapping(value = "/")
 	public ModelAndView primaPagina(HttpSession session, @RequestParam("page") Optional<Integer> page) {
-		int currentPage = page.orElse(1);
+		int currentPage = page.orElse(1); 
 
 		//	List<Post> messaggi = service.getLastMessage();
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
