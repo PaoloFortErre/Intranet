@@ -60,8 +60,8 @@
 					method="post" enctype="multipart/form-data" class="signin-form">
 
 					<div class="form-group">
-						<label for="nome">Nome</label>
-						<input type="text" class="form-control" name="nome" id="nome">
+						<label for="descrizione">Descrizione</label>
+						<input type="text" class="form-control" th:field="*{descrizione}" name="descrizione" id="descrizione">
 					</div>
 					<select  class="custom-select custom-select-lg mb-3" th:field="*{settore}" >
 						<option th:value="'Erre Technology'" th:text="ErreTechnology"></option>

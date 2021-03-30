@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.Cliente;
@@ -27,7 +25,6 @@ import com.erretechnology.intranet.models.ComunicazioneHR;
 import com.erretechnology.intranet.models.Evento;
 import com.erretechnology.intranet.models.MyWorkBean;
 import com.erretechnology.intranet.models.News;
-import com.erretechnology.intranet.models.NewsModificato;
 import com.erretechnology.intranet.models.Podcast;
 import com.erretechnology.intranet.models.Sondaggio;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;

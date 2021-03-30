@@ -16,15 +16,15 @@ public class ComunicazioneHR {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private long timestamp;
+	private String descrizione;
+	private String nome;
+	private boolean visibile;
+	
 	@Lob
 	private byte[] data;
 	@ManyToOne
 	@JoinColumn(name = "id_autore")
 	private UtenteDatiPersonali utente;
-	private String nome;
-	private boolean visibile;
-
-	
 	
 	public int getId() {
 		return id;
@@ -45,11 +45,11 @@ public class ComunicazioneHR {
 	public void setUtente(UtenteDatiPersonali utente) {
 		this.utente = utente;
 	}
-	public String getNome() {
-		return nome;
+	public String getDescrizione() {
+		return descrizione;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDescrizione(String nome) {
+		this.descrizione = nome;
 	}
 	public boolean isVisibile() {
 		return visibile;
@@ -62,5 +62,11 @@ public class ComunicazioneHR {
 	}
 	public void setData(byte[] data) {
 		this.data = data;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 }

@@ -9,14 +9,15 @@ public class FilePdf{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private String settore;
-	private String nomeFile;
+	private String nome;
+	private long timestamp;
 	@Lob
     private byte[] data;
 	@ManyToOne
 	@JoinColumn(name = "id_autore")
 	private UtenteDatiPersonali autore;
 	private boolean visibile;
-	private String nome; 
+	private String descrizione; 
 
 	public UtenteDatiPersonali getAutore() {
 		return autore;
@@ -32,14 +33,6 @@ public class FilePdf{
 
 	public void setData(byte[] data) {
 		this.data = data;
-	}
-
-	public String getNomeFile() {
-		return nomeFile;
-	}
-
-	public void setNomeFile(String nomeFile) {
-		this.nomeFile = nomeFile;
 	}
 	
 	public Integer getId() {
@@ -66,11 +59,27 @@ public class FilePdf{
 		this.visibile = visibile;
 	}
 
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String nome) {
+		this.descrizione = nome;
+	}
+
 	public String getNome() {
 		return nome;
 	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public long getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
 	}
 }

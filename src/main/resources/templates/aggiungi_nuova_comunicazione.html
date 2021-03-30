@@ -63,7 +63,7 @@
                 <a th:href="@{/file/downloadFileHR(id=${comunicazione.id})}"
                 th:text="${comunicazione.nome}" th:download="${comunicazione.nome}"></a>
               </td>
-              <td></td>
+              <td th:text="${comunicazione.descrizione}"></td>
               <td>
                 <form th:action="@{/file/deleteFileHR(id=${comunicazione.id})}" method="post">
                   <button class="btn btn-danger" type="submit">Elimina</button>

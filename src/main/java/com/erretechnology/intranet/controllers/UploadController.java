@@ -2,6 +2,8 @@ package com.erretechnology.intranet.controllers;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -31,10 +33,19 @@ public class UploadController extends BaseController{
 
 	@GetMapping(value = "/")
 	public ModelAndView uploadMAV() {
-		System.out.println("AAAAAAAAAAA");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("upload");
 		mav.addObject("filePdf", new FilePdf());
+		return mav;
+	}
+	
+	@GetMapping(value = "/moduli")
+	public ModelAndView moduliMAV(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("aggiungi_nuova_comunicazione");
+		mav.addObject("comunicazioneHR", new ComunicazioneHR());
+		mav.addObject("comunicazioni", serviceFilePdf.findAll().stream().sorted(Comparator.comparingLong(FilePdf::getTimestamp).reversed()).collect(Collectors.toList()));
+		mav.addObject("user", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return mav;
 	}
 
@@ -43,7 +54,7 @@ public class UploadController extends BaseController{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("aggiungi_nuova_comunicazione");
 		mav.addObject("comunicazioneHR", new ComunicazioneHR());
-		mav.addObject("comunicazioni", serviceComunicazioni.getAll());
+		mav.addObject("comunicazioni", serviceComunicazioni.getAll().stream().sorted(Comparator.comparingLong(ComunicazioneHR::getTimestamp).reversed()).collect(Collectors.toList()));
 		mav.addObject("user", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return mav;
 	}
@@ -65,7 +76,8 @@ public class UploadController extends BaseController{
 
 		// save the file on the local file system
 		try {
-			filePdf.setNomeFile(fileName);
+			filePdf.setNome(fileName);
+			filePdf.setTimestamp(Instant.now().getEpochSecond());
 			filePdf.setData(file.getBytes());
 			filePdf.setVisibile(true);
 			filePdf.setAutore(u);
@@ -91,42 +103,26 @@ public class UploadController extends BaseController{
 			attributes.addFlashAttribute("message", "Please select a file to upload.");
 			return "redirect:/file/hr";
 		}
-
-		// normalize the file path
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-
 		// save the file on the local file system
 		try {
+			UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 			filePdfHR.setNome(fileName);
 			filePdfHR.setData(file.getBytes());
 			filePdfHR.setTimestamp(Instant.now().getEpochSecond());
-			filePdfHR.setUtente(serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+			filePdfHR.setUtente(u);
 			filePdfHR.setVisibile(true);
 			serviceComunicazioni.save(filePdfHR);
-			saveLog("inserito una nuova Comunicazione HR", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+			saveLog("inserito una nuova Comunicazione HR", u);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		// return success response
-		attributes.addFlashAttribute("message", "You successfully uploaded " + fileName + '!');
+		attributes.addFlashAttribute("message", "Hai caricato con successo la comunicazione!");
 
 		return "redirect:/file/hr";
-	}
-	
-	
-	
-	
-
-	@GetMapping(value = "/moduli")
-	public ModelAndView downloadMAV(HttpSession session) {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("downloadPdf");
-		mav.addObject("filePdf", serviceFilePdf.findAll());
-		mav.addObject("user", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		return mav;
-	}
-	
+	}	
 
 	@PostMapping(value = "/deleteFilePdf")
 	public String deleteMessaggio(int id, HttpSession session) {
@@ -158,7 +154,7 @@ public class UploadController extends BaseController{
 	@GetMapping(value = "/downloadFile")
 	public ResponseEntity<Resource> downloadModulo(int id, HttpSession session) {
 		FilePdf pdf = serviceFilePdf.findById(id);
-		return downloadFile(pdf.getData(), pdf.getNomeFile(), session);
+		return downloadFile(pdf.getData(), pdf.getNome(), session);
 		
 	}
 	

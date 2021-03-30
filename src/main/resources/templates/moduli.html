@@ -73,7 +73,7 @@
 			<div class="col-xs-6 col-sm-6 col-md-4 col-lg-4"
 				th:each="pdf: ${filePdf}">
 				<div class="modulo" style="margin: auto;"
-				 th:if="((${pdf.settore} == ${user.settore.nomeSettore}) or ${admin}) and ${pdf.visibile}">	
+				 th:if="((${pdf.settore} == ${user.settore.nomeSettore}) or ${GM}) and ${pdf.visibile}">	
 					<div th:if="${admin}">
 					
 					</div>
@@ -85,13 +85,13 @@
 						<h4 style="display: inline-block; padding-left: 8px;"><strong>Modulo:</strong></h4><h4 style="padding: 8px; display: inline-block;" th:text="${pdf.nome}"></h4>
 						<img src="/view/MyWork/images/pdf-icon.png"
 							style="float: right; margin: 8px;" width="30px">
-							<form th:action="@{/file/deleteFilePdf(id=${pdf.id})}" th:if="${admin}" method="post">
+							<form th:action="@{/file/deleteFilePdf(id=${pdf.id})}" th:if="${GM}" method="post">
 						<button type="submit"  id="bottoneModulo"> <img src="/view/MyWork/images/trash.png" width="50%"></button>
 					</form>
 					</div>
 					<div id="modulo-body">
 						<a th:href="@{/file/downloadFile(id=${pdf.id})}"
-							 th:download="${pdf.nomeFile}"
+							 th:download="${pdf.nome}"
 							style="text-align: right; padding: 8px;"> <img
 							src="/view/MyWork/images/download.png.png" width="30px"
 							style="float: right;" class="img-responsive"></a>

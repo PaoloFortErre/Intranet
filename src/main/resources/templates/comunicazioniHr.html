@@ -77,7 +77,7 @@
 
 						<img src="/view/MyWork/images/pdf-icon.png" style="float: right;" width="30px">
 						<p th:text="${#dates.format(comunicazione.timestamp*1000, 'dd/MM/yyyy')}"> </p>
-						<h3 th:text="${comunicazione.nome}"> </h3>
+						<h3 th:text="${comunicazione.descrizione}"> </h3>
 						<a th:href="@{/file/downloadFileHR(id=${comunicazione.id})}"  th:download="${comunicazione.nome}" style="text-align: right">
 							<img src="/view/MyWork/images/download.png.png" width="30px"></a>
 
