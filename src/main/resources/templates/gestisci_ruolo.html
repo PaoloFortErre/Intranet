@@ -140,7 +140,8 @@
     	  email = email.substr(last_index+1);
     	 $.get("http://localhost:8080/profile/addPermesso?email=" + email + "&list=" + sList, function( data) {
     		 let checkbox = "<p class='p text-danger'>Permessi modificati</p>" + "<br>";
-	          $("#text").append(checkbox);
+    		 $("#text > p").remove();
+    		 $("#text").append(checkbox);
     	 });
     }
   </script>
