@@ -50,7 +50,7 @@
               <th scope="col">#</th>
               <th scope="col">Data</th>
               <th scope="col">Scarica</th>
-              <th scope="col">Nome</th>
+              <th scope="col">Descrizione</th>
               <th scope="col">Funzioni</th>
             </tr>
           </thead>
@@ -102,7 +102,7 @@
             <form th:action="@{/file/uploadHR}" th:object="${comunicazioneHR}"
             method="post" enctype="multipart/form-data" class="signin-form">
             <div class="form-group col-12">
-              <label for="nome">Nome</label>
+              <label for="nome">Descrizione</label>
               <input type="text" name="nome" class="form-control" id="input" required>
             </div>
 
