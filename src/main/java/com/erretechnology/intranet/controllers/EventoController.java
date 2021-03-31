@@ -153,7 +153,9 @@ public class EventoController extends BaseController {
 		model.addAttribute("date", date);
 		Indirizzo indirizzo = repoIndirizzo.findById(evento.getIndirizzo().getId()).get();
 		model.addAttribute("indirizzo", indirizzo);
-		return "EventoFormUpdate";
+		if (evento.isLife()) {
+		return "EventoFormUpdate";}
+		else {return "EventoWorkUpdate";}
 	}
 
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
@@ -193,10 +195,14 @@ public class EventoController extends BaseController {
 		repoEvento.save(evento);
 		model.addAttribute("evento", evento);
 		saveLog("modificato un evento", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		if(!evento.isLife())
+		
+		
+		
+		if(!evento.isLife()) {
 			return "redirect:/myWork/";
+		} else {
 		return "redirect:/myLife/";
-
+		}
 	}
 
 	@RequestMapping("/delete/{id}")
