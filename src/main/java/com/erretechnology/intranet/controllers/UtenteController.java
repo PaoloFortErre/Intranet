@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import com.erretechnology.intranet.models.FileImmagine;
-import com.erretechnology.intranet.models.Libro;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.Permesso;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
@@ -113,15 +112,13 @@ public class UtenteController extends BaseController{
 
 
 	@RequestMapping(value = "/cambioPassword", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView cambioPassword(boolean flag, String messaggio, Model model) {
-		if(flag) {
-			model.addAttribute("messaggio", messaggio);
-		}
+	public ModelAndView cambioPassword(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("cambiaPassword");
 		mav.addObject("vecchiaPassword", new String());
 		mav.addObject("nuovaPassword", new String());
 		mav.addObject("cNuovaPassword", new String());
+		mav.addObject("obbligato", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())).getPasswordCambiata());
 		return mav;
 	}
 
@@ -132,14 +129,20 @@ public class UtenteController extends BaseController{
 		String regex = "^(?=.*[0-9])"
 				+ "(?=.*[a-z])(?=.*[A-Z])"
 				+ "(?=\\S+$).{8,20}$";
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/profile/cambioPassword");
 		if(passwordEncoder.matches(vPsw, serviceUtente.findById(Integer.parseInt(session.getAttribute("id").toString())).getPassword())){
 			if(nPsw.equals(cNPsw)) {
 				if(nPsw.equals(vPsw)) {
-					return cambioPassword(true, "la nuova password non può essere uguale alla precedente", model);
+					mav.addObject("messaggio", "la nuova password non può essere uguale alla precedente");
+					return mav;
 				}else {
 					Pattern p = Pattern.compile(regex);
 					Matcher m = p.matcher(nPsw);
-					if(!m.matches()) {return cambioPassword(true, "La password deve contenere una lettera maiuscola, una lettera minuscola, un numero ed essere di almeno 8 caratteri", model);}
+					if(!m.matches()) {
+						mav.addObject("messaggio", "La password deve contenere una lettera maiuscola, una lettera minuscola, un numero ed essere di almeno 8 caratteri");
+						return mav;
+					}
 					Utente u = serviceUtente.findById(Integer.parseInt(session.getAttribute("id").toString()));
 					u.setPassword(nPsw);
 					serviceUtente.saveUtente(u);
@@ -152,10 +155,12 @@ public class UtenteController extends BaseController{
 					return primaPagina(session);
 				}
 			}else {
-				return cambioPassword(true, "le password non corrispondono", model);
+				mav.addObject("messaggio", "Le password non corrispondono");
+				return mav;
 			}
 		}else{
-			return cambioPassword(true, "la vecchia password è sbagliata", model);
+			mav.addObject("messaggio", "la vecchia password è sbagliata");
+			return mav;
 		}
 	}
 
