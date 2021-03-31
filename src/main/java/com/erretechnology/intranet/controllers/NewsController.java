@@ -127,10 +127,25 @@ public class NewsController extends BaseController {
 	public String delete(@PathVariable int id, HttpSession session) {
 		News news = repoNews.findById(id).get();
 		news.setVisibile(false);
+		news.setTimestampEliminazione(Instant.now().getEpochSecond());
 		repoNews.save(news);
 		saveLog("eliminato una news", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/myWork/";
 	}
 	
-
+	@GetMapping(value ="/cancellaNews")
+	public String eliminaNews(HttpSession session, int id) {
+		News n = repoNews.findById(id).get();
+		repoNews.delete(n);
+		return "redirect:/profile/mostraEliminati";
+	}
+	
+	@GetMapping(value ="/ripristinaNews")
+	public String ripristinaNews(HttpSession session, int id) {
+		News n = repoNews.findById(id).get();
+		n.setVisibile(true);
+		repoNews.save(n);;
+		return "redirect:/profile/mostraEliminati";
+	}
+	
 }

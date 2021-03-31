@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.erretechnology.intranet.models.Commento;
 import com.erretechnology.intranet.models.ComunicazioneHR;
 import com.erretechnology.intranet.models.FilePdf;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
@@ -124,6 +125,8 @@ public class UploadController extends BaseController{
 			serviceFilePdf.findByAutore(autore).stream().filter(x-> x.getId() == id).count() > 0) {
 			FilePdf pdf =serviceFilePdf.findById(id);
 			pdf.setVisibile(false);
+			pdf.setTimestampEliminazione(Instant.now().getEpochSecond());
+
 			serviceFilePdf.insert(pdf);
 			saveLog("cancellato un modulo", autore);
 			return "redirect:/moduli/";
@@ -139,7 +142,9 @@ public class UploadController extends BaseController{
 			serviceComunicazioni.findByAutore(autore).stream().filter(x-> x.getId() == id).count() > 0) {
 			ComunicazioneHR pdf =serviceComunicazioni.findById(id);
 			pdf.setVisibile(false);
+			pdf.setTimestampEliminazione(Instant.now().getEpochSecond());
 			serviceComunicazioni.save(pdf);
+			
 			saveLog("cancellato una comunicazione hr", autore);
 			return "redirect:/file/hr";
 		} 
@@ -178,5 +183,35 @@ public class UploadController extends BaseController{
 		mav.setViewName("comunicazioniList");
 		mav.addObject("comunicazioni", serviceComunicazioni.getAll());
 		return mav;
+	}
+	
+	@GetMapping(value ="/cancellaComunicazioneHR")
+	public String eliminaComunicazioneHR(HttpSession session, int id) {
+		ComunicazioneHR hr = serviceComunicazioni.findById(id);
+		serviceComunicazioni.remove(hr);
+		return "redirect:/profile/mostraEliminati";
+	}
+	
+	@GetMapping(value ="/ripristinaComunicazioneHR")
+	public String ripristinaComunicazioneHR(HttpSession session, int id) {
+		ComunicazioneHR hr = serviceComunicazioni.findById(id);
+		hr.setVisibile(true);
+		serviceComunicazioni.save(hr);;
+		return "redirect:/profile/mostraEliminati";
+	}
+	
+	@GetMapping(value ="/cancellaModulo")
+	public String eliminaModulo(HttpSession session, int id) {
+		FilePdf file = serviceFilePdf.findById(id);
+		serviceFilePdf.remove(file);
+		return "redirect:/profile/mostraEliminati";
+	}
+	
+	@GetMapping(value ="/ripristinaModulo")
+	public String ripristinaModulo(HttpSession session, int id) {
+		FilePdf file = serviceFilePdf.findById(id);
+		file.setVisibile(true);
+		serviceFilePdf.insert(file);;
+		return "redirect:/profile/mostraEliminati";
 	}
 }

@@ -20,7 +20,7 @@ public class ServiceSondaggioImpl implements ServiceSondaggio{
 		return repositorySondaggio.findById(id).get();
 	}
 	@Override
-	public List<Sondaggio> findAll(){
+	public List<Sondaggio> findAllVisible(){
 		return repositorySondaggio.findAll().stream()
 				.filter(x->x.isVisibile())
 				.sorted(Comparator.comparingInt(Sondaggio::getId).reversed())
@@ -34,5 +34,19 @@ public class ServiceSondaggioImpl implements ServiceSondaggio{
 	@Override
 	public List<Sondaggio> findByAutore(UtenteDatiPersonali autore) {
 		return findAll().stream().filter(x-> x.getAutore().equals(autore)).collect(Collectors.toList());
+	}
+	@Override
+	public List<Sondaggio> getAllNotVisible() {
+		// TODO Auto-generated method stub
+		return findAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList());
+	}
+	@Override
+	public void delete(Sondaggio s) {
+		repositorySondaggio.delete(s);
+	}
+	@Override
+	public List<Sondaggio> findAll() {
+		// TODO Auto-generated method stub
+		return repositorySondaggio.findAll();
 	}
 }

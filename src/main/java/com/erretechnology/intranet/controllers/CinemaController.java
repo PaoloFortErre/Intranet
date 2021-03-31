@@ -118,8 +118,24 @@ public class CinemaController extends BaseController {
 	public String delete(@PathVariable int id, HttpSession session) {
 		Cinema cinema = repoCinema.findById(id).get();
 		cinema.setVisibile(false);
+		cinema.setTimestampEliminazione(Instant.now().getEpochSecond());
 		repoCinema.save(cinema);
 		saveLog("cancellato un cinema", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/myLife/";
 	}
+	
+	@RequestMapping("/cancellaFilm")
+	public String cancellaFilm(int id, HttpSession session) {
+		repoCinema.deleteById(id);
+		return "redirect:/profile/mostraEliminati";
+		}
+	
+	@RequestMapping("/ripristinaFilm")
+	public String ripristinaFilm(int id, HttpSession session) {
+		Cinema cinema = repoCinema.findById(id).get();
+		cinema.setVisibile(true);
+		repoCinema.save(cinema);
+		return "redirect:/profile/mostraEliminati";
+		}
+	
 }

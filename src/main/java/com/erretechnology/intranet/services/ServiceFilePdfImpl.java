@@ -33,4 +33,9 @@ public class ServiceFilePdfImpl implements ServiceFilePdf {
 		return findAll().stream().filter(x -> x.getAutore().equals(autore)).collect(Collectors.toList());
 	}
 
+	@Override
+	public void remove(FilePdf modulo) {
+		repositoryFilePdf.delete(modulo);
+	}
+
 }

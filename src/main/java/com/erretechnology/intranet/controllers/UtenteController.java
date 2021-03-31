@@ -382,6 +382,8 @@ public class UtenteController extends BaseController{
 		mav.addObject("libri", repositoryLibro.getAllNotVisible());
 		mav.addObject("film", repositoryFilm.getAllNotVisible());
 		mav.addObject("client", repositoryCliente.getAllNotVisible());
+		System.out.println(serviceSondaggio.getAllNotVisible().size()+" sondaggi");
+		mav.addObject("sondaggi", serviceSondaggio.getAllNotVisible());
 		return mav;
 	}
 

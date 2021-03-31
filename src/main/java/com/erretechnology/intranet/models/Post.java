@@ -3,6 +3,7 @@ package com.erretechnology.intranet.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,7 +31,7 @@ public class Post {
 	@ManyToOne
 	@JoinColumn(name = "id_autore")
 	private UtenteDatiPersonali autore;
-	@OneToMany(mappedBy = "post")
+	@OneToMany(mappedBy = "post", cascade=CascadeType.REMOVE)
 	private List<Commento> setCommenti;
 	
 	//private Set<Commento> setCommentiOrdinati = new TreeSet<Commento>();

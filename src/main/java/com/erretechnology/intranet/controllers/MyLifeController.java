@@ -227,6 +227,7 @@ public class MyLifeController extends BaseController {
 		   autorePost.getId() == sessionId) {
 			Commento c = serviceCommento.findById(id);
 			c.setVisibile(false);
+			c.setTimestampEliminazione(Instant.now().getEpochSecond());
 			serviceCommento.save(c);
 			//System.out.println("cancellazione post: RIUSCITO");
 			saveLog("cancellato un commento in bacheca", serviceDatiPersonali.findById(sessionId));
@@ -290,7 +291,30 @@ public class MyLifeController extends BaseController {
 	public String eliminaPost(HttpSession session, int id) {
 		Post p = servicePost.findById(id);
 		servicePost.remove(p);
-		return "redirect:/profile/gestione_suprema";
+		return "redirect:/profile/mostraEliminati";
+	}
+	
+	@GetMapping(value ="/ripristinaPost")
+	public String ripristinaPost(HttpSession session, int id) {
+		Post p = servicePost.findById(id);
+		p.setVisibile(true);
+		servicePost.save(p);
+		return "redirect:/profile/mostraEliminati";
+	}
+	
+	@GetMapping(value ="/cancellaCommento")
+	public String eliminaCommento(HttpSession session, int id) {
+		Commento c = serviceCommento.findById(id);
+		serviceCommento.delete(c);
+		return "redirect:/profile/mostraEliminati";
+	}
+	
+	@GetMapping(value ="/ripristinaCommento")
+	public String ripristinaCommento(HttpSession session, int id) {
+		Commento c = serviceCommento.findById(id);
+		c.setVisibile(true);
+		serviceCommento.save(c);;
+		return "redirect:/profile/mostraEliminati";
 	}
 
 }

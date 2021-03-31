@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.erretechnology.intranet.models.FilePdf;
 import com.erretechnology.intranet.models.Podcast;
 import com.erretechnology.intranet.models.Utility;
 
@@ -68,6 +70,7 @@ public class PodcastController extends BaseController {
 	@GetMapping(value = "/deletePodcast/{id}")
 	public String deletePodcast(@PathVariable int id) {
 		Podcast p = servicePodcast.getById(id);
+		p.setTimestampEliminazione(Instant.now().getEpochSecond());
 		p.setVisibile(false);
 		servicePodcast.save(p);
 		saveLog("eliminato il podcast con "  + p.getNome(), p.getUtente());
@@ -102,5 +105,20 @@ public class PodcastController extends BaseController {
 		}
 
 		return "redirect:/myWork/";
+	}
+	
+	@GetMapping(value ="/cancellaPodcast")
+	public String eliminaPodcast(HttpSession session, int id) {
+		Podcast p = servicePodcast.getById(id);
+		servicePodcast.remove(p);
+		return "redirect:/profile/mostraEliminati";
+	}
+	
+	@GetMapping(value ="/ripristinaPodcast")
+	public String ripristinaModulo(HttpSession session, int id) {
+		Podcast p = servicePodcast.getById(id);
+		p.setVisibile(true);
+		servicePodcast.save(p);;
+		return "redirect:/profile/mostraEliminati";
 	}
 }
