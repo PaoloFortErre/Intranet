@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import com.erretechnology.intranet.models.FileImmagine;
+import com.erretechnology.intranet.models.Libro;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.Permesso;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;

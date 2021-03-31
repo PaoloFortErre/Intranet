@@ -255,8 +255,8 @@
           </div>
 
           <!-- GESTIONE SUPREMA -->
-          <div sec:authorize="hasRole('ADMIN')">
-            <a class="btn btn-primary mt-3" th:href="@{/profile/mostraEliminati}" method="get">GESTIONE SUPREMA</a>
+          <div th:if="${session.id} == ${utente.utente.id}">
+            <a th:if="${AM}" class="btn btn-primary mt-3" th:href="@{/profile/mostraEliminati}" method="get">GESTIONE SUPREMA</a>
           </div>
 
 

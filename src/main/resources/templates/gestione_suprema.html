@@ -18,8 +18,9 @@
   <style>
   body{
     background-image: url("/view/MyWork/images/background.png");
-    background-repeat: no-repeat, repeat;
-    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover, contain;
+
   }
 
   </style>
@@ -84,12 +85,15 @@
               <th scope="col">Funzioni</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <th class="text-center" scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
+          <tbody >
+            <tr th:each:"libro : ${libri}">
+              <td th:text="${libri[0].id}">AAAAAAAAAAAAAAAAAA</td>
+            </tr>
+            <!--<tr th:each:"libro:${libri}">
+              <td class="text-center" th:text="${libro.id}"></td>
+              <td th:text="${libro.titolo}"></td>
+              <td th:text="${libro.autore}"></td>
+              <td th:text="${libro.timestampEliminazione}"></td>
               <td>
                 <div class="img-fluid text-center">
                   <a href="#"><img title="ripristina elemento"
@@ -98,7 +102,7 @@
                       width="27px" src="/view/Admin/images/delete_icon.png" alt="delete"></a>
                     </div>
                   </td>
-                </tr>
+                </tr> -->
               </tbody>
             </table>
           </div>
@@ -159,7 +163,6 @@
                     <tr>
                       <th scope="col">ID</th>
                       <th scope="col">Nome</th>
-                      <th scope="col">Autore</th>
                       <th scope="col">Data e ora</th>
                       <th scope="col">Funzioni</th>
                     </tr>
@@ -167,7 +170,6 @@
                   <tbody>
                     <tr>
                       <th class="text-center" scope="row">1</th>
-                      <td>Mark</td>
                       <td>Otto</td>
                       <td>@mdo</td>
                       <td>
@@ -195,10 +197,10 @@
                       <thead class="thead-dark text-center">
                         <tr>
                           <th scope="col">ID</th>
-                          <th scope="col">First</th>
-                          <th scope="col">Last</th>
+                          <th scope="col">Autore</th>
+                          <th scope="col">Testo</th>
                           <th scope="col">Data e ora</th>
-                          <th scope="col">Handle</th>
+                          <th scope="col">Funzioni</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -238,8 +240,8 @@
                           <thead class="thead-dark text-center">
                             <tr>
                               <th scope="col">ID</th>
-                              <th scope="col">Titolo</th>
                               <th scope="col">Autore</th>
+                              <th scope="col">Testo</th>
                               <th scope="col">Data e ora</th>
                               <th scope="col">Funzioni</th>
                             </tr>
@@ -275,10 +277,10 @@
                               <thead class="thead-dark text-center">
                                 <tr>
                                   <th scope="col">ID</th>
-                                  <th scope="col">First</th>
-                                  <th scope="col">Last</th>
+                                  <th scope="col">Nome</th>
+                                  <th scope="col">Descrizione</th>
                                   <th scope="col">Data e ora</th>
-                                  <th scope="col">Handle</th>
+                                  <th scope="col">Funzioni</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -318,8 +320,10 @@
                                   <thead class="thead-dark text-center">
                                     <tr>
                                       <th scope="col">ID</th>
-                                      <th scope="col">Titolo</th>
                                       <th scope="col">Autore</th>
+                                      <th scope="col">Nome</th>
+                                      <th scope="col">Descrizione</th>
+                                      <th scope="col">Settore</th>
                                       <th scope="col">Data e ora</th>
                                       <th scope="col">Funzioni</th>
                                     </tr>
@@ -328,6 +332,8 @@
                                     <tr>
                                       <th class="text-center" scope="row">1</th>
                                       <td>Mark</td>
+                                      <td>Otto</td>
+                                      <td>@mdo</td>
                                       <td>Otto</td>
                                       <td>@mdo</td>
                                       <td>
@@ -355,10 +361,10 @@
                                       <thead class="thead-dark text-center">
                                         <tr>
                                           <th scope="col">ID</th>
-                                          <th scope="col">First</th>
-                                          <th scope="col">Last</th>
+                                          <th scope="col">Nome</th>
+                                          <th scope="col">Autore</th>
                                           <th scope="col">Data e ora</th>
-                                          <th scope="col">Handle</th>
+                                          <th scope="col">Funzioni</th>
                                         </tr>
                                       </thead>
                                       <tbody>
@@ -398,7 +404,8 @@
                                           <thead class="thead-dark text-center">
                                             <tr>
                                               <th scope="col">ID</th>
-                                              <th scope="col">Titolo</th>
+                                              <th scope="col">Nome</th>
+                                              <th scope="col">Link</th>
                                               <th scope="col">Autore</th>
                                               <th scope="col">Data e ora</th>
                                               <th scope="col">Funzioni</th>
@@ -407,6 +414,7 @@
                                           <tbody>
                                             <tr>
                                               <th class="text-center" scope="row">1</th>
+                                              <td>Mark</td>
                                               <td>Mark</td>
                                               <td>Otto</td>
                                               <td>@mdo</td>
@@ -435,10 +443,10 @@
                                               <thead class="thead-dark text-center">
                                                 <tr>
                                                   <th scope="col">ID</th>
-                                                  <th scope="col">First</th>
-                                                  <th scope="col">Last</th>
+                                                  <th scope="col">Titolo</th>
+                                                  <th scope="col">Autore</th>
                                                   <th scope="col">Data e ora</th>
-                                                  <th scope="col">Handle</th>
+                                                  <th scope="col">Funzioni</th>
                                                 </tr>
                                               </thead>
                                               <tbody>

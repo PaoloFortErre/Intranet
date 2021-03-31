@@ -112,6 +112,7 @@ public class LibroController extends BaseController {
 	public String delete(@PathVariable int id, HttpSession session) {
 		Libro libro = repoLibro.findById(id).get();
 		libro.setVisibile(false);
+		libro.setTimestampEliminazione(Instant.now().getEpochSecond());
 		repoLibro.save(libro);
 		saveLog("cancellato un libro", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/myLife/";
