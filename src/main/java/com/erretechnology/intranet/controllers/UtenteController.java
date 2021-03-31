@@ -238,12 +238,13 @@ public class UtenteController extends BaseController{
 
 
 	@GetMapping(value = "/addPermesso")
-	public String addPermesso(String email, String list, HttpSession session, Model model) {
+	public String addPermesso(String email, String list, HttpSession session, Model model) throws Exception {
 		String[] permessi = list.split(",");
 		//Set<String> targetSet = new CopyOnWriteArraySet<String>(Arrays.asList(permessi));
 		int id_utente = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(id_utente);
-		if(utenteLoggato.getUtente().getRuolo().getNome().equals("ADMIN")) {
+		if( utenteLoggato.getUtente().getRuolo().getNome().equals("ADMIN") || 
+			utenteLoggato.getUtente().getSetPermessi().contains(servicePermesso.findById("AM"))) {
 			Utente u = serviceUtente.findByEmail(email);
 			Set<Permesso> permessiUtente = new HashSet<Permesso>();
 			boolean flag;
@@ -281,23 +282,21 @@ public class UtenteController extends BaseController{
 			saveLog("modificato permessi i permessi di " + serviceDatiPersonali.findByAutore(u).getNome() +  " " +serviceDatiPersonali.findByAutore(u).getCognome(), utenteLoggato);
 			return "redirect:/profile/gestisciPermesso";
 		}
-		return "redirect:/forbidden";
+		throw new Exception("Non hai i permessi per svolgere quest'azione");
 	}
 
 	@GetMapping(value = "/cancellaUtente")
-	public ModelAndView rimuoviUtente(HttpSession session, boolean flag, String messaggio, Model model) {
+	public ModelAndView rimuoviUtente(HttpSession session, boolean flag, String messaggio, Model model) throws Exception {
 		if(flag) model.addAttribute("messaggio", messaggio);
 		ModelAndView mav = new ModelAndView();
 		UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
-		if(serviceUtente.findById(utenteLoggato.getId()).getRuolo().getNome().equals("ADMIN")) {
-
+		if( serviceUtente.findById(utenteLoggato.getId()).getRuolo().getNome().equals("ADMIN") || 
+			utenteLoggato.getUtente().getSetPermessi().contains(servicePermesso.findById("AM"))) {
 			mav.setViewName("eliminaUtente");
 			mav.addObject("utenti", serviceDatiPersonali.getAll().stream().filter(x -> x.getUtente().getAttivo()).collect(Collectors.toList()));
 			return mav;
-
 		}
-		mav.setViewName("forbidden");
-		return mav;
+		throw new Exception("Non hai i permessi per svolgere quest'azione");
 	}
 
 	// form Registrazione
@@ -349,7 +348,7 @@ public class UtenteController extends BaseController{
 	}
 
 	@PostMapping(value = "/elimina")
-	public ModelAndView rimuovi(@RequestParam("id_eliminato") int id, Model model, HttpSession session) {
+	public ModelAndView rimuovi(@RequestParam("id_eliminato") int id, Model model, HttpSession session) throws Exception {
 		Utente u = serviceUtente.findById(id);
 		UtenteDatiPersonali utente = serviceDatiPersonali.findByAutore(u);
 		u.setAttivo(false);

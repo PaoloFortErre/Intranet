@@ -1,14 +1,11 @@
 package com.erretechnology.intranet.controllers;
 
-import java.io.IOException;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.erretechnology.intranet.models.Aforisma;
 import com.erretechnology.intranet.models.Cinema;
 import com.erretechnology.intranet.models.Commento;
@@ -47,12 +43,6 @@ public class MyLifeController extends BaseController {
 	private RepositoryLibro repoLib;
 	@Autowired
 	private RepositoryCinema repoCine;
-	//	@GetMapping(value="/myLife")
-	//	public ModelAndView myLife() {
-	//		ModelAndView mav = new ModelAndView();
-	//		mav.setViewName("myLife");
-	//		return mav;
-	//	}
 
 	@GetMapping(value = "/")
 	public ModelAndView primaPagina(HttpSession session, @RequestParam("page") Optional<Integer> page) {
@@ -180,11 +170,11 @@ public class MyLifeController extends BaseController {
 			saveLog("modificato un post in bacheca", autore);
 			return "redirect:/myLife/";
 		}
-		return "redirect:/forbidden";
+		throw new Exception("Non hai i permessi per svolgere quest'azione");
 	}
 
 	@PostMapping(value = "/editCommento")
-	public String updateCommento(int id, HttpSession session, Commento commento) {
+	public String updateCommento(int id, HttpSession session, Commento commento) throws Exception {
 		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
 		Commento c = serviceCommento.findById(id);
 		UtenteDatiPersonali autore = c.getAutore();
@@ -203,15 +193,16 @@ public class MyLifeController extends BaseController {
 			saveLog("modificato un commento in bacheca" ,  autore);
 			return "redirect:/myLife/";
 		}
-		return "redirect:/forbidden";
+		throw new Exception("Non hai i permessi per svolgere quest'azione");
 	}
 
 	@PostMapping(value = "/deletePost")
-	public String deletePost(/*@ModelAttribute Post post*/ int id, HttpSession session) {
+	public String deletePost(/*@ModelAttribute Post post*/ int id, HttpSession session) throws Exception {
 		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
 		//int autoreId = servicePost.findById(id).getAutore().getId();
 		UtenteDatiPersonali autore = servicePost.findById(id).getAutore();
-		if(sessionId == autore.getId() || serviceAuthority.findByUserId(sessionId).stream().filter(x -> x.getIdPermesso().equals("DS")).count() == 1) {
+		if(sessionId == autore.getId() || 
+		   serviceAuthority.findByUserId(sessionId).stream().filter(x -> x.getIdPermesso().equals("DS")).count() == 1) {
 			Post p = servicePost.findById(id);
 			p.setVisibile(false);
 			servicePost.save(p);
@@ -220,20 +211,20 @@ public class MyLifeController extends BaseController {
 			return "redirect:/myLife/";
 		}
 		//System.out.println("cancellazione post: PERMESSO NEGATO");
-		return "redirect:/forbidden";
+		throw new Exception("Non hai i permessi per svolgere quest'azione");
 
 	}
 
 	@PostMapping(value = "/deleteCommento")
-	public String deleteCommento(/*@ModelAttribute Post post*/ int id, HttpSession session) {
+	public String deleteCommento(/*@ModelAttribute Post post*/ int id, HttpSession session) throws Exception {
 		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
 		// int autoreId = serviceCommento.findById(id).getAutore().getId();
 		UtenteDatiPersonali autoreCommento = serviceCommento.findById(id).getAutore();
 		UtenteDatiPersonali autorePost = serviceCommento.findById(id).getPost().getAutore();
 		//Utente utenteLoggato = serviceUtente.findById(sessionId);
 		if(sessionId == autoreCommento.getId() ||
-				serviceAuthority.findByUserId(sessionId).stream().filter(x-> x.getIdPermesso().equals("DS")).count() == 1 ||
-				autorePost.getId() == sessionId) {
+		   serviceAuthority.findByUserId(sessionId).stream().filter(x-> x.getIdPermesso().equals("DS")).count() == 1 ||
+		   autorePost.getId() == sessionId) {
 			Commento c = serviceCommento.findById(id);
 			c.setVisibile(false);
 			serviceCommento.save(c);
@@ -242,7 +233,7 @@ public class MyLifeController extends BaseController {
 			return "redirect:/myLife/";
 		}
 		//System.out.println("cancellazione post: PERMESSO NEGATO");
-		return "redirect:/forbidden";
+		throw new Exception("Non hai i permessi per svolgere quest'azione");
 
 	}
 
@@ -276,10 +267,6 @@ public class MyLifeController extends BaseController {
 			img.setNomeFile(StringUtils.cleanPath(document.getOriginalFilename()));
 			serviceFileImmagine.insert(img);
 			post.setImmagine(img);
-
-			System.err.println("File caricato");
-
-
 		}
 
 		servicePost.save(post);

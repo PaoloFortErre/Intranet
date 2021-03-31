@@ -118,29 +118,32 @@ public class UploadController extends BaseController{
 	}	
 
 	@PostMapping(value = "/deleteFilePdf")
-	public String deleteMessaggio(int id, HttpSession session) {
+	public String deleteMessaggio(int id, HttpSession session) throws Exception {
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
-		if(serviceFilePdf.findByAutore(autore).stream().filter(x-> x.getId() == id).count() > 0) {
+		if( autore.getUtente().getSetPermessi().contains(servicePermesso.findById("GM")) || 
+			serviceFilePdf.findByAutore(autore).stream().filter(x-> x.getId() == id).count() > 0) {
 			FilePdf pdf =serviceFilePdf.findById(id);
 			pdf.setVisibile(false);
 			serviceFilePdf.insert(pdf);
 			saveLog("cancellato un modulo", autore);
 			return "redirect:/moduli/";
-		} return "redirect:forbidden";
+		} 
+		throw new Exception("Non hai i permessi per svolgere quest'azione");
 
 	}
 
 	@PostMapping(value = "/deleteFileHR")
-	public String deleteComunicazioneHR(int id, HttpSession session) {
+	public String deleteComunicazioneHR(int id, HttpSession session) throws Exception {
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
-		if(serviceComunicazioni.findByAutore(autore).stream().filter(x-> x.getId() == id).count() > 0) {
+		if( autore.getUtente().getSetPermessi().contains(servicePermesso.findById("GHR")) || 
+			serviceComunicazioni.findByAutore(autore).stream().filter(x-> x.getId() == id).count() > 0) {
 			ComunicazioneHR pdf =serviceComunicazioni.findById(id);
 			pdf.setVisibile(false);
 			serviceComunicazioni.save(pdf);
 			saveLog("cancellato una comunicazione hr", autore);
 			return "redirect:/file/hr";
-		} return "redirect:forbidden";
-
+		} 
+		throw new Exception("Non hai i permessi per svolgere quest'azione");
 	}
 
 

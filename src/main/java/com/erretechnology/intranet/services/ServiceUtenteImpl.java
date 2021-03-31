@@ -35,8 +35,8 @@ public class ServiceUtenteImpl implements ServiceUtente{
 	}
 	@Override
 	public Utente findByResetPasswordToken(String token) {
-		//List<Utente> a = getAll().stream().filter(x-> x.getTokenResetPassword() != null).filter(x -> x.getTokenResetPassword().equals(token)).collect(Collectors.toList());
-		return getAll().stream().filter(x-> x.getTokenResetPassword() != null).filter(x -> x.getTokenResetPassword().equals(token)).findFirst().get();
+		return getAll().stream().filter(x-> x.getTokenResetPassword() != null)
+			  .filter(x -> x.getTokenResetPassword().equals(token)).findFirst().orElse(null);
 	}
 	@Override
 	public void updateResetPasswordToken(String token, String email) /*throws CustomerNotFoundException*/ {

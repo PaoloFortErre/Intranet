@@ -2,6 +2,8 @@ package com.erretechnology.intranet.controllers;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Comparator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import javax.mail.MessagingException;
@@ -38,13 +40,6 @@ public class HomeController extends BaseController{
 	@GetMapping("/")
 	public String home() {
 		return ("redirect:login");
-	}
-
-	@GetMapping("/forbidden")
-	public ModelAndView admin() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("forbidden");
-		return mav;
 	}
 
 	// Login form
@@ -112,12 +107,19 @@ public class HomeController extends BaseController{
 	}
 	
 	@GetMapping("/reset_password")
-	public ModelAndView showResetPasswordForm(@Param(value = "token") String token, Model model) {
+	public ModelAndView showResetPasswordForm(@Param(value = "token") String token) {
+		ModelAndView mav = new ModelAndView();
+		if(token == "") {
+			mav.setViewName("password_lost");
+	    	mav.addObject("error", "Non è più possibile effettuare il cambio password con questo token");
+	    	return mav;
+		}
 	    Utente utente = serviceUtente.findByResetPasswordToken(token);
-	    ModelAndView mav = new ModelAndView();
+	    
 	     
 	    if (utente == null) {
-	        
+	    	mav.setViewName("password_lost");
+	    	mav.addObject("error", "Si è verificato un problema con il token, riprovare o richiederne uno nuovo");
 	    }else {
 	    	mav.setViewName("reset_password_form");
 	    	mav.addObject("token", token);
@@ -127,26 +129,35 @@ public class HomeController extends BaseController{
 	}
  
 	@PostMapping("/reset_password")
-	public String processResetPassword(HttpServletRequest request, @RequestParam("password") String psw ,
+	public ModelAndView processResetPassword(HttpServletRequest request, @RequestParam("password") String psw ,
 			@RequestParam("cPassword") String cPsw) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("reset_password_form");
 		if(psw.equals(cPsw)) {
+			String regex = "^(?=.*[0-9]) (?=.*[a-z])(?=.*[A-Z]) (?=\\S+$).{8,20}$";
+			Pattern p = Pattern.compile(regex);
+			Matcher m = p.matcher(psw);
+			if(!m.matches()) {
+		    	mav.addObject("erroreUtente", "La password deve contenere una lettera maiuscola, una lettera minuscola, un numero ed essere di almeno 8 caratteri");
+		    	return mav;
+			}
 			String token = request.getParameter("token");
-
-		     
 		    Utente utente = serviceUtente.findByResetPasswordToken(token);
 		     
 		    if (utente == null) {
-		    	
+		    	mav.addObject("erroreUtente", "Non è più presente nessun token per cambiare la password");
+		    	return mav;
 		    } else {  
 		    	utente.setPassword(psw);
 		    	utente.setTokenResetPassword(null);
 		        serviceUtente.saveUtente(utente);
 		        saveLog("cambiato la password via \"Password dimenticata\"", serviceDatiPersonali.findByAutore(utente));
+		        mav.setViewName("redirect:login");
+			    return mav;
 		    }
-		     
-		    return "redirect:login";
 		}
-	    return "redirect:forbidden";
+    	mav.addObject("errorePassword", "Le due password non corrispondono");
+    	return mav;
 	}
 	
 	//Permission manager
@@ -157,7 +168,7 @@ public class HomeController extends BaseController{
 		return mav;
 	}
 
-	// Login form
+	// Homepage
 	@GetMapping(value = "/homepage")
 	public ModelAndView homepageAdmin() {
 		ModelAndView mav = new ModelAndView();
@@ -172,7 +183,7 @@ public class HomeController extends BaseController{
 		session.setAttribute("id", u.getId());
 		if(serviceDatiPersonali.findById(u.getId()).getPasswordCambiata())
 			return "redirect:/homepage";
-		else return "redirect:/profile/cambioPassword";
+		return "redirect:/profile/cambioPassword";
 	}
 
 	// Login form with error

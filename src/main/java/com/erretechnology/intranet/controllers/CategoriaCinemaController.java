@@ -1,7 +1,5 @@
 package com.erretechnology.intranet.controllers;
 
-import java.io.IOException;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +42,7 @@ public class CategoriaCinemaController extends BaseController{
 	}
 	
 	@PostMapping(value = "/insert")
-	public String post(@ModelAttribute("categoriaCinema") CategoriaCinema categoriaCinema, ModelMap model, HttpSession session) throws IOException {
+	public String post(@ModelAttribute("categoriaCinema") CategoriaCinema categoriaCinema, ModelMap model, HttpSession session) {
 				
 		categoriaCinema.setVisibile(true);	
 		repoCategoria.save(categoriaCinema);

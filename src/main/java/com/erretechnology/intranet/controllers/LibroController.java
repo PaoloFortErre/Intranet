@@ -1,6 +1,5 @@
 package com.erretechnology.intranet.controllers;
 
-import java.io.IOException;
 import java.time.Instant;
 
 import javax.servlet.http.HttpSession;

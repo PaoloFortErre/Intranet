@@ -30,8 +30,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
 		http.authorizeRequests()
 		//TODO update e delete di tutti 
-		.antMatchers("/podcast/*", "/cliente/*", "/evento/newWork/*", "/news/new/*", "/myWork/addSondaggio", "/myWork/sondaggi"
-				, "/myWork/modificaSondaggio/*" , "/myWork/deleteSondaggio/*" , "/myWork/sondaggiFormUpdate/*" , "/myWork/addSondaggio").access("hasAuthority('GMW')")
+		.antMatchers("/podcast/*", "/cliente/*", "/evento/newWork/*", "/news/new/*").access("hasAuthority('GMW')")
+		.antMatchers("/myWork/addSondaggio", "/myWork/sondaggi", "/myWork/modificaSondaggio/*" , 
+				     "/myWork/deleteSondaggio/*" , "/myWork/sondaggiFormUpdate/*" , "/myWork/addSondaggio").access("hasAuthority('GS')")
 		.antMatchers("/evento/newLife/", "/cinema/new/", "/libro/new").access("hasAuthority('GML')")
 		.antMatchers("/file/hr" , "file/uploadHR" , "/file/deleteFileHR").access("hasAuthority('GHR')")
 		.antMatchers("/file/" , "file/upload" , "/file/deleteFilePdf").access("hasAuthority('GM')")

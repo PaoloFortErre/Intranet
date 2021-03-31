@@ -173,11 +173,13 @@ public class MyWorkController extends BaseController {
 	
 	@GetMapping(value = "/modificaSondaggio/{id}")
 	public String modificaSondaggio(@PathVariable int id, Model model) {
+		//controllare permesso GS
 		model.addAttribute("sondaggio", serviceSondaggio.findById(id));
 		return "sondaggiFormUpdate";
 	}
 	@PostMapping(value = "/sondaggiFormUpdate/{id}")
 	public String paginaModificaSondaggio(@PathVariable int id, @RequestParam("titolo") String titolo, @RequestParam("link") String link, HttpSession session, Model model) {
+		//controllare permesso GS
 		Sondaggio sondaggio = serviceSondaggio.findById(id);
 		sondaggio.setLink(link);
 		if(titolo!=null)
@@ -191,8 +193,8 @@ public class MyWorkController extends BaseController {
 	}
 	@PostMapping(value = "/deleteSondaggio/{id}")
 	public String deleteMessaggio(@PathVariable int id, HttpSession session) {
+		//controllare permesso GS
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
-		
 			Sondaggio s =serviceSondaggio.findById(id);
 			s.setVisibile(false);
 			serviceSondaggio.save(s);
