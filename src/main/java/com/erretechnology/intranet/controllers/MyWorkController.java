@@ -196,12 +196,12 @@ public class MyWorkController extends BaseController {
 		return "sondaggiFormUpdate";
 	}
 	@PostMapping(value = "/sondaggiFormUpdate/{id}")
-	public String paginaModificaSondaggio(@PathVariable int id, @RequestParam("titolo") String titolo, @RequestParam("link") String link, HttpSession session, Model model) {
+	public String paginaModificaSondaggio(@PathVariable int id,String nomeSondaggio, String link, HttpSession session, Model model) {
 		//controllare permesso GS
 		Sondaggio sondaggio = serviceSondaggio.findById(id);
 		sondaggio.setLink(link);
-		if(titolo!=null)
-		sondaggio.setNomeSondaggio(titolo);
+		if(nomeSondaggio!=null)
+		sondaggio.setNomeSondaggio(nomeSondaggio);
 		serviceSondaggio.save(sondaggio);
 		model.addAttribute("sondaggio", serviceSondaggio.findById(id));
 
