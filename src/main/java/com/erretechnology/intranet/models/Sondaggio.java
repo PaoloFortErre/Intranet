@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "sondaggio")
-public class Sondaggio {
+public class Sondaggio implements MyWorkBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
