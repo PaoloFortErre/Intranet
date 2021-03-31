@@ -27,6 +27,7 @@ public class Podcast {
 	private UtenteDatiPersonali utente;
 	private long dataPodcast;
 	private Boolean visibile;
+	private long timestampEliminazione;
 	
 	public UtenteDatiPersonali getUtente() {
 		return utente;
@@ -73,6 +74,12 @@ public class Podcast {
 	}
 	public void setVisibile(Boolean visibile) {
 		this.visibile = visibile;
+	}
+	public long getTimestampEliminazione() {
+		return timestampEliminazione;
+	}
+	public void setTimestampEliminazione(long timestampEliminazione) {
+		this.timestampEliminazione = timestampEliminazione;
 	}
 
 

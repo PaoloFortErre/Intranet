@@ -30,6 +30,7 @@ public class News implements MyWorkBean{
 	@JoinColumn(name="autore_id")
 	private UtenteDatiPersonali autore;
 	private boolean visibile;
+	private long timestampEliminazione;
 	
 	public News() {
 	}
@@ -88,6 +89,14 @@ public class News implements MyWorkBean{
 
 	public void setVisibile(boolean visibile) {
 		this.visibile = visibile;
+	}
+
+	public long getTimestampEliminazione() {
+		return timestampEliminazione;
+	}
+
+	public void setTimestampEliminazione(long timestampEliminazione) {
+		this.timestampEliminazione = timestampEliminazione;
 	}
 
 	

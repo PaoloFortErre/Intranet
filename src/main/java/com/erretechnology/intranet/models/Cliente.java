@@ -20,6 +20,7 @@ public class Cliente {
 	private FileImmagine logo;
 	private long dataInizio;
 	private boolean visibile;
+	private long timestampEliminazione;
 	
 	public Cliente() {
 	}
@@ -62,6 +63,14 @@ public class Cliente {
 
 	public void setVisibile(boolean visibile) {
 		this.visibile = visibile;
+	}
+
+	public long getTimestampEliminazione() {
+		return timestampEliminazione;
+	}
+
+	public void setTimestampEliminazione(long timestampEliminazione) {
+		this.timestampEliminazione = timestampEliminazione;
 	}
 
 }

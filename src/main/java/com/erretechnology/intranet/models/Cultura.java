@@ -17,6 +17,7 @@ public abstract class Cultura {
 	@JoinColumn(name = "id_immagine")
 	private FileImmagine copertina;
 	private boolean visibile;
+	private long timestampEliminazione;
 	
 	public Cultura() {
 	}
@@ -48,6 +49,14 @@ public abstract class Cultura {
 
 	public void setVisibile(boolean visibile) {
 		this.visibile = visibile;
+	}
+
+	public long getTimestampEliminazione() {
+		return timestampEliminazione;
+	}
+
+	public void setTimestampEliminazione(long timestampEliminazione) {
+		this.timestampEliminazione = timestampEliminazione;
 	}
 	
 	

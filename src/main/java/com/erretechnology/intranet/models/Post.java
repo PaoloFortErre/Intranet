@@ -22,6 +22,7 @@ public class Post {
 	private String testo;
 	private long timestamp;
 	private boolean visibile;
+	private long timestampEliminazione;
 	@OneToOne()
 	@JoinColumn(name = "id_immagine")
 	private FileImmagine immagine;
@@ -95,5 +96,13 @@ public class Post {
 
 	public void setImmagine(FileImmagine immagine) {
 		this.immagine = immagine;
+	}
+
+	public long getTimestampEliminazione() {
+		return timestampEliminazione;
+	}
+
+	public void setTimestampEliminazione(long timestampEliminazione) {
+		this.timestampEliminazione = timestampEliminazione;
 	}	
 }

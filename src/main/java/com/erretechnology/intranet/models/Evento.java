@@ -30,6 +30,7 @@ public class Evento implements MyWorkBean{
 	private UtenteDatiPersonali autore;
 	private boolean visibile;
 	private boolean isLife;
+	private long timestampEliminazione;
 	
 	public Evento() {
 
@@ -105,6 +106,14 @@ public class Evento implements MyWorkBean{
 
 	public void setLife(boolean isLife) {
 		this.isLife = isLife;
+	}
+
+	public long getTimestampEliminazione() {
+		return timestampEliminazione;
+	}
+
+	public void setTimestampEliminazione(long timestampEliminazione) {
+		this.timestampEliminazione = timestampEliminazione;
 	}
 	
 }

@@ -25,6 +25,7 @@ public class Commento /*extends Post*/ {
 	@JoinColumn(name = "id_post")
 	private Post post;
 	private boolean visibile;
+	private long timestampEliminazione;
 	
 	public int getId() {
 		return id;
@@ -61,5 +62,11 @@ public class Commento /*extends Post*/ {
 	}
 	public void setTesto(String testo) {
 		this.testo = testo;
+	}
+	public long getTimestampEliminazione() {
+		return timestampEliminazione;
+	}
+	public void setTimestampEliminazione(long timestampEliminazione) {
+		this.timestampEliminazione = timestampEliminazione;
 	}
 }

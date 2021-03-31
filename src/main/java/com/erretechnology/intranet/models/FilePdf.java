@@ -18,6 +18,7 @@ public class FilePdf{
 	private UtenteDatiPersonali autore;
 	private boolean visibile;
 	private String descrizione; 
+	private long timestampEliminazione;
 
 	public UtenteDatiPersonali getAutore() {
 		return autore;
@@ -81,5 +82,13 @@ public class FilePdf{
 
 	public void setTimestamp(long timestamp) {
 		this.timestamp = timestamp;
+	}
+
+	public long getTimestampEliminazione() {
+		return timestampEliminazione;
+	}
+
+	public void setTimestampEliminazione(long timestampEliminazione) {
+		this.timestampEliminazione = timestampEliminazione;
 	}
 }
