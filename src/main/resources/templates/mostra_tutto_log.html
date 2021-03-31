@@ -34,15 +34,26 @@
   body {
     background-color: black;
     background-image: url("/view/MyWork/images/carbonio.jpg");
-    background-position: center;
     background-repeat: no-repeat;
-    background-size: contain, cover;
+    background-size: cover;
     color:#F3F3F3;
     font-family: Noto Sans, sans-serif;
     overflow-x: hidden;
   }
 
   #myInput {
+    background-image: url('/view/Profile/Images/search_icon.png');
+    background-position: 2px 8px;
+    background-repeat: no-repeat;
+    background-size: 6%;
+    width: 40%;
+    font-size: 20px;
+    padding: 12px 20px 12px 40px;
+    border: 3px solid #ddd;
+    margin-bottom: 15px;
+  }
+
+  #myInput2{
     background-image: url('/view/Profile/Images/search_icon.png');
     background-position: 2px 8px;
     background-repeat: no-repeat;
@@ -79,10 +90,20 @@
       </div>
 
       <div class="col">
-        <h2 class="h2 text-center mb-3">Attività recenti degli utenti</h2>
-        <div class="container text-center" th:if="${admin}">
-          <a class="btn btn-primary mr-3" th:href="@{/profile/}">TORNA INDIETRO</a>
-          <input class="h3" type="text" id="myInput" onkeyup="myFunction()" placeholder="Filtra per cognome" title="Cerca con nome utente" >
+
+        <span class="d-inline">
+          <h2 class="h2 text-center mb-3 mt-3">Attività recenti</h2><h2 th:if="${admin}" class="h2 text-center mb-3 mt-3">degli utenti</h2>
+        </span>
+
+        <a class="btn btn-primary mb-2" th:href="@{/profile/}">TORNA INDIETRO</a>
+        <div class="container text-center" >
+          <div th:if="${admin}">
+            <input class="h3" type="text" id="myInput" onkeyup="myFunction()" placeholder="Filtra per cognome" title="Cerca con nome utente" >
+          </div>
+          <div class="container text-center">
+            <input class="h3" type="text" id="myInput2" onkeyup="myFunction2()" placeholder="Filtra per attività" title="Cerca con attività" >
+          </div>
+
         </div>
         <table id="myTable" class="table table-dark">
           <thead class="thead-light">
@@ -123,6 +144,25 @@
     tr = table.getElementsByTagName("tr");
     for (i = 0; i < tr.length; i++) {
       td = tr[i].getElementsByTagName("td")[1];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+
+  function myFunction2() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput2");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[2];
       if (td) {
         txtValue = td.textContent || td.innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
