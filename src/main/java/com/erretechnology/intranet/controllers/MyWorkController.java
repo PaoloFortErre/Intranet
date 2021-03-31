@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.erretechnology.intranet.models.Aforisma;
 import com.erretechnology.intranet.models.Cliente;
 import com.erretechnology.intranet.models.ComunicazioneHR;
 import com.erretechnology.intranet.models.Evento;
@@ -28,6 +29,7 @@ import com.erretechnology.intranet.models.News;
 import com.erretechnology.intranet.models.Podcast;
 import com.erretechnology.intranet.models.Sondaggio;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
+import com.erretechnology.intranet.repositories.RepositoryAforisma;
 import com.erretechnology.intranet.repositories.RepositoryCliente;
 import com.erretechnology.intranet.repositories.RepositoryEvento;
 import com.erretechnology.intranet.repositories.RepositoryNews;
@@ -35,6 +37,8 @@ import com.erretechnology.intranet.repositories.RepositoryNews;
 @Controller
 @RequestMapping(value = "myWork")
 public class MyWorkController extends BaseController {
+	@Autowired
+	private RepositoryAforisma repoAfo;
 	@Autowired
 	private RepositoryCliente repoCliente;
 
@@ -136,6 +140,20 @@ public class MyWorkController extends BaseController {
 			mav.addObject("comunicazioni", comunicazione.get(comunicazione.size()-1));
 		}
 		
+		List<Aforisma> aforismi = repoAfo.findAll();
+		if (aforismi.size()==0) {
+			mav.addObject("aforisma", null);
+			mav.addObject("aforisma2", null);
+
+		}
+		else if (aforismi.size()==1) {
+			mav.addObject("aforisma", aforismi.get(0));
+			mav.addObject("aforisma2", null);
+		}
+		else {
+			mav.addObject("aforisma", aforismi.get(0));
+			mav.addObject("aforisma2", aforismi.get(1));
+		}
 		List<Evento> eventi = (List<Evento>) repoEvento.findNextWorkEvents(Instant.now().getEpochSecond());
 		//System.out.println(eventi.size());
 		setMAV(mav, eventi, 0, 4, "eventi");

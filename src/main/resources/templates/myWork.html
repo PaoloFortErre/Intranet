@@ -86,33 +86,64 @@ table, th, td {
 					<li class="item2" th:if="${newsSlide2!=null}"></li>
 
 				</ol>
-				<div th:if="${newsSlide==null}">
-					<img src="/view/MyWork/images/ferrari1.png" alt="ferrari"
-						width="100%" height="750px">
-				</div>
-				<!-- Wrapper for slides -->
 				<div class="carousel-inner" role="listbox">
 
-
-					<div class="item active" th:if="${news!=null}" >
-
-						<img src="/view/MyWork/images/ferrari1.png" alt="ferrari1"
-							width="100%">
-						<div class="carousel-caption">
-							<h1 class="font-caption" style="font-weight: 900"
-								th:text="${newsSlide.titolo}"></h1>
-
-
+					<div class="top-right"></div>
+					<div class="item active">
+						<img src="/view/MyWork/images/ferrari1.png" alt="Cittï¿½" tag="cit" width="100%">
+						<div class="carousel-caption" th:if=${aforisma!=null}>
+							<h1 class="font-caption" style="font-weight: 900; text-shadow: 3px 1px 1px rgba(150, 150, 150, 1);"
+								th:text="${aforisma.frase}"></h1>
+							<p th:text="${aforisma.autore}"></p>
+							<div th:if="${GMW}">
+								<form th:action="@{'/aforisma/update/'+${aforisma.id}}"
+									method="get">
+									<button type="submit" name="modifica"
+										style="background-color: transparent; border: 0px solid #232323; display: inline-block">
+										<img src="/view/MyWork/images/edit.png" width="38%">
+									</button>
+								</form>
+								<a th:href="@{/aforisma/new/}" style="display: inline-block">
+									<img src="/view/MyWork/images/more.png" width="30px"
+									style="margin-bottom: 10px; display: inline-block">
+								</a>
+							</div>
+						</div>
+						<div class="carousel-caption" th:if="${aforisma==null and GMW}">
+							<a th:href="@{/aforisma/new/}"
+								style="display: inline-block; color: #f3f3f3; text-decoration: none;">
+								Aggiungi aforisma <img src="/view/MyWork/images/more.png"
+								width="30px" style="margin-bottom: 10px; display: inline-block">
+							</a>
 						</div>
 					</div>
 
-					<div class="item" th:if="${news2!=null}">
-						<img src="/view/MyWork/images/scarpe.png" alt="techweek.png"
-							width="100%">
-						<div class="carousel-caption">
+					<div class="item">
+						<img src="/view/MyWork/images/scarpe.png" alt="Lago" width="100%">
+						<div class="carousel-caption" th:if=${aforisma2!=null}>
 							<h1 class="font-caption" style="font-weight: 900"
-								th:text="${newsSlide2.titolo}"></h1>
+								th:text="${aforisma2.frase}"></h1>
+							<p th:text="${aforisma2.autore}"></p>
+							<div th:if="${GMW}">
+								<form th:action="@{'/aforisma/update/'+${aforisma2.id}}"
+									method="get">
+									<button type="submit" name="modifica"
+										style="background-color: transparent; border: 0px solid #232323;">
+										<img src="/view/MyWork/images/edit.png" width="38%">
+									</button>
+								</form>
+								<a th:href="@{/aforisma/new/}"> <img
+									src="/view/MyWork/images/more.png" width="30px"
+									style="margin-bottom: 10px;"></a>
+							</div>
 
+						</div>
+						<div class="carousel-caption" th:if="${aforisma2==null and GMW}">
+							<a th:href="@{/aforisma/new/}"
+								style="display: inline-block; color: #f3f3f3; text-decoration: none;">
+								Aggiungi aforisma <img src="/view/MyWork/images/more.png"
+								width="30px" style="margin-bottom: 10px; display: inline-block">
+							</a>
 						</div>
 					</div>
 				</div>
@@ -125,8 +156,8 @@ table, th, td {
 	<div class="container"
 		th:with="admin = ${#authorization.expression('hasAuthority(''WNMW'')')}">
 		<div class="row" style="margin-top: 30px;">
-		<div class="col-xs-0 col-sm-0 col-md-2 col-lg-2" style="margin-top: 50px;"></div>
-			<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" style="margin-top: 50px;">
+		<div class="col-xs-0 col-sm-0 col-md-2 col-lg-2" style="margin-top: 80px;"></div>
+			<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" style="margin-top: 80px;">
 
 
 				<div class="assunti">
@@ -694,7 +725,7 @@ table, th, td {
 		<p th:if="${news==null}"
 			style="text-align: center; margin-bottom: 50px; font-size: 16px;">Nessuna
 			news recente</p>
-		<div class="col-sm-12 col-md-10 col-lg-11" style="margin: auto;">
+		<div class="col-sm-12 col-md-10 col-lg-11" >
 
 
 			<div
