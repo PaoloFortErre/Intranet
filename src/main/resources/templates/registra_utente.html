@@ -72,7 +72,7 @@
                 </small> -->
               </div>
               <div class="form-group col-auto ml-5">
-                <label for="settore">Che settore è ?</label>
+                <label for="settore">Settore</label>
                 <select class="form-control" id="settore" th:name="settore">
                   <option th:value="'Erre Technology'" th:text="ErreTechnology"></option>
                   <option th:value="'Erre GES'" th:text="ErreGES"></option>
@@ -81,7 +81,7 @@
                 </select>
               </div>
             </div>
-            <button type="submit" class="btn btn-success mb-3">Aggiungi</button>
+            <button type="submit" class="btn btn-info mb-3">Aggiungi</button>
           </form>
 
           <div th:if="${aggiungi != null}" class="row justify-content-center mt-2">
@@ -109,7 +109,7 @@
                   </select>
                 </div>
               </div>
-              <input class="btn btn-success mb-3" type="submit" value ="Riattiva">
+              <input class="btn btn-info mb-3" type="submit" value ="Riattiva">
             </form>
           </div>
 
