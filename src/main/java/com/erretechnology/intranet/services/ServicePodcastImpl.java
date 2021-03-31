@@ -28,15 +28,20 @@ public class ServicePodcastImpl implements ServicePodcast{
 	}
 
 	@Override
+	public List<Podcast> getAllNotVisible() {
+		return repositoryPodcast.findAll().stream().filter(x -> x.getVisibile()==false).collect(Collectors.toList());
+	}
+
+	@Override
 	public Podcast getById(int id) {
 		return repositoryPodcast.findById(id).get();
-	} 
-	
+	}
+
 	@Override
 	public boolean contains(byte[] data) {
 		return getAll().stream().filter(x->Arrays.equals(x.getPodcast(), (data))).count() > 0;
 	}
-	
+
 	@Override
 	public Podcast getpodcastByData(byte[] data) {
 		return getAll().stream().filter(x->Arrays.equals(x.getPodcast(), (data))).findFirst().get();

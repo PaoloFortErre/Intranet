@@ -51,7 +51,7 @@ public class UtenteController extends BaseController{
 	RepositoryCinema repositoryFilm;
 	@Autowired
 	RepositoryCliente repositoryCliente;
-	
+
 	@GetMapping(value = "/")
 	public ModelAndView primaPagina(HttpSession session) {
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
@@ -184,7 +184,7 @@ public class UtenteController extends BaseController{
 		return "redirect:/profile/";
 	}
 
-	// PAGINA ATTIVITA' RECENTI 
+	// PAGINA ATTIVITA' RECENTI
 	@GetMapping(value = "/mostra_log")
 	public ModelAndView mostraLog(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
@@ -248,7 +248,7 @@ public class UtenteController extends BaseController{
 		//Set<String> targetSet = new CopyOnWriteArraySet<String>(Arrays.asList(permessi));
 		int id_utente = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(id_utente);
-		if( utenteLoggato.getUtente().getRuolo().getNome().equals("ADMIN") || 
+		if( utenteLoggato.getUtente().getRuolo().getNome().equals("ADMIN") ||
 			utenteLoggato.getUtente().getSetPermessi().contains(servicePermesso.findById("AM"))) {
 			Utente u = serviceUtente.findByEmail(email);
 			Set<Permesso> permessiUtente = new HashSet<Permesso>();
@@ -279,7 +279,7 @@ public class UtenteController extends BaseController{
 					permessiUtente.add(p);
 					p.addUtente(u);
 					servicePermesso.savePermesso(p);
-				}					
+				}
 			}
 
 			u.setSetPermessi(permessiUtente);
@@ -295,7 +295,7 @@ public class UtenteController extends BaseController{
 		if(flag) model.addAttribute("messaggio", messaggio);
 		ModelAndView mav = new ModelAndView();
 		UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
-		if( serviceUtente.findById(utenteLoggato.getId()).getRuolo().getNome().equals("ADMIN") || 
+		if( serviceUtente.findById(utenteLoggato.getId()).getRuolo().getNome().equals("ADMIN") ||
 			utenteLoggato.getUtente().getSetPermessi().contains(servicePermesso.findById("AM"))) {
 			mav.setViewName("eliminaUtente");
 			mav.addObject("utenti", serviceDatiPersonali.getAll().stream().filter(x -> x.getUtente().getAttivo()).collect(Collectors.toList()));
@@ -360,7 +360,7 @@ public class UtenteController extends BaseController{
 		serviceUtente.save(u);
 		return rimuoviUtente(session , true, "L'utente " + utente.getNome() + " " + utente.getCognome() + " è stato disattivato", model);
 	}
-	
+
 	@GetMapping(value= "/mostraEliminati")
 	public ModelAndView mostraNonAttivi(HttpSession session) {
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
@@ -373,11 +373,11 @@ public class UtenteController extends BaseController{
 		mav.addObject("comunicazioniHR", serviceComunicazioni.getAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList()));
 		mav.addObject("moduli", serviceFilePdf.findAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList()));
 		mav.addObject("eventi", repositoryEvento.getAllNotVisible());
-		mav.addObject("podcast", servicePodcast.getAll().stream().filter(x->x.getVisibile() == false).collect(Collectors.toList()));
+		mav.addObject("podcast", servicePodcast.getAllNotVisible());
 		mav.addObject("libri", repositoryLibro.getAllNotVisible());
 		mav.addObject("film", repositoryFilm.getAllNotVisible());
 		mav.addObject("client", repositoryCliente.getAllNotVisible());
 		return mav;
 	}
-	
+
 }
