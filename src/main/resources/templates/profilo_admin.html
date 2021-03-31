@@ -38,13 +38,9 @@
     overflow-x: hidden;
   }
 
-  #logo{
-    width: 25%;
-  }
-
   nav {
     font-size: 25px;
-    margin-right: 15px;
+    margin-right: 10px;
     color: #F3F3F3;
   }
 
@@ -127,30 +123,35 @@
 
 <body>
   <!-- ROW CON NAVBAR -->
-  <div class="row justify-content-start">
-    <div class="col-3 ml-5">
+  <div class="row bg-dark justify-content-start mt-3">
+    <div class="col-2 ml-5">
       <a href="https://erretechnology.com/" target="blank">
-        <img id="logo" class="img-fluid rounded mt-5"
+        <img width="40%"
         src="/view/Login/images/erre_group_white.png" alt="logoErreGroup.png">
       </div>
 
-      <div class="col-lg-6 col-md-4 col-sm-3">
-        <nav class="navbar mt-5 mr-5">
-          <div class="content mr-5" >
+      <div class="col-lg-8 col-md-8 col-sm-5">
+        <nav class="navbar">
+          <div class="content mr-3" >
             <a th:href="@{/homepage}">HOME</a>
           </div>
-          <div class="content mr-5" >
+          <div class="content mr-3" >
+            <a th:href="@{/myWork/}">MYWORK</a>
+          </div>
+          <div class="content mr-3" >
+            <a th:href="@{/myLife/}">MYLIFE</a>
+          </div>
+          <div class="content mr-3" >
             <a th:href="@{/comunicazioniHr/}">COMUNICAZIONI HR</a>
           </div>
-          <div class="content mr-5" >
+          <div class="content mr-3" >
             <a th:href="@{/moduli/}">MODULI</a>
           </div>
-          <div class="content mr-5" >
+          <div class="content mr-3" >
             <a href="http://polyedro.erretechnology.com/www/">POLYEDRO</a>
           </div>
         </nav>
       </div>
-
     </div>
 
     <!-- ROW CON IMMAGINE PROFILO, NOME E EMAIL -->
@@ -158,7 +159,7 @@
     <div class="container-fluid mt-4">
       <div class="row justify-content-start">
 
-        <div class="col-2 mr-5">
+        <div class="col-lg-2 col-md-2 col-sm-1 mr-5">
           <div class="container-fluid">
             <img class="picture img rounded-circle"
             th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}" alt="profile_picca"
@@ -171,7 +172,7 @@
             <h1 class="h1" th:text="${utente.nome}"></h1>
             <h1 class="h1 text-primary" th:text="${utente.cognome}" ></h1><br><br>
             <h6 class="h6" th:text="${utente.utente.email}"></h6>
-            <img id="logo2" class="img-fluid shadow rounded-pill mw-25"  th:src="'data:image/png;base64,' + ${utente.settore.getImgData(utente.settore.logo)}" alt="logo-agency">
+            <img class="img-fluid shadow rounded-pill mw-25"  th:src="'data:image/png;base64,' + ${utente.settore.getImgData(utente.settore.logo)}" alt="logo-agency">
           </div>
         </div>
 
@@ -183,7 +184,7 @@
         </div>
 
         <!-- DESCRIZIONE PERSONALE -->
-        <div class="col-3 justify-content-end mr-4">
+        <div class="col-lg-3 col-md-2 col-sm-2 justify-content-end mr-3">
           <div class="card position-relative text-end">
             <img class="top-left" src="/view/Profile/Images/pin_post-it.png" alt="pin-post-it">
             <div class="card-body">
@@ -209,7 +210,7 @@
     <div class="container-fluid">
       <div class="row justify-content-start mt-5 ml-1" th:with="AM = ${#authorization.expression('hasAuthority(''AM'')')}">
 
-        <div class="col-2 ml-3">
+        <div class="col-lg-2 col-md-2 col-sm-1 ml-3">
 
           <!-- GESTIONE FOTO -->
           <div class="btn-group">
