@@ -1,10 +1,12 @@
 package com.erretechnology.intranet.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -17,6 +19,8 @@ public class Evento implements MyWorkBean{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String titolo;
+	@Lob
+	@Column(columnDefinition="BLOB")
 	private String contenuto;
 	@OneToOne
 	@JoinColumn(name = "id_immagine")

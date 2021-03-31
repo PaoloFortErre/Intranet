@@ -15,6 +15,8 @@ import com.erretechnology.intranet.repositories.RepositoryAuthorities;
 public class ServiceAuthorityImpl implements ServiceAuthority{
 	@Autowired
 	private RepositoryAuthorities authoritiesRepository;
+	@Autowired
+	private ServiceUtente serviceUtente;
 	@Override
 	public List<Authority> findByUserId(Integer id) {
 		// TODO Auto-generated method stub
@@ -27,8 +29,10 @@ public class ServiceAuthorityImpl implements ServiceAuthority{
 	}
 	@Override
 	public Map<String,String> getMapById(int id){
-		List<String> list1 = findByUserId(id).stream().map(x-> x.getIdPermesso()).collect(Collectors.toList());
-		List<String> list2  = findByUserId(id).stream().map(x-> x.getDescrizione()).collect(Collectors.toList());
+		List<String> list1 = /*findByUserId(id).stream().map(x-> x.getIdPermesso()).collect(Collectors.toList());*/ 
+				serviceUtente.findById(id).getSetPermessi().stream().map(x-> x.getNome()).collect(Collectors.toList());
+		List<String> list2  = /*findByUserId(id).stream().map(x-> x.getDescrizione()).collect(Collectors.toList());*/
+				serviceUtente.findById(id).getSetPermessi().stream().map(x-> x.getDescrizione()).collect(Collectors.toList());
 		return IntStream.range(0, Math.min( list1.size(), list2.size()))
 			   .boxed()
 			   .collect(Collectors.toMap(list1::get, list2::get));

@@ -95,9 +95,9 @@
 						th:src="'data:image/png;base64,' + ${utente.settore.getImgData(utente.settore.logoBlack)}"
 						width="100%" style="border-radius: 6px 6px 0px 0px"> <img
 						th:src="'data:image/jpeg;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}"
-						alt="utente" title="utente" class="immagineUtente"
+						alt="utente" title="utente" class="immagineUtente mt-3 mb-5"
 						style="margin: 0 auto; position: absolute; left: 37%; top: 88px; border: 1px solid #BEC3CC">
-					<br> <br> <br> <br>
+					<br> <br> <br><br>
 					<div style="margin: 0 auto; text-align: center">
 						<p ><a th:href="@{/profile/viewProfile/(id=${utente.id})}"
 							th:text="${utente.nome} + ' ' + ${utente.cognome}"
