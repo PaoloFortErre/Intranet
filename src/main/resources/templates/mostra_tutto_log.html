@@ -80,7 +80,7 @@
 
       <div class="col">
         <h2 class="h2 text-center mb-3">Attività recenti degli utenti</h2>
-        <div class="container text-center" sec:authorize="hasRole('ADMIN')">
+        <div class="container text-center" th:if="${admin}">
           <a class="btn btn-primary mr-3" th:href="@{/profile/}">TORNA INDIETRO</a>
           <input class="h3" type="text" id="myInput" onkeyup="myFunction()" placeholder="Filtra per cognome" title="Cerca con nome utente" >
         </div>
