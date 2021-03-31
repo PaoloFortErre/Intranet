@@ -1,6 +1,5 @@
 package com.erretechnology.intranet.models;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +16,6 @@ public class News implements MyWorkBean{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@NotNull
-	@Column(length = 37)
 	private String titolo;
 	@NotNull
 	@Lob
