@@ -12,6 +12,7 @@ public class Sondaggio {
 	private String nomeSondaggio;
 	private String link;
 	private long timestamp;
+	private long timestampEliminazione;
 	private boolean visibile;
 	
 	public int getId() {
@@ -50,6 +51,12 @@ public class Sondaggio {
 	}
 	public void setVisibile(boolean visibile) {
 		this.visibile = visibile;
+	}
+	public long getTimestampEliminazione() {
+		return timestampEliminazione;
+	}
+	public void setTimestampEliminazione(long timestampEliminazione) {
+		this.timestampEliminazione = timestampEliminazione;
 	}
 	
 	

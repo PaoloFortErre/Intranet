@@ -16,4 +16,7 @@ public interface RepositoryLibro extends CrudRepository<Libro, Integer>{
 	
 	@Query(value = "SELECT * FROM book WHERE visibile = true ORDER BY id DESC LIMIT ?1", nativeQuery = true)
 	List<Libro> findLimit(int number);
+	
+	@Query(value = "DELETE FROM book WHERE id = ?1" , nativeQuery = true)
+	void remove(int libro);
 }

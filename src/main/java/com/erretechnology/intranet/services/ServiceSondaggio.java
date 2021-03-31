@@ -10,4 +10,7 @@ public interface ServiceSondaggio {
 	public Sondaggio findById(int id);
 	public List<Sondaggio> findAll();
 	public List<Sondaggio> findByAutore(UtenteDatiPersonali autore);
+	public List<Sondaggio> getAllNotVisible();
+	public void delete(Sondaggio s);
+	public List<Sondaggio> findAllVisible();
 }

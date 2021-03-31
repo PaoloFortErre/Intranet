@@ -46,4 +46,9 @@ public class ServicePodcastImpl implements ServicePodcast{
 	public Podcast getpodcastByData(byte[] data) {
 		return getAll().stream().filter(x->Arrays.equals(x.getPodcast(), (data))).findFirst().get();
 	}
+
+	@Override
+	public void remove(Podcast p) {
+		repositoryPodcast.delete(p);
+	}
 }

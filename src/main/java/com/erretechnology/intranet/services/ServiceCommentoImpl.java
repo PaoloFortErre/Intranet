@@ -42,4 +42,5 @@ public class ServiceCommentoImpl implements ServiceCommento{
 		// TODO Auto-generated method stub
 		return repositoryCommento.findAll();
 	}
+
 }

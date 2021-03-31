@@ -141,8 +141,23 @@ public class ClienteController extends BaseController{
 	public String delete(@PathVariable int id, HttpSession session) {
 		Cliente cliente = repoCliente.findById(id).get();
 		cliente.setVisibile(false);
+		cliente.setTimestampEliminazione(Instant.now().getEpochSecond());
 		repoCliente.save(cliente);
 		saveLog("cancellato un nuovo cliente", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/myWork/";
 	}
+	
+	@RequestMapping("/cancellaCliente")
+	public String cancellaCliente(int id, HttpSession session) {
+		repoCliente.deleteById(id);
+		return "redirect:/profile/mostraEliminati";
+		}
+	
+	@RequestMapping("/ripristinaCliente")
+	public String ripristinaCliente(int id, HttpSession session) {
+		Cliente cliente = repoCliente.findById(id).get();
+		cliente.setVisibile(true);
+		repoCliente.save(cliente);
+		return "redirect:/profile/mostraEliminati";
+		}
 }

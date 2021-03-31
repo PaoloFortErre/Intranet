@@ -12,4 +12,5 @@ public interface ServicePodcast{
 	public boolean contains(byte[] data);
 	public Podcast getpodcastByData(byte[] data);
 	public List<Podcast> getAllNotVisible();
+	public void remove(Podcast p);
 }

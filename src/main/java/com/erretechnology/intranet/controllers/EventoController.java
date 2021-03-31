@@ -203,6 +203,7 @@ public class EventoController extends BaseController {
 	public String delete(@PathVariable int id, HttpSession session) {
 		Evento evento = repoEvento.findById(id).get();
 		evento.setVisibile(false);
+		evento.setTimestampEliminazione(Instant.now().getEpochSecond());
 		repoEvento.save(evento);
 		saveLog("eliminato un post", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 
@@ -211,7 +212,21 @@ public class EventoController extends BaseController {
 		} else {
 			return "redirect:/myWork/";
 		}
-
-
+	}
+	
+	
+	@GetMapping(value ="/cancellaEvento")
+	public String eliminaEvento(HttpSession session, int id) {
+		Evento e = repoEvento.findById(id).get();
+		repoEvento.delete(e);
+		return "redirect:/profile/mostraEliminati";
+	}
+	
+	@GetMapping(value ="/ripristinaEvento")
+	public String ripristinaEvento(HttpSession session, int id) {
+		Evento e = repoEvento.findById(id).get();
+		e.setVisibile(true);
+		repoEvento.save(e);;
+		return "redirect:/profile/mostraEliminati";
 	}
 }

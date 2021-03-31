@@ -51,7 +51,6 @@ public class MyWorkController extends BaseController {
 	@GetMapping(value = "/")
 	public ModelAndView primaPagina(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("");
 		UtenteDatiPersonali u1 = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		mav.addObject("utenteDati", u1);
 		mav.setViewName("myWork");
@@ -66,7 +65,6 @@ public class MyWorkController extends BaseController {
 				utentiCompleanno.add(u);
 			}
 		}
-		//System.out.println(utentiCompleanno.size());
 		mav.addObject("utente", utentiCompleanno);
 
 		List<UtenteDatiPersonali> nuoviUtenti = utenti.stream()
@@ -74,7 +72,6 @@ public class MyWorkController extends BaseController {
 				.filter(x->x.getUtente().getAttivo()==true)
 				.limit(6)
 				.collect(Collectors.toList());
-		//System.out.println(nuoviUtenti.size());
 		setMAV(mav, nuoviUtenti, 0, 6, "nuoviAssunti");
 
 		
@@ -83,7 +80,6 @@ public class MyWorkController extends BaseController {
 			Podcast primoPodcast = listPodcast.get(listPodcast.size()-1);
 			mav.addObject("primoPodcast", primoPodcast);
 			listPodcast.remove(listPodcast.size()-1);
-			System.out.println(listPodcast.stream().limit(3).collect(Collectors.toList()).size() + " numero podcast");
 			mav.addObject("altriPodcast", listPodcast.stream().limit(3).sorted(Comparator.comparingInt(Podcast::getId).reversed()).collect(Collectors.toList()));
 		}
 		
@@ -95,7 +91,6 @@ public class MyWorkController extends BaseController {
 		}
 
 		List<News> news= repoNews.findAllOrderByDataPubblicazioneDesc(); 
-		//System.out.println(news.size());
 
 		setMAV(mav, news, 0, 6, "news");
 
@@ -111,8 +106,7 @@ public class MyWorkController extends BaseController {
 		}
 
 		
-		List<Sondaggio> sondaggi = serviceSondaggio.findAll();
-		System.out.println(sondaggi.size());
+		List<Sondaggio> sondaggi = serviceSondaggio.findAllVisible();
 		if (sondaggi.size()==0) {
 			mav.addObject("sondaggi",null);
 			mav.addObject("sondaggi1",null);
@@ -155,7 +149,6 @@ public class MyWorkController extends BaseController {
 			mav.addObject("aforisma2", aforismi.get(1));
 		}
 		List<Evento> eventi = (List<Evento>) repoEvento.findNextWorkEvents(Instant.now().getEpochSecond());
-		//System.out.println(eventi.size());
 		setMAV(mav, eventi, 0, 4, "eventi");
 		return mav;
 		
@@ -215,6 +208,7 @@ public class MyWorkController extends BaseController {
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 			Sondaggio s =serviceSondaggio.findById(id);
 			s.setVisibile(false);
+			s.setTimestampEliminazione(Instant.now().getEpochSecond());
 			serviceSondaggio.save(s);
 			saveLog("cancellato un sondaggio", autore);
 			return "redirect:/myWork/";
@@ -226,5 +220,20 @@ public class MyWorkController extends BaseController {
 		mav.setViewName("addSondaggio");
 		mav.addObject("sondaggio", new Sondaggio());
 		return mav;		
+	}
+	
+	@GetMapping(value ="/cancellaSondaggio")
+	public String eliminaSondaggio(HttpSession session, int id) {
+		Sondaggio s = serviceSondaggio.findById(id);
+		serviceSondaggio.delete(s);
+		return "redirect:/profile/mostraEliminati";
+	}
+	
+	@GetMapping(value ="/ripristinaSondaggio")
+	public String ripristinaNews(HttpSession session, int id) {
+		Sondaggio s = serviceSondaggio.findById(id);
+		s.setVisibile(true);
+		serviceSondaggio.save(s);
+		return "redirect:/profile/mostraEliminati";
 	}
 }

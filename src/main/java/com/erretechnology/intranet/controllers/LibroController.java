@@ -117,4 +117,20 @@ public class LibroController extends BaseController {
 		saveLog("cancellato un libro", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/myLife/";
 	}
+	
+	@RequestMapping("/cancellaLibro")
+	public String cancellaLibro(HttpSession session, int id) {
+		repoLibro.deleteById(id);
+		return "redirect:/profile/mostraEliminati";
+	}
+	
+	@RequestMapping("/ripristinaLibro")
+	public String ripristinaLibro(HttpSession session, int id) {
+		Libro l = repoLibro.findById(id).get();
+		l.setVisibile(true);
+		repoLibro.save(l);
+		return "redirect:/profile/mostraEliminati";
+	}
+	
+	
 }

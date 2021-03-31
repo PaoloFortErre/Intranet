@@ -13,6 +13,8 @@ public interface ServiceComunicazioniHR {
 	public List<ComunicazioneHR> findByAutore(UtenteDatiPersonali autore);
 
 	public List<ComunicazioneHR> getAll();
+
+	public void remove(ComunicazioneHR hr);
 	
 	
 }

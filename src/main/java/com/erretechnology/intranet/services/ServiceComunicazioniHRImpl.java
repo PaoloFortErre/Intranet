@@ -36,6 +36,12 @@ public class ServiceComunicazioniHRImpl implements ServiceComunicazioniHR{
 		// TODO Auto-generated method stub
 		return repositoryComunicazioniHR.findAll();
 	}
+
+	@Override
+	public void remove(ComunicazioneHR hr) {
+		 repositoryComunicazioniHR.delete(hr);;
+		
+	}
 	
 	
 	
