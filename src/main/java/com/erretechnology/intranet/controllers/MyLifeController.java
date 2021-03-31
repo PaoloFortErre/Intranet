@@ -204,6 +204,7 @@ public class MyLifeController extends BaseController {
 		if(sessionId == autore.getId() || 
 		   serviceAuthority.findByUserId(sessionId).stream().filter(x -> x.getIdPermesso().equals("DS")).count() == 1) {
 			Post p = servicePost.findById(id);
+			p.setTimestampEliminazione(Instant.now().getEpochSecond());
 			p.setVisibile(false);
 			servicePost.save(p);
 			//System.out.println("cancellazione post: RIUSCITO");
