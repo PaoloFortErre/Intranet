@@ -22,7 +22,7 @@ body {
 
 .carousel-caption {
 	font-size: 24px;
-	padding: 265px 0;
+	padding: 235px 0;
 	
 }
 
@@ -385,11 +385,8 @@ hr#linea {
 }
 
 #quadrato-podcast {
-	background: rgb(82, 92, 222);
-	background: linear-gradient(90deg, rgba(82, 92, 222, 1) 3%,
-		rgba(114, 125, 216, 1) 19%, rgba(142, 151, 228, 1) 39%,
-		rgba(193, 199, 246, 1) 97%);
-	padding: 13px;
+	background: rgb(12,79,255);
+background: linear-gradient(6deg, rgba(12,79,255,1) 3%, rgba(36,115,255,1) 30%, rgba(129,168,255,1) 72%, rgba(173,199,255,1) 97%);	padding: 13px;
 	border-radius: 9px 9px 9px 9px;
 	-webkit-box-shadow: 10px 10px 6px 0px rgba(0, 0, 0, 0.75);
 	-moz-box-shadow: 10px 10px 6px 0px rgba(0, 0, 0, 0.75);
@@ -399,11 +396,10 @@ hr#linea {
 #imgRosario {
 	margin-top: 10px;
 	border-radius: 10%;
-	border: 1px solid black;
-}
+	border: 1px solid white;}
 
 audio {
-	width: 65%;
+	width: 95%;
 }
 
 .evento {

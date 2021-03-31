@@ -9,8 +9,7 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -19,9 +18,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap"
-	rel="stylesheet">
+
 <link href='https://fonts.googleapis.com/css?family=Montserrat'
 	rel='stylesheet' type='text/css'>
 
@@ -92,9 +89,9 @@ table, th, td {
 					<div class="item active">
 						<img src="/view/MyWork/images/ferrari1.png" alt="Cittï¿½" tag="cit" width="100%">
 						<div class="carousel-caption" th:if=${aforisma!=null}>
-							<h1 class="font-caption" style="font-weight: 900; text-shadow: 3px 1px 1px rgba(150, 150, 150, 1);"
+							<h1 class="font-caption" style="font-weight: 900; text-shadow: 3px 1px 6px rgba(0, 0, 0, 1);"
 								th:text="${aforisma.frase}"></h1>
-							<p th:text="${aforisma.autore}"></p>
+							<p th:text="${aforisma.autore}" style="font-style:italic"></p>
 							<div th:if="${GMW}">
 								<form th:action="@{'/aforisma/update/'+${aforisma.id}}"
 									method="get">
@@ -121,9 +118,9 @@ table, th, td {
 					<div class="item">
 						<img src="/view/MyWork/images/scarpe.png" alt="Lago" width="100%">
 						<div class="carousel-caption" th:if=${aforisma2!=null}>
-							<h1 class="font-caption" style="font-weight: 900"
+							<h1 class="font-caption" style="font-weight: 900; text-shadow: 3px 1px 6px rgba(0, 0, 0, 1);"
 								th:text="${aforisma2.frase}"></h1>
-							<p th:text="${aforisma2.autore}"></p>
+							<p th:text="${aforisma2.autore}" style="font-style:italic"></p>
 							<div th:if="${GMW}">
 								<form th:action="@{'/aforisma/update/'+${aforisma2.id}}"
 									method="get">
@@ -187,10 +184,10 @@ table, th, td {
 							</th:block>
 							<th:block>
 								<tr>
-									<td th:each="nuovoUtente: ${nuoviAssunti}"><a
+									<td th:each="nuovoUtente: ${nuoviAssunti}"> <br><a
 										th:href="@{/profile/viewProfile/(id=${nuovoUtente.id})}"
 										th:text="${nuovoUtente.nome} + ' ' + ${nuovoUtente.cognome}"
-										style="color: #303030; font-size: 15px;"></a></td>
+										style="color: #303030; font-size: 15px; font-weight: 700; font-size: 19px;"></a></td>
 
 
 								</tr>
@@ -215,15 +212,15 @@ table, th, td {
 										th:href="@{/profile/viewProfile/(id=${nuovoUtente.id})}"><img
 											th:src="'data:image/png;base64,' + ${nuovoUtente.immagine.getImgData(nuovoUtente.immagine.data)}"
 											alt="fotoProfiloUtente" class="img-fluid" width="140px"
-											height="140px" style="border-radius: 8px;"></a></td>
+											height="140px" ></a></td>
 								</tr>
 							</th:block>
 							<th:block>
 								<tr>
-									<td th:each="nuovoUtente: ${nuoviAssunti2}"><a
+									<td th:each="nuovoUtente: ${nuoviAssunti2}"> <br><a
 										th:href="@{/profile/viewProfile/(id=${nuovoUtente.id})}"
 										th:text="${nuovoUtente.nome} + ' ' + ${nuovoUtente.cognome}"
-										style="color: #303030; font-size: 15px;"></a></td>
+										style="color: #303030; font-size: 15px; font-weight: 700; font-size: 19px;"></a></td>
 
 
 								</tr>
@@ -488,9 +485,9 @@ table, th, td {
 								width="38%">
 						</button>
 					</form>
-					<div th:if="${altriPodcast!=null}" style="margin: 0 auto; text-align: center;">
+					<div th:if="${altriPodcast.size!=0}" style="margin: 0 auto; text-align: center;">
 						<a href="" id="podcast" onclick="mostraPodcast()"
-							style="text-decoration: none; color: #f3f3f3; font-size: 13px;">
+							style="text-decoration: none; color: #f3f3f3; font-size: 13px;" th:if="${altriPodcast!=null}">
 							<br>Vedi altri <img
 							src="/view/MyWork/images/frecciasotto.png" width="30px"
 							id="frecciasotto" style="margin-left: 5px;">
@@ -523,7 +520,7 @@ table, th, td {
 						</form>
 					</div>
 					<a href="" onclick="menoPodcast()"
-						style="text-decoration: none; color: #f3f3f3; font-size: 13px;">
+						style="text-decoration: none; color: #f3f3f3; font-size: 13px; display: none">
 						<br>Vedi meno <img src="/view/MyWork/images/frecciasopra.png"
 						width="30px" id="frecciasotto" style="margin-left: 5px;">
 					</a>
@@ -542,7 +539,7 @@ table, th, td {
 				<h2
 					style="line-height: 45px; display: inline-block; font-weight: 900;" th:if="${utente!=null AND !utente.isEmpty}">Oggi
 					è il compleanno di:</h2>
-				<h2 style="line-height: 45px; display: inline-block; font-weight: 900; margin: 5px;" >Oggi nessuno compie gli anni :-(</h2>
+				<h2 style="line-height: 45px; display: inline-block; font-weight: 900; margin: 5px;" th:if="${utente==null OR utente.isEmpty}">Oggi nessuno compie gli anni :-(</h2>
 					
 				<div>
 					<div th:each="utente: ${utente}">

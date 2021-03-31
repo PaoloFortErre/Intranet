@@ -22,7 +22,9 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap"
 	rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css"
+	rel="stylesheet" />
 <link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat'
 	rel='stylesheet' type='text/css'>
@@ -56,7 +58,10 @@
 	position: absolute;
 	left: 0;
 	bottom: 0;
+	
 }
+.pagination>ul>li:hover {
+background-color: red;}
 </style>
 
 </head>
@@ -115,9 +120,9 @@
 					<div class="item active">
 						<img src="/view/MyLife/images/barc.jpg" alt="Cittï¿½" width="100%">
 						<div class="carousel-caption" th:if=${aforisma!=null}>
-							<h1 class="font-caption" style="font-weight: 900"
+							<h1 class="font-caption" style="font-weight: 900; text-shadow: 3px 1px 6px rgba(0, 0, 0, 1);"
 								th:text="${aforisma.frase}"></h1>
-							<p th:text="${aforisma.autore}"></p>
+							<p th:text="${aforisma.autore}"  style="font-style: italic"></p>
 							<div th:if="${GML}">
 								<form th:action="@{'/aforisma/update/'+${aforisma.id}}"
 									method="get">
@@ -144,9 +149,9 @@
 					<div class="item">
 						<img src="/view/MyLife/images/mare.png" alt="Lago" width="100%">
 						<div class="carousel-caption" th:if=${aforisma2!=null}>
-							<h1 class="font-caption" style="font-weight: 900"
+							<h1 class="font-caption" style="font-weight: 900; text-shadow: 3px 1px 6px rgba(0, 0, 0, 1);"
 								th:text="${aforisma2.frase}"></h1>
-							<p th:text="${aforisma2.autore}"></p>
+							<p th:text="${aforisma2.autore}" style="font-style: italic"></p>
 							<div th:if="${GML}">
 								<form th:action="@{'/aforisma/update/'+${aforisma2.id}}"
 									method="get">
@@ -210,8 +215,8 @@
 							tuo profilo</a>
 					</div>
 					<div id="prof2">
-						<a th:href="@{/myLife/profiliUtenti/}" id="gestisciProfilo"> Vedi il
-							profilo dei tuoi colleghi</a>
+						<a th:href="@{/myLife/profiliUtenti/}" id="gestisciProfilo">
+							Vedi il profilo dei tuoi colleghi</a>
 					</div>
 					<br>
 				</div>
@@ -236,11 +241,11 @@
 						<div class="col-sm-8 col-md-10 col-lg-10">
 							<div class="form-group">
 								<form th:action="@{/myLife/addPost}"
-									enctype="multipart/form-data" id="myForm1" method="post" onsubmit="return validateForm()">
+									enctype="multipart/form-data" id="myForm1" method="post"
+									onsubmit="return validateForm()">
 									<label for="testo"></label>
 									<textarea class="form-control" rows="2" cols="30" name="testo"
-										 style="width: 98%" placeholder="Scrivi un post..."
-										id="post" ></textarea>
+										style="width: 98%" placeholder="Scrivi un post..." id="post"></textarea>
 
 									<button type="button" data-toggle="modal"
 										style="background-color: #E8E7E7; color: #303030; border: 0px solid #E8E7E7"
@@ -277,7 +282,8 @@
 										<div id="delete" style="display: none">
 											<button type="button" class="close" aria-label="Close"
 												onclick="remove()">
-												<span aria-hidden="true" style="color: red; font-size: 40px; margin-right: 20px; opacity: 0.9">X</span>
+												<span aria-hidden="true"
+													style="color: red; font-size: 40px; margin-right: 20px; opacity: 0.9">X</span>
 											</button>
 											<img id="previewImg" src="#" alt="Immagine Caricata"
 												width="70%" height="70%" />
@@ -372,9 +378,11 @@
 
 												<textarea th:class="postModificato + ${post.id}"
 													name="testo" placeholder="Modifica post" cols="20"
-													rows="2.5" id="post" style="display: none; width: 350px; color: BLACK;"
-													required></textarea>
-												<input type="file" name="document" style="display: none; color: black;" th:class="editfoto +  ${post.id}">	
+													rows="2.5" id="post"
+													style="display: none; width: 350px; color: BLACK;" required></textarea>
+												<input type="file" name="document"
+													style="display: none; color: black;"
+													th:class="editfoto +  ${post.id}">
 											</form>
 										</div>
 
@@ -388,7 +396,7 @@
 								<div>
 									<br>
 									<div
-										style="width: 100%; height: 50px; padding-left: 17px; padding-right: 17px;">
+										style="width: 100%; padding-left: 17px; padding-right: 17px;">
 										<p
 											style="margin-right: 15px; font-size: 18px; color: #303030;"
 											th:text="${post.testo}">
@@ -403,75 +411,77 @@
 											width="100%" height="40%">
 									</div>
 
-
-									<!-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ COMMENTO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-->
-									<div class="col-sm-5 col-md-5 col-lg-5"
-										style="margin-top: 10px; margin-left: 15px;"
-										th:each="commento : ${post.setCommenti}"
-										th:if="${commento.visibile}" id="commento">
-										<table id="tableCommento">
-											<tr>
-												<td><img
-													th:src="'data:image/jpeg;base64,' + ${commento.autore.immagine.getImgData(commento.autore.immagine.data)}"
-													width="50px" style="border-radius: 50%"> <a
-													th:href="@{/profile/viewProfile/(id=${commento.autore.id})}"
-													class="nomeCommento"
-													th:text="${commento.autore.nome} + ' ' + ${commento.autore.cognome}"
-													style="color: #303030; font-size: 14px;"></a>
-
-
-													<p
-														style="display: inline-block; font-style: italic; font-size: 10px; color: #303030;"
-														th:text="${#dates.format(commento.timestamp*1000, 'dd/MM/yyyy, HH:mm')}">
-													</p></td>
-												<td
-													th:if="(${DS} or ${commento.autore.id} == ${session.id} or ${post.autore.id} == ${session.id}) and ${UB}"><br>
-													<br> <br>
-													<form
-														th:action="@{/myLife/deleteCommento(id=${commento.id})}"
-														method="post">
-														<button name="button" type="submit" id="bottoneElimina">
-															<img src="/view/MyLife/images/trash.png" width="23px">
-														</button>
-													</form></td>
-
-												<td th:if="${commento.autore.id} == ${session.id} and ${UB}">
-													<form
-														th:action="@{/myLife/editCommento(id=${commento.id})}"
-														method="post">
-														<button name="button" type="submit"
-															th:onclick="'showAreaCommento(' + ${commento.id} + ')'"
-															id="bottoneModifica">
-															<img src="/view/MyLife/images/edit.png" width="23px" style="margin-right: 10px;">
-														</button>
-														<textarea th:class="commentoModificato + ${commento.id}"
-															name="testo" id="post" placeholder="Modifica commento" required
-															rows="2.5" style="display: none; color: black; width: 175px" ></textarea>
-													</form>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<p th:text="${commento.testo}"
-														style="color: #303030; margin-left: 60px;"></p>
-												</td>
-											</tr>
-										</table>
-									</div>
-									<br>
-									<div th:if="${UB}">
-										<form th:action="@{/myLife/addCommento(idPost=${post.id})}"
-											method="post">
-											<label for="testo"></label>
-											<textarea id="post" name="testo" rows="2" cols="30"
-												style="width: 93%; padding: 8px; margin-left: 15px; color: #303030;"
-												placeholder="Lascia un commento..." required></textarea>
-											<input type="submit" value="Commenta" id="submitPost"
-												style="margin-bottom: 50px; font-size: 13px;" />
-
-										</form>
-									</div>
 								</div>
+								<!-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ COMMENTO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-->
+								<div class="col-sm-5 col-md-5 col-lg-5"
+									style="margin-top: 20px; margin-left: 15px; margin-bottom: 6px;"
+									th:each="commento : ${post.setCommenti}"
+									th:if="${commento.visibile}" id="commento">
+									<table id="tableCommento">
+										<tr>
+											<td><img
+												th:src="'data:image/jpeg;base64,' + ${commento.autore.immagine.getImgData(commento.autore.immagine.data)}"
+												width="50px" style="border-radius: 50%"> <a
+												th:href="@{/profile/viewProfile/(id=${commento.autore.id})}"
+												class="nomeCommento"
+												th:text="${commento.autore.nome} + ' ' + ${commento.autore.cognome}"
+												style="color: #303030; font-size: 14px;"></a>
+
+
+												<p
+													style="display: inline-block; font-style: italic; font-size: 10px; color: #303030;"
+													th:text="${#dates.format(commento.timestamp*1000, 'dd/MM/yyyy, HH:mm')}">
+												</p></td>
+											<td
+												th:if="(${DS} or ${commento.autore.id} == ${session.id} or ${post.autore.id} == ${session.id}) and ${UB}"><br>
+												<br> <br>
+												<form
+													th:action="@{/myLife/deleteCommento(id=${commento.id})}"
+													method="post">
+													<button name="button" type="submit" id="bottoneElimina">
+														<img src="/view/MyLife/images/trash.png" width="23px">
+													</button>
+												</form></td>
+
+											<td th:if="${commento.autore.id} == ${session.id} and ${UB}">
+												<form th:action="@{/myLife/editCommento(id=${commento.id})}"
+													method="post">
+													<button name="button" type="submit"
+														th:onclick="'showAreaCommento(' + ${commento.id} + ')'"
+														id="bottoneModifica">
+														<img src="/view/MyLife/images/edit.png" width="23px"
+															style="margin-right: 10px;">
+													</button>
+													<textarea th:class="commentoModificato + ${commento.id}"
+														name="testo" id="post" placeholder="Modifica commento"
+														required rows="2.5"
+														style="display: none; color: black; width: 175px"></textarea>
+												</form>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<p th:text="${commento.testo}"
+													style="color: #303030; margin-left: 60px;"></p>
+											</td>
+										</tr>
+									</table>
+								</div>
+								<br>
+								<div th:if="${UB}">
+									<form th:action="@{/myLife/addCommento(idPost=${post.id})}"
+										method="post">
+										<label for="testo"></label> 
+										
+										<textarea id="post" name="testo" rows="2" cols="30"
+											style="width: 93%; padding: 8px; margin-left: 15px; color: #303030;"
+											placeholder="Lascia un commento..." required></textarea>
+										<input type="submit" value="Commenta" id="submitPost"
+											style="margin-bottom: 50px; font-size: 13px;" />
+
+									</form>
+								</div>
+
 
 
 							</div>
@@ -512,7 +522,7 @@ COLONNA DESTRA
 							style="float: right; margin-bottom: 10px;"></a>
 					</div>
 
-					<h2 id="culturaPiemonte" style="margin-top: 30px">Cultura in
+					<h2 id="culturaPiemonte" style="margin-top: 30px">Eventi in
 						Piemonte</h2>
 
 					<p
@@ -629,7 +639,7 @@ COLONNA DESTRA
 					</div>
 				</div>
 				<br>
-				<h2 id="culturaPiemonte">Film</h2>
+				<h2 id="culturaPiemonte">Cinema e serie TV</h2>
 				<p
 					style="color: #303030; text-align: center; font-size: 15px; margin-bottom: 50px;">
 					Se sei un tipo da cinema o serie TV:</p>
@@ -637,53 +647,21 @@ COLONNA DESTRA
 					style="text-align: center; color: #303030; font-style: italic; font-size: 12px;">
 					Non ci sono film da consigliare</p>
 
-				<div th:if="${film1!=null}">
-
-					<img
-						th:src="'data:image/png;base64,' + ${film1.copertina.getImgData(film1.copertina.data)}"
-						class="img-responsive" width="32%"
-						style="display: inline;; color: #303030;"> <img
-						th:if="${film2!=null}"
-						th:src="'data:image/png;base64,' + ${film2.copertina.getImgData(film2.copertina.data)}"
-						class="img-responsive" width="32%"
-						style="display: inline;; color: #303030;"> <img
-						th:if="${film3!=null}"
-						th:src="'data:image/png;base64,' + ${film3.copertina.getImgData(film3.copertina.data)}"
-						class="img-responsive" width="33%"
-						style="display: inline;; color: #303030;">
-
-					<div id="didascalieFilm">
-						<table id="film">
-							<tr>
-								<td th:if="${film1!=null}">
-									<p th:text="${film1.titolo}" style="color: black;"></p>
-								</td>
-								<td th:if="${film2!=null}">
-									<p th:text="${film2.titolo}" style="color: black;"></p>
-								</td>
-								<td th:if="${film3!=null}">
-									<p th:text="${film3.titolo}" style="color: black;"></p>
-								</td>
-							</tr>
-							<tr style="color: blue;">
-								<td th:if="${film1!=null}">
-									<p th:text="${film1.categoria.nome}" style="color: blue;">
-									</p>
-								</td>
-								<td th:if="${film2!=null}">
-									<p th:text="${film2.categoria.nome}" style="color: blue;">
-									</p>
-								</td>
-								<td th:if="${film3!=null}">
-									<p th:text="${film3.categoria.nome}" style="color: blue;">
-									</p>
-								</td>
-							</tr>
-							<tr th:if="${GML}">
+				
 
 
-								<td th:if="${film1!=null}">
-									<form th:action="@{'/cinema/update/'+${film1.id}}"
+				<div>
+					
+					<div id="primoFilm" th:if="${film1!=null}">
+						
+						<div class="caption" ><img
+							th:src="'data:image/png;base64,' + ${film1.copertina.getImgData(film1.copertina.data)}"
+							class="img-responsive">
+						
+						<h3 th:text="${film1.titolo}" style="color: white;"></h3>
+					</div>
+					<p style="color: black">Ecco dove lo potrai trovare: </p><p th:text="${film1.categoria.nome}" style="color: blue;">
+					<div th:if="${GML}"><form th:action="@{'/cinema/update/'+${film1.id}}"
 										th:if="${GML}" method="get">
 										<button type="submit" name="modifica"
 											style="background-color: transparent; border: 0px solid #232323;">
@@ -697,10 +675,17 @@ COLONNA DESTRA
 											<img src="/view/MyLife/images/trash.png" width="38%">
 										</button>
 									</form>
-								</td>
-
-								<td th:if="${film2!=null}">
-									<form th:action="@{'/cinema/update/'+${film2.id}}"
+									</div>
+</div>
+					<div id="secondoFilm" style="display: none;" th:if="${film2!=null}">
+						<div class="caption" ><img
+							th:src="'data:image/png;base64,' + ${film2.copertina.getImgData(film2.copertina.data)}"
+							class="img-responsive">
+						
+						<h3 th:text="${film2.titolo}" style="color: white;"></h3>
+					</div>
+					<p style="color: black">Ecco dove lo potrai trovare: </p><p th:text="${film2.categoria.nome}" style="color: blue;">
+					<div th:if="${GML}"><form th:action="@{'/cinema/update/'+${film2.id}}"
 										th:if="${GML}" method="get">
 										<button type="submit" name="modifica"
 											style="background-color: transparent; border: 0px solid #232323;">
@@ -714,9 +699,17 @@ COLONNA DESTRA
 											<img src="/view/MyLife/images/trash.png" width="38%">
 										</button>
 									</form>
-								</td>
-								<td th:if="${film3!=null}">
-									<form th:action="@{'/cinema/update/'+${film3.id}}"
+									</div>
+					</div>
+					<div id="terzoFilm" style="display: none;" th:if="${film3!=null}">
+						<div class="caption" ><img
+							th:src="'data:image/png;base64,' + ${film3.copertina.getImgData(film3.copertina.data)}"
+							class="img-responsive" >
+						
+						<h3 th:text="${film3.titolo}" style="color: white;"></h3>
+					</div>
+					<p style="color: black">Ecco dove lo potrai trovare: </p> <p th:text="${film3.categoria.nome}" style="color: blue;">
+					<div th:if="${GML}"><form th:action="@{'/cinema/update/'+${film3.id}}"
 										th:if="${GML}" method="get">
 										<button type="submit" name="modifica"
 											style="background-color: transparent; border: 0px solid #232323;">
@@ -730,10 +723,18 @@ COLONNA DESTRA
 											<img src="/view/MyLife/images/trash.png" width="38%">
 										</button>
 									</form>
-								</td>
-							</tr>
-						</table>
+									</div>
 					</div>
+
+					<ul class="pagination" style="float: right">
+
+						<li><a href="" onclick="film1()" id="C">1</a></li>
+						<li><a href="" onclick="film2()" id="C1">2</a></li>
+						<li><a href="" onclick="film3()" id="C2">3</a></li>
+
+					</ul>
+					<br>
+
 				</div>
 				<br> <br>
 				<hr style="border: 1px solid #c9c9c9">
@@ -844,7 +845,10 @@ COLONNA DESTRA
 			</div>
 		</div>
 	</footer>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"> </script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js">
+		
+	</script>
 	<script>
 		$(document).ready(function() {
 			// Activate Carousel
@@ -883,6 +887,8 @@ COLONNA DESTRA
 
 		});
 
+		
+		
 		function showAreaCommento(id) {
 
 			document.getElementsByClassName('commentoModificato' + id)[0].style.display = "block";
@@ -891,11 +897,32 @@ COLONNA DESTRA
 
 		function showAreaPost(id) {
 			document.getElementsByClassName('postModificato' + id)[0].style.display = "block";
-			document.getElementsByClassName("editfoto" +id)[0].style.display="block";
+			document.getElementsByClassName("editfoto" + id)[0].style.display = "block";
+
+		}
+		function film1() {
+			document.getElementById("secondoFilm").style.display = "none";
+			document.getElementById("primoFilm").style.display = "block";
+			document.getElementById("terzoFilm").style.display = "none";
+
+
+		}
+		function film2() {
+			document.getElementById("secondoFilm").style.display = "block";
+			document.getElementById("primoFilm").style.display = "none";
+			document.getElementById("terzoFilm").style.display = "none";
+
+
+		}
+		
+		function film3() {
+			document.getElementById("terzoFilm").style.display = "block";
+			document.getElementById("primoFilm").style.display = "none";
+			document.getElementById("secondoFilm").style.display = "none";
 
 		}
 
-		function readURL(input) {
+	 function readURL(input) {
 			if (input.files && input.files[0]) {
 				var reader = new FileReader();
 
@@ -919,20 +946,17 @@ COLONNA DESTRA
 			$('#delete').hide();
 			document.getElementById("post").required = true;
 		}
-		
+
 		function validateForm() {
-			  var x = document.forms["myForm1"]["post"].value;
-			  var y= document.getElementById("img").value;
-			  
-			  if (y=="" && x=="" ) {
-			    swal("Scrivi qualcosa per pubblicare il post");
-			    return false;
-			  }
-			 
+			var x = document.forms["myForm1"]["post"].value;
+			var y = document.getElementById("img").value;
+
+			if (y == "" && x == "") {
+				swal("Scrivi qualcosa per pubblicare il post");
+				return false;
 			}
-		
-		
-		
+
+		}
 	</script>
 
 </body>
