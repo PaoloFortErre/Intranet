@@ -23,7 +23,7 @@
 	rel='stylesheet' type='text/css'>
 
 
-<link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
+<link rel="stylesheet" href="/view/cssGio/style.css">
 <style>
 td, th, tr {
 	color: white;
@@ -35,7 +35,7 @@ table, th, td {
 </style>
 </head>
 
-<body ng-app="" onload="data()"
+<body onload="data()"
 	th:with="GMW = ${#authorization.expression('hasAuthority(''GMW'')')}">
 
 	<div class="container-fluid">
@@ -380,7 +380,7 @@ table, th, td {
 						</th:block>
 					</table>
 				</div>
-				<div th:if="${sondaggi1!=null}" style="margin: 0 auto; text-align: center;">
+				<div th:if="${sondaggi2!=null}" style="margin: 0 auto; text-align: center;">
 					<br><a href="" id="mostraSondaggi" onclick="mostraSondaggi()"
 						style="text-decoration: none; color: black; font-size: 13px;">
 						<br>Vedi altri <img
@@ -395,13 +395,13 @@ table, th, td {
 						<th:block>
 
 							<tr >
-								<td style="text-align: center;" th:each="sondaggio1: ${sondaggi1}"><a
+								<td style="text-align: center;" th:each="sondaggio1: ${sondaggi2}"><a
 									th:href="@{${sondaggio1.link}}" target="blank"><img
 										src="/view/MyWork/images/surveymonkey.png" width="70px;"
 										style="position: static; margin: 15px;"> </a></td>
-</tr>
-<tr>
-								<td style="text-align: center;" th:each="sondaggio1: ${sondaggi1}"><a
+							</tr>
+							<tr>
+								<td style="text-align: center;" th:each="sondaggio1: ${sondaggi2}"><a
 									th:href="@{${sondaggio1.link}}" target="blank"
 									th:text="${sondaggio1.nomeSondaggio}"
 									style="color: black; text-decoration: none; font-size: 17px;"></a>
@@ -462,7 +462,7 @@ table, th, td {
 					<p
 						th:text="${#dates.format(primoPodcast.dataPodcast *1000, 'dd/MM/yyyy')}"
 						style="font-style: italic; font-size: 10px"></p>
-					<audio controls style="margin-top: 10px">
+					<audio controls style="margin-top: 10px" preload="metadata">
 						<source
 							th:src="'data:audio/mp3;base64,' + ${primoPodcast.getAudioData(primoPodcast.podcast)}"
 							type="audio/ogg">

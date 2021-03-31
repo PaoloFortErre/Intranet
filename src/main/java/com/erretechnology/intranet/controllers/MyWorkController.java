@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.Aforisma;
@@ -56,7 +55,8 @@ public class MyWorkController extends BaseController {
 		mav.setViewName("myWork");
 		Calendar calendar = Calendar.getInstance(), calUtente = Calendar.getInstance();
 		calendar.setTimeInMillis(Instant.now().getEpochSecond()*1000);
-		List<UtenteDatiPersonali> utenti = serviceDatiPersonali.getAll(), utentiCompleanno = new LinkedList<UtenteDatiPersonali>();
+		List<UtenteDatiPersonali> utenti = serviceDatiPersonali.getAll();
+		List<UtenteDatiPersonali> utentiCompleanno = new LinkedList<UtenteDatiPersonali>();
 
 		for(UtenteDatiPersonali u : utenti) {
 			calUtente.setTimeInMillis(u.getDataNascita()*1000);
@@ -107,24 +107,7 @@ public class MyWorkController extends BaseController {
 
 		
 		List<Sondaggio> sondaggi = serviceSondaggio.findAllVisible();
-		if (sondaggi.size()==0) {
-			mav.addObject("sondaggi",null);
-			mav.addObject("sondaggi1",null);
-
-			
-		}
-		else if (sondaggi.size()>0 && sondaggi.size()<=3) {
-			mav.addObject("sondaggi", sondaggi.subList(0, sondaggi.size()));
-			mav.addObject("sondaggi1",null);
-		}
-		else if (sondaggi.size()>3 && sondaggi.size()<6){
-			mav.addObject("sondaggi", sondaggi.subList(0, 3));
-			mav.addObject("sondaggi1", sondaggi.subList(3, sondaggi.size()));
-		}
-		else {
-			mav.addObject("sondaggi", sondaggi.subList(0, 3));
-			mav.addObject("sondaggi1", sondaggi.subList(3, 6));
-		}
+		setMAV(mav, sondaggi , 0, 6, "sondaggi");
 		
 		List<ComunicazioneHR> comunicazione = serviceComunicazioni.getAll();
 		if(comunicazione.size()==0) {
