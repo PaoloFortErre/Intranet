@@ -9,7 +9,8 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -18,7 +19,9 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link rel="preconnect" href="https://fonts.gstatic.com">
-
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap"
+	rel="stylesheet">
 <link href='https://fonts.googleapis.com/css?family=Montserrat'
 	rel='stylesheet' type='text/css'>
 
@@ -118,7 +121,7 @@ table, th, td {
 					<div class="item">
 						<img src="/view/MyWork/images/scarpe.png" alt="Lago" width="100%">
 						<div class="carousel-caption" th:if=${aforisma2!=null}>
-							<h1 class="font-caption" style="font-weight: 900; text-shadow: 3px 1px 6px rgba(0, 0, 0, 1);"
+							<h1 class="font-caption" style="font-weight: 900; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"
 								th:text="${aforisma2.frase}"></h1>
 							<p th:text="${aforisma2.autore}" style="font-style:italic"></p>
 							<div th:if="${GMW}">
