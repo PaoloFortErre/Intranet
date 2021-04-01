@@ -754,7 +754,7 @@ COLONNA DESTRA
 									STYLE="margin-left: 5px;; color: #303030;"></p>
 								<p
 									style="FONT-size: 10px; font-style: italic; text-align: right;; color: #303030;"
-									th:text="${libri.autore}"></p>
+									th:text="${libri.scrittore}"></p>
 
 								<div th:if="${libri!=null}">
 									<form th:action="@{'/libro/update/'+${libri.id}}"
@@ -783,7 +783,7 @@ COLONNA DESTRA
 									STYLE="margin-left: 5px;; color: #303030;"></p>
 								<p
 									style="FONT-size: 10px; font-style: italic; text-align: right; color: #303030;"
-									th:text="${libri1.autore}"></p>
+									th:text="${libri1.scrittore}"></p>
 								<div th:if="${libri1!=null}">
 									<form th:action="@{'/libro/update/'+${libri1.id}}"
 										th:if="${GML}" method="get">
