@@ -367,9 +367,9 @@ public class UtenteController extends BaseController{
 	}
 
 	@GetMapping(value= "/mostraEliminati")
-	public ModelAndView mostraNonAttivi(HttpSession session) {
+	public ModelAndView mostraNonAttivi(HttpSession session) throws Exception{
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
-		//if(u.getUtente().getRuolo().getNome().equals("ADMIN")) return null;
+		if(!u.getUtente().getRuolo().getNome().equals("ADMIN")) throw new Exception("Fidati. Prima chiedi i permessi");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("gestione_suprema");
 		mav.addObject("post", servicePost.getAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList()));

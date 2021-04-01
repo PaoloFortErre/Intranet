@@ -32,6 +32,7 @@ public class Utente{
 	private Boolean attivo;
 	@Column(name = "reset_password_token")
 	private String tokenResetPassword;
+	private long timestampToken;
 	@ManyToMany(mappedBy = "setUtenti", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	Set<Permesso> setPermessi;
 	@ManyToOne
@@ -97,5 +98,13 @@ public class Utente{
 
 	public void setTokenResetPassword(String tokenResetPassword) {
 		this.tokenResetPassword = tokenResetPassword;
+	}
+
+	public long getTimestampToken() {
+		return timestampToken;
+	}
+
+	public void setTimestampToken(long timestampToken) {
+		this.timestampToken = timestampToken;
 	}
 }

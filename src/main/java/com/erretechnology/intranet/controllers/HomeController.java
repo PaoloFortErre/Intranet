@@ -1,6 +1,7 @@
 package com.erretechnology.intranet.controllers;
 
 import java.io.UnsupportedEncodingException;
+import java.time.Instant;
 import java.util.Comparator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -90,13 +91,13 @@ public class HomeController extends BaseController{
 	     
 	    String content = "<p>Car* collega</p>"
 	            + "<p>Questa mail è stata inviata automaticamente in seguito alla sua richiesta.</p>"
-	            + "<p>clicca sul seguente link per cambiare password:</p>"
-	            + "<p><a href=\"" + link + "\">Cambia la tua password</a></p>"
+	            + "<p>Hai un'ora di tempo per settare la nuova password, clicca sul seguente link per cambiare password:</p>"
+	            + "<h3><a href=\"" + link + "\">Cambia la tua password</a></h3>"
 	            + "<br>"
 	            + "<p>Se non sei stato tu a richiedere il cambio password, "
 	            + "sei pregato di contattare l'amministratore."
-	            + "Si prega di non rispondere a questa mail."
-	            + "Gruppo ErreTechnology</p>"
+	            + "Si prega di non rispondere a questa mail.</p>"
+	            + "<br><p>Gruppo ErreTechnology</p>"
 	             ;
 	     
 	    helper.setSubject(subject);
@@ -109,22 +110,22 @@ public class HomeController extends BaseController{
 	@GetMapping("/reset_password")
 	public ModelAndView showResetPasswordForm(@Param(value = "token") String token) {
 		ModelAndView mav = new ModelAndView();
-		if(token == "") {
-			mav.setViewName("password_lost");
-	    	mav.addObject("error", "Non è più possibile effettuare il cambio password con questo token");
-	    	return mav;
-		}
 	    Utente utente = serviceUtente.findByResetPasswordToken(token);
-	    
-	     
-	    if (utente == null) {
+	    if (utente == null || (Instant.now().getEpochSecond() - utente.getTimestampToken() > 3600)) {
 	    	mav.setViewName("password_lost");
 	    	mav.addObject("error", "Si è verificato un problema con il token, riprovare o richiederne uno nuovo");
 	    }else {
 	    	mav.setViewName("reset_password_form");
 	    	mav.addObject("token", token);
 	    }
-	     
+	    
+		if(token == "") {
+			mav.setViewName("password_lost");
+	    	mav.addObject("error", "Non è più possibile effettuare il cambio password con questo token");
+	    	return mav;
+		}
+	//    Utente utente = serviceUtente.findByResetPasswordToken(token);
+	    
 	    return mav;
 	}
  
@@ -150,6 +151,7 @@ public class HomeController extends BaseController{
 		    } else {  
 		    	utente.setPassword(psw);
 		    	utente.setTokenResetPassword(null);
+		    	utente.setTimestampToken(0);
 		        serviceUtente.saveUtente(utente);
 		        saveLog("cambiato la password via \"Password dimenticata\"", serviceDatiPersonali.findByAutore(utente));
 		        mav.setViewName("redirect:login");
@@ -170,9 +172,10 @@ public class HomeController extends BaseController{
 
 	// Homepage
 	@GetMapping(value = "/homepage")
-	public ModelAndView homepageAdmin() {
+	public ModelAndView homepageAdmin(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("homepage");
+		mav.addObject("utente", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return mav;
 	}
 

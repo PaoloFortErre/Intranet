@@ -1,5 +1,6 @@
 package com.erretechnology.intranet.services;
 
+import java.time.Instant;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,7 @@ public class ServiceUtenteImpl implements ServiceUtente{
 		Utente utente = findByEmail(email);
 		if (utente != null) {
 			utente.setTokenResetPassword(token);
+			utente.setTimestampToken(Instant.now().getEpochSecond());
 			userRepository.save(utente);
 		}
 	}
