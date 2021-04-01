@@ -12,15 +12,15 @@
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-<link href='https://fonts.googleapis.com/css?family=Montserrat'
-	rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat'
+  rel='stylesheet' type='text/css'>
   <title>Homepage</title>
   <style>
-h1, h2, h3, h4, h5, textarea, p, label, input, button {
-	font-family: "Montserrat"
-, sans-serif;
+  h1, h2, h3, h4, h5, textarea, p, label, input, button {
+    font-family: "Montserrat"
+    , sans-serif;
 
-}
+  }
 
   body {
     background-color: #303030;
@@ -86,30 +86,53 @@ h1, h2, h3, h4, h5, textarea, p, label, input, button {
     }
   }
 
-  .magnify:hover{
-    width: 101%;
-    heigth: 101%;
+  /* inizio titolo */
+  .immaginiTitolo {
+    position: relative;
+    text-align: center;
+    color: white;
   }
 
+  /* Top left text */
+  .top-left {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+  }
+
+  /* Top right text */
+  .top-right {
+    position: absolute;
+    top: 8px;
+    right: 30px;
+  }
+
+  /* Centered text */
   .centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .immaginiTitolo:hover{
+    width: 101%;
+    height: 101%;
+  }
 
   .descrizione{
-    font-size: 35px;
+    font-size: 25px;
     font-weight: 400;
     font-family: Noto Sans, sans-serif;
     text-shadow: 9px 3px 6px #303030;
     -webkit-text-stroke: 0.3px #303030;
   }
+  /*fine titolo*/
 
   /*Profile Pic Start*/
   .picture{
-    width: 270px;
-    height: 270px;
+    width: 100px;
+    height: 100px;
     background-color: #999999;
     border: 3px solid #CCCCCC;
     color: #FFFFFF;
@@ -118,23 +141,28 @@ h1, h2, h3, h4, h5, textarea, p, label, input, button {
     transition: all 0.2s;
     -webkit-transition: all 0.2s;
   }
+  .picture:hover{
+    width: 130px;
+    height: 130px;
+    border-color: yellow;
+  }
 
   /*START FOOTER*/
   footer {
-  	margin-top:150px;
-  	background-color: black;
-  	width: 100%;
-  	height: 160px;
-  	flex-shrink: 0;
+    margin-top:150px;
+    background-color: black;
+    width: 100%;
+    height: 160px;
+    flex-shrink: 0;
   }
   /* Style all font awesome icons */
   .fa {
-  	padding: 20px;
-  	font-size: 30px;
-  	width: 70px;
-  	height: 70px;
-  	text-align: center;
-  	text-decoration: none;
+    padding: 20px;
+    font-size: 30px;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    text-decoration: none;
   }
 
   /* Style all font awesome icons */
@@ -172,144 +200,145 @@ h1, h2, h3, h4, h5, textarea, p, label, input, button {
   <div class="container-fluid">
     <div class="row mt-3 mb-5">
 
+      <!--MYWORK -->
       <div class="col">
-        <div class="magnify container-fluid">
+        <div class="immaginiTitolo container">
+          <img src="/view/Homepage/Images/my_work_1.jpg" class="img-fluid rounded-lg " alt="mywork1">
 
-          <figure class="figure position-relative">
-            <img src="/view/Homepage/Images/my_work_1.jpg" class="img-fluid rounded-lg " alt="mywork1">
+          <div class="centered">
+            <h1 class="h1 title">My work</h1>
+            <h4 class="h4 descrizione mb-5 mt-5">Scopri cos'è successo di recente in Erre</h4>
+            <a class="btn btn-primary btn-lg" th:href="@{/myWork/}" role="button"><b>ENTRA</b></a>
+          </div>
 
-            <div class="container centered text-center mt-2">
-              <h1 class="h1 title">My work</h1>
-              <h4 class="h4 descrizione mb-4">Scopri cos'è successo di recente in Erre</h4>
-              <div class="container">
-                <a class="btn btn-primary btn-lg" th:href="@{/myWork/}" role="button"><b>ENTRA</b></a>
-              </div>
-            </div>
-          </figure>
         </div>
       </div>
 
+      <!--MYLIFE -->
       <div class="col">
-        <div class="magnify container-fluid">
+        <div class=" immaginiTitolo container">
+          <img src="/view/Homepage/Images/my_life_1.jpg" class="img-fluid rounded-lg " alt="mylife1">
 
-          <figure class="figure position-relative">
-            <img src="/view/Homepage/Images/my_life_1.jpg" class="img-fluid rounded-lg " alt="mylife1">
+          <div class="top-right">
+            <!--PROFILE PIC -->
+            <a th:href="@{/profile/}">
+              <img class="picture img rounded-circle"
+              th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}" alt="profile_pic" title="Vai al tuo profilo"
+              id="utente-foto-profilo">
+            </a></div>
 
-            <div class="container centered text-center mt-2">
+            <div class="centered">
               <h1 class="h1 title">My life</h1>
-              <h4 class="h4 descrizione mb-4">Scopri cosa fare il prossimo fine settimana</h4>
-              <div class="container">
-                <a class="btn btn-primary btn-lg" th:href="@{/myLife/}" role="button"><b>ENTRA</b></a>
-              </div>
-            </div>
-          </figure>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-
-  <!-- PANNELLO LINKEDIN-->
-  <div class="container mt-2">
-    <div class="row  ml-5">
-
-      <div class="col-1">
-      </div>
-
-      <div class="col-8 ml-5">
-        <div id="carouselExampleIndicators" class="carousel slide ml-5" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active bg-primary"></li>
-            <li class="bg-primary" data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li class="bg-primary" data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            <li class="bg-primary" data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-          </ol>
-          <div class="carousel-inner">
-            <div class="carousel-item active" data-interval="3000">
-              <iframe class="d-block w-100" src="https://www.linkedin.com/embed/feed/update/urn:li:share:6779727207917989888"
-              height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
-            </div>
-            <div class="carousel-item" data-interval="3000">
-              <iframe class="d-block w-100" src="https://www.linkedin.com/embed/feed/update/urn:li:share:6777974764054032384"
-              height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
-            </div>
-            <div class="carousel-item" data-interval="3000">
-              <iframe class="d-block w-100" src="https://www.linkedin.com/embed/feed/update/urn:li:share:6778281649567236098"
-              height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
-            </div>
-            <div class="carousel-item" data-interval="3000">
-              <iframe class="d-block w-100" src="https://www.linkedin.com/embed/feed/update/urn:li:share:6777857210736230400"
-              height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
+              <h4 class="h4 descrizione mb-5 mt-5">Scopri cosa fare il prossimo fine settimana</h4>
+              <a class="btn btn-primary btn-lg" th:href="@{/myLife/}" role="button"><b>ENTRA</b></a>
             </div>
           </div>
-          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
         </div>
-      </div>
 
-      <div class="col-1">
       </div>
+    </div>
 
+
+    <!-- PANNELLO LINKEDIN-->
+    <div class="container mt-2">
+      <div class="row  ml-5">
+
+        <div class="col-1">
+        </div>
+
+        <div class="col-8 ml-5">
+          <div id="carouselExampleIndicators" class="carousel slide ml-5" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active bg-primary"></li>
+              <li class="bg-primary" data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+              <li class="bg-primary" data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+              <li class="bg-primary" data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active" data-interval="3000">
+                <iframe class="d-block w-100" src="https://www.linkedin.com/embed/feed/update/urn:li:share:6779727207917989888"
+                height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
+              </div>
+              <div class="carousel-item" data-interval="3000">
+                <iframe class="d-block w-100" src="https://www.linkedin.com/embed/feed/update/urn:li:share:6777974764054032384"
+                height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
+              </div>
+              <div class="carousel-item" data-interval="3000">
+                <iframe class="d-block w-100" src="https://www.linkedin.com/embed/feed/update/urn:li:share:6778281649567236098"
+                height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
+              </div>
+              <div class="carousel-item" data-interval="3000">
+                <iframe class="d-block w-100" src="https://www.linkedin.com/embed/feed/update/urn:li:share:6777857210736230400"
+                height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-1">
+        </div>
+
+      </div>
+    </div>
+
+    <!--PANNELLO CON FOTO E LINK AL PROFILO
+    <div class="container mt-3">
+    <div class="row justify-content-center " style="margin-top: 100px; margin-bottom: 150px;">
+    <div class="col-lg-4 col-md-4 col-sm-3 col-xs-3">
+    <div class="container">
+    <img class="picture img rounded-circle"
+    th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}" alt="profile_pic">
+  </div>
+</div>
+
+<div class="col-lg-5 col-md-3 col-sm-3 col-xs-2  text-center">
+<div class="container mt-5">
+<h3 class="p text-center">Se desideri vedere le tue informazioni dettagliate, vai alla gestione del tuo profilo</h3>
+<a class="btn btn-primary btn-lg mb-5 mt-3" th:href="@{/profile/}">PROFILO</a>
+</div>
+</div>
+</div>
+</div>-->
+
+<!-- PANNELLO FOOTER CON INFO-->
+<footer class="align-items-center">
+  <div class="container align-items-center mt-4"
+  style="margin-top: 40px">
+  <div class="row justify-content-center align-items-center mt-3 pt-4"
+  style="margin-top: 15px; padding-top: 15px;">
+  <div class="col-sm-4 col-lg-4">
+    <a href="https://erretechnology.com/" target="blank"><img
+      src="/view/MyWork/images/errelogowhite.png" height="80px"
+      alt="erre_logo" style="margin: auto"></a>
+    </div>
+    <div class="col-sm-4 col-lg-4">
+      <img src="/view/MyWork/images/thegate.png" width="100%"
+      style="margin: auto;">
+      <p style="color: #F3F3F3; text-align: center; font-size: 20px;">
+        Supporto: +39 011 197 429 00</p>
+      </div>
+      <div class="col-sm-4 col-lg-4 pl-5" style="padding-left: 150px">
+        <a class="rounded fa fa-facebook"
+        href="https://www.facebook.com/erretechnologygroup/"
+        target="blank"></a> <a class="rounded fa fa-linkedin ml-2"
+        href="https://www.linkedin.com/company/erretechnologygroup/"
+        style="margin-left: 10px" target="blank"></a>
+      </div>
     </div>
   </div>
+</footer>
 
-   <!--PANNELLO CON FOTO E LINK AL PROFILO
-  <div class="container mt-3">
-    <div class="row justify-content-center " style="margin-top: 100px; margin-bottom: 150px;">
-      <div class="col-lg-4 col-md-4 col-sm-3 col-xs-3">
-        <div class="container">
-          <img class="picture img rounded-circle"
-          th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}" alt="profile_pic">
-        </div>
-      </div>
+<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
-      <div class="col-lg-5 col-md-3 col-sm-3 col-xs-2  text-center">
-        <div class="container mt-5">
-          <h3 class="p text-center">Se desideri vedere le tue informazioni dettagliate, vai alla gestione del tuo profilo</h3>
-          <a class="btn btn-primary btn-lg mb-5 mt-3" th:href="@{/profile/}">PROFILO</a>
-        </div>
-      </div>
-    </div>
-  </div>-->
-
-  <!-- PANNELLO FOOTER CON INFO-->
-	<footer class="align-items-center">
-		<div class="container align-items-center mt-4"
-			style="margin-top: 40px">
-			<div class="row justify-content-center align-items-center mt-3 pt-4"
-				style="margin-top: 15px; padding-top: 15px;">
-				<div class="col-sm-4 col-lg-4">
-					<a href="https://erretechnology.com/" target="blank"><img
-						src="/view/MyWork/images/errelogowhite.png" height="80px"
-						alt="erre_logo" style="margin: auto"></a>
-				</div>
-				<div class="col-sm-4 col-lg-4">
-					<img src="/view/MyWork/images/thegate.png" width="100%"
-						style="margin: auto;">
-					<p style="color: #F3F3F3; text-align: center; font-size: 20px;">
-						Supporto: +39 011 197 429 00</p>
-				</div>
-				<div class="col-sm-4 col-lg-4 pl-5" style="padding-left: 150px">
-					<a class="rounded fa fa-facebook"
-						href="https://www.facebook.com/erretechnologygroup/"
-						target="blank"></a> <a class="rounded fa fa-linkedin ml-2"
-						href="https://www.linkedin.com/company/erretechnologygroup/"
-						style="margin-left: 10px" target="blank"></a>
-				</div>
-			</div>
-		</div>
-	</footer>
-
-    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-
-  </body>
-  </html>
+</body>
+</html>
