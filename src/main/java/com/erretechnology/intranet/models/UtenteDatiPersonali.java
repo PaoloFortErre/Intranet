@@ -21,6 +21,7 @@ public class UtenteDatiPersonali implements Serializable, MyWorkBean{
 	@OneToOne()
 	@JoinColumn(name = "id_user")
 	private Utente utente;
+	@Column(length = 500)
 	private String descrizione;
 	private long dataNascita;
 	private String nome;
