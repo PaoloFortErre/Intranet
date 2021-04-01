@@ -40,12 +40,6 @@ public class ClienteController extends BaseController{
 		return "cliente";
 	}
 
-	@GetMapping("/list")
-	public String getList(Model model) {
-		model.addAttribute("clienteList", repoCliente.findAll());
-		return "clienteList";
-	}
-
 	@GetMapping("/new")
 	public String form(Model model) {
 		model.addAttribute("cliente", new Cliente()); 

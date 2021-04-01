@@ -21,19 +21,6 @@ import com.erretechnology.intranet.repositories.RepositoryCategoriaCinema;
 public class CategoriaCinemaController extends BaseController{
 	@Autowired
 	private RepositoryCategoriaCinema repoCategoria;
-	
-	@GetMapping("/{id}")
-	public String get(@PathVariable int id, Model model) {
-		
-		model.addAttribute("categoriaCinema", repoCategoria.findById(id).get());
-		return "categoriaCinema";
-	}	
-	
-	@GetMapping("/list")
-	public String getList(Model model) {
-		model.addAttribute("categoriaCinemaList", repoCategoria.findAll());
-		return "categoriaCinemaList";
-	}
 
 	@GetMapping("/new")
 	public String form(Model model) {

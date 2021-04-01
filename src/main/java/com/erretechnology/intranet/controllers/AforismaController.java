@@ -27,19 +27,6 @@ public class AforismaController extends BaseController {
 	@Autowired
 	private RepositoryUtente repoUtente;
 	
-	@GetMapping("/{id}")
-	public String get(@PathVariable int id, Model model) {
-		
-		model.addAttribute("aforisma", repoAforisma.findById(id).get());
-		return "aforisma";
-	}
-	
-	@GetMapping("/list")
-	public String getList(Model model) {
-		model.addAttribute("aforismaList", repoAforisma.findAll());
-		return "aforismaList";
-	}
-	
 	@GetMapping("/new")
 	public String form(Model model) {
 		model.addAttribute("aforisma", new Aforisma()); 

@@ -40,12 +40,6 @@ public class CinemaController extends BaseController {
 		return "cinema";
 	}	
 
-	@GetMapping("/list")
-	public String getList(Model model) {
-		model.addAttribute("cinemaList", repoCinema.findAll());
-		return "cinemaList";
-	}
-
 	@GetMapping("/new")
 	public String form(Model model) {
 		model.addAttribute("cinema", new Cinema()); 

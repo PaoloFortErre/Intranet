@@ -37,12 +37,6 @@ public class NewsController extends BaseController {
 		return "news";
 	}
 	
-	@GetMapping("/list")
-	public String getList(Model model) {
-		model.addAttribute("newsList", repoNews.findAllOrderByDataPubblicazioneDesc());
-		return "newsList";
-	}
-	
 	@GetMapping("/new")
 	public String form(Model model) {
 		model.addAttribute("news", new News()); 

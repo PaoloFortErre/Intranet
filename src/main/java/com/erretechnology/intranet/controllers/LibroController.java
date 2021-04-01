@@ -36,12 +36,6 @@ public class LibroController extends BaseController {
 		return "libro";
 	}	
 
-	@GetMapping("/list")
-	public String getList(Model model) {
-		model.addAttribute("libroList", repoLibro.findAll());
-		return "libroList";
-	}
-
 	@GetMapping("/new")
 	public String form(Model model) {
 		model.addAttribute("libro", new Libro()); 
