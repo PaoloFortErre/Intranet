@@ -1,44 +1,41 @@
 package com.erretechnology.intranet.models;
 
-import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.persistence.DiscriminatorType;
 
+@Entity(name="news")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="type", discriminatorType = DiscriminatorType.INTEGER)
 
-@Entity
-@Table(name = "event")
-public class Evento implements MyWorkBean{
+public class Novita implements MyWorkBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	@NotNull
 	private String titolo;
+	@NotNull
 	@Lob
-	@Column(columnDefinition="BLOB")
 	private String contenuto;
-	@OneToOne
+	private long dataPubblicazione;
+	@OneToOne()
 	@JoinColumn(name = "id_immagine")
 	private FileImmagine copertina;
-	private long data;
-	@OneToOne
-	@JoinColumn(name = "id_indirizzo")
-	private Indirizzo indirizzo;
 	@ManyToOne
 	@JoinColumn(name="autore_id")
 	private UtenteDatiPersonali autore;
 	private boolean visibile;
-	private boolean isLife;
 	private long timestampEliminazione;
-	
-	public Evento() {
-
-	}
 
 	public int getId() {
 		return id;
@@ -64,28 +61,20 @@ public class Evento implements MyWorkBean{
 		this.contenuto = contenuto;
 	}
 
+	public long getDataPubblicazione() {
+		return dataPubblicazione;
+	}
+
+	public void setDataPubblicazione(long dataPubblicazione) {
+		this.dataPubblicazione = dataPubblicazione;
+	}
+
 	public FileImmagine getCopertina() {
 		return copertina;
 	}
 
 	public void setCopertina(FileImmagine copertina) {
 		this.copertina = copertina;
-	}
-
-	public long getData() {
-		return data;
-	}
-
-	public void setData(long data) {
-		this.data = data;
-	}
-
-	public Indirizzo getIndirizzo() {
-		return indirizzo;
-	}
-
-	public void setIndirizzo(Indirizzo indirizzo) {
-		this.indirizzo = indirizzo;
 	}
 
 	public UtenteDatiPersonali getAutore() {
@@ -104,14 +93,6 @@ public class Evento implements MyWorkBean{
 		this.visibile = visibile;
 	}
 
-	public boolean isLife() {
-		return isLife;
-	}
-
-	public void setLife(boolean isLife) {
-		this.isLife = isLife;
-	}
-
 	public long getTimestampEliminazione() {
 		return timestampEliminazione;
 	}
@@ -119,5 +100,4 @@ public class Evento implements MyWorkBean{
 	public void setTimestampEliminazione(long timestampEliminazione) {
 		this.timestampEliminazione = timestampEliminazione;
 	}
-	
 }

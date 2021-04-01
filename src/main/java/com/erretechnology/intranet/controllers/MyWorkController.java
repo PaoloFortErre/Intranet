@@ -22,7 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.erretechnology.intranet.models.Aforisma;
 import com.erretechnology.intranet.models.Cliente;
 import com.erretechnology.intranet.models.ComunicazioneHR;
-import com.erretechnology.intranet.models.Evento;
+import com.erretechnology.intranet.models.EventoWork;
 import com.erretechnology.intranet.models.MyWorkBean;
 import com.erretechnology.intranet.models.News;
 import com.erretechnology.intranet.models.Podcast;
@@ -30,7 +30,7 @@ import com.erretechnology.intranet.models.Sondaggio;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.repositories.RepositoryAforisma;
 import com.erretechnology.intranet.repositories.RepositoryCliente;
-import com.erretechnology.intranet.repositories.RepositoryEvento;
+import com.erretechnology.intranet.repositories.RepositoryEventoWork;
 import com.erretechnology.intranet.repositories.RepositoryNews;
 
 @Controller
@@ -45,7 +45,7 @@ public class MyWorkController extends BaseController {
 	private RepositoryNews repoNews;
 
 	@Autowired
-	private RepositoryEvento repoEvento;
+	private RepositoryEventoWork repoEvento;
 
 	@GetMapping(value = "/")
 	public ModelAndView primaPagina(HttpSession session) {
@@ -70,10 +70,10 @@ public class MyWorkController extends BaseController {
 		List<UtenteDatiPersonali> nuoviUtenti = utenti.stream()
 				.sorted(Comparator.comparingInt(UtenteDatiPersonali::getId).reversed())
 				.filter(x->x.getUtente().getAttivo()==true)
-				.limit(6)
+				.limit(1)
 				.collect(Collectors.toList());
-		setMAV(mav, nuoviUtenti, 0, 6, "nuoviAssunti");
-
+	//	setMAV(mav, nuoviUtenti, 0, 6, "nuoviAssunti");
+mav.addObject("nuoveAssunzioni", nuoviUtenti);
 		
 		List<Podcast> listPodcast = servicePodcast.getAll();
 		if(listPodcast.size() != 0 && listPodcast!= null) {
@@ -83,7 +83,7 @@ public class MyWorkController extends BaseController {
 			mav.addObject("altriPodcast", listPodcast.stream().limit(3).sorted(Comparator.comparingInt(Podcast::getId).reversed()).collect(Collectors.toList()));
 		}
 		
-		List<Cliente> clienti = repoCliente.findLimit(3);
+		List<Cliente> clienti = repoCliente.findLimit(1);
 		if(clienti.size() > 0) {
 			mav.addObject("nuoviClienti", clienti);
 		} else {
@@ -131,7 +131,7 @@ public class MyWorkController extends BaseController {
 			mav.addObject("aforisma", aforismi.get(0));
 			mav.addObject("aforisma2", aforismi.get(1));
 		}
-		List<Evento> eventi = (List<Evento>) repoEvento.findNextWorkEvents(Instant.now().getEpochSecond());
+		List<EventoWork> eventi = (List<EventoWork>) repoEvento.findNextEvents(Instant.now().getEpochSecond());
 		setMAV(mav, eventi, 0, 4, "eventi");
 		return mav;
 		

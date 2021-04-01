@@ -57,7 +57,7 @@ body{
 	<img src="/view/MyWork/images/frecciasinistra.png" style="display: inline-block;" width="20%">Torna indietro
 </a>
 
-	<form th:action="@{/evento/insert}" th:object="${evento}" method="post" enctype="multipart/form-data">
+	<form th:action="@{/eventowork/insert}" th:object="${evento}" method="post" enctype="multipart/form-data">
 		<div class="form-group col-12">
 			<label for="titolo">Titolo</label>
 		  <input class="form-control" type="text"  name="titolo" id="input" th:field="*{titolo}" style="color: black">
@@ -67,22 +67,15 @@ body{
 			<label for="contenuto">Contenuto</label>
 		  <textarea class="form-control"   id="input" name="contenuto" th:field="*{contenuto}" rows="2"></textarea>
 	  </div>
-
+	  
+		<div class="form-group col-12">
+			<label for="luogo">Luogo</label>
+		  <input class="form-control" type="text" id="input" name="luogo" th:field="*{luogo}">
+		</div>
+		
 		<div class="form-group col-5">
 			<label for="date">Data</label>
 		  <input class="form-control" type="date" id="input" name="date">
-	  </div>
-
-		<div class="form-group col-12">
-			<label for="via">Via:</label>
-		  <input class="form-control" type="text" id="input" name="via">
-	  </div>
-
-		<div class="form-group col-6">
-			<label for="citta">Citta</label>
-		  <input class="form-control" type="text" id="input" name="citta">
-		  <label for="provincia">Provincia</label>
-		 	<input class="form-control" type="text" id="input" name="provincia">
 	  </div>
 
 		<div class="form-group col-6">

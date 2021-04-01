@@ -32,7 +32,7 @@ import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.models.Utility;
 import com.erretechnology.intranet.repositories.RepositoryCinema;
 import com.erretechnology.intranet.repositories.RepositoryCliente;
-import com.erretechnology.intranet.repositories.RepositoryEvento;
+import com.erretechnology.intranet.repositories.RepositoryEventoLife;
 import com.erretechnology.intranet.repositories.RepositoryLibro;
 import com.erretechnology.intranet.repositories.RepositoryNews;
 
@@ -43,7 +43,7 @@ public class UtenteController extends BaseController{
 	@Autowired
 	RepositoryNews repositoryNews;
 	@Autowired
-	RepositoryEvento repositoryEvento;
+	RepositoryEventoLife repositoryEvento;
 	@Autowired
 	RepositoryLibro repositoryLibro;
 	@Autowired
