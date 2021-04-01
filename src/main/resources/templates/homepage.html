@@ -19,7 +19,7 @@
 h1, h2, h3, h4, h5, textarea, p, label, input, button {
 	font-family: "Montserrat"
 , sans-serif;
-	
+
 }
 
   body {
@@ -104,6 +104,19 @@ h1, h2, h3, h4, h5, textarea, p, label, input, button {
     font-family: Noto Sans, sans-serif;
     text-shadow: 9px 3px 6px #303030;
     -webkit-text-stroke: 0.3px #303030;
+  }
+
+  /*Profile Pic Start*/
+  .picture{
+    width: 270px;
+    height: 270px;
+    background-color: #999999;
+    border: 3px solid #CCCCCC;
+    color: #FFFFFF;
+    border-radius: 50%;
+    overflow: hidden;
+    transition: all 0.2s;
+    -webkit-transition: all 0.2s;
   }
 
   /*START FOOTER*/
@@ -247,19 +260,24 @@ h1, h2, h3, h4, h5, textarea, p, label, input, button {
     </div>
   </div>
 
-  <!-- PANNELLO CON LINK AL PROFILO-->
-  <div class="row justify-content-center " style="margin-top: 100px; margin-bottom: 150px;">
-    <div class="col-4">
-      <img src="/view/Homepage/Images/phone_person.png" class="img-fluid mt-3" alt="phoneAndHuman.png">
-    </div>
+   <!--PANNELLO CON FOTO E LINK AL PROFILO
+  <div class="container mt-3">
+    <div class="row justify-content-center " style="margin-top: 100px; margin-bottom: 150px;">
+      <div class="col-lg-4 col-md-4 col-sm-3 col-xs-3">
+        <div class="container">
+          <img class="picture img rounded-circle"
+          th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}" alt="profile_pic">
+        </div>
+      </div>
 
-    <div class="col-4 text-center mt-5">
-      <div class="container mt-5">
-        <h3 class="p text-center">Se desideri vedere le tue informazioni dettagliate, vai alla gestione del tuo profilo</h3>
-        <a class="btn btn-primary btn-lg mb-5 mt-3" th:href="@{/profile/}">PROFILO</a>
+      <div class="col-lg-5 col-md-3 col-sm-3 col-xs-2  text-center">
+        <div class="container mt-5">
+          <h3 class="p text-center">Se desideri vedere le tue informazioni dettagliate, vai alla gestione del tuo profilo</h3>
+          <a class="btn btn-primary btn-lg mb-5 mt-3" th:href="@{/profile/}">PROFILO</a>
+        </div>
       </div>
     </div>
-  </div>
+  </div>-->
 
   <!-- PANNELLO FOOTER CON INFO-->
 	<footer class="align-items-center">

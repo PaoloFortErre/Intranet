@@ -24,8 +24,6 @@
   integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
   crossorigin="anonymous"></script>
 
-  <title>profilo</title>
-
   <style media="screen">
 
   body {
@@ -67,7 +65,7 @@
 
   .top-left2 {
     position: absolute;
-    width: 8%;
+    width: 12%;
     height: 24%;
     top: 4px;
     left: 0px;
@@ -123,40 +121,38 @@
 
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="https://erretechnology.com/" target="blank"><img width="10%"
-  src="/view/Login/images/erre_group_white.png" alt="logoErreGroup.png"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav ">
-      <li class="nav-item  ">
-        <a th:href="@{/homepage/}"><img
-          src="/view/MyWork/images/casabianca.png" width="30px"
-          style="opacity: 0.5"> </a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link" th:href="@{/myWork/}">MyWork</a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link" th:href="@{/myLife/}">MyLife</a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link" th:href="@{/comunicazioniHr/}">Comunicazioni HR</a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link" th:href="@{/moduli/}">Moduli</a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link " href="http://polyedro.erretechnology.com/www/">Polyedro</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-  <!-- ROW CON NAVBAR -->
-  <div class="row bg-dark justify-content-start mt-3">
-
+<!--NAVBAR CON LINK A PAGINE E LINK A SITO ERRE-->
+  <div class="row">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info" style="width: 100%">
+    <a class="navbar-brand pl-5" href="https://erretechnology.com/" target="blank">
+      <img width="12%" src="/view/Login/images/erre_group_white.png" alt="logoErreGroup.png"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item mr-4">
+          <a class="navbar-brand pl-5" th:href="@{/homepage/}" title="Homepage">
+            <img src="/view/MyWork/images/casabianca.png" alt="home.png" style="opacity: 0.5"></a>
+        </li>
+        <li class="nav-item mr-4">
+          <a class="nav-link" th:href="@{/myWork/}">MyWork</a>
+        </li>
+        <li class="nav-item mr-4">
+          <a class="nav-link" th:href="@{/myLife/}">MyLife</a>
+        </li>
+        <li class="nav-item mr-4">
+          <a class="nav-link" th:href="@{/comunicazioniHr/}">ComunicazioniHR</a>
+        </li>
+        <li class="nav-item mr-4">
+          <a class="nav-link" th:href="@{/moduli/}">Moduli</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="http://polyedro.erretechnology.com/www/">Polyedro</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
 
     </div>
@@ -164,27 +160,27 @@
     <!-- ROW CON IMMAGINE PROFILO, NOME E EMAIL -->
 
     <div class="container-fluid mt-4">
-      <div class="row justify-content-start">
+      <div class="row justify-content-center">
 
-        <div class="col-lg-2 col-md-2 col-sm-1 mr-5">
-          <div class="container-fluid">
+        <div class="col-lg-2 col-md-2 col-sm-1">
+          <div class="container">
             <img class="picture img rounded-circle"
-            th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}" alt="profile_picca"
-            style="width: 260px;">
+            th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}" alt="profile_picca">
           </div>
         </div>
 
-        <div class="col-lg-2 col-md-2 col-sm-1">
+        <div class="col-lg-3 col-md-2 col-sm-1 col-xs-2">
           <div class="container text-center">
             <h1 class="h1" th:text="${utente.nome}"></h1>
             <h1 class="h1 text-primary" th:text="${utente.cognome}" ></h1><br><br>
             <h6 class="h6" th:text="${utente.utente.email}"></h6>
-            <img class="img-fluid shadow rounded-pill mw-25"  th:src="'data:image/png;base64,' + ${utente.settore.getImgData(utente.settore.logo)}" alt="logo-agency">
-          </div>
-        </div>
 
-        <!--LOGO DINAMICO -->
-        <div class="col-2">
+            <!--LOGO DINAMICO -->
+            <div class="container mt-3">
+              <img class="shadow" width="30%"
+              th:src="'data:image/png;base64,' + ${utente.settore.getImgData(utente.settore.logo)}" alt="logo-agency">
+            </div>
+          </div>
         </div>
 
         <div class="col-2">
