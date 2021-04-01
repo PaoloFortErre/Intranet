@@ -13,16 +13,14 @@ public class ErroreController extends BaseController implements ErrorController 
 	@RequestMapping("/error")
 	public ModelAndView handleError(HttpServletRequest httpRequest, HttpSession session) throws Exception {
 		ModelAndView errorPage = new ModelAndView();
+		errorPage.setViewName("erroreGenerico");
         Integer httpErrorCode;
 		if(httpRequest.getAttribute("javax.servlet.error.status_code") != null) {
 			httpErrorCode = (Integer) httpRequest.getAttribute("javax.servlet.error.status_code");
 			if( httpErrorCode == 404)
 				errorPage.setViewName("error");
-			else 
-				errorPage.setViewName("erroreGenerico");
 		}else {
         	httpErrorCode = 403;
-        	errorPage.setViewName("erroreGenerico");
         }
         errorPage.addObject("errorNumber", httpErrorCode);
         return errorPage;

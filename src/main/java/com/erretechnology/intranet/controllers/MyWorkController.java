@@ -19,37 +19,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.erretechnology.intranet.models.Aforisma;
 import com.erretechnology.intranet.models.Cliente;
 import com.erretechnology.intranet.models.ComunicazioneHR;
-import com.erretechnology.intranet.models.EventoWork;
-import com.erretechnology.intranet.models.MyWorkBean;
-import com.erretechnology.intranet.models.News;
-import com.erretechnology.intranet.models.Podcast;
+import com.erretechnology.intranet.models.ElementiMyWork;
+import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.Sondaggio;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
-import com.erretechnology.intranet.repositories.RepositoryAforisma;
 import com.erretechnology.intranet.repositories.RepositoryCliente;
-import com.erretechnology.intranet.repositories.RepositoryEventoWork;
-import com.erretechnology.intranet.repositories.RepositoryNews;
 
 @Controller
 @RequestMapping(value = "myWork")
 public class MyWorkController extends BaseController {
 	@Autowired
-	private RepositoryAforisma repoAfo;
-	@Autowired
 	private RepositoryCliente repoCliente;
-
-	@Autowired
-	private RepositoryNews repoNews;
-
-	@Autowired
-	private RepositoryEventoWork repoEvento;
 
 	@GetMapping(value = "/")
 	public ModelAndView primaPagina(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
+		List<ElementiMyWork> elementi = serviceElementiMyWork.findAll();
+		elementi.stream().filter(x -> x.getFoto() != null).forEach(x -> x.setImmagine(serviceFileImmagine.getImmagine(x.getFoto())));
 		UtenteDatiPersonali u1 = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		mav.addObject("utenteDati", u1);
 		mav.setViewName("myWork");
@@ -73,15 +61,15 @@ public class MyWorkController extends BaseController {
 				.limit(1)
 				.collect(Collectors.toList());
 	//	setMAV(mav, nuoviUtenti, 0, 6, "nuoviAssunti");
-mav.addObject("nuoveAssunzioni", nuoviUtenti);
+		mav.addObject("nuoveAssunzioni", nuoviUtenti);
 		
-		List<Podcast> listPodcast = servicePodcast.getAll();
+		/*List<Podcast> listPodcast = elementi.stream().map(x -> x.getTipo().equals("aphorism"));
 		if(listPodcast.size() != 0 && listPodcast!= null) {
 			Podcast primoPodcast = listPodcast.get(listPodcast.size()-1);
 			mav.addObject("primoPodcast", primoPodcast);
 			listPodcast.remove(listPodcast.size()-1);
 			mav.addObject("altriPodcast", listPodcast.stream().limit(3).sorted(Comparator.comparingInt(Podcast::getId).reversed()).collect(Collectors.toList()));
-		}
+		}*/
 		
 		List<Cliente> clienti = repoCliente.findLimit(1);
 		if(clienti.size() > 0) {
@@ -90,24 +78,13 @@ mav.addObject("nuoveAssunzioni", nuoviUtenti);
 			mav.addObject("nuoviClienti", null);
 		}
 
-		List<News> news= repoNews.findAllOrderByDataPubblicazioneDesc(); 
-
-		setMAV(mav, news, 0, 6, "news");
-
-		if (news.size()==0) {
-			mav.addObject( "newsSlide", null);
-			mav.addObject( "newsSlide2", null);
-		}else if(news.size()>=2) {
-			mav.addObject( "newsSlide", news.get(0));
-			mav.addObject( "newsSlide2", news.get(1));
-		}else if (news.size()<2) {
-			mav.addObject( "newsSlide", news.get(0));
-			mav.addObject( "newsSlide2", null);
-		}
+		List<ElementiMyWork> news= elementi.stream().filter(x -> x.getTipo().equals("news")).collect(Collectors.toList());
+		mav.addObject("newsSlide", news);
 
 		
-		List<Sondaggio> sondaggi = serviceSondaggio.findAllVisible();
-		setMAV(mav, sondaggi , 0, 6, "sondaggi");
+		List<ElementiMyWork> sondaggi = elementi.stream().filter(x -> x.getTipo().equals("sondaggi")).collect(Collectors.toList());
+		/*setMAV(mav, sondaggi , 0, 6, "sondaggi");*/
+		mav.addObject("sonadggi", sondaggi);
 		
 		List<ComunicazioneHR> comunicazione = serviceComunicazioni.getAll();
 		if(comunicazione.size()==0) {
@@ -116,43 +93,15 @@ mav.addObject("nuoveAssunzioni", nuoviUtenti);
 		else {
 			mav.addObject("comunicazioni", comunicazione.get(comunicazione.size()-1));
 		}
+		List<ElementiMyWork> aforismi = elementi.stream().filter(x -> x.getTipo().equals("aphorism")).collect(Collectors.toList());
+		mav.addObject("aforisma", aforismi);
 		
-		List<Aforisma> aforismi = repoAfo.findAll();
-		if (aforismi.size()==0) {
-			mav.addObject("aforisma", null);
-			mav.addObject("aforisma2", null);
-
-		}
-		else if (aforismi.size()==1) {
-			mav.addObject("aforisma", aforismi.get(0));
-			mav.addObject("aforisma2", null);
-		}
-		else {
-			mav.addObject("aforisma", aforismi.get(0));
-			mav.addObject("aforisma2", aforismi.get(1));
-		}
-		List<EventoWork> eventi = (List<EventoWork>) repoEvento.findNextEvents(Instant.now().getEpochSecond());
-		setMAV(mav, eventi, 0, 4, "eventi");
+		List<ElementiMyWork> eventi = elementi.stream().filter(x -> x.getTipo().equals("eventi")).collect(Collectors.toList());
+		mav.addObject("eventi", eventi);
 		return mav;
 		
 	}
-
-	private void setMAV(ModelAndView mav, List<? extends MyWorkBean> list, int inizio, int fine, String nomeOggetto) {
-		if (list.size()==0) {
-			mav.addObject(nomeOggetto, null);
-			mav.addObject(nomeOggetto + "2", null);
-		}else if(list.size() >= fine) {
-			mav.addObject(nomeOggetto, list.subList(inizio, ((fine + inizio) / 2)));
-			mav.addObject(nomeOggetto + "2", list.subList(((fine + inizio) / 2), fine));
-		}else if(list.size() <= ((fine + inizio) / 2)) {
-			mav.addObject(nomeOggetto, list.subList(inizio, list.size()));
-			mav.addObject(nomeOggetto + "2", null);
-		}else if(list.size() > ((fine + inizio) / 2) && list.size() < fine) {
-			mav.addObject(nomeOggetto, list.subList(inizio, ((fine + inizio) / 2)));
-			mav.addObject(nomeOggetto + "2", list.subList(((fine + inizio) / 2), list.size()));
-		}
-	}
-
+	
 	@PostMapping(value = "/sondaggi")
 	public String sondaggio(@ModelAttribute("sondaggio") Sondaggio sondaggio, HttpSession session) {
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));

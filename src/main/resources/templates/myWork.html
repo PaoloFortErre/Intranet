@@ -9,9 +9,6 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
 	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
@@ -63,7 +60,7 @@ table, th, td {
 </style>
 </head>
 
-<body onload="data()"
+<body 
 	th:with="GMW = ${#authorization.expression('hasAuthority(''GMW'')')}">
 
 
@@ -112,11 +109,11 @@ table, th, td {
 				<div class="carousel-caption" th:if="${aforisma!=null}">
 					<h1
 						style="font-weight: 900; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"
-						th:text="${aforisma.frase}"></h1>
-					<p th:text="${aforisma.autore}"
+						th:text="${aforisma[0].titolo}"></h1>
+					<p th:text="${aforisma[0].contenuto}"
 						style="font-style: italic; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"></p>
 					<div th:if="${GMW}">
-						<form th:action="@{'/aforisma/update/'+${aforisma.id}}"
+						<form th:action="@{'/aforisma/update/'+${aforisma[0].id}}"
 							method="get">
 							<button type="submit" name="modifica"
 								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 8px; width: 150px;">
@@ -138,11 +135,11 @@ table, th, td {
 				<div class="carousel-caption" th:if="${aforisma!=null}">
 					<h1
 						style="font-weight: 900; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"
-						th:text="${aforisma2.frase}"></h1>
-					<p th:text="${aforisma2.autore}"
+						th:text="${aforisma[1].titolo}"></h1>
+					<p th:text="${aforisma[1].contenuto}"
 						style="font-style: italic; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"></p>
 					<div th:if="${GMW}">
-						<form th:action="@{'/aforisma/update/'+${aforisma2.id}}"
+						<form th:action="@{'/aforisma/update/'+${aforisma[1].id}}"
 							method="get">
 							<button type="submit" name="modifica"
 								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 8px; width: 150px;">
@@ -232,13 +229,13 @@ table, th, td {
 
 					<tr>
 						<td style="text-align: center; vertical-align: middle;"><img
-							th:src="'data:image/png;base64,' + ${newsSlide.copertina.getImgData(newsSlide.copertina.data)}"
+							th:src="'data:image/png;base64,' + ${newsSlide[0].immagine.getImgData(newsSlide[0].immagine.data)}"
 							alt="fotoProfiloUtente" class="img-fluid" width="330px" style="height: 350px"></td>
 					</tr>
 
 					<tr>
 						<td style="text-align: center;">
-							<p style="font-size: 22px;" th:text="${newsSlide.titolo}"></p>
+							<p style="font-size: 22px;" th:text="${newsSlide[0].titolo}"></p>
 						</td>
 					</tr>
 
