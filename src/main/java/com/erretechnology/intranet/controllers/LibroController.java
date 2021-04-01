@@ -48,6 +48,7 @@ public class LibroController extends BaseController {
 		libro.setVisibile(true);
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
+		libro.setAutore(utenteLoggato);
 
 		if(!immagine.getOriginalFilename().isEmpty()) {
 			FileImmagine img = new FileImmagine();
@@ -73,11 +74,11 @@ public class LibroController extends BaseController {
 	}
 
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-	public String update(@PathVariable int id, String titolo, String autore ,@RequestParam(required=false) MultipartFile immagine, 
+	public String update(@PathVariable int id, String titolo, String scrittore ,@RequestParam(required=false) MultipartFile immagine, 
 			HttpSession session, Model model) throws Exception{
 		Libro libro = repoLibro.findById(id).get();
 		libro.setTitolo(titolo);
-		libro.setAutore(autore);
+		libro.setScrittore(scrittore);
 
 		if(!immagine.getOriginalFilename().isEmpty()) {
 			FileImmagine img = new FileImmagine();			

@@ -55,6 +55,7 @@ public class EventoLifeController extends BaseController {
 
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
+		evento.setAutore(utenteLoggato);
 		evento.setVisibile(true);
 
 		if(!immagine.getOriginalFilename().isEmpty()) {

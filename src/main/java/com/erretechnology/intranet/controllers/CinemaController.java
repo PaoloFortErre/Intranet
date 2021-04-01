@@ -53,6 +53,7 @@ public class CinemaController extends BaseController {
 		cinema.setVisibile(true);
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
+		cinema.setAutore(utenteLoggato);
 
 		if(!immagine.getOriginalFilename().isEmpty()) {
 			FileImmagine img = new FileImmagine();

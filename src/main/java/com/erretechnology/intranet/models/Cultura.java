@@ -4,6 +4,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 
@@ -16,12 +17,12 @@ public abstract class Cultura {
 	@OneToOne
 	@JoinColumn(name = "id_immagine")
 	private FileImmagine copertina;
+	@ManyToOne
+	@JoinColumn(name="autore_id")
+	private UtenteDatiPersonali autore;
 	private boolean visibile;
 	private long timestampEliminazione;
-	
-	public Cultura() {
-	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -57,6 +58,14 @@ public abstract class Cultura {
 
 	public void setTimestampEliminazione(long timestampEliminazione) {
 		this.timestampEliminazione = timestampEliminazione;
+	}
+
+	public UtenteDatiPersonali getAutore() {
+		return autore;
+	}
+
+	public void setAutore(UtenteDatiPersonali autore) {
+		this.autore = autore;
 	}
 	
 	

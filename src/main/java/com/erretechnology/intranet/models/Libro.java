@@ -6,14 +6,16 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "book")
 public class Libro extends Cultura {
-	private String autore;
+	private String scrittore;
 
-	public String getAutore() {
-		return autore;
+	public String getScrittore() {
+		return scrittore;
 	}
 
-	public void setAutore(String autore) {
-		this.autore = autore;
+	public void setScrittore(String scrittore) {
+		this.scrittore = scrittore;
 	}
+
+	
 	
 }
