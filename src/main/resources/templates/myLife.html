@@ -517,7 +517,7 @@ COLONNA DESTRA
 				<br>
 				<div>
 					<div th:if="${GML}">
-						<br> <a th:href="@{/evento/newLife/}"> <img
+						<br> <a th:href="@{/eventolife/new/}"> <img
 							src="/view/MyWork/images/moreb.png" width="30px"
 							style="float: right; margin-bottom: 10px;"></a>
 					</div>
@@ -545,16 +545,11 @@ COLONNA DESTRA
 
 							<img src="/view/MyWork/images/location.jpg" width="9%"
 								height="9%">
-							<p th:text="${eventilife.indirizzo.via}"
+							<p th:text="${eventilife.luogo}"
 								style="margin-top: 10px; text-align: left; display: inline-block;; color: #303030;"></p>
-							<p style="display: inline-block; color: #303030;">-</p>
-
-							<p th:text="${eventilife.indirizzo.citta}"
-								style="margin-top: 10px; text-align: left; display: inline-block; font-weight: 900; color: #303030;"></p>
-
 							<p th:text="${#dates.format(eventilife.data*1000, 'dd/MM/yyyy')}"
 								style="margin-top: 10px; text-align: right; color: #303030; font-style: italic; font-size: 12px;"></p>
-							<form th:action="@{'/evento/update/'+${eventilife.id}}"
+							<form th:action="@{'/eventolife/update/'+${eventilife.id}}"
 								th:if="${GML}" method="get">
 								<button type="submit" name="modifica"
 									style="background-color: transparent; border: 0px solid;">
@@ -562,7 +557,7 @@ COLONNA DESTRA
 										width="38%">
 								</button>
 							</form>
-							<form th:action="@{'/evento/delete/'+${eventilife.id}}"
+							<form th:action="@{'/eventolife/delete/'+${eventilife.id}}"
 								th:if="${GML}" method="get">
 								<button type="submit" name="modifica"
 									style="background-color: transparent; border: 0px solid;">
@@ -593,16 +588,13 @@ COLONNA DESTRA
 
 							<img src="/view/MyWork/images/location.jpg" width="9%"
 								height="9%">
-							<p th:text="${eventilife1.indirizzo.via}"
+							<p th:text="${eventilife1.luogo}"
 								style="margin-top: 10px; text-align: left; display: inline-block; color: #303030;"></p>
-							<p style="display: inline-block;">-</p>
-							<p th:text="${eventilife1.indirizzo.citta}"
-								style="margin-top: 10px; text-align: left; display: inline-block; font-weight: 900; color: #303030;"></p>
 
 							<p
 								th:text="${#dates.format(eventilife1.data*1000, 'dd/MM/yyyy')}"
 								style="margin-top: 10px; text-align: right;; color: #303030;"></p>
-							<form th:action="@{'/evento/update/'+${eventilife1.id}}"
+							<form th:action="@{'/eventolife/update/'+${eventilife1.id}}"
 								th:if="${GML}" method="get">
 								<button type="submit" name="modifica"
 									style="background-color: transparent; border: 0px solid;">
@@ -610,7 +602,7 @@ COLONNA DESTRA
 										width="38%">
 								</button>
 							</form>
-							<form th:action="@{'/evento/delete/'+${eventilife1.id}}"
+							<form th:action="@{'/eventolife/delete/'+${eventilife1.id}}"
 								th:if="${GML}" method="get">
 								<button type="submit" name="modifica"
 									style="background-color: transparent; border: 0px solid;">

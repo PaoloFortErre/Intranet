@@ -22,7 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.erretechnology.intranet.models.Aforisma;
 import com.erretechnology.intranet.models.Cliente;
 import com.erretechnology.intranet.models.ComunicazioneHR;
-import com.erretechnology.intranet.models.Evento;
+import com.erretechnology.intranet.models.EventoWork;
 import com.erretechnology.intranet.models.MyWorkBean;
 import com.erretechnology.intranet.models.News;
 import com.erretechnology.intranet.models.Podcast;
@@ -30,7 +30,7 @@ import com.erretechnology.intranet.models.Sondaggio;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.repositories.RepositoryAforisma;
 import com.erretechnology.intranet.repositories.RepositoryCliente;
-import com.erretechnology.intranet.repositories.RepositoryEvento;
+import com.erretechnology.intranet.repositories.RepositoryEventoWork;
 import com.erretechnology.intranet.repositories.RepositoryNews;
 
 @Controller
@@ -45,7 +45,7 @@ public class MyWorkController extends BaseController {
 	private RepositoryNews repoNews;
 
 	@Autowired
-	private RepositoryEvento repoEvento;
+	private RepositoryEventoWork repoEvento;
 
 	@GetMapping(value = "/")
 	public ModelAndView primaPagina(HttpSession session) {
@@ -131,7 +131,7 @@ public class MyWorkController extends BaseController {
 			mav.addObject("aforisma", aforismi.get(0));
 			mav.addObject("aforisma2", aforismi.get(1));
 		}
-		List<Evento> eventi = (List<Evento>) repoEvento.findNextWorkEvents(Instant.now().getEpochSecond());
+		List<EventoWork> eventi = (List<EventoWork>) repoEvento.findNextEvents(Instant.now().getEpochSecond());
 		setMAV(mav, eventi, 0, 4, "eventi");
 		return mav;
 		

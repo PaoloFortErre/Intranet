@@ -22,6 +22,7 @@ class ExceptionController {
 		log.setTimestamp(Instant.now().getEpochSecond());
 		log.setErrore(e.toString());
 		repoErrorLog.save(log);
+		e.printStackTrace();
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("errorNumber", 500);
 		mav.setViewName("erroreGenerico");
