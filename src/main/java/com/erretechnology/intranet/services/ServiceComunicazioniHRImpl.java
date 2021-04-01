@@ -42,6 +42,12 @@ public class ServiceComunicazioniHRImpl implements ServiceComunicazioniHR{
 		 repositoryComunicazioniHR.delete(hr);;
 		
 	}
+
+	@Override
+	public List<ComunicazioneHR> getAllNotVisible() {
+		// TODO Auto-generated method stub
+		return getAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList());
+	}
 	
 	
 	

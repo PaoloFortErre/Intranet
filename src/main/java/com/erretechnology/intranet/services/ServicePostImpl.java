@@ -78,4 +78,10 @@ public class ServicePostImpl implements ServicePost{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public List<Post> getAllNotVisible() {
+		// TODO Auto-generated method stub
+		return getAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList());
+	}
 }

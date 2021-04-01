@@ -15,6 +15,8 @@ public interface ServiceComunicazioniHR {
 	public List<ComunicazioneHR> getAll();
 
 	public void remove(ComunicazioneHR hr);
+
+	public List<ComunicazioneHR> getAllNotVisible();
 	
 	
 }

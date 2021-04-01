@@ -15,4 +15,6 @@ public interface ServiceFilePdf {
 	public List<FilePdf> findByAutore(UtenteDatiPersonali autore);
 
 	public void remove(FilePdf modulo);
+
+	public List<FilePdf> getAllNotVisible();
 }

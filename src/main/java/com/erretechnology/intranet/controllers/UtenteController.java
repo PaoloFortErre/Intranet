@@ -372,11 +372,11 @@ public class UtenteController extends BaseController{
 		if(!u.getUtente().getRuolo().getNome().equals("ADMIN")) throw new Exception("Fidati. Prima chiedi i permessi");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("gestione_suprema");
-		mav.addObject("post", servicePost.getAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList()));
-		mav.addObject("commenti", serviceCommento.getAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList()));
+		mav.addObject("post", servicePost.getAllNotVisible());
+		mav.addObject("commenti", serviceCommento.getAllNotVisible());
 		mav.addObject("news", repositoryNews.getAllNotVisible());
-		mav.addObject("comunicazioniHR", serviceComunicazioni.getAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList()));
-		mav.addObject("moduli", serviceFilePdf.findAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList()));
+		mav.addObject("comunicazioniHR", serviceComunicazioni.getAllNotVisible());
+		mav.addObject("moduli", serviceFilePdf.getAllNotVisible());
 		mav.addObject("eventi", repositoryEvento.getAllNotVisible());
 		mav.addObject("podcast", servicePodcast.getAllNotVisible());
 		mav.addObject("libri", repositoryLibro.getAllNotVisible());

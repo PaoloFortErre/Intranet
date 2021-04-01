@@ -24,4 +24,6 @@ public interface ServicePost {
 
 	public void remove(Post p);
 
+	public List<Post> getAllNotVisible();
+
 }
