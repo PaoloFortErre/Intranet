@@ -22,7 +22,7 @@ body {
 
 .carousel-caption {
 	font-size: 24px;
-	padding: 235px 0;
+	padding: 15px 0;
 	
 }
 
@@ -80,18 +80,22 @@ body {
 }
 
 .content>a:hover {
-	color: #ECF260;;
+	color: #ECF260;
 }
 
 nav {
-	position: fixed;
-	font-size: 25px;
-	float: right;
-	text-align: right;
-	margin-top: 20px;
-	padding: 5px;
+	
+	font-size: 20px;
+	
+	
+	
+	
 	color: #F3F3F3;
-	height: 90px;
+	
+}
+.nav-link:hover {
+	
+	color: #ECF260;
 }
 
 .content {
@@ -308,7 +312,12 @@ hr#linea {
 		width: 80px;
 	}
 }
-
+@media screen and (max-width: 400px) {
+	
+	#rowmacchina {
+	height: 1600px;
+	}
+}
 #teamHR {
 	padding: 5px;
 	color: #F3F3F3;

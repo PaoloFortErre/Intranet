@@ -70,10 +70,10 @@ public class MyWorkController extends BaseController {
 		List<UtenteDatiPersonali> nuoviUtenti = utenti.stream()
 				.sorted(Comparator.comparingInt(UtenteDatiPersonali::getId).reversed())
 				.filter(x->x.getUtente().getAttivo()==true)
-				.limit(6)
+				.limit(1)
 				.collect(Collectors.toList());
-		setMAV(mav, nuoviUtenti, 0, 6, "nuoviAssunti");
-
+	//	setMAV(mav, nuoviUtenti, 0, 6, "nuoviAssunti");
+mav.addObject("nuoveAssunzioni", nuoviUtenti);
 		
 		List<Podcast> listPodcast = servicePodcast.getAll();
 		if(listPodcast.size() != 0 && listPodcast!= null) {
@@ -83,7 +83,7 @@ public class MyWorkController extends BaseController {
 			mav.addObject("altriPodcast", listPodcast.stream().limit(3).sorted(Comparator.comparingInt(Podcast::getId).reversed()).collect(Collectors.toList()));
 		}
 		
-		List<Cliente> clienti = repoCliente.findLimit(3);
+		List<Cliente> clienti = repoCliente.findLimit(1);
 		if(clienti.size() > 0) {
 			mav.addObject("nuoviClienti", clienti);
 		} else {
