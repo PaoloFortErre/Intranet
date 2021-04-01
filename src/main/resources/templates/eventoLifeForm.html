@@ -59,30 +59,15 @@ body{
 	</a>
 </p>
 
-	<form th:action="@{/evento/insert}" th:object="${evento}" method="post" enctype="multipart/form-data">
+	<form th:action="@{/eventolife/insert}" th:object="${evento}" method="post" enctype="multipart/form-data">
 		<div class="form-group col-12">
 			<label for="titolo">Titolo</label>
 		  <input class="form-control" type="text"  name="titolo" id="input" th:field="*{titolo}">
 		</div>
 
 		<div class="form-group col-12">
-			<label for="contenuto">Contenuto</label>
-		  <textarea class="form-control"  id="input" name="contenuto" th:field="*{contenuto} " rows="1"> </textarea>
-		</div>
-
-		<div class="form-group col-12">
-			<label for="via">Via</label>
-		  <input class="form-control" type="text" id="input" name="via">
-		</div>
-
-		<div class="form-group col-12">
-			<label for="citta">Citta</label>
-		  <input class="form-control" type="text" id="input" name="citta">
-		</div>
-
-		<div class="form-group col-12">
-			<label for="provincia">Provincia</label>
-		  <input class="form-control" type="text" id="input" name="provincia">
+			<label for="luogo">Luogo</label>
+		  <input class="form-control" type="text" id="input" name="luogo" th:field="*{luogo}">
 		</div>
 
 		<div class="form-group col-12">

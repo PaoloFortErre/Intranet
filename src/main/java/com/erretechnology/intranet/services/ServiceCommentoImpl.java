@@ -43,4 +43,10 @@ public class ServiceCommentoImpl implements ServiceCommento{
 		return repositoryCommento.findAll();
 	}
 
+	@Override
+	public List<Commento> getAllNotVisible() {
+		// TODO Auto-generated method stub
+		return getAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList());
+	}
+
 }

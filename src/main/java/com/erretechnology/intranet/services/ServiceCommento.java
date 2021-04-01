@@ -14,4 +14,6 @@ public interface ServiceCommento {
 	public void delete(Commento commento);
 	
 	public Commento findById(int id);
+
+	public List<Commento> getAllNotVisible();
 }

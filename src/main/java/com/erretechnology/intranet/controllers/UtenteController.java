@@ -32,7 +32,7 @@ import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.models.Utility;
 import com.erretechnology.intranet.repositories.RepositoryCinema;
 import com.erretechnology.intranet.repositories.RepositoryCliente;
-import com.erretechnology.intranet.repositories.RepositoryEvento;
+import com.erretechnology.intranet.repositories.RepositoryEventoLife;
 import com.erretechnology.intranet.repositories.RepositoryLibro;
 import com.erretechnology.intranet.repositories.RepositoryNews;
 
@@ -43,7 +43,7 @@ public class UtenteController extends BaseController{
 	@Autowired
 	RepositoryNews repositoryNews;
 	@Autowired
-	RepositoryEvento repositoryEvento;
+	RepositoryEventoLife repositoryEvento;
 	@Autowired
 	RepositoryLibro repositoryLibro;
 	@Autowired
@@ -372,11 +372,11 @@ public class UtenteController extends BaseController{
 		if(!u.getUtente().getRuolo().getNome().equals("ADMIN")) throw new Exception("Fidati. Prima chiedi i permessi");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("gestione_suprema");
-		mav.addObject("post", servicePost.getAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList()));
-		mav.addObject("commenti", serviceCommento.getAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList()));
+		mav.addObject("post", servicePost.getAllNotVisible());
+		mav.addObject("commenti", serviceCommento.getAllNotVisible());
 		mav.addObject("news", repositoryNews.getAllNotVisible());
-		mav.addObject("comunicazioniHR", serviceComunicazioni.getAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList()));
-		mav.addObject("moduli", serviceFilePdf.findAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList()));
+		mav.addObject("comunicazioniHR", serviceComunicazioni.getAllNotVisible());
+		mav.addObject("moduli", serviceFilePdf.getAllNotVisible());
 		mav.addObject("eventi", repositoryEvento.getAllNotVisible());
 		mav.addObject("podcast", servicePodcast.getAllNotVisible());
 		mav.addObject("libri", repositoryLibro.getAllNotVisible());

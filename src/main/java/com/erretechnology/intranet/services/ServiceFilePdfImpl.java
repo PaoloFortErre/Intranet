@@ -38,4 +38,10 @@ public class ServiceFilePdfImpl implements ServiceFilePdf {
 		repositoryFilePdf.delete(modulo);
 	}
 
+	@Override
+	public List<FilePdf> getAllNotVisible() {
+		// TODO Auto-generated method stub
+		return findAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList());
+	}
+
 }

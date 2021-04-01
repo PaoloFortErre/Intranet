@@ -21,7 +21,7 @@ import com.erretechnology.intranet.models.Aforisma;
 import com.erretechnology.intranet.models.Cinema;
 import com.erretechnology.intranet.models.Commento;
 import com.erretechnology.intranet.models.CommentoModificato;
-import com.erretechnology.intranet.models.Evento;
+import com.erretechnology.intranet.models.EventoLife;
 import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.Libro;
 import com.erretechnology.intranet.models.Post;
@@ -29,14 +29,14 @@ import com.erretechnology.intranet.models.PostModificato;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.repositories.RepositoryAforisma;
 import com.erretechnology.intranet.repositories.RepositoryCinema;
-import com.erretechnology.intranet.repositories.RepositoryEvento;
+import com.erretechnology.intranet.repositories.RepositoryEventoLife;
 import com.erretechnology.intranet.repositories.RepositoryLibro;
 
 @Controller
 @RequestMapping(value = "myLife")
 public class MyLifeController extends BaseController {
 	@Autowired
-	private RepositoryEvento repoEvento;
+	private RepositoryEventoLife repoEvento;
 	@Autowired
 	private RepositoryAforisma repoAfo;
 	@Autowired
@@ -50,7 +50,7 @@ public class MyLifeController extends BaseController {
 
 		//	List<Post> messaggi = service.getLastMessage();
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
-		List<Evento> evento = (List<Evento>) repoEvento.findNextLifeEvents(Instant.now().getEpochSecond());
+		List<EventoLife> evento = (List<EventoLife>) repoEvento.findNextEvents(Instant.now().getEpochSecond());
 		List<Libro> libri = repoLib.findAll();
 		List<Aforisma> aforismi = repoAfo.findAll();
 		List <Cinema> film = repoCine.findLimit(3);
