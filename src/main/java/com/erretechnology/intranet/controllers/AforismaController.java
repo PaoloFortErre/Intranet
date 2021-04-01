@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.erretechnology.intranet.models.Aforisma;
-import com.erretechnology.intranet.models.AforismaModificato;
 import com.erretechnology.intranet.repositories.RepositoryAforisma;
-import com.erretechnology.intranet.repositories.RepositoryAforismaModificato;
 import com.erretechnology.intranet.repositories.RepositoryUtente;
 
 @Controller
@@ -26,8 +24,6 @@ import com.erretechnology.intranet.repositories.RepositoryUtente;
 public class AforismaController extends BaseController {
 	@Autowired
 	private RepositoryAforisma repoAforisma;
-	@Autowired
-	private RepositoryAforismaModificato repoOldAforisma;
 	@Autowired
 	private RepositoryUtente repoUtente;
 	
@@ -73,15 +69,10 @@ public class AforismaController extends BaseController {
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	public String update(@PathVariable int id, String frase, String autore, Model model, HttpSession session) {
 		Aforisma aforisma = repoAforisma.findById(id).get();
-		AforismaModificato am = new AforismaModificato();
-		am.setFrase(aforisma.getFrase());
-		am.setAutore(aforisma.getAutore());
-		am.setAforisma(aforisma);
 		aforisma.setFrase(frase);
 		aforisma.setAutore(autore);
 		
 		repoAforisma.save(aforisma);
-		repoOldAforisma.save(am);
 		model.addAttribute("aforisma", aforisma);
 		saveLog("modificato una aforisma", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "aforisma";

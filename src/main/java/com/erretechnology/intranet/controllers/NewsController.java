@@ -21,18 +21,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.News;
-import com.erretechnology.intranet.models.NewsModificato;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.repositories.RepositoryNews;
-import com.erretechnology.intranet.repositories.RepositoryNewsModificato;
 
 @Controller
 @RequestMapping("news")
 public class NewsController extends BaseController {
 	@Autowired
 	private RepositoryNews repoNews;
-	@Autowired
-	private RepositoryNewsModificato repoOldNews;
 	
 	@GetMapping("/{id}")
 	public String get(@PathVariable int id, Model model) {
@@ -93,10 +89,6 @@ public class NewsController extends BaseController {
 	public String update(@PathVariable int id, String titolo, String contenuto,
 			@RequestParam(required=false) MultipartFile immagine, HttpSession session, Model model) throws Exception {
 		News news = repoNews.findById(id).get();
-		NewsModificato nm = new NewsModificato();
-		nm.setTitolo(news.getTitolo());
-		nm.setContenuto(news.getContenuto());
-		nm.setNews(news);
 		news.setTitolo(titolo);
 		news.setContenuto(contenuto);
 
@@ -117,7 +109,6 @@ public class NewsController extends BaseController {
 		}
 
 		repoNews.save(news);
-		repoOldNews.save(nm);
 		model.addAttribute("news", news);
 		saveLog("modificato una news", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/myWork/";

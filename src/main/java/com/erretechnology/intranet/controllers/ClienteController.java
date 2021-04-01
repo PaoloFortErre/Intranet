@@ -23,19 +23,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.erretechnology.intranet.models.Cliente;
-import com.erretechnology.intranet.models.ClienteModificato;
 import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.repositories.RepositoryCliente;
-import com.erretechnology.intranet.repositories.RepositoryClienteModificato;
 
 @Controller
 @RequestMapping("cliente")
 public class ClienteController extends BaseController{
 	@Autowired
 	private RepositoryCliente repoCliente;
-	@Autowired
-	private RepositoryClienteModificato repoOldCliente;
 
 	@GetMapping("/{id}")
 	public String get(@PathVariable int id, Model model) {
@@ -100,10 +96,6 @@ public class ClienteController extends BaseController{
 	public String update(@PathVariable int id, String nome, String dataInizio, @RequestParam(required=false) MultipartFile immagine, 
 			HttpSession session, Model model) throws Exception {
 		Cliente cliente = repoCliente.findById(id).get();
-		ClienteModificato cm = new ClienteModificato();
-		cm.setNome(cliente.getNome());
-		cm.setDataInizio(cliente.getDataInizio());
-		cm.setCliente(cliente);
 		cliente.setNome(nome);
 
 		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM");
@@ -131,7 +123,6 @@ public class ClienteController extends BaseController{
 		}
 
 		repoCliente.save(cliente);
-		repoOldCliente.save(cm);
 		model.addAttribute("cliente", cliente);
 		saveLog("modificato le informazioni di un cliente", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/myWork/";
