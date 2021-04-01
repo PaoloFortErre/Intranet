@@ -122,36 +122,43 @@
 </head>
 
 <body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="https://erretechnology.com/" target="blank"><img width="10%"
+  src="/view/Login/images/erre_group_white.png" alt="logoErreGroup.png"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav ">
+      <li class="nav-item  ">
+        <a th:href="@{/homepage/}"><img
+          src="/view/MyWork/images/casabianca.png" width="30px"
+          style="opacity: 0.5"> </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" th:href="@{/myWork/}">MyWork</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" th:href="@{/myLife/}">MyLife</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" th:href="@{/comunicazioniHr/}">Comunicazioni HR</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" th:href="@{/moduli/}">Moduli</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link " href="http://polyedro.erretechnology.com/www/">Polyedro</a>
+      </li>
+    </ul>
+  </div>
+</nav>
   <!-- ROW CON NAVBAR -->
   <div class="row bg-dark justify-content-start mt-3">
-    <div class="col-2 ml-5">
-      <a href="https://erretechnology.com/" target="blank">
-        <img width="40%"
-        src="/view/Login/images/erre_group_white.png" alt="logoErreGroup.png">
-      </div>
 
-      <div class="col-lg-8 col-md-8 col-sm-5">
-        <nav class="navbar">
-          <div class="content mr-3" >
-            <a th:href="@{/homepage}">HOME</a>
-          </div>
-          <div class="content mr-3" >
-            <a th:href="@{/myWork/}">MYWORK</a>
-          </div>
-          <div class="content mr-3" >
-            <a th:href="@{/myLife/}">MYLIFE</a>
-          </div>
-          <div class="content mr-3" >
-            <a th:href="@{/comunicazioniHr/}">COMUNICAZIONI HR</a>
-          </div>
-          <div class="content mr-3" >
-            <a th:href="@{/moduli/}">MODULI</a>
-          </div>
-          <div class="content mr-3" >
-            <a href="http://polyedro.erretechnology.com/www/">POLYEDRO</a>
-          </div>
-        </nav>
-      </div>
+
+
     </div>
 
     <!-- ROW CON IMMAGINE PROFILO, NOME E EMAIL -->
