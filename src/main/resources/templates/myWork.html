@@ -244,7 +244,7 @@ table, th, td {
 			</div>
 			<div class="col-xs-12 col-sm-3 col-lg-4 col-xl-4">
 				<table class="table table-borderless"
-					style="vertical-align: middle;">
+					style="vertical-align: middle;" th:if="${newsSlide!=null}">
 
 					<tr>
 						<td style="text-align: center; vertical-align: middle;"><img
@@ -326,7 +326,7 @@ table, th, td {
 				</table>
 			</div>
 			<div class="col-xs-12 col-sm-3 col-lg-4 col-xl-4">
-				<table class="table table-borderless">
+				<table class="table table-borderless" th:if="${eventi!=null}">
 					<tr>
 						<td style="text-align: center; vertical-align: middle;"
 							th:if="${eventi!=null}"><img
@@ -363,7 +363,7 @@ table, th, td {
 				</table>
 			</div>
 			<div class="col-xs-12 col-sm-3 col-lg-4 col-xl-4">
-				<table class="table table-borderless">
+				<table class="table table-borderless" th:if="${utente!=null AND !utente.isEmpty}">
 					<tr>
 						<td style="text-align: center; vertical-align: middle;"
 							th:each="utente: ${utente}"><img
