@@ -17,32 +17,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import com.erretechnology.intranet.models.Aforisma;
-import com.erretechnology.intranet.models.Cinema;
 import com.erretechnology.intranet.models.Commento;
 import com.erretechnology.intranet.models.CommentoModificato;
-import com.erretechnology.intranet.models.EventoLife;
+import com.erretechnology.intranet.models.ElementiMyLife;
 import com.erretechnology.intranet.models.FileImmagine;
-import com.erretechnology.intranet.models.Libro;
 import com.erretechnology.intranet.models.Post;
 import com.erretechnology.intranet.models.PostModificato;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
-import com.erretechnology.intranet.repositories.RepositoryAforisma;
-import com.erretechnology.intranet.repositories.RepositoryCinema;
-import com.erretechnology.intranet.repositories.RepositoryEventoLife;
-import com.erretechnology.intranet.repositories.RepositoryLibro;
+import com.erretechnology.intranet.repositories.RepositoryCategoriaCinema;
 
 @Controller
 @RequestMapping(value = "myLife")
 public class MyLifeController extends BaseController {
 	@Autowired
-	private RepositoryEventoLife repoEvento;
-	@Autowired
-	private RepositoryAforisma repoAfo;
-	@Autowired
-	private RepositoryLibro repoLib;
-	@Autowired
-	private RepositoryCinema repoCine;
+	private RepositoryCategoriaCinema repoCategoria;
 
 	@GetMapping(value = "/")
 	public ModelAndView primaPagina(HttpSession session, @RequestParam("page") Optional<Integer> page) {
@@ -50,10 +38,13 @@ public class MyLifeController extends BaseController {
 
 		//	List<Post> messaggi = service.getLastMessage();
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
-		List<EventoLife> evento = (List<EventoLife>) repoEvento.findNextEvents(Instant.now().getEpochSecond());
-		List<Libro> libri = repoLib.findAll();
-		List<Aforisma> aforismi = repoAfo.findAll();
-		List <Cinema> film = repoCine.findLimit(3);
+		List<ElementiMyLife> elementi = serviceElementiMyLife.findAll();
+		elementi.stream().filter(x -> x.getTipo().equals("cinema")).forEach(x->x.setCinema(repoCategoria.findById(Integer.parseInt(x.getContenuto())).get()));
+		elementi.stream().filter(x -> x.getFoto() != null).forEach(x -> x.setImmagine(serviceFileImmagine.getImmagine(x.getFoto())));
+		List<ElementiMyLife> evento = elementi.stream().filter(x -> x.getTipo().equals("eventi")).collect(Collectors.toList());
+		List<ElementiMyLife> aforismi = elementi.stream().filter(x -> x.getTipo().equals("aphorism")).collect(Collectors.toList());
+		List<ElementiMyLife> film = elementi.stream().filter(x -> x.getTipo().equals("cinema")).collect(Collectors.toList());
+		List<ElementiMyLife> libri = elementi.stream().filter(x -> x.getTipo().equals("book")).collect(Collectors.toList());
 		Page<Post> postPage= servicePost.findPaginated(PageRequest.of(currentPage - 1, 5));
 
 
@@ -69,77 +60,12 @@ public class MyLifeController extends BaseController {
 					.collect(Collectors.toList());	
 			mav.addObject("pageNumbers", pageNumbers);
 		}
-
-		if(evento.size()==0) {
-			mav.addObject("eventilife", null);
-			mav.addObject("eventilife1", null);
-
-		} 
-		else if (evento.size()==1) {
-			mav.addObject("eventilife", evento.get(0));
-			mav.addObject("eventilife1", null);
-		}
-		else {
-			mav.addObject("eventilife", evento.get(0));
-			mav.addObject("eventilife1", evento.get(1));
-		}
-
-
-		if (aforismi.size()==0) {
-			mav.addObject("aforisma", null);
-			mav.addObject("aforisma2", null);
-
-		}
-		else if (aforismi.size()==1) {
-			mav.addObject("aforisma", aforismi.get(0));
-			mav.addObject("aforisma2", null);
-		}
-		else {
-			mav.addObject("aforisma", aforismi.get(0));
-			mav.addObject("aforisma2", aforismi.get(1));
-		}
-
-
-		if (libri.size()==0) {
-			mav.addObject("libri", null);
-			mav.addObject("libri1", null);
-		}
-		else if (libri.size()==1) {
-			mav.addObject("libri", libri.get(0));
-			mav.addObject("libri1", null);
-		}
-		else {
-			mav.addObject("libri", libri.get(0));
-			mav.addObject("libri1", libri.get(1));
-		}
-
-
-		if (film.size()==0) {
-			mav.addObject("film1", null);
-			mav.addObject("film2", null);
-			mav.addObject("film3", null);
-
-		}
-		else if (film.size()==1) {
-			mav.addObject("film1", film.get(0));
-			mav.addObject("film2", null);
-			mav.addObject("film3", null);
-
-		}
-		else if (film.size()==2) {
-			mav.addObject("film1", film.get(0));
-			mav.addObject("film2", film.get(1));
-			mav.addObject("film3", null);
-		}
-		else {
-			mav.addObject("film1", film.get(0));
-			mav.addObject("film2", film.get(1));
-			mav.addObject("film3", film.get(2));
-		}
-		mav.addObject("filmTutti", film);
-
-		//	mav.addObject("eventilife2", evento.get(2));
-		//	mav.addObject("img", serviceFileImmagine.getLastImmagineByUtente(u));
+		
+		mav.addObject("film", film);
+		mav.addObject("eventilife", evento);
+		mav.addObject("aforisma", aforismi);
+		mav.addObject("libri", libri);
+		
 		return mav;
 	}
 
