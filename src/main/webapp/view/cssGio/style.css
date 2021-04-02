@@ -306,7 +306,11 @@ hr#linea {
 		margin-left: 12px;
 	}
 }
-
+@media screen and (max-width: 767px) {
+	#utente-foto-profilo {
+		display: none;	
+	}
+}
 @media screen and (max-width: 800px) {
 	#imgSettore {
 		width: 80px;
@@ -486,6 +490,7 @@ audio {
 	-webkit-box-shadow: 10px 10px 6px 0px rgba(0, 0, 0, 0.75);
 	-moz-box-shadow: 10px 10px 6px 0px rgba(0, 0, 0, 0.75);
 	box-shadow: 10px 10px 6px 0px rgba(0, 0, 0, 0.75);
+	display:block;
 }
 
 #headerHR {
