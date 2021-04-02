@@ -101,7 +101,7 @@ public class MyWorkController extends BaseController {
 		mav.addObject("eventi", eventi);
 		
 
-//		mav.addObject("video", serviceVideo.getLastVideo("MyWork"));
+		mav.addObject("video", serviceVideo.getLastVideo("MyWork"));
 		
 		return mav;
 		
