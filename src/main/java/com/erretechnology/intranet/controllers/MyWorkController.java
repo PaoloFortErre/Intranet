@@ -96,7 +96,7 @@ public class MyWorkController extends BaseController {
 		List<ElementiMyWork> aforismi = elementi.stream().filter(x -> x.getTipo().equals("aphorism")).collect(Collectors.toList());
 		mav.addObject("aforisma", aforismi);
 		
-		List<ElementiMyWork> eventi = elementi.stream().filter(x -> x.getTipo().equals("eventi")).collect(Collectors.toList());
+		List<ElementiMyWork> eventi = elementi.stream().filter(x -> x.getTipo().equals("event")).collect(Collectors.toList());
 		mav.addObject("eventi", eventi);
 		return mav;
 		
