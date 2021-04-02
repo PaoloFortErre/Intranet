@@ -574,3 +574,7 @@ audio {
 #altriPodcast {
 	display: none;
 }
+.bottoniGMW:hover{
+	background-color: black;
+	color: white;
+}
