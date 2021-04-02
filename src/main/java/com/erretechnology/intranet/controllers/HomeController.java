@@ -29,6 +29,7 @@ import com.erretechnology.intranet.models.FilePdf;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.models.Utility;
+import com.erretechnology.intranet.repositories.RepositoryLinkedin;
 
 import net.bytebuddy.utility.RandomString;
 
@@ -37,6 +38,8 @@ public class HomeController extends BaseController{
 	
 	@Autowired
     private JavaMailSender mailSender;
+	@Autowired
+	private RepositoryLinkedin repositoryLinkedin;
 	
 	@GetMapping("/")
 	public String home() {
@@ -175,6 +178,7 @@ public class HomeController extends BaseController{
 	public ModelAndView homepageAdmin(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("homepage");
+		mav.addObject("linkedinPost", repositoryLinkedin.findLimit(4));
 		mav.addObject("utente", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return mav;
 	}

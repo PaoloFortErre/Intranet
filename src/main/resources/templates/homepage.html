@@ -239,37 +239,32 @@
     </div>
 
 
+
     <!-- PANNELLO LINKEDIN-->
     <div class="container mt-2">
       <div class="row  ml-5">
 
         <div class="col-1">
         </div>
-
-        <div class="col-8 ml-5">
+		<a th:href="@{/linkedin/new/}">Aggiungi</a>
+        <div class="col-8 ml-5" th:if="${linkedinPost.size() > 0}">
           <div id="carouselExampleIndicators" class="carousel slide ml-5" data-ride="carousel">
             <ol class="carousel-indicators">
-              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active bg-primary"></li>
-              <li class="bg-primary" data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-              <li class="bg-primary" data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-              <li class="bg-primary" data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+            	<div th:each="post, i: ${linkedinPost}" th:remove="tag">
+	              <li th:if="${i.index} == 0" data-target="#carouselExampleIndicators" th:attr="data-slide-to=${i.index}" class="active bg-primary"></li>
+	              <li th:unless="${i.index} == 0" data-target="#carouselExampleIndicators" th:attr="data-slide-to=${i.index}" class="bg-primary"></li>
+			 	</div>
             </ol>
             <div class="carousel-inner">
-              <div class="carousel-item active" data-interval="3000">
-                <iframe class="d-block w-100" src="https://www.linkedin.com/embed/feed/update/urn:li:share:6782535312770899968"
-                height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
-              </div>
-              <div class="carousel-item" data-interval="3000">
-                <iframe class="d-block w-100" src="https://www.linkedin.com/embed/feed/update/urn:li:share:6777974764054032384"
-                height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
-              </div>
-              <div class="carousel-item" data-interval="3000">
-                <iframe class="d-block w-100" src="https://www.linkedin.com/embed/feed/update/urn:li:share:6778281649567236098"
-                height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
-              </div>
-              <div class="carousel-item" data-interval="3000">
-                <iframe class="d-block w-100" src="https://www.linkedin.com/embed/feed/update/urn:li:share:6777857210736230400"
-                height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
+              <div th:each="post, i: ${linkedinPost}" th:remove="tag">
+	              <div th:if="${i.index} == 0" class="carousel-item active" data-interval="3000" >
+	                <iframe class="d-block w-100" th:src="${post.link}"
+	                height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
+	              </div>
+	              <div th:unless="${i.index} == 0" class="carousel-item" data-interval="3000" >
+	                <iframe class="d-block w-100" th:src="${post.link}"
+	                height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
+	              </div>
               </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
