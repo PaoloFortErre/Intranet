@@ -41,35 +41,35 @@
 
 
 
-	<div class="row" style="background-color: #303030">
-		<div>
-			<nav class="navbar navbar-nav navbar-right"
-				style="margin-left: 1320px;">
-				<div class="content" style="display: inline-block">
-					<a th:href="@{/homepage/}"><img
-						src="/view/MyWork/images/casabianca.png" width="30px"
-						style="margin-top: -10px; opacity: 0.9"> </a>
-				</div>
-
-				<div class="content" style="display: inline-block; color: #ECF260;">
-					<a th:href="@{/comunicazioniHr/}">COMUNICAZIONI HR</a>
-				</div>
-				<div class="content" style="display: inline-block">
-					<a th:href="@{/moduli/}">MODULI</a>
-				</div>
-				<div class="content" style="display: inline-block">
-					<a href="http://polyedro.erretechnology.com/www/" target="blank">POLYEDRO</a>
-				</div>
-				<div style="position: relative; float: right">
-					<a th:href="@{/profile/}"><img
+	<nav
+		class="navbar navbar-expand-md bg-dark navbar-dark justify-content-end">
+		<a class="navbar-brand" th:href="@{/homepage/}"><img
+			src="/view/MyWork/images/casabianca.png" width="30px"
+			alt="homeBianca.png" style="opacity: 0.9" class="img-fluid"></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse justify-content-end"
+			id="collapsibleNavbar">
+			<ul class="navbar-nav ml-5 mr-5">
+				<li class="nav-item mr-3 mt-3"><a class="nav-link"
+					th:href="@{/myLife/}">MY LIFE</a></li>
+				<li class="nav-item mr-3 mt-3"><a class="nav-link"
+					th:href="@{/comunicazioniHr/}">COMUNICAZIONI HR</a></li>
+				<li class="nav-item mr-3 mt-3"><a class="nav-link"
+					th:href="@{/moduli/}">MODULI</a></li>
+				<li class="nav-item mr-3 mt-3"><a class="nav-link"
+					href="http://polyedro.erretechnology.com/www/" target="blank">POLYEDRO</a>
+				</li>
+				<li class="nav-item"><a th:href="@{/profile/}"><img
 						th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
-						alt="utente" title="utente" class="immagineUtente"
-						id="utente-foto-profilo"
-						style="margin: 30px; margin-right: 40px; border-radius: 50%; margin-top: 0px;"></a>
-				</div>
-			</nav>
+						alt="utente" title="utente" class="immagineUtente img-fluid"
+						id="utente-foto-profilo" style="border-radius: 50%;"></a></li>
+
+			</ul>
 		</div>
-	</div>
+	</nav>
 
 	<div class="container">
 		<div class="row" style="text-align: center">
