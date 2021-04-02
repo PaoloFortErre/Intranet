@@ -45,6 +45,13 @@ table, th, td {
 	border: 0px solid white;
 }
 
+.logo{
+	opacity: 0.5;
+}
+.logo:hover{
+	opacity: 1;
+}
+
 .nav-link:hover {
 	color: #ECF260;
 }
@@ -63,7 +70,7 @@ table, th, td {
 
 	<nav
 		class="navbar navbar-expand-md bg-dark navbar-dark justify-content-end">
-		<a class="navbar-brand" th:href="@{/homepage/}"><img
+		<a class="navbar-brand logo" th:href="@{/homepage/}"><img
 			src="/view/MyWork/images/casabianca.png" width="30px"
 			alt="homeBianca.png" style="opacity: 0.9" class="img-fluid"></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
