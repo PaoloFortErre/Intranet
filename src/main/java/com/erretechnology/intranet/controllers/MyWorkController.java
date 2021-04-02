@@ -25,6 +25,7 @@ import com.erretechnology.intranet.models.ElementiMyWork;
 import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.Sondaggio;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
+import com.erretechnology.intranet.models.VideoDelGiorno;
 import com.erretechnology.intranet.repositories.RepositoryCliente;
 
 @Controller
@@ -98,8 +99,32 @@ public class MyWorkController extends BaseController {
 		
 		List<ElementiMyWork> eventi = elementi.stream().filter(x -> x.getTipo().equals("event")).collect(Collectors.toList());
 		mav.addObject("eventi", eventi);
+		
+
+//		mav.addObject("video", serviceVideo.getLastVideo("MyWork"));
+		
 		return mav;
 		
+		
+		
+	}
+	
+	@GetMapping(value = "/addVideo")
+	public ModelAndView setVideo(HttpSession session, String link) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("addVideo");
+		mav.addObject("video", new VideoDelGiorno());
+		
+		return mav;
+	}
+	
+	@PostMapping(value = "/video")
+	public String video(@ModelAttribute("video") VideoDelGiorno video, HttpSession session) {
+		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		video.setPagina("MyWork");
+		serviceVideo.save(video);
+		saveLog("aggiornato il video su myWork", autore);
+		return "redirect:/myWork/";
 	}
 	
 	@PostMapping(value = "/sondaggi")

@@ -23,6 +23,7 @@ import com.erretechnology.intranet.services.ServiceSettore;
 import com.erretechnology.intranet.services.ServiceSondaggio;
 import com.erretechnology.intranet.services.ServiceUtente;
 import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
+import com.erretechnology.intranet.services.ServiceVideo;
 
 public abstract class BaseController {
 	@Autowired
@@ -59,6 +60,8 @@ public abstract class BaseController {
 	protected ServiceComunicazioniHR serviceComunicazioni;
 	@Autowired
 	protected ServiceElementiMyWork serviceElementiMyWork;
+	@Autowired
+	protected ServiceVideo serviceVideo;
 	
 	protected void saveLog(String testo, UtenteDatiPersonali autore) {
 		Log log = new Log();
