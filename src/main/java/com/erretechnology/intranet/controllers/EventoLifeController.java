@@ -87,7 +87,7 @@ public class EventoLifeController extends BaseController {
 	}
 
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-	public String update(@PathVariable int id, String titolo, String contenuto, String date, String luogo, 
+	public String update(@PathVariable int id, String titolo, String contenuto, String date, String luogo, String link,
 			@RequestParam(required=false) MultipartFile immagine, HttpSession session, Model model) throws Exception {
 		EventoLife evento = repoEvento.findById(id).get();
 		evento.setTitolo(titolo);
@@ -96,6 +96,7 @@ public class EventoLifeController extends BaseController {
 		Date formettedDate = new SimpleDateFormat("yyyy-MM-dd").parse(date); 
 		Timestamp timestamp = new Timestamp(formettedDate.getTime()/1000);  
 		evento.setData(timestamp.getTime());
+		evento.setLink(link);
 
 		if(!immagine.getOriginalFilename().isEmpty()) {
 			FileImmagine img = new FileImmagine();			

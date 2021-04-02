@@ -74,11 +74,12 @@ public class LibroController extends BaseController {
 	}
 
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-	public String update(@PathVariable int id, String titolo, String scrittore ,@RequestParam(required=false) MultipartFile immagine, 
+	public String update(@PathVariable int id, String titolo, String scrittore ,@RequestParam(required=false) MultipartFile immagine, String link,
 			HttpSession session, Model model) throws Exception{
 		Libro libro = repoLibro.findById(id).get();
 		libro.setTitolo(titolo);
 		libro.setScrittore(scrittore);
+		libro.setLink(link);
 
 		if(!immagine.getOriginalFilename().isEmpty()) {
 			FileImmagine img = new FileImmagine();			

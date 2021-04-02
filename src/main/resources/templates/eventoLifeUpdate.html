@@ -71,6 +71,10 @@
 					<label for="date">Data</label>
 					<input class="form-control" type="date" id="date" name="date" th:value="${#dates.format(date, 'yyyy-MM-dd')}" style="color: black">
 				</div>
+				<div class="form-group col-12">
+					<label for="link">Link </label>
+					<input class="form-control" type="text" name="link" id="input" th:field="*{link}" required>
+				</div>
 				<div class="form-group col-8">
 					<label for="immagine">Immagine dell'evento</label>
 					<input class="form-control-file" type="file" name="immagine" accept="image/png, image/jpeg"/>

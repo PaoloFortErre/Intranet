@@ -68,11 +68,15 @@ body {
 							<option th:each="category: ${categorie}" th:value="${category.id}" th:text="${category.nome}"></option>
 						</select>
 					</div>
-
+					<div class="form-group col-12">
+						<label for="link">Link </label>
+						<input class="form-control" type="text" name="link" id="input" th:field="*{link}" required>
+					</div>
 					<div class="form-group col-8">
 						<label for="immagine">Immagine di Copertina <span style="opacity: 0.7; font-size: 12px">(orientamento: verticale)</span></label>
 						<input type="file" class="form-control-file" accept="image/png, image/jpeg" name="immagine" id="immagine">
 					</div>
+					
 					<div class="form-group col-4">
 						<input class="form-control" type="submit" id="pubblicaSubmit" value="Pubblica">
 					</div>
