@@ -5,7 +5,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "event")
-public class EventoLife extends Cultura implements MyWorkBean{
+public class EventoLife extends Cultura implements MyWorkBean, Evento{
 	
 	private long data;
 	private String luogo;

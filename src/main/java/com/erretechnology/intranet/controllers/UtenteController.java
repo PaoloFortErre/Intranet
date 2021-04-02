@@ -25,6 +25,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.erretechnology.intranet.models.Evento;
+import com.erretechnology.intranet.models.EventoLife;
 import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.Permesso;
@@ -33,6 +36,7 @@ import com.erretechnology.intranet.models.Utility;
 import com.erretechnology.intranet.repositories.RepositoryCinema;
 import com.erretechnology.intranet.repositories.RepositoryCliente;
 import com.erretechnology.intranet.repositories.RepositoryEventoLife;
+import com.erretechnology.intranet.repositories.RepositoryEventoWork;
 import com.erretechnology.intranet.repositories.RepositoryLibro;
 import com.erretechnology.intranet.repositories.RepositoryNews;
 
@@ -43,7 +47,9 @@ public class UtenteController extends BaseController{
 	@Autowired
 	RepositoryNews repositoryNews;
 	@Autowired
-	RepositoryEventoLife repositoryEvento;
+	RepositoryEventoLife repositoryEventoLife;
+	@Autowired
+	RepositoryEventoWork repositoryEventoWork;
 	@Autowired
 	RepositoryLibro repositoryLibro;
 	@Autowired
@@ -370,6 +376,8 @@ public class UtenteController extends BaseController{
 	public ModelAndView mostraNonAttivi(HttpSession session) throws Exception{
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		if(!u.getUtente().getRuolo().getNome().equals("ADMIN")) throw new Exception("Fidati. Prima chiedi i permessi");
+		List<Evento> eventi= repositoryEventoWork.getAllNotVisible();
+		eventi.addAll(repositoryEventoLife.getAllNotVisible());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("gestione_suprema");
 		mav.addObject("post", servicePost.getAllNotVisible());
@@ -377,7 +385,7 @@ public class UtenteController extends BaseController{
 		mav.addObject("news", repositoryNews.getAllNotVisible());
 		mav.addObject("comunicazioniHR", serviceComunicazioni.getAllNotVisible());
 		mav.addObject("moduli", serviceFilePdf.getAllNotVisible());
-		mav.addObject("eventi", repositoryEvento.getAllNotVisible());
+		mav.addObject("eventi", eventi);
 		mav.addObject("podcast", servicePodcast.getAllNotVisible());
 		mav.addObject("libri", repositoryLibro.getAllNotVisible());
 		mav.addObject("film", repositoryFilm.getAllNotVisible());

@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("1")
-public class EventoWork extends Novita {
+public class EventoWork extends Novita implements Evento {
 	
 	private long data;
 	private String luogo;

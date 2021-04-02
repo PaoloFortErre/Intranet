@@ -493,10 +493,16 @@
                                                                             <td th:text="${evento.autore.nome} + ' ' + ${evento.autore.cognome}"></td>
                                                                             <td th:utext="${#dates.format(evento.timestampEliminazione*1000, 'dd/MM/yyyy, HH:mm')}"></td>
                                                                             <td>
-                                                                              <div class="img-fluid text-center">
-                                                                                <a th:href="@{/evento/ripristinaEvento/(id=${evento.id})}"><img title="ripristina elemento"
+                                                                              <div class="img-fluid text-center" th:if ="${evento instanceof T(com.erretechnology.intranet.models.EventoLife)}">
+                                                                                <a th:href="@{/eventolife/ripristinaEvento/(id=${evento.id})}"><img title="ripristina elemento"
                                                                                   width="27px" src="/view/Admin/images/restore_icon.png" alt="restore"></a>
-                                                                                  <a th:href="@{/evento/cancellaEvento/(id=${evento.id})}"><img title="elimina elemento" class=""
+                                                                                  <a th:href="@{/eventolife/cancellaEvento/(id=${evento.id})}"><img title="elimina elemento" class=""
+                                                                                    width="27px" src="/view/Admin/images/delete_icon.png" alt="delete"></a>
+                                                                                  </div>
+                                                                                  <div class="img-fluid text-center" th:if ="${evento instanceof T(com.erretechnology.intranet.models.EventoWork)}">
+                                                                                <a th:href="@{/eventowork/ripristinaEvento/(id=${evento.id})}"><img title="ripristina elemento"
+                                                                                  width="27px" src="/view/Admin/images/restore_icon.png" alt="restore"></a>
+                                                                                  <a th:href="@{/eventowork/cancellaEvento/(id=${evento.id})}"><img title="elimina elemento" class=""
                                                                                     width="27px" src="/view/Admin/images/delete_icon.png" alt="delete"></a>
                                                                                   </div>
                                                                                 </td>

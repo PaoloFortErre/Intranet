@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import com.erretechnology.intranet.models.Evento;
 import com.erretechnology.intranet.models.EventoWork;
 
 public interface RepositoryEventoWork extends CrudRepository<EventoWork, Integer>{
@@ -18,5 +19,5 @@ public interface RepositoryEventoWork extends CrudRepository<EventoWork, Integer
 	List<EventoWork> findOrderByIdDesc();
 	
 	@Query("SELECT e FROM EventoWork e WHERE e.visibile = false")
-	List<EventoWork> getAllNotVisible();
+	List<Evento> getAllNotVisible();
 }
