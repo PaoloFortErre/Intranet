@@ -22,7 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.erretechnology.intranet.models.Cliente;
 import com.erretechnology.intranet.models.ComunicazioneHR;
 import com.erretechnology.intranet.models.ElementiMyWork;
-import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.Sondaggio;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.models.VideoDelGiorno;
@@ -100,6 +99,8 @@ public class MyWorkController extends BaseController {
 		List<ElementiMyWork> eventi = elementi.stream().filter(x -> x.getTipo().equals("event")).collect(Collectors.toList());
 		mav.addObject("eventi", eventi);
 		
+		ElementiMyWork video = elementi.stream().filter(x -> x.getTipo().equals("video")).collect(Collectors.toList()).get(0);
+		mav.addObject("video", video);
 
 //		mav.addObject("video", serviceVideo.getLastVideo("MyWork"));
 		
