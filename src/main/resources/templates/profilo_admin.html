@@ -42,6 +42,13 @@
 
   .nav-link:hover {
 	   color: #ECF260;
+     font-weight: 600;
+  }
+  .logo:hover{
+    opacity: 1;
+  }
+  .logo{
+    opacity: 0.5;
   }
   nav {
   	font-size: 20px;
@@ -260,10 +267,10 @@
 <body>
 
   <!--NAVBAR CON LINK A PAGINE E LINK A SITO ERRE-->
-  <div class="row">
+  <div class="row align-items-center">
     <nav
   		class="navbar navbar-expand-md bg-dark navbar-dark justify-content-end">
-  		<a class="navbar-brand" th:href="@{/homepage/}"><img
+  		<a class="navbar-brand logo" th:href="@{/homepage/}"><img
   			src="/view/MyWork/images/casabianca.png" width="30px"
   			alt="homeBianca.png" style="opacity: 0.9" class="img-fluid ml-3"></a>
   		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -284,13 +291,11 @@
   				<li class="nav-item mr-3 mt-3"><a class="nav-link"
   					href="http://polyedro.erretechnology.com/www/" target="blank">POLYEDRO</a>
   				</li>
-
   			</ul>
   		</div>
   	</nav>
+  </div>
 
-
-      </div>
 
       <!-- ROW CON IMMAGINE PROFILO, NOME, COGNOME, EMAIL  -->
 
@@ -316,11 +321,10 @@
               // Get the image and insert it inside the modal - use its "alt" text as a caption
               var img = document.getElementById("myImg");
               var modalImg = document.getElementById("img01");
-              var captionText = document.getElementById("caption");
+
               img.onclick = function(){
                 modal.style.display = "block";
                 modalImg.src = this.src;
-                captionText.innerHTML = this.alt;
               }
 
               // Get the <span> element that closes the modal
@@ -347,7 +351,7 @@
                         <label class="dropdown-item font-weight-bold text-danger" style="cursor: pointer;" for="elimina">Elimina la foto profilo</label>
                         <input class="d-none" type="submit" value="Elimina foto profilo" id="elimina">
                       </form>
-                  </ul> 
+                  </ul>
               </div>
 
             </div>
@@ -412,10 +416,10 @@
                     Gestisci gli utenti
                   </button>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item font-weight-bold" th:href="@{/profile/registra}">AGGIUNGI O RIATTIVA UTENTE</a>
-                    <a class="dropdown-item text-danger font-weight-bold mt-2" th:href="@{/profile/cancellaUtente}">ELIMINA UTENTE</a>
+                    <a class="dropdown-item " th:href="@{/profile/registra}">Aggiungi o riattiva utente</a>
+                    <a class="dropdown-item text-danger  mt-2" th:href="@{/profile/cancellaUtente}">Elimina utente</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item font-weight-bold" th:href="@{/profile/gestisciPermesso}">GESTISCI I PERMESSI DEGLI UTENTI</a>
+                    <a class="dropdown-item" th:href="@{/profile/gestisciPermesso}">Gestisci i permessi degli utenti</a>
                   </div>
                 </div>
               </div>
@@ -439,11 +443,11 @@
               <img class="top-left" src="/view/Profile/Images/pin_post-it.png" alt="pin-post-it">
               <div class="card-body">
                 <h3 class="h3 card-title text-center" style="color:#303030">Una breve descrizione di me stesso</h3>
-                <p class="h4 card-text" th:text="${utente.descrizione}" style="color:#303030"></p>
+                <h5 class="h5 ml-2 mr-2" th:text="${utente.descrizione}" style="color:#303030"></h5>
                 <div th:if="${session.id} == ${utente.utente.id}">
                   <form th:action="@{/profile/modificaDescrizione}" method="post">
                     <div class="form-group">
-                      <textarea class="form-control" id="exampleFormControlTextarea1" name="descrizione" placeholder="Modifica la tua descrizione"
+                      <textarea class="form-control ml-2 mr-2" id="exampleFormControlTextarea1" name="descrizione" placeholder="Modifica la tua descrizione"
                       cols="35" rows="3" maxlength="499" required style="resize: none"></textarea>
                     </div>
                     <div class="text-center">
@@ -464,15 +468,15 @@
 
           <div class="col-xl-9 col-lg-8 col-md-10 col-sm-10 col-xs-10">
 
-            <div class="container position-relative">
-              <img class="top-left position-absolute" src="/view/Profile/Images/pin_post-it.png" alt="pin-post-it">
+            <div class="container">
+
               <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                   <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
                   <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
                 </ol>
-                <div class="carousel-inner">
 
+                <div class="carousel-inner">
                   <div class="carousel-item active th:if="${session.id} == ${utente.utente.id}"">
                     <img src="/view/Login/images/Homepage/my_life_2.jpg" class="d-block w-100 h-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
@@ -498,6 +502,7 @@
                 <span class="sr-only">Next</span>
               </a>
             </div>
+
           </div>
 
         </div>
@@ -507,7 +512,7 @@
 
 
     <!-- ROW DESCRIZIONE E DASHBOARD -->
-    <div class="container mt-5">
+    <div class="container mt-5 mb-5">
       <div class="row justify-content-center mt-5 " th:with="AM = ${#authorization.expression('hasAuthority(''AM'')')}">
         <div class="col-xl-9 col-lg-8 col-md-10 col-sm-10 col-xs-10" th:if="${session.id} == ${utente.utente.id}">
           <div class="container bg-gradient-warning">
