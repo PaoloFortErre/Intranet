@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,7 +28,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.Evento;
-import com.erretechnology.intranet.models.EventoLife;
 import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.Permesso;
@@ -136,7 +136,7 @@ public class UtenteController extends BaseController{
 				+ "(?=.*[a-z])(?=.*[A-Z])"
 				+ "(?=\\S+$).{8,20}$";
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/profile/cambioPassword");
+		mav.setViewName("cambiaPassword");
 		if(passwordEncoder.matches(vPsw, serviceUtente.findById(Integer.parseInt(session.getAttribute("id").toString())).getPassword())){
 			if(nPsw.equals(cNPsw)) {
 				if(nPsw.equals(vPsw)) {
@@ -147,27 +147,31 @@ public class UtenteController extends BaseController{
 					Matcher m = p.matcher(nPsw);
 					if(!m.matches()) {
 						mav.addObject("messaggio", "La password deve contenere una lettera maiuscola, una lettera minuscola, un numero ed essere di almeno 8 caratteri");
-						return mav;
+					}else {
+						Utente u = serviceUtente.findById(Integer.parseInt(session.getAttribute("id").toString()));
+						u.setPassword(nPsw);
+						serviceUtente.saveUtente(u);
+						UtenteDatiPersonali udp = serviceDatiPersonali.findById(u.getId());
+						if(!udp.isPasswordCambiata()) {
+							udp.setPasswordCambiata(true);
+							serviceDatiPersonali.save(udp);
+						}
+						saveLog("modificato la password", udp);
+						return primaPagina(session);
 					}
-					Utente u = serviceUtente.findById(Integer.parseInt(session.getAttribute("id").toString()));
-					u.setPassword(nPsw);
-					serviceUtente.saveUtente(u);
-					UtenteDatiPersonali udp = serviceDatiPersonali.findById(u.getId());
-					if(!udp.isPasswordCambiata()) {
-						udp.setPasswordCambiata(true);
-						serviceDatiPersonali.save(udp);
-					}
-					saveLog("modificato la password", udp);
-					return primaPagina(session);
+					
 				}
 			}else {
 				mav.addObject("messaggio", "Le password non corrispondono");
-				return mav;
 			}
 		}else{
 			mav.addObject("messaggio", "la vecchia password è sbagliata");
-			return mav;
 		}
+		mav.addObject("vecchiaPassword", new String());
+		mav.addObject("nuovaPassword", new String());
+		mav.addObject("cNuovaPassword", new String());
+		mav.addObject("obbligato", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())).getPasswordCambiata());
+		return mav;
 	}
 
 
