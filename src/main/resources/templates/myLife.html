@@ -13,11 +13,23 @@
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+	crossorigin="anonymous">
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+	crossorigin="anonymous"></script>
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+	integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+	crossorigin="anonymous"></script>
 <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+	integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+	crossorigin="anonymous"></script>
+
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap"
@@ -60,6 +72,14 @@
 	bottom: 0;
 	
 }
+.carousel-inner img {
+	width: 100%;
+	height: 750px;
+}
+
+.carousel-caption {
+	top: 300px;
+}
 .pagination>ul>li:hover {
 background-color: red;}
 </style>
@@ -67,118 +87,104 @@ background-color: red;}
 </head>
 <body ng-app=""
 	th:with="GML = ${#authorization.expression('hasAuthority(''GML'')')}">
-	<div class="container-fluid">
+		<nav
+		class="navbar navbar-expand-md bg-dark navbar-dark justify-content-end">
+		<a class="navbar-brand" th:href="@{/homepage/}"><img
+			src="/view/MyWork/images/casabianca.png" width="30px"
+			alt="homeBianca.png" style="opacity: 0.9" class="img-fluid"></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse justify-content-end"
+			id="collapsibleNavbar">
+			<ul class="navbar-nav ml-5 mr-5">
+				<li class="nav-item mr-3 mt-3"><a class="nav-link"
+					th:href="@{/myWork/}">MY WORK</a></li>
+				<li class="nav-item mr-3 mt-3"><a class="nav-link"
+					th:href="@{/comunicazioniHr/}">COMUNICAZIONI HR</a></li>
+				<li class="nav-item mr-3 mt-3"><a class="nav-link"
+					th:href="@{/moduli/}">MODULI</a></li>
+				<li class="nav-item mr-3 mt-3"><a class="nav-link"
+					href="http://polyedro.erretechnology.com/www/" target="blank">POLYEDRO</a>
+				</li>
+				<li class="nav-item"><a th:href="@{/profile/}"><img
+						th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
+						alt="utente" title="utente" class="immagineUtente img-fluid"
+						id="utente-foto-profilo" style="border-radius: 50%;"></a></li>
 
+			</ul>
+		</div>
+	</nav>
 
-		<div class="row">
+	<div id="demo" class="carousel slide" data-ride="carousel"
+		style="width: 100%">
+		<ul class="carousel-indicators">
+			<li data-target="#demo" data-slide-to="0" class="active"></li>
+			<li data-target="#demo" data-slide-to="1"></li>
 
-
-			<div id="myCarousel" class="carousel slide"
-				style="background-color: #303030">
-
-
-
-				<nav class="navbar navbar-nav navbar-right" id="navcambiante">
-					<div class="content" style="display: inline-block">
-						<a th:href="@{/homepage/}"><img
-							src="/view/MyWork/images/casabianca.png" width="30px"
-							style="margin-top: -10px; opacity: 0.9"> </a>
-					</div>
-					<div class="content" style="display: inline-block">
-						<a th:href="@{/myWork/}">MY WORK</a>
-					</div>
-					<div class="content" style="display: inline-block">
-						<a th:href="@{/comunicazioniHr/}">COMUNICAZIONI HR</a>
-					</div>
-					<div class="content" style="display: inline-block">
-						<a th:href="@{/moduli/}">MODULI</a>
-					</div>
-					<div class="content" style="display: inline-block">
-						<a href="http://polyedro.erretechnology.com/www/" target="blank">POLYEDRO</a>
-					</div>
-					<div style="position: relative; float: right">
-						<a th:href="@{/profile/}"><img
-							th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
-							alt="utente" title="utente" class="immagineUtente"
-							id="utente-foto-profilo"
-							style="margin: 30px; margin-right: 40px;; border-radius: 50%; margin-top: 0px;"></a>
-					</div>
-				</nav>
-
-
-				<!-- Indicators -->
-				<ol class="carousel-indicators">
-					<li class="item1 active"></li>
-					<li class="item2"></li>
-
-				</ol>
-
-				<!-- Wrapper for slides -->
-				<div class="carousel-inner" role="listbox">
-
-					<div class="top-right"></div>
-					<div class="item active">
-						<img src="/view/MyLife/images/barc.jpg" alt="Cittï¿½" width="100%">
-						<div class="carousel-caption" th:if=${aforisma!=null}>
-							<h1 class="font-caption" style="font-weight: 900; text-shadow: 3px 1px 6px rgba(0, 0, 0, 1);"
-								th:text="${aforisma[0].titolo}"></h1>
-							<p th:text="${aforisma[0].contenuto}"  style="font-style: italic"></p>
-							<div th:if="${GML}">
-								<form th:action="@{'/aforisma/update/'+${aforisma[0].id}}"
-									method="get">
-									<button type="submit" name="modifica"
-										style="background-color: transparent; border: 0px solid #232323; display: inline-block">
-										<img src="/view/MyWork/images/edit.png" width="38%">
-									</button>
-								</form>
-								<a th:href="@{/aforisma/new/}" style="display: inline-block">
-									<img src="/view/MyWork/images/more.png" width="30px"
-									style="margin-bottom: 10px; display: inline-block">
-								</a>
-							</div>
-						</div>
-						<div class="carousel-caption" th:if="${aforisma==null and GML}">
-							<a th:href="@{/aforisma/new/}"
-								style="display: inline-block; color: #f3f3f3; text-decoration: none;">
-								Aggiungi aforisma <img src="/view/MyWork/images/more.png"
-								width="30px" style="margin-bottom: 10px; display: inline-block">
-							</a>
-						</div>
-					</div>
-
-					<div class="item">
-						<img src="/view/MyLife/images/mare.png" alt="Lago" width="100%">
-						<div class="carousel-caption" th:if="${aforisma.size>1}">
-							<h1 class="font-caption" style="font-weight: 900; text-shadow: 3px 1px 6px rgba(0, 0, 0, 1);"
-								th:text="${aforisma[1].titolo}"></h1>
-							<p th:text="${aforisma[1].contenuto}" style="font-style: italic"></p>
-							<div th:if="${GML}">
-								<form th:action="@{'/aforisma/update/'+${aforisma[1].id}}"
-									method="get">
-									<button type="submit" name="modifica"
-										style="background-color: transparent; border: 0px solid #232323;">
-										<img src="/view/MyWork/images/edit.png" width="38%">
-									</button>
-								</form>
-								<a th:href="@{/aforisma/new/}"> <img
-									src="/view/MyWork/images/more.png" width="30px"
-									style="margin-bottom: 10px;"></a>
-							</div>
-
-						</div>
-						<div class="carousel-caption" th:if="${aforisma[1]==null and GML}">
-							<a th:href="@{/aforisma/new/}"
-								style="display: inline-block; color: #f3f3f3; text-decoration: none;">
-								Aggiungi aforisma <img src="/view/MyWork/images/more.png"
-								width="30px" style="margin-bottom: 10px; display: inline-block">
-							</a>
-						</div>
+		</ul>
+		<div class="carousel-inner">
+			<div class="carousel-item active">
+				<img src="/view/MyLife/images/barc.jpg" alt="ferrari"
+					title="ferrari" width="100%" height="500" class="img-fluid">
+				<div class="carousel-caption" th:if="${aforisma!=null}">
+					<h1
+						style="font-weight: 900; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"
+						th:text="${aforisma[0].titolo}"></h1>
+					<p th:text="${aforisma[0].contenuto}"
+						style="font-style: italic; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"></p>
+					<div th:if="${GMW}">
+						<form th:action="@{'/aforisma/update/'+${aforisma[0].id}}"
+							method="get">
+							<button type="submit" name="modifica"
+								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 8px; width: 150px;">
+								Modifica aforisma
+								<!-- <img src="/view/MyWork/images/edit.png" width="50px" height="20px">-->
+							</button>
+						</form>
+						<a th:href="@{/aforisma/new/}"
+							style="display: inline-block; color: black; background-color: white; font-size: 12px; padding: 8px; text-decoration: none; width: 150px;">
+							Aggiungi aforisma <!--  <img src="/view/MyWork/images/more.png" width="30px"  height="20px"
+									style="margin-bottom: 10px; display: inline-block">-->
+						</a>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
+			<div class="carousel-item">
+				<img src="/view/MyLife/images/mare.png" alt="scarpe" width="100%"
+					height="500" class="img-fluid">
+				<div class="carousel-caption" th:if="${aforisma!=null}">
+					<h1
+						style="font-weight: 900; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"
+						th:text="${aforisma[1].titolo}"></h1>
+					<p th:text="${aforisma[1].contenuto}"
+						style="font-style: italic; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"></p>
+					<div th:if="${GMW}">
+						<form th:action="@{'/aforisma/update/'+${aforisma[1].id}}"
+							method="get">
+							<button type="submit" name="modifica"
+								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 8px; width: 150px;">
+								Modifica aforisma
+								<!-- <img src="/view/MyWork/images/edit.png" width="50px" height="20px">-->
+							</button>
+						</form>
+						<a th:href="@{/aforisma/new/}"
+							style="display: inline-block; color: black; background-color: white; font-size: 12px; padding: 8px; text-decoration: none; width: 150px;">
+							Aggiungi aforisma <!--  <img src="/view/MyWork/images/more.png" width="30px"  height="20px"
+									style="margin-bottom: 10px; display: inline-block">-->
+						</a>
+					</div>
+				</div>
+			</div>
 
+		</div>
+		<a class="carousel-control-prev" href="#demo" data-slide="prev"> <span
+			class="carousel-control-prev-icon"></span>
+		</a> <a class="carousel-control-next" href="#demo" data-slide="next">
+			<span class="carousel-control-next-icon"></span>
+		</a>
+	</div>
 	<!-- ************
 			FINE HEADER
 			***************** -->
@@ -719,9 +725,9 @@ COLONNA DESTRA
 
 					<ul class="pagination" style="float: right">
 
-						<li><a href="" onclick="film1()" id="C">1</a></li>
-						<li><a href="" onclick="film2()" id="C1">2</a></li>
-						<li><a href="" onclick="film3()" id="C2">3</a></li>
+						<li class="page-item"><a  href="" onclick="film1()" id="C" class="page-link">1</a></li>
+						<li class="page-item"><a href="" onclick="film2()" id="C1" class="page-link">2</a></li>
+						<li class="page-item"><a href="" onclick="film3()" id="C2" class="page-link">3</a></li>
 
 					</ul>
 					<br>
