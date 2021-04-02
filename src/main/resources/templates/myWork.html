@@ -60,7 +60,7 @@ table, th, td {
 </style>
 </head>
 
-<body 
+<body
 	th:with="GMW = ${#authorization.expression('hasAuthority(''GMW'')')}">
 
 
@@ -169,8 +169,8 @@ table, th, td {
 	<div class="container-fluid">
 		<br> <br> <br>
 		<!-- ROW MACCHINA  -->
-		<div class="row mt-5" 
-			style="width: 102%; height: 600px; background-image: url('/view/MyWork/images/makkinina.png'); background-position: center; background-repeat: no-repeat; background-size: cover;">
+		<div class="row mt-5"
+			style="width: 102%; height: 700px; background-image: url('/view/MyWork/images/makkinina.png'); background-position: center; background-repeat: no-repeat; background-size: cover;">
 			<div class="col-xs-12 col-sm-12 col-lg-12 col-xl-12">
 				<br>
 				<h1 style="text-align: center">Le ultime novità</h1>
@@ -206,7 +206,8 @@ table, th, td {
 				<table class="table table-borderless" th:if="${nuoviClienti!=null}">
 
 					<tr>
-						<td th:each="cliente: ${nuoviClienti}" style="text-align: center; vertical-align: middle;"><img
+						<td th:each="cliente: ${nuoviClienti}"
+							style="text-align: center; vertical-align: middle;"><img
 							th:src="'data:image/png;base64,' + ${cliente.logo.getImgData(cliente.logo.data)}"
 							alt="fotoProfiloUtente" class="img-fluid" width="365px"
 							style="margin-bottom: -17px; height: 380px"></td>
@@ -219,30 +220,65 @@ table, th, td {
 							<p th:text="${cliente.nome}"
 								style="font-style: italic; font-weight: 900; font-size: 25px;">
 							</p>
-						</td>
+
+
+
+							<form th:action="@{'/cliente/update/'+${cliente.id}}"
+								th:if="${GMW}" method="get">
+								<button type="submit" name="modifica"
+									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+									Modifica</button>
+							</form>
+<a class="mt-1" th:href="@{/cliente/new/}" th:if="${GMW}"
+							style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
+						</a>
+							<form th:action="@{'/cliente/delete/'+${cliente.id}}"
+								th:if="${GMW}" method="get">
+								<button type="submit" name="modifica" class="mt-1"
+									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+									Elimina</button>
+							</form>
 					</tr>
 
 				</table>
 			</div>
 			<div class="col-xs-12 col-sm-3 col-lg-4 col-xl-4">
-				<table class="table table-borderless" style="vertical-align: middle; ">
+				<table class="table table-borderless"
+					style="vertical-align: middle;">
 
 					<tr>
 						<td style="text-align: center; vertical-align: middle;"><img
 							th:src="'data:image/png;base64,' + ${newsSlide[0].immagine.getImgData(newsSlide[0].immagine.data)}"
-							alt="fotoProfiloUtente" class="img-fluid" width="330px" style="height: 350px"></td>
+							alt="fotoProfiloUtente" class="img-fluid" width="330px"
+							style="height: 350px"></td>
 					</tr>
 
 					<tr>
 						<td style="text-align: center;">
 							<p style="font-size: 22px;" th:text="${newsSlide[0].titolo}"></p>
+							<form th:action="@{'/news/update/'+${newsSlide[0].id}}"
+								th:if="${GMW}" method="get">
+								<button type="submit" name="modifica"
+									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+									Modifica</button>
+							</form>
+<a class="mt-1" th:href="@{/news/new/}" th:if="${GMW}"
+							style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
+						</a>
+							<form th:action="@{'/news/delete/'+${newsSlide[0].id}}"
+								th:if="${GMW}" method="get">
+								<button type="submit" name="modifica" class="mt-1"
+									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+									Elimina</button>
+							</form>
+
+
 						</td>
 					</tr>
 
 				</table>
 			</div>
 		</div>
-	
 
 
 
@@ -266,18 +302,103 @@ table, th, td {
 
 
 
-	<!-- ROW SCHIZZO  -->
-	<br>
-	<br>
-	<br>
-	<br>
-	<div class="row mt-5 mb-5"
-		style="width: 102%; height: 600px; background-image: url('/view/MyWork/images/schizzo.png'); background-position: center; background-repeat: no-repeat; background-size: cover;">
-		<div class="col-xs-12 col-sm-12 col-lg-12 col-xl-12">
-			<br>
-			<h1 style="text-align: center">Il mondo dentro e fuori</h1>
+
+		<!-- ROW SCHIZZO  -->
+		<br> <br> <br> <br>
+		<div class="row mt-5 mb-5"
+			style="width: 102%; height: 700px; background-image: url('/view/MyWork/images/schizzo.png'); background-position: center; background-repeat: no-repeat; background-size: cover;">
+			<div class="col-xs-12 col-sm-12 col-lg-12 col-xl-12">
+				<br>
+				<h1 style="text-align: center">Il mondo dentro e fuori</h1>
+
+			</div>
+			<div class="col-xs-12 col-sm-3 col-lg-4 col-xl-4">
+				<table class="table table-borderless">
+					<tr>
+						<td style="text-align: center; vertical-align: middle;"><img
+							src="/view/MyWork/images/RADICEr.png"
+							style="margin-bottom: -17px; height: 380px"></td>
+					</tr>
+					<tr>
+						<td style="text-align: center; vertical-align: middle;"><p
+								style="font-size: 22px;">I podcast di Rosario</p></td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-xs-12 col-sm-3 col-lg-4 col-xl-4">
+				<table class="table table-borderless">
+					<tr>
+						<td style="text-align: center; vertical-align: middle;"
+							th:if="${eventi!=null}"><img
+							th:src="'data:image/png;base64,' + ${eventi[0].immagine.getImgData(eventi[0].immagine.data)}"
+							width="365px" style="margin-bottom: -17px; height: 380px">
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align: center; vertical-align: middle;"
+							th:if="${eventi!=null}">
+							<p style="font-size: 22px; margin-bottom: -5PX"
+								th:text="${#dates.format(eventi[0].timestamp*1000, 'dd/MM/yyyy')}"></p>
+							<p
+								style="font-style: italic; font-weight: 900; font-size: 25px; margin-bottom: -5PX"
+								th:text="${eventi[0].titolo}"></p>
+							<p style="font-size: 15px;" th:text="${eventi[0].luogo}"></p>
+
+							<form th:action="@{'/eventowork/update/'+${eventi[0].id}}"
+								th:if="${GMW}" method="get">
+								<button type="submit" name="modifica"
+									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+									Modifica</button>
+							</form> <a class="mt-1" th:href="@{/eventowork/new/}" th:if="${GMW}"
+							style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
+						</a>
+							<form th:action="@{'/eventowork/delete/'+${eventi[0].id}}"
+								th:if="${GMW}" method="get">
+								<button type="submit" name="modifica" class="mt-1"
+									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+									Elimina</button>
+							</form>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-xs-12 col-sm-3 col-lg-4 col-xl-4">
+				<table class="table table-borderless">
+					<tr>
+						<td style="text-align: center; vertical-align: middle;"
+							th:each="utente: ${utente}"><img
+							th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}"
+							width="365px" style="margin-bottom: -17px; height: 380px">
+						</td>
+					</tr>
+					<tr>
+						<td th:each="utente: ${utente}"
+							style="text-align: center; vertical-align: middle;"><p
+								style="font-size: 22px; margin-bottom: -5PX">
+								Hai già fatto gli auguri a <br><a
+									th:href="@{/profile/viewProfile/(id=${utente.id})}"
+									style="font-style: italic; font-weight: 900; font-size: 25px; margin-bottom: -5PX"
+									th:text="${utente.nome} + ' ' + ${utente.cognome}"> </a>?
+							<p></td>
+					</tr>
+				</table>
+			</div>
 		</div>
-	</div>
+
+
+
+
+
+		<div class="row">
+			<div class="col-xs-0 col-sm-0 col-lg-2 col-xl-2 mt-5"></div>
+			<div class="col-xs-12 col-sm-12 col-lg-10 col-xl-10 mt-5" style="margin-top: 50px;">
+				<iframe width="80%" height="800" 
+					src="https://www.youtube.com/embed/tgbNymZ7vqY"
+					style="border: 0px solid"></iframe>
+			</div>
+			<div class="col-xs-0 col-sm-0 col-lg-2 col-xl-2"></div>
+		</div>
+
 
 
 	</div>
@@ -289,7 +410,8 @@ table, th, td {
 
 
 
-<br><br>
+	<br>
+	<br>
 	<!-- PANNELLO FOOTER CON INFO-->
 	<footer class="align-items-center">
 		<div class="container align-items-center mt-4"
@@ -308,9 +430,9 @@ table, th, td {
 						Supporto: +39 011 197 429 00</p>
 				</div>
 				<div class="col-sm-4 col-lg-4 pl-5" style="padding-left: 150px">
-					<a class="rounded-circle fa fa-facebook"
+					<a class="rounded fa fa-facebook"
 						href="https://www.facebook.com/erretechnologygroup/"
-						target="blank"></a> <a class="rounded-circle fa fa-linkedin ml-2"
+						target="blank"></a> <a class="rounded fa fa-linkedin ml-2"
 						href="https://www.linkedin.com/company/erretechnologygroup/"
 						style="margin-left: 10px" target="blank"></a>
 				</div>
