@@ -332,9 +332,9 @@
               }
               </script>
 
-              <div class="bottom-right">
-                <a href="#" id="imageDropdown" title="Clicca per gestire la foto profilo" data-toggle="dropdown">
-                  <div class="dropdown fa fa-camera text-white" th:if="${session.id} == ${utente.utente.id}">
+              <div class="  bottom-right" th:if="${session.id} == ${utente.utente.id}">
+                <a class="dropdown fa fa-camera text-white" href="#" id="imageDropdown" title="Clicca per gestire la foto profilo" data-toggle="dropdown">
+                </a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="imageDropdown" >
                       <form th:action="@{/profile/cambiaFotoProfilo}" method ="post" enctype="multipart/form-data">
                         <label class="dropdown-item " style="cursor: pointer;" for="scegli">Modifica la foto profilo</label>
@@ -347,9 +347,7 @@
                         <label class="dropdown-item font-weight-bold text-danger" style="cursor: pointer;" for="elimina">Elimina la foto profilo</label>
                         <input class="d-none" type="submit" value="Elimina foto profilo" id="elimina">
                       </form>
-                    </ul>
-                  </div>
-                </a>
+                  </ul> 
               </div>
 
             </div>
