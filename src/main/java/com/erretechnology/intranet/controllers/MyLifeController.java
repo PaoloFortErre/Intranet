@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,10 +21,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.erretechnology.intranet.models.Commento;
 import com.erretechnology.intranet.models.CommentoModificato;
 import com.erretechnology.intranet.models.ElementiMyLife;
+import com.erretechnology.intranet.models.ElementiMyWork;
 import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.Post;
 import com.erretechnology.intranet.models.PostModificato;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
+import com.erretechnology.intranet.models.VideoDelGiorno;
 import com.erretechnology.intranet.repositories.RepositoryCategoriaCinema;
 
 @Controller
@@ -45,6 +48,8 @@ public class MyLifeController extends BaseController {
 		List<ElementiMyLife> aforismi = elementi.stream().filter(x -> x.getTipo().equals("aphorism")).collect(Collectors.toList());
 		List<ElementiMyLife> film = elementi.stream().filter(x -> x.getTipo().equals("cinema")).collect(Collectors.toList());
 		List<ElementiMyLife> libri = elementi.stream().filter(x -> x.getTipo().equals("book")).collect(Collectors.toList());
+		ElementiMyLife video = elementi.stream().filter(x -> x.getTipo().equals("video")).collect(Collectors.toList()).get(0);
+		
 		Page<Post> postPage= servicePost.findPaginated(PageRequest.of(currentPage - 1, 5));
 
 
@@ -65,8 +70,27 @@ public class MyLifeController extends BaseController {
 		mav.addObject("eventilife", evento);
 		mav.addObject("aforisma", aforismi);
 		mav.addObject("libri", libri);
+		mav.addObject("video", video);
 		
 		return mav;
+	}
+	
+	@GetMapping(value = "/addVideo")
+	public ModelAndView setVideo(HttpSession session, String link) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("addVideoMyLife");
+		mav.addObject("video", new VideoDelGiorno());
+		
+		return mav;
+	}
+	
+	@PostMapping(value = "/video")
+	public String video(@ModelAttribute("video") VideoDelGiorno video, HttpSession session) {
+		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		video.setPagina("MyLife");
+		serviceVideo.save(video);
+		saveLog("aggiornato il video su myLife", autore);
+		return "redirect:/myLife/";
 	}
 
 	@PostMapping(value = "/editPost")

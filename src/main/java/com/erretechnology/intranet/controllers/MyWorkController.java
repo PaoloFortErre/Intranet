@@ -102,7 +102,7 @@ public class MyWorkController extends BaseController {
 		ElementiMyWork video = elementi.stream().filter(x -> x.getTipo().equals("video")).collect(Collectors.toList()).get(0);
 		mav.addObject("video", video);
 
-		mav.addObject("video", serviceVideo.getLastVideo("MyWork"));
+		//mav.addObject("video", serviceVideo.getLastVideo("MyWork"));
 		
 		return mav;
 		

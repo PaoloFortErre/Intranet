@@ -809,6 +809,18 @@ COLONNA DESTRA
 			</div>
 		</div>
 	</div>
+	
+	
+	<div class="row" th:if="${video!=null}">
+			<div class="col-xs-0 col-sm-0 col-lg-2 col-xl-2 mt-5"></div>
+			<div class="col-xs-12 col-sm-12 col-lg-8 col-xl-8 mt-5" style="margin-top: 50px;">
+			<h1 style="text-align: center; "> Il video del mese </h1>
+			<h3 style="text-align: center; " class="mb-5" th:text="${video.titolo}"></h3>
+			<iframe width="100%" height="800" th:src="${video.contenuto}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				
+			</div>
+			<div class="col-xs-0 col-sm-0 col-lg-2 col-xl-2 mt-5"></div>
+		</div>
 
 	<!-- PANNELLO FOOTER CON INFO-->
 	<footer class="align-items-center">
