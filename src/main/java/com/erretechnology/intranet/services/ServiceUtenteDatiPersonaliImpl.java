@@ -57,6 +57,7 @@ public class ServiceUtenteDatiPersonaliImpl extends BaseController implements Se
 		utente.addRuolo(r);*/
 		udp.setSettore(serviceSettore.findById(settore));
 		udp.setPasswordCambiata(false);
+		udp.setVisualizzaDataNascita(true);
 		udp.setUtente(utente);
 		udp.setImmagine(serviceFileImmagine.getImmagine(63));
 		save(udp);
