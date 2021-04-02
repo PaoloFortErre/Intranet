@@ -19,6 +19,8 @@ public class ErroreController extends BaseController implements ErrorController 
 			httpErrorCode = (Integer) httpRequest.getAttribute("javax.servlet.error.status_code");
 			if( httpErrorCode == 404)
 				errorPage.setViewName("error");
+			if( httpErrorCode == 200)
+				errorPage.setViewName("errore200");
 		}else {
         	httpErrorCode = 403;
         }
