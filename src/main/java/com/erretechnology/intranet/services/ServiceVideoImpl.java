@@ -1,6 +1,5 @@
 package com.erretechnology.intranet.services;
 
-import java.util.Comparator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +15,7 @@ public class ServiceVideoImpl implements ServiceVideo{
 	@Override
 	public VideoDelGiorno getLastVideo(String nomePagina) {
 		// TODO Auto-generated method stub
-		return repositoryVideo.findAll().stream().filter(x->x.getPagina().equals(nomePagina))
-				.sorted(Comparator.comparingInt(VideoDelGiorno::getId).reversed()).findFirst().get();
+		return repositoryVideo.findTopByPagina(nomePagina);
 	}
 
 	@Override

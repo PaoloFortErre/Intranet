@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.erretechnology.intranet.models.Sondaggio;
@@ -21,10 +22,7 @@ public class ServiceSondaggioImpl implements ServiceSondaggio{
 	}
 	@Override
 	public List<Sondaggio> findAllVisible(){
-		return repositorySondaggio.findAll().stream()
-				.filter(x->x.isVisibile())
-				.sorted(Comparator.comparingInt(Sondaggio::getId).reversed())
-				.collect(Collectors.toList());
+		return repositorySondaggio.findByVisibileTrue(Sort.by("id").descending());
 	}
 	
 	@Override
@@ -33,12 +31,12 @@ public class ServiceSondaggioImpl implements ServiceSondaggio{
 	}
 	@Override
 	public List<Sondaggio> findByAutore(UtenteDatiPersonali autore) {
-		return findAll().stream().filter(x-> x.getAutore().equals(autore)).collect(Collectors.toList());
+		return repositorySondaggio.findByAutore(autore);
 	}
 	@Override
 	public List<Sondaggio> getAllNotVisible() {
 		// TODO Auto-generated method stub
-		return findAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList());
+		return repositorySondaggio.findByVisibileFalse(Sort.by("id").descending());
 	}
 	@Override
 	public void delete(Sondaggio s) {
