@@ -414,10 +414,10 @@ table, th, td {
         
         <!-- Modal body -->
         <div class="modal-body" th:each="podcast : ${podcast}" th:if="${podcast!=null}" style="background-color: #B9CAF0;">
-        <p th:text="${podcast.podcast.nome}" style="color: #303030 "></p>
+        <p th:text="${podcast.nome}" style="color: #303030 "></p>
           <audio controls style="margin-top: 10px;" preload="metadata">
 						<source
-							th:src="'data:audio/mp3;base64,' + ${podcast.podcast.getAudioData(podcast.podcast.podcast)}"
+							th:src="'data:audio/mp3;base64,' + ${podcast.getAudioData(podcast.podcast)}"
 							type="audio/ogg"  >
 					</audio>
         </div>
