@@ -215,6 +215,17 @@ public class HomeController extends BaseController{
 		return mav;
 	}
 	
+	@GetMapping (value= "/myLife1")
+	public ModelAndView MyLife1(HttpSession session) {
+		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		ModelAndView mav = new ModelAndView();
+	
+		mav.addObject("utenteDati", u);
+		
+		mav.setViewName("myLife1");
+		return mav;
+	}
+	
 	@GetMapping (value= "/moduli")
 	public ModelAndView moduli(HttpSession session) {
 		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
