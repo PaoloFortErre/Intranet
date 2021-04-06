@@ -943,3 +943,47 @@ table, th, td {
 	</script>
 </body>
 </html>
+
+
+
+
+
+
+	<table class="table table-borderless" th:if="${eventi.size > 0}">
+					<tr>
+						<td style="text-align: center; vertical-align: middle;"
+							th:if="${eventi!=null}">
+							
+							<img
+							th:src="'data:image/png;base64,' + ${eventi[0].immagine.getImgData(eventi[0].immagine.data)}"
+							width="90%" style="margin-bottom: -17px; height: 380px"
+							class="img-fluid"></td>
+					</tr>
+					<tr>
+						<td style="text-align: center; vertical-align: middle;"
+							th:if="${eventi!=null}">
+							<p style="font-size: 22px; margin-bottom: -5PX"
+								th:text="${#dates.format(eventi[0].timestamp*1000, 'dd/MM/yyyy')}"></p>
+							<p
+								style="font-style: italic; font-weight: 900; font-size: 25px; margin-bottom: -5PX"
+								th:text="${eventi[0].titolo}"></p>
+							<p style="font-size: 15px;" th:text="${eventi[0].luogo}"></p>
+
+							<form th:action="@{'/eventowork/update/'+${eventi[0].id}}"
+								th:if="${GMW}" method="get">
+								<button type="submit" name="modifica" class="bottoniGMW"
+									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+									Modifica</button>
+							</form> <a th:href="@{/eventowork/new/}" th:if="${GMW}"
+							class="bottoniGMW mt-1"
+							style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
+						</a>
+							<form th:action="@{'/eventowork/delete/'+${eventi[0].id}}"
+								th:if="${GMW}" method="get">
+								<button type="submit" name="modifica" class="bottoniGMW mt-1"
+									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+									Elimina</button>
+							</form>
+						</td>
+					</tr>
+				</table>

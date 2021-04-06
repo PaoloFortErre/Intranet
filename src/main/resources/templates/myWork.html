@@ -266,7 +266,7 @@ table, th, td {
 
 							<div id="demo1" class="carousel slide" data-ride="carousel">
 								<ul class="carousel-indicators">
-									<li data-target="#demo1" data-slide-to="0" class="active" th:if="${newsSlide.size>0}"></li>
+									<li data-target="#demo1" data-slide-to="0" class="active" th:if="${newsSlide.size>1}"></li>
 									<li data-target="#demo1" data-slide-to="1" th:if="${newsSlide.size>1}"></li>
 									<li data-target="#demo1" data-slide-to="2" th:if="${newsSlide.size>2}"></li>
 								</ul>
@@ -391,7 +391,7 @@ table, th, td {
 					</tr>
 					<tr>
 						<td style="text-align: center; vertical-align: middle;"><p
-								style="font-size: 22px;">I podcast di Rosario</p></td>
+								style="font-size: 22px;">I podcast di <span style="font-style: italic; font-weight: 900; font-size: 25px; margin-bottom: -5PX;"> Rosario </span></p></td>
 					</tr>
 				</table>
 			</div>
@@ -402,9 +402,9 @@ table, th, td {
 							th:if="${eventi!=null}">
 
 							<div id="demo2" class="carousel slide" data-ride="carousel">
-								<ul class="carousel-indicators">
+								<ul class="carousel-indicators" th:if="${eventi.size > 0}" >
 									<li data-target="#demo2" data-slide-to="0" class="active"
-										th:if="${eventi.size > 0}"></li>
+										th:if="${eventi.size > 1}"></li>
 									<li data-target="#demo2" data-slide-to="1"
 										th:if="${eventi.size > 1}"></li>
 									<li data-target="#demo2" data-slide-to="2"
@@ -415,7 +415,7 @@ table, th, td {
 										<img
 											th:src="'data:image/png;base64,' + ${eventi[0].immagine.getImgData(eventi[0].immagine.data)}"
 											alt="evento" width="400px" style="height: 350px;">
-											
+										<br>	<br>
 										<p style="font-size: 22px; margin-bottom: -5PX"
 								th:text="${#dates.format(eventi[0].timestamp*1000, 'dd/MM/yyyy')}"></p>
 
@@ -446,8 +446,7 @@ table, th, td {
 										<img
 											th:src="'data:image/png;base64,' + ${eventi[1].immagine.getImgData(eventi[1].immagine.data)}"
 											alt="Chicago" width="400px" style="height: 350px;">
-
-										<p style="font-size: 22px; margin-bottom: -5PX"
+<br><br>								<p style="font-size: 22px; margin-bottom: -5PX"
 								th:text="${#dates.format(eventi[1].timestamp*1000, 'dd/MM/yyyy')}"></p>
 
 										<h3 th:text="${eventi[1].titolo}"
@@ -476,7 +475,7 @@ table, th, td {
 										<img
 											th:src="'data:image/png;base64,' + ${eventi[2].immagine.getImgData(eventi[2].immagine.data)}"
 											width="400px" style="height: 350px;">
-
+<br><br>
 										<p style="font-size: 22px; margin-bottom: -5PX"
 								th:text="${#dates.format(eventi[2].timestamp*1000, 'dd/MM/yyyy')}"></p>
 
