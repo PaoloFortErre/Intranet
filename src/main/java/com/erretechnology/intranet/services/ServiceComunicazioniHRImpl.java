@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.erretechnology.intranet.models.ComunicazioneHR;
-import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.repositories.RepositoryComunicazioniHR;
 @Service
 public class ServiceComunicazioniHRImpl implements ServiceComunicazioniHR{
@@ -26,12 +26,6 @@ public class ServiceComunicazioniHRImpl implements ServiceComunicazioniHR{
 	}
 
 	@Override
-	public List<ComunicazioneHR> findByAutore(UtenteDatiPersonali autore) {
-		// TODO Auto-generated method stub
-		return repositoryComunicazioniHR.findAll().stream().filter(x -> x.getUtente().equals(autore)).collect(Collectors.toList());	
-		}
-
-	@Override
 	public List<ComunicazioneHR> getAll() {
 		// TODO Auto-generated method stub
 		return repositoryComunicazioniHR.findAll();
@@ -46,7 +40,7 @@ public class ServiceComunicazioniHRImpl implements ServiceComunicazioniHR{
 	@Override
 	public List<ComunicazioneHR> getAllNotVisible() {
 		// TODO Auto-generated method stub
-		return getAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList());
+		return repositoryComunicazioniHR.findByVisibileFalse(Sort.by("id").descending());
 	}
 	
 	

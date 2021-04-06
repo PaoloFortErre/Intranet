@@ -93,7 +93,7 @@ public abstract class BaseController {
 	    ImageWriter imageWriter = ImageIO.getImageWritersByFormatName(imageExtension).next();
 	    ImageWriteParam imageWriteParam = imageWriter.getDefaultWriteParam();
 	    if(!imageExtension.equalsIgnoreCase("png")) {
-	    	imageWriteParam.setCompressionMode(ImageWriteParam.MODE_DEFAULT);
+	    	imageWriteParam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
 	    	imageWriteParam.setCompressionQuality(quality);
 	    	imageWriteParam.setProgressiveMode(ImageWriteParam.MODE_DEFAULT);
 	    }

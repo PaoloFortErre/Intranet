@@ -20,7 +20,8 @@ public class ServiceAuthorityImpl implements ServiceAuthority{
 	@Override
 	public List<Authority> findByUserId(Integer id) {
 		// TODO Auto-generated method stub
-		return getAll().stream().filter(x -> x.getIdUtente()==id).collect(Collectors.toList());
+		//return getAll().stream().filter(x -> x.getIdUtente()==id).collect(Collectors.toList());
+		return authoritiesRepository.findByIdUtente(id); 
 	}
 	
 	@Override

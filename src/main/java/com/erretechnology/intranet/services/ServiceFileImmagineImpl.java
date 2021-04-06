@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.erretechnology.intranet.models.FileImmagine;
@@ -28,8 +29,7 @@ public class ServiceFileImmagineImpl implements ServiceFileImmagini{
 	
 	@Override
 	public FileImmagine getLastImmagineByUtente(UtenteDatiPersonali u) {
-		return getAll().stream().filter(x-> x.getAutore().equals(u))
-				.sorted(Comparator.comparingLong(FileImmagine::getTimestamp).reversed()).findFirst().get();
+		return repositoryFileImmagine.findTopByAutore(u, Sort.by("id").descending());
 	}
 
 	@Override
@@ -39,12 +39,12 @@ public class ServiceFileImmagineImpl implements ServiceFileImmagini{
 	
 	@Override
 	public boolean contains(byte[] data) {
-		return getAll().stream().filter(x->Arrays.equals(x.getData(), (data))).count() > 0;
+		return repositoryFileImmagine.findByData(data) != null;
 	}
 
 	@Override
 	public FileImmagine getImmagineByData(byte[] data) {
-		return getAll().stream().filter(x->Arrays.equals(x.getData(), (data))).findFirst().get();
+		return repositoryFileImmagine.findByData(data);
 	}
 
 }

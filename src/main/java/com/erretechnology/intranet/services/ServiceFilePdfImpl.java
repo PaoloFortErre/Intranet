@@ -1,12 +1,11 @@
 package com.erretechnology.intranet.services;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.erretechnology.intranet.models.FilePdf;
-import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.repositories.RepositoryFilePdf;
 @Service("ServiceFilePdf")
 public class ServiceFilePdfImpl implements ServiceFilePdf {
@@ -29,11 +28,6 @@ public class ServiceFilePdfImpl implements ServiceFilePdf {
 	}
 
 	@Override
-	public List<FilePdf> findByAutore(UtenteDatiPersonali autore) {
-		return findAll().stream().filter(x -> x.getAutore().equals(autore)).collect(Collectors.toList());
-	}
-
-	@Override
 	public void remove(FilePdf modulo) {
 		repositoryFilePdf.delete(modulo);
 	}
@@ -41,7 +35,7 @@ public class ServiceFilePdfImpl implements ServiceFilePdf {
 	@Override
 	public List<FilePdf> getAllNotVisible() {
 		// TODO Auto-generated method stub
-		return findAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList());
+		return repositoryFilePdf.findByVisibileFalse(Sort.by("id").descending());
 	}
 
 }

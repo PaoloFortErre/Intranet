@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.erretechnology.intranet.models.Commento;
 import com.erretechnology.intranet.models.ComunicazioneHR;
 import com.erretechnology.intranet.models.FilePdf;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
@@ -121,8 +119,7 @@ public class UploadController extends BaseController{
 	@PostMapping(value = "/deleteFilePdf")
 	public String deleteMessaggio(int id, HttpSession session) throws Exception {
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
-		if( autore.getUtente().getSetPermessi().contains(servicePermesso.findById("GM")) || 
-			serviceFilePdf.findByAutore(autore).stream().filter(x-> x.getId() == id).count() > 0) {
+		if( autore.getUtente().getSetPermessi().contains(servicePermesso.findById("GM"))) {
 			FilePdf pdf =serviceFilePdf.findById(id);
 			pdf.setVisibile(false);
 			pdf.setTimestampEliminazione(Instant.now().getEpochSecond());
@@ -138,8 +135,7 @@ public class UploadController extends BaseController{
 	@PostMapping(value = "/deleteFileHR")
 	public String deleteComunicazioneHR(int id, HttpSession session) throws Exception {
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
-		if( autore.getUtente().getSetPermessi().contains(servicePermesso.findById("GHR")) || 
-			serviceComunicazioni.findByAutore(autore).stream().filter(x-> x.getId() == id).count() > 0) {
+		if( autore.getUtente().getSetPermessi().contains(servicePermesso.findById("GHR"))) {
 			ComunicazioneHR pdf =serviceComunicazioni.findById(id);
 			pdf.setVisibile(false);
 			pdf.setTimestampEliminazione(Instant.now().getEpochSecond());
