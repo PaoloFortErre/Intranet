@@ -64,6 +64,7 @@ public class MyWorkController extends BaseController {
 		mav.addObject("nuoveAssunzioni", nuoviUtenti);
 		
 		List<ElementiMyWork> listPodcast = elementi.stream().filter(x -> x.getTipo().equals("podcast")).collect(Collectors.toList());
+		listPodcast.stream().forEach(x ->x.setPodcast(servicePodcast.getById(x.getId())));
 		mav.addObject("podcast", listPodcast);
 		/*if(listPodcast.size() != 0 && listPodcast!= null) {
 			Podcast primoPodcast = listPodcast.get(listPodcast.size()-1);

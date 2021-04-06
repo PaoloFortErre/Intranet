@@ -18,7 +18,15 @@ public class ElementiMyWork {
 	private String tipo;
 	@Transient
 	private FileImmagine immagine;
+	@Transient
+	private Podcast podcast;
 	
+	public Podcast getPodcast() {
+		return podcast;
+	}
+	public void setPodcast(Podcast podcast) {
+		this.podcast = podcast;
+	}
 	public FileImmagine getImmagine() {
 		return immagine;
 	}
