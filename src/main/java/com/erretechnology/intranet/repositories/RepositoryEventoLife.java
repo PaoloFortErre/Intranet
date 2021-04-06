@@ -15,9 +15,6 @@ public interface RepositoryEventoLife extends CrudRepository<EventoLife, Integer
 	@Query("SELECT e FROM EventoLife e WHERE e.data < ?1 AND e.visibile = true ORDER BY e.data DESC")
 	List<EventoLife> findRecentEvents(long date);
 	
-	@Query("SELECT e FROM EventoLife e WHERE e.visibile = true ORDER BY e.id DESC")
-	List<EventoLife> findOrderByIdDesc();
-	
 	@Query("SELECT e FROM EventoLife e WHERE e.visibile = false")
 	List<Evento> getAllNotVisible();
 }

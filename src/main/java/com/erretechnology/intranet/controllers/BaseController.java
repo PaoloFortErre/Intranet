@@ -5,6 +5,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.Instant;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
@@ -17,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.erretechnology.intranet.models.Log;
+import com.erretechnology.intranet.models.Notifica;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.services.ServiceAuthority;
 import com.erretechnology.intranet.services.ServiceCommento;
@@ -27,6 +30,7 @@ import com.erretechnology.intranet.services.ServiceElementiMyWork;
 import com.erretechnology.intranet.services.ServiceFileImmagini;
 import com.erretechnology.intranet.services.ServiceFilePdf;
 import com.erretechnology.intranet.services.ServiceLog;
+import com.erretechnology.intranet.services.ServiceNotifica;
 import com.erretechnology.intranet.services.ServicePermesso;
 import com.erretechnology.intranet.services.ServicePodcast;
 import com.erretechnology.intranet.services.ServicePost;
@@ -77,6 +81,8 @@ public abstract class BaseController {
 	protected ServiceElementiMyLife serviceElementiMyLife;
 	@Autowired
 	protected ServiceVideo serviceVideo;
+	@Autowired
+	protected ServiceNotifica serviceNotifica;
 	
 	protected void saveLog(String testo, UtenteDatiPersonali autore) {
 		Log log = new Log();
@@ -84,6 +90,42 @@ public abstract class BaseController {
 		log.setUtente(autore);
 		log.setAzione(testo);
 		serviceLog.save(log);
+	}
+	
+	protected void notificaSingola(String testo, UtenteDatiPersonali utente) {
+		Notifica n = new Notifica();
+		n.setDescrizione(testo);
+		n.setTimestamp(Instant.now().getEpochSecond());
+		serviceNotifica.save(n);
+		utente.addNotifica(n);
+		serviceDatiPersonali.save(utente);
+		n.addUtente(utente);
+	}
+	
+	protected void notificaTutti(String testo) {
+		Notifica n = new Notifica();
+		n.setDescrizione(testo);
+		n.setTimestamp(Instant.now().getEpochSecond());
+		serviceNotifica.save(n);
+		List<UtenteDatiPersonali> utenti = serviceDatiPersonali.getAttivi();
+		for(UtenteDatiPersonali u : utenti) {
+			u.addNotifica(n);
+			serviceDatiPersonali.save(u);
+			n.addUtente(u);
+		}
+	}
+	
+	protected void notificaSelezionati(String testo, String settore) {
+		Notifica n = new Notifica();
+		n.setDescrizione(testo);
+		n.setTimestamp(Instant.now().getEpochSecond());
+		serviceNotifica.save(n);
+		List<UtenteDatiPersonali> utenti = serviceDatiPersonali.getAttivi().stream().filter(x->x.getSettore().equals(settore)).collect(Collectors.toList());
+		for(UtenteDatiPersonali u : utenti) {
+			u.addNotifica(n);
+			serviceDatiPersonali.save(u);
+			n.addUtente(u);
+		}
 	}
 	
 	protected byte[] compressImage(MultipartFile mpFile, float qualita) {

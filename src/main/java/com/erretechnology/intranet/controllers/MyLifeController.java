@@ -47,7 +47,7 @@ public class MyLifeController extends BaseController {
 		List<ElementiMyLife> aforismi = elementi.stream().filter(x -> x.getTipo().equals("aphorism")).collect(Collectors.toList());
 		List<ElementiMyLife> film = elementi.stream().filter(x -> x.getTipo().equals("cinema")).collect(Collectors.toList());
 		List<ElementiMyLife> libri = elementi.stream().filter(x -> x.getTipo().equals("book")).collect(Collectors.toList());
-		ElementiMyLife video = elementi.stream().filter(x -> x.getTipo().equals("video")).collect(Collectors.toList()).get(0);
+		VideoDelGiorno video = serviceVideo.getLastVideo("MyLife");
 		
 		Page<Post> postPage= servicePost.findPaginated(PageRequest.of(currentPage - 1, 5));
 
@@ -79,7 +79,8 @@ public class MyLifeController extends BaseController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("addVideoMyLife");
 		mav.addObject("video", new VideoDelGiorno());
-		
+		notificaTutti("È stato inserito un nuovo video su MyLife!");
+
 		return mav;
 	}
 	
@@ -192,11 +193,13 @@ public class MyLifeController extends BaseController {
 	public String inserisciCommento(Commento commento, HttpSession session, int idPost) {
 		int id = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(id);
+		UtenteDatiPersonali autorePost = servicePost.findById(idPost).getAutore();
 		commento.setAutore(autore);
 		commento.setTimestamp(Instant.now().getEpochSecond());
 		commento.setPost(servicePost.findById(idPost));
 		commento.setVisibile(true);
 		serviceCommento.save(commento);
+		notificaSingola(autore.getNome() + " " + autore.getCognome() + " ha commentato il tuo post", autorePost);
 		saveLog("risposto a un post in bacheca", autore);
 		return "redirect:/myLife/";
 	}

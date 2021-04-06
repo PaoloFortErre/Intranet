@@ -258,7 +258,7 @@ table, th, td {
 					<tr>
 						<td th:each="cliente: ${nuoviClienti}"
 							style="text-align: center; vertical-align: middle;"><img
-							th:src="'data:image/png;base64,' + ${cliente.logo.getImgData(cliente.logo.data)}"
+							th:src="'data:image/png;base64,' + ${cliente.immagine.getImgData(cliente.immagine.data)}"
 							alt="fotoProfiloUtente" class="img-fluid" width="70%"
 							style="margin-bottom: -17px; height: 320px"></td>
 
@@ -271,7 +271,7 @@ table, th, td {
 						<td th:each="cliente: ${nuoviClienti}" style="text-align: center;">
 							<p style="font-size: 22px; margin-bottom: -5px">Una nuova
 								partnership con</p>
-							<p th:text="${cliente.nome}"
+							<p th:text="${cliente.titolo}"
 								style="font-style: italic; font-weight: 900; font-size: 25px;">
 							</p>
 
@@ -626,8 +626,8 @@ table, th, td {
 					style="background-color: white; border: 0px solid #232323; color: black; font-size: 12px; padding: 8px; width: 150px; float: right; padding-left: 25px;">
 					Aggiungi video</a>
 				<h3 style="text-align: center;" class="mb-5"
-					th:text="${video.titolo}"></h3>
-				<iframe width="100%" height="800" th:src="${video.contenuto}"
+					th:text="${video.sottoTitolo}"></h3>
+				<iframe width="100%" height="800" th:src="${video.link}"
 					title="YouTube video player" frameborder="0"
 					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 					allowfullscreen></iframe>

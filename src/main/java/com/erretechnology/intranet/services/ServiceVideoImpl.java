@@ -15,7 +15,7 @@ public class ServiceVideoImpl implements ServiceVideo{
 	@Override
 	public VideoDelGiorno getLastVideo(String nomePagina) {
 		// TODO Auto-generated method stub
-		return repositoryVideo.findTopByPagina(nomePagina);
+		return repositoryVideo.findTopByPaginaOrderByIdDesc(nomePagina);
 	}
 
 	@Override

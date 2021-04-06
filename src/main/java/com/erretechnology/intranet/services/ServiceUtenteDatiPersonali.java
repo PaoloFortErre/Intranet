@@ -13,4 +13,5 @@ public interface ServiceUtenteDatiPersonali {
 	public UtenteDatiPersonali findByAutore(Utente autore);
 	public void insert(String psw, String email, String settore,UtenteDatiPersonali udp);
 	public List<UtenteDatiPersonali> getInattivi();
+	public List<UtenteDatiPersonali> getAttivi();
 }

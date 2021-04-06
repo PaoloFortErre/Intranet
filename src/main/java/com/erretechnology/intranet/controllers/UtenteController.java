@@ -69,7 +69,9 @@ public class UtenteController extends BaseController {
 			mav.addObject("admin", false);
 			mav.addObject("log", serviceLog.findLastFiveLogById(u));
 		}
-			
+		for(int i = 0; i < u.getSetNotifiche().size(); i++) {
+			System.out.println(u.getSetNotifiche().get(i).getDescrizione());
+		}
 		mav.addObject("post", servicePost.getByAutore(u));
 		mav.setViewName("profilo_admin");
 		mav.addObject("attivi", serviceUtente.getAll().stream().filter(x -> x.getAttivo()).count());

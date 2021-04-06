@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,20 +18,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.erretechnology.intranet.models.Cliente;
 import com.erretechnology.intranet.models.ComunicazioneHR;
 import com.erretechnology.intranet.models.ElementiMyWork;
 import com.erretechnology.intranet.models.Podcast;
 import com.erretechnology.intranet.models.Sondaggio;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.models.VideoDelGiorno;
-import com.erretechnology.intranet.repositories.RepositoryCliente;
 
 @Controller
 @RequestMapping(value = "myWork")
 public class MyWorkController extends BaseController {
-	@Autowired
-	private RepositoryCliente repoCliente;
 
 	@GetMapping(value = "/")
 	public ModelAndView primaPagina(HttpSession session) {
@@ -73,12 +68,9 @@ public class MyWorkController extends BaseController {
 			mav.addObject("altriPodcast", listPodcast.stream().limit(3).sorted(Comparator.comparingInt(Podcast::getId).reversed()).collect(Collectors.toList()));
 		}*/
 		
-		List<Cliente> clienti = repoCliente.findLimit(1);
-		if(clienti.size() > 0) {
-			mav.addObject("nuoviClienti", clienti);
-		} else {
-			mav.addObject("nuoviClienti", null);
-		}
+
+		List<ElementiMyWork> clienti= elementi.stream().filter(x -> x.getTipo().equals("cliente")).collect(Collectors.toList());
+		mav.addObject("nuoviClienti", clienti);
 
 		List<ElementiMyWork> news= elementi.stream().filter(x -> x.getTipo().equals("news")).collect(Collectors.toList());
 		mav.addObject("newsSlide", news);
@@ -101,7 +93,7 @@ public class MyWorkController extends BaseController {
 		List<ElementiMyWork> eventi = elementi.stream().filter(x -> x.getTipo().equals("event")).collect(Collectors.toList());
 		mav.addObject("eventi", eventi);
 		
-		ElementiMyWork video = elementi.stream().filter(x -> x.getTipo().equals("video")).collect(Collectors.toList()).get(0);
+		VideoDelGiorno video = serviceVideo.getLastVideo("MyWork");
 		mav.addObject("video", video);
 
 		//mav.addObject("video", serviceVideo.getLastVideo("MyWork"));
@@ -117,7 +109,6 @@ public class MyWorkController extends BaseController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("addVideo");
 		mav.addObject("video", new VideoDelGiorno());
-		
 		return mav;
 	}
 	
@@ -127,6 +118,7 @@ public class MyWorkController extends BaseController {
 		video.setPagina("MyWork");
 		serviceVideo.save(video);
 		saveLog("aggiornato il video su myWork", autore);
+		notificaTutti("È stato inserito un nuovo video su MyWork!");
 		return "redirect:/myWork/";
 	}
 	
@@ -138,6 +130,7 @@ public class MyWorkController extends BaseController {
 		sondaggio.setVisibile(true);
 		serviceSondaggio.save(sondaggio);
 		saveLog("creato un nuovo sondaggio", autore);
+		notificaTutti("È stato inserito un nuovo sondaggio!");
 		return "redirect:/myWork/";
 	}
 

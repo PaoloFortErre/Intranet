@@ -1,11 +1,16 @@
 package com.erretechnology.intranet.models;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -34,8 +39,16 @@ public class UtenteDatiPersonali implements Serializable, MyWorkBean{
 	@JoinColumn(name = "id_immagine")
 	private FileImmagine immagine;
 	private boolean visualizzaDataNascita;
+	@ManyToMany(mappedBy = "setUtenti", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<Notifica> setNotifiche;
 
 
+	public List<Notifica> getSetNotifiche() {
+		return setNotifiche;
+	}
+	public void setSetNotifiche(List<Notifica> setNotifiche) {
+		this.setNotifiche = setNotifiche;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -119,5 +132,9 @@ public class UtenteDatiPersonali implements Serializable, MyWorkBean{
 	}
 	public void setImmagine(FileImmagine immagine) {
 		this.immagine = immagine;
+	}
+	public void addNotifica(Notifica n) {
+		setNotifiche.add(n);
+		
 	}
 }
