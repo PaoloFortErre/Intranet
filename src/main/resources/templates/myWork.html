@@ -413,7 +413,7 @@ table, th, td {
         </div>
         
         <!-- Modal body -->
-        <div class="modal-body" th:each="podcast : ${podcast}">
+        <div class="modal-body" th:each="podcast : ${podcast}" th:if="${podcast!=null}" style="background-color: #B9CAF0;">
         <p th:text="${podcast.podcast.nome}" style="color: #303030 "></p>
           <audio controls style="margin-top: 10px;" preload="metadata">
 						<source
@@ -424,7 +424,7 @@ table, th, td {
         
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
         </div>
         
       </div>
