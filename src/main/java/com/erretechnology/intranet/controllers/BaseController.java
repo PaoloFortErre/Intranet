@@ -38,9 +38,6 @@ import com.erretechnology.intranet.services.ServiceUtente;
 import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 import com.erretechnology.intranet.services.ServiceVideo;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
 public abstract class BaseController {
 	@Autowired
 	protected ServiceAuthority serviceAuthority;
