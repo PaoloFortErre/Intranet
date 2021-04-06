@@ -95,7 +95,7 @@
               <tr th:each="libro:${libri}">
                 <td class="text-center" th:text="${libro.id}"></td>
                 <th th:text="${libro.titolo}"></th>
-                <td th:text="${libro.autore}"></td>
+                <td th:text="${libro.scrittore}"></td>
                 <td th:utext="${#dates.format(libro.timestampEliminazione*1000, 'dd/MM/yyyy, HH:mm')}"></td>
                 <td>
                   <div class="img-fluid text-center">

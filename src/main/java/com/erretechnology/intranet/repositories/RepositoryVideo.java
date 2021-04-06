@@ -7,5 +7,5 @@ import com.erretechnology.intranet.models.VideoDelGiorno;
 
 public interface RepositoryVideo extends JpaRepository<VideoDelGiorno, Integer>{
 	@Query
-	public VideoDelGiorno findTopByPagina(String pagina);
+	public VideoDelGiorno findTopByPaginaOrderByIdDesc(String pagina);
 }

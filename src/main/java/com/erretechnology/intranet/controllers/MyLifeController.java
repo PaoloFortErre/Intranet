@@ -47,7 +47,7 @@ public class MyLifeController extends BaseController {
 		List<ElementiMyLife> aforismi = elementi.stream().filter(x -> x.getTipo().equals("aphorism")).collect(Collectors.toList());
 		List<ElementiMyLife> film = elementi.stream().filter(x -> x.getTipo().equals("cinema")).collect(Collectors.toList());
 		List<ElementiMyLife> libri = elementi.stream().filter(x -> x.getTipo().equals("book")).collect(Collectors.toList());
-		ElementiMyLife video = elementi.stream().filter(x -> x.getTipo().equals("video")).collect(Collectors.toList()).get(0);
+		VideoDelGiorno video = serviceVideo.getLastVideo("MyLife");
 		
 		Page<Post> postPage= servicePost.findPaginated(PageRequest.of(currentPage - 1, 5));
 

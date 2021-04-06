@@ -101,7 +101,7 @@ public class MyWorkController extends BaseController {
 		List<ElementiMyWork> eventi = elementi.stream().filter(x -> x.getTipo().equals("event")).collect(Collectors.toList());
 		mav.addObject("eventi", eventi);
 		
-		ElementiMyWork video = elementi.stream().filter(x -> x.getTipo().equals("video")).collect(Collectors.toList()).get(0);
+		VideoDelGiorno video = serviceVideo.getLastVideo("MyWork");
 		mav.addObject("video", video);
 
 		//mav.addObject("video", serviceVideo.getLastVideo("MyWork"));
