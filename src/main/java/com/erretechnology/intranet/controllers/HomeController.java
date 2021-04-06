@@ -138,7 +138,9 @@ public class HomeController extends BaseController{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("reset_password_form");
 		if(psw.equals(cPsw)) {
-			String regex = "^(?=.*[0-9]) (?=.*[a-z])(?=.*[A-Z]) (?=\\S+$).{8,20}$";
+			String regex = "^(?=.*[0-9])"
+					+ "(?=.*[a-z])(?=.*[A-Z])"
+					+ "(?=\\S+$).{8,20}$";
 			Pattern p = Pattern.compile(regex);
 			Matcher m = p.matcher(psw);
 			if(!m.matches()) {

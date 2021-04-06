@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.erretechnology.intranet.models.Commento;
@@ -17,7 +18,8 @@ public class ServiceCommentoImpl implements ServiceCommento{
 	
 	@Override
 	public List<Commento> getLastMessage() {
-		return repositoryCommento.findAll().stream().filter(x -> x.isVisibile()).sorted(Comparator.comparingInt(Commento::getId).reversed()).collect(Collectors.toList());
+	//	return repositoryCommento.findAll().stream().filter(x -> x.isVisibile()).sorted(Comparator.comparingInt(Commento::getId).reversed()).collect(Collectors.toList());
+		return repositoryCommento.findByVisibileTrue(Sort.by("id"));
 	}
 
 	@Override
@@ -46,7 +48,8 @@ public class ServiceCommentoImpl implements ServiceCommento{
 	@Override
 	public List<Commento> getAllNotVisible() {
 		// TODO Auto-generated method stub
-		return getAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList());
+	//	return getAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList());
+		return repositoryCommento.findByVisibileFalse(Sort.by("id"));
 	}
 
 }

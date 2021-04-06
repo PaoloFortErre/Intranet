@@ -32,13 +32,15 @@ public class ServiceUtenteImpl implements ServiceUtente{
 	}
 	@Override
 	public Utente findByEmail(String email) {
-		return getAll().stream().filter(x -> x.getEmail().equals(email)).findFirst().get();
+	//	return getAll().stream().filter(x -> x.getEmail().equals(email)).findFirst().get();
+		return userRepository.findByEmail(email);
 	}
 	@Override
 	public Utente findByResetPasswordToken(String token) {
-		return getAll().stream().filter(x-> x.getTokenResetPassword() != null)
+		return userRepository.findByTokenResetPassword(token);
+	/*	return getAll().stream().filter(x-> x.getTokenResetPassword() != null)
 			  .filter(x -> x.getTokenResetPassword().equals(token)).findFirst().orElse(null);
-	}
+	*/}
 	@Override
 	public void updateResetPasswordToken(String token, String email) /*throws CustomerNotFoundException*/ {
 		Utente utente = findByEmail(email);
@@ -56,7 +58,9 @@ public class ServiceUtenteImpl implements ServiceUtente{
 
 	@Override
 	public boolean foundEmail(String email) {
-		return getAll().stream().filter(x-> x.getEmail().equals(email)).count() == 1;
+		if(findByEmail(email)!= null) return true;
+		return false;
+	//	return getAll().stream().filter(x-> x.getEmail().equals(email)).count() == 1;
 	}
 
 }
