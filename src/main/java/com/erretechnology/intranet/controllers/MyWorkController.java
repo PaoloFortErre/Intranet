@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.erretechnology.intranet.models.Cliente;
 import com.erretechnology.intranet.models.ComunicazioneHR;
 import com.erretechnology.intranet.models.ElementiMyWork;
+import com.erretechnology.intranet.models.Podcast;
 import com.erretechnology.intranet.models.Sondaggio;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.models.VideoDelGiorno;
@@ -63,8 +64,7 @@ public class MyWorkController extends BaseController {
 	//	setMAV(mav, nuoviUtenti, 0, 6, "nuoviAssunti");
 		mav.addObject("nuoveAssunzioni", nuoviUtenti);
 		
-		List<ElementiMyWork> listPodcast = elementi.stream().filter(x -> x.getTipo().equals("podcast")).collect(Collectors.toList());
-		listPodcast.stream().forEach(x ->x.setPodcast(servicePodcast.getById(x.getId())));
+		List<Podcast> listPodcast = servicePodcast.getAll();
 		mav.addObject("podcast", listPodcast);
 		/*if(listPodcast.size() != 0 && listPodcast!= null) {
 			Podcast primoPodcast = listPodcast.get(listPodcast.size()-1);

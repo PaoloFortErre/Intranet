@@ -36,7 +36,7 @@ public class ServicePermessoImpl implements ServicePermesso{
 	
 	@Override
 	public Permesso findByDescrizione(String descrizione) {
-		return getAll().stream().filter(x-> x.getDescrizione().equals(descrizione)).findFirst().get();
+		return repositoryPermesso.findByDescrizione(descrizione);
 	}
 	
 	

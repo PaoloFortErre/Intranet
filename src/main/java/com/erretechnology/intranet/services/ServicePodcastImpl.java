@@ -1,13 +1,9 @@
 package com.erretechnology.intranet.services;
-
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.Podcast;
 import com.erretechnology.intranet.repositories.RepositoryPodcast;
 
@@ -24,12 +20,12 @@ public class ServicePodcastImpl implements ServicePodcast{
 
 	@Override
 	public List<Podcast> getAll() {
-		return repositoryPodcast.findAll().stream().filter(x -> x.getVisibile()).collect(Collectors.toList());
+		return repositoryPodcast.findByVisibileTrue(Sort.by("id").descending());
 	}
 
 	@Override
 	public List<Podcast> getAllNotVisible() {
-		return repositoryPodcast.findAll().stream().filter(x -> x.getVisibile()==false).collect(Collectors.toList());
+		return repositoryPodcast.findByVisibileFalse(Sort.by("id").descending());
 	}
 
 	@Override
@@ -39,12 +35,12 @@ public class ServicePodcastImpl implements ServicePodcast{
 
 	@Override
 	public boolean contains(byte[] data) {
-		return getAll().stream().filter(x->Arrays.equals(x.getPodcast(), (data))).count() > 0;
+		return repositoryPodcast.findByPodcast(data) != null;
 	}
 
 	@Override
 	public Podcast getpodcastByData(byte[] data) {
-		return getAll().stream().filter(x->Arrays.equals(x.getPodcast(), (data))).findFirst().get();
+		return repositoryPodcast.findByPodcast(data);
 	}
 
 	@Override
