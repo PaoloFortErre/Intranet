@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -90,6 +91,16 @@ public class MyLifeController extends BaseController {
 		video.setPagina("MyLife");
 		serviceVideo.save(video);
 		saveLog("aggiornato il video su myLife", autore);
+		return "redirect:/myLife/";
+	}
+	
+	@PostMapping(value = "/likePost")
+	public String likePost(int id, HttpSession session) {
+		UtenteDatiPersonali utente = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		Post p = servicePost.findById(id);
+		p.addUtente(utente);
+		servicePost.save(p);
+		utente.addUtente(p);
 		return "redirect:/myLife/";
 	}
 
