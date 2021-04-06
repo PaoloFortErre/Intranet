@@ -64,19 +64,12 @@ public class UtenteController extends BaseController {
 			mav.addObject("log", serviceLog.findLastFive());
 			mav.addObject("allLog", serviceLog.findAll());
 			mav.addObject("admin", true);
-<<<<<<< Updated upstream
 		} else {
-			mav.addObject("post", servicePost.getByAutore(u));
-			mav.addObject("log",
-					serviceLog.findLastFiveLogById(Integer.parseInt(session.getAttribute("id").toString())));
-=======
-		}
-		else {
-			mav.addObject("log", serviceLog.findLastFiveLogById(Integer.parseInt(session.getAttribute("id").toString())));
->>>>>>> Stashed changes
 			mav.addObject("allLog", serviceLog.findLogById(Integer.parseInt(session.getAttribute("id").toString())));
 			mav.addObject("admin", false);
+			mav.addObject("log", serviceLog.findLastFiveLogById(Integer.parseInt(session.getAttribute("id").toString())));
 		}
+			
 		mav.addObject("post", servicePost.getByAutore(u));
 		mav.setViewName("profilo_admin");
 		mav.addObject("attivi", serviceUtente.getAll().stream().filter(x -> x.getAttivo()).count());
