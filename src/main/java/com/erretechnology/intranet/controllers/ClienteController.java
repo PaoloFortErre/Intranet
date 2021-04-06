@@ -63,7 +63,7 @@ public class ClienteController extends BaseController{
 			UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
 
 			FileImmagine img = new FileImmagine();
-			img.setData(immagine.getBytes());
+			img.setData(compressImage(immagine, 60));
 			img.setAutore(utenteLoggato);
 			img.setTimestamp(Instant.now().getEpochSecond());
 			img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
@@ -101,7 +101,7 @@ public class ClienteController extends BaseController{
 
 		if(!immagine.getOriginalFilename().isEmpty()) {
 			FileImmagine img = new FileImmagine();			
-			img.setData(immagine.getBytes());
+			img.setData(compressImage(immagine, 60));
 			if(!serviceFileImmagine.contains(img.getData())) {
 				int idUser = Integer.parseInt(session.getAttribute("id").toString());
 				UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);

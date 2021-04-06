@@ -1,8 +1,20 @@
 package com.erretechnology.intranet.controllers;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.time.Instant;
 
+import javax.imageio.IIOImage;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.ImageOutputStream;
+import javax.imageio.stream.MemoryCacheImageOutputStream;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.erretechnology.intranet.models.Log;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
@@ -25,6 +37,9 @@ import com.erretechnology.intranet.services.ServiceSondaggio;
 import com.erretechnology.intranet.services.ServiceUtente;
 import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 import com.erretechnology.intranet.services.ServiceVideo;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 public abstract class BaseController {
 	@Autowired
@@ -72,5 +87,35 @@ public abstract class BaseController {
 		log.setUtente(autore);
 		log.setAzione(testo);
 		serviceLog.save(log);
+	}
+	
+	protected byte[] compressImage(MultipartFile mpFile, float qualita) {
+	    float quality = qualita;
+	    String imageName = mpFile.getOriginalFilename();
+	    String imageExtension = imageName.substring(imageName.lastIndexOf(".") + 1);
+	    ImageWriter imageWriter = ImageIO.getImageWritersByFormatName(imageExtension).next();
+	    ImageWriteParam imageWriteParam = imageWriter.getDefaultWriteParam();
+	    if(!imageExtension.equalsIgnoreCase("png")) {
+	    	imageWriteParam.setCompressionMode(ImageWriteParam.MODE_DEFAULT);
+	    	imageWriteParam.setCompressionQuality(quality);
+	    	imageWriteParam.setProgressiveMode(ImageWriteParam.MODE_DEFAULT);
+	    }
+	    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	    ImageOutputStream imageOutputStream = new MemoryCacheImageOutputStream(baos);
+	    imageWriter.setOutput(imageOutputStream);
+	    BufferedImage originalImage = null;
+	    try (InputStream inputStream = mpFile.getInputStream()) {
+	        originalImage = ImageIO.read(inputStream); 
+	    } catch (IOException e) {
+	        return baos.toByteArray();
+	    }
+	    IIOImage image = new IIOImage(originalImage, null, null);
+	    try {
+	        imageWriter.write(null, image, imageWriteParam);
+	    } catch (IOException e) {
+	    } finally {
+	        imageWriter.dispose();
+	    }
+	    return baos.toByteArray();
 	}
 }
