@@ -1,60 +1,102 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="it">
 <head>
-<title>Modulistica</title>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<title>Moduli</title>
+	<meta name="description" content="Questo è un profilo admin">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- Add icon library -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- Add text library -->
+	<link href='https://fonts.googleapis.com/css?family=Montserrat'
+	rel='stylesheet' type='text/css'>
+	<!-- Add icon library -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+	crossorigin="anonymous">
 
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap"
-	rel="stylesheet">
-
-
-
+	<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+	crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+	crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/view/cssGio/style.css">
 
+<style media="screen">
+.nav-link:hover {
+	color: #ECF260;
+	font-weight: 600;
+}
+.logo:hover{
+	opacity: 1;
+}
+.logo{
+	opacity: 0.5;
+}
+nav {
+	font-size: 20px;
+	color: #F3F3F3;
+	width: 100%
+
+}
+
+.casa:hover {
+	opacity: 0.8 !important;
+}
+</style>
 </head>
-<body>
+<body ng-app=""
+	th:with="GML = ${#authorization.expression('hasAuthority(''GML'')')}" onresize="myFunction()">
 
-	<div class="row" style="background-color: #303030">
-		<div>
-			<nav class="navbar navbar-nav navbar-right">
-				<div class="content" style="display: inline-block">
-					<a th:href="@{/homepage/}"><img
-						src="/view/MyWork/images/casabianca.png" width="30px"
-						style="margin-top: -10px; opacity: 0.9"> </a>
-				</div>
-
-				<div class="content" style="display: inline-block; color: #ECF260;">
-					<a th:href="@{/comunicazioniHr/}">COMUNICAZIONI HR</a>
-				</div>
-				<div class="content" style="display: inline-block">
-					<a style="color: #ECF260; text-decoration: none">MODULI</a>
-				</div>
-				<div class="content" style="display: inline-block">
-					<a href="http://polyedro.erretechnology.com/www/" target="blank">POLYEDRO</a>
-				</div>
-				<div style="position: relative; float: right">
-					<a th:href="@{/profile/}"><img
+	<nav
+		class="navbar navbar-expand-md bg-dark navbar-dark justify-content-end">
+		<a class="navbar-brand logo" th:href="@{/homepage/}"><img
+			src="/view/MyWork/images/casabianca.png" width="30px"
+			alt="homeBianca.png" style="opacity: 0.9" class="img-fluid"></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse justify-content-end"
+			id="collapsibleNavbar">
+			<ul class="navbar-nav ml-5 mr-5">
+				<li class="nav-item mr-3 mt-3"><a class="nav-link"
+					th:href="@{/myLife/}">MY LIFE</a></li>
+				<li class="nav-item mr-3 mt-3"><a class="nav-link"
+					th:href="@{/comunicazioniHr/}">COMUNICAZIONI HR</a></li>
+				<li class="nav-item mr-3 mt-3"><a class="nav-link"
+					th:href="@{/moduli/}">MODULI</a></li>
+				<li class="nav-item mr-3 mt-3"><a class="nav-link"
+					href="http://polyedro.erretechnology.com/www/" target="blank">POLYEDRO</a>
+				</li>
+				<li class="nav-item avatar dropdown mt-3">
+					<a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						<span class="badge badge-danger ml-2">4</span>
+						<i class="fa fa-bell"></i>
+					</a>
+					<div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-5">
+						<a class="dropdown-item waves-effect waves-light" href="#">Action <span class="badge badge-danger ml-2">4</span></a>
+						<a class="dropdown-item waves-effect waves-light" href="#">Another action <span class="badge badge-danger ml-2">1</span></a>
+						<a class="dropdown-item waves-effect waves-light" href="#">Something else here <span class="badge badge-danger ml-2">4</span></a>
+					</div>
+				</li>
+				<li class="nav-item mr-3 mt-3"><a class="nav-link"
+					th:href="@{/profile/}" target="blank" id="scrittaProfilo"
+					style="display: none;">PROFILO</a></li>
+				<li class="nav-item"><a th:href="@{/profile/}"><img
 						th:src="'data:image/jpeg;base64,' + ${user.immagine.getImgData(user.immagine.data)}"
-						alt="utente" title="utente" class="immagineUtente"
-						id="utente-foto-profilo"
-						style="margin: 30px; margin-right: 40px; border-radius: 50%; margin-top: 0px;"></a>
-				</div>
-			</nav>
+						alt="utente" title="utente" class="immagineUtente img-fluid"
+						id="utente-foto-profilo" style="border-radius: 50%;"></a></li>
+
+			</ul>
 		</div>
-	</div>
-	<div class="row">
-		<img src="/view/MyWork/images/giaccalogo.png" id="headerHR">
-	</div>
+	</nav>
 
 	<div class="container" th:with="GM = ${#authorization.expression('hasAuthority(''GM'')')}">
 		<div th:if="${GM}">
@@ -67,9 +109,9 @@
 			<div class="col-xs-6 col-sm-6 col-md-4 col-lg-4"
 				th:each="pdf: ${filePdf}">
 				<div class="modulo" style="margin: auto;"
-				 th:if="((${pdf.settore} == ${user.settore.nomeSettore}) or ${GM}) and ${pdf.visibile}">	
+				 th:if="((${pdf.settore} == ${user.settore.nomeSettore}) or ${GM}) and ${pdf.visibile}">
 					<div th:if="${admin}">
-					
+
 					</div>
 					<div id="modulo-img">
 						<img src="/view/MyWork/images/modulo.png" width="100%"
