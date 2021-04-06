@@ -4,7 +4,7 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
 	<meta charset="ISO-8859-1">
-	<title>Sondaggio editing</title>
+	<title>Video MyLife editing</title>
 
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet"
@@ -55,7 +55,47 @@
 					<a class="mr-2" th:href="@{/myLife/}" style="color: #F3F3F3;">
 						<img src="/view/MyWork/images/frecciasinistra.png" style="display: inline-block;" width="20%">Torna indietro
 					</a>
-				</p>
+				</p><br> 
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin-left: 12px; font-size: 18px">
+    Come inserire il link giusto
+  </button> <br>
+    <div class="modal" id="myModal" style="color: #303030">
+    <div class="modal-dialog" >
+      <div class="modal-content" style="width: 700px; margin: 0 auto;">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title" style="font-size: 22px; color: #303030" > Come inserire il link giusto: </h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body" style="color: #303030">
+        
+        <p style="font-size: 20px; font-weight: 900; color: #303030"> PASSO 1: </p>
+ 		<p  style="color: #303030">  Scegliere il video da condividere (Youtube/Vimeo) e aprirlo come per riprodurlo </p>
+ 		<img src="/view/MyWork/images/riproduci.png" width="100%" > 
+ 		<br><br>
+ 		<p style="font-size: 20px; font-weight: 900; color: #303030"> PASSO 2: </p>
+ 		<p  style="color: #303030"> Selezionare "Condividi" a destra sotto la riproduzione </p>
+ 		<img src="/view/MyWork/images/condividi.png" width="100%" > 
+ 		<br><br>
+ 		<p style="font-size: 20px; font-weight: 900; color: #303030"> PASSO 3: </p>
+ 		<p  style="color: #303030"> Selezionare "Incorpora"</p>
+ 		<img src="/view/MyWork/images/incorpora.png" width="100%" > 
+ 		<br><br>
+ 		<p style="font-size: 20px; font-weight: 900; color: #303030"> PASSO 4: </p>
+ 		<p  style="color: #303030"> Copiare la parte di testo (link) evidenziata in giallo</p>
+ 		<img src="/view/MyWork/images/evidenzia.png" width="100%" > 
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
 
 				<form th:object="${video}" th:action="@{/myLife/video}"
 				method="post" enctype="multipart/form-data"  class="signin-form">

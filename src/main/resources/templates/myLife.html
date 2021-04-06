@@ -135,7 +135,7 @@
 		</ul>
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<img src="/view/MyWork/images/ferrari1.png" alt="ferrari"
+				<img src="/view/MyLife/images/barc.jpg" alt="ferrari"
 					title="ferrari" width="100%" height="500" class="img-fluid">
 				<div class="carousel-caption" th:if="${aforisma.size>0}">
 					<h1
@@ -161,7 +161,7 @@
 				</div>
 			</div>
 			<div class="carousel-item">
-				<img src="/view/MyWork/images/scarpe.png" alt="scarpe" width="100%"
+				<img src="/view/MyLife/images/mare.png" alt="scarpe" width="100%"
 					height="500" class="img-fluid">
 				<div class="carousel-caption" th:if="${aforisma.size>1}">
 					<h1
@@ -833,6 +833,9 @@ COLONNA DESTRA
 			<div class="col-xs-0 col-sm-0 col-lg-2 col-xl-2 mt-5"></div>
 			<div class="col-xs-12 col-sm-12 col-lg-8 col-xl-8 mt-5" style="margin-top: 50px;">
 			<h1 style="text-align: center; "> Il video del mese </h1>
+			<a th:href="@{/myLife/addVideoMyLife/}" th:if="${GML}"
+					style="background-color: white; border: 0px solid #232323; color: black; font-size: 12px; padding: 8px; width: 150px; float: right; padding-left: 25px;">
+					Aggiungi video</a>
 			<h3 style="text-align: center; " class="mb-5" th:text="${video.titolo}"></h3>
 			<iframe width="100%" height="800" th:src="${video.contenuto}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 

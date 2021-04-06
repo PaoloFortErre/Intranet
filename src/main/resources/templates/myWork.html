@@ -187,7 +187,7 @@ table, th, td {
 				<h1 style="text-align: center">Le ultime novità</h1>
 				<br>
 			</div>
-			<div class="col-xs-12 col-sm-3 col-lg-4 col-xl-4">
+			<div class="col-xs-12 col-sm-4 col-lg-4 col-xl-4">
 				<table class="table table-borderless"
 					th:if="${nuoveAssunzioni!=null}">
 
@@ -213,7 +213,7 @@ table, th, td {
 
 				</table>
 			</div>
-			<div class="col-xs-12 col-sm-3 col-lg-4 col-xl-4">
+			<div class="col-xs-12 col-sm-4 col-lg-4 col-xl-4">
 				<table class="table table-borderless" th:if="${nuoviClienti.size>0}">
 
 					<tr>
@@ -257,7 +257,7 @@ table, th, td {
 
 				</table>
 			</div>
-			<div class="col-xs-12 col-sm-3 col-lg-4 col-xl-4">
+			<div class="col-xs-12 col-sm-4 col-lg-4 col-xl-4">
 				<table class="table table-borderless"
 					style="vertical-align: middle;" th:if="${newsSlide.size>0}">
 
@@ -376,13 +376,13 @@ table, th, td {
 			 °°°°°°°°°°°°°°°°°-->
 		<br> <br> <br> <br>
 		<div class="row mt-5 mb-5"
-			style="width: 102%; height: 700px; background-image: url('/view/MyWork/images/schizzo.png'); background-position: center; background-repeat: no-repeat; background-size: cover;">
+			style="width: 102%; height: 700px; background-image: url('/view/MyWork/images/schizzo.png'); background-position: center; background-repeat: no-repeat; background-size: cover; margin-top: 1000px">
 			<div class="col-xs-12 col-sm-12 col-lg-12 col-xl-12">
 				<br>
 				<h1 style="text-align: center">Il mondo dentro e fuori</h1>
 
 			</div>
-			<div class="col-xs-12 col-sm-3 col-lg-4 col-xl-4">
+			<div class="col-xs-12 col-sm-4 col-lg-4 col-xl-4">
 				<table class="table table-borderless">
 					<tr>
 						<td style="text-align: center; vertical-align: middle;"><img
@@ -391,11 +391,47 @@ table, th, td {
 					</tr>
 					<tr>
 						<td style="text-align: center; vertical-align: middle;"><p
-								style="font-size: 22px;">I podcast di <span style="font-style: italic; font-weight: 900; font-size: 25px; margin-bottom: -5PX;"> Rosario </span></p></td>
+								style="font-size: 22px;"  >I podcast di <span style="font-style: italic; font-weight: 900; font-size: 25px; margin-bottom: -5PX;" > Rosario </span></p>
+								<button type="button"  data-toggle="modal" data-target="#myModal" style="background-color: transparent; border: 0px solid; font-size: 12px">
+    Ascolta gli ultimi podcast<img src="/view/MyWork/images/record.png" width="12%"> 
+  </button>
+								</td>
 					</tr>
 				</table>
+				  <!-- Button to Open the Modal -->
+  
+
+  <!-- The Modal -->
+  <div class="modal" id="myModal" style="color: #303030">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title" style="font-size: 22px; color: #303030" > I podcast di <span style="font-style: italic; font-weight: 900; font-size: 25px; margin-bottom: -5PX;" > Rosario </span></h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body" th:each="podcast : ${podcast}">
+        <p th:text="${podcast.podcast.nome}" style="color: #303030 "></p>
+          <audio controls style="margin-top: 10px;" preload="metadata">
+						<source
+							th:src="'data:audio/mp3;base64,' + ${podcast.podcast.getAudioData(podcast.podcast.podcast)}"
+							type="audio/ogg"  >
+					</audio>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
 			</div>
-			<div class="col-xs-12 col-sm-3 col-lg-4 col-xl-4">
+			<div class="col-xs-12 col-sm-4 col-lg-4 col-xl-4">
 				<table class="table table-borderless" th:if="${eventi.size > 0}">
 					<tr>
 						<td style="text-align: center; vertical-align: middle;"
@@ -514,7 +550,7 @@ table, th, td {
 					</tr>
 				</table>
 			</div>
-			<div class="col-xs-12 col-sm-3 col-lg-4 col-xl-4">
+			<div class="col-xs-12 col-sm-4 col-lg-4 col-xl-4">
 				<table class="table table-borderless"
 					th:if="${utente!=null AND !utente.isEmpty}">
 					<tr>
