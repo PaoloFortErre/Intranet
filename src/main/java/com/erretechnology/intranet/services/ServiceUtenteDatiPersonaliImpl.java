@@ -11,6 +11,7 @@ import com.erretechnology.intranet.models.Permesso;
 import com.erretechnology.intranet.models.Ruolo;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
+import com.erretechnology.intranet.repositories.RepositoryUtente;
 import com.erretechnology.intranet.repositories.RepositoryUtenteDatiPersonali;
 
 @Service("serviceUtenteDati")
@@ -19,6 +20,7 @@ public class ServiceUtenteDatiPersonaliImpl extends BaseController implements Se
 	@Autowired
 	RepositoryUtenteDatiPersonali repositoryUtenteDatiPersonali;
 	
+
 	@Override
 	public void save(UtenteDatiPersonali utente) {
 		repositoryUtenteDatiPersonali.save(utente);
@@ -26,9 +28,10 @@ public class ServiceUtenteDatiPersonaliImpl extends BaseController implements Se
 
 	@Override
 	public UtenteDatiPersonali findByAutore(Utente autore) {
-		if (getAll().stream().filter(x->x.getUtente().getId().equals(autore.getId())).count() == 1)
+		return repositoryUtenteDatiPersonali.findByUtente(autore);
+	/*	if (getAll().stream().filter(x->x.getUtente().getId().equals(autore.getId())).count() == 1)
 		return getAll().stream().filter(x-> x.getUtente().getId().equals(autore.getId())).findFirst().get();
-		return null;
+		return null;*/
 	}
 	@Override
 	public List<UtenteDatiPersonali> getAll() {
@@ -65,8 +68,8 @@ public class ServiceUtenteDatiPersonaliImpl extends BaseController implements Se
 
 	@Override
 	public List<UtenteDatiPersonali> getInattivi() {
-		// TODO Auto-generated method stub
-		return repositoryUtenteDatiPersonali.findAll().stream().filter(x->x.getUtente().getAttivo() == false).collect(Collectors.toList());
+		return repositoryUtenteDatiPersonali.findByAttivoFalse();
+	//	return repositoryUtenteDatiPersonali.findAll().stream().filter(x->x.getUtente().getAttivo() == false).collect(Collectors.toList());
 	}
 
 }

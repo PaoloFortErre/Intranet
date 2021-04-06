@@ -21,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.erretechnology.intranet.models.Commento;
 import com.erretechnology.intranet.models.CommentoModificato;
 import com.erretechnology.intranet.models.ElementiMyLife;
-import com.erretechnology.intranet.models.ElementiMyWork;
 import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.Post;
 import com.erretechnology.intranet.models.PostModificato;

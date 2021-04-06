@@ -62,12 +62,12 @@ public class UtenteController extends BaseController {
 		ModelAndView mav = new ModelAndView();
 		if (serviceUtente.findById(u.getId()).getRuolo().getNome().equals("ADMIN")) {
 			mav.addObject("log", serviceLog.findLastFive());
-			mav.addObject("allLog", serviceLog.findAll());
+	//		mav.addObject("allLog", serviceLog.findAll());
 			mav.addObject("admin", true);
 		} else {
-			mav.addObject("allLog", serviceLog.findLogById(Integer.parseInt(session.getAttribute("id").toString())));
+//			mav.addObject("allLog", serviceLog.findLogById(u));
 			mav.addObject("admin", false);
-			mav.addObject("log", serviceLog.findLastFiveLogById(Integer.parseInt(session.getAttribute("id").toString())));
+			mav.addObject("log", serviceLog.findLastFiveLogById(u));
 		}
 			
 		mav.addObject("post", servicePost.getByAutore(u));
@@ -215,7 +215,7 @@ public class UtenteController extends BaseController {
 			mav.addObject("allLog", serviceLog.findAll());
 			mav.addObject("admin", true);
 		} else {
-			mav.addObject("allLog", serviceLog.findLogById(Integer.parseInt(session.getAttribute("id").toString())));
+			mav.addObject("allLog", serviceLog.findLogById(u));
 			mav.addObject("admin", false);
 		}
 		return mav;
