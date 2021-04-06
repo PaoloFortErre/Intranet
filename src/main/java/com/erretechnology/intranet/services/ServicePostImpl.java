@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.erretechnology.intranet.models.Post;
+import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.repositories.RepositoryPost;
 @Service("servicePost")
 public class ServicePostImpl implements ServicePost{
@@ -84,4 +85,14 @@ public class ServicePostImpl implements ServicePost{
 		// TODO Auto-generated method stub
 		return getAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList());
 	}
+	
+	@Override
+	public List<Post> getByAutore(UtenteDatiPersonali autore) {
+		return repositoryPost.findAll().stream()
+				.filter(x->x.getAutore().equals(autore) && x.isVisibile())
+				.sorted(Comparator.comparingInt(Post::getId).reversed())
+				.limit(5)
+				.collect(Collectors.toList());
+	}
+
 }

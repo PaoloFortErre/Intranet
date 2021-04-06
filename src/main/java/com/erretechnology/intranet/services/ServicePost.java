@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import com.erretechnology.intranet.models.Post;
+import com.erretechnology.intranet.models.UtenteDatiPersonali;
 
 public interface ServicePost {
 	
@@ -25,5 +26,7 @@ public interface ServicePost {
 	public void remove(Post p);
 
 	public List<Post> getAllNotVisible();
+	
+	public List<Post> getByAutore(UtenteDatiPersonali autore);
 
 }
