@@ -143,7 +143,7 @@
 						th:text="${aforisma[0].titolo}"></h1>
 					<p th:text="${aforisma[0].contenuto}"
 						style="font-style: italic; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"></p>
-					<div th:if="${GMW}">
+					<div th:if="${GML}">
 						<form th:action="@{'/aforisma/update/'+${aforisma[0].id}}"
 							method="get">
 							<button type="submit" name="modifica"
@@ -169,7 +169,7 @@
 						th:text="${aforisma[1].titolo}"></h1>
 					<p th:text="${aforisma[1].contenuto}"
 						style="font-style: italic; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"></p>
-					<div th:if="${GMW}">
+					<div th:if="${GML}">
 						<form th:action="@{'/aforisma/update/'+${aforisma[1].id}}"
 							method="get">
 							<button type="submit" name="modifica"
