@@ -45,10 +45,11 @@ table, th, td {
 	border: 0px solid white;
 }
 
-.logo{
+.logo {
 	opacity: 0.5;
 }
-.logo:hover{
+
+.logo:hover {
 	opacity: 1;
 }
 
@@ -57,7 +58,11 @@ table, th, td {
 }
 
 .carousel-inner img {
-	height: 750px;
+	height: 880px;
+}
+
+.carousel-caption {
+	top: 370px;
 }
 </style>
 </head>
@@ -261,101 +266,114 @@ table, th, td {
 
 							<div id="demo1" class="carousel slide" data-ride="carousel">
 								<ul class="carousel-indicators">
-									<li data-target="#demo1" data-slide-to="0" class="active"></li>
-									<li data-target="#demo1" data-slide-to="1"></li>
-									<li data-target="#demo1" data-slide-to="2"></li>
+									<li data-target="#demo1" data-slide-to="0" class="active" th:if="${newsSlide.size>0}"></li>
+									<li data-target="#demo1" data-slide-to="1" th:if="${newsSlide.size>1}"></li>
+									<li data-target="#demo1" data-slide-to="2" th:if="${newsSlide.size>2}"></li>
 								</ul>
 								<div class="carousel-inner">
 									<div class="carousel-item active">
 										<img
 											th:src="'data:image/png;base64,' + ${newsSlide[0].immagine.getImgData(newsSlide[0].immagine.data)}"
 											alt="Los Angeles" width="400px" style="height: 350px;">
-										<div class="carousel-caption">
-											<h3 th:text="${newsSlide[0].titolo}"
-												style="bottom: 800px; background-color: grey ; width: 390px"></h3>
 
-										</div>
+										<h3 th:text="${newsSlide[0].titolo}"
+											style="text-align: center; margin: 0 auto"></h3>
+										<br>
+
+										<form th:action="@{'/news/update/'+${newsSlide[0].id}}"
+											th:if="${GMW}" method="get">
+											<button type="submit" name="modifica" class="bottoniGMW"
+												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+												Modifica</button>
+										</form>
+										<a class="bottoniGMW mt-1" th:href="@{/news/new/}"
+											th:if="${GMW}"
+											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
+										</a>
+										<form th:action="@{'/news/delete/'+${newsSlide[0].id}}"
+											th:if="${GMW}" method="get">
+											<button type="submit" name="modifica" class="bottoniGMW mt-1"
+												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+												Elimina</button>
+										</form>
+
+
 									</div>
-									<div class="carousel-item">
+									<div class="carousel-item" th:if="${newsSlide.size>1}">
 										<img
 											th:src="'data:image/png;base64,' + ${newsSlide[1].immagine.getImgData(newsSlide[1].immagine.data)}"
 											alt="Chicago" width="400px" style="height: 350px;">
-										<div class="carousel-caption">
-											<h3 th:text="${newsSlide[1].titolo}"
-												style="top: -800px; background-color: grey; width: 390px"></h3>
 
-										</div>
+										<h3 th:text="${newsSlide[1].titolo}"
+											style="text-align: center; margin: 0 auto"></h3>
+
+										<br>
+										<form th:action="@{'/news/update/'+${newsSlide[1].id}}"
+											th:if="${GMW}" method="get">
+											<button type="submit" name="modifica" class="bottoniGMW"
+												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+												Modifica</button>
+										</form>
+										<a class="bottoniGMW mt-1" th:href="@{/news/new/}"
+											th:if="${GMW}"
+											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
+										</a>
+										<form th:action="@{'/news/delete/'+${newsSlide[1].id}}"
+											th:if="${GMW}" method="get">
+											<button type="submit" name="modifica" class="bottoniGMW mt-1"
+												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+												Elimina</button>
+										</form>
+
 									</div>
-									<div class="carousel-item">
-										<img src="ny.jpg" alt="New York" width="400px"
-											style="height: 350px;">
-										<div class="carousel-caption">
-											<h3 style="top: -800px; background-color: grey; width: 390px">New
-												York</h3>
-											<p>We love the Big Apple!</p>
-										</div>
+									<div class="carousel-item" th:if="${newsSlide.size>2}">
+										<img
+											th:src="'data:image/png;base64,' + ${newsSlide[2].immagine.getImgData(newsSlide[2].immagine.data)}"
+											width="400px" style="height: 350px;">
+
+										<h3 th:text="${newsSlide[2].titolo}"
+											style="text-align: center; margin: 0 auto"></h3>
+										<br>
+										<form th:action="@{'/news/update/'+${newsSlide[2].id}}"
+											th:if="${GMW}" method="get">
+											<button type="submit" name="modifica" class="bottoniGMW"
+												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+												Modifica</button>
+										</form>
+										<a class="bottoniGMW mt-1" th:href="@{/news/new/}"
+											th:if="${GMW}"
+											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
+										</a>
+										<form th:action="@{'/news/delete/'+${newsSlide[2].id}}"
+											th:if="${GMW}" method="get">
+											<button type="submit" name="modifica" class="bottoniGMW mt-1"
+												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+												Elimina</button>
+										</form>
+
 									</div>
 								</div>
-								<a class="carousel-control-prev" href="#demo1" data-slide="prev">
-									<span class="carousel-control-prev-icon"></span>
+								<br> <br> <a class="carousel-control-prev"
+									href="#demo1" data-slide="prev" th:if="${newsSlide.size>1}"> <span
+									class="carousel-control-prev-icon"></span>
 								</a> <a class="carousel-control-next" href="#demo1"
-									data-slide="next"> <span class="carousel-control-next-icon"></span>
+									data-slide="next" th:if="${newsSlide.size>1}"> <span class="carousel-control-next-icon"></span>
 								</a>
 							</div>
 						</td>
 					</tr>
 
-					<tr>
-						<td style="text-align: center;">
 
-							<form th:action="@{'/news/update/'+${newsSlide[0].id}}"
-								th:if="${GMW}" method="get">
-								<button type="submit" name="modifica" class="bottoniGMW"
-									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
-									Modifica</button>
-							</form> <a class="bottoniGMW mt-1" th:href="@{/news/new/}"
-							th:if="${GMW}"
-							style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
-						</a>
-							<form th:action="@{'/news/delete/'+${newsSlide[0].id}}"
-								th:if="${GMW}" method="get">
-								<button type="submit" name="modifica" class="bottoniGMW mt-1"
-									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
-									Elimina</button>
-							</form>
-
-
-						</td>
-					</tr>
 
 				</table>
 			</div>
 		</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		<!-- ROW SCHIZZO  -->
+		<!-- °°°°°°°°°°°°°°°°°
+		
+				ROW SCHIZZO  
+				
+			 °°°°°°°°°°°°°°°°°-->
 		<br> <br> <br> <br>
 		<div class="row mt-5 mb-5"
 			style="width: 102%; height: 700px; background-image: url('/view/MyWork/images/schizzo.png'); background-position: center; background-repeat: no-repeat; background-size: cover;">
@@ -381,36 +399,118 @@ table, th, td {
 				<table class="table table-borderless" th:if="${eventi.size > 0}">
 					<tr>
 						<td style="text-align: center; vertical-align: middle;"
-							th:if="${eventi!=null}"><img
-							th:src="'data:image/png;base64,' + ${eventi[0].immagine.getImgData(eventi[0].immagine.data)}"
-							width="90%" style="margin-bottom: -17px; height: 380px"
-							class="img-fluid"></td>
-					</tr>
-					<tr>
-						<td style="text-align: center; vertical-align: middle;"
 							th:if="${eventi!=null}">
-							<p style="font-size: 22px; margin-bottom: -5PX"
-								th:text="${#dates.format(eventi[0].timestamp*1000, 'dd/MM/yyyy')}"></p>
-							<p
-								style="font-style: italic; font-weight: 900; font-size: 25px; margin-bottom: -5PX"
-								th:text="${eventi[0].titolo}"></p>
-							<p style="font-size: 15px;" th:text="${eventi[0].luogo}"></p>
 
-							<form th:action="@{'/eventowork/update/'+${eventi[0].id}}"
-								th:if="${GMW}" method="get">
-								<button type="submit" name="modifica" class="bottoniGMW"
-									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
-									Modifica</button>
-							</form> <a th:href="@{/eventowork/new/}" th:if="${GMW}"
-							class="bottoniGMW mt-1"
-							style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
-						</a>
-							<form th:action="@{'/eventowork/delete/'+${eventi[0].id}}"
-								th:if="${GMW}" method="get">
-								<button type="submit" name="modifica" class="bottoniGMW mt-1"
-									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
-									Elimina</button>
-							</form>
+							<div id="demo2" class="carousel slide" data-ride="carousel">
+								<ul class="carousel-indicators">
+									<li data-target="#demo2" data-slide-to="0" class="active"
+										th:if="${eventi.size > 0}"></li>
+									<li data-target="#demo2" data-slide-to="1"
+										th:if="${eventi.size > 1}"></li>
+									<li data-target="#demo2" data-slide-to="2"
+										th:if="${eventi.size > 2}"></li>
+								</ul>
+								<div class="carousel-inner" th:if="${eventi.size > 0}">
+									<div class="carousel-item active">
+										<img
+											th:src="'data:image/png;base64,' + ${eventi[0].immagine.getImgData(eventi[0].immagine.data)}"
+											alt="evento" width="400px" style="height: 350px;">
+											
+										<p style="font-size: 22px; margin-bottom: -5PX"
+								th:text="${#dates.format(eventi[0].timestamp*1000, 'dd/MM/yyyy')}"></p>
+
+										<h3 th:text="${eventi[0].titolo}"
+											style="text-align: center; margin: 0 auto"></h3>
+										<br>
+
+										<form th:action="@{'/eventowork/update/'+${eventi[0].id}}"
+											th:if="${GMW}" method="get">
+											<button type="submit" name="modifica" class="bottoniGMW"
+												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+												Modifica</button>
+										</form>
+										<a class="bottoniGMW mt-1" th:href="@{/eventowork/new/}"
+											th:if="${GMW}"
+											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
+										</a>
+										<form th:action="@{'/eventowork/delete/'+${eventi[0].id}}"
+											th:if="${GMW}" method="get">
+											<button type="submit" name="modifica" class="bottoniGMW mt-1"
+												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+												Elimina</button>
+										</form>
+
+
+									</div>
+									<div class="carousel-item" th:if="${eventi.size > 1}">
+										<img
+											th:src="'data:image/png;base64,' + ${eventi[1].immagine.getImgData(eventi[1].immagine.data)}"
+											alt="Chicago" width="400px" style="height: 350px;">
+
+										<p style="font-size: 22px; margin-bottom: -5PX"
+								th:text="${#dates.format(eventi[1].timestamp*1000, 'dd/MM/yyyy')}"></p>
+
+										<h3 th:text="${eventi[1].titolo}"
+											style="text-align: center; margin: 0 auto"></h3>
+										<br>
+
+										<form th:action="@{'/eventowork/update/'+${eventi[1].id}}"
+											th:if="${GMW}" method="get">
+											<button type="submit" name="modifica" class="bottoniGMW"
+												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+												Modifica</button>
+										</form>
+										<a class="bottoniGMW mt-1" th:href="@{/eventowork/new/}"
+											th:if="${GMW}"
+											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
+										</a>
+										<form th:action="@{'/eventowork/delete/'+${eventi[1].id}}"
+											th:if="${GMW}" method="get">
+											<button type="submit" name="modifica" class="bottoniGMW mt-1"
+												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+												Elimina</button>
+										</form>
+
+									</div>
+									<div class="carousel-item" th:if="${eventi.size > 2}">
+										<img
+											th:src="'data:image/png;base64,' + ${eventi[2].immagine.getImgData(eventi[2].immagine.data)}"
+											width="400px" style="height: 350px;">
+
+										<p style="font-size: 22px; margin-bottom: -5PX"
+								th:text="${#dates.format(eventi[2].timestamp*1000, 'dd/MM/yyyy')}"></p>
+
+										<h3 th:text="${eventi[2].titolo}"
+											style="text-align: center; margin: 0 auto"></h3>
+										<br>
+
+										<form th:action="@{'/eventowork/update/'+${eventi[2].id}}"
+											th:if="${GMW}" method="get">
+											<button type="submit" name="modifica" class="bottoniGMW"
+												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+												Modifica</button>
+										</form>
+										<a class="bottoniGMW mt-1" th:href="@{/eventowork/new/}"
+											th:if="${GMW}"
+											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
+										</a>
+										<form th:action="@{'/eventowork/delete/'+${eventi[2].id}}"
+											th:if="${GMW}" method="get">
+											<button type="submit" name="modifica" class="bottoniGMW mt-1"
+												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+												Elimina</button>
+										</form>
+
+									</div>
+								</div>
+								<br> <br> <a class="carousel-control-prev"
+									href="#demo2" data-slide="prev" th:if="${eventi.size>1}"> <span
+									class="carousel-control-prev-icon"></span>
+								</a> <a class="carousel-control-next" href="#demo2"
+									data-slide="next"  th:if="${eventi.size>1}"> <span class="carousel-control-next-icon"></span>
+								</a>
+							</div>
+
 						</td>
 					</tr>
 				</table>
@@ -422,7 +522,7 @@ table, th, td {
 						<td style="text-align: center; vertical-align: middle;"
 							th:each="utente: ${utente}"><img
 							th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}"
-							width="45%" style="margin-bottom: -17px; height: 320px"
+							width="250px" style="margin-bottom: -17px; height: 380px"
 							class="img-fluid"></td>
 					</tr>
 					<tr>
@@ -431,8 +531,8 @@ table, th, td {
 								style="font-size: 22px; margin-bottom: -5PX">
 								Hai già fatto gli auguri a <br> <a
 									th:href="@{/profile/viewProfile/(id=${utente.id})}"
-									style="font-style: italic; font-weight: 900; font-size: 25px; margin-bottom: -5PX"
-									th:text="${utente.nome} + ' ' + ${utente.cognome}"> </a>
+									style="font-style: italic; font-weight: 900; font-size: 25px; margin-bottom: -5PX; text-decoration: none;"
+									th:text="${utente.nome} + ' ' + ${utente.cognome}"> </a> ?
 							<p></td>
 					</tr>
 				</table>
