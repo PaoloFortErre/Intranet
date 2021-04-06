@@ -63,8 +63,9 @@ public class MyWorkController extends BaseController {
 	//	setMAV(mav, nuoviUtenti, 0, 6, "nuoviAssunti");
 		mav.addObject("nuoveAssunzioni", nuoviUtenti);
 		
-		/*List<Podcast> listPodcast = elementi.stream().map(x -> x.getTipo().equals("aphorism"));
-		if(listPodcast.size() != 0 && listPodcast!= null) {
+		List<ElementiMyWork> listPodcast = elementi.stream().filter(x -> x.getTipo().equals("podcast")).collect(Collectors.toList());
+		mav.addObject("podcast", listPodcast);
+		/*if(listPodcast.size() != 0 && listPodcast!= null) {
 			Podcast primoPodcast = listPodcast.get(listPodcast.size()-1);
 			mav.addObject("primoPodcast", primoPodcast);
 			listPodcast.remove(listPodcast.size()-1);
