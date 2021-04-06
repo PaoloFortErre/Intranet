@@ -192,11 +192,13 @@ public class MyLifeController extends BaseController {
 	public String inserisciCommento(Commento commento, HttpSession session, int idPost) {
 		int id = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(id);
+		UtenteDatiPersonali autorePost = servicePost.findById(idPost).getAutore();
 		commento.setAutore(autore);
 		commento.setTimestamp(Instant.now().getEpochSecond());
 		commento.setPost(servicePost.findById(idPost));
 		commento.setVisibile(true);
 		serviceCommento.save(commento);
+		notificaSingola(autore.getNome() + " " + autore.getCognome() + " ha commentato il tuo post", autorePost);
 		saveLog("risposto a un post in bacheca", autore);
 		return "redirect:/myLife/";
 	}

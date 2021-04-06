@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.erretechnology.intranet.models.Log;
+import com.erretechnology.intranet.models.Notifica;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.services.ServiceAuthority;
 import com.erretechnology.intranet.services.ServiceCommento;
@@ -27,6 +28,7 @@ import com.erretechnology.intranet.services.ServiceElementiMyWork;
 import com.erretechnology.intranet.services.ServiceFileImmagini;
 import com.erretechnology.intranet.services.ServiceFilePdf;
 import com.erretechnology.intranet.services.ServiceLog;
+import com.erretechnology.intranet.services.ServiceNotifica;
 import com.erretechnology.intranet.services.ServicePermesso;
 import com.erretechnology.intranet.services.ServicePodcast;
 import com.erretechnology.intranet.services.ServicePost;
@@ -77,6 +79,8 @@ public abstract class BaseController {
 	protected ServiceElementiMyLife serviceElementiMyLife;
 	@Autowired
 	protected ServiceVideo serviceVideo;
+	@Autowired
+	protected ServiceNotifica serviceNotifica;
 	
 	protected void saveLog(String testo, UtenteDatiPersonali autore) {
 		Log log = new Log();
@@ -84,6 +88,16 @@ public abstract class BaseController {
 		log.setUtente(autore);
 		log.setAzione(testo);
 		serviceLog.save(log);
+	}
+	
+	protected void notificaSingola(String testo, UtenteDatiPersonali utente) {
+		Notifica n = new Notifica();
+		n.setDescrizione(testo);
+		n.setTimestamp(Instant.now().getEpochSecond());
+		serviceNotifica.save(n);
+		utente.addNotifica(n);
+		serviceDatiPersonali.save(utente);
+		n.addUtente(utente);
 	}
 	
 	protected byte[] compressImage(MultipartFile mpFile, float qualita) {
