@@ -95,7 +95,7 @@ public abstract class BaseController {
 	    if(!imageExtension.equalsIgnoreCase("png")) {
 	    	imageWriteParam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
 	    	imageWriteParam.setCompressionQuality(quality);
-	    	imageWriteParam.setProgressiveMode(ImageWriteParam.MODE_DEFAULT);
+	    	
 	    }
 	    ByteArrayOutputStream baos = new ByteArrayOutputStream();
 	    ImageOutputStream imageOutputStream = new MemoryCacheImageOutputStream(baos);

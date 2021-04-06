@@ -92,7 +92,7 @@ public class ServicePostImpl implements ServicePost{
 		return repositoryPost.findAll().stream()
 				.filter(x->x.getAutore().equals(autore) && x.isVisibile())
 				.sorted(Comparator.comparingInt(Post::getId).reversed())
-				.limit(5)
+				.limit(3)
 				.collect(Collectors.toList());
 	}
 
