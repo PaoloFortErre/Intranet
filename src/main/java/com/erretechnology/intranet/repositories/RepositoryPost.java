@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.erretechnology.intranet.models.Post;
+import com.erretechnology.intranet.models.UtenteDatiPersonali;
 
 @Repository(value = "RepositoryPost")
 
@@ -18,4 +19,7 @@ public interface RepositoryPost extends JpaRepository<Post, Integer>{
 	
 	@Query
 	public List<Post> findByVisibileFalse(Sort sort);
+	
+	@Query
+	public List<Post> findTop5ByAutoreAndVisibileTrueOrderByIdDesc(UtenteDatiPersonali u);
 }

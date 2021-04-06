@@ -230,7 +230,7 @@ table, th, td {
 					<tr>
 						<td th:each="cliente: ${nuoviClienti}"
 							style="text-align: center; vertical-align: middle;"><img
-							th:src="'data:image/png;base64,' + ${cliente.logo.getImgData(cliente.logo.data)}"
+							th:src="'data:image/png;base64,' + ${cliente.immagine.getImgData(cliente.immagine.data)}"
 							alt="fotoProfiloUtente" class="img-fluid" width="70%"
 							style="margin-bottom: -17px; height: 320px"></td>
 
@@ -243,7 +243,7 @@ table, th, td {
 						<td th:each="cliente: ${nuoviClienti}" style="text-align: center;">
 							<p style="font-size: 22px; margin-bottom: -5px">Una nuova
 								partnership con</p>
-							<p th:text="${cliente.nome}"
+							<p th:text="${cliente.titolo}"
 								style="font-style: italic; font-weight: 900; font-size: 25px;">
 							</p>
 
