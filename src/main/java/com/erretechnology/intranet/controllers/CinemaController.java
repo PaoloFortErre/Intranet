@@ -57,7 +57,7 @@ public class CinemaController extends BaseController {
 
 		if(!immagine.getOriginalFilename().isEmpty()) {
 			FileImmagine img = new FileImmagine();
-			img.setData(immagine.getBytes());
+			img.setData(compressImage(immagine, 60));
 			img.setAutore(utenteLoggato);
 			img.setTimestamp(Instant.now().getEpochSecond());
 			img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
