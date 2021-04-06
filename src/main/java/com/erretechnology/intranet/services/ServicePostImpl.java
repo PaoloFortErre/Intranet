@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.erretechnology.intranet.models.Post;
@@ -21,7 +22,7 @@ public class ServicePostImpl implements ServicePost{
 	@Autowired
 	private RepositoryPost repositoryPost;
 	
-	@Override
+/*	@Override
 	public List<Post> getLastMessage() {
 		return repositoryPost.findAll().stream()
 				.filter(x->x.isVisibile())
@@ -29,7 +30,7 @@ public class ServicePostImpl implements ServicePost{
 				
 				.collect(Collectors.toList());
 	}
-	
+	*/
 	@Override
 	public void save(Post mex) {
 		repositoryPost.save(mex);
@@ -83,7 +84,7 @@ public class ServicePostImpl implements ServicePost{
 	@Override
 	public List<Post> getAllNotVisible() {
 		// TODO Auto-generated method stub
-		return getAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList());
+		return repositoryPost.findByVisibileFalse(Sort.by("id").descending());
 	}
 	
 	@Override
@@ -93,6 +94,12 @@ public class ServicePostImpl implements ServicePost{
 				.sorted(Comparator.comparingInt(Post::getId).reversed())
 				.limit(5)
 				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Post> getLastMessage() {
+		// TODO Auto-generated method stub
+		return repositoryPost.findByVisibileTrue(Sort.by("id").descending());
 	}
 
 }
