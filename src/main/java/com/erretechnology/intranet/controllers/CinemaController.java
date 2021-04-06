@@ -68,6 +68,7 @@ public class CinemaController extends BaseController {
 
 		repoCinema.save(cinema);
 		saveLog("inserito un cinema", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+		notificaTutti("È stato inserito un nuovo film consigliato dalla redazione!");
 		return "redirect:/myLife/";
 	}
 

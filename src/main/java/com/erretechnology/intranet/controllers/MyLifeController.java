@@ -79,7 +79,8 @@ public class MyLifeController extends BaseController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("addVideoMyLife");
 		mav.addObject("video", new VideoDelGiorno());
-		
+		notificaTutti("È stato inserito un nuovo video su MyLife!");
+
 		return mav;
 	}
 	

@@ -5,6 +5,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.Instant;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
@@ -98,6 +100,32 @@ public abstract class BaseController {
 		utente.addNotifica(n);
 		serviceDatiPersonali.save(utente);
 		n.addUtente(utente);
+	}
+	
+	protected void notificaTutti(String testo) {
+		Notifica n = new Notifica();
+		n.setDescrizione(testo);
+		n.setTimestamp(Instant.now().getEpochSecond());
+		serviceNotifica.save(n);
+		List<UtenteDatiPersonali> utenti = serviceDatiPersonali.getAttivi();
+		for(UtenteDatiPersonali u : utenti) {
+			u.addNotifica(n);
+			serviceDatiPersonali.save(u);
+			n.addUtente(u);
+		}
+	}
+	
+	protected void notificaSelezionati(String testo, String settore) {
+		Notifica n = new Notifica();
+		n.setDescrizione(testo);
+		n.setTimestamp(Instant.now().getEpochSecond());
+		serviceNotifica.save(n);
+		List<UtenteDatiPersonali> utenti = serviceDatiPersonali.getAttivi().stream().filter(x->x.getSettore().equals(settore)).collect(Collectors.toList());
+		for(UtenteDatiPersonali u : utenti) {
+			u.addNotifica(n);
+			serviceDatiPersonali.save(u);
+			n.addUtente(u);
+		}
 	}
 	
 	protected byte[] compressImage(MultipartFile mpFile, float qualita) {

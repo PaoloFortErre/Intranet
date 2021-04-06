@@ -14,5 +14,8 @@ public interface RepositoryUtenteDatiPersonali extends JpaRepository<UtenteDatiP
 	
 	@Query("SELECT u2 FROM Utente u1, UtenteDatiPersonali u2 WHERE u1.id = u2.id AND u1.attivo = FALSE")
 	public List<UtenteDatiPersonali> findByAttivoFalse();
+	
+	@Query("SELECT u2 FROM Utente u1, UtenteDatiPersonali u2 WHERE u1.id = u2.id AND u1.attivo = TRUE")
+	public List<UtenteDatiPersonali> findByAttivoTrue();
 
 }

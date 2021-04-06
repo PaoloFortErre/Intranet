@@ -1,17 +1,14 @@
 package com.erretechnology.intranet.services;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.erretechnology.intranet.controllers.BaseController;
 import com.erretechnology.intranet.models.Permesso;
 import com.erretechnology.intranet.models.Ruolo;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
-import com.erretechnology.intranet.repositories.RepositoryUtente;
 import com.erretechnology.intranet.repositories.RepositoryUtenteDatiPersonali;
 
 @Service("serviceUtenteDati")
@@ -69,6 +66,12 @@ public class ServiceUtenteDatiPersonaliImpl extends BaseController implements Se
 	@Override
 	public List<UtenteDatiPersonali> getInattivi() {
 		return repositoryUtenteDatiPersonali.findByAttivoFalse();
+	//	return repositoryUtenteDatiPersonali.findAll().stream().filter(x->x.getUtente().getAttivo() == false).collect(Collectors.toList());
+	}
+	
+	@Override
+	public List<UtenteDatiPersonali> getAttivi() {
+		return repositoryUtenteDatiPersonali.findByAttivoTrue();
 	//	return repositoryUtenteDatiPersonali.findAll().stream().filter(x->x.getUtente().getAttivo() == false).collect(Collectors.toList());
 	}
 

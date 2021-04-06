@@ -109,7 +109,6 @@ public class MyWorkController extends BaseController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("addVideo");
 		mav.addObject("video", new VideoDelGiorno());
-		
 		return mav;
 	}
 	
@@ -119,6 +118,7 @@ public class MyWorkController extends BaseController {
 		video.setPagina("MyWork");
 		serviceVideo.save(video);
 		saveLog("aggiornato il video su myWork", autore);
+		notificaTutti("È stato inserito un nuovo video su MyWork!");
 		return "redirect:/myWork/";
 	}
 	
@@ -130,6 +130,7 @@ public class MyWorkController extends BaseController {
 		sondaggio.setVisibile(true);
 		serviceSondaggio.save(sondaggio);
 		saveLog("creato un nuovo sondaggio", autore);
+		notificaTutti("È stato inserito un nuovo sondaggio!");
 		return "redirect:/myWork/";
 	}
 
