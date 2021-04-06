@@ -439,7 +439,9 @@
 											th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(post.immagine.data)}"
 											width="100%" height="40%">
 									</div>
-
+									<form th:action="@{/myLife/likePost(id=${post.id})}" method="post">
+										<button type="submit" class="btn btn-block btn-primary"><i class="fa fa-thumbs-up">Like</i> </button>
+									</form>
 								</div>
 								<!-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ COMMENTO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-->
 								<div class="col-xs-5 col-sm-10 col-md-11 col-lg-11"

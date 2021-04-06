@@ -1,7 +1,9 @@
 
 package com.erretechnology.intranet.models;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -35,9 +39,30 @@ public class Post {
 	private UtenteDatiPersonali autore;
 	@OneToMany(mappedBy = "post", cascade=CascadeType.REMOVE)
 	private List<Commento> setCommenti;
+	@ManyToMany
+	@JoinTable(name = "UserLike",
+    joinColumns = @JoinColumn(name = "id_post"),
+    inverseJoinColumns = @JoinColumn(name = "id_utente"))
+	private Set<UtenteDatiPersonali> setUtenti= new HashSet<UtenteDatiPersonali>();
 	
 	//private Set<Commento> setCommentiOrdinati = new TreeSet<Commento>();
 	
+	public Set<UtenteDatiPersonali> getSetUtenti() {
+		return setUtenti;
+	}
+	
+	public void addUtente(UtenteDatiPersonali u) {
+		setUtenti.add(u);
+	}
+	
+	public void removeUtente(UtenteDatiPersonali u) {
+		setUtenti.remove(u);
+	}
+
+	public void setSetUtenti(Set<UtenteDatiPersonali> setUtenti) {
+		this.setUtenti = setUtenti;
+	}
+
 	public List<Commento> getSetCommenti() {
 		return setCommenti;
 	}

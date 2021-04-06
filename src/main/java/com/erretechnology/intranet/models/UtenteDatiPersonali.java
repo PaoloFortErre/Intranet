@@ -39,10 +39,27 @@ public class UtenteDatiPersonali implements Serializable, MyWorkBean{
 	@JoinColumn(name = "id_immagine")
 	private FileImmagine immagine;
 	private boolean visualizzaDataNascita;
-	@ManyToMany(mappedBy = "setUtenti", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy = "setUtenti", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Notifica> setNotifiche;
+	@ManyToMany(mappedBy = "setUtenti", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<Post> setPostPiaciuti;
 
 
+	public List<Post> getSetPostPiaciuti() {
+		return setPostPiaciuti;
+	}
+	public void setSetPostPiaciuti(List<Post> setPostPiaciuti) {
+		this.setPostPiaciuti = setPostPiaciuti;
+	}
+	
+	public void addUtente(Post p) {
+		setPostPiaciuti.add(p);
+	}
+	
+	public void removeUtente(Post p) {
+		setPostPiaciuti.remove(p);
+	}
+	
 	public List<Notifica> getSetNotifiche() {
 		return setNotifiche;
 	}
