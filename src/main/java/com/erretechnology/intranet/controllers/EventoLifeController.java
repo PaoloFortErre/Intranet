@@ -32,13 +32,6 @@ public class EventoLifeController extends BaseController {
 	@Autowired
 	private RepositoryEventoLife repoEvento;
 
-	@GetMapping("/{id}")
-	public String get(@PathVariable int id, Model model) {
-
-		model.addAttribute("evento", repoEvento.findById(id).get());
-		return "eventolife";
-	}
-
 	@GetMapping("/new")
 	public String formLife(Model model) {
 		model.addAttribute("evento", new EventoLife()); 

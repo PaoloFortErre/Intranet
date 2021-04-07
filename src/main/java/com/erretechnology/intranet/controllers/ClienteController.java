@@ -33,13 +33,6 @@ public class ClienteController extends BaseController{
 	@Autowired
 	private RepositoryCliente repoCliente;
 
-	@GetMapping("/{id}")
-	public String get(@PathVariable int id, Model model) {
-
-		model.addAttribute("cliente", repoCliente.findById(id).get());
-		return "cliente";
-	}
-
 	@GetMapping("/new")
 	public String form(Model model) {
 		model.addAttribute("cliente", new Cliente()); 
