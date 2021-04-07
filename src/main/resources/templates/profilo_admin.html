@@ -480,18 +480,19 @@
 
       <!-- ROW POST PERSONALI -->
       <div class="container mt-5">
-        <div th:each="post:${post}" class="row justify-content-center mt-5">
+        <div class="row justify-content-center mt-5">
           <div class="container rounded text-center bg-dark w-50 mt-5">
             <h1 class="h1" style="font-weight: 600;" >Gli ultimi post</h1>
           </div>
 
-          <div  class="col-auto text-center mt-4">
-            <div class="container" >
-              <div class="card shadow position-relative mt-3 ">
+          <div  class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-xs-10  text-center mt-4">
+            <div class="container w-50" >
+              <div th:each="post:${post}" class="card shadow position-relative mt-3 ">
                 <img class="top-left" src="/view/Profile/Images/pin_post-it.png" alt="pin-post-it">
                 <img th:if="${post.immagine} != null" th:src="'data:image/png;base64,' + ${post.immagine.getImgData(post.immagine.data)}" class="card-img-top" alt="immagine-post">
-                <div class="card-body">
-                  <p th:text="${post.testo}" class="card-text text-dark"></p>
+                <hr>
+                <div class="card-body rounded border border-dark">
+                  <p th:text="${post.testo}" class="card-text text-dark font-weight-bold"></p>
                 </div>
               </div>
             </div>
