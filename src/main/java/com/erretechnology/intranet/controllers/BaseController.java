@@ -122,7 +122,7 @@ public abstract class BaseController {
 		n.setDescrizione(testo);
 		n.setTimestamp(Instant.now().getEpochSecond());
 		serviceNotifica.save(n);
-		List<UtenteDatiPersonali> utenti = serviceDatiPersonali.getAttivi().stream().filter(x->x.getSettore().equals(settore)).collect(Collectors.toList());
+		List<UtenteDatiPersonali> utenti = serviceDatiPersonali.getAttivi().stream().filter(x->x.getSettore().getNomeSettore().equals(settore)).collect(Collectors.toList());
 		for(UtenteDatiPersonali u : utenti) {
 			u.addNotifica(n);
 			serviceDatiPersonali.save(u);
