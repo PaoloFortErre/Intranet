@@ -187,14 +187,14 @@ id="collapsibleNavbar">
 <div class="carousel-item">
 	<img src="/view/MyWork/images/slideshow3.jpg" alt="scarpe" width="100%"
 	height="500px" class="img-fluid">
-	<div class="carousel-caption" th:if="${aforisma.size>1}">
+	<div class="carousel-caption" th:if="${aforisma.size>2}">
 		<h1
 		style="font-weight: 900; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"
 		th:text="${aforisma[2].titolo}"></h1>
 		<p th:text="${aforisma[2].contenuto}"
 		style="font-style: italic; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"></p>
 		<div th:if="${GMW}">
-			<form th:action="@{'/aforisma/update/'+${aforisma[1].id}}"
+			<form th:action="@{'/aforisma/update/'+${aforisma[2].id}}"
 			method="get">
 			<button type="submit" name="modifica"
 			style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 8px; width: 150px;">
