@@ -292,7 +292,7 @@
               <li class="nav-item mr-3 mt-3"><a class="nav-link"
                 href="http://polyedro.erretechnology.com/www/" target="blank">POLYEDRO</a>
               </li>
-              <li  class="nav-item avatar dropdown mt-3">
+              <li th:if="${session.id} == ${utente.utente.id}"  class="nav-item avatar dropdown mt-3">
                 <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                   <span class="badge badge-danger ml-2" th:text="${utente.setNotifiche.size()}"></span>
                   <i class="fa fa-bell"></i>
@@ -485,9 +485,10 @@
           <div class="col-auto text-center mt-5">
             <div class="container">
               <h1 class="h1" style="font-weight: 600;" >Gli ultimi post</h1>
+              <hr>
             </div>
 
-            <div th:each="post:${post}" class="mt-3">
+            <div class="container mt-3" th:each="post:${post}">
               <div class="card shadow position-relative mt-5 ">
                 <img class="top-left" src="/view/Profile/Images/pin_post-it.png" alt="pin-post-it">
                 <img th:if="${post.immagine} != null" th:src="'data:image/png;base64,' + ${post.immagine.getImgData(post.immagine.data)}" class="card-img-top" alt="immagine-post">
