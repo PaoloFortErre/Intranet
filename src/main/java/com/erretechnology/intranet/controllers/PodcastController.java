@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.Podcast;
+import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.models.Utility;
 
 @Controller
@@ -54,13 +55,14 @@ public class PodcastController extends BaseController {
 			podcast.setTimestamp(Instant.now().getEpochSecond());
 			podcast.setPodcast(file.getBytes());
 		}
-		podcast.setUtente(serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+		UtenteDatiPersonali utente = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		podcast.setUtente(utente);
 		podcast.setNome(StringUtils.cleanPath(file.getOriginalFilename()));
 		podcast.setDataPodcast(timestampPodcast);
 		podcast.setVisibile(true);
 		servicePodcast.save(podcast);
-		saveLog("inserito un nuovo podcast",serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		notificaTutti("È stato inserito un nuovo podcast di Rosario! Buon ascolto!");
+		saveLog("inserito un nuovo podcast",utente);
+		notificaTutti("ha inserito un nuovo podcast di Rosario! Buon ascolto!", utente);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/myWork/");
 		return mav;

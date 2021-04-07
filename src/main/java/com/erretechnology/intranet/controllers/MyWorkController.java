@@ -118,7 +118,7 @@ public class MyWorkController extends BaseController {
 		video.setPagina("MyWork");
 		serviceVideo.save(video);
 		saveLog("aggiornato il video su myWork", autore);
-		notificaTutti("È stato inserito un nuovo video su MyWork!");
+		notificaTutti("ha inserito un nuovo video su MyWork!", autore);
 		return "redirect:/myWork/";
 	}
 	
@@ -130,7 +130,7 @@ public class MyWorkController extends BaseController {
 		sondaggio.setVisibile(true);
 		serviceSondaggio.save(sondaggio);
 		saveLog("creato un nuovo sondaggio", autore);
-		notificaTutti("È stato inserito un nuovo sondaggio!");
+		notificaTutti("ha inserito un nuovo sondaggio!", autore);
 		return "redirect:/myWork/";
 	}
 

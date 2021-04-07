@@ -67,8 +67,8 @@ public class NewsController extends BaseController {
 		}
 
 		repoNews.save(news);
-		saveLog("aggiunto una news", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		notificaTutti("È stata inserita una news su MyWork!");
+		saveLog("aggiunto una news", utenteLoggato);
+		notificaTutti("hs inserito una news su MyWork!", utenteLoggato);
 		return "redirect:/myWork/";
 	}
 	

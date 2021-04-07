@@ -18,6 +18,7 @@ public class Notifica {
 	private int id;
 	private String descrizione;
 	private long timestamp;
+	private UtenteDatiPersonali utente;
 	@ManyToMany
 	@JoinTable(name = "NotificheUtente",
     joinColumns = @JoinColumn(name = "id_notifica"),
@@ -50,6 +51,12 @@ public class Notifica {
 	}
 	public void addUtente(UtenteDatiPersonali utente) {
 		this.setUtenti.add(utente);
+	}
+	public UtenteDatiPersonali getUtente() {
+		return utente;
+	}
+	public void setUtente(UtenteDatiPersonali utente) {
+		this.utente = utente;
 	}
 
 

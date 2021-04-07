@@ -80,7 +80,7 @@ public class UploadController extends BaseController{
 		filePdf.setAutore(u);
 		serviceFilePdf.insert(filePdf);
 		saveLog("Inserito un nuovo modulo", u );
-		notificaSelezionati("È stato inserito un nuovo modulo!", filePdf.getSettore());
+		notificaSelezionati("ha inserito un nuovo modulo!", filePdf.getSettore(), u);
 
 
 		// return success response
@@ -109,7 +109,7 @@ public class UploadController extends BaseController{
 		filePdfHR.setVisibile(true);
 		serviceComunicazioni.save(filePdfHR);
 		saveLog("inserito una nuova Comunicazione HR", u);
-		notificaTutti("È stato inserita una nuova ComunicazioneHR!");
+		notificaTutti("ha inserito una nuova ComunicazioneHR!", u);
 
 
 		// return success response

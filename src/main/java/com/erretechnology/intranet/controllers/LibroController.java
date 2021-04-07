@@ -62,8 +62,8 @@ public class LibroController extends BaseController {
 		}
 
 		repoLibro.save(libro);
-		saveLog("inserito un libro", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		notificaTutti("È stato inserito un nuovo libro consigliato dalla redazione!");
+		saveLog("inserito un libro", utenteLoggato);
+		notificaTutti("ha inserito un nuovo libro consigliato dalla redazione!", utenteLoggato);
 		return "redirect:/myLife/";
 	}
 

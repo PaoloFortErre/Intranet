@@ -75,8 +75,8 @@ public class EventoWorkController extends BaseController {
 		}
 
 		repoEvento.save(evento);
-		saveLog("inserito un nuovo evento", serviceDatiPersonali.findById(idUser));
-		notificaTutti("È stato inserito un nuovo evento su MyWork!");
+		saveLog("inserito un nuovo evento", utenteLoggato);
+		notificaTutti("ha inserito un nuovo evento su MyWork!", utenteLoggato);
 		return "redirect:/myWork/";
 	}
 

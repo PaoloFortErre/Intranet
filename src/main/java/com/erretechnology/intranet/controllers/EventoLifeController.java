@@ -72,8 +72,8 @@ public class EventoLifeController extends BaseController {
 		}
 
 		repoEvento.save(evento);
-		saveLog("inserito un nuovo evento", serviceDatiPersonali.findById(idUser));
-		notificaTutti("È stato inserito un nuovo evento su MyLife!");
+		saveLog("inserito un nuovo evento", utenteLoggato);
+		notificaTutti("ha inserito un nuovo evento su MyLife!", utenteLoggato);
 		return "redirect:/myLife/";
 	}
 

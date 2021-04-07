@@ -92,20 +92,22 @@ public abstract class BaseController {
 		serviceLog.save(log);
 	}
 	
-	protected void notificaSingola(String testo, UtenteDatiPersonali utente) {
+	protected void notificaSingola(String testo, UtenteDatiPersonali utente, UtenteDatiPersonali utenteCreatore) {
 		Notifica n = new Notifica();
 		n.setDescrizione(testo);
 		n.setTimestamp(Instant.now().getEpochSecond());
 		n.addUtente(utente);
+		n.setUtente(utenteCreatore);
 		serviceNotifica.save(n);
 		utente.addNotifica(n);
 		serviceDatiPersonali.save(utente);
 		
 	}
 	
-	protected void notificaTutti(String testo) {
+	protected void notificaTutti(String testo, UtenteDatiPersonali utenteCreatore) {
 		Notifica n = new Notifica();
 		n.setDescrizione(testo);
+		n.setUtente(utenteCreatore);
 		n.setTimestamp(Instant.now().getEpochSecond());
 		serviceNotifica.save(n);
 		List<UtenteDatiPersonali> utenti = serviceDatiPersonali.getAttivi();
@@ -117,9 +119,10 @@ public abstract class BaseController {
 		serviceNotifica.save(n);
 	}
 	
-	protected void notificaSelezionati(String testo, String settore) {
+	protected void notificaSelezionati(String testo, String settore, UtenteDatiPersonali utenteCreatore) {
 		Notifica n = new Notifica();
 		n.setDescrizione(testo);
+		n.setUtente(utenteCreatore);
 		n.setTimestamp(Instant.now().getEpochSecond());
 		serviceNotifica.save(n);
 		List<UtenteDatiPersonali> utenti = serviceDatiPersonali.getAttivi().stream().filter(x->x.getSettore().getNomeSettore().equals(settore)).collect(Collectors.toList());
