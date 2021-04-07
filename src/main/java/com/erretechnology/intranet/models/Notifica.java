@@ -19,6 +19,9 @@ public class Notifica {
 	private int id;
 	private String descrizione;
 	private long timestamp;
+	private String destinazione;
+	private int idDest;
+	
 	@ManyToOne
 	@JoinColumn(name = "id_autore")
 	private UtenteDatiPersonali utente;
@@ -36,6 +39,18 @@ public class Notifica {
 	}
 	public int getId() {
 		return id;
+	}
+	public String getDestinazione() {
+		return destinazione;
+	}
+	public void setDestinazione(String destinazione) {
+		this.destinazione = destinazione;
+	}
+	public int getIdDest() {
+		return idDest;
+	}
+	public void setIdDest(int idDest) {
+		this.idDest = idDest;
 	}
 	public void setId(int id) {
 		this.id = id;
