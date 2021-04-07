@@ -292,20 +292,23 @@
               <li class="nav-item mr-3 mt-3"><a class="nav-link"
                 href="http://polyedro.erretechnology.com/www/" target="blank">POLYEDRO</a>
               </li>
-              <li th:if="${session.id} == ${utente.utente.id}"  class="nav-item avatar dropdown mt-3">
-                <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  <span class="badge badge-danger ml-2" th:text="${utente.setNotifiche.size()}"></span>
-                  <i class="fa fa-bell"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-5">
-                  <div class="dropdown-item waves-effect waves-light" th:each="i:${#numbers.sequence(utente.setNotifiche.size() - 1, 0, -1)}" th:with="notifica=${utente.setNotifiche[i]}">
-                    <p class="font-weight-bold" th:text="${notifica.utente.nome} + ' ' + ${notifica.utente.cognome}+ ' ' "  ></p>
-                    <p class="mt-n3" th:text="${notifica.descrizione}" ></p>
-                    <p class="p mt-n2" th:utext="${#dates.format(notifica.timestamp*1000, 'dd/MM/yyyy, HH:mm')}" style="font-size: 10px"></p>
-                    <hr>
-                  </div>
-                </div>
-              </li>
+
+              <!-- Notifiche -->
+      				<li class="nav-item avatar dropdown mt-3" style="cursor: pointer">
+      					<a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      						<span class="badge badge-danger mr-n1" th:text="${utente.setNotifiche.size()}"></span>
+      						<i class="fa fa-bell mr-n2"></i>
+      					</a>
+      					<div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-5" >
+      						<div class="dropdown-item waves-effect waves-light" th:each="i:${#numbers.sequence(utente.setNotifiche.size() - 1, 0, -1)}" th:with="notifica=${utente.setNotifiche[i]}">
+      							<p class="font-weight-bold" th:text="${notifica.utente.nome} + ' ' + ${notifica.utente.cognome}+ ' ' " style="COLOR: BLACK"></p>
+      							<p class="mt-n3" th:text="${notifica.descrizione}" style="COLOR: BLACK"></p>
+      							<p class="p mt-n2" th:utext="${#dates.format(notifica.timestamp*1000, 'dd/MM/yyyy, HH:mm')}" style="font-size: 10px; color: black"></p>
+      							<hr>
+      						</div>
+      					</div>
+      				</li>
+
             </ul>
           </div>
         </nav>
