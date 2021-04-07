@@ -46,34 +46,34 @@
             <div class="form-row ml-2">
               <div class="form-group col-auto ml-5">
                 <label >Nome</label>
-                <input class="form-control " th:field="${user.nome}"/>
+                <input class="form-control " th:field="${user.nome}" required/>
               </div>
               <div class="form-group col-auto ml-5">
                 <label >Cognome</label>
-                <input class="form-control " th:field="${user.cognome}"/>
+                <input class="form-control " th:field="${user.cognome}" required/>
               </div>
             </div>
             <div class="form-row ml-2">
               <div class="form-group col-auto ml-5">
                 <label >Email</label>
-                <input class="form-control" type="email" th:name="email" placeholder="*****@*****"/>
+                <input class="form-control" type="email" th:name="email" placeholder="*****@*****" required/>
               </div>
               <div class="form-group col-auto ml-5">
                 <label for="date1">Data di nascita</label>
-                <input class="form-control" id="date1" type="date" th:field="${date.date}" placeholder="Inserisci la data in formato gg/mm/aaaa">
+                <input class="form-control" id="date1" type="date" th:field="${date.date}" required placeholder="Inserisci la data in formato gg/mm/aaaa">
               </div>
             </div>
             <div class="form-row ml-2">
               <div class="form-group col-auto ml-5">
                 <label >Password</label>
-                <input class="form-control" type="password" th:name="password"/>
+                <input class="form-control" type="password" th:name="password" required/>
                 <!--  <small id="passwordHelpInline" class="text-muted">
                   Deve essere tra gli 8-20 caratteri.
                 </small> -->
               </div>
               <div class="form-group col-auto ml-5">
                 <label for="settore">Settore</label>
-                <select class="form-control" id="settore" th:name="settore">
+                <select class="form-control" id="settore" th:name="settore" required>
                   <option th:value="'Erre Technology'" th:text="ErreTechnology"></option>
                   <option th:value="'Erre GES'" th:text="ErreGES"></option>
                   <option th:value="'Erre PRO'" th:text="ErrePRO"></option>
