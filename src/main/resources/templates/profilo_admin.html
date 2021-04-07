@@ -451,7 +451,7 @@
 
       <!-- ROW DESCRIZIONE PERSONALE -->
       <div class="container mt-5">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mt-5">
 
           <div class="col-xl-10 col-lg-10 col-md-10">
             <div class="card position-relative text-end">
@@ -468,7 +468,6 @@
                     <div class="text-center">
                       <input class="btn btn-primary " type="submit" value="Modifica descrizione"/>
                     </div>
-
                   </form>
                 </div>
               </div>
@@ -481,34 +480,31 @@
       <!-- ROW POST PERSONALI -->
       <div class="container mt-5 mb-5">
         <div class="row justify-content-center mt-5 mb-5">
-        <div  class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div class="container rounded text-center mt-5">
-          
-          
-          
             <h1 class="h1" style="font-weight: 900; color: white;" >Gli ultimi post</h1>
-<hr style="border: 0.5px solid white">
+            <hr style="border: 0.5px solid white">
           </div>
-		</div>
+		    </div>
+
           <div  class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4  text-center mt-4" th:each="post:${post}">
             <div class="container" >
               <div  class="card shadow position-relative mt-3 ">
                 <img class="top-left" src="/view/Profile/Images/pin_post-it.png" alt="pin-post-it">
                 <img th:if="${post.immagine} != null" th:src="'data:image/png;base64,' + ${post.immagine.getImgData(post.immagine.data)}" class="card-img-top" alt="immagine-post">
-                <hr>
                 <div class="card-body rounded border border-dark">
                   <p th:text="${post.testo}" class="card-text text-dark font-weight-bold"></p>
                 </div>
               </div>
             </div>
-
           </div>
 
         </div>
       </div>
 <br><br>
 
-      <!-- ROW DESCRIZIONE E DASHBOARD -->
+      <!-- ROW DASHBOARD -->
       <div class="container mt-5 mb-5">
         <div class="row justify-content-center mt-5 " th:with="AM = ${#authorization.expression('hasAuthority(''AM'')')}">
           <div class="col-xl-12" th:if="${session.id} == ${utente.utente.id}">
