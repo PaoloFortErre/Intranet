@@ -61,7 +61,7 @@
 			<form class="signin-form" th:action="@{/eventowork/update/{id}(id = ${evento.id})}" th:object="${evento}" method="post" enctype="multipart/form-data">
 				<div class="form-group col-10">
 					<label for="titolo">Titolo</label>
-					<input class="form-control" type="text" id="titolo" name="titolo" th:field="*{titolo}" style="color: black">
+					<input class="form-control" type="text" id="titolo" name="titolo" th:field="*{titolo}" required style="color: black">
 				</div>
 				<div class="form-group col-10">
 					<label for="contenuto">Contenuto</label>
@@ -73,7 +73,7 @@
 				</div>
 				<div class="form-group col-5">
 					<label for="date">Data</label>
-					<input class="form-control" type="date" id="date" name="date" th:value="${#dates.format(date, 'yyyy-MM-dd')}" style="color: black">
+					<input class="form-control" type="date" id="date" name="date" required th:value="${#dates.format(date, 'yyyy-MM-dd')}" style="color: black">
 				</div>
 				<div class="form-group col-8">
 					<label for="immagine">Immagine dell'evento</label>
