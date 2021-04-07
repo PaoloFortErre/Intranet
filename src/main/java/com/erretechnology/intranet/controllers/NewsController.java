@@ -61,7 +61,7 @@ public class NewsController extends BaseController {
 
 		repoNews.save(news);
 		saveLog("aggiunto una news", utenteLoggato);
-		notificaTutti("hs inserito una news su MyWork!", utenteLoggato);
+		notificaTutti("ha inserito una news su MyWork!", utenteLoggato);
 		return "redirect:/myWork/";
 	}
 	
