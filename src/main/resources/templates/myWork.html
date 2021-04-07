@@ -96,14 +96,18 @@ table, th, td {
 				</li>
 				<li class="nav-item avatar dropdown mt-3">
 					<a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-						<span class="badge badge-danger ml-2">4</span>
+						<span class="badge badge-danger ml-2" th:text="${utenteDati.setNotifiche.size()}"></span>
 						<i class="fa fa-bell"></i>
 					</a>
-					<div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-5">
-						<a class="dropdown-item waves-effect waves-light" href="#">Action <span class="badge badge-danger ml-2">4</span></a>
-						<a class="dropdown-item waves-effect waves-light" href="#">Another action <span class="badge badge-danger ml-2">1</span></a>
-						<a class="dropdown-item waves-effect waves-light" href="#">Something else here <span class="badge badge-danger ml-2">4</span></a>
-					</div>
+					
+					 <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-5" >
+                  <div class="dropdown-item waves-effect waves-light" th:each="i:${#numbers.sequence(utenteDati.setNotifiche.size() - 1, 0, -1)}" th:with="notifica=${utenteDati.setNotifiche[i]}">
+                    <p class="font-weight-bold" th:text="${notifica.utente.nome} + ' ' + ${notifica.utente.cognome}+ ' ' "  style="COLOR: BLACK"></p>
+                    <p class="mt-n3" th:text="${notifica.descrizione}" style="COLOR: BLACK"></p>
+                    <p class="p mt-n2" th:utext="${#dates.format(notifica.timestamp*1000, 'dd/MM/yyyy, HH:mm')}" style="font-size: 10px; color: black"></p>
+                    <hr>
+                  </div>
+                </div> 
 				</li>
 				<li class="nav-item mr-3 mt-3"><a class="nav-link"
 					th:href="@{/profile/}" target="blank" id="scrittaProfilo"
@@ -278,7 +282,7 @@ table, th, td {
 
 
 							<form th:action="@{'/cliente/update/'+${cliente.id}}"
-								th:if="${GMW}" method="get">
+								th:if="${GMW}" method="get" style="display: inline-block;">
 								<button type="submit" name="modifica"
 									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;"
 									class="bottoniGMW">Modifica</button>
@@ -287,7 +291,7 @@ table, th, td {
 							style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
 						</a>
 							<form th:action="@{'/cliente/delete/'+${cliente.id}}"
-								th:if="${GMW}" method="get">
+								th:if="${GMW}" method="get" style="display: inline-block;">
 								<button type="submit" name="modifica" class="bottoniGMW mt-1"
 									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
 									Elimina</button>
@@ -320,7 +324,7 @@ table, th, td {
 										<br>
 
 										<form th:action="@{'/news/update/'+${newsSlide[0].id}}"
-											th:if="${GMW}" method="get">
+											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW"
 												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
 												Modifica</button>
@@ -330,7 +334,7 @@ table, th, td {
 											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
 										</a>
 										<form th:action="@{'/news/delete/'+${newsSlide[0].id}}"
-											th:if="${GMW}" method="get">
+											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW mt-1"
 												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
 												Elimina</button>
@@ -348,7 +352,7 @@ table, th, td {
 
 										<br>
 										<form th:action="@{'/news/update/'+${newsSlide[1].id}}"
-											th:if="${GMW}" method="get">
+											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW"
 												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
 												Modifica</button>
@@ -358,7 +362,7 @@ table, th, td {
 											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
 										</a>
 										<form th:action="@{'/news/delete/'+${newsSlide[1].id}}"
-											th:if="${GMW}" method="get">
+											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW mt-1"
 												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
 												Elimina</button>
@@ -374,7 +378,7 @@ table, th, td {
 											style="text-align: center; margin: 0 auto"></h3>
 										<br>
 										<form th:action="@{'/news/update/'+${newsSlide[2].id}}"
-											th:if="${GMW}" method="get">
+											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW"
 												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
 												Modifica</button>
@@ -384,7 +388,7 @@ table, th, td {
 											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
 										</a>
 										<form th:action="@{'/news/delete/'+${newsSlide[2].id}}"
-											th:if="${GMW}" method="get">
+											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW mt-1"
 												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
 												Elimina</button>
@@ -499,7 +503,7 @@ table, th, td {
 										<br>
 
 										<form th:action="@{'/eventowork/update/'+${eventi[0].id}}"
-											th:if="${GMW}" method="get">
+											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW"
 												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
 												Modifica</button>
@@ -509,7 +513,7 @@ table, th, td {
 											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
 										</a>
 										<form th:action="@{'/eventowork/delete/'+${eventi[0].id}}"
-											th:if="${GMW}" method="get">
+											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW mt-1"
 												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
 												Elimina</button>
@@ -529,7 +533,7 @@ table, th, td {
 										<br>
 
 										<form th:action="@{'/eventowork/update/'+${eventi[1].id}}"
-											th:if="${GMW}" method="get">
+											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW"
 												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
 												Modifica</button>
@@ -539,7 +543,7 @@ table, th, td {
 											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
 										</a>
 										<form th:action="@{'/eventowork/delete/'+${eventi[1].id}}"
-											th:if="${GMW}" method="get">
+											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW mt-1"
 												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
 												Elimina</button>
@@ -559,7 +563,7 @@ table, th, td {
 										<br>
 
 										<form th:action="@{'/eventowork/update/'+${eventi[2].id}}"
-											th:if="${GMW}" method="get">
+											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW"
 												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
 												Modifica</button>
@@ -569,7 +573,7 @@ table, th, td {
 											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
 										</a>
 										<form th:action="@{'/eventowork/delete/'+${eventi[2].id}}"
-											th:if="${GMW}" method="get">
+											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW mt-1"
 												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
 												Elimina</button>

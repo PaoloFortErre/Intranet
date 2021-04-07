@@ -82,7 +82,7 @@
 
 .carousel-inner img {
 	width: 100%;
-	height: 980px;
+	height: 880px;
 }
 
 .carousel-caption {
@@ -400,7 +400,7 @@
 
 			</div>
 
-			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4">
+			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4" style="text-align: center">
 				<div class="profile-card-2 mt-5">
 					<img
 						th:src="'data:image/png;base64,' + ${film[0].immagine.getImgData(film[0].immagine.data)}"
@@ -409,10 +409,24 @@
 					<div class="profile-username" th:text="${film[0].cinema.nome}">
 					</div>
 				</div>
+					<form th:action="@{'/cinema/update/'+${film[0].id}}"
+								th:if="${GML}" method="get" style="display: inline-block;"	>
+								<button type="submit" name="modifica"
+									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+									Modifica
+								</button>
+							</form>
+							<form th:action="@{'/cinema/delete/'+${film[0].id}}"
+								th:if="${GML}" method="get" style="display: inline-block;">
+								<button type="submit" name="modifica"
+									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+									Elimina
+								</button>
+							</form>
 			</div>
 
 
-			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4 ">
+			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4 " style="text-align: center;">
 				<div class="profile-card-2 mt-5">
 					<img
 						th:src="'data:image/png;base64,' + ${film[1].immagine.getImgData(film[1].immagine.data)}"
@@ -420,11 +434,25 @@
 					<div class="profile-name" th:text="${film[1].titolo}"></div>
 					<div class="profile-username" th:text="${film[1].cinema.nome}"></div>
 				</div>
+				<form th:action="@{'/cinema/update/'+${film[1].id}}"
+								th:if="${GML}" method="get" style="display: inline-block;"	>
+								<button type="submit" name="modifica"
+									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+									Modifica
+								</button>
+							</form>
+							<form th:action="@{'/cinema/delete/'+${film[1].id}}"
+								th:if="${GML}" method="get" style="display: inline-block;">
+								<button type="submit" name="modifica"
+									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+									Elimina
+								</button>
+							</form>
 			</div>
 
 
 
-			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4">
+			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4" style="text-align: center">
 				<div class="profile-card-2 mt-5">
 					<img
 						th:src="'data:image/png;base64,' + ${film[2].immagine.getImgData(film[2].immagine.data)}"
@@ -433,7 +461,20 @@
 					<div class="profile-username" th:text="${film[2].cinema.nome}"></div>
 
 				</div>
-
+<form th:action="@{'/cinema/update/'+${film[2].id}}"
+								th:if="${GML}" method="get" style="display: inline-block;"	>
+								<button type="submit" name="modifica"
+									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+									Modifica
+								</button>
+							</form>
+							<form th:action="@{'/cinema/delete/'+${film[2].id}}"
+								th:if="${GML}" method="get" style="display: inline-block;">
+								<button type="submit" name="modifica"
+									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+									Elimina
+								</button>
+							</form>
 
 			</div>
 		</div>
@@ -471,14 +512,14 @@
 								<p th:text="${#dates.format(eventilife[0].timestamp*1000, 'dd/MM/yyyy')}"  style="text-align: center" ></p>
 								<div style="margin: 0 auto; text-align: center" th:if="${GML}">
 								<form th:action="@{'/eventolife/update/'+${eventilife[0].id}}"
-								th:if="${GML}" method="get">
+								th:if="${GML}" method="get" style="display: inline-block;">
 								<button type="submit" name="modifica"
 									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
 									Modifica
 								</button>
-							</form><br>
+							</form>
 							<form th:action="@{'/eventolife/delete/'+${eventilife[0].id}}"
-								th:if="${GML}" method="get">
+								th:if="${GML}" method="get" style="display: inline-block;">
 								<button type="submit" name="modifica"
 								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
 									Elimina
@@ -493,14 +534,14 @@
 								<p th:text="${#dates.format(eventilife[1].timestamp*1000, 'dd/MM/yyyy')}"  style="text-align: center; " ></p>
 							<div style="margin: 0 auto; text-align: center" th:if="${GML}">
 								<form th:action="@{'/eventolife/update/'+${eventilife[1].id}}"
-								th:if="${GML}" method="get">
+								th:if="${GML}" method="get" style="display: inline-block;">
 								<button type="submit" name="modifica"
 									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
 									Modifica
 								</button>
-							</form><br>
+							</form>
 							<form th:action="@{'/eventolife/delete/'+${eventilife[1].id}}"
-								th:if="${GML}" method="get">
+								th:if="${GML}" method="get" style="display: inline-block;">
 								<button type="submit" name="modifica"
 								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
 									Elimina
@@ -514,14 +555,14 @@
 								<p th:text="${#dates.format(eventilife[2].timestamp*1000, 'dd/MM/yyyy')}"  style="text-align: center; "  ></p>
 						<div style="margin: 0 auto; text-align: center" th:if="${GML}">
 								<form th:action="@{'/eventolife/update/'+${eventilife[2].id}}"
-								th:if="${GML}" method="get">
+								th:if="${GML}" method="get" style="display: inline-block;">
 								<button type="submit" name="modifica"
 									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
 									Modifica
 								</button>
-							</form><br>
+							</form>
 							<form th:action="@{'/eventolife/delete/'+${eventilife[2].id}}"
-								th:if="${GML}" method="get">
+								th:if="${GML}" method="get" style="display: inline-block;">
 								<button type="submit" name="modifica"
 								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
 									Elimina
@@ -553,10 +594,10 @@
 <div class="col-xs-12 col-sm-12 col-lg-12 col-xl-12 mt-5 ">
 				<br>
 				<h1 style="text-align: center">Sei un tipo da libri?</h1>
-				<h5 style="text-align: center; font-style: italic">Ecco una lista selezionata da ERRE:</h5>
+				<h5 style="text-align: center; font-style: italic">Ecco una lista di libri selezionata da ERRE:</h5>
 
 			</div>
-	<div class="col-xs-6 col-sm-6 col-lg-3 col-xl-3 ">
+	<div class="col-xs-6 col-sm-6 col-lg-3 col-xl-3 " style="text-align: center">
 				<div class="profile-card-3 mt-5">
 					<img
 					th:src="'data:image/png;base64,' + ${libri[0].immagine.getImgData(libri[0].immagine.data)}"
@@ -564,8 +605,22 @@
 					<div class="profile-name" th:text="${libri[0].titolo}"></div>
 					<div class="profile-username" th:text="${libri[0].contenuto}"></div>
 				</div>
+				<form th:action="@{'/libro/update/'+${libri[0].id}}"
+										th:if="${GML}" method="get" style="display: inline-block">
+										<button type="submit" name="modifica"
+								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+										Modifica
+										</button>
+									</form>
+									<form th:action="@{'/libro/delete/'+${libri[0].id}}"
+										th:if="${GML}" method="get" style="display: inline-block">
+										<button type="submit" name="modifica"
+								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+										Elimina</button>
+									</form>
+				
 			</div>
-	<div class="col-xs-6 col-sm-6 col-lg-3 col-xl-3 ">
+	<div class="col-xs-6 col-sm-6 col-lg-3 col-xl-3 " style="text-align: center">
 				<div class="profile-card-3 mt-5">
 					<img
 					th:src="'data:image/png;base64,' + ${libri[1].immagine.getImgData(libri[1].immagine.data)}"
@@ -573,8 +628,21 @@
 					<div class="profile-name" th:text="${libri[1].titolo}"></div>
 					<div class="profile-username" th:text="${libri[1].contenuto}"></div>
 				</div>
+				<form th:action="@{'/libro/update/'+${libri[1].id}}"
+										th:if="${GML}" method="get" style="display: inline-block">
+										<button type="submit" name="modifica"
+								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+										Modifica
+										</button>
+									</form>
+									<form th:action="@{'/libro/delete/'+${libri[1].id}}"
+										th:if="${GML}" method="get" style="display: inline-block">
+										<button type="submit" name="modifica"
+								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+										Elimina</button>
+									</form>
 			</div>
-	<div class="col-xs-6 col-sm-6 col-lg-3 col-xl-3 ">
+	<div class="col-xs-6 col-sm-6 col-lg-3 col-xl-3 " style="text-align: center">
 				<div class="profile-card-3 mt-5">
 					<img
 					th:src="'data:image/png;base64,' + ${libri[2].immagine.getImgData(libri[2].immagine.data)}"
@@ -582,8 +650,21 @@
 					<div class="profile-name" th:text="${libri[2].titolo}"></div>
 					<div class="profile-username" th:text="${libri[2].contenuto}"></div>
 				</div>
+				<form th:action="@{'/libro/update/'+${libri[2].id}}"
+										th:if="${GML}" method="get" style="display: inline-block">
+										<button type="submit" name="modifica"
+								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+										Modifica
+										</button>
+									</form>
+									<form th:action="@{'/libro/delete/'+${libri[2].id}}"
+										th:if="${GML}" method="get" style="display: inline-block">
+										<button type="submit" name="modifica"
+								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+										Elimina</button>
+									</form>
 			</div>
-	<div class="col-xs-6 col-sm-6 col-lg-3 col-xl-3 ">
+	<div class="col-xs-6 col-sm-6 col-lg-3 col-xl-3 " style="text-align: center">
 				<div class="profile-card-3 mt-5">
 					<img
 					th:src="'data:image/png;base64,' + ${libri[3].immagine.getImgData(libri[3].immagine.data)}"
@@ -591,6 +672,19 @@
 					<div class="profile-name" th:text="${libri[3].titolo}"></div>
 					<div class="profile-username" th:text="${libri[3].contenuto}"></div>
 				</div>
+				<form th:action="@{'/libro/update/'+${libri[3].id}}"
+										th:if="${GML}" method="get" style="display: inline-block">
+										<button type="submit" name="modifica"
+								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+										Modifica
+										</button>
+									</form>
+									<form th:action="@{'/libro/delete/'+${libri[3].id}}"
+										th:if="${GML}" method="get" style="display: inline-block">
+										<button type="submit" name="modifica"
+								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+										Elimina</button>
+									</form>
 			</div>
 </div>
 
@@ -660,5 +754,18 @@
 			</div>
 		</div>
 	</footer>
+	<script>
+	function myFunction() {
+		var w = window.outerWidth;
+		if (w <= 847) {
+
+			document.getElementById("utente-foto-profilo").style.display = "none";
+			document.getElementById("scrittaProfilo").style.display = "block";
+
+		} else {
+			document.getElementById("utente-foto-profilo").style.display = "block";
+			document.getElementById("scrittaProfilo").style.display = "none";
+		}
+	}</script>
 </body>
 </html>
