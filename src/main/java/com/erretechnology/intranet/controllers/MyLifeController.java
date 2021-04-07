@@ -84,6 +84,14 @@ public class MyLifeController extends BaseController {
 		return mav;
 	}
 	
+	@GetMapping(value = "/autorePost")
+	public int autorePost(int id, HttpSession session) {
+		Post p = servicePost.findById(id);
+		UtenteDatiPersonali utenteSessione = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		return p.getSetUtenti().contains(utenteSessione) ? 1 : 0;
+	}
+	
+	
 	@PostMapping(value = "/video")
 	public String video(@ModelAttribute("video") VideoDelGiorno video, HttpSession session) {
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));

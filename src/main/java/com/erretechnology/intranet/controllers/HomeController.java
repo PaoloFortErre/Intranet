@@ -3,6 +3,7 @@ package com.erretechnology.intranet.controllers;
 import java.io.UnsupportedEncodingException;
 import java.time.Instant;
 import java.util.Comparator;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -25,10 +27,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.ComunicazioneHR;
+import com.erretechnology.intranet.models.ElementiMyLife;
 import com.erretechnology.intranet.models.FilePdf;
+import com.erretechnology.intranet.models.PostLinkedin;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.models.Utility;
+import com.erretechnology.intranet.models.VideoDelGiorno;
+import com.erretechnology.intranet.repositories.RepositoryCategoriaCinema;
 import com.erretechnology.intranet.repositories.RepositoryLinkedin;
 
 import net.bytebuddy.utility.RandomString;
@@ -40,6 +46,9 @@ public class HomeController extends BaseController{
     private JavaMailSender mailSender;
 	@Autowired
 	private RepositoryLinkedin repositoryLinkedin;
+	@Autowired
+	private RepositoryCategoriaCinema repoCategoria;
+
 	
 	@GetMapping("/")
 	public String home() {
@@ -219,7 +228,21 @@ public class HomeController extends BaseController{
 	public ModelAndView MyLife1(HttpSession session) {
 		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		ModelAndView mav = new ModelAndView();
+		List<ElementiMyLife> elementi = serviceElementiMyLife.findAll();
 	
+		elementi.stream().filter(x -> x.getTipo().equals("cinema")).forEach(x->x.setCinema(repoCategoria.findById(Integer.parseInt(x.getContenuto())).get()));
+		elementi.stream().filter(x -> x.getFoto() != null).forEach(x -> x.setImmagine(serviceFileImmagine.getImmagine(x.getFoto())));
+		List<ElementiMyLife> evento = elementi.stream().filter(x -> x.getTipo().equals("eventi")).collect(Collectors.toList());
+		List<ElementiMyLife> aforismi = elementi.stream().filter(x -> x.getTipo().equals("aphorism")).collect(Collectors.toList());
+		List<ElementiMyLife> film = elementi.stream().filter(x -> x.getTipo().equals("cinema")).collect(Collectors.toList());
+		List<ElementiMyLife> libri = elementi.stream().filter(x -> x.getTipo().equals("book")).collect(Collectors.toList());
+		VideoDelGiorno video = serviceVideo.getLastVideo("MyLife"); 
+		
+		mav.addObject("film", film);
+		mav.addObject("eventilife", evento);
+		mav.addObject("aforisma", aforismi);
+		mav.addObject("libri", libri);
+		mav.addObject("video", video);
 		mav.addObject("utenteDati", u);
 		
 		mav.setViewName("myLife1");
@@ -230,6 +253,7 @@ public class HomeController extends BaseController{
 	public ModelAndView moduli(HttpSession session) {
 		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		ModelAndView mav = new ModelAndView();
+		
 	
 		mav.addObject("user", u);
 		mav.addObject("filePdf", serviceFilePdf.findAll().stream().filter(x->x.isVisibile()).sorted(Comparator.comparingLong(FilePdf::getTimestamp).reversed()).collect(Collectors.toList()));

@@ -18,9 +18,7 @@
 	crossorigin="anonymous">
 
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-	crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
 	integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
@@ -448,17 +446,34 @@
 											width="100%" height="40%">
 									</div>
 									<div>
-										<button type="button" th:if="${post.setUtenti.size > 0}" 
+											<img src="/view/MyWork/images/like2.png" width="30" style="margin-left: 17px; " th:if="${post.setUtenti.size > 0}"><button type="button" th:if="${post.setUtenti.size > 0}" 
 										data-toggle="modal" th:data-target="${'#myModalLike' + post.id}" th:text="${post.setUtenti.size}" 
-										style="color: #303030; background-color: transparent; border: 0px solid; font-size: 12px"></button>
+										style="color: #303030; background-color: transparent; border: 0px solid; font-size: 13px; margin-top: 17px;"></button>
 										<!-- <a th:if="${post.setUtenti.size > 0}"
 											style="color: #303030; font-size: 14px;"><b
 											th:text="${post.setUtenti.size}"></b></a>-->
-										<form th:action="@{/myLife/likePost(id=${post.id})}"method="post">
-											<button type="submit" class="btn btn-block btn-primary">
-												<i class="fa fa-thumbs-up">Like</i>
-											</button>
+										
+									<br><hr>
+										<form th:action="@{/myLife/likePost(id=${post.id})}"method="post" style=" display: inline-block;" >
+											<button type="submit" class="miPiaceBtn" th:id="'postLike' + ${post.id}" th:value="${post.id}">
+											
+												<!-- <div th:each="utente : ${post.setUtenti}">
+													<div th:if="${utente.id} == ${session.id}">
+													
+													</div>
+												</div> -->
+												<img src="/view/MyWork/images/like.png" width="20"> Mi piace
+											</button>										
+
 										</form>
+										<!-- <script>
+													$(document).ready(function(){
+														console.log("A : " + this );
+														$("#miPiaceBtn").toggleClass("buttonClicked");
+													});
+															
+													</script> -->
+										<button class="CommentaBtn"  th:onclick="'mostraTextarea(' + ${post.id} + ')'"> <img src="/view/MyWork/images/comment.png" width="20">Commenta</button>
 									</div>
 
 									<!-- The Modal -->
@@ -549,16 +564,16 @@
 									</table>
 								</div>
 								<br>
-								<div th:if="${UB}">
+								<div th:if="${UB}" th:id="'commentoArea' + ${post.id}" style="display: none">
 									<form th:action="@{/myLife/addCommento(idPost=${post.id})}"
 										method="post">
 										<label for="testo"></label>
 
-										<textarea id="post" name="testo" rows="2" cols="30"
+										<textarea id="post"  name="testo" rows="2" cols="30"
 											style="width: 91%; padding: 8px; margin-left: 15px; color: #303030;"
 											placeholder="Lascia un commento..." required></textarea>
 										<input type="submit" value="Commenta" id="submitPost"
-											style="margin-bottom: 50px; font-size: 13px;" />
+											style="margin-bottom: 10px; font-size: 13px;" />
 
 									</form>
 								</div>
@@ -984,6 +999,12 @@ COLONNA DESTRA
 			document.getElementById("secondoFilm").style.display = "none";
 
 		}
+		function mostraTextarea(id) {
+			console.log(id);
+			
+			document.getElementById("commentoArea" + id).style.display = "block";
+			
+		}
 
 		function readURL(input) {
 			if (input.files && input.files[0]) {
@@ -1032,6 +1053,19 @@ COLONNA DESTRA
 				document.getElementById("scrittaProfilo").style.display = "none";
 			}
 		}
+		
+		$(document).ready(function(){
+			var bottoni = document.getElementsByClassName("miPiaceBtn");
+			var id = bottoni[0].id;
+			var last_index = id.indexOf("e");
+	    	id = id.substr(last_index+1);
+	    	 $.get("http://localhost:8080/myLife/autorePost?id=" + id, function( data) {
+	    		 if(data){
+	    			 console.log("hai messo mi piace");
+	    		 }
+	    	 });
+			console.log(id);
+		});
 	</script>
 
 </body>

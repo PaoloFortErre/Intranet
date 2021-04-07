@@ -583,3 +583,13 @@ audio {
 	background-color: black;
 	color: white;
 }
+.miPiaceBtn , .CommentaBtn{
+	background-color: transparent; border: 0px solid; color: #303030; margin-left: 17px;
+}
+.miPiaceBtn:hover ,.CommentaBtn:hover{
+	background-color: #DFDEDE;
+}
+
+.buttonClicked {
+	color: red;
+}
