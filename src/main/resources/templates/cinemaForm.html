@@ -64,7 +64,7 @@ body {
 					<div class="form-group col-7">
 						<label for="categoria">Piattaforma</label>
 						<select class="custom-select" name="categoria" th:field="*{categoria}" required>
-							<option selected value=" "></option>
+							<option value=""></option>
 							<option th:each="category: ${categorie}" th:value="${category.id}" th:text="${category.nome}"></option>
 						</select>
 					</div>
