@@ -30,13 +30,6 @@ public class NewsController extends BaseController {
 	@Autowired
 	private RepositoryNews repoNews;
 	
-	@GetMapping("/{id}")
-	public String get(@PathVariable int id, Model model) {
-		
-		model.addAttribute("news", repoNews.findById(id).get());
-		return "news";
-	}
-	
 	@GetMapping("/new")
 	public String form(Model model) {
 		model.addAttribute("news", new News()); 

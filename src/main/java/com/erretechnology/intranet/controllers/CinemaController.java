@@ -33,13 +33,6 @@ public class CinemaController extends BaseController {
 	@Autowired
 	private RepositoryCategoriaCinema repoCategoria;
 
-	@GetMapping("/{id}")
-	public String get(@PathVariable int id, Model model) {
-
-		model.addAttribute("cinema", repoCinema.findById(id).get());
-		return "cinema";
-	}	
-
 	@GetMapping("/new")
 	public String form(Model model) {
 		model.addAttribute("cinema", new Cinema()); 

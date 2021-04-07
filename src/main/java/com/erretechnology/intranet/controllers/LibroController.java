@@ -27,14 +27,7 @@ import com.erretechnology.intranet.repositories.RepositoryLibro;
 @RequestMapping("libro")
 public class LibroController extends BaseController {
 	@Autowired
-	private RepositoryLibro repoLibro;
-
-	@GetMapping("/{id}")
-	public String get(@PathVariable int id, Model model) {
-
-		model.addAttribute("libro", repoLibro.findById(id).get());
-		return "libro";
-	}	
+	private RepositoryLibro repoLibro;	
 
 	@GetMapping("/new")
 	public String form(Model model) {
