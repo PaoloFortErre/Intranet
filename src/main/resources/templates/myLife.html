@@ -18,7 +18,8 @@
 	crossorigin="anonymous">
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
 	integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
@@ -446,24 +447,35 @@
 											width="100%" height="40%">
 									</div>
 									<div>
-											<img src="/view/MyWork/images/like2.png" width="30" style="margin-left: 17px; " th:if="${post.setUtenti.size > 0}"><button type="button" th:if="${post.setUtenti.size > 0}" 
-										data-toggle="modal" th:data-target="${'#myModalLike' + post.id}" th:text="${post.setUtenti.size}" 
-										style="color: #303030; background-color: transparent; border: 0px solid; font-size: 13px; margin-top: 17px;"></button>
+
+										<img src="/view/MyWork/images/like2.png" width="30"
+												style="margin-left: 17px;" th:if="${post.setUtenti.size > 0}"><button type="button" th:if="${post.setUtenti.size > 0}"
+											data-toggle="modal"
+											th:data-target="${'#myModalLike' + post.id}"
+											th:text="${post.setUtenti.size}"
+											style="color: #303030; background-color: transparent; 
+											border: 0px solid; font-size: 25px; margin-top: 17px;">
+											
+										</button>
 										<!-- <a th:if="${post.setUtenti.size > 0}"
 											style="color: #303030; font-size: 14px;"><b
 											th:text="${post.setUtenti.size}"></b></a>-->
-										
-									<br><hr>
-										<form th:action="@{/myLife/likePost(id=${post.id})}"method="post" style=" display: inline-block;" >
-											<button type="submit" class="miPiaceBtn" th:id="'postLike' + ${post.id}" th:value="${post.id}">
-											
+
+										<br>
+										<hr>
+										<form th:action="@{/myLife/likePost(id=${post.id})}"
+											method="post" style="display: inline-block;">
+											<button type="submit" class="miPiaceBtn"
+												th:id="'postLike' + ${post.id}" th:value="${post.id}">
+
 												<!-- <div th:each="utente : ${post.setUtenti}">
 													<div th:if="${utente.id} == ${session.id}">
 													
 													</div>
 												</div> -->
-												<img src="/view/MyWork/images/like.png" width="20"> Mi piace
-											</button>										
+												<img src="/view/MyWork/images/like.png" width="20"
+													th:id="'imgLike' + ${post.id}"> Mi piace
+											</button>
 
 										</form>
 										<!-- <script>
@@ -473,11 +485,15 @@
 													});
 															
 													</script> -->
-										<button class="CommentaBtn"  th:onclick="'mostraTextarea(' + ${post.id} + ')'"> <img src="/view/MyWork/images/comment.png" width="20">Commenta</button>
+										<button class="CommentaBtn"
+											th:onclick="'mostraTextarea(' + ${post.id} + ')'">
+											<img src="/view/MyWork/images/comment.png" width="20">Commenta
+										</button>
 									</div>
 
 									<!-- The Modal -->
-									<div class="modal" th:id="${'myModalLike' + post.id}" style="color: #303030">
+									<div class="modal" th:id="${'myModalLike' + post.id}"
+										style="color: #303030">
 										<div class="modal-dialog">
 											<div class="modal-content">
 
@@ -494,8 +510,10 @@
 
 												<!-- Modal body -->
 												<div class="modal-body" th:each="utente : ${post.setUtenti}"
-													th:if="${post.setUtenti.size > 0}" style="background-color: #B9CAF0;">
-													<p th:text="${utente.nome} + ' ' + ${utente.cognome}" style="color: #303030"></p>
+													th:if="${post.setUtenti.size > 0}"
+													style="background-color: #B9CAF0;">
+													<p th:text="${utente.nome} + ' ' + ${utente.cognome}"
+														style="color: #303030"></p>
 												</div>
 
 												<!-- Modal footer -->
@@ -564,12 +582,13 @@
 									</table>
 								</div>
 								<br>
-								<div th:if="${UB}" th:id="'commentoArea' + ${post.id}" style="display: none">
+								<div th:if="${UB}" th:id="'commentoArea' + ${post.id}"
+									style="display: none">
 									<form th:action="@{/myLife/addCommento(idPost=${post.id})}"
 										method="post">
 										<label for="testo"></label>
 
-										<textarea id="post"  name="testo" rows="2" cols="30"
+										<textarea id="post" name="testo" rows="2" cols="30"
 											style="width: 91%; padding: 8px; margin-left: 15px; color: #303030;"
 											placeholder="Lascia un commento..." required></textarea>
 										<input type="submit" value="Commenta" id="submitPost"
@@ -1001,9 +1020,9 @@ COLONNA DESTRA
 		}
 		function mostraTextarea(id) {
 			console.log(id);
-			
+
 			document.getElementById("commentoArea" + id).style.display = "block";
-			
+
 		}
 
 		function readURL(input) {
@@ -1053,19 +1072,42 @@ COLONNA DESTRA
 				document.getElementById("scrittaProfilo").style.display = "none";
 			}
 		}
-		
-		$(document).ready(function(){
-			var bottoni = document.getElementsByClassName("miPiaceBtn");
-			var id = bottoni[0].id;
-			var last_index = id.indexOf("e");
-	    	id = id.substr(last_index+1);
-	    	 $.get("http://localhost:8080/myLife/autorePost?id=" + id, function( data) {
-	    		 if(data){
-	    			 console.log("hai messo mi piace");
-	    		 }
-	    	 });
-			console.log(id);
-		});
+
+		$(document)
+				.ready(
+						function() {
+							var bottoni = document
+									.getElementsByClassName("miPiaceBtn");
+							for (var i = 0; i < bottoni.length; i++) {
+								var id = bottoni[i].id;
+								var last_index = id.indexOf("e");
+								id = id.substr(last_index + 1);
+								$
+										.ajax({
+											type : 'GET',
+											url : "http://localhost:8080/myLife/autorePost?id="
+													+ id,
+											async : false,
+											success : function(data) {
+												if (data) {
+													$('#postLike' + id).css(
+															'color', '#0C4FFF');
+													$('#postLike' + id).css(
+															'background-color',
+															'#cce5ff');
+													$('#postLike' + id).css(
+															'font-weight',
+															'bold');
+													$('#postLike' + id).css(
+															'padding', '8px');
+													$('#postLike' + id).css(
+															'border-radius',
+															'5px');
+												}
+											}
+										});
+							}
+						});
 	</script>
 
 </body>
