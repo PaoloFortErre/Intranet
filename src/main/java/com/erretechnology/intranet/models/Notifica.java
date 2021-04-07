@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Notifica {
@@ -18,6 +19,8 @@ public class Notifica {
 	private int id;
 	private String descrizione;
 	private long timestamp;
+	@ManyToOne
+	@JoinColumn(name = "id_autore")
 	private UtenteDatiPersonali utente;
 	@ManyToMany
 	@JoinTable(name = "NotificheUtente",
