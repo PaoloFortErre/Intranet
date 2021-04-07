@@ -298,7 +298,7 @@
                   <i class="fa fa-bell"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-5">
-                  <div class="dropdown-item waves-effect waves-light" th:each="notifica:${utente.setNotifiche}">
+                  <div class="dropdown-item waves-effect waves-light" th:each="i:${#numbers.sequence(utente.setNotifiche.size() - 1, 0, -1)}" th:with="notifica=${utente.setNotifiche[i]}">
                     <p class="font-weight-bold" th:text="${notifica.utente.nome} + ' ' + ${notifica.utente.cognome}+ ' ' "  ></p>
                     <p class="mt-n3" th:text="${notifica.descrizione}" ></p>
                     <p class="p mt-n2" th:utext="${#dates.format(notifica.timestamp*1000, 'dd/MM/yyyy, HH:mm')}" style="font-size: 10px"></p>
@@ -318,7 +318,7 @@
         <div class="row justify-content-start align-items-center">
 
           <!-- IMMAGINE PROFILO -->
-          <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4 col-xs-5">
+          <div class="col-auto">
             <div class="profile_pic">
               <img id="myImg" class="picture rounded-circle"
               th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}" alt="profile_picca">
@@ -401,7 +401,7 @@
           </div>
 
           <!-- ANAGRAFICA PROFILO -->
-          <div class="col-xl-4 col-lg-4 col-md-5 col-sm-10 col-xs-auto mt-3">
+          <div class="col-auto mt-2">
             <div class="container text-center">
               <h1 class="h1" th:text="${utente.nome}" style="font-weight: 600"></h1>
               <h1 class="h1 text-primary" th:text="${utente.cognome}" style="font-weight: 600"></h1><br>
@@ -430,7 +430,7 @@
                   <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Gestisci gli utenti
                   </button>
-                  <div class="dropdown-menu">
+                  <div class="dropdown-menu font-weight-bold">
                     <a class="dropdown-item " th:href="@{/profile/registra}">Aggiungi o riattiva utente</a>
                     <a class="dropdown-item text-danger  mt-2" th:href="@{/profile/cancellaUtente}">Elimina utente</a>
                     <div class="dropdown-divider"></div>
@@ -453,7 +453,7 @@
       <div class="container mt-5">
         <div class="row justify-content-center">
 
-          <div class="col-auto">
+          <div class="col-xl-10 col-lg-10 col-md-10">
             <div class="card position-relative text-end">
               <img class="top-left" src="/view/Profile/Images/pin_post-it.png" alt="pin-post-it">
               <div class="card-body">
@@ -480,22 +480,19 @@
 
       <!-- ROW POST PERSONALI -->
       <div class="container mt-5">
-        <div class="row justify-content-center mt-5">
+        <div th:each="post:${post}" class="row justify-content-center mt-5">
+          <div class="container rounded text-center bg-dark w-50 mt-5">
+            <h1 class="h1" style="font-weight: 600;" >Gli ultimi post</h1>
+          </div>
 
-          <div class="col-auto text-center mt-5">
-            <div class="container">
-              <h1 class="h1" style="font-weight: 600;" >Gli ultimi post</h1>
-              <hr>
-            </div>
-
-            <div class="container mt-3" th:each="post:${post}">
-              <div class="card shadow position-relative mt-5 ">
+          <div  class="col-auto text-center mt-4">
+            <div class="container" >
+              <div class="card shadow position-relative mt-3 ">
                 <img class="top-left" src="/view/Profile/Images/pin_post-it.png" alt="pin-post-it">
                 <img th:if="${post.immagine} != null" th:src="'data:image/png;base64,' + ${post.immagine.getImgData(post.immagine.data)}" class="card-img-top" alt="immagine-post">
                 <div class="card-body">
                   <p th:text="${post.testo}" class="card-text text-dark"></p>
                 </div>
-
               </div>
             </div>
 
