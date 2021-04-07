@@ -299,8 +299,8 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-5">
                   <div th:each="notifica:${utente.setNotifiche}">
-                    <p class="dropdown-item waves-effect waves-light" th:text="${notifica.descrizione} + ' ' + 'il '"></p>
-                    <p class="p dropdown-item" th:utext="${#dates.format(notifica.timestamp*1000, 'dd/MM/yyyy, HH:mm')}" style="font-size: 10px"></p>
+                    <p class="dropdown-item waves-effect waves-light" th:text="${notifica.descrizione}" ></p>
+                    <p class="p ml-4 mt-n3" th:utext="${#dates.format(notifica.timestamp*1000, 'dd/MM/yyyy, HH:mm')}" style="font-size: 10px"></p>
                   </div>
                 </div>
               </li>
