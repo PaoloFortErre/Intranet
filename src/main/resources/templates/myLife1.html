@@ -597,22 +597,22 @@
 				<h5 style="text-align: center; font-style: italic">Ecco una lista di libri selezionata da ERRE:</h5>
 
 			</div>
-	<div class="col-xs-6 col-sm-6 col-lg-3 col-xl-3 " style="text-align: center">
+	<div class="col-xs-6 col-sm-6 col-lg-3 col-xl-3 " style="text-align: center" th:if="${libri.size > 0}" th:each="libro : ${libri}">
 				<div class="profile-card-3 mt-5">
 					<img
-					th:src="'data:image/png;base64,' + ${libri[0].immagine.getImgData(libri[0].immagine.data)}"
+					th:src="'data:image/png;base64,' + ${libro.immagine.getImgData(libro.immagine.data)}"
 						class="img img-responsive" width="100%" height="350px">
-					<div class="profile-name" th:text="${libri[0].titolo}"></div>
-					<div class="profile-username" th:text="${libri[0].contenuto}"></div>
+					<div class="profile-name" th:text="${libro.titolo}"></div>
+					<div class="profile-username" th:text="${libro.contenuto}"></div>
 				</div>
-				<form th:action="@{'/libro/update/'+${libri[0].id}}"
+				<form th:action="@{'/libro/update/'+${libro.id}}"
 										th:if="${GML}" method="get" style="display: inline-block">
 										<button type="submit" name="modifica"
 								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
 										Modifica
 										</button>
 									</form>
-									<form th:action="@{'/libro/delete/'+${libri[0].id}}"
+									<form th:action="@{'/libro/delete/'+${libro.id}}"
 										th:if="${GML}" method="get" style="display: inline-block">
 										<button type="submit" name="modifica"
 								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
@@ -620,7 +620,7 @@
 									</form>
 				
 			</div>
-	<div class="col-xs-6 col-sm-6 col-lg-3 col-xl-3 " style="text-align: center">
+	<!--  <div class="col-xs-6 col-sm-6 col-lg-3 col-xl-3 " style="text-align: center">
 				<div class="profile-card-3 mt-5">
 					<img
 					th:src="'data:image/png;base64,' + ${libri[1].immagine.getImgData(libri[1].immagine.data)}"
@@ -685,7 +685,7 @@
 								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
 										Elimina</button>
 									</form>
-			</div>
+			</div>-->
 </div>
 
 
