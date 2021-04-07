@@ -52,11 +52,11 @@ public class UtenteDatiPersonali implements Serializable, MyWorkBean{
 		this.setPostPiaciuti = setPostPiaciuti;
 	}
 	
-	public void addUtente(Post p) {
+	public void addPostPiaciuto(Post p) {
 		setPostPiaciuti.add(p);
 	}
 	
-	public void removeUtente(Post p) {
+	public void removePostPiaciuto(Post p) {
 		setPostPiaciuti.remove(p);
 	}
 	

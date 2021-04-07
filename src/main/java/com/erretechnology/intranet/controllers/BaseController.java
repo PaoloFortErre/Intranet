@@ -96,10 +96,11 @@ public abstract class BaseController {
 		Notifica n = new Notifica();
 		n.setDescrizione(testo);
 		n.setTimestamp(Instant.now().getEpochSecond());
+		n.addUtente(utente);
 		serviceNotifica.save(n);
 		utente.addNotifica(n);
 		serviceDatiPersonali.save(utente);
-		n.addUtente(utente);
+		
 	}
 	
 	protected void notificaTutti(String testo) {
@@ -113,6 +114,7 @@ public abstract class BaseController {
 			serviceDatiPersonali.save(u);
 			n.addUtente(u);
 		}
+		serviceNotifica.save(n);
 	}
 	
 	protected void notificaSelezionati(String testo, String settore) {
@@ -126,6 +128,7 @@ public abstract class BaseController {
 			serviceDatiPersonali.save(u);
 			n.addUtente(u);
 		}
+		serviceNotifica.save(n);
 	}
 	
 	protected byte[] compressImage(MultipartFile mpFile, float qualita) {

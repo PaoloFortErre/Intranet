@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -98,9 +97,23 @@ public class MyLifeController extends BaseController {
 	public String likePost(int id, HttpSession session) {
 		UtenteDatiPersonali utente = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		Post p = servicePost.findById(id);
-		p.addUtente(utente);
+		boolean flag = p.getSetUtenti().contains(utente);
+		if(flag) 
+			p.removeUtente(utente);
+		else
+			p.addUtente(utente);
 		servicePost.save(p);
-		utente.addUtente(p);
+		if(flag) {
+			utente.removePostPiaciuto(p);
+			saveLog("rimosso mi piace a un post", utente);
+		}
+			
+		else {
+			utente.addPostPiaciuto(p);
+			saveLog("messo mi piace a un post", utente);
+			notificaSingola(utente.getNome() + " " + utente.getCognome() + " ha messo mi piace al tuo post", p.getAutore());
+		}
+			
 		return "redirect:/myLife/";
 	}
 
