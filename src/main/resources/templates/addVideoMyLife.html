@@ -52,10 +52,11 @@
 				</h4 ><hr style="background-color: #F3F3F3; ">
 
 				<p style="text-align: right; margin-bottom: 30px;display: inline-block;">
-					<a class="mr-2" th:href="@{/myLife/}" style="color: #F3F3F3;">
+					<a class="mr-2" th:href="@{/myLife1/}" style="color: #F3F3F3;">
 						<img src="/view/MyWork/images/frecciasinistra.png" style="display: inline-block;" width="20%">Torna indietro
 					</a>
 				</p><br>
+				
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin-left: 12px; font-size: 18px">
     Come inserire il link giusto
   </button> <br>
@@ -97,7 +98,10 @@
       </div>
     </div>
 
-				<form th:object="${video}" th:action="@{/myLife/video}"
+				
+
+		</div>
+		<form th:object="${video}" th:action="@{/myLife/video}"
 				method="post" enctype="multipart/form-data"  class="signin-form">
 
 				<div class="form-group col-12">
@@ -114,8 +118,7 @@
 					<input class="form-control" type="submit" id="pubblicaSubmit" value="Pubblica">
 				</div>
 			</form>
-
-		</div>
+	</div>
 	</div>
 </div>
 </body>

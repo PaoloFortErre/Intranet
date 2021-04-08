@@ -100,7 +100,7 @@ public class MyLifeController extends BaseController {
 		video.setPagina("MyLife");
 		serviceVideo.save(video);
 		saveLog("aggiornato il video su myLife", autore);
-		return "redirect:/myLife/";
+		return "redirect:/myLife1/";
 	}
 	
 	@PostMapping(value = "/likePost")
