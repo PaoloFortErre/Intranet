@@ -93,6 +93,7 @@ public abstract class BaseController {
 	}
 	
 	protected void notificaSingola(String testo, UtenteDatiPersonali utente, UtenteDatiPersonali utenteCreatore) {
+		if(utente.equals(utenteCreatore)) return;
 		Notifica n = new Notifica();
 		n.setDescrizione(testo);
 		n.setTimestamp(Instant.now().getEpochSecond());
@@ -112,9 +113,11 @@ public abstract class BaseController {
 		serviceNotifica.save(n);
 		List<UtenteDatiPersonali> utenti = serviceDatiPersonali.getAttivi();
 		for(UtenteDatiPersonali u : utenti) {
-			u.addNotifica(n);
-			serviceDatiPersonali.save(u);
-			n.addUtente(u);
+			if(!u.equals(utenteCreatore)) {
+				u.addNotifica(n);
+				serviceDatiPersonali.save(u);
+				n.addUtente(u);
+			}
 		}
 		serviceNotifica.save(n);
 	}
@@ -127,9 +130,11 @@ public abstract class BaseController {
 		serviceNotifica.save(n);
 		List<UtenteDatiPersonali> utenti = serviceDatiPersonali.getAttivi().stream().filter(x->x.getSettore().getNomeSettore().equals(settore)).collect(Collectors.toList());
 		for(UtenteDatiPersonali u : utenti) {
-			u.addNotifica(n);
-			serviceDatiPersonali.save(u);
-			n.addUtente(u);
+			if(!u.equals(utenteCreatore)) {
+				u.addNotifica(n);
+				serviceDatiPersonali.save(u);
+				n.addUtente(u);
+			}
 		}
 		serviceNotifica.save(n);
 	}

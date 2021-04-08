@@ -67,9 +67,16 @@ public class Notifica {
 	public void setTimestamp(long timestamp) {
 		this.timestamp = timestamp;
 	}
+	
 	public void addUtente(UtenteDatiPersonali utente) {
 		this.setUtenti.add(utente);
 	}
+	
+	public void removeUtente(UtenteDatiPersonali utente) {
+		this.setUtenti.remove(utente);
+	}
+	
+	
 	public UtenteDatiPersonali getUtente() {
 		return utente;
 	}

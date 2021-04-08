@@ -1071,41 +1071,29 @@ COLONNA DESTRA
 			}
 		}
 
-		$(document)
-				.ready(
-						function() {
-							var bottoni = document
-									.getElementsByClassName("miPiaceBtn");
-							for (var i = 0; i < bottoni.length; i++) {
-								var id = bottoni[i].id;
-								var last_index = id.indexOf("e");
-								id = id.substr(last_index + 1);
-								$
-										.ajax({
-											type : 'GET',
-											url : "http://localhost:8080/myLife/autorePost?id="
-													+ id,
-											async : false,
-											success : function(data) {
-												if (data) {
-													$('#postLike' + id).css(
-															'color', '#0C4FFF');
-													$('#postLike' + id).css(
-															'background-color',
-															'#cce5ff');
-													$('#postLike' + id).css(
-															'font-weight',
-															'bold');
-													$('#postLike' + id).css(
-															'padding', '8px');
-													$('#postLike' + id).css(
-															'border-radius',
-															'5px');
-												}
-											}
-										});
+		$(document).ready(
+			function() {
+				var bottoni = document.getElementsByClassName("miPiaceBtn");
+				for (var i = 0; i < bottoni.length; i++) {
+					var id = bottoni[i].id;
+					var last_index = id.indexOf("e");
+					id = id.substr(last_index + 1);
+					$.ajax({
+						type : 'GET',
+						url : "http://localhost:8080/myLife/autorePost?id="+ id,
+						async : false,
+						success : function(data) {
+							if (data) {
+								$('#postLike' + id).css('color', '#0C4FFF');
+								$('#postLike' + id).css('background-color','#cce5ff');
+								$('#postLike' + id).css('font-weight','bold');
+								$('#postLike' + id).css('padding', '8px');
+								$('#postLike' + id).css('border-radius','5px');
 							}
-						});
+						}
+					});
+				}
+			});
 	</script>
 
 </body>

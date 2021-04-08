@@ -10,14 +10,17 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.regex.*;
 import javax.servlet.http.HttpSession;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +31,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.Evento;
 import com.erretechnology.intranet.models.FileImmagine;
+import com.erretechnology.intranet.models.Notifica;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.Permesso;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
@@ -69,9 +73,6 @@ public class UtenteController extends BaseController {
 			mav.addObject("admin", false);
 			mav.addObject("log", serviceLog.findLastFiveLogById(u));
 		}
-		for(int i = 0; i < u.getSetNotifiche().size(); i++) {
-			System.out.println(u.getSetNotifiche().get(i).getDescrizione());
-		}
 		mav.addObject("post", servicePost.getByAutore(u));
 		mav.setViewName("profilo_admin");
 		mav.addObject("attivi", serviceUtente.getAll().stream().filter(x -> x.getAttivo()).count());
@@ -98,6 +99,17 @@ public class UtenteController extends BaseController {
 		mav.setViewName("profilo_admin");
 		mav.addObject("utente", u);
 		return mav;
+	}
+	
+	@GetMapping(value = "/eliminaNotifica/{id}")
+	public String elimina(HttpSession session, @PathVariable int id) {
+		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		Notifica n = serviceNotifica.findById(id);
+		u.removeNotifica(n);
+		n.removeUtente(u);
+		serviceNotifica.save(n);
+		serviceDatiPersonali.save(u);
+		return "redirect:/profile/";
 	}
 
 	@PostMapping(value = "/modificaDescrizione")

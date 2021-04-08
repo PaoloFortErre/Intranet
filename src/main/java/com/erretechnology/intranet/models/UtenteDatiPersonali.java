@@ -150,6 +150,9 @@ public class UtenteDatiPersonali implements Serializable, MyWorkBean{
 	}
 	public void addNotifica(Notifica n) {
 		setNotifiche.add(n);
-		
+	}
+	
+	public void removeNotifica(Notifica n) {
+		setNotifiche.remove(n);
 	}
 }
