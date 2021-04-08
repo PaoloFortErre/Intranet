@@ -98,6 +98,7 @@ public class UtenteController extends BaseController {
 		mav.addObject("post", servicePost.getByAutore(u));
 		mav.setViewName("profilo_admin");
 		mav.addObject("utente", u);
+		mav.addObject("utenteDati", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return mav;
 	}
 	

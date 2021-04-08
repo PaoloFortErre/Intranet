@@ -95,7 +95,7 @@
 						<span class="badge badge-danger mr-n4" th:text="${utenteDati.setNotifiche.size()}"></span>
 						<i class="fa fa-bell mr-n4"></i>
 					</a>
-					<div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-5" >
+					<div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary" th:if="${utente.setNotifiche.size() > 0}" aria-labelledby="navbarDropdownMenuLink-5" >
 						<div class="dropdown-item waves-effect waves-light" th:each="i:${#numbers.sequence(utenteDati.setNotifiche.size() - 1, 0, -1)}" th:with="notifica=${utenteDati.setNotifiche[i]}">
 							<p class="font-weight-bold" th:text="${notifica.utente.nome} + ' ' + ${notifica.utente.cognome}+ ' ' "  style="COLOR: BLACK"></p>
 							<p class="mt-n3" th:text="${notifica.descrizione}" style="COLOR: BLACK"></p>
