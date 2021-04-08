@@ -82,7 +82,7 @@
 
 .carousel-inner img {
 	width: 100%;
-	height: 880px;
+	height: 980px;
 }
 
 .carousel-caption {
@@ -393,7 +393,7 @@
 
 			<div class="col-xs-12 col-sm-12 col-lg-12 col-xl-12 mb-5">
 				<br>
-				<h1 style="text-align: center">Film e Sserie TV</h1>
+				<h1 style="text-align: center">Film e Serie TV</h1>
 				<h5 style="text-align: center; font-style: italic">Ecco gli
 					ultimi titoli selezionati da ERRE:</h5>
 
@@ -687,7 +687,25 @@
 			</div>-->
 </div>
 
+<div class="row" th:if="${video!=null}">
+		
+		<div class="col-xs-12 col-sm-12 col-lg-12 col-xl-12 mt-5"
+			style="margin-top: 50px;">
+			<br><br><br><br>
+			<h1 style="text-align: center;">Il video del mese</h1>
+			<a th:href="@{/myLife/addVideo/}" th:if="${GML}"
+				style="background-color: white; border: 0px solid #232323; color: black; font-size: 12px; padding: 8px; width: 150px; float: right; padding-left: 25px;">
+				Aggiungi video</a>
+			<h3 style="text-align: center;" class="mb-5"
+				th:text="${video.sottoTitolo}"></h3>
+			<iframe width="100%" height="800" th:src="${video.link}"
+				title="YouTube video player" frameborder="0"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+				allowfullscreen></iframe>
 
+		</div>
+		
+	</div>
 
 
 

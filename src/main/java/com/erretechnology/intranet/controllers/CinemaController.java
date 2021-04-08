@@ -62,7 +62,7 @@ public class CinemaController extends BaseController {
 		repoCinema.save(cinema);
 		saveLog("inserito un cinema", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		notificaTutti("ha inserito un nuovo film consigliato dalla redazione!", utenteLoggato);
-		return "redirect:/myLife/";
+		return "redirect:/myLife1/";
 	}
 
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
@@ -102,7 +102,7 @@ public class CinemaController extends BaseController {
 		repoCinema.save(cinema);
 		model.addAttribute("cinema", cinema);
 		saveLog("modificato le informazioni di un cinema", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		return "redirect:/myLife/";
+		return "redirect:/myLife1/";
 	}
 
 	@RequestMapping("/delete/{id}")
@@ -112,7 +112,7 @@ public class CinemaController extends BaseController {
 		cinema.setTimestampEliminazione(Instant.now().getEpochSecond());
 		repoCinema.save(cinema);
 		saveLog("cancellato un cinema", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		return "redirect:/myLife/";
+		return "redirect:/myLife1/";
 	}
 	
 	@RequestMapping("/cancellaFilm")
