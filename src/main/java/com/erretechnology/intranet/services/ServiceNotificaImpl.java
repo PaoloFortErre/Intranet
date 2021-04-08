@@ -15,8 +15,10 @@ public class ServiceNotificaImpl implements ServiceNotifica{
 	@Override
 	public void save(Notifica notifica) {
 		repositoryNotifica.save(notifica);
-		// TODO Auto-generated method stub
-		
+	}
+	@Override
+	public Notifica findById(int id) {
+		return repositoryNotifica.findById(id).get();
 	}
 
 }

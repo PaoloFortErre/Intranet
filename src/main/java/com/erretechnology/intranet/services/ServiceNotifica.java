@@ -4,4 +4,6 @@ import com.erretechnology.intranet.models.Notifica;
 
 public interface ServiceNotifica {
 	public void save(Notifica notifica);
+
+	public Notifica findById(int id);
 }
