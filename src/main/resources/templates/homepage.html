@@ -23,7 +23,7 @@
   }
 
   body {
-    background-color: #303030;
+    background-color: black;
     background-image: url("/view/MyWork/images/carbonio.jpg");
     background-repeat: no-repeat;
     background-size: cover, contain;
@@ -225,7 +225,8 @@
               <img class="picture img rounded-circle"
               th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}" alt="profile_pic" title="Vai al tuo profilo"
               id="utente-foto-profilo">
-            </a></div>
+            </a>
+          </div>
 
             <div class="centered container">
               <h1 class="h1 title">My life</h1>
@@ -244,7 +245,7 @@
     <div class="container mt-2">
       <div class="row justify-content-center">
 
-        <div class="col-xl-8 col-lg-8 col-md-9 col-sm-auto col-xs-7" th:if="${linkedinPost!=null}">
+        <div class="col-xl-8 col-lg-8 col-md-9 col-sm-auto col-xs-7 mr-4" th:if="${linkedinPost!=null}">
           <div class="text-center container">
             <a th:if=${GMW} class="btn btn-primary" th:href="@{/linkedin/new}">Aggiungi post Linkedin</a>
 
