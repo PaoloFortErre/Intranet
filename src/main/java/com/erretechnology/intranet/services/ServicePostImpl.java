@@ -1,10 +1,7 @@
 package com.erretechnology.intranet.services;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -70,20 +67,17 @@ public class ServicePostImpl implements ServicePost{
 
 	@Override
 	public List<Post> getAll() {
-		// TODO Auto-generated method stub
 		return repositoryPost.findAll();
 	}
 
 	@Override
 	public void remove(Post p) {
 		repositoryPost.delete(p);
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public List<Post> getAllNotVisible() {
-		// TODO Auto-generated method stub
 		return repositoryPost.findByVisibileFalse(Sort.by("id").descending());
 	}
 	
@@ -95,7 +89,6 @@ public class ServicePostImpl implements ServicePost{
 
 	@Override
 	public List<Post> getLastMessage() {
-		// TODO Auto-generated method stub
 		return repositoryPost.findByVisibileTrue(Sort.by("id").descending());
 	}
 

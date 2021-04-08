@@ -1,14 +1,12 @@
 package com.erretechnology.intranet.services;
 
 import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import com.erretechnology.intranet.models.ComunicazioneHR;
 import com.erretechnology.intranet.repositories.RepositoryComunicazioniHR;
+
 @Service
 public class ServiceComunicazioniHRImpl implements ServiceComunicazioniHR{
 	@Autowired
@@ -21,13 +19,11 @@ public class ServiceComunicazioniHRImpl implements ServiceComunicazioniHR{
 
 	@Override
 	public ComunicazioneHR findById(int id) {
-		// TODO Auto-generated method stub
 		return repositoryComunicazioniHR.findById(id).get();
 	}
 
 	@Override
 	public List<ComunicazioneHR> getAll() {
-		// TODO Auto-generated method stub
 		return repositoryComunicazioniHR.findAll();
 	}
 
@@ -39,7 +35,6 @@ public class ServiceComunicazioniHRImpl implements ServiceComunicazioniHR{
 
 	@Override
 	public List<ComunicazioneHR> getAllNotVisible() {
-		// TODO Auto-generated method stub
 		return repositoryComunicazioniHR.findByVisibileFalse(Sort.by("id").descending());
 	}
 	
