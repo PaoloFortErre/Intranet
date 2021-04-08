@@ -460,9 +460,9 @@
           <div class="col-xl-10 col-lg-10 col-md-10">
             <div class="card position-relative text-end">
               <img class="top-left" src="/view/Profile/Images/pin_post-it.png" alt="pin-post-it">
-              <div class="card-body">
+              <div class="card-body" th:if="${utente.descrizione != null}">
                 <h3 class="h3 card-title text-center" style="color:#303030; font-weight: 600;">Una breve descrizione di me stesso</h3>
-                <h5 class="h5 ml-2 mr-2" th:text="${utente.descrizione}" style="color:#303030"></h5>
+                <h5  class="h5 ml-2 mr-2" th:text="${utente.descrizione}" style="color:#303030"></h5>
                 <div th:if="${session.id} == ${utente.utente.id}">
                   <form th:action="@{/profile/modificaDescrizione}" method="post">
                     <div class="form-group">
@@ -475,6 +475,9 @@
                   </form>
                 </div>
               </div>
+              <div class="card-body" th:unless="${utente.descrizione != null}">
+              	<h3 class="h3 card-title text-center" style="color:#303030; font-weight: 600;">Non è presente nessuna descrizione</h3>
+              </div>
             </div>
           </div>
         </div>
@@ -482,7 +485,7 @@
 
 
       <!-- ROW POST PERSONALI -->
-      <div class="container mt-5 mb-5">
+      <div class="container mt-5 mb-5" th:if="${post.size > 0}">
         <div class="row justify-content-center mt-5 mb-5">
 
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -491,8 +494,7 @@
             <hr style="border: 0.5px solid white">
           </div>
 		    </div>
-
-          <div  class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4  text-center mt-4" th:each="post:${post}">
+          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4  text-center mt-4" th:each="post:${post}">
             <div class="container" >
               <div  class="card shadow position-relative mt-3 ">
                 <img class="top-left" src="/view/Profile/Images/pin_post-it.png" alt="pin-post-it">
@@ -505,6 +507,12 @@
           </div>
 
         </div>
+      </div>
+      
+      <div class="container mt-5 mb-5" th:unless="${post.size > 0}">
+      	  <div class="container rounded text-center mt-5">
+            <h1 class="h1" style="font-weight: 900; color: white;" >Non sono presenti post</h1>
+          </div>
       </div>
 <br><br>
 
