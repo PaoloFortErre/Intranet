@@ -530,7 +530,8 @@
                     <tbody th:each="log:${log}">
                       <tr th:if="${AM}">
                         <td th:utext="${#dates.format(log.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"></td>
-                        <td th:utext="${log.utente.nome} + ' '+ ${log.utente.cognome} + ' ' + 'ha' + ' ' + ${log.azione}"></td>
+                        <td th:if="${log.utente.id} == ${session.id}" th:utext="'hai' + ' ' + ${log.azione}"/>
+                        <td th:unless="${log.utente.id} == ${session.id}" th:utext="${log.utente.nome} + ' '+ ${log.utente.cognome} + ' ' + 'ha' + ' ' + ${log.azione}"></td>
                       </tr>
                       <tr th:if="${!AM}">
                         <td th:utext="${#dates.format(log.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"></td>

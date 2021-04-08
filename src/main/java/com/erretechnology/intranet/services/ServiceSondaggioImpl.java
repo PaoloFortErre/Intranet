@@ -1,8 +1,6 @@
 package com.erretechnology.intranet.services;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -35,7 +33,6 @@ public class ServiceSondaggioImpl implements ServiceSondaggio{
 	}
 	@Override
 	public List<Sondaggio> getAllNotVisible() {
-		// TODO Auto-generated method stub
 		return repositorySondaggio.findByVisibileFalse(Sort.by("id").descending());
 	}
 	@Override
@@ -44,7 +41,6 @@ public class ServiceSondaggioImpl implements ServiceSondaggio{
 	}
 	@Override
 	public List<Sondaggio> findAll() {
-		// TODO Auto-generated method stub
 		return repositorySondaggio.findAll();
 	}
 }
