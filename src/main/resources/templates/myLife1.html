@@ -271,8 +271,8 @@
 				<!-- Notifiche -->
       				<li class="nav-item avatar dropdown " style="cursor: pointer">
       					<a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-      						<span class="badge badge-danger mr-n1" th:text="${utenteDati.setNotifiche.size()}"></span>
-      						<i class="fa fa-bell mr-n2"></i>
+      						<span class="badge badge-danger mr-n4" th:text="${utenteDati.setNotifiche.size()}"></span>
+      						<i class="fa fa-bell mr-n4"></i>
       					</a>
       					<div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-5" >
       						<div class="dropdown-item waves-effect waves-light" th:each="i:${#numbers.sequence(utenteDati.setNotifiche.size() - 1, 0, -1)}" th:with="notifica=${utenteDati.setNotifiche[i]}">
