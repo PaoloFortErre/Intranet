@@ -44,8 +44,7 @@ public class CinemaController extends BaseController {
 	public String post(@ModelAttribute("cinema") Cinema cinema, @RequestParam(required=false) MultipartFile immagine,
 			ModelMap model, HttpSession session) throws Exception {	
 		cinema.setVisibile(true);
-		int idUser = Integer.parseInt(session.getAttribute("id").toString());
-		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
+		UtenteDatiPersonali utenteLoggato= (UtenteDatiPersonali) session.getAttribute("utenteSessione");
 		cinema.setAutore(utenteLoggato);
 
 		if(!immagine.getOriginalFilename().isEmpty()) {
@@ -60,7 +59,7 @@ public class CinemaController extends BaseController {
 		}
 
 		repoCinema.save(cinema);
-		saveLog("inserito un cinema", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+		saveLog("inserito un nuova serie/film", utenteLoggato);
 		notificaTutti("ha inserito un nuovo film consigliato dalla redazione!", utenteLoggato, "MyLife");
 		return "redirect:/myLife1/";
 	}
@@ -81,13 +80,11 @@ public class CinemaController extends BaseController {
 		CategoriaCinema categoriaCinema = repoCategoria.findById(categoria).get();
 		cinema.setCategoria(categoriaCinema);
 		cinema.setLink(link);
-		
+		UtenteDatiPersonali utenteLoggato= (UtenteDatiPersonali) session.getAttribute("utenteSessione");
 		if(!immagine.getOriginalFilename().isEmpty()) {
 			FileImmagine img = new FileImmagine();			
 			img.setData(immagine.getBytes());
 			if(!serviceFileImmagine.contains(img.getData())) {
-				int idUser = Integer.parseInt(session.getAttribute("id").toString());
-				UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
 				img.setAutore(utenteLoggato);
 				img.setTimestamp(Instant.now().getEpochSecond());
 				img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
@@ -101,7 +98,7 @@ public class CinemaController extends BaseController {
 
 		repoCinema.save(cinema);
 		model.addAttribute("cinema", cinema);
-		saveLog("modificato le informazioni di un cinema", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+		saveLog("modificato le informazioni di un cinema", utenteLoggato);
 		return "redirect:/myLife1/";
 	}
 
@@ -111,7 +108,7 @@ public class CinemaController extends BaseController {
 		cinema.setVisibile(false);
 		cinema.setTimestampEliminazione(Instant.now().getEpochSecond());
 		repoCinema.save(cinema);
-		saveLog("cancellato un cinema", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+		saveLog("cancellato un cinema", (UtenteDatiPersonali) session.getAttribute("utenteSessione"));
 		return "redirect:/myLife1/";
 	}
 	

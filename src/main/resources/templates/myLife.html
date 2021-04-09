@@ -382,7 +382,7 @@
 										<!-- ELIMINA POST -->
 
 										<div
-											th:if="(${DS} or ${post.autore.id} == ${session.id}) and ${UB}"
+											th:if="(${DS} or ${post.autore.id} == ${session.utenteSessione.id}) and ${UB}"
 											style="display: inline-block; color: #303030;">
 
 											<form th:action="@{/myLife/deletePost(id=${post.id})}"
@@ -396,7 +396,7 @@
 
 										<!-- MODIFICA POST -->
 
-										<div th:if="(${post.autore.id} == ${session.id}) and ${UB}"
+										<div th:if="(${post.autore.id} == ${session.utenteSessione.id}) and ${UB}"
 											style="display: inline-block;">
 											<form th:action="@{/myLife/editPost(id=${post.id})}"
 												method="post" enctype="multipart/form-data">
@@ -542,7 +542,7 @@
 													th:text="${#dates.format(commento.timestamp*1000, 'dd/MM/yyyy, HH:mm')}">
 												</p></td>
 											<td
-												th:if="(${DS} or ${commento.autore.id} == ${session.id} or ${post.autore.id} == ${session.id}) and ${UB}"><br>
+												th:if="(${DS} or ${commento.autore.id} == ${session.utenteSessione.id} or ${post.autore.id} == ${session.utenteSessione.id}) and ${UB}"><br>
 												<br> <br>
 												<form
 													th:action="@{/myLife/deleteCommento(id=${commento.id})}"
@@ -552,7 +552,7 @@
 													</button>
 												</form></td>
 
-											<td th:if="${commento.autore.id} == ${session.id} and ${UB}">
+											<td th:if="${commento.autore.id} == ${session.utenteSessione.id} and ${UB}">
 												<form th:action="@{/myLife/editCommento(id=${commento.id})}"
 													method="post">
 													<button name="button" type="submit"
