@@ -213,7 +213,7 @@ public class HomeController extends BaseController{
 		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		ModelAndView mav = new ModelAndView();
 		List<ElementiMyWork> elementi = serviceElementiMyWork.findAll();
-		List<ElementiMyWork> sondaggi = elementi.stream().filter(x -> x.getTipo().equals("sondaggio")).collect(Collectors.toList());
+		List<ElementiMyWork> sondaggi = elementi.stream().filter(x -> x.getTipo().equals("sondaggio")).limit(7).collect(Collectors.toList());
 		
 		mav.addObject("sondaggi", sondaggi);
 		

@@ -50,7 +50,7 @@
           <input class="h3" type="text" id="myInput" onkeyup="myFunction()" placeholder="Filtra per nome" title="Cerca per nome" style="color:black;">
         </div>
         <div class="container">
-          <table id="myTable" class="table table-bordered table-hover bg-white">
+          <table id="myTable" class="table table-bordered table-hover bg-white" style="color: #303030">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
@@ -68,7 +68,7 @@
                 <td>
                   <img src="/view/MyWork/images/pdf-icon.png" width="7%">
                   <a th:href="@{/file/downloadFileHR(id=${comunicazione.id})}"
-                  th:text="${comunicazione.nome}" th:download="${comunicazione.nome}"></a>
+                  th:text="${comunicazione.nome}" th:download="${comunicazione.nome}" style="color: #303030"></a>
                 </td>
                 <td>
                   <form th:action="@{/file/deleteFileHR(id=${comunicazione.id})}" method="post">
