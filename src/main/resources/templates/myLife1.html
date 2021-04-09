@@ -322,10 +322,10 @@
 				<div class="carousel-caption" >
 					<div th:if="${aforisma.size>0}">
 					<h1
-						style="font-weight: 900; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"
+							style="font-weight: 900; font-size: 60px;"
 						th:text="${aforisma[0].titolo}"></h1>
 					<p th:text="${aforisma[0].contenuto}"
-						style="font-style: italic; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"></p>
+						style="font-style: italic; "></p>
 					<div th:if="${GML}">
 						<form th:action="@{'/aforisma/update/'+${aforisma[0].id}}"
 							method="get">
@@ -350,10 +350,11 @@
 					height="500" class="img-fluid">
 				<div class="carousel-caption" >
 				<div th:if="${aforisma.size>1}">
-					<h1 style="font-weight: 900; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"
+					<h1 style="font-weight: 900; font-size: 60px;"
+					
 						th:text="${aforisma[1].titolo}"></h1>
 					<p th:text="${aforisma[1].contenuto}"
-						style="font-style: italic; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"></p>
+						style="font-style: italic; "></p>
 					<div th:if="${GML}">
 						<form th:action="@{'/aforisma/update/'+${aforisma[1].id}}"
 							method="get">
@@ -378,10 +379,11 @@
 					height="500" class="img-fluid">
 				<div class="carousel-caption" >
 				<div th:if="${aforisma.size>2}">
-					<h1 style="font-weight: 900; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"
+					<h1 							style="font-weight: 900; font-size: 60px;"
+
 						th:text="${aforisma[2].titolo}"></h1>
 					<p th:text="${aforisma[2].contenuto}"
-						style="font-style: italic; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"></p>
+						style="font-style: italic; "></p>
 					<div th:if="${GML}">
 						<form th:action="@{'/aforisma/update/'+${aforisma[2].id}}"
 							method="get">

@@ -54,7 +54,7 @@
               <td>
                 <img src="/view/MyWork/images/pdf-icon.png" width="4%">
                 <a th:href="@{/file/downloadFileHR(id=${comunicazione.id})}"
-                th:text="${comunicazione.nome}" th:download="${comunicazione.nome}"></a>
+                th:text="${comunicazione.nome}" th:download="${comunicazione.nome}" style="color: #303030"></a>
               </td>
               <td th:text="${comunicazione.descrizione}"></td>
             </tr>

@@ -189,10 +189,10 @@ table, th, td {
 				<div class="carousel-caption" >
 					<div th:if="${aforisma.size>0}">
 						<h1
-							style="font-weight: 900; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"
+							style="font-weight: 900; font-size: 60px;"
 							th:text="${aforisma[0].titolo}"></h1>
 						<p th:text="${aforisma[0].contenuto}"
-							style="font-style: italic; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"></p>
+							style="font-style: italic; "></p>
 						<div th:if="${GMW}">
 							<form th:action="@{'/aforisma/update/'+${aforisma[0].id}}"
 								method="get">
@@ -218,10 +218,10 @@ table, th, td {
 				<div class="carousel-caption" >
 					<div th:if="${aforisma.size>1}">
 						<h1
-							style="font-weight: 900; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"
+							style="font-weight: 900; font-size: 60px;"
 							th:text="${aforisma[1].titolo}"></h1>
 						<p th:text="${aforisma[1].contenuto}"
-							style="font-style: italic; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"></p>
+							style="font-style: italic;"></p>
 						<div th:if="${GMW}">
 							<form th:action="@{'/aforisma/update/'+${aforisma[1].id}}"
 								method="get">
@@ -248,10 +248,10 @@ table, th, td {
 				<div class="carousel-caption" >
 					<div th:if="${aforisma.size>2}">
 						<h1
-							style="font-weight: 900; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"
+							style="font-weight: 900; font-size: 60px;"
 							th:text="${aforisma[2].titolo}"></h1>
 						<p th:text="${aforisma[2].contenuto}"
-							style="font-style: italic; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"></p>
+							style="font-style: italic; "></p>
 						<div th:if="${GMW}">
 							<form th:action="@{'/aforisma/update/'+${aforisma[2].id}}"
 								method="get">
@@ -288,8 +288,8 @@ table, th, td {
 		<div class="row mt-5" id="rowmacchina1">
 					<div class="col-xs-12 col-sm-12 col-lg-12 col-xl-12">
 				<br>
-				<h1 style="text-align: center">Le ultime novità</h1>
-				<br>
+				<h1 style="text-align: center" class="mb-3">Le ultime novità</h1>
+				
 			</div>
 			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4">
 				<table class="table table-borderless"
@@ -545,7 +545,7 @@ ROW SCHIZZO
 		<div class="row mt-5 mb-5" id="rowmacchina2">
 			<div class="col-xs-12 col-sm-12 col-lg-12 col-xl-12">
 				<br>
-				<h1 style="text-align: center">Il mondo dentro e fuori</h1>
+				<h1 style="text-align: center" class="mb-3">Il mondo dentro e fuori</h1>
 
 			</div>
 			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4">

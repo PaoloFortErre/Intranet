@@ -86,13 +86,14 @@ body {
 nav {
 	
 	font-size: 20px;
-	
+	height: 75px;
 	
 	
 	
 	color: #F3F3F3;
 	
 }
+
 .nav-link:hover {
 	
 	color: #ECF260;
@@ -153,9 +154,10 @@ footer {
 }
 
 .immagineUtente {
+	margin-top: 12px;
 	border-radius: 50%;
-	height: 70px;
-	width: 70px;
+	height: 60px;
+	width: 60px;
 	border: 2px solid #E8E7E7;
 }
 

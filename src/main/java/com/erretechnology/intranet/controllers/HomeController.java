@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.ComunicazioneHR;
 import com.erretechnology.intranet.models.ElementiMyLife;
+import com.erretechnology.intranet.models.ElementiMyWork;
 import com.erretechnology.intranet.models.FilePdf;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
@@ -211,7 +212,11 @@ public class HomeController extends BaseController{
 	public ModelAndView comunicazioniHr(HttpSession session) {
 		UtenteDatiPersonali u  = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
 		ModelAndView mav = new ModelAndView();
-	
+		List<ElementiMyWork> elementi = serviceElementiMyWork.findAll();
+		List<ElementiMyWork> sondaggi = elementi.stream().filter(x -> x.getTipo().equals("sondaggio")).collect(Collectors.toList());
+		
+		mav.addObject("sondaggi", sondaggi);
+		
 		mav.addObject("utenteDati", u);
 		mav.addObject("comunicazioni", serviceComunicazioni.getAll().stream()
 				.filter(x->x.isVisibile())
