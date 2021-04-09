@@ -62,7 +62,7 @@ public class PodcastController extends BaseController {
 		podcast.setVisibile(true);
 		servicePodcast.save(podcast);
 		saveLog("inserito un nuovo podcast",utente);
-		notificaTutti("ha inserito un nuovo podcast di Rosario! Buon ascolto!", utente);
+		notificaTutti("ha inserito un nuovo podcast di Rosario! Buon ascolto!", utente, "MyWork");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/myWork/");
 		return mav;

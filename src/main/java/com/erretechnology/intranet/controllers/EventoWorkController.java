@@ -69,7 +69,7 @@ public class EventoWorkController extends BaseController {
 
 		repoEvento.save(evento);
 		saveLog("inserito un nuovo evento", utenteLoggato);
-		notificaTutti("ha inserito un nuovo evento su MyWork!", utenteLoggato);
+		notificaTutti("ha inserito un nuovo evento su MyWork!", utenteLoggato, "MyWork");
 		return "redirect:/myWork/";
 	}
 

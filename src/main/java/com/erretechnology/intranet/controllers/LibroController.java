@@ -56,7 +56,7 @@ public class LibroController extends BaseController {
 
 		repoLibro.save(libro);
 		saveLog("inserito un libro", utenteLoggato);
-		notificaTutti("ha inserito un nuovo libro consigliato dalla redazione!", utenteLoggato);
+		notificaTutti("ha inserito un nuovo libro consigliato dalla redazione!", utenteLoggato, "MyLife");
 		return "redirect:/myLife1/";
 	}
 

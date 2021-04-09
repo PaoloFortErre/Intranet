@@ -10,10 +10,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.regex.*;
 import javax.servlet.http.HttpSession;
-import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -110,6 +108,17 @@ public class UtenteController extends BaseController {
 		n.removeUtente(u);
 		serviceNotifica.save(n);
 		serviceDatiPersonali.save(u);
+
+		switch(n.getDestinazione()) {
+			case "MyWork":
+				return "redirect:/myWork/";
+			case "MyLife":
+				return "redirect:/myLife1/";
+			case "HR":
+				return "redirect:/file/hr";
+			case "Moduli":
+				return "redirect:/file/moduli";
+		}
 		return "redirect:/profile/";
 	}
 
