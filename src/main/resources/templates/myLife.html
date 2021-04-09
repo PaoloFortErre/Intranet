@@ -130,6 +130,9 @@
 						</div>
 					</div>
 				</li>
+						<li class="nav-item mr-3 mt-3"><a class="nav-link"
+					th:href="@{/profile/}" target="blank" id="scrittaProfilo"
+					style="display: none;">PROFILO</a></li>
 				<li class="nav-item"><a th:href="@{/profile/}"><img
 						th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
 						alt="utente" title="utente" class="immagineUtente img-fluid"
