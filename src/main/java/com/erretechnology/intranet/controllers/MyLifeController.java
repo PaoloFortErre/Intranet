@@ -40,7 +40,7 @@ public class MyLifeController extends BaseController {
 		int currentPage = page.orElse(1); 
 
 		//	List<Post> messaggi = service.getLastMessage();
-		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		UtenteDatiPersonali u = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
 		List<ElementiMyLife> elementi = serviceElementiMyLife.findAll();
 		elementi.stream().filter(x -> x.getTipo().equals("cinema")).forEach(x->x.setCinema(repoCategoria.findById(Integer.parseInt(x.getContenuto())).get()));
 		elementi.stream().filter(x -> x.getFoto() != null).forEach(x -> x.setImmagine(serviceFileImmagine.getImmagine(x.getFoto())));
@@ -80,7 +80,7 @@ public class MyLifeController extends BaseController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("addVideoMyLife");
 		mav.addObject("video", new VideoDelGiorno());
-		notificaTutti("ha inserito un nuovo video su MyLife!", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())),"MyLife");
+		notificaTutti("ha inserito un nuovo video su MyLife!", (UtenteDatiPersonali) session.getAttribute("utenteSessione"),"MyLife");
 
 		return mav;
 	}
@@ -89,14 +89,14 @@ public class MyLifeController extends BaseController {
 	@ResponseBody
 	public int autorePost(int id, HttpSession session) {
 		Post p = servicePost.findById(id);
-		UtenteDatiPersonali utenteSessione = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		UtenteDatiPersonali utenteSessione = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
 		return p.getSetUtenti().contains(utenteSessione) ? 1 : 0;
 	}
 	
 	
 	@PostMapping(value = "/video")
 	public String video(@ModelAttribute("video") VideoDelGiorno video, HttpSession session) {
-		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		UtenteDatiPersonali autore = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
 		video.setPagina("MyLife");
 		serviceVideo.save(video);
 		saveLog("aggiornato il video su myLife", autore);
@@ -105,7 +105,7 @@ public class MyLifeController extends BaseController {
 	
 	@PostMapping(value = "/likePost")
 	public String likePost(int id, HttpSession session) {
-		UtenteDatiPersonali utente = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		UtenteDatiPersonali utente = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
 		Post p = servicePost.findById(id);
 		boolean flag = p.getSetUtenti().contains(utente);
 		if(flag) 
@@ -129,7 +129,7 @@ public class MyLifeController extends BaseController {
 
 	@PostMapping(value = "/editPost")
 	public String updatePost(int id, HttpSession session, Post post,  @RequestParam(required=false) MultipartFile document) throws Exception {
-		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
+		int sessionId = ((UtenteDatiPersonali) session.getAttribute("utenteSessione")).getId();
 		Post p = servicePost.findById(id);
 		UtenteDatiPersonali autore = p.getAutore();
 		if(sessionId == autore.getId()) {
@@ -159,7 +159,7 @@ public class MyLifeController extends BaseController {
 
 	@PostMapping(value = "/editCommento")
 	public String updateCommento(int id, HttpSession session, Commento commento) throws Exception {
-		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
+		int sessionId = ((UtenteDatiPersonali) session.getAttribute("utenteSessione")).getId();
 		Commento c = serviceCommento.findById(id);
 		UtenteDatiPersonali autore = c.getAutore();
 		if(sessionId == autore.getId()) {
@@ -182,7 +182,7 @@ public class MyLifeController extends BaseController {
 
 	@PostMapping(value = "/deletePost")
 	public String deletePost(/*@ModelAttribute Post post*/ int id, HttpSession session) throws Exception {
-		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
+		int sessionId = ((UtenteDatiPersonali) session.getAttribute("utenteSessione")).getId();
 		//int autoreId = servicePost.findById(id).getAutore().getId();
 		UtenteDatiPersonali autore = servicePost.findById(id).getAutore();
 		if(sessionId == autore.getId() || 
@@ -202,7 +202,7 @@ public class MyLifeController extends BaseController {
 
 	@PostMapping(value = "/deleteCommento")
 	public String deleteCommento(/*@ModelAttribute Post post*/ int id, HttpSession session) throws Exception {
-		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
+		int sessionId = ((UtenteDatiPersonali) session.getAttribute("utenteSessione")).getId();
 		// int autoreId = serviceCommento.findById(id).getAutore().getId();
 		UtenteDatiPersonali autoreCommento = serviceCommento.findById(id).getAutore();
 		UtenteDatiPersonali autorePost = serviceCommento.findById(id).getPost().getAutore();
@@ -225,8 +225,7 @@ public class MyLifeController extends BaseController {
 
 	@PostMapping(value = "/addCommento")
 	public String inserisciCommento(Commento commento, HttpSession session, int idPost) {
-		int id = Integer.parseInt(session.getAttribute("id").toString());
-		UtenteDatiPersonali autore = serviceDatiPersonali.findById(id);
+		UtenteDatiPersonali autore = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
 		UtenteDatiPersonali autorePost = servicePost.findById(idPost).getAutore();
 		commento.setAutore(autore);
 		commento.setTimestamp(Instant.now().getEpochSecond());
@@ -240,16 +239,13 @@ public class MyLifeController extends BaseController {
 
 	@PostMapping(value = "/addPost")
 	public String inserisciPost(Post post, HttpSession session, @RequestParam(required=false) MultipartFile document) throws Exception {
-		//	String mail = session.getAttribute("email").toString();
-		int id = Integer.parseInt(session.getAttribute("id").toString());
-		UtenteDatiPersonali autore = serviceDatiPersonali.findById(id);
+		UtenteDatiPersonali autore = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
 		post.setAutore(autore);
 		post.setTimestamp(Instant.now().getEpochSecond());
 		post.setVisibile(true);
 		if(!document.getOriginalFilename().isEmpty()) {
 			FileImmagine img = new FileImmagine();
-			UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(id);
-			img.setAutore(utenteLoggato);
+			img.setAutore(autore);
 			img.setData(compressImage(document, 0.5f));
 			img.setTimestamp(Instant.now().getEpochSecond());
 			img.setNomeFile(StringUtils.cleanPath(document.getOriginalFilename()));
@@ -265,7 +261,7 @@ public class MyLifeController extends BaseController {
 
 	@GetMapping (value= "/profiliUtenti")
 	public ModelAndView comunicazioniHr(HttpSession session) {
-		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		UtenteDatiPersonali u  = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("utenteDati", u);

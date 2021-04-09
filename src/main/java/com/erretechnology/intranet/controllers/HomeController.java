@@ -186,7 +186,7 @@ public class HomeController extends BaseController{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("homepage");
 		mav.addObject("linkedinPost", repositoryLinkedin.findLimit(4));
-		mav.addObject("utente", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+		mav.addObject("utente", (UtenteDatiPersonali) session.getAttribute("utenteSessione"));
 		return mav;
 	}
 
@@ -194,7 +194,7 @@ public class HomeController extends BaseController{
 	public String setSession(HttpSession session) {
 		final String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
 		Utente u  = serviceUtente.findByEmail(currentUserName);
-		session.setAttribute("id", u.getId());
+		session.setAttribute("utenteSessione", serviceDatiPersonali.findByAutore(u));
 		if(serviceDatiPersonali.findById(u.getId()).getPasswordCambiata())
 			return "redirect:/homepage";
 		return "redirect:/profile/cambioPassword";
@@ -209,7 +209,7 @@ public class HomeController extends BaseController{
 	
 	@GetMapping (value= "/comunicazioniHr")
 	public ModelAndView comunicazioniHr(HttpSession session) {
-		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		UtenteDatiPersonali u  = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
 		ModelAndView mav = new ModelAndView();
 	
 		mav.addObject("utenteDati", u);
@@ -222,7 +222,7 @@ public class HomeController extends BaseController{
 	
 	@GetMapping (value= "/myLife1")
 	public ModelAndView MyLife1(HttpSession session) {
-		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		UtenteDatiPersonali u  = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
 		ModelAndView mav = new ModelAndView();
 		List<ElementiMyLife> elementi = serviceElementiMyLife.findAll();
 	
@@ -247,7 +247,7 @@ public class HomeController extends BaseController{
 	
 	@GetMapping (value= "/moduli")
 	public ModelAndView moduli(HttpSession session) {
-		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		UtenteDatiPersonali u  = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
 		ModelAndView mav = new ModelAndView();
 		
 	

@@ -12,6 +12,6 @@ public interface ServiceFilePdf {
 	public List<FilePdf> findAll();
 
 	public void remove(FilePdf modulo);
-
+	public List<FilePdf> getAllVisible();
 	public List<FilePdf> getAllNotVisible();
 }

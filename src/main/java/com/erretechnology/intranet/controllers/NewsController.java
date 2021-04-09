@@ -42,8 +42,7 @@ public class NewsController extends BaseController {
 		
 		Long date = Instant.now().getEpochSecond();
 		news.setDataPubblicazione(date);
-		int idUser = Integer.parseInt(session.getAttribute("id").toString());
-		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
+		UtenteDatiPersonali utenteLoggato = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
 		news.setAutore(utenteLoggato);
 		news.setVisibile(true);
 
@@ -78,13 +77,13 @@ public class NewsController extends BaseController {
 		News news = repoNews.findById(id).get();
 		news.setTitolo(titolo);
 		news.setContenuto(contenuto);
+		UtenteDatiPersonali utenteLoggato = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
 
 		if(!immagine.getOriginalFilename().isEmpty()) {
 			FileImmagine img = new FileImmagine();			
 			img.setData(compressImage(immagine, 0.5f));
 			if(!serviceFileImmagine.contains(img.getData())) {
-				int idUser = Integer.parseInt(session.getAttribute("id").toString());
-				UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
+				
 				img.setAutore(utenteLoggato);
 				img.setTimestamp(Instant.now().getEpochSecond());
 				img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
@@ -97,7 +96,7 @@ public class NewsController extends BaseController {
 
 		repoNews.save(news);
 		model.addAttribute("news", news);
-		saveLog("modificato una news", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+		saveLog("modificato una news", utenteLoggato);
 		return "redirect:/myWork/";
 	}
 	
@@ -107,7 +106,7 @@ public class NewsController extends BaseController {
 		news.setVisibile(false);
 		news.setTimestampEliminazione(Instant.now().getEpochSecond());
 		repoNews.save(news);
-		saveLog("eliminato una news", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+		saveLog("eliminato una news", (UtenteDatiPersonali) session.getAttribute("utenteSessione"));
 		return "redirect:/myWork/";
 	}
 	
