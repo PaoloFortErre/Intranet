@@ -249,6 +249,7 @@
           <div class="text-center container">
             <a th:if=${GMW} class="btn btn-primary" th:href="@{/linkedin/new}">Aggiungi post Linkedin</a>
 
+
             <div id="carouselExampleIndicators" class="carousel slide ml-5" data-ride="carousel">
               <ol class="carousel-indicators">
                 <div th:each="post, i: ${linkedinPost}" th:remove="tag">
@@ -258,11 +259,15 @@
               </ol>
               <div class="carousel-inner">
                 <div th:each="post, i: ${linkedinPost}" th:remove="tag">
+
                   <div th:if="${i.index} == 0" class="carousel-item active" data-interval="3000" >
+                      <a class="fa fa-trash text-danger float-left" th:if=${GMW} th:href="@{/linkedin/cancella(id=${post.id})}" title="Elimina post">Elimina</a>
                     <iframe class="d-block w-100" th:src="${post.link}"
                     height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
+
                   </div>
                   <div th:unless="${i.index} == 0" class="carousel-item" data-interval="3000" >
+                    <a class="fa fa-trash text-danger float-left" th:if=${GMW} th:href="@{/linkedin/cancella(id=${post.id})}" title="Elimina post">Elimina</a>
                     <iframe class="d-block w-100" th:src="${post.link}"
                     height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
                   </div>

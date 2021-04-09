@@ -37,7 +37,7 @@ public class LinkedinController extends BaseController {
 	}
 	
 	@RequestMapping("/cancella")
-	public String cancellaCliente(int id, HttpSession session) {
+	public String cancellaCliente(@RequestParam int id, HttpSession session) {
 		repoLinkedin.deleteById(id);
 		return "redirect:/homepage";
 	}
