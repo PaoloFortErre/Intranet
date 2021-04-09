@@ -59,7 +59,7 @@
 			</a>
 			</p>
 
-			<form th:action="@{/libro/update/{id}(id = ${libro.id})}" th:object="${libro}" method="post" enctype="multipart/form-data">
+			<form th:action="@{/libro/update/{id}(id = ${libro.id})}" th:object="${libro}" method="post" enctype="multipart/form-data" novalidate>
 				<div class="form-group col-12">
 					<label for="titolo">Titolo</label>
 				  <input class="form-control" type="text" id="titolo" name="titolo" th:field="*{titolo}" required>

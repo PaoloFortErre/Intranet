@@ -54,7 +54,7 @@ body {
 				</p>
 
 				<form th:action="@{/cinema/insert}" th:object="${cinema}"
-					method="post" enctype="multipart/form-data" class="signin-form">
+					method="post" enctype="multipart/form-data" class="signin-form" novalidate>
 
 					<div class="form-group col-12">
 						<label for="titolo">Titolo </label>

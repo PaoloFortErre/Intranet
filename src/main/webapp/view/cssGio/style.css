@@ -6,7 +6,7 @@ h1, h2, h3, h4, h5, textarea, p, label, input, button, a {
 }
 
 body {
-	background-color: #303030;
+	background-color: black;
 	background-image: url("/view/MyWork/images/carbonio.jpg");
 	background-position: center;
 	background-repeat: no-repeat;
@@ -322,6 +322,14 @@ hr#linea {
 	height: 3600px;
 	}
 }
+
+@media screen and (max-width: 600px) {
+	
+	.carousel-inner img  {
+	height: 500px;
+	}
+}
+
 #teamHR {
 	padding: 5px;
 	color: #F3F3F3;
