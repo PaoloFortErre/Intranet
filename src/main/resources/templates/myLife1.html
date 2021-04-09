@@ -582,7 +582,7 @@
 							</div>
 						</div>
 						<div class="carousel-item" th:if="${eventilife.size>2}">
-							<img th:src="'data:image/png;base64,' + ${eventilife[1].immagine.getImgData(eventilife[1].immagine.data)}" style="height: 550px" >
+							<img th:src="'data:image/png;base64,' + ${eventilife[2].immagine.getImgData(eventilife[2].immagine.data)}" style="height: 550px" >
 							<br><h3 th:text="${eventilife[2].titolo}"  style="text-align: center;font-size: 30px; font-weight: bold;" class="mt-3"></h3>
 								<p th:text="${#dates.format(eventilife[2].timestamp*1000, 'dd/MM/yyyy')}"  style="text-align: center; "  ></p>
 						<div style="margin: 0 auto; text-align: center" th:if="${GML}">
