@@ -187,7 +187,7 @@ public class HomeController extends BaseController{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("homepage");
 		mav.addObject("linkedinPost", repositoryLinkedin.findLimit(4));
-		mav.addObject("utente", (UtenteDatiPersonali) session.getAttribute("utenteSessione"));
+		mav.addObject("utente", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return mav;
 	}
 
@@ -195,7 +195,7 @@ public class HomeController extends BaseController{
 	public String setSession(HttpSession session) {
 		final String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
 		Utente u  = serviceUtente.findByEmail(currentUserName);
-		session.setAttribute("utenteSessione", serviceDatiPersonali.findByAutore(u));
+		session.setAttribute("id", u.getId());
 		if(serviceDatiPersonali.findById(u.getId()).getPasswordCambiata())
 			return "redirect:/homepage";
 		return "redirect:/profile/cambioPassword";
@@ -210,7 +210,7 @@ public class HomeController extends BaseController{
 	
 	@GetMapping (value= "/comunicazioniHr")
 	public ModelAndView comunicazioniHr(HttpSession session) {
-		UtenteDatiPersonali u  = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
+		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		ModelAndView mav = new ModelAndView();
 		List<ElementiMyWork> elementi = serviceElementiMyWork.findAll();
 		List<ElementiMyWork> sondaggi = elementi.stream().filter(x -> x.getTipo().equals("sondaggio")).collect(Collectors.toList());
@@ -227,7 +227,7 @@ public class HomeController extends BaseController{
 	
 	@GetMapping (value= "/myLife1")
 	public ModelAndView MyLife1(HttpSession session) {
-		UtenteDatiPersonali u  = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
+		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		ModelAndView mav = new ModelAndView();
 		List<ElementiMyLife> elementi = serviceElementiMyLife.findAll();
 	
@@ -252,7 +252,7 @@ public class HomeController extends BaseController{
 	
 	@GetMapping (value= "/moduli")
 	public ModelAndView moduli(HttpSession session) {
-		UtenteDatiPersonali u  = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
+		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		ModelAndView mav = new ModelAndView();
 		
 	

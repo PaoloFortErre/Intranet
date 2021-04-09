@@ -60,7 +60,7 @@ public class UtenteController extends BaseController {
 
 	@GetMapping(value = "/")
 	public ModelAndView primaPagina(HttpSession session) {
-		UtenteDatiPersonali u = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
+		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		ModelAndView mav = new ModelAndView();
 		if (serviceUtente.findById(u.getId()).getRuolo().getNome().equals("ADMIN")) {
 			mav.addObject("log", serviceLog.findLastFive());
@@ -91,19 +91,18 @@ public class UtenteController extends BaseController {
 	public ModelAndView viewUserProfile(HttpSession session, int id) {
 		ModelAndView mav = new ModelAndView();
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(id);
-		UtenteDatiPersonali utenteLoggato  =(UtenteDatiPersonali) session.getAttribute("utenteSessione");
-		if (u.getId() == utenteLoggato.getId())
+		if (u.getId() == serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())).getId())
 			return primaPagina(session);
 		mav.addObject("post", servicePost.getByAutore(u));
 		mav.setViewName("profilo_admin");
 		mav.addObject("utente", u);
-		mav.addObject("utenteDati", utenteLoggato);
+		mav.addObject("utenteDati", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return mav;
 	}
 	
 	@GetMapping(value = "/eliminaNotifica/{id}")
 	public String elimina(HttpSession session, @PathVariable int id) {
-		UtenteDatiPersonali u = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
+		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		Notifica n = serviceNotifica.findById(id);
 		u.removeNotifica(n);
 		n.removeUtente(u);
@@ -125,7 +124,8 @@ public class UtenteController extends BaseController {
 
 	@PostMapping(value = "/modificaDescrizione")
 	public String modificaDescrizione(@ModelAttribute("utente") UtenteDatiPersonali utente, HttpSession session) {
-		UtenteDatiPersonali utenteLoggato = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
+		int id_utente = Integer.parseInt(session.getAttribute("id").toString());
+		UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(id_utente);
 		utenteLoggato.setDescrizione(utente.getDescrizione());
 		serviceDatiPersonali.save(utenteLoggato);
 		saveLog("aggiornato la descrizione", utenteLoggato);
@@ -134,7 +134,8 @@ public class UtenteController extends BaseController {
 
 	@PostMapping(value = "/eliminaFotoProfilo")
 	public String eliminaFotoProfilo(@ModelAttribute("utente") UtenteDatiPersonali utente, HttpSession session) {
-		UtenteDatiPersonali utenteLoggato = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
+		int id_utente = Integer.parseInt(session.getAttribute("id").toString());
+		UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(id_utente);
 		utenteLoggato.setImmagine(serviceFileImmagine.getImmagine(63));
 		serviceDatiPersonali.save(utenteLoggato);
 		saveLog("eliminato la foto profilo", utenteLoggato);
@@ -148,7 +149,8 @@ public class UtenteController extends BaseController {
 		mav.addObject("vecchiaPassword", new String());
 		mav.addObject("nuovaPassword", new String());
 		mav.addObject("cNuovaPassword", new String());
-		mav.addObject("obbligato", ((UtenteDatiPersonali) session.getAttribute("utenteSessione")).getPasswordCambiata());
+		mav.addObject("obbligato", serviceDatiPersonali
+				.findById(Integer.parseInt(session.getAttribute("id").toString())).getPasswordCambiata());
 		return mav;
 	}
 
@@ -159,10 +161,9 @@ public class UtenteController extends BaseController {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String regex = "^(?=.*[0-9])" + "(?=.*[a-z])(?=.*[A-Z])" + "(?=\\S+$).{8,20}$";
 		ModelAndView mav = new ModelAndView();
-		UtenteDatiPersonali udp = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
-		Utente u = udp.getUtente();
 		mav.setViewName("cambiaPassword");
-		if (passwordEncoder.matches(vPsw, u.getPassword())) {
+		if (passwordEncoder.matches(vPsw,
+				serviceUtente.findById(Integer.parseInt(session.getAttribute("id").toString())).getPassword())) {
 			if (nPsw.equals(cNPsw)) {
 				if (nPsw.equals(vPsw)) {
 					mav.addObject("messaggio", "la nuova password non può essere uguale alla precedente");
@@ -174,8 +175,10 @@ public class UtenteController extends BaseController {
 						mav.addObject("messaggio",
 								"La password deve contenere una lettera maiuscola, una lettera minuscola, un numero ed essere di almeno 8 caratteri");
 					} else {
+						Utente u = serviceUtente.findById(Integer.parseInt(session.getAttribute("id").toString()));
 						u.setPassword(nPsw);
 						serviceUtente.saveUtente(u);
+						UtenteDatiPersonali udp = serviceDatiPersonali.findById(u.getId());
 						if (!udp.isPasswordCambiata()) {
 							udp.setPasswordCambiata(true);
 							serviceDatiPersonali.save(udp);
@@ -194,20 +197,22 @@ public class UtenteController extends BaseController {
 		mav.addObject("vecchiaPassword", new String());
 		mav.addObject("nuovaPassword", new String());
 		mav.addObject("cNuovaPassword", new String());
-		mav.addObject("obbligato", udp.getPasswordCambiata());
+		mav.addObject("obbligato", serviceDatiPersonali
+				.findById(Integer.parseInt(session.getAttribute("id").toString())).getPasswordCambiata());
 		return mav;
 	}
 
 	@PostMapping(value = "/cambiaFotoProfilo")
 	public String modificaFoto(@RequestParam(required = false) MultipartFile immagine, HttpSession session)
 			throws Exception {
+		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		FileImmagine img = null;
 		if (!immagine.getOriginalFilename().isEmpty()) {
 
 			img = new FileImmagine();
 			// img.setData(compressImage(immagine, 0.1f));
 			img.setData(compressImage(immagine, 0.5f));
-			UtenteDatiPersonali utenteLoggato = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
+			UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(idUser);
 			if (!serviceFileImmagine.contains(img.getData())) {
 				img.setAutore(utenteLoggato);
 				img.setTimestamp(Instant.now().getEpochSecond());
@@ -229,7 +234,7 @@ public class UtenteController extends BaseController {
 	public ModelAndView mostraLog(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("mostra_tutto_log");
-		UtenteDatiPersonali u = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
+		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		if (serviceUtente.findById(u.getId()).getRuolo().getNome().equals("ADMIN")) {
 			mav.addObject("allLog", serviceLog.findAll());
 			mav.addObject("admin", true);
@@ -243,7 +248,9 @@ public class UtenteController extends BaseController {
 	@PostMapping(value = "/setVisualizzazione")
 	public String modificaVisualizazzioneDataNascita(HttpSession session,
 			/* HttpServletRequest request */ @RequestParam("set") String value) {
-		UtenteDatiPersonali utenteLoggato = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
+		// String value = request.getParameter("set");
+		int id_utente = Integer.parseInt(session.getAttribute("id").toString());
+		UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(id_utente);
 		if (value.equals("Si")) {
 			utenteLoggato.setVisualizzaDataNascita(true);
 		} else
@@ -282,7 +289,10 @@ public class UtenteController extends BaseController {
 	@GetMapping(value = "/addPermesso")
 	public String addPermesso(String email, String list, HttpSession session, Model model) throws Exception {
 		String[] permessi = list.split(",");
-		UtenteDatiPersonali utenteLoggato = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
+		// Set<String> targetSet = new
+		// CopyOnWriteArraySet<String>(Arrays.asList(permessi));
+		int id_utente = Integer.parseInt(session.getAttribute("id").toString());
+		UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(id_utente);
 		if (utenteLoggato.getUtente().getRuolo().getNome().equals("ADMIN")
 				|| utenteLoggato.getUtente().getSetPermessi().contains(servicePermesso.findById("AM"))) {
 			Utente u = serviceUtente.findByEmail(email);
@@ -333,7 +343,8 @@ public class UtenteController extends BaseController {
 		if (flag)
 			model.addAttribute("messaggio", messaggio);
 		ModelAndView mav = new ModelAndView();
-		UtenteDatiPersonali utenteLoggato = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
+		UtenteDatiPersonali utenteLoggato = serviceDatiPersonali
+				.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		if (serviceUtente.findById(utenteLoggato.getId()).getRuolo().getNome().equals("ADMIN")
 				|| utenteLoggato.getUtente().getSetPermessi().contains(servicePermesso.findById("AM"))) {
 			mav.setViewName("eliminaUtente");
@@ -407,7 +418,7 @@ public class UtenteController extends BaseController {
 
 	@GetMapping(value = "/mostraEliminati")
 	public ModelAndView mostraNonAttivi(HttpSession session) throws Exception {
-		UtenteDatiPersonali u = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
+		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		if (!u.getUtente().getRuolo().getNome().equals("ADMIN"))
 			throw new Exception("Fidati. Prima chiedi i permessi");
 		List<Evento> eventi = repositoryEventoWork.getAllNotVisible();

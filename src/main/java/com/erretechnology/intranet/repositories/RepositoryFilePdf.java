@@ -12,6 +12,4 @@ import com.erretechnology.intranet.models.FilePdf;
 public interface RepositoryFilePdf extends JpaRepository<FilePdf, Integer>{
 	@Query
 	List<FilePdf> findByVisibileFalse(Sort sort);
-	@Query
-	List<FilePdf> findByVisibileTrue(Sort sort);
 }

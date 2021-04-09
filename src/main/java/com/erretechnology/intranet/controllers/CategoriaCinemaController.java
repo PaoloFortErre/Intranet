@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.erretechnology.intranet.models.CategoriaCinema;
-import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.repositories.RepositoryCategoriaCinema;
 
 @Controller
@@ -34,7 +33,7 @@ public class CategoriaCinemaController extends BaseController{
 				
 		categoriaCinema.setVisibile(true);	
 		repoCategoria.save(categoriaCinema);
-		saveLog("inserito una nuova categoria cinema", (UtenteDatiPersonali) session.getAttribute("utenteSessione"));
+		saveLog("inserito una nuova categoria cinema", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
         return "categoriaCinema";
 	}
 	
@@ -52,7 +51,7 @@ public class CategoriaCinemaController extends BaseController{
 		
 		repoCategoria.save(categoriaCinema);
 		model.addAttribute("categoriaCinema", categoriaCinema);
-		saveLog("modificato le informazioni di una categoria cinema", (UtenteDatiPersonali) session.getAttribute("utenteSessione"));
+		saveLog("modificato le informazioni di una categoria cinema", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "categoriaCinema";
 	}
 	
@@ -61,7 +60,7 @@ public class CategoriaCinemaController extends BaseController{
 		CategoriaCinema categoriaCinema = repoCategoria.findById(id).get();
 		categoriaCinema.setVisibile(false);
 		repoCategoria.save(categoriaCinema);
-		saveLog("cancellato una categoria cinema", (UtenteDatiPersonali) session.getAttribute("utenteSessione"));
+		saveLog("cancellato una categoria cinema", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/categoriaCinema/list";
 	}
 }

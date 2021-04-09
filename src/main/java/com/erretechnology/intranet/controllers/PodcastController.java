@@ -55,7 +55,7 @@ public class PodcastController extends BaseController {
 			podcast.setTimestamp(Instant.now().getEpochSecond());
 			podcast.setPodcast(file.getBytes());
 		}
-		UtenteDatiPersonali utente = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
+		UtenteDatiPersonali utente = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		podcast.setUtente(utente);
 		podcast.setNome(StringUtils.cleanPath(file.getOriginalFilename()));
 		podcast.setDataPodcast(timestampPodcast);
@@ -109,14 +109,14 @@ public class PodcastController extends BaseController {
 	}
 	
 	@GetMapping(value ="/cancellaPodcast")
-	public String eliminaPodcast(int id) {
+	public String eliminaPodcast(HttpSession session, int id) {
 		Podcast p = servicePodcast.getById(id);
 		servicePodcast.remove(p);
 		return "redirect:/profile/mostraEliminati";
 	}
 	
 	@GetMapping(value ="/ripristinaPodcast")
-	public String ripristinaModulo(int id) {
+	public String ripristinaModulo(HttpSession session, int id) {
 		Podcast p = servicePodcast.getById(id);
 		p.setVisibile(true);
 		servicePodcast.save(p);;

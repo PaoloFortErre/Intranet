@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.erretechnology.intranet.models.Aforisma;
-import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.repositories.RepositoryAforisma;
 import com.erretechnology.intranet.repositories.RepositoryUtente;
 
@@ -43,25 +42,28 @@ public class AforismaController extends BaseController {
 	@PostMapping(value = "/life/insert")
 	public String postLife(@ModelAttribute("aforisma") Aforisma aforisma, HttpSession session, ModelMap model) throws IOException {
 		
-		aforisma.setUtente(((UtenteDatiPersonali) session.getAttribute("utenteSessione")).getUtente());
+		int idUser = Integer.parseInt(session.getAttribute("id").toString());
+		aforisma.setUtente(repoUtente.findById(idUser).get());
 		aforisma.setVisibile(true);
 		aforisma.setVisibile(true);
 		aforisma.setLife(true);
 		
 		repoAforisma.save(aforisma);
-		saveLog("aggiunto una aforisma", (UtenteDatiPersonali) session.getAttribute("utenteSessione"));
+		saveLog("aggiunto una aforisma", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
         return "redirect:/myLife1/";
 	}
 	
 	@PostMapping(value = "/work/insert")
 	public String postWork(@ModelAttribute("aforisma") Aforisma aforisma, HttpSession session, ModelMap model) throws IOException {
-		aforisma.setUtente(((UtenteDatiPersonali) session.getAttribute("utenteSessione")).getUtente());
+		
+		int idUser = Integer.parseInt(session.getAttribute("id").toString());
+		aforisma.setUtente(repoUtente.findById(idUser).get());
 		aforisma.setVisibile(true);
 		aforisma.setVisibile(true);
 		aforisma.setLife(false);
 		
 		repoAforisma.save(aforisma);
-		saveLog("aggiunto una aforisma", (UtenteDatiPersonali) session.getAttribute("utenteSessione"));
+		saveLog("aggiunto una aforisma", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
         return "redirect:/myWork/";
 	}
 	
@@ -80,7 +82,7 @@ public class AforismaController extends BaseController {
 		
 		repoAforisma.save(aforisma);
 		model.addAttribute("aforisma", aforisma);
-		saveLog("modificato una aforisma", (UtenteDatiPersonali) session.getAttribute("utenteSessione"));
+		saveLog("modificato una aforisma", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
         return "redirect:/myLife1/";
 	}
 	
@@ -89,7 +91,7 @@ public class AforismaController extends BaseController {
 		Aforisma aforisma = repoAforisma.findById(id).get();
 		aforisma.setVisibile(false);
 		repoAforisma.save(aforisma);
-		saveLog("eliminato una aforisma", (UtenteDatiPersonali) session.getAttribute("utenteSessione"));
+		saveLog("eliminato una aforisma", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/aforisma/list";
 	}
 }

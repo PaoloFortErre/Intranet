@@ -2,8 +2,6 @@ package com.erretechnology.intranet.models;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,16 +37,16 @@ public class UtenteDatiPersonali implements Serializable, MyWorkBean{
 	@JoinColumn(name = "id_immagine")
 	private FileImmagine immagine;
 	private boolean visualizzaDataNascita;
-	@ManyToMany(mappedBy = "setUtenti", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy = "setUtenti", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Notifica> setNotifiche;
 	@ManyToMany(mappedBy = "setUtenti", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Post> setPostPiaciuti;
+	private List<Post> setPostPiaciuti;
 
 
-	public Set<Post> getSetPostPiaciuti() {
+	public List<Post> getSetPostPiaciuti() {
 		return setPostPiaciuti;
 	}
-	public void setSetPostPiaciuti(Set<Post> setPostPiaciuti) {
+	public void setSetPostPiaciuti(List<Post> setPostPiaciuti) {
 		this.setPostPiaciuti = setPostPiaciuti;
 	}
 	

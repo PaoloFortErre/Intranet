@@ -50,9 +50,10 @@ public class ClienteController extends BaseController{
 		Timestamp timestamp = Timestamp.valueOf(parsedDate.atStartOfDay());
 		cliente.setDataInizio(timestamp.getTime());
 		cliente.setVisibile(true);
-		UtenteDatiPersonali utenteLoggato= (UtenteDatiPersonali) session.getAttribute("utenteSessione");
+
 		if(!immagine.getOriginalFilename().isEmpty()) {
-			
+			int idUser = Integer.parseInt(session.getAttribute("id").toString());
+			UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
 
 			FileImmagine img = new FileImmagine();
 			img.setData(compressImage(immagine, 0.5f));
@@ -65,7 +66,7 @@ public class ClienteController extends BaseController{
 		}
 
 		repoCliente.save(cliente);
-		saveLog("inserito un nuovo cliente", utenteLoggato);
+		saveLog("inserito un nuovo cliente", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/myWork/";
 	}
 
@@ -89,13 +90,14 @@ public class ClienteController extends BaseController{
 		LocalDate parsedDate = yearMonth.atDay(1);
 		Timestamp timestamp = Timestamp.valueOf(parsedDate.atStartOfDay());
 		cliente.setDataInizio(timestamp.getTime());
-		UtenteDatiPersonali utenteLoggato = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
+
 
 		if(!immagine.getOriginalFilename().isEmpty()) {
 			FileImmagine img = new FileImmagine();			
 			img.setData(compressImage(immagine, 0.5f));
 			if(!serviceFileImmagine.contains(img.getData())) {
-				
+				int idUser = Integer.parseInt(session.getAttribute("id").toString());
+				UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
 				img.setAutore(utenteLoggato);
 				img.setTimestamp(Instant.now().getEpochSecond());
 				img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
@@ -109,7 +111,7 @@ public class ClienteController extends BaseController{
 
 		repoCliente.save(cliente);
 		model.addAttribute("cliente", cliente);
-		saveLog("modificato le informazioni di un cliente", utenteLoggato);
+		saveLog("modificato le informazioni di un cliente", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/myWork/";
 	}
 
@@ -119,7 +121,7 @@ public class ClienteController extends BaseController{
 		cliente.setVisibile(false);
 		cliente.setTimestampEliminazione(Instant.now().getEpochSecond());
 		repoCliente.save(cliente);
-		saveLog("cancellato un nuovo cliente", (UtenteDatiPersonali) session.getAttribute("utenteSessione"));
+		saveLog("cancellato un nuovo cliente", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/myWork/";
 	}
 	

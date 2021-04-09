@@ -34,7 +34,7 @@ public class MyWorkController extends BaseController {
 		ModelAndView mav = new ModelAndView();
 		List<ElementiMyWork> elementi = serviceElementiMyWork.findAll();
 		elementi.stream().filter(x -> x.getFoto() != null).forEach(x -> x.setImmagine(serviceFileImmagine.getImmagine(x.getFoto())));
-		UtenteDatiPersonali u1 = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
+		UtenteDatiPersonali u1 = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		mav.addObject("utenteDati", u1);
 		mav.setViewName("myWork");
 		Calendar calendar = Calendar.getInstance(), calUtente = Calendar.getInstance();
@@ -114,7 +114,7 @@ public class MyWorkController extends BaseController {
 	
 	@PostMapping(value = "/video")
 	public String video(@ModelAttribute("video") VideoDelGiorno video, HttpSession session) {
-		UtenteDatiPersonali autore = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
+		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		video.setPagina("MyWork");
 		serviceVideo.save(video);
 		saveLog("aggiornato il video su myWork", autore);
@@ -124,7 +124,7 @@ public class MyWorkController extends BaseController {
 	
 	@PostMapping(value = "/sondaggi")
 	public String sondaggio(@ModelAttribute("sondaggio") Sondaggio sondaggio, HttpSession session) {
-		UtenteDatiPersonali autore = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
+		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		sondaggio.setAutore(autore);
 		sondaggio.setTimestamp(Instant.now().getEpochSecond());
 		sondaggio.setVisibile(true);
@@ -151,14 +151,14 @@ public class MyWorkController extends BaseController {
 		serviceSondaggio.save(sondaggio);
 		model.addAttribute("sondaggio", serviceSondaggio.findById(id));
 
-		saveLog("modificato un sondaggio", (UtenteDatiPersonali) session.getAttribute("utenteSessione"));
+		saveLog("modificato un sondaggio", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 	
 		return "redirect:/myWork/";
 	}
 	@PostMapping(value = "/deleteSondaggio/{id}")
 	public String deleteMessaggio(@PathVariable int id, HttpSession session) {
 		//controllare permesso GS
-		UtenteDatiPersonali autore = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
+		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 			Sondaggio s =serviceSondaggio.findById(id);
 			s.setVisibile(false);
 			s.setTimestampEliminazione(Instant.now().getEpochSecond());
