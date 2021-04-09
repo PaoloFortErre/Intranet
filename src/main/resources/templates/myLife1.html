@@ -85,8 +85,21 @@
 	height: 980px;
 }
 
+@media screen and (max-width: 700px) {
+	.carousel-inner img {
+		height: 580px;
+	}
+}
+
 .carousel-caption {
 	top: 450px;
+}
+
+@media screen and (max-width: 700px) {
+	.carousel-caption {
+		top: 80px;
+		font-size: 10px;
+	}
 }
 /*****************
     - Header -
@@ -173,6 +186,7 @@
 		margin-left: 0px;
 	}
 }
+
 .profile-card-3 {
 	box-shadow: 0px 20px 21px 3px rgba(255, 255, 255, 0.31);
 	max-width: 380px;
@@ -230,16 +244,12 @@
 .profile-card-3:hover .profile-name {
 	bottom: 80px;
 	color: white;
-	
-	
 }
 
 .profile-card-3:hover .profile-username {
 	bottom: 60px;
 	font-size: 20px;
 }
-
-
 </style>
 
 </head>
@@ -309,11 +319,9 @@
 			<div class="carousel-item active">
 				<img src="/view/MyLife/images/mylife1.png" alt="ferrari"
 					title="ferrari" width="100%" height="500" class="img-fluid">
-				<div class="carousel-caption">
+				<div class="carousel-caption" >
+					<div th:if="${aforisma.size>0}">
 					<h1
-						style="font-weight: 900; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);">Ogni
-						sogno a cui rinunci è un pezzo di futuro che smette di esistere</h1>
-					<!--<h1
 						style="font-weight: 900; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"
 						th:text="${aforisma[0].titolo}"></h1>
 					<p th:text="${aforisma[0].contenuto}"
@@ -325,26 +333,24 @@
 								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 8px; width: 150px;">
 								Modifica aforisma
 								<!-- <img src="/view/MyWork/images/edit.png" width="50px" height="20px">-->
-					<!-- >button>
+						</button>
 						</form>
-						<a th:href="@{/aforisma/new/}"
+					</div>
+				</div>
+						<a th:href="@{/aforisma/life/new/}" th:if="${GML}"
 							style="display: inline-block; color: black; background-color: white; font-size: 12px; padding: 8px; text-decoration: none; width: 150px;">
 							Aggiungi aforisma <!--  <img src="/view/MyWork/images/more.png" width="30px"  height="20px"
 									style="margin-bottom: 10px; display: inline-block">-->
-					<!-- </a>
-					</div>-->
+					   </a>
+					
 				</div>
 			</div>
 			<div class="carousel-item">
 				<img src="/view/MyLife/images/mylife2.png" alt="scarpe" width="100%"
 					height="500" class="img-fluid">
-				<div class="carousel-caption">
-					<h1
-						style="font-weight: 900; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);">Non
-						andare dove il sentiero ti può portare. Vai invece dove il
-						sentiero non c'è ancora e lascia dietro di te una traccia</h1>
-					<!--<h1
-						style="font-weight: 900; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"
+				<div class="carousel-caption" >
+				<div th:if="${aforisma.size>1}">
+					<h1 style="font-weight: 900; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"
 						th:text="${aforisma[1].titolo}"></h1>
 					<p th:text="${aforisma[1].contenuto}"
 						style="font-style: italic; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"></p>
@@ -355,24 +361,44 @@
 								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 8px; width: 150px;">
 								Modifica aforisma
 								<!-- <img src="/view/MyWork/images/edit.png" width="50px" height="20px">-->
-					<!-- </button>
+						</button>
 						</form>
-						<a th:href="@{/aforisma/new/}"
+						</div>
+						</div>
+						<a th:href="@{/aforisma/life/new/}" th:if="${GML}"
 							style="display: inline-block; color: black; background-color: white; font-size: 12px; padding: 8px; text-decoration: none; width: 150px;">
 							Aggiungi aforisma <!--  <img src="/view/MyWork/images/more.png" width="30px"  height="20px"
 									style="margin-bottom: 10px; display: inline-block">-->
-					<!-- </a> 
-					</div>-->
+						</a> 
+					
 				</div>
 			</div>
 			<div class="carousel-item">
 				<img src="/view/MyLife/images/mylife3.png" alt="scarpe" width="100%"
 					height="500" class="img-fluid">
-				<div class="carousel-caption">
-					<h1
-						style="font-weight: 900; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);">Chi
-						conosce tutte le risposte, non si è fatto tutte le domande</h1>
-
+				<div class="carousel-caption" >
+				<div th:if="${aforisma.size>2}">
+					<h1 style="font-weight: 900; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"
+						th:text="${aforisma[2].titolo}"></h1>
+					<p th:text="${aforisma[2].contenuto}"
+						style="font-style: italic; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"></p>
+					<div th:if="${GML}">
+						<form th:action="@{'/aforisma/update/'+${aforisma[2].id}}"
+							method="get">
+							<button type="submit" name="modifica"
+								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 8px; width: 150px;">
+								Modifica aforisma
+								<!-- <img src="/view/MyWork/images/edit.png" width="50px" height="20px">-->
+						</button>
+						</form>
+					</div>
+				</div>
+						<a th:href="@{/aforisma/life/new/}" th:if="${GML}"
+							style="display: inline-block; color: black; background-color: white; font-size: 12px; padding: 8px; text-decoration: none; width: 150px;">
+							Aggiungi aforisma <!--  <img src="/view/MyWork/images/more.png" width="30px"  height="20px"
+									style="margin-bottom: 10px; display: inline-block">-->
+						</a> 
+					
 				</div>
 			</div>
 		</div>

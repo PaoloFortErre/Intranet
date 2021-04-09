@@ -2,7 +2,7 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
 	<meta charset="ISO-8859-1">
-	<title>Aforisma editing</title>
+	<title>Aggiungi Aforisma</title>
 
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet"
@@ -20,6 +20,25 @@
 	<script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"> </script>
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+
+<style>
+body{
+	background-image: url("/view/MyWork/images/background.png");
+	  background-repeat: no-repeat, repeat;
+	    background-attachment: fixed;
+	  
+	
+}
+#input {
+	background-color: #E2E2E2;
+	border-radius: 0px 0px 0px 0px;
+	border: 0px solid #E2E2E2;
+	
+}
+</style>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"> </script>
 
@@ -40,6 +59,7 @@
 	}
 
 
+
 </style>
 
 </head>
@@ -50,42 +70,36 @@
 		<div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" id="colForm">
 
-				<h4 style="text-align: center; margin-bottom:5px;"> Modifica aforisma
+				<h4 style="text-align: center; margin-bottom:5px;"> Inserisci un nuovo aforisma
 				</h4 ><hr style="background-color: #F3F3F3; ">
 
 				<p style="text-align: right; margin-bottom: 30px;display: inline-block;">
-					<a class="mr-2" th:href="@{/myWork/}" style="color: #F3F3F3;">
+					<a class="mr-2" th:href="@{/myLife/}" style="color: #F3F3F3;">
 						<img src="/view/MyWork/images/frecciasinistra.png" style="display: inline-block;" width="20%">Torna indietro
 					</a>
 				</p>
 
-				<form th:action="@{/aforisma/update/{id}(id = ${aforisma.id})}" th:object="${aforisma}" method="post"  class="signin-form">
-					<div class="form-group col-12">
-						<label for="frase">Frase</label>
-					  <input class="form-control" type="text" id="frase" name="frase" th:field="*{frase}" required>
-					</div>
-	
-					<div class="form-group col-8">
-						<label for="autore">Autore</label>
-					  <input class="form-control" type="text" id="autore" name="autore" th:field="*{autore}">
-					</div>
-					<div class="form-group col-4">
-						<input class="form-control" type="submit" id="pubblicaSubmit" value="Salva">
-					</div>
+				<form th:action="@{/aforisma/work/insert}" th:object="${aforisma}"
+				method="post" enctype="multipart/form-data"  class="signin-form">
+
+				<div class="form-group col-12">
+					<label for="aforisma">Aforisma</label>
+					<input class="form-control" type="text" name="aforisma" id="input" th:field="*{frase}" required>
+				</div>
+
+				<div class="form-group col-8">
+					<label for="autore">Autore</label>
+					<input class="form-control" type="text" name="autore" id="input2" th:field="*{autore}">
+				</div>
+				<div class="form-group col-4">
+					<input class="form-control" type="submit" id="pubblicaSubmit" value="Pubblica">
+				</div>
+
 			</form>
 		</div>
 	</div>
 
+</div>
 
-
-
-	<script>
-
-	function bye(){
-		var x = document.getElementById("input").value;
-		var y = document.getElementById("input2").value;
-		alert("Hai inserito: " + x  + " di " + y);
-	}
-</script>
 </body>
 </html>
