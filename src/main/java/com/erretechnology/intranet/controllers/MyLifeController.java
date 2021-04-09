@@ -80,7 +80,7 @@ public class MyLifeController extends BaseController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("addVideoMyLife");
 		mav.addObject("video", new VideoDelGiorno());
-		notificaTutti("ha inserito un nuovo video su MyLife!", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+		notificaTutti("ha inserito un nuovo video su MyLife!", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())),"MyLife");
 
 		return mav;
 	}
@@ -121,7 +121,7 @@ public class MyLifeController extends BaseController {
 		else {
 			utente.addPostPiaciuto(p);
 			saveLog("messo mi piace a un post", utente);
-			notificaSingola("ha messo mi piace al tuo post", p.getAutore(), utente);
+			notificaSingola("ha messo mi piace al tuo post", p.getAutore(), utente, "MyLife");
 		}
 			
 		return "redirect:/myLife/";
@@ -233,7 +233,7 @@ public class MyLifeController extends BaseController {
 		commento.setPost(servicePost.findById(idPost));
 		commento.setVisibile(true);
 		serviceCommento.save(commento);
-		notificaSingola("ha commentato il tuo post", autorePost, autore);
+		notificaSingola("ha commentato il tuo post", autorePost, autore, "MyLife");
 		saveLog("risposto a un post in bacheca", autore);
 		return "redirect:/myLife/";
 	}
