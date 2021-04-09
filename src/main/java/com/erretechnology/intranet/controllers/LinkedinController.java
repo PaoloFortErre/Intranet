@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.erretechnology.intranet.models.PostLinkedin;
 import com.erretechnology.intranet.repositories.RepositoryLinkedin;
@@ -35,8 +36,8 @@ public class LinkedinController extends BaseController {
 		return "redirect:/homepage";
 	}
 	
-	@RequestMapping("/cancella/{id}")
-	public String cancellaCliente(@PathVariable int id, HttpSession session) {
+	@RequestMapping("/cancella")
+	public String cancellaCliente(int id, HttpSession session) {
 		repoLinkedin.deleteById(id);
 		return "redirect:/homepage";
 	}
