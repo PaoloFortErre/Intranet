@@ -50,7 +50,7 @@ public class AforismaController extends BaseController {
 		
 		repoAforisma.save(aforisma);
 		saveLog("aggiunto una aforisma", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-        return "redirect:/myLife/";
+        return "redirect:/myLife1/";
 	}
 	
 	@PostMapping(value = "/work/insert")
@@ -83,7 +83,7 @@ public class AforismaController extends BaseController {
 		repoAforisma.save(aforisma);
 		model.addAttribute("aforisma", aforisma);
 		saveLog("modificato una aforisma", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-        return "redirect:/myLife/";
+        return "redirect:/myLife1/";
 	}
 	
 	@RequestMapping("/delete/{id}")
