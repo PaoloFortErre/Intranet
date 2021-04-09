@@ -42,8 +42,8 @@ public class UploadController extends BaseController{
 		ModelAndView mav = new ModelAndView(); 
 		mav.setViewName("aggiungi_nuova_comunicazione");
 		mav.addObject("comunicazioneHR", new ComunicazioneHR());
-		mav.addObject("comunicazioni", serviceFilePdf.findAll().stream().filter(x->x.isVisibile()).sorted(Comparator.comparingLong(FilePdf::getTimestamp).reversed()).collect(Collectors.toList()));
-		mav.addObject("user", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+		mav.addObject("comunicazioni", serviceFilePdf.getAllVisible());
+		mav.addObject("user", (UtenteDatiPersonali) session.getAttribute("utenteSessione"));
 		return mav;
 	}
 
@@ -52,8 +52,8 @@ public class UploadController extends BaseController{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("aggiungi_nuova_comunicazione");
 		mav.addObject("comunicazioneHR", new ComunicazioneHR());
-		mav.addObject("comunicazioni", serviceComunicazioni.getAll().stream().filter(x->x.isVisibile()).sorted(Comparator.comparingLong(ComunicazioneHR::getTimestamp).reversed()).collect(Collectors.toList()));
-		mav.addObject("user", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+		mav.addObject("comunicazioni", serviceComunicazioni.getAllVisible());
+		mav.addObject("user", (UtenteDatiPersonali) session.getAttribute("utenteSessione"));
 		return mav;
 	}
 
@@ -62,7 +62,7 @@ public class UploadController extends BaseController{
 	@PostMapping(value = "/upload")
 	public String uploadPdf(@RequestParam("file") MultipartFile file, RedirectAttributes attributes, 
 			@ModelAttribute("filePdf") FilePdf filePdf, HttpSession session) throws Exception{
-		UtenteDatiPersonali u =  serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		UtenteDatiPersonali u =  (UtenteDatiPersonali) session.getAttribute("utenteSessione");
 		// check if file is empty
 		if (file.isEmpty()) {
 			attributes.addFlashAttribute("message", "Please select a file to upload.");
@@ -101,7 +101,7 @@ public class UploadController extends BaseController{
 		}
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 		// save the file on the local file system
-		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		UtenteDatiPersonali u = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
 		filePdfHR.setNome(fileName);
 		filePdfHR.setData(file.getBytes());
 		filePdfHR.setTimestamp(Instant.now().getEpochSecond());
@@ -120,7 +120,7 @@ public class UploadController extends BaseController{
 
 	@PostMapping(value = "/deleteFilePdf")
 	public String deleteMessaggio(int id, HttpSession session) throws Exception {
-		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		UtenteDatiPersonali autore = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
 		if( autore.getUtente().getSetPermessi().contains(servicePermesso.findById("GM"))) {
 			FilePdf pdf =serviceFilePdf.findById(id);
 			pdf.setVisibile(false);
@@ -136,7 +136,7 @@ public class UploadController extends BaseController{
 
 	@PostMapping(value = "/deleteFileHR")
 	public String deleteComunicazioneHR(int id, HttpSession session) throws Exception {
-		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		UtenteDatiPersonali autore = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
 		if( autore.getUtente().getSetPermessi().contains(servicePermesso.findById("GHR"))) {
 			ComunicazioneHR pdf =serviceComunicazioni.findById(id);
 			pdf.setVisibile(false);
@@ -169,7 +169,7 @@ public class UploadController extends BaseController{
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Content-Disposition", String.format("attachment; filename=" + nome));    
-		saveLog("scaricato il modulo " + nome, serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+		saveLog("scaricato il modulo " + nome, (UtenteDatiPersonali) session.getAttribute("utenteSessione"));
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_PDF_VALUE)
 				.body(new ByteArrayResource(data));

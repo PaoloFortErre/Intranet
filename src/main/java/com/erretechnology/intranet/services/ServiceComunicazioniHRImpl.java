@@ -38,6 +38,12 @@ public class ServiceComunicazioniHRImpl implements ServiceComunicazioniHR{
 		return repositoryComunicazioniHR.findByVisibileFalse(Sort.by("id").descending());
 	}
 	
+	@Override
+	public List<ComunicazioneHR> getAllVisible() {
+		// TODO Auto-generated method stub
+		return repositoryComunicazioniHR.findByVisibileTrue(Sort.by("id").descending());
+	}
+	
 	
 	
 	

@@ -48,8 +48,7 @@ public class EventoWorkController extends BaseController {
 		
 		Long now = Instant.now().getEpochSecond();
 		evento.setDataPubblicazione(now);
-		int idUser = Integer.parseInt(session.getAttribute("id").toString());
-		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
+		UtenteDatiPersonali utenteLoggato = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
 		evento.setAutore(utenteLoggato);
 		evento.setVisibile(true);
 
@@ -92,13 +91,13 @@ public class EventoWorkController extends BaseController {
 		Date formettedDate = new SimpleDateFormat("yyyy-MM-dd").parse(date); 
 		Timestamp timestamp = new Timestamp(formettedDate.getTime()/1000);  
 		evento.setData(timestamp.getTime());
+		UtenteDatiPersonali utenteLoggato= (UtenteDatiPersonali) session.getAttribute("utenteSessione");
 
 		if(!immagine.getOriginalFilename().isEmpty()) {
 			FileImmagine img = new FileImmagine();			
 			img.setData(compressImage(immagine, 0.5f));
 			if(!serviceFileImmagine.contains(img.getData())) {
-				int idUser = Integer.parseInt(session.getAttribute("id").toString());
-				UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
+				
 				img.setAutore(utenteLoggato);
 				img.setTimestamp(Instant.now().getEpochSecond());
 				img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
@@ -112,7 +111,7 @@ public class EventoWorkController extends BaseController {
 
 		repoEvento.save(evento);
 		model.addAttribute("evento", evento);
-		saveLog("modificato un evento", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+		saveLog("modificato un evento", utenteLoggato);
 
 		return "redirect:/myWork/";
 	}
@@ -123,7 +122,7 @@ public class EventoWorkController extends BaseController {
 		evento.setVisibile(false);
 		evento.setTimestampEliminazione(Instant.now().getEpochSecond());
 		repoEvento.save(evento);
-		saveLog("eliminato un evento", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+		saveLog("eliminato un evento", (UtenteDatiPersonali) session.getAttribute("utenteSessione"));
 
 		return "redirect:/myWork/";
 	}

@@ -39,8 +39,7 @@ public class LibroController extends BaseController {
 	public String post(@ModelAttribute("libro") Libro libro, @RequestParam(required=false) MultipartFile immagine, ModelMap model, 
 			HttpSession session) throws Exception {	
 		libro.setVisibile(true);
-		int idUser = Integer.parseInt(session.getAttribute("id").toString());
-		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
+		UtenteDatiPersonali utenteLoggato= (UtenteDatiPersonali) session.getAttribute("utenteSessione");
 		libro.setAutore(utenteLoggato);
 
 		if(!immagine.getOriginalFilename().isEmpty()) {
@@ -74,13 +73,13 @@ public class LibroController extends BaseController {
 		libro.setTitolo(titolo);
 		libro.setScrittore(scrittore);
 		libro.setLink(link);
+		UtenteDatiPersonali utenteLoggato = (UtenteDatiPersonali) session.getAttribute("utenteSessione");
 
 		if(!immagine.getOriginalFilename().isEmpty()) {
 			FileImmagine img = new FileImmagine();			
 			img.setData(compressImage(immagine, 0.5f));
 			if(!serviceFileImmagine.contains(img.getData())) {
-				int idUser = Integer.parseInt(session.getAttribute("id").toString());
-				UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
+				
 				img.setAutore(utenteLoggato);
 				img.setTimestamp(Instant.now().getEpochSecond());
 				img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
@@ -94,7 +93,7 @@ public class LibroController extends BaseController {
 
 		repoLibro.save(libro);
 		model.addAttribute("libro", libro);
-		saveLog("modificato le informazioni di un libro", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+		saveLog("modificato le informazioni di un libro", utenteLoggato);
 		return "redirect:/myLife1/";
 	}
 
@@ -104,18 +103,18 @@ public class LibroController extends BaseController {
 		libro.setVisibile(false);
 		libro.setTimestampEliminazione(Instant.now().getEpochSecond());
 		repoLibro.save(libro);
-		saveLog("cancellato un libro", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+		saveLog("cancellato un libro", (UtenteDatiPersonali) session.getAttribute("utenteSessione"));
 		return "redirect:/myLife1/";
 	}
 	
 	@RequestMapping("/cancellaLibro")
-	public String cancellaLibro(HttpSession session, int id) {
+	public String cancellaLibro(int id) {
 		repoLibro.deleteById(id);
 		return "redirect:/profile/mostraEliminati";
 	}
 	
 	@RequestMapping("/ripristinaLibro")
-	public String ripristinaLibro(HttpSession session, int id) {
+	public String ripristinaLibro(int id) {
 		Libro l = repoLibro.findById(id).get();
 		l.setVisibile(true);
 		repoLibro.save(l);
