@@ -11,6 +11,8 @@ import com.erretechnology.intranet.models.UtenteDatiPersonali;
 
 public interface RepositoryComunicazioniHR extends JpaRepository<ComunicazioneHR, Integer>{
 	@Query
+	List<ComunicazioneHR> findByVisibileTrue(Sort sort);
+	@Query
 	public List<ComunicazioneHR> findByVisibileFalse(Sort sort);
 	@Query
 	public List<ComunicazioneHR> findByUtente(UtenteDatiPersonali utente, Sort sort);

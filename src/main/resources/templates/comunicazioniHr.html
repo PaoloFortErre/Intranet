@@ -234,10 +234,14 @@ nav {
 						sondaggio
 					</a>
 				</div>
-				<div id="comunicazione" class="mb-3 mt-3" th:each="sondaggi : ${sondaggi}">
-				
+				<div id="comunicazione" class="row mb-3 mt-3" th:each="sondaggi : ${sondaggi}">
+				<div class="col-xs-2 col-sm-2 col-lg-2 col-xl-2 ">
+				<img src="/view/MyWork/images/surveymonkey.png" width="200%">
+				</div>
+				<div class="col-xs-10 col-sm-10 col-lg-10 col-xl-10 ">
 					<p th:text="${sondaggi.titolo}"></p>
 					<a th:href="@{${sondaggi.contenuto}}" target="blank"> clicca qui</a>
+					</div>
 				</div>
 			</div>
 
