@@ -70,7 +70,7 @@ nav {
 </style>
 
 </head>
-<body onresize="myFunction()">
+<body onresize="myFunction()" th:with="GHR = ${#authorization.expression('hasAuthority(''GHR'')')}">
 
 	<nav
 		class="navbar navbar-expand-md bg-dark navbar-dark justify-content-end">
@@ -134,7 +134,7 @@ nav {
 	<div class="container">
 		<div class="row  mt-5">
 			<div class="col-xs-8 col-sm-8 col-lg-8 col-xl-8 mb-5"
-				th:with="GHR = ${#authorization.expression('hasAuthority(''GHR'')')}">
+				>
 
 				<div class="container-fluid text-center mb-3" th:if="${GHR}">
 					<a class="aggiungi" th:href="@{/file/hr}"
@@ -226,10 +226,18 @@ nav {
 								</div>-->
 
 			<div class="col-xs-4 col-sm-4 col-lg-4 col-xl-4 mb-5">
+			
+				<div class="container-fluid text-center mb-3" th:if="${GHR}">
+					<a class="aggiungi" th:href="@{/file/hr}"
+						style="text-decoration: none; color: #F3F3F3;"> <img
+						class="mr-5" src="/view/MyWork/images/more.png" width="30px">Aggiungi
+						sondaggio
+					</a>
+				</div>
 				<div id="comunicazione" class="mb-3 mt-3" th:each="sondaggi : ${sondaggi}">
 				
 					<p th:text="${sondaggi.titolo}"></p>
-					<a th:href="@{${sondaggi.contenuto}}" target="blank"> clicca</a>
+					<a th:href="@{${sondaggi.contenuto}}" target="blank"> clicca qui</a>
 				</div>
 			</div>
 
