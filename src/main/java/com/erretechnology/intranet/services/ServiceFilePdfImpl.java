@@ -34,8 +34,12 @@ public class ServiceFilePdfImpl implements ServiceFilePdf {
 
 	@Override
 	public List<FilePdf> getAllNotVisible() {
-		// TODO Auto-generated method stub
 		return repositoryFilePdf.findByVisibileFalse(Sort.by("id").descending());
+	}
+	
+	@Override
+	public List<FilePdf> getAllVisible() {
+		return repositoryFilePdf.findByVisibileTrue(Sort.by("id").descending());
 	}
 
 }
