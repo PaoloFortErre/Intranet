@@ -27,23 +27,44 @@ public class AforismaController extends BaseController {
 	@Autowired
 	private RepositoryUtente repoUtente;
 	
-	@GetMapping("/new")
-	public String form(Model model) {
+	@GetMapping("/life/new")
+	public String formLife(Model model) {
 		model.addAttribute("aforisma", new Aforisma()); 
 		return "aforismaForm";
 	}
 	
-	@PostMapping(value = "/insert")
-	public String post(@ModelAttribute("aforisma") Aforisma aforisma, HttpSession session, ModelMap model) throws IOException {
+	@GetMapping("/work/new")
+	public String formWork(Model model) {
+		model.addAttribute("aforisma", new Aforisma()); 
+		return "aforismaFormWork";
+	}
+	
+	@PostMapping(value = "/life/insert")
+	public String postLife(@ModelAttribute("aforisma") Aforisma aforisma, HttpSession session, ModelMap model) throws IOException {
 		
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		aforisma.setUtente(repoUtente.findById(idUser).get());
 		aforisma.setVisibile(true);
 		aforisma.setVisibile(true);
+		aforisma.setLife(true);
 		
 		repoAforisma.save(aforisma);
 		saveLog("aggiunto una aforisma", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
         return "redirect:/myLife/";
+	}
+	
+	@PostMapping(value = "/work/insert")
+	public String postWork(@ModelAttribute("aforisma") Aforisma aforisma, HttpSession session, ModelMap model) throws IOException {
+		
+		int idUser = Integer.parseInt(session.getAttribute("id").toString());
+		aforisma.setUtente(repoUtente.findById(idUser).get());
+		aforisma.setVisibile(true);
+		aforisma.setVisibile(true);
+		aforisma.setLife(false);
+		
+		repoAforisma.save(aforisma);
+		saveLog("aggiunto una aforisma", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+        return "redirect:/myWork/";
 	}
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
@@ -62,7 +83,7 @@ public class AforismaController extends BaseController {
 		repoAforisma.save(aforisma);
 		model.addAttribute("aforisma", aforisma);
 		saveLog("modificato una aforisma", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		return "aforisma";
+        return "redirect:/myLife/";
 	}
 	
 	@RequestMapping("/delete/{id}")
