@@ -79,7 +79,7 @@ table, th, td {
 @media screen and (max-width: 1000px) {
 	
 	div#rowmacchina1 {
-	height: 1700px;  
+	height: 1800px;  
 	width: 105%; 
 	}
 }
@@ -97,7 +97,7 @@ table, th, td {
 @media screen and (max-width: 1000px) {
 	
 	div#rowmacchina2 {
-	height: 1700px;
+	height: 2000px;
 	width: 105%; 
 	 	}
 }
@@ -568,8 +568,8 @@ ROW SCHIZZO
 						<div class="modal-content">
 
 							<!-- Modal Header -->
-							<div class="modal-header">
-								<h4 class="modal-title" style="font-size: 22px; color: #303030">
+							<div class="modal-header" style="background-color: #303030">
+								<h4 class="modal-title" style="font-size: 22px; color: #f3f3f3">
 									I podcast di <span
 										style="font-style: italic; font-weight: 900; font-size: 25px; margin-bottom: -5PX;">
 										Rosario </span>
@@ -579,7 +579,7 @@ ROW SCHIZZO
 
 							<!-- Modal body -->
 							<div class="modal-body" th:each="podcast : ${podcast}"
-								th:if="${podcast!=null}" style="background-color: #B9CAF0;">
+								th:if="${podcast!=null}" style="background-color: #A7B0BD;">
 								<p th:text="${podcast.nome}" style="color: #303030"></p>
 								<audio controls style="margin-top: 10px;" preload="metadata">
 									<source
@@ -589,7 +589,7 @@ ROW SCHIZZO
 							</div>
 
 							<!-- Modal footer -->
-							<div class="modal-footer">
+							<div class="modal-footer" style="background-color: #303030">
 								<button type="button" class="btn btn-primary"
 									data-dismiss="modal">Close</button>
 							</div>
