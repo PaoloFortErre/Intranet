@@ -73,7 +73,7 @@
 	</style>
 
 </head>
-<body>
+<body onresize="myFunction()">
 
 	<nav class="navbar navbar-expand-md bg-dark navbar-dark justify-content-end">
 		<a class="navbar-brand logo" th:href="@{/homepage/}"><img
@@ -236,5 +236,19 @@
 								</div>
 							</div>
 						</footer>
+						<script>
+						function myFunction() {
+			var w = window.outerWidth;
+			if (w <= 950) {
+
+				document.getElementById("utente-foto-profilo").style.display = "none";
+				document.getElementById("scrittaProfilo").style.display = "block";
+
+			} else {
+				document.getElementById("utente-foto-profilo").style.display = "block";
+				document.getElementById("scrittaProfilo").style.display = "none";
+			}
+		}
+			</script>			
 					</body>
 					</html>
