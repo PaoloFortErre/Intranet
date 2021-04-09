@@ -37,7 +37,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		.antMatchers("/file/hr" , "file/uploadHR" , "/file/deleteFileHR").access("hasAuthority('GHR')")
 		.antMatchers("/file/" , "file/upload" , "/file/deleteFilePdf").access("hasAuthority('GM')")
 		.antMatchers("/profile/gestisciPermesso" , "/profile/registra" , "/profile/cancellaUtente").access("hasAuthority('AM')")
-		.antMatchers("/myLife/*", "/profile/*", "/homepage", "/file/*", "/myWork/*" , "/homepage/", "/myLife1/*" , "/moduli/").access("isAuthenticated()")
+		.antMatchers("/myLife/*", "/profile/*", "/homepage", "/file/*", "/myWork/*" , "/homepage/*", "/myLife1/*" , "/moduli/*", "/aforisma/*",
+				"/cinema/*","/cliente/*", "/eventolife/*", "/eventowork/*", "/categoriacinema/*", "/libro/*", "/linkedin/*" , "/news/*",
+				"/podcast/*").access("isAuthenticated()")
 		.antMatchers("/").permitAll()
 		.and().formLogin()
 		.loginPage("/login").failureUrl("/login-error").successForwardUrl("/setSession")
