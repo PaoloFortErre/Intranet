@@ -21,5 +21,5 @@ public interface RepositoryPost extends JpaRepository<Post, Integer>{
 	public List<Post> findByVisibileFalse(Sort sort);
 	
 	@Query
-	public List<Post> findTop5ByAutoreAndVisibileTrueOrderByIdDesc(UtenteDatiPersonali u);
+	public List<Post> findTop6ByAutoreAndVisibileTrueOrderByIdDesc(UtenteDatiPersonali u);
 }

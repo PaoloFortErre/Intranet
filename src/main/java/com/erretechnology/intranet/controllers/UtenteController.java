@@ -115,9 +115,9 @@ public class UtenteController extends BaseController {
 			case "MyLife":
 				return "redirect:/myLife1/";
 			case "HR":
-				return "redirect:/file/hr";
+				return "redirect:/comunicazioniHr/";
 			case "Moduli":
-				return "redirect:/file/moduli";
+				return "redirect:/moduli/";
 		}
 		return "redirect:/profile/";
 	}
