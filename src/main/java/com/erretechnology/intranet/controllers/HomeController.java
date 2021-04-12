@@ -272,7 +272,7 @@ public class HomeController extends BaseController{
 		Manutenzione m = repositoryManutenzione.findById(1031).get();
 		m.setManutenzione(true);
 		repositoryManutenzione.save(m);
-		return "redirect:/";
+		return "redirect:/manutenzione";
     }
 	@GetMapping("/maintain-disable")
     public String disableMaintanince(HttpSession session) throws Exception {
