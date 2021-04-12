@@ -83,7 +83,12 @@ public class AforismaController extends BaseController {
 		repoAforisma.save(aforisma);
 		model.addAttribute("aforisma", aforisma);
 		saveLog("modificato una aforisma", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-        return "redirect:/myLife1/";
+		
+		if(aforisma.isLife()) {
+	        return "redirect:/myLife1/";
+		} else {
+	        return "redirect:/myWork/";
+		}
 	}
 	
 	@RequestMapping("/delete/{id}")
