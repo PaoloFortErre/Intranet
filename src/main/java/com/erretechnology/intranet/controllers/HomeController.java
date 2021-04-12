@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import com.erretechnology.intranet.models.ComunicazioneHR;
 import com.erretechnology.intranet.models.ElementiMyLife;
 import com.erretechnology.intranet.models.ElementiMyWork;
 import com.erretechnology.intranet.models.FilePdf;
@@ -198,7 +197,13 @@ public class HomeController extends BaseController{
 	public String setSession(HttpSession session) {
 		final String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
 		Utente u  = serviceUtente.findByEmail(currentUserName);
+		Boolean isAdmin  = u.getRuolo().getNome().equals("ADMIN");
+	    if(repositoryManutenzione.findById(1031).get().getManutenzione() && !isAdmin) {
+	    	SecurityContextHolder.getContext().setAuthentication(null);
+	    	return "redirect:/manutenzione";
+	    }
 		session.setAttribute("id", u.getId());
+		
 		if(serviceDatiPersonali.findById(u.getId()).getPasswordCambiata())
 			return "redirect:/homepage";
 		return "redirect:/profile/cambioPassword";
@@ -263,6 +268,12 @@ public class HomeController extends BaseController{
 		return mav;
 	}
 	
+	@GetMapping(value = "/manutenzione")
+	public ModelAndView manutenzione() {
+		ModelAndView mav = new ModelAndView("manutenzione");
+		return mav;
+	}
+	
 	@GetMapping("/maintain-enable")
     public String enableMaintanince(HttpSession session) throws Exception {
 		if(!serviceUtente.findById(Integer.parseInt(session.getAttribute("id").toString())).getRuolo().getNome().equals("ADMIN")) {
@@ -272,8 +283,9 @@ public class HomeController extends BaseController{
 		Manutenzione m = repositoryManutenzione.findById(1031).get();
 		m.setManutenzione(true);
 		repositoryManutenzione.save(m);
-		return "redirect:/manutenzione";
+		return "redirect:/";
     }
+	
 	@GetMapping("/maintain-disable")
     public String disableMaintanince(HttpSession session) throws Exception {
 		if(!serviceUtente.findById(Integer.parseInt(session.getAttribute("id").toString())).getRuolo().getNome().equals("ADMIN")) {

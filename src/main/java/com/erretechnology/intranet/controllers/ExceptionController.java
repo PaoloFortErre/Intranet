@@ -16,7 +16,7 @@ class ExceptionController {
 	@Autowired
 	private RepositoryErrorLog repoErrorLog;
 
-	@ExceptionHandler(value = Exception.class)
+	@ExceptionHandler(value = Throwable.class)
 	public ModelAndView defaultErrorHandler(HttpServletRequest httpRequest, Exception e) throws Exception {
 		ErrorLog log = new ErrorLog();
 		log.setTimestamp(Instant.now().getEpochSecond());

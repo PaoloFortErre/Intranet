@@ -38,7 +38,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
 		http.formLogin()
 		.loginPage("/login").failureUrl("/login-error").successForwardUrl("/setSession").and()
-		.addFilterAfter(new MaintenanceFilter(serviceUtente, repositoryManutenzione), BasicAuthenticationFilter.class)
 		.authorizeRequests()
 		.antMatchers("/podcast/*", "/cliente/*", "/evento/newWork/*", "/news/new/*").access("hasAuthority('GMW')")
 		.antMatchers("/myWork/addSondaggio", "/myWork/sondaggi", "/myWork/modificaSondaggio/*" , 
@@ -51,7 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		.antMatchers("/myLife/*", "/profile/*", "/homepage", "/file/*", "/myWork/*" , "/homepage/*", "/myLife1/*" , "/moduli/*", "/aforisma/*",
 				"/cinema/*","/cliente/*", "/eventolife/*", "/eventowork/*", "/categoriacinema/*", "/libro/*", "/linkedin/*" , "/news/*",
 				"/podcast/*").access("isAuthenticated()")
-		.antMatchers("/", "/login").permitAll()
+		.antMatchers("/", "/login" , "/manutenzione").permitAll()
 		.antMatchers("/maintain-enable", "/maintain-disable").access("isAuthenticated")
 		.and()
 		.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
