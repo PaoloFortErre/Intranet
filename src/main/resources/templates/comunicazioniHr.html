@@ -70,7 +70,7 @@ nav {
 </style>
 
 </head>
-<body onresize="myFunction()" th:with="GHR = ${#authorization.expression('hasAuthority(''GHR'')')}">
+<body onresize="myFunction()" th:with="GHR = ${#authorization.expression('hasAuthority(''GHR'')')}, GS = ${#authorization.expression('hasAuthority(''GS'')')}">
 
 	<nav
 		class="navbar navbar-expand-md bg-dark navbar-dark justify-content-end">
@@ -229,7 +229,7 @@ nav {
 
 			<div class="col-xs-4 col-sm-4 col-lg-4 col-xl-4 mb-5">
 			
-				<div class="container-fluid text-center mb-3" th:if="${GHR}">
+				<div class="container-fluid text-center mb-3" th:if="${GS}">
 					<a class="aggiungi" th:href="@{/myWork/addSondaggio}"
 						style="text-decoration: none; color: #F3F3F3;"> <img
 						class="mr-5" src="/view/MyWork/images/more.png" width="30px">Aggiungi

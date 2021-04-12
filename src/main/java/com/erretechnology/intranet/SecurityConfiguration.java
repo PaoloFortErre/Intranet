@@ -10,13 +10,21 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import com.erretechnology.intranet.repositories.RepositoryManutenzione;
+import com.erretechnology.intranet.services.ServiceUtente;
 
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
 	@Autowired
 	DataSource dataSource;
+	@Autowired
+	ServiceUtente serviceUtente;
+	@Autowired
+	RepositoryManutenzione repositoryManutenzione;
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -28,21 +36,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests()
-		//TODO update e delete di tutti 
+		http.formLogin()
+		.loginPage("/login").failureUrl("/login-error").successForwardUrl("/setSession").and()
+		.addFilterAfter(new MaintenanceFilter(serviceUtente, repositoryManutenzione), BasicAuthenticationFilter.class)
+		.authorizeRequests()
 		.antMatchers("/podcast/*", "/cliente/*", "/evento/newWork/*", "/news/new/*").access("hasAuthority('GMW')")
 		.antMatchers("/myWork/addSondaggio", "/myWork/sondaggi", "/myWork/modificaSondaggio/*" , 
 				     "/myWork/deleteSondaggio/*" , "/myWork/sondaggiFormUpdate/*").access("hasAuthority('GS')")
 		.antMatchers("/evento/newLife/", "/cinema/new/", "/libro/new").access("hasAuthority('GML')")
 		.antMatchers("/file/hr" , "file/uploadHR" , "/file/deleteFileHR").access("hasAuthority('GHR')")
 		.antMatchers("/file/" , "file/upload" , "/file/deleteFilePdf").access("hasAuthority('GM')")
-		.antMatchers("/profile/gestisciPermesso" , "/profile/registra" , "/profile/cancellaUtente").access("hasAuthority('AM')")
+		.antMatchers("/profile/gestisciPermesso" , "/profile/registra" , "/profile/cancellaUtente", "/maintain-enable" ,
+				"/maintain-disable").access("hasAuthority('AM')")
 		.antMatchers("/myLife/*", "/profile/*", "/homepage", "/file/*", "/myWork/*" , "/homepage/*", "/myLife1/*" , "/moduli/*", "/aforisma/*",
 				"/cinema/*","/cliente/*", "/eventolife/*", "/eventowork/*", "/categoriacinema/*", "/libro/*", "/linkedin/*" , "/news/*",
 				"/podcast/*").access("isAuthenticated()")
-		.antMatchers("/").permitAll()
-		.and().formLogin()
-		.loginPage("/login").failureUrl("/login-error").successForwardUrl("/setSession")
+		.antMatchers("/", "/login").permitAll()
+		.antMatchers("/maintain-enable", "/maintain-disable").access("isAuthenticated")
 		.and()
 		.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
 		.and()

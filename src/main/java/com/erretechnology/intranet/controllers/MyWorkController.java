@@ -131,7 +131,7 @@ public class MyWorkController extends BaseController {
 		serviceSondaggio.save(sondaggio);
 		saveLog("creato un nuovo sondaggio", autore);
 		notificaTutti("ha inserito un nuovo sondaggio!", autore, "MyWork");
-		return "redirect:/myWork/";
+		return "redirect:/comunicazioniHr/";
 	}
 
 	
