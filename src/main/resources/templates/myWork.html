@@ -49,6 +49,7 @@ table, th, td {
 .carousel-inner img {
 	height: 900px;
 }
+
 @media screen and (max-width: 1000px) {
 	.carousel-inner img {
 		height: 580px;
@@ -58,9 +59,20 @@ table, th, td {
 .carousel-caption {
 	top: 370px;
 }
+.h1caption {
+font-size: 75px;
+}
+
 @media screen and (max-width: 1000px) {
 	.carousel-caption {
-		top: 80px;
+		top: 40px;
+		
+	}
+}
+
+@media screen and (max-width: 1000px) {
+	.carousel-caption>h1 {
+		top: 40px;
 		font-size: 10px;
 	}
 }
@@ -176,7 +188,7 @@ table, th, td {
 				<div class="carousel-caption" >
 					<div th:if="${aforisma.size>0}">
 						<h1
-							style="font-weight: 900; font-size: 75px;"
+							style="font-weight: 900; " class="h1caption"
 							th:text="${aforisma[0].titolo}"></h1>
 						<p th:text="${aforisma[0].contenuto}"
 							style="font-style: italic; "></p>
@@ -204,7 +216,7 @@ table, th, td {
 				<div class="carousel-caption" >
 					<div th:if="${aforisma.size>1}">
 						<h1
-							style="font-weight: 900; font-size: 75px;"
+							style="font-weight: 900;" class="h1caption"
 							th:text="${aforisma[1].titolo}"></h1>
 						<p th:text="${aforisma[1].contenuto}"
 							style="font-style: italic;"></p>
@@ -233,7 +245,7 @@ table, th, td {
 				<div class="carousel-caption" >
 					<div th:if="${aforisma.size>2}">
 						<h1
-							style="font-weight: 900; font-size: 75px; line-height: 75px"
+							style="font-weight: 900; ; line-height: 75px" class="h1caption"
 							th:text="${aforisma[2].titolo}"></h1>
 						<p th:text="${aforisma[2].contenuto}"
 							style="font-style: italic; "></p>
