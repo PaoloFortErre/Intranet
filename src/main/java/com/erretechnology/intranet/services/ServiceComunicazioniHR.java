@@ -14,6 +14,7 @@ public interface ServiceComunicazioniHR {
 	public void remove(ComunicazioneHR hr);
 	public List<ComunicazioneHR> getAllVisible();
 	public List<ComunicazioneHR> getAllNotVisible();
+	public List<ComunicazioneHR> findFirst10ByVisibileTrueOrderByIdDesc();
 	
 	
 }

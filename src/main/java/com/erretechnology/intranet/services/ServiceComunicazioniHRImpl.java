@@ -41,6 +41,10 @@ public class ServiceComunicazioniHRImpl implements ServiceComunicazioniHR{
 	public List<ComunicazioneHR> getAllVisible() {
 		return repositoryComunicazioniHR.findByVisibileTrue(Sort.by("id").descending());
 	}
+	@Override
+	public List<ComunicazioneHR> findFirst10ByVisibileTrueOrderByIdDesc() {
+		return repositoryComunicazioniHR.findFirst10ByVisibileTrueOrderByIdDesc();
+	}
 	
 	
 	

@@ -16,4 +16,6 @@ public interface RepositoryComunicazioniHR extends JpaRepository<ComunicazioneHR
 	public List<ComunicazioneHR> findByVisibileFalse(Sort sort);
 	@Query
 	public List<ComunicazioneHR> findByUtente(UtenteDatiPersonali utente, Sort sort);
+	@Query
+	public List<ComunicazioneHR> findFirst10ByVisibileTrueOrderByIdDesc();
 }

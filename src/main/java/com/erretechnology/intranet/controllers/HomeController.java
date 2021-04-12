@@ -218,9 +218,7 @@ public class HomeController extends BaseController{
 		mav.addObject("sondaggi", sondaggi);
 		
 		mav.addObject("utenteDati", u);
-		mav.addObject("comunicazioni", serviceComunicazioni.getAll().stream()
-				.filter(x->x.isVisibile())
-				.sorted(Comparator.comparingLong(ComunicazioneHR::getTimestamp).reversed()).limit(10).collect(Collectors.toList()));
+		mav.addObject("comunicazioni", serviceComunicazioni.findFirst10ByVisibileTrueOrderByIdDesc());
 		mav.setViewName("comunicazioniHr");
 		return mav;
 	}

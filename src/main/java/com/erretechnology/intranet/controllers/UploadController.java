@@ -179,7 +179,7 @@ public class UploadController extends BaseController{
 	public ModelAndView listComunicazioni() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("comunicazioniList");
-		mav.addObject("comunicazioni", serviceComunicazioni.getAll());
+		mav.addObject("comunicazioni", serviceComunicazioni.getAllVisible());
 		return mav;
 	}
 	
