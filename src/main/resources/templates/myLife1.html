@@ -452,7 +452,7 @@ font-size: 75px;
 					</div>
 
 					<!-- Modal body -->
-					<div class="modal-body">
+					<div class="modal-body" th:if="${aforisma.size>0}">
 						<form th:action="@{/aforisma/update/{id}(id = ${aforisma[0].id})}"
 							method="post" class="signin-form">
 							<div class="form-group col-12">
@@ -495,7 +495,7 @@ font-size: 75px;
 					</div>
 
 					<!-- Modal body -->
-					<div class="modal-body">
+					<div class="modal-body" th:if="${aforisma.size>1}">
 						<form th:action="@{/aforisma/update/{id}(id = ${aforisma[1].id})}"
 							method="post" class="signin-form">
 							<div class="form-group col-12">
@@ -539,7 +539,7 @@ font-size: 75px;
 					</div>
 
 					<!-- Modal body -->
-					<div class="modal-body">
+					<div class="modal-body" th:if="${aforisma.size>2}">
 						<form th:action="@{/aforisma/update/{id}(id = ${aforisma[2].id})}"
 							method="post" class="signin-form">
 							<div class="form-group col-12">
@@ -588,8 +588,8 @@ font-size: 75px;
 
 			</div>
 
-			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4"
-				style="text-align: center">
+			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4" 
+				style="text-align: center" th:if="${film.size>0}">
 				<div class="profile-card-2 mt-5">
 					<img
 						th:src="'data:image/png;base64,' + ${film[0].immagine.getImgData(film[0].immagine.data)}"
@@ -676,7 +676,7 @@ font-size: 75px;
 
 
 			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4 "
-				style="text-align: center;">
+				style="text-align: center;" th:if="${film.size>1}">
 				<div class="profile-card-2 mt-5">
 					<img
 						th:src="'data:image/png;base64,' + ${film[1].immagine.getImgData(film[1].immagine.data)}"
@@ -758,7 +758,7 @@ font-size: 75px;
 
 
 			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4"
-				style="text-align: center">
+				style="text-align: center" th:if="${film.size>2}">
 				<div class="profile-card-2 mt-5">
 					<img
 						th:src="'data:image/png;base64,' + ${film[2].immagine.getImgData(film[2].immagine.data)}"
