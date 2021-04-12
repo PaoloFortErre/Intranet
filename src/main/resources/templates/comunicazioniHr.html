@@ -84,6 +84,8 @@ nav {
 		<div class="collapse navbar-collapse justify-content-end"
 			id="collapsibleNavbar">
 			<ul class="navbar-nav ml-5 mr-5">
+			<li class="nav-item mr-3 mt-3"><a class="nav-link"
+					th:href="@{/myWork/}">MY WORK</a></li>
 				<li class="nav-item mr-3 mt-3"><a class="nav-link"
 					th:href="@{/myLife1/}">MY LIFE</a></li>
 				<li class="nav-item active mr-3 mt-3"><a class="nav-link"
@@ -162,7 +164,7 @@ nav {
 						<hr style="background-color: #F3F3F3">
 					</div>
 					<div class="container-fluid  text-center">
-						<a class="btn btn-info mt-2" th:href="@{/file/comunicazioniList}"
+						<a class="btn mt-2" style="background-color: blue; color: #f3f3f3" th:href="@{/file/comunicazioniList}"
 							type="button" name="button">Visualizza tutto</a>
 					</div>
 
@@ -228,7 +230,7 @@ nav {
 			<div class="col-xs-4 col-sm-4 col-lg-4 col-xl-4 mb-5">
 			
 				<div class="container-fluid text-center mb-3" th:if="${GHR}">
-					<a class="aggiungi" th:href="@{/file/hr}"
+					<a class="aggiungi" th:href="@{/myWork/addSondaggio}"
 						style="text-decoration: none; color: #F3F3F3;"> <img
 						class="mr-5" src="/view/MyWork/images/more.png" width="30px">Aggiungi
 						sondaggio
