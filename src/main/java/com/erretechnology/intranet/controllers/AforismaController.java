@@ -71,7 +71,11 @@ public class AforismaController extends BaseController {
 	public String updateForm(@PathVariable int id, Model model) {
 		Aforisma aforisma = repoAforisma.findById(id).get();
 		model.addAttribute("aforisma", aforisma);
-		return "aforismaFormUpdate";
+		if(aforisma.isLife()) {
+	        return "redirect:/myLife1/";
+		} else {
+	        return "redirect:/myWork/";
+		}
 	}
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
