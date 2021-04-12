@@ -54,7 +54,7 @@ public class MaintenanceFilter implements Filter{
 			Boolean isAdmin  = u.getRuolo().getNome().equals("ADMIN");
 		    if(repositoryManutenzione.findById(1031).get().getManutenzione() && !isAdmin) {
 		    	System.out.println("pagina di manutenzione");
-		    	
+	
 		    }else {
 		    	chain.doFilter(request, response);
 		    }
