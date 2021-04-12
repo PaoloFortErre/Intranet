@@ -298,7 +298,7 @@ font-size: 75px;
         </div>
         
         <!-- Modal body -->
-        <div class="modal-body"  >
+        <div class="modal-body" th:if="${aforisma.size>2}" >
         <form th:action="@{/aforisma/update/{id}(id = ${aforisma[2].id})}"  method="post"  class="signin-form">
 					<div class="form-group col-12">
 						<label for="frase"  style="color: black;">Frase</label>
@@ -336,7 +336,7 @@ font-size: 75px;
         </div>
         
         <!-- Modal body -->
-        <div class="modal-body">
+        <div class="modal-body" th:if="${aforisma.size>1}">
         <form th:action="@{/aforisma/update/{id}(id = ${aforisma[1].id})}"  method="post"  class="signin-form">
 					<div class="form-group col-12">
 						<label for="frase"  style="color: black;">Frase</label>
@@ -374,16 +374,16 @@ font-size: 75px;
         </div>
         
         <!-- Modal body -->
-        <div class="modal-body">
+        <div class="modal-body" th:if="${aforisma.size>0}">
         <form th:action="@{/aforisma/update/{id}(id = ${aforisma[0].id})}"  method="post"  class="signin-form">
 					<div class="form-group col-12">
 						<label for="frase"  style="color: black;">Frase</label>
-					  <input class="form-control" type="text" id="frase" name="frase"  required>
+					  <input class="form-control" type="text" id="frase" name="frase" th:placeholder="${aforisma[0].titolo}" required>
 					</div>
 	
 					<div class="form-group col-12">
 						<label for="autore"  style="color: black;">Autore</label>
-					  <input class="form-control" type="text" id="autore"   name="autore" >
+					  <input class="form-control" type="text" id="autore" th:placeholder="${aforisma[0].contenuto}" name="autore" >
 					</div>
 					<div class="form-group col-4" style="float:right">
 						<input class="form-control" type="submit" id="pubblicaSubmit" value="Salva">
