@@ -22,17 +22,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.erretechnology.intranet.models.ComunicazioneHR;
 import com.erretechnology.intranet.models.ElementiMyLife;
 import com.erretechnology.intranet.models.ElementiMyWork;
 import com.erretechnology.intranet.models.FilePdf;
+import com.erretechnology.intranet.models.Manutenzione;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.models.Utility;
 import com.erretechnology.intranet.models.VideoDelGiorno;
 import com.erretechnology.intranet.repositories.RepositoryCategoriaCinema;
 import com.erretechnology.intranet.repositories.RepositoryLinkedin;
+import com.erretechnology.intranet.repositories.RepositoryManutenzione;
 
 import net.bytebuddy.utility.RandomString;
 
@@ -43,6 +44,8 @@ public class HomeController extends BaseController{
     private JavaMailSender mailSender;
 	@Autowired
 	private RepositoryLinkedin repositoryLinkedin;
+	@Autowired
+	RepositoryManutenzione repositoryManutenzione;
 	@Autowired
 	private RepositoryCategoriaCinema repoCategoria;
 
@@ -259,5 +262,28 @@ public class HomeController extends BaseController{
 		mav.setViewName("moduli");
 		return mav;
 	}
+	
+	@GetMapping("/maintain-enable")
+    public String enableMaintanince(HttpSession session) throws Exception {
+		if(!serviceUtente.findById(Integer.parseInt(session.getAttribute("id").toString())).getRuolo().getNome().equals("ADMIN")) {
+			throw new Exception("non hai i permessi per svolgere quest'azione");
+		}
+		System.err.println("manutenzione attiva");
+		Manutenzione m = repositoryManutenzione.findById(1031).get();
+		m.setManutenzione(true);
+		repositoryManutenzione.save(m);
+		return "redirect:/";
+    }
+	@GetMapping("/maintain-disable")
+    public String disableMaintanince(HttpSession session) throws Exception {
+		if(!serviceUtente.findById(Integer.parseInt(session.getAttribute("id").toString())).getRuolo().getNome().equals("ADMIN")) {
+			throw new Exception("non hai i permessi per svolgere quest'azione");
+		}
+		System.err.println("manutenzione disattivata");
+		Manutenzione m = repositoryManutenzione.findById(1031).get();
+		m.setManutenzione(false);
+		repositoryManutenzione.save(m);
+		return "redirect:/";
+    }
 
 }
