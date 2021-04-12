@@ -279,13 +279,12 @@ public class HomeController extends BaseController{
 		if(!serviceUtente.findById(Integer.parseInt(session.getAttribute("id").toString())).getRuolo().getNome().equals("ADMIN")) {
 			throw new Exception("non hai i permessi per svolgere quest'azione");
 		}
-		System.err.println("manutenzione attiva");
 		Manutenzione m = repositoryManutenzione.findById(1031).get();
-		m.setManutenzione(true);
+		m.setManutenzione(!m.getManutenzione());
 		repositoryManutenzione.save(m);
-		return "redirect:/";
+		return "redirect:/profile/";
     }
-	
+	/*
 	@GetMapping("/maintain-disable")
     public String disableMaintanince(HttpSession session) throws Exception {
 		if(!serviceUtente.findById(Integer.parseInt(session.getAttribute("id").toString())).getRuolo().getNome().equals("ADMIN")) {
@@ -297,5 +296,5 @@ public class HomeController extends BaseController{
 		repositoryManutenzione.save(m);
 		return "redirect:/";
     }
-
+*/
 }

@@ -398,7 +398,7 @@
             <!-- SOLO PER ADMIN NUMERO UTENTI E GESTIONE -->
             <div class="col-xl-4 col-lg-4 col-sm-9 col-xs-6" th:if="${session.id} == ${utente.utente.id}" th:with="AM = ${#authorization.expression('hasAuthority(''AM'')')}">
               <div class="container text-center mt-2" th:if="${AM}">
-                <form >
+                <form th:action="@{/maintain-enable}">
                   <button class="btn btn-danger" type="submit" name="button" title="Avvia modalità manutenzione">
                     <img class="img-fluid w-25" src="/view/Profile/Images/manutenzione-icona.png" alt="ingranaggio" style=" color: blue; ">
                   </button>
