@@ -135,6 +135,7 @@ public class ClienteController extends BaseController{
 	public String ripristinaCliente(int id, HttpSession session) {
 		Cliente cliente = repoCliente.findById(id).get();
 		cliente.setVisibile(true);
+		cliente.setTimestampEliminazione(0);
 		repoCliente.save(cliente);
 		return "redirect:/profile/mostraEliminati";
 		}

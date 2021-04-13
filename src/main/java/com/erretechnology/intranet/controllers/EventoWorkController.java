@@ -140,6 +140,7 @@ public class EventoWorkController extends BaseController {
 	public String ripristinaEvento(HttpSession session, int id) {
 		EventoWork e = repoEvento.findById(id).get();
 		e.setVisibile(true);
+		e.setTimestampEliminazione(0);
 		repoEvento.save(e);;
 		return "redirect:/profile/mostraEliminati";
 	}

@@ -122,6 +122,7 @@ public class NewsController extends BaseController {
 	public String ripristinaNews(HttpSession session, int id) {
 		News n = repoNews.findById(id).get();
 		n.setVisibile(true);
+		n.setTimestampEliminazione(0);
 		repoNews.save(n);;
 		return "redirect:/profile/mostraEliminati";
 	}

@@ -119,6 +119,7 @@ public class PodcastController extends BaseController {
 	public String ripristinaModulo(HttpSession session, int id) {
 		Podcast p = servicePodcast.getById(id);
 		p.setVisibile(true);
+		p.setTimestampEliminazione(0);
 		servicePodcast.save(p);;
 		return "redirect:/profile/mostraEliminati";
 	}

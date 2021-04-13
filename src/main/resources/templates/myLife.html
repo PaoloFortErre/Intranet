@@ -775,7 +775,7 @@ COLONNA DESTRA
 
 				<div>
 
-					<div id="primoFilm" th:if="${film !=null}">
+					<div id="primoFilm" th:if="${film.size > 0}">
 
 						<div class="caption">
 							<img
@@ -888,7 +888,7 @@ COLONNA DESTRA
 						style="text-align: center; color: #303030; font-style: italic; font-size: 12px;">
 						Non ci sono libri da consigliare</p>
 					<br>
-					<table id="libri" th:if="${libri!=null}">
+					<table id="libri" th:if="${libri.size > 0}">
 						<tr>
 							<td><img
 								th:src="'data:image/png;base64,' + ${libri[0].immagine.getImgData(libri[0].immagine.data)}"

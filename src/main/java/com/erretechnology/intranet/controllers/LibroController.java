@@ -118,6 +118,7 @@ public class LibroController extends BaseController {
 	public String ripristinaLibro(HttpSession session, int id) {
 		Libro l = repoLibro.findById(id).get();
 		l.setVisibile(true);
+		l.setTimestampEliminazione(0);
 		repoLibro.save(l);
 		return "redirect:/profile/mostraEliminati";
 	}

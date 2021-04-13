@@ -194,6 +194,7 @@ public class UploadController extends BaseController{
 	public String ripristinaComunicazioneHR(HttpSession session, int id) {
 		ComunicazioneHR hr = serviceComunicazioni.findById(id);
 		hr.setVisibile(true);
+		hr.setTimestampEliminazione(0);
 		serviceComunicazioni.save(hr);;
 		return "redirect:/profile/mostraEliminati";
 	}
@@ -209,6 +210,7 @@ public class UploadController extends BaseController{
 	public String ripristinaModulo(HttpSession session, int id) {
 		FilePdf file = serviceFilePdf.findById(id);
 		file.setVisibile(true);
+		file.setTimestampEliminazione(0);
 		serviceFilePdf.insert(file);;
 		return "redirect:/profile/mostraEliminati";
 	}
