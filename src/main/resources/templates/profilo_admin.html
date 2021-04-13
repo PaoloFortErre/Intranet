@@ -344,7 +344,7 @@
                 </div>
               </div>
               <!-- IMPOSTAZIONI PROFILO -->
-              <div class="dropdown mt-3 text-justify ml-4" th:if="${session.id} == ${utente.utente.id}">
+              <div class="dropdown mt-3 text-justify ml-4 float-left" th:if="${session.id} == ${utente.utente.id}">
                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Impostazioni profilo
                 </button>
@@ -602,6 +602,7 @@
         </div>
 
         <script>
+<<<<<<< Updated upstream
         $(document).ready(
           function() {
             $.ajax({
@@ -623,3 +624,27 @@
           </script>
         </body>
         </html>
+=======
+        	$(document).ready(
+    		function() {
+    			$.ajax({
+    				type : 'POST',
+    				url : "http://localhost:8080/checkManutenzione?",
+    				success : function(data) {
+    					console.log(data);
+	    				if (data){
+	    					$("#btn-manutenzione").addClass("btn btn-success");
+	    					$('#btn-manutenzione').prop('title', 'Disattiva modalità manutenzione');
+	    				}
+	    				else{
+	    					$("#btn-manutenzione").addClass("btn btn-danger");
+	    					$('#btn-manutenzione').prop('title', 'Avvia modalità manutenzione');
+	    				}
+
+    				}
+    			});
+    		});
+        </script>
+      </body>
+      </html>
+>>>>>>> Stashed changes
