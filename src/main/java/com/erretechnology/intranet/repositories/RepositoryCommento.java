@@ -15,6 +15,6 @@ public interface RepositoryCommento extends JpaRepository<Commento, Integer>{
 	
 	public List<Commento> findByVisibileFalse(Sort sort);
 	
-	public List<Commento> findByAutoreAndVisibileTrue(UtenteDatiPersonali autore);
+	public List<Commento> findByAutore(UtenteDatiPersonali autore);
 
 }

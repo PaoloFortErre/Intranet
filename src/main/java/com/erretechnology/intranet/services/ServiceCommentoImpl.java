@@ -49,6 +49,6 @@ public class ServiceCommentoImpl implements ServiceCommento{
 	
 	@Override
 	public List<Commento> getAllByAutore(UtenteDatiPersonali autore) {
-		return repositoryCommento.findByAutoreAndVisibileTrue(autore);
+		return repositoryCommento.findByAutore(autore);
 	}
 }
