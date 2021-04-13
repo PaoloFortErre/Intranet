@@ -116,12 +116,16 @@ nav {
 	<div class="container" th:with="GM = ${#authorization.expression('hasAuthority(''GM'')')}">
 		<div th:if="${GM}">
 		<br><br><br>
-			<a th:href="@{/file/}" style="color: #F3F3F3; text-decoration: none;" > <img src="/view/MyWork/images/more.png" width="30px" style="float: left; margin-bottom: 10px;">&nbsp;&nbsp;Aggiungi nuovo modulo</a>
+			<a th:href="@{/file/}" style="color: #F3F3F3; text-decoration: none;" >
+				<img src="/view/MyWork/images/more.png" width="30px" style="float: left; margin-bottom: 10px;">
+				&nbsp;&nbsp;Aggiungi nuovo modulo
+			</a>
 			<br>
 			<br>
 		</div>
 		<div class="row" style="margin-top: 50px" th:if="${filePdf!=null}">
-			<div class="col-xs-6 col-sm-6 col-md-4 col-lg-4"
+
+			<div class="col-xs-9 col-sm-9 col-md-6 col-lg-6 col-xl-6"
 				th:each="pdf: ${filePdf}">
 				<div class="modulo" style="margin: auto;"
 				 th:if="((${pdf.settore} == ${user.settore.nomeSettore}) or ${GM}) and ${pdf.visibile}">
