@@ -399,6 +399,7 @@ public class UtenteController extends BaseController {
 		Utente u = serviceUtente.findById(id);
 		UtenteDatiPersonali utente = serviceDatiPersonali.findByAutore(u);
 		u.setAttivo(true);
+		servicePost.getByAutore(utente).stream().filter(x->x.getTimestampEliminazione() == 0).forEach(x->x.setVisibile(true));
 		serviceUtente.save(u);
 
 		return registrazione(model, "riattiva",
@@ -411,6 +412,7 @@ public class UtenteController extends BaseController {
 		Utente u = serviceUtente.findById(id);
 		UtenteDatiPersonali utente = serviceDatiPersonali.findByAutore(u);
 		u.setAttivo(false);
+		servicePost.getByAutore(utente).stream().forEach(x->x.setVisibile(false));
 		serviceUtente.save(u);
 		return rimuoviUtente(session, true,
 				"L'utente " + utente.getNome() + " " + utente.getCognome() + " è stato disattivato", model);
