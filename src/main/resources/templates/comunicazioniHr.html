@@ -135,9 +135,11 @@ nav {
 
 	<div class="container">
 		<div class="row  mt-5">
-			<div class="col-xs-8 col-sm-8 col-lg-8 col-xl-8 mb-5"
-				>
+			<div class="col-xs-8 col-sm-8 col-lg-8 col-xl-8 mb-5">
 
+				<div class="container text-center">
+					<h2 class="h2">COMUNICAZIONI</h2>
+				</div>
 				<div class="container-fluid text-center mb-3" th:if="${GHR}">
 					<a class="aggiungi" th:href="@{/file/hr}"
 						style="text-decoration: none; color: #F3F3F3;"> <img
@@ -164,7 +166,8 @@ nav {
 						<hr style="background-color: #F3F3F3">
 					</div>
 					<div class="container-fluid  text-center">
-						<a class="btn mt-2" style="background-color: blue; color: #f3f3f3" th:href="@{/file/comunicazioniList}"
+						<a class="btn mt-2" style="background-color: blue; color: #f3f3f3"
+						th:href="@{/file/comunicazioniList}"
 							type="button" name="button">Visualizza tutto</a>
 					</div>
 
@@ -228,7 +231,11 @@ nav {
 								</div>-->
 
 			<div class="col-xs-4 col-sm-4 col-lg-4 col-xl-4 mb-5">
-			
+
+				<div class="container text-center">
+					<h2 class="h2">SONDAGGI</h2>
+				</div>
+
 				<div class="container-fluid text-center mb-3" th:if="${GS}">
 					<a class="aggiungi" th:href="@{/myWork/addSondaggio}"
 						style="text-decoration: none; color: #F3F3F3;"> <img
@@ -250,6 +257,7 @@ nav {
 		</div>
 
 	</div>
+
 	<!-- PANNELLO FOOTER CON INFO-->
 	<footer class="align-items-center" style="margin-top: 360px;">
 		<div class="container align-items-center mt-4"
