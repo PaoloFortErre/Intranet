@@ -11,6 +11,6 @@ import com.erretechnology.intranet.models.Cliente;
 @Repository
 public interface RepositoryCliente extends CrudRepository<Cliente, Integer>{
 
-	@Query("SELECT c FROM Cliente c WHERE c.visibile = false")
+	@Query("SELECT c FROM Cliente c WHERE c.visibile = false ORDER BY timestampEliminazione DESC")
 	List<Cliente> getAllNotVisible();
 }

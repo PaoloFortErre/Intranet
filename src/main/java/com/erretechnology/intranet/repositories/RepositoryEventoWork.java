@@ -15,6 +15,6 @@ public interface RepositoryEventoWork extends CrudRepository<EventoWork, Integer
 	@Query("SELECT e FROM EventoWork e WHERE e.data < ?1 AND e.visibile = true ORDER BY e.data DESC")
 	List<EventoWork> findRecentEvents(long date);
 	
-	@Query("SELECT e FROM EventoWork e WHERE e.visibile = false")
+	@Query("SELECT e FROM EventoWork e WHERE e.visibile = false ORDER BY timestampEliminazione DESC")
 	List<Evento> getAllNotVisible();
 }
