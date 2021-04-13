@@ -399,8 +399,8 @@ public class UtenteController extends BaseController {
 		Utente u = serviceUtente.findById(id);
 		UtenteDatiPersonali utente = serviceDatiPersonali.findByAutore(u);
 		u.setAttivo(true);
-		servicePost.getAllByAutore(utente).stream().filter(x->x.getTimestampEliminazione() == 0).forEach(x->x.setVisibile(true));
-		serviceCommento.getAllByAutore(utente).stream().filter(x->x.getTimestampEliminazione() == 0).forEach(x->x.setVisibile(true));
+		servicePost.getAllByAutore(utente).stream().filter(x->x.getTimestampEliminazione() == 0).forEach(x->{x.setVisibile(true);});
+		serviceCommento.getAllByAutore(utente).stream().filter(x->x.getTimestampEliminazione() == 0).forEach(x->{x.setVisibile(true);});
 		serviceUtente.save(u);
 
 		return registrazione(model, "riattiva",
@@ -413,8 +413,8 @@ public class UtenteController extends BaseController {
 		Utente u = serviceUtente.findById(id);
 		UtenteDatiPersonali utente = serviceDatiPersonali.findByAutore(u);
 		u.setAttivo(false);
-		servicePost.getAllByAutore(utente).stream().forEach(x->x.setVisibile(false));
-		serviceCommento.getAllByAutore(utente).stream().forEach(x->x.setVisibile(false));
+		servicePost.getAllByAutore(utente).stream().forEach(x->{x.setVisibile(false);});
+		serviceCommento.getAllByAutore(utente).stream().forEach(x->{x.setVisibile(false);});
 		serviceUtente.save(u);
 		return rimuoviUtente(session, true,
 				"L'utente " + utente.getNome() + " " + utente.getCognome() + " è stato disattivato", model);
@@ -429,8 +429,8 @@ public class UtenteController extends BaseController {
 		eventi.addAll(repositoryEventoLife.getAllNotVisible());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("gestione_suprema");
-		mav.addObject("post", servicePost.getAllNotVisible());
-		mav.addObject("commenti", serviceCommento.getAllNotVisible());
+		mav.addObject("post", servicePost.getAllNotVisible().stream().filter(x->x.getAutore().getUtente().getAttivo()).collect(Collectors.toList()));
+		mav.addObject("commenti", serviceCommento.getAllNotVisible().stream().filter(x->x.getAutore().getUtente().getAttivo()).collect(Collectors.toList()));
 		mav.addObject("news", repositoryNews.getAllNotVisible());
 		mav.addObject("comunicazioniHR", serviceComunicazioni.getAllNotVisible());
 		mav.addObject("moduli", serviceFilePdf.getAllNotVisible());

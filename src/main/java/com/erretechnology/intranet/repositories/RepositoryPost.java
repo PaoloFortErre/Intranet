@@ -20,7 +20,7 @@ public interface RepositoryPost extends JpaRepository<Post, Integer>{
 	@Query
 	public List<Post> findByVisibileFalse(Sort sort);
 	@Query
-	public List<Post> findByAutoreAndVisibileTrue(UtenteDatiPersonali u);
+	public List<Post> findByAutore(UtenteDatiPersonali u);
 	
 	@Query
 	public List<Post> findTop6ByAutoreAndVisibileTrueOrderByIdDesc(UtenteDatiPersonali u);
