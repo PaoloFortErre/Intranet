@@ -21,6 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.erretechnology.intranet.models.ElementiMyLife;
 import com.erretechnology.intranet.models.ElementiMyWork;
@@ -284,6 +285,12 @@ public class HomeController extends BaseController{
 		repositoryManutenzione.save(m);
 		return "redirect:/profile/";
     }
+	
+	@PostMapping("checkManutenzione")
+	@ResponseBody
+	public Boolean checkManutenzione() {
+		return repositoryManutenzione.findById(1031).get().getManutenzione();
+	}
 	/*
 	@GetMapping("/maintain-disable")
     public String disableMaintanince(HttpSession session) throws Exception {
