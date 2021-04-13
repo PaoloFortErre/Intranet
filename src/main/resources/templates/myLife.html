@@ -858,13 +858,13 @@ COLONNA DESTRA
 						</div>
 					</div>
 
-					<ul class="pagination" style="float: right">
+					<ul class="pagination" style="float: right" th:if="${film.size>0}">
 
-						<li class="page-item"><a href="" onclick="film1()" id="C"
+						<li class="page-item" th:if="${film.size>0}"><a href="" onclick="film1()" id="C"
 							class="page-link">1</a></li>
-						<li class="page-item"><a href="" onclick="film2()" id="C1"
+						<li class="page-item" th:if="${film.size>1}"><a href="" onclick="film2()" id="C1"
 							class="page-link">2</a></li>
-						<li class="page-item"><a href="" onclick="film3()" id="C2"
+						<li class="page-item" th:if="${film.size>2}"><a href="" onclick="film3()" id="C2"
 							class="page-link">3</a></li>
 
 					</ul>
