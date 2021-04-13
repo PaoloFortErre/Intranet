@@ -32,11 +32,12 @@
     background-color: black;
     background-image: url("/view/Profile/Images/bg-profile.jpg");
     background-repeat: no-repeat;
-    background-size: cover,contain;
+    background-size: auto;
     color:#F3F3F3;
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     overflow-x: hidden;
+    box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 0.35);
   }
 
   /*
@@ -165,14 +166,6 @@
       overflow-x: hidden;
     }
 
-
-    /* 100% Image Width on Smaller Screens */
-    @media only screen and (max-width: 700px){
-      .modal-content {
-        width: 100%;
-      }
-    }
-    /*Profile Pic End*/
 
     .input--file {
       position: relative;
@@ -394,21 +387,49 @@
               </div>
             </div>
 
-            <!-- SOLO PER ADMIN NUMERO UTENTI E GESTIONE -->
-            <div class="col-xl-4 col-lg-4 col-sm-9 col-xs-6" th:if="${session.id} == ${utente.utente.id}" th:with="AM = ${#authorization.expression('hasAuthority(''AM'')')}">
-              <div class="container text-center mt-2" th:if="${AM}">
-                <form th:action="@{/maintain-enable}">
-                  <button id="btn-manutenzione" type="submit" name="button">
-                    <img class="img-fluid w-25" src="/view/Profile/Images/manutenzione-icona.png" alt="ingranaggio" style=" color: blue; ">
-                  </button>
-                </form>
+
+            <!--MODAL PER BOTTONE MANUTENZIONE -- >
+            <div class="modal" id="manutenzione" tabindex="-1" aria-labelledby="manutenzione" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Modalità manutenzione</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Confermi l'attivazione della modalità manutenzione?</p><br>
+                    <p>Gli utenti non riusciranno piu' ad accedere all'intranet aziendale</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">ANNULLA</button>
+                    <form th:action="@{/maintain-enable}">
+                      <button type="button" class="btn btn-success">CONFERMA</button>
+                    </form>
+                  </div>
+                </div>
               </div>
+            </div>
+            <!-- SOLO PER ADMIN NUMERO UTENTI E GESTIONE SITO -->
+            <div class="col-xl-4 col-lg-4 col-sm-9 col-xs-6" th:if="${session.id} == ${utente.utente.id}" th:with="AM = ${#authorization.expression('hasAuthority(''AM'')')}">
+
+
+              <!-- MODALITA' MANUTENZIONE-->
+              <div class="container text-center mt-2" th:if="${AM}" data-toggle="modal" data-target="#manutenzione">
+                <button id="btn-manutenzione" type="button" >
+                  <img class="img-fluid w-25" src="/view/Profile/Images/manutenzione-icona.png" alt="ingranaggio" style=" color: blue; ">
+                </button>
+              </div>
+
+              <!-- PANNELLO GESTIONE UTENTI -->
               <div class="container shadow text-center rounded pr-n2 pl-n2" th:if="${AM}" style="position: relative; background-color: #f8f9fa">
                 <img class="top-left" src="/view/Profile/Images/pin_post-it.png" alt="pin-post-it">
                 <div class="container text-white mt-3 pt-3">
                   <h1 class="h1 text-center mt-3 text-dark" th:text="${attivi}" style="font-weight: 800 !important">"</h1>
                   <h3 class="h3" style="color:#303030; ">UTENTI REGISTRATI</h3>
                 </div><br>
+
                 <!-- GESTIONE ACCOUNT INTRANET -->
                 <div class="container">
                   <div class="btn-group mb-4">
@@ -483,39 +504,39 @@
             </div>
 
             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 text-center mt-4" th:each="post:${post}">
-                <div class="container">
-                  <!-- Modal -->
-                  <div class="modal" th:id="'postModal' + ${post.id}"  tabindex="0" aria-labelledby="profile_pic" aria-hidden="true">
-                    <div class="modal-dialog-centered">
-                      <div class="modal-content bg-dark" >
-                        <div class="modal-header">
-                          <p class="modal-title font-weight-bold" th:text="${'Bacheca di ' + {utente.nome} + ' ' + {utente.cognome}}"></p>
-                          <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
+              <div class="container">
+                <!-- Modal -->
+                <div class="modal" th:id="'postModal' + ${post.id}"  tabindex="0" aria-labelledby="profile_pic" aria-hidden="true">
+                  <div class="modal-dialog-centered">
+                    <div class="modal-content bg-dark" >
+                      <div class="modal-header">
+                        <p class="modal-title font-weight-bold" th:text="${'Bacheca di ' + {utente.nome} + ' ' + {utente.cognome}}"></p>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="container">
+                          <img class="img-fluid immagine-modal" th:if="${post.immagine} != null" th:src="'data:image/png;base64,' + ${post.immagine.getImgData(post.immagine.data)}" alt="immagine-post-modal" >
                         </div>
-                        <div class="modal-body">
-                          <div class="container">
-                            <img class="img-fluid immagine-modal" th:if="${post.immagine} != null" th:src="'data:image/png;base64,' + ${post.immagine.getImgData(post.immagine.data)}" alt="immagine-post-modal" >
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <p th:text="${post.testo}" class="font-weight-bold"></p>
-                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <p th:text="${post.testo}" class="font-weight-bold"></p>
                       </div>
                     </div>
                   </div>
+                </div>
 
-                  <div class="card shadow position-relative mt-3 ">
-                    <img class="top-left" src="/view/Profile/Images/pin_post-it.png" alt="pin-post-it">
+                <div class="card shadow position-relative mt-3 ">
+                  <img class="top-left" src="/view/Profile/Images/pin_post-it.png" alt="pin-post-it">
 
-                    <div data-toggle="modal" th:attr="data-target='#postModal' + ${post.id}">
-                      <img style="cursor: pointer" th:if="${post.immagine} != null" th:src="'data:image/png;base64,' + ${post.immagine.getImgData(post.immagine.data)}" class="card-img-top" alt="immagine-post" >
-                    </div>
-                    <div class="card-body rounded border border-dark">
-                      <p th:text="${post.testo}" class="font-weight-bold text-dark"></p>
-                    </div>
+                  <div data-toggle="modal" th:attr="data-target='#postModal' + ${post.id}">
+                    <img style="cursor: pointer" th:if="${post.immagine} != null" th:src="'data:image/png;base64,' + ${post.immagine.getImgData(post.immagine.data)}" class="card-img-top" alt="immagine-post" >
                   </div>
+                  <div class="card-body rounded border border-dark">
+                    <p th:text="${post.testo}" class="font-weight-bold text-dark"></p>
+                  </div>
+                </div>
 
               </div>
             </div>
@@ -533,7 +554,7 @@
 
 
         <!-- ROW DASHBOARD -->
-        <div class="container mt-5 mb-5">
+        <div class="container mt-5">
           <div class="row justify-content-center mt-5 " th:with="AM = ${#authorization.expression('hasAuthority(''AM'')')}">
             <div class="col-xl-12" th:if="${session.id} == ${utente.utente.id}">
               <div class="container bg-gradient-warning">
@@ -579,27 +600,26 @@
 
           </div>
         </div>
-        
+
         <script>
-        	$(document).ready(
-    		function() {
-    			$.ajax({
-    				type : 'POST',
-    				url : "http://localhost:8080/checkManutenzione?",
-    				success : function(data) {
-    					console.log(data);
-	    				if (data){
-	    					$("#btn-manutenzione").addClass("btn btn-success");
-	    					$('#btn-manutenzione').prop('title', 'Disattiva modalità manutenzione');
-	    				}	
-	    				else{
-	    					$("#btn-manutenzione").addClass("btn btn-danger");
-	    					$('#btn-manutenzione').prop('title', 'Avvia modalità manutenzione');
-	    				}
-	    					
-    				}
-    			});
-    		});
-        </script>
-      </body>
-      </html>
+        $(document).ready(
+          function() {
+            $.ajax({
+              type : 'POST',
+              url : "http://localhost:8080/checkManutenzione?",
+              success : function(data) {
+                if (data){
+                  $("#btn-manutenzione").addClass("btn btn-success");
+                  $('#btn-manutenzione').prop('title', 'Disattiva modalità manutenzione');
+                }
+                else{
+                  $("#btn-manutenzione").addClass("btn btn-danger");
+                  $('#btn-manutenzione').prop('title', 'Avvia modalità manutenzione');
+                }
+
+              }
+            });
+          });
+          </script>
+        </body>
+        </html>
