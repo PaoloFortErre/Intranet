@@ -396,7 +396,7 @@ table, th, td {
 					</div>
 
 					<!-- Modal body -->
-					<div class="modal-body" th:if="${aforisma.size>0}">
+					<div class="modal-body" th:if="${aforisma.size>2}">
 						<form th:action="@{/aforisma/update/{id}(id = ${aforisma[2].id})}"
 							method="post" class="signin-form">
 							<div class="form-group col-12">

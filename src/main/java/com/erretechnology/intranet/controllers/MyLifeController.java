@@ -144,7 +144,10 @@ public class MyLifeController extends BaseController {
 			if(!document.getOriginalFilename().isEmpty()) {
 				FileImmagine img = new FileImmagine();
 				img.setAutore(autore);
-				img.setData(compressImage(document, 0.5f));
+				if(compressImage(document, 0.5f).length == 0)
+					img.setData(document.getBytes());
+				else
+					img.setData(compressImage(document, 0.5f));	
 				img.setTimestamp(Instant.now().getEpochSecond());
 				img.setNomeFile(StringUtils.cleanPath(document.getOriginalFilename()));
 				serviceFileImmagine.insert(img);

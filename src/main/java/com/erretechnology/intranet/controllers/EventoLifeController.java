@@ -96,7 +96,10 @@ public class EventoLifeController extends BaseController {
 
 		if(!immagine.getOriginalFilename().isEmpty()) {
 			FileImmagine img = new FileImmagine();			
-			img.setData(compressImage(immagine, 0.5f));
+			if(compressImage(immagine, 0.5f).length == 0)
+				img.setData(immagine.getBytes());
+			else
+				img.setData(compressImage(immagine, 0.5f));	
 			if(!serviceFileImmagine.contains(img.getData())) {
 				int idUser = Integer.parseInt(session.getAttribute("id").toString());
 				UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
