@@ -285,6 +285,7 @@ public class MyLifeController extends BaseController {
 	public String ripristinaPost(HttpSession session, int id) {
 		Post p = servicePost.findById(id);
 		p.setVisibile(true);
+		p.setTimestampEliminazione(0);
 		servicePost.save(p);
 		return "redirect:/profile/mostraEliminati";
 	}
@@ -300,6 +301,7 @@ public class MyLifeController extends BaseController {
 	public String ripristinaCommento(HttpSession session, int id) {
 		Commento c = serviceCommento.findById(id);
 		c.setVisibile(true);
+		c.setTimestampEliminazione(0);
 		serviceCommento.save(c);;
 		return "redirect:/profile/mostraEliminati";
 	}
