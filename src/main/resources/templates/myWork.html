@@ -11,10 +11,14 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
@@ -59,14 +63,14 @@ table, th, td {
 .carousel-caption {
 	top: 370px;
 }
+
 .h1caption {
-font-size: 75px;
+	font-size: 75px;
 }
 
 @media screen and (max-width: 1000px) {
 	.carousel-caption {
 		top: 40px;
-		
 	}
 }
 
@@ -76,42 +80,40 @@ font-size: 75px;
 		font-size: 10px;
 	}
 }
+
 #rowmacchina1 {
-    background-image: url('/view/MyWork/images/makkinina.png');
-	width: 102%; 
-	height: 700px;  
-	background-position: center; 
-	background-repeat: no-repeat; 
-	background-size: cover; 
+	background-image: url('/view/MyWork/images/makkinina.png');
+	width: 102%;
+	height: 700px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
 	margin-top: 1000px
-	
 }
+
 @media screen and (max-width: 1000px) {
-	
 	div#rowmacchina1 {
-	height: 1800px;  
-	width: 105%; 
+		height: 1800px;
+		width: 105%;
 	}
 }
 
 #rowmacchina2 {
-    background-image: url('/view/MyWork/images/schizzo.png');
-	width: 102%; 
-	height: 700px;  
-	background-position: center; 
-	background-repeat: no-repeat; 
-	background-size: cover; 
+	background-image: url('/view/MyWork/images/schizzo.png');
+	width: 102%;
+	height: 700px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
 	margin-top: 1000px
-	
-}
-@media screen and (max-width: 1000px) {
-	
-	div#rowmacchina2 {
-	height: 2000px;
-	width: 105%; 
-	 	}
 }
 
+@media screen and (max-width: 1000px) {
+	div#rowmacchina2 {
+		height: 2000px;
+		width: 105%;
+	}
+}
 </style>
 </head>
 
@@ -143,23 +145,37 @@ font-size: 75px;
 				<li class="nav-item mr-3 mt-3"><a class="nav-link"
 					href="http://polyedro.erretechnology.com/www/" target="blank">POLYEDRO</a>
 				</li>
-			<!-- Notifiche -->
-      				<li th:if="${utenteDati.setNotifiche != null}" class="nav-item avatar dropdown " style="cursor: pointer">
-      					<a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-      						<span class="badge badge-danger mr-n4" th:text="${utenteDati.setNotifiche.size}"></span>
-      						<i class="fa fa-bell mr-n4"></i>
-      					</a>
-      					<div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary" th:if="${utenteDati.setNotifiche.size > 0}" aria-labelledby="navbarDropdownMenuLink-5" >
-      						<div class="dropdown-item waves-effect waves-light" th:each="i:${#numbers.sequence(utenteDati.setNotifiche.size() - 1, 0, -1)}" th:with="notifica=${utenteDati.setNotifiche[i]}">
-      							<a th:href="@{/profile/eliminaNotifica/{id}(id = ${notifica.id})}"><div>
-      							<p class="font-weight-bold" th:text="${notifica.utente.nome} + ' ' + ${notifica.utente.cognome}+ ' ' " style="COLOR: BLACK"></p>
-      							<p class="mt-n3" th:text="${notifica.descrizione}" style="COLOR: BLACK"></p>
-      							<p class="p mt-n2" th:utext="${#dates.format(notifica.timestamp*1000, 'dd/MM/yyyy, HH:mm')}" style="font-size: 10px; color: black"></p>
-      							</div></a>
-      							<hr>
-      						</div>
-      					</div>
-      				</li>
+				<!-- Notifiche -->
+				<li th:if="${utenteDati.setNotifiche != null}"
+					class="nav-item avatar dropdown " style="cursor: pointer"><a
+					class="nav-link dropdown-toggle waves-effect waves-light"
+					id="navbarDropdownMenuLink-5" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="true"> <span
+						class="badge badge-danger mr-n4"
+						th:text="${utenteDati.setNotifiche.size}"></span> <i
+						class="fa fa-bell mr-n4"></i>
+				</a>
+					<div
+						class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
+						th:if="${utenteDati.setNotifiche.size > 0}"
+						aria-labelledby="navbarDropdownMenuLink-5">
+						<div class="dropdown-item waves-effect waves-light"
+							th:each="i:${#numbers.sequence(utenteDati.setNotifiche.size() - 1, 0, -1)}"
+							th:with="notifica=${utenteDati.setNotifiche[i]}">
+							<a
+								th:href="@{/profile/eliminaNotifica/{id}(id = ${notifica.id})}"><div>
+									<p class="font-weight-bold"
+										th:text="${notifica.utente.nome} + ' ' + ${notifica.utente.cognome}+ ' ' "
+										style="COLOR: BLACK"></p>
+									<p class="mt-n3" th:text="${notifica.descrizione}"
+										style="COLOR: BLACK"></p>
+									<p class="p mt-n2"
+										th:utext="${#dates.format(notifica.timestamp*1000, 'dd/MM/yyyy, HH:mm')}"
+										style="font-size: 10px; color: black"></p>
+								</div></a>
+							<hr>
+						</div>
+					</div></li>
 
 				<li class="nav-item mr-3 mt-3"><a class="nav-link"
 					th:href="@{/profile/}" target="blank" id="scrittaProfilo"
@@ -185,93 +201,90 @@ font-size: 75px;
 			<div class="carousel-item active">
 				<img src="/view/MyWork/images/ferrari1.png" alt="ferrari"
 					title="ferrari" class="img-fluid" width=" 100%" height="500px">
-				<div class="carousel-caption" >
+				<div class="carousel-caption">
 					<div th:if="${aforisma.size>0}">
-						<h1
-							style="font-weight: 900; " class="h1caption"
+						<h1 style="font-weight: 900;" class="h1caption"
 							th:text="${aforisma[0].titolo}"></h1>
-						<p th:text="${aforisma[0].contenuto}"
-							style="font-style: italic; "></p>
+						<p th:text="${aforisma[0].contenuto}" style="font-style: italic;"></p>
 						<div th:if="${GMW}">
-							
-								<button type="submit" name="modifica" data-toggle="modal" data-target="#myModal3"
-									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 8px; width: 150px;">
-									Modifica aforisma
-									<!-- <img src="/view/MyWork/images/edit.png" width="50px" height="20px">-->
-								</button>
-						
+
+							<button type="submit" name="modifica" data-toggle="modal"
+								data-target="#myModal3"
+								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 8px; width: 150px;">
+								Modifica aforisma
+								<!-- <img src="/view/MyWork/images/edit.png" width="50px" height="20px">-->
+							</button>
+
 						</div>
 					</div>
-						<a th:href="@{/aforisma/work/new/}" th:if="${GMW}" 
-							style="display: inline-block; color: black; background-color: white; font-size: 12px; padding: 8px; text-decoration: none; width: 150px;">
-							Aggiungi aforisma <!--  <img src="/view/MyWork/images/more.png" width="30px"  height="20px"
+					<a th:href="@{/aforisma/work/new/}" th:if="${GMW}"
+						style="display: inline-block; color: black; background-color: white; font-size: 12px; padding: 8px; text-decoration: none; width: 150px;">
+						Aggiungi aforisma <!--  <img src="/view/MyWork/images/more.png" width="30px"  height="20px"
 		style="margin-bottom: 10px; display: inline-block">-->
-						</a>
-					
+					</a>
+
 				</div>
 			</div>
 			<div class="carousel-item">
 				<img src="/view/MyWork/images/slideshow2.png" alt="scarpe"
 					width="100%" height="500px" class="img-fluid">
-				<div class="carousel-caption" >
+				<div class="carousel-caption">
 					<div th:if="${aforisma.size>1}">
-						<h1
-							style="font-weight: 900;" class="h1caption"
+						<h1 style="font-weight: 900;" class="h1caption"
 							th:text="${aforisma[1].titolo}"></h1>
-						<p th:text="${aforisma[1].contenuto}"
-							style="font-style: italic;"></p>
+						<p th:text="${aforisma[1].contenuto}" style="font-style: italic;"></p>
 						<div th:if="${GMW}">
-							
-								<button type="submit" name="modifica" data-toggle="modal" data-target="#myModal2"
-									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 8px; width: 150px;">
-									Modifica aforisma
-									<!-- <img src="/view/MyWork/images/edit.png" width="50px" height="20px">-->
-								</button>
-							
+
+							<button type="submit" name="modifica" data-toggle="modal"
+								data-target="#myModal2"
+								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 8px; width: 150px;">
+								Modifica aforisma
+								<!-- <img src="/view/MyWork/images/edit.png" width="50px" height="20px">-->
+							</button>
+
 						</div>
 					</div>
-						<a th:href="@{/aforisma/work/new/}" th:if="${GMW}" 
-							style="display: inline-block; color: black; background-color: white; font-size: 12px; padding: 8px; text-decoration: none; width: 150px;">
-							Aggiungi aforisma <!--  <img src="/view/MyWork/images/more.png" width="30px"  height="20px"
+					<a th:href="@{/aforisma/work/new/}" th:if="${GMW}"
+						style="display: inline-block; color: black; background-color: white; font-size: 12px; padding: 8px; text-decoration: none; width: 150px;">
+						Aggiungi aforisma <!--  <img src="/view/MyWork/images/more.png" width="30px"  height="20px"
 		style="margin-bottom: 10px; display: inline-block">-->
-						</a>
-					
+					</a>
+
 				</div>
 			</div>
 
 			<div class="carousel-item">
 				<img src="/view/MyWork/images/slideshow3.png" alt="scarpe"
 					width="100%" height="500px" class="img-fluid">
-				<div class="carousel-caption" >
+				<div class="carousel-caption">
 					<div th:if="${aforisma.size>2}">
-						<h1
-							style="font-weight: 900; ; line-height: 75px" class="h1caption"
+						<h1 style="font-weight: 900;; line-height: 75px" class="h1caption"
 							th:text="${aforisma[2].titolo}"></h1>
-						<p th:text="${aforisma[2].contenuto}"
-							style="font-style: italic; "></p>
+						<p th:text="${aforisma[2].contenuto}" style="font-style: italic;"></p>
 						<div th:if="${GMW}">
-							
-								<button type="submit" name="modifica" data-toggle="modal" data-target="#myModal1"
-									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 8px; width: 150px;">
-									Modifica aforisma
-									<!-- <img src="/view/MyWork/images/edit.png" width="50px" height="20px">-->
-								</button>
-						
-							
-							
-							
-			
-			
 
-							
+							<button type="submit" name="modifica" data-toggle="modal"
+								data-target="#myModal1"
+								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 8px; width: 150px;">
+								Modifica aforisma
+								<!-- <img src="/view/MyWork/images/edit.png" width="50px" height="20px">-->
+							</button>
+
+
+
+
+
+
+
+
 						</div>
 					</div>
-						<a th:href="@{/aforisma/work/new/}" th:if="${GMW}" 
-							style="display: inline-block; color: black; background-color: white; font-size: 12px; padding: 8px; text-decoration: none; width: 150px;">
-							Aggiungi aforisma <!--  <img src="/view/MyWork/images/more.png" width="30px"  height="20px"
+					<a th:href="@{/aforisma/work/new/}" th:if="${GMW}"
+						style="display: inline-block; color: black; background-color: white; font-size: 12px; padding: 8px; text-decoration: none; width: 150px;">
+						Aggiungi aforisma <!--  <img src="/view/MyWork/images/more.png" width="30px"  height="20px"
 		style="margin-bottom: 10px; display: inline-block">-->
-						</a>
-					
+					</a>
+
 				</div>
 			</div>
 
@@ -286,126 +299,139 @@ font-size: 75px;
 
 
 	<div class="container-fluid">
-	  <!-- The Modal -->
-	  <div class="modal" id="myModal1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title"  style="color: black;"> Modifica l'aforisma </h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body" th:if="${aforisma.size>2}" >
-        <form th:action="@{/aforisma/update/{id}(id = ${aforisma[2].id})}"  method="post"  class="signin-form">
-					<div class="form-group col-12">
-						<label for="frase"  style="color: black;">Frase</label>
-					  <input class="form-control" type="text" id="frase" name="frase"  required>
+		<!-- The Modal -->
+		<div class="modal" id="myModal1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title" style="color: black;">Modifica
+							l'aforisma</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
-	
-					<div class="form-group col-12">
-						<label for="autore"  style="color: black;">Autore</label>
-					  <input class="form-control" type="text" id="autore"   name="autore" >
+
+					<!-- Modal body -->
+					<div class="modal-body" th:if="${aforisma.size>2}">
+						<form th:action="@{/aforisma/update/{id}(id = ${aforisma[2].id})}"
+							method="post" class="signin-form">
+							<div class="form-group col-12">
+								<label for="frase" style="color: black;">Frase</label> <input
+									class="form-control" type="text" id="frase" name="frase"
+									required>
+							</div>
+
+							<div class="form-group col-12">
+								<label for="autore" style="color: black;">Autore</label> <input
+									class="form-control" type="text" id="autore" name="autore">
+							</div>
+							<div class="form-group col-4" style="float: right">
+								<input class="form-control" type="submit" id="pubblicaSubmit"
+									value="Salva">
+							</div>
+						</form>
 					</div>
-					<div class="form-group col-4" style="float:right">
-						<input class="form-control" type="submit" id="pubblicaSubmit" value="Salva">
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Chiudi</button>
 					</div>
-			</form>
-               </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Chiudi</button>
-        </div>
-        
-      </div>
-    </div>
-  </div>
-  
-    <!-- The Modal -->
-	  <div class="modal" id="myModal2">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title"  style="color: black;"> Modifica l'aforisma </h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body" th:if="${aforisma.size>1}">
-        <form th:action="@{/aforisma/update/{id}(id = ${aforisma[1].id})}"  method="post"  class="signin-form">
-					<div class="form-group col-12">
-						<label for="frase"  style="color: black;">Frase</label>
-					  <input class="form-control" type="text" id="frase" name="frase"  required>
+
+				</div>
+			</div>
+		</div>
+
+		<!-- The Modal -->
+		<div class="modal" id="myModal2">
+			<div class="modal-dialog">
+				<div class="modal-content">
+
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title" style="color: black;">Modifica
+							l'aforisma</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
-	
-					<div class="form-group col-12">
-						<label for="autore"  style="color: black;">Autore</label>
-					  <input class="form-control" type="text" id="autore"   name="autore" >
+
+					<!-- Modal body -->
+					<div class="modal-body" th:if="${aforisma.size>1}">
+						<form th:action="@{/aforisma/update/{id}(id = ${aforisma[1].id})}"
+							method="post" class="signin-form">
+							<div class="form-group col-12">
+								<label for="frase" style="color: black;">Frase</label> <input
+									class="form-control" type="text" id="frase" name="frase"
+									required>
+							</div>
+
+							<div class="form-group col-12">
+								<label for="autore" style="color: black;">Autore</label> <input
+									class="form-control" type="text" id="autore" name="autore">
+							</div>
+							<div class="form-group col-4" style="float: right">
+								<input class="form-control" type="submit" id="pubblicaSubmit"
+									value="Salva">
+							</div>
+						</form>
 					</div>
-					<div class="form-group col-4" style="float:right">
-						<input class="form-control" type="submit" id="pubblicaSubmit" value="Salva">
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Chiudi</button>
 					</div>
-			</form>
-               </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Chiudi</button>
-        </div>
-        
-      </div>
-    </div>
-  </div>
-  
-    <!-- The Modal -->
-	  <div class="modal" id="myModal3">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title"  style="color: black;"> Modifica l'aforisma </h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body" th:if="${aforisma.size>0}">
-        <form th:action="@{/aforisma/update/{id}(id = ${aforisma[0].id})}"  method="post"  class="signin-form">
-					<div class="form-group col-12">
-						<label for="frase"  style="color: black;">Frase</label>
-					  <input class="form-control" type="text" id="frase" name="frase" th:placeholder="${aforisma[0].titolo}" required>
+
+				</div>
+			</div>
+		</div>
+
+		<!-- The Modal -->
+		<div class="modal" id="myModal3">
+			<div class="modal-dialog">
+				<div class="modal-content">
+
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title" style="color: black;">Modifica
+							l'aforisma</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
-	
-					<div class="form-group col-12">
-						<label for="autore"  style="color: black;">Autore</label>
-					  <input class="form-control" type="text" id="autore" th:placeholder="${aforisma[0].contenuto}" name="autore" >
+
+					<!-- Modal body -->
+					<div class="modal-body" th:if="${aforisma.size>0}">
+						<form th:action="@{/aforisma/update/{id}(id = ${aforisma[0].id})}"
+							method="post" class="signin-form">
+							<div class="form-group col-12">
+								<label for="frase" style="color: black;">Frase</label> <input
+									class="form-control" type="text" id="frase" name="frase"
+									th:placeholder="${aforisma[0].titolo}" required>
+							</div>
+
+							<div class="form-group col-12">
+								<label for="autore" style="color: black;">Autore</label> <input
+									class="form-control" type="text" id="autore"
+									th:placeholder="${aforisma[0].contenuto}" name="autore">
+							</div>
+							<div class="form-group col-4" style="float: right">
+								<input class="form-control" type="submit" id="pubblicaSubmit"
+									value="Salva">
+							</div>
+						</form>
 					</div>
-					<div class="form-group col-4" style="float:right">
-						<input class="form-control" type="submit" id="pubblicaSubmit" value="Salva">
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Chiudi</button>
 					</div>
-			</form>
-               </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Chiudi</button>
-        </div>
-        
-      </div>
-    </div>
-  </div>
+
+				</div>
+			</div>
+		</div>
 		<br> <br> <br>
 		<!-- ROW MACCHINA  -->
 		<div class="row mt-5" id="rowmacchina1">
-					<div class="col-xs-12 col-sm-12 col-lg-12 col-xl-12">
+			<div class="col-xs-12 col-sm-12 col-lg-12 col-xl-12">
 				<br>
 				<h1 style="text-align: center" class="mb-3">Le ultime novità</h1>
-				
+
 			</div>
 			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4">
 				<table class="table table-borderless"
@@ -434,6 +460,13 @@ font-size: 75px;
 				</table>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4">
+			
+			<a class="bottoniGMW mt-1" th:href="@{/cliente/new/}"
+											th:if="${GMW}"
+											style="background-color: transparent; text-align: center; border: 0px solid #232323; display: inline-block; color: white; font-size: 12px; padding: 5px; width: 100px;">
+											<img src="/view/MyWork/images/more.png" width="30%"> Aggiungi
+										</a>
+			
 				<table class="table table-borderless" th:if="${nuoviClienti.size>0}">
 
 					<tr>
@@ -450,71 +483,85 @@ font-size: 75px;
 								</ul>
 								<div class="carousel-inner">
 									<div class="carousel-item active">
-										<div class="container"><img
-							th:src="'data:image/png;base64,' + ${nuoviClienti[0].immagine.getImgData(nuoviClienti[0].immagine.data)}"
-											alt="Clienti" width="400px" style="height: 300px;" class="img-fluid"></div>
+										<div class="container">
+											<img
+												th:src="'data:image/png;base64,' + ${nuoviClienti[0].immagine.getImgData(nuoviClienti[0].immagine.data)}"
+												alt="Clienti" width="400px" style="height: 300px;"
+												class="img-fluid">
+										</div>
 
-									<br><br>
-									<p style="font-size: 22px; margin-bottom: -5px">  Una nuova partnership con</p>
-										 <h3 th:text="${nuoviClienti[0].titolo}"
+										<br> <br>
+										<p style="font-size: 22px; margin-bottom: -5px">Una nuova
+											partnership con</p>
+										<h3 th:text="${nuoviClienti[0].titolo}"
 											style="text-align: center; margin: 0 auto; font-weight: 900"></h3>
 										<br>
 
+
+
+										<button type="submit" name="modifica" class="bottoniGMW"
+											th:if="${GMW}" data-toggle="modal" data-target="#myModal4"
+											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+											Modifica</button>
+
+
+
+										<!-- The Modal -->
+										<div class="modal" id="myModal4">
+											<div class="modal-dialog">
+												<div class="modal-content">
+
+													<!-- Modal Header -->
+													<div class="modal-header">
+														<h4 class="modal-title" style="color: black;">
+															Modifica cliente</h4>
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+													</div>
+
+													<!-- Modal body -->
+													<div class="modal-body">
+														<form
+															th:action="@{/cliente/update/{id}(id = ${nuoviClienti[0].id})}"
+															th:object="${cliente}" method="post"
+															enctype="multipart/form-data">
+															<div class="form-group col-12">
+																<label for="nome" style="color: black;">Nome:</label> <input
+																	class="form-control" type="text" id="nome" name="nome"
+																	required style="color: black">
+															</div>
+															<div class="form-group col-12">
+																<label for="dataInizio" style="color: black;">Data
+																	inizio:</label> <input class="form-control" type="month"
+																	id="dataInizio" name="dataInizio" required
+																	th:value="${#dates.format(date, 'yyyy-MM')}"
+																	style="color: black">
+															</div>
+															<div class="form-group col-12" style="color: black;">
+																<label for="immagine" style="color: black;">Modifica
+																	foto</label> <input class="form-control-file" type="file"
+																	name="immagine" accept="image/png, image/jpeg"
+																	style="color: black;" />
+															</div>
+															<div class="form-group col-4">
+																<input class="form-control" id="pubblicaSubmit"
+																	type="submit" value="Pubblica">
+															</div>
+														</form>
+													</div>
+
+													<!-- Modal footer -->
+													<div class="modal-footer">
+														<button type="button" class="btn btn-danger"
+															data-dismiss="modal">Chiudi</button>
+													</div>
+
+												</div>
+											</div>
+										</div>
+
+
+
 										
-											
-											<button type="submit" name="modifica" class="bottoniGMW" th:if="${GMW}"  data-toggle="modal" data-target="#myModal4"
-												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
-												Modifica</button>
-												
-												
- 
-    <!-- The Modal -->
-	  <div class="modal" id="myModal4">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title"  style="color: black;"> Modifica cliente </h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-       <form th:action="@{/cliente/update/{id}(id = ${nuoviClienti[0].id})}"  th:object="${cliente}" method="post" enctype="multipart/form-data">
-				<div class="form-group col-12">
-					<label for="nome" style="color: black;">Nome:</label>
-					<input class="form-control" type="text" id="nome" name="nome"  required style="color: black">
-				</div>
-				<div class="form-group col-12" >
-					<label for="dataInizio" style="color: black;">Data inizio:</label>
-					<input class="form-control" type="month" id="dataInizio" name="dataInizio" required th:value="${#dates.format(date, 'yyyy-MM')}" style="color: black">
-				</div>
-				<div class="form-group col-12" style="color: black;">
-					<label for="immagine" style="color: black;">Modifica foto</label>
-					<input class="form-control-file" type="file" name="immagine" accept="image/png, image/jpeg" style="color: black;"/>
-				</div>
-				<div class="form-group col-4">
-					<input class="form-control" id="pubblicaSubmit" type="submit" value="Pubblica" >
-				</div>
-			</form>
-               </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Chiudi</button>
-        </div>
-        
-      </div>
-    </div>
-  </div>												
-												
-												
-										
-										<a class="bottoniGMW mt-1" th:href="@{/cliente/new/}"
-											th:if="${GMW}"
-											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
-										</a>
 										<form th:action="@{'/cliente/delete/'+${nuoviClienti[0].id}}"
 											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW mt-1"
@@ -524,123 +571,154 @@ font-size: 75px;
 
 
 									</div>
-										<div class="carousel-item ">
-										<div class="container"><img
-							th:src="'data:image/png;base64,' + ${nuoviClienti[1].immagine.getImgData(nuoviClienti[1].immagine.data)}"
-											alt="Clienti" width="400px" style="height: 300px;" class="img-fluid"></div>
-<br><br>
-									<p style="font-size: 22px; margin-bottom: -5px"> Una nuova partnership con</p>
+									<div class="carousel-item " th:if="${nuoviClienti.size>1}">
+										<div class="container">
+											<img
+												th:src="'data:image/png;base64,' + ${nuoviClienti[1].immagine.getImgData(nuoviClienti[1].immagine.data)}"
+												alt="Clienti" width="400px" style="height: 300px;"
+												class="img-fluid">
+										</div>
+										<br> <br>
+										<p style="font-size: 22px; margin-bottom: -5px">Una nuova
+											partnership con</p>
 										<h3 th:text="${nuoviClienti[1].titolo}"
 											style="text-align: center; margin: 0 auto; font-weight: 900"></h3>
 										<br>
 
-										
-											<button type="submit" name="modifica" class="bottoniGMW" th:if="${GMW}" data-toggle="modal" data-target="#myModal5"
-												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
-												Modifica</button>
-												
-												 <!-- The Modal -->
-	  <div class="modal" id="myModal5">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title"  style="color: black;"> Modifica cliente </h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-       <form th:action="@{/cliente/update/{id}(id = ${nuoviClienti[1].id})}"  th:object="${cliente}" method="post" enctype="multipart/form-data">
-				<div class="form-group col-12">
-					<label for="nome" style="color: black;">Nome:</label>
-					<input class="form-control" type="text" id="nome" name="nome"  required style="color: black">
-				</div>
-				<div class="form-group col-12" >
-					<label for="dataInizio" style="color: black;">Data inizio:</label>
-					<input class="form-control" type="month" id="dataInizio" name="dataInizio" required th:value="${#dates.format(date, 'yyyy-MM')}" style="color: black">
-				</div>
-				<div class="form-group col-12" style="color: black;">
-					<label for="immagine" style="color: black;">Modifica foto</label>
-					<input class="form-control-file" type="file" name="immagine" accept="image/png, image/jpeg" style="color: black;"/>
-				</div>
-				<div class="form-group col-4">
-					<input class="form-control" id="pubblicaSubmit" type="submit" value="Pubblica" >
-				</div>
-			</form>
-               </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Chiudi</button>
-        </div>
-        
-      </div>
-    </div>
-  </div>
-										
-										<a class="bottoniGMW mt-1" th:href="@{/cliente/new/}"
-											th:if="${GMW}"
-											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
-										</a>
+
+										<button type="submit" name="modifica" class="bottoniGMW"
+											th:if="${GMW}" data-toggle="modal" data-target="#myModal5"
+											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+											Modifica</button>
+
+										<!-- The Modal -->
+										<div class="modal" id="myModal5">
+											<div class="modal-dialog">
+												<div class="modal-content">
+
+													<!-- Modal Header -->
+													<div class="modal-header">
+														<h4 class="modal-title" style="color: black;">
+															Modifica cliente</h4>
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+													</div>
+
+													<!-- Modal body -->
+													<div class="modal-body">
+														<form
+															th:action="@{/cliente/update/{id}(id = ${nuoviClienti[1].id})}"
+															th:object="${cliente}" method="post"
+															enctype="multipart/form-data">
+															<div class="form-group col-12">
+																<label for="nome" style="color: black;">Nome:</label> <input
+																	class="form-control" type="text" id="nome" name="nome"
+																	required style="color: black">
+															</div>
+															<div class="form-group col-12">
+																<label for="dataInizio" style="color: black;">Data
+																	inizio:</label> <input class="form-control" type="month"
+																	id="dataInizio" name="dataInizio" required
+																	th:value="${#dates.format(date, 'yyyy-MM')}"
+																	style="color: black">
+															</div>
+															<div class="form-group col-12" style="color: black;">
+																<label for="immagine" style="color: black;">Modifica
+																	foto</label> <input class="form-control-file" type="file"
+																	name="immagine" accept="image/png, image/jpeg"
+																	style="color: black;" />
+															</div>
+															<div class="form-group col-4">
+																<input class="form-control" id="pubblicaSubmit"
+																	type="submit" value="Pubblica">
+															</div>
+														</form>
+													</div>
+
+													<!-- Modal footer -->
+													<div class="modal-footer">
+														<button type="button" class="btn btn-danger"
+															data-dismiss="modal">Chiudi</button>
+													</div>
+
+												</div>
+											</div>
+										</div>
+
 									
-											<button type="submit" name="modifica" class="bottoniGMW mt-1" th:if="${GMW}" data-toggle="modal" data-target="#myModal6"
-												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
-												Elimina</button>
-												
-																								
-												 <!-- The Modal -->
-	  <div class="modal" id="myModal6">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title"  style="color: black;"> Modifica cliente </h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-       <form th:action="@{/cliente/update/{id}(id = ${nuoviClienti[2].id})}"  th:object="${cliente}" method="post" enctype="multipart/form-data">
-				<div class="form-group col-12">
-					<label for="nome" style="color: black;">Nome:</label>
-					<input class="form-control" type="text" id="nome" name="nome"  required style="color: black">
-				</div>
-				<div class="form-group col-12" >
-					<label for="dataInizio" style="color: black;">Data inizio:</label>
-					<input class="form-control" type="month" id="dataInizio" name="dataInizio" required th:value="${#dates.format(date, 'yyyy-MM')}" style="color: black">
-				</div>
-				<div class="form-group col-12">
-					<label for="immagine" style="color: black;">Modifica foto</label>
-					<input class="form-control-file" type="file" name="immagine" accept="image/png, image/jpeg" style="color: black;"/>
-				</div>
-				<div class="form-group col-4">
-					<input class="form-control" id="pubblicaSubmit" type="submit" value="Pubblica" >
-				</div>
-			</form>
-               </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Chiudi</button>
-        </div>
-        
-      </div>
-    </div>
-  </div>
-									
+
+										<button type="submit" name="modifica" class="bottoniGMW mt-1"
+											th:if="${GMW}" data-toggle="modal" data-target="#myModal6"
+											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+											Elimina</button>
+
+
+										<!-- The Modal -->
+										<div class="modal" id="myModal6">
+											<div class="modal-dialog">
+												<div class="modal-content">
+
+													<!-- Modal Header -->
+													<div class="modal-header">
+														<h4 class="modal-title" style="color: black;">
+															Modifica cliente</h4>
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+													</div>
+
+													<!-- Modal body -->
+													<div class="modal-body">
+														<form
+															th:action="@{/cliente/update/{id}(id = ${nuoviClienti[2].id})}"
+															th:object="${cliente}" method="post"
+															enctype="multipart/form-data">
+															<div class="form-group col-12">
+																<label for="nome" style="color: black;">Nome:</label> <input
+																	class="form-control" type="text" id="nome" name="nome"
+																	required style="color: black">
+															</div>
+															<div class="form-group col-12">
+																<label for="dataInizio" style="color: black;">Data
+																	inizio:</label> <input class="form-control" type="month"
+																	id="dataInizio" name="dataInizio" required
+																	th:value="${#dates.format(date, 'yyyy-MM')}"
+																	style="color: black">
+															</div>
+															<div class="form-group col-12">
+																<label for="immagine" style="color: black;">Modifica
+																	foto</label> <input class="form-control-file" type="file"
+																	name="immagine" accept="image/png, image/jpeg"
+																	style="color: black;" />
+															</div>
+															<div class="form-group col-4">
+																<input class="form-control" id="pubblicaSubmit"
+																	type="submit" value="Pubblica">
+															</div>
+														</form>
+													</div>
+
+													<!-- Modal footer -->
+													<div class="modal-footer">
+														<button type="button" class="btn btn-danger"
+															data-dismiss="modal">Chiudi</button>
+													</div>
+
+												</div>
+											</div>
+										</div>
+
 
 
 									</div>
-										<div class="carousel-item ">
-										<div class="container"><img
-							th:src="'data:image/png;base64,' + ${nuoviClienti[2].immagine.getImgData(nuoviClienti[2].immagine.data)}"
-											alt="Clienti" width="400px" style="height: 300px;" class="img-fluid"></div>
-									<br><br>
-									<p style="font-size: 22px; margin-bottom: -5px"> Una nuova partnership con</p>
-										 <h3 th:text="${nuoviClienti[2].titolo}"
+									<div class="carousel-item " th:if="${nuoviClienti.size>2}">
+										<div class="container">
+											<img
+												th:src="'data:image/png;base64,' + ${nuoviClienti[2].immagine.getImgData(nuoviClienti[2].immagine.data)}"
+												alt="Clienti" width="400px" style="height: 300px;"
+												class="img-fluid">
+										</div>
+										<br> <br>
+										<p style="font-size: 22px; margin-bottom: -5px">Una nuova
+											partnership con</p>
+										<h3 th:text="${nuoviClienti[2].titolo}"
 											style="text-align: center; margin: 0 auto; font-weight: 900"></h3>
 										<br>
 										<form th:action="@{'/cliente/update/'+${nuoviClienti[2].id}}"
@@ -649,10 +727,7 @@ font-size: 75px;
 												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
 												Modifica</button>
 										</form>
-										<a class="bottoniGMW mt-1" th:href="@{/cliente/new/}"
-											th:if="${GMW}"
-											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
-										</a>
+										
 										<form th:action="@{'/cliente/delete/'+${nuoviClienti[2].id}}"
 											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW mt-1"
@@ -668,6 +743,11 @@ font-size: 75px;
 				</table>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4">
+			<a class="bottoniGMW mt-1" th:href="@{/news/new/}"
+											th:if="${GMW}"
+											style="background-color: transparent; text-align: center; border: 0px solid #232323; display: inline-block; color: white; font-size: 12px; padding: 5px; width: 100px;">
+											<img src="/view/MyWork/images/more.png" width="30%"> Aggiungi
+										</a>
 				<table class="table table-borderless"
 					style="vertical-align: middle;" th:if="${newsSlide.size>0}">
 
@@ -683,71 +763,82 @@ font-size: 75px;
 									<li data-target="#demo1" data-slide-to="2"
 										th:if="${newsSlide.size>2}"></li>
 								</ul>
-								<div class="carousel-inner">
+								<div class="carousel-inner" th:if="${newsSlide.size>0}">
 									<div class="carousel-item active">
-										<div class="container"><img
-											th:src="'data:image/png;base64,' + ${newsSlide[0].immagine.getImgData(newsSlide[0].immagine.data)}"
-											alt="Los Angeles" width="400px" style="height: 390px;" class="img-fluid"></div>
-<br><br>
+										<div class="container">
+											<img
+												th:src="'data:image/png;base64,' + ${newsSlide[0].immagine.getImgData(newsSlide[0].immagine.data)}"
+												alt="Los Angeles" width="400px" style="height: 390px;"
+												class="img-fluid">
+										</div>
+										<br> <br>
 										<h3 th:text="${newsSlide[0].titolo}"
 											style="text-align: center; margin: 0 auto"></h3>
 										<br>
 
+
+										<button type="submit" name="modifica" class="bottoniGMW"
+											th:if="${GMW}" data-toggle="modal" data-target="#myModal7"
+											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+											Modifica</button>
+
+										<!-- The Modal -->
+										<div class="modal" id="myModal7" style="color: black">
+											<div class="modal-dialog">
+												<div class="modal-content">
+
+													<!-- Modal Header -->
+													<div class="modal-header">
+														<h4 class="modal-title" style="color: black;">
+															Modifica news</h4>
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+													</div>
+
+													<!-- Modal body -->
+													<div class="modal-body">
+														<form
+															th:action="@{/news/update/{id}(id = ${newsSlide[0].id})}"
+															th:object="${news}" method="post"
+															enctype="multipart/form-data">
+															<div class="form-group col-12">
+																<label for="titolo" style="color: black;">Titolo</label>
+																<input class="form-control" type="text" id="titolo"
+																	name="titolo" required>
+															</div>
+
+															<div class="form-group col-12">
+																<label for="contenuto" style="color: black;">Contenuto</label>
+																<input class="form-control" type="text" id="contenuto"
+																	name="contenuto">
+															</div>
+
+															<div class="form-group col-12">
+																<label for="immagine" style="color: black;">Immagine</label>
+																<input class="form-control-file" type="file"
+																	name="immagine" accept="image/png, image/jpeg"
+																	style="color: black;" />
+															</div>
+
+															<div class="form-group col-4">
+																<input class="form-control" type="submit"
+																	id="pubblicaSubmit" value="Pubblica">
+															</div>
+
+														</form>
+													</div>
+
+													<!-- Modal footer -->
+													<div class="modal-footer">
+														<button type="button" class="btn btn-danger"
+															data-dismiss="modal">Chiudi</button>
+													</div>
+
+												</div>
+											</div>
+										</div>
+
+
 										
-											<button type="submit" name="modifica" class="bottoniGMW" th:if="${GMW}"  data-toggle="modal" data-target="#myModal7"
-												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
-												Modifica</button>
-												
-										 <!-- The Modal -->
-	  <div class="modal" id="myModal7" style="color: black">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title"  style="color: black;"> Modifica news </h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-       	<form th:action="@{/news/update/{id}(id = ${newsSlide[0].id})}" th:object="${news}" method="post" enctype="multipart/form-data">
-				<div class="form-group col-12">
-					<label for="titolo"  style="color: black;">Titolo</label>
-				  <input class="form-control" type="text" id="titolo" name="titolo" required>
-				</div>
-
-				<div class="form-group col-12">
-					<label for="contenuto"  style="color: black;">Contenuto</label>
-				  <input class="form-control" type="text" id="contenuto" name="contenuto" >
-				</div>
-
-				<div class="form-group col-12">
-					<label for="immagine"  style="color: black;">Immagine</label>
-					<input class="form-control-file" type="file" name="immagine" accept="image/png, image/jpeg"  style="color: black;"/>
-				</div>
-
-				<div class="form-group col-4">
-					<input class="form-control" type="submit" id="pubblicaSubmit" value="Pubblica">
-				</div>
-
-			</form>
-               </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Chiudi</button>
-        </div>
-        
-      </div>
-    </div>
-  </div>												
-												
-										
-										<a class="bottoniGMW mt-1" th:href="@{/news/new/}"
-											th:if="${GMW}"
-											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
-										</a>
 										<form th:action="@{'/news/delete/'+${newsSlide[0].id}}"
 											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW mt-1"
@@ -758,68 +849,79 @@ font-size: 75px;
 
 									</div>
 									<div class="carousel-item" th:if="${newsSlide.size>1}">
-										<div class="container"><img
-											th:src="'data:image/png;base64,' + ${newsSlide[1].immagine.getImgData(newsSlide[1].immagine.data)}"
-											alt="Chicago" width="400px" style="height: 390px" class="img-fluid"></div>
-<br><br>
+										<div class="container">
+											<img
+												th:src="'data:image/png;base64,' + ${newsSlide[1].immagine.getImgData(newsSlide[1].immagine.data)}"
+												alt="Chicago" width="400px" style="height: 390px"
+												class="img-fluid">
+										</div>
+										<br> <br>
 										<h3 th:text="${newsSlide[1].titolo}"
 											style="text-align: center; margin: 0 auto"></h3>
 
 										<br>
+
+										<button type="submit" name="modifica" class="bottoniGMW"
+											th:if="${GMW}" data-toggle="modal" data-target="#myModal8"
+											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+											Modifica</button>
+
+
+										<!-- The Modal -->
+										<div class="modal" id="myModal8" style="color: black">
+											<div class="modal-dialog">
+												<div class="modal-content">
+
+													<!-- Modal Header -->
+													<div class="modal-header">
+														<h4 class="modal-title" style="color: black;">
+															Modifica news</h4>
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+													</div>
+
+													<!-- Modal body -->
+													<div class="modal-body">
+														<form
+															th:action="@{/news/update/{id}(id = ${newsSlide[1].id})}"
+															th:object="${news}" method="post"
+															enctype="multipart/form-data">
+															<div class="form-group col-12">
+																<label for="titolo" style="color: black;">Titolo</label>
+																<input class="form-control" type="text" id="titolo"
+																	name="titolo" required>
+															</div>
+
+															<div class="form-group col-12">
+																<label for="contenuto" style="color: black;">Contenuto</label>
+																<input class="form-control" type="text" id="contenuto"
+																	name="contenuto">
+															</div>
+
+															<div class="form-group col-12">
+																<label for="immagine" style="color: black;">Immagine</label>
+																<input class="form-control-file" type="file"
+																	name="immagine" accept="image/png, image/jpeg"
+																	style="color: black;" />
+															</div>
+
+															<div class="form-group col-4">
+																<input class="form-control" type="submit"
+																	id="pubblicaSubmit" value="Pubblica">
+															</div>
+
+														</form>
+													</div>
+
+													<!-- Modal footer -->
+													<div class="modal-footer">
+														<button type="button" class="btn btn-danger"
+															data-dismiss="modal">Chiudi</button>
+													</div>
+
+												</div>
+											</div>
+										</div>
 										
-											<button type="submit" name="modifica" class="bottoniGMW" th:if="${GMW}" data-toggle="modal" data-target="#myModal8"
-												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
-												Modifica</button>
-										
-										
-									 <!-- The Modal -->
-	  <div class="modal" id="myModal8" style="color: black">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title"  style="color: black;"> Modifica news </h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-       	<form th:action="@{/news/update/{id}(id = ${newsSlide[1].id})}" th:object="${news}" method="post" enctype="multipart/form-data">
-				<div class="form-group col-12">
-					<label for="titolo"  style="color: black;">Titolo</label>
-				  <input class="form-control" type="text" id="titolo" name="titolo" required>
-				</div>
-
-				<div class="form-group col-12">
-					<label for="contenuto"  style="color: black;">Contenuto</label>
-				  <input class="form-control" type="text" id="contenuto" name="contenuto" >
-				</div>
-
-				<div class="form-group col-12">
-					<label for="immagine"  style="color: black;">Immagine</label>
-					<input class="form-control-file" type="file" name="immagine" accept="image/png, image/jpeg"  style="color: black;"/>
-				</div>
-
-				<div class="form-group col-4">
-					<input class="form-control" type="submit" id="pubblicaSubmit" value="Pubblica">
-				</div>
-
-			</form>
-               </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Chiudi</button>
-        </div>
-        
-      </div>
-    </div>
-  </div>									
-										<a class="bottoniGMW mt-1" th:href="@{/news/new/}"
-											th:if="${GMW}"
-											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
-										</a>
 										<form th:action="@{'/news/delete/'+${newsSlide[1].id}}"
 											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW mt-1"
@@ -829,68 +931,79 @@ font-size: 75px;
 
 									</div>
 									<div class="carousel-item" th:if="${newsSlide.size>2}">
-										<div class="container"><img
-											th:src="'data:image/png;base64,' + ${newsSlide[2].immagine.getImgData(newsSlide[2].immagine.data)}"
-											width="400px" style="height: 390px;" alt="news" class="img-fluid"></div>
-<br><br>
+										<div class="container">
+											<img
+												th:src="'data:image/png;base64,' + ${newsSlide[2].immagine.getImgData(newsSlide[2].immagine.data)}"
+												width="400px" style="height: 390px;" alt="news"
+												class="img-fluid">
+										</div>
+										<br> <br>
 										<h3 th:text="${newsSlide[2].titolo}"
 											style="text-align: center; margin: 0 auto"></h3>
 										<br>
-										
-											<button type="submit" name="modifica" class="bottoniGMW"  th:if="${GMW}" data-toggle="modal" data-target="#myModal9"
-												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
-												Modifica</button>
-												
-										
-									 <!-- The Modal -->
-	  <div class="modal" id="myModal9" style="color: black">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title"  style="color: black;"> Modifica news </h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-       	<form th:action="@{/news/update/{id}(id = ${newsSlide[2].id})}" th:object="${news}" method="post" enctype="multipart/form-data">
-				<div class="form-group col-12">
-					<label for="titolo"  style="color: black;">Titolo</label>
-				  <input class="form-control" type="text" id="titolo" name="titolo" required>
-				</div>
 
-				<div class="form-group col-12">
-					<label for="contenuto"  style="color: black;">Contenuto</label>
-				  <input class="form-control" type="text" id="contenuto" name="contenuto" >
-				</div>
+										<button type="submit" name="modifica" class="bottoniGMW"
+											th:if="${GMW}" data-toggle="modal" data-target="#myModal9"
+											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+											Modifica</button>
 
-				<div class="form-group col-12">
-					<label for="immagine"  style="color: black;">Immagine</label>
-					<input class="form-control-file" type="file" name="immagine" accept="image/png, image/jpeg"  style="color: black;"/>
-				</div>
 
-				<div class="form-group col-4">
-					<input class="form-control" type="submit" id="pubblicaSubmit" value="Pubblica">
-				</div>
+										<!-- The Modal -->
+										<div class="modal" id="myModal9" style="color: black">
+											<div class="modal-dialog">
+												<div class="modal-content">
 
-			</form>
-               </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Chiudi</button>
-        </div>
-        
-      </div>
-    </div>
-  </div>													
-										
-										<a class="bottoniGMW mt-1" th:href="@{/news/new/}"
-											th:if="${GMW}"
-											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
-										</a>
+													<!-- Modal Header -->
+													<div class="modal-header">
+														<h4 class="modal-title" style="color: black;">
+															Modifica news</h4>
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+													</div>
+
+													<!-- Modal body -->
+													<div class="modal-body">
+														<form
+															th:action="@{/news/update/{id}(id = ${newsSlide[2].id})}"
+															th:object="${news}" method="post"
+															enctype="multipart/form-data">
+															<div class="form-group col-12">
+																<label for="titolo" style="color: black;">Titolo</label>
+																<input class="form-control" type="text" id="titolo"
+																	name="titolo" required>
+															</div>
+
+															<div class="form-group col-12">
+																<label for="contenuto" style="color: black;">Contenuto</label>
+																<input class="form-control" type="text" id="contenuto"
+																	name="contenuto">
+															</div>
+
+															<div class="form-group col-12">
+																<label for="immagine" style="color: black;">Immagine</label>
+																<input class="form-control-file" type="file"
+																	name="immagine" accept="image/png, image/jpeg"
+																	style="color: black;" />
+															</div>
+
+															<div class="form-group col-4">
+																<input class="form-control" type="submit"
+																	id="pubblicaSubmit" value="Pubblica">
+															</div>
+
+														</form>
+													</div>
+
+													<!-- Modal footer -->
+													<div class="modal-footer">
+														<button type="button" class="btn btn-danger"
+															data-dismiss="modal">Chiudi</button>
+													</div>
+
+												</div>
+											</div>
+										</div>
+
+				
 										<form th:action="@{'/news/delete/'+${newsSlide[2].id}}"
 											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW mt-1"
@@ -910,7 +1023,7 @@ font-size: 75px;
 				</table>
 			</div>
 		</div>
-		
+
 
 		<!-- °°°°°°°°°°°°°°°°°
 
@@ -921,15 +1034,18 @@ ROW SCHIZZO
 		<div class="row mt-5 mb-5" id="rowmacchina2">
 			<div class="col-xs-12 col-sm-12 col-lg-12 col-xl-12">
 				<br>
-				<h1 style="text-align: center" class="mb-3">Il mondo dentro e fuori</h1>
+				<h1 style="text-align: center" class="mb-3">Il mondo dentro e
+					fuori</h1>
 
 			</div>
 			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4">
 				<table class="table table-borderless">
 					<tr>
-						<td style="text-align: center; vertical-align: middle;"><div class="container"><img
-							src="/view/MyWork/images/RADICEr.png" alt="rosarioRad"
-							style="margin-bottom: -17px; height: 380px" class="img-fluid"> </div></td>
+						<td style="text-align: center; vertical-align: middle;"><div
+								class="container">
+								<img src="/view/MyWork/images/RADICEr.png" alt="rosarioRad"
+									style="margin-bottom: -17px; height: 380px" class="img-fluid">
+							</div></td>
 					</tr>
 					<tr>
 						<td style="text-align: center; vertical-align: middle;"><p
@@ -943,7 +1059,12 @@ ROW SCHIZZO
 								Ascolta gli ultimi podcast<img
 									src="/view/MyWork/images/record.png" alt="podcast icona"
 									width="12%">
-							</button></td>
+							</button>
+							<br>
+							<a th:href="@{/podcast/}" th:if="${GMW}"
+									style="background-color: transparent; text-align: center; border: 0px solid #232323; display: inline-block; color: white; font-size: 12px; padding: 5px; width: 100px;">
+											<img src="/view/MyWork/images/more.png" width="30%"> Aggiungi podcast </a>
+							</td>
 					</tr>
 				</table>
 				<!-- Button to Open the Modal -->
@@ -975,21 +1096,16 @@ ROW SCHIZZO
 										type="audio/ogg">
 								</audio>
 								<form th:action="@{'/podcast/deletePodcast/'+${podcast.id}}"
-						th:if="${GMW}" method="get">
-						<button type="submit" name="modifica"
-							style=" color: black; background-color: white; font-size: 12px; padding: 8px; text-decoration: none; width: 128px; border:0px">
-							Elimina
-						
-						</button>
-					</form>
+									th:if="${GMW}" method="get">
+									<button type="submit" name="modifica"
+										style="color: black; background-color: white; font-size: 12px; padding: 8px; text-decoration: none; width: 128px; border: 0px">
+										Elimina</button>
+								</form>
 							</div>
 
 							<!-- Modal footer -->
 							<div class="modal-footer" style="background-color: #303030">
-							 <a th:href="@{/podcast/}" th:if="${GMW}"
-							style=" color: black; background-color: white; font-size: 12px; padding: 8px; text-decoration: none; width: 128px;">
-							Aggiungi podcast 
-						</a>
+								
 								<button type="button" class="btn btn-primary"
 									data-dismiss="modal">Close</button>
 							</div>
@@ -999,6 +1115,11 @@ ROW SCHIZZO
 				</div>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4">
+			<a class="bottoniGMW mt-1" th:href="@{/eventowork/new/}"
+											th:if="${GMW}"
+											style="background-color: transparent; text-align: center; border: 0px solid #232323; display: inline-block; color: white; font-size: 12px; padding: 5px; width: 100px;">
+											<img src="/view/MyWork/images/more.png" width="30%"> Aggiungi
+										</a>
 				<table class="table table-borderless" th:if="${eventi.size > 0}">
 					<tr>
 						<td style="text-align: center; vertical-align: middle;"
@@ -1015,10 +1136,13 @@ ROW SCHIZZO
 								</ul>
 								<div class="carousel-inner" th:if="${eventi.size > 0}">
 									<div class="carousel-item active">
-										<div class="container"><img
-											th:src="'data:image/png;base64,' + ${eventi[0].immagine.getImgData(eventi[0].immagine.data)}"
-											alt="evento" width="400px" style="height: 350px;" class="img-fluid"> </div><br>
-										<br>
+										<div class="container">
+											<img
+												th:src="'data:image/png;base64,' + ${eventi[0].immagine.getImgData(eventi[0].immagine.data)}"
+												alt="evento" width="400px" style="height: 350px;"
+												class="img-fluid">
+										</div>
+										<br> <br>
 										<p style="font-size: 22px; margin-bottom: -5PX"
 											th:text="${#dates.format(eventi[0].timestamp*1000, 'dd/MM/yyyy')}"></p>
 
@@ -1026,66 +1150,79 @@ ROW SCHIZZO
 											style="text-align: center; margin: 0 auto"></h3>
 										<br>
 
-										
-											<button type="submit" name="modifica" class="bottoniGMW"  th:if="${GMW}" data-toggle="modal" data-target="#myModal10"
-												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
-												Modifica</button>
-												
-										
-									 <!-- The Modal -->
-	  <div class="modal" id="myModal10" style="color: black">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title"  style="color: black;"> Modifica evento </h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-       		<form class="signin-form" th:action="@{/eventowork/update/{id}(id = ${eventi[0].id})}" th:object="${evento}" method="post" enctype="multipart/form-data">
-				<div class="form-group col-12">
-					<label for="titolo" style="color: black;">Titolo</label>
-					<input class="form-control" type="text" id="titolo" name="titolo"  required style="color: black">
-				</div>
-				<div class="form-group col-12">
-					<label for="contenuto" style="color: black;">Contenuto</label>
-					<input class="form-control" type="text" id="contenuto" name="contenuto" style="color: black">
-				</div>
-				<div class="form-group col-12">
-					<label for="luogo" style="color: black;">Luogo</label>
-				 	<input class="form-control" type="text" id="input" name="luogo">
-				</div>
-				<div class="form-group col-12">
-					<label for="date" style="color: black;">Data</label>
-					<input class="form-control" type="date" id="date" name="date" required th:value="${#dates.format(date, 'yyyy-MM-dd')}" style="color: black">
-				</div>
-				<div class="form-group col-12" style="color: black;">
-					<label for="immagine"style="color: black;">Immagine dell'evento</label>
-					<input class="form-control-file" type="file" name="immagine" accept="image/png, image/jpeg" style="color: black;"/>
-				</div><br>
-				<div class="form-group col-4">
-					<input class="form-control" type="submit" id="pubblicaSubmit" value="Pubblica">
-				</div>
 
-			</form>
-               </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Chiudi</button>
-        </div>
-        
-      </div>
-    </div>
-  </div>													
+										<button type="submit" name="modifica" class="bottoniGMW"
+											th:if="${GMW}" data-toggle="modal" data-target="#myModal10"
+											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+											Modifica</button>
+
+
+										<!-- The Modal -->
+										<div class="modal" id="myModal10" style="color: black">
+											<div class="modal-dialog">
+												<div class="modal-content">
+
+													<!-- Modal Header -->
+													<div class="modal-header">
+														<h4 class="modal-title" style="color: black;">
+															Modifica evento</h4>
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+													</div>
+
+													<!-- Modal body -->
+													<div class="modal-body">
+														<form class="signin-form"
+															th:action="@{/eventowork/update/{id}(id = ${eventi[0].id})}"
+															th:object="${evento}" method="post"
+															enctype="multipart/form-data">
+															<div class="form-group col-12">
+																<label for="titolo" style="color: black;">Titolo</label>
+																<input class="form-control" type="text" id="titolo"
+																	name="titolo" required style="color: black">
+															</div>
+															<div class="form-group col-12">
+																<label for="contenuto" style="color: black;">Contenuto</label>
+																<input class="form-control" type="text" id="contenuto"
+																	name="contenuto" style="color: black">
+															</div>
+															<div class="form-group col-12">
+																<label for="luogo" style="color: black;">Luogo</label> <input
+																	class="form-control" type="text" id="input"
+																	name="luogo">
+															</div>
+															<div class="form-group col-12">
+																<label for="date" style="color: black;">Data</label> <input
+																	class="form-control" type="date" id="date" name="date"
+																	required
+																	th:value="${#dates.format(date, 'yyyy-MM-dd')}"
+																	style="color: black">
+															</div>
+															<div class="form-group col-12" style="color: black;">
+																<label for="immagine" style="color: black;">Immagine
+																	dell'evento</label> <input class="form-control-file"
+																	type="file" name="immagine"
+																	accept="image/png, image/jpeg" style="color: black;" />
+															</div>
+															<br>
+															<div class="form-group col-4">
+																<input class="form-control" type="submit"
+																	id="pubblicaSubmit" value="Pubblica">
+															</div>
+
+														</form>
+													</div>
+
+													<!-- Modal footer -->
+													<div class="modal-footer">
+														<button type="button" class="btn btn-danger"
+															data-dismiss="modal">Chiudi</button>
+													</div>
+
+												</div>
+											</div>
+										</div>
+
 										
-										<a class="bottoniGMW mt-1" th:href="@{/eventowork/new/}"
-											th:if="${GMW}"
-											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
-										</a>
 										<form th:action="@{'/eventowork/delete/'+${eventi[0].id}}"
 											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW mt-1"
@@ -1096,10 +1233,13 @@ ROW SCHIZZO
 
 									</div>
 									<div class="carousel-item" th:if="${eventi.size > 1}">
-										<div class="container"><img
-											th:src="'data:image/png;base64,' + ${eventi[1].immagine.getImgData(eventi[1].immagine.data)}"
-											alt="Chicago" width="400px" style="height: 350px;" class="img-fluid"></div> <br>
-										<br>
+										<div class="container">
+											<img
+												th:src="'data:image/png;base64,' + ${eventi[1].immagine.getImgData(eventi[1].immagine.data)}"
+												alt="Chicago" width="400px" style="height: 350px;"
+												class="img-fluid">
+										</div>
+										<br> <br>
 										<p style="font-size: 22px; margin-bottom: -5PX"
 											th:text="${#dates.format(eventi[1].timestamp*1000, 'dd/MM/yyyy')}"></p>
 
@@ -1107,65 +1247,78 @@ ROW SCHIZZO
 											style="text-align: center; margin: 0 auto"></h3>
 										<br>
 
-										
-											<button type="submit" name="modifica" class="bottoniGMW" th:if="${GMW}" data-toggle="modal" data-target="#myModal11"
-												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
-												Modifica</button>
-												
-																					 <!-- The Modal -->
-	  <div class="modal" id="myModal11" style="color: black">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title"  style="color: black;"> Modifica evento </h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-       		<form class="signin-form" th:action="@{/eventowork/update/{id}(id = ${eventi[1].id})}" th:object="${evento}" method="post" enctype="multipart/form-data">
-				<div class="form-group col-12">
-					<label for="titolo" style="color: black;">Titolo</label>
-					<input class="form-control" type="text" id="titolo" name="titolo"  required style="color: black">
-				</div>
-				<div class="form-group col-12">
-					<label for="contenuto" style="color: black;">Contenuto</label>
-					<input class="form-control" type="text" id="contenuto" name="contenuto" style="color: black">
-				</div>
-				<div class="form-group col-12">
-					<label for="luogo" style="color: black;">Luogo</label>
-				 	<input class="form-control" type="text" id="input" name="luogo">
-				</div>
-				<div class="form-group col-12">
-					<label for="date" style="color: black;">Data</label>
-					<input class="form-control" type="date" id="date" name="date" required th:value="${#dates.format(date, 'yyyy-MM-dd')}" style="color: black">
-				</div>
-				<div class="form-group col-12">
-					<label for="immagine" style="color: black;">Immagine dell'evento</label>
-					<input class="form-control-file" type="file" name="immagine" accept="image/png, image/jpeg" style="color: black;"/>
-				</div><br>
-				<div class="form-group col-4" >
-					<input class="form-control" type="submit" id="pubblicaSubmit" value="Pubblica">
-				</div>
 
-			</form>
-               </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Chiudi</button>
-        </div>
-        
-      </div>
-    </div>
-  </div>
+										<button type="submit" name="modifica" class="bottoniGMW"
+											th:if="${GMW}" data-toggle="modal" data-target="#myModal11"
+											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+											Modifica</button>
+
+										<!-- The Modal -->
+										<div class="modal" id="myModal11" style="color: black">
+											<div class="modal-dialog">
+												<div class="modal-content">
+
+													<!-- Modal Header -->
+													<div class="modal-header">
+														<h4 class="modal-title" style="color: black;">
+															Modifica evento</h4>
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+													</div>
+
+													<!-- Modal body -->
+													<div class="modal-body">
+														<form class="signin-form"
+															th:action="@{/eventowork/update/{id}(id = ${eventi[1].id})}"
+															th:object="${evento}" method="post"
+															enctype="multipart/form-data">
+															<div class="form-group col-12">
+																<label for="titolo" style="color: black;">Titolo</label>
+																<input class="form-control" type="text" id="titolo"
+																	name="titolo" required style="color: black">
+															</div>
+															<div class="form-group col-12">
+																<label for="contenuto" style="color: black;">Contenuto</label>
+																<input class="form-control" type="text" id="contenuto"
+																	name="contenuto" style="color: black">
+															</div>
+															<div class="form-group col-12">
+																<label for="luogo" style="color: black;">Luogo</label> <input
+																	class="form-control" type="text" id="input"
+																	name="luogo">
+															</div>
+															<div class="form-group col-12">
+																<label for="date" style="color: black;">Data</label> <input
+																	class="form-control" type="date" id="date" name="date"
+																	required
+																	th:value="${#dates.format(date, 'yyyy-MM-dd')}"
+																	style="color: black">
+															</div>
+															<div class="form-group col-12">
+																<label for="immagine" style="color: black;">Immagine
+																	dell'evento</label> <input class="form-control-file"
+																	type="file" name="immagine"
+																	accept="image/png, image/jpeg" style="color: black;" />
+															</div>
+															<br>
+															<div class="form-group col-4">
+																<input class="form-control" type="submit"
+																	id="pubblicaSubmit" value="Pubblica">
+															</div>
+
+														</form>
+													</div>
+
+													<!-- Modal footer -->
+													<div class="modal-footer">
+														<button type="button" class="btn btn-danger"
+															data-dismiss="modal">Chiudi</button>
+													</div>
+
+												</div>
+											</div>
+										</div>
+
 										
-										<a class="bottoniGMW mt-1" th:href="@{/eventowork/new/}"
-											th:if="${GMW}"
-											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
-										</a>
 										<form th:action="@{'/eventowork/delete/'+${eventi[1].id}}"
 											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW mt-1"
@@ -1175,10 +1328,12 @@ ROW SCHIZZO
 
 									</div>
 									<div class="carousel-item" th:if="${eventi.size > 2}">
-										<div class="container"><img
-											th:src="'data:image/png;base64,' + ${eventi[2].immagine.getImgData(eventi[2].immagine.data)}"
-											width="400px" style="height: 350px;" class="img-fluid"></div> <br>
-										<br>
+										<div class="container">
+											<img
+												th:src="'data:image/png;base64,' + ${eventi[2].immagine.getImgData(eventi[2].immagine.data)}"
+												width="400px" style="height: 350px;" class="img-fluid">
+										</div>
+										<br> <br>
 										<p style="font-size: 22px; margin-bottom: -5PX"
 											th:text="${#dates.format(eventi[2].timestamp*1000, 'dd/MM/yyyy')}"></p>
 
@@ -1186,63 +1341,76 @@ ROW SCHIZZO
 											style="text-align: center; margin: 0 auto"></h3>
 										<br>
 
-										
-											<button type="submit" name="modifica" class="bottoniGMW"  th:if="${GMW}" data-toggle="modal" data-target="#myModal12"
-												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
-												Modifica</button>
-																			 <!-- The Modal -->
-	  <div class="modal" id="myModal12" style="color: black">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title"  style="color: black;"> Modifica news </h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-       		<form class="signin-form" th:action="@{/eventowork/update/{id}(id = ${eventi[2].id})}" th:object="${evento}" method="post" enctype="multipart/form-data">
-				<div class="form-group col-12">
-					<label for="titolo" style="color: black;">Titolo</label>
-					<input class="form-control" type="text" id="titolo" name="titolo"  required style="color: black">
-				</div>
-				<div class="form-group col-12">
-					<label for="contenuto" style="color: black;">Contenuto</label>
-					<input class="form-control" type="text" id="contenuto" name="contenuto" style="color: black">
-				</div>
-				<div class="form-group col-12">
-					<label for="luogo" style="color: black;">Luogo</label>
-				 	<input class="form-control" type="text" id="input" name="luogo">
-				</div>
-				<div class="form-group col-12">
-					<label for="date" style="color: black;">Data</label>
-					<input class="form-control" type="date" id="date" name="date" required th:value="${#dates.format(date, 'yyyy-MM-dd')}" style="color: black">
-				</div>
-				<div class="form-group col-12">
-					<label for="immagine" style="color: black;">Immagine dell'evento</label>
-					<input class="form-control-file" type="file" name="immagine" accept="image/png, image/jpeg" style="color: black;"/>
-				</div><br>
-				<div class="form-group col-4">
-					<input class="form-control" type="submit" id="pubblicaSubmit" value="Pubblica">
-				</div>
 
-			</form>
-               </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Chiudi</button>
-        </div>
-        
-      </div>
-    </div>
-  </div>
-											<a class="bottoniGMW mt-1" th:href="@{/eventowork/new/}"
-											th:if="${GMW}"
-											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
-										</a>
+										<button type="submit" name="modifica" class="bottoniGMW"
+											th:if="${GMW}" data-toggle="modal" data-target="#myModal12"
+											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+											Modifica</button>
+										<!-- The Modal -->
+										<div class="modal" id="myModal12" style="color: black">
+											<div class="modal-dialog">
+												<div class="modal-content">
+
+													<!-- Modal Header -->
+													<div class="modal-header">
+														<h4 class="modal-title" style="color: black;">
+															Modifica news</h4>
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+													</div>
+
+													<!-- Modal body -->
+													<div class="modal-body">
+														<form class="signin-form"
+															th:action="@{/eventowork/update/{id}(id = ${eventi[2].id})}"
+															th:object="${evento}" method="post"
+															enctype="multipart/form-data">
+															<div class="form-group col-12">
+																<label for="titolo" style="color: black;">Titolo</label>
+																<input class="form-control" type="text" id="titolo"
+																	name="titolo" required style="color: black">
+															</div>
+															<div class="form-group col-12">
+																<label for="contenuto" style="color: black;">Contenuto</label>
+																<input class="form-control" type="text" id="contenuto"
+																	name="contenuto" style="color: black">
+															</div>
+															<div class="form-group col-12">
+																<label for="luogo" style="color: black;">Luogo</label> <input
+																	class="form-control" type="text" id="input"
+																	name="luogo">
+															</div>
+															<div class="form-group col-12">
+																<label for="date" style="color: black;">Data</label> <input
+																	class="form-control" type="date" id="date" name="date"
+																	required
+																	th:value="${#dates.format(date, 'yyyy-MM-dd')}"
+																	style="color: black">
+															</div>
+															<div class="form-group col-12">
+																<label for="immagine" style="color: black;">Immagine
+																	dell'evento</label> <input class="form-control-file"
+																	type="file" name="immagine"
+																	accept="image/png, image/jpeg" style="color: black;" />
+															</div>
+															<br>
+															<div class="form-group col-4">
+																<input class="form-control" type="submit"
+																	id="pubblicaSubmit" value="Pubblica">
+															</div>
+
+														</form>
+													</div>
+
+													<!-- Modal footer -->
+													<div class="modal-footer">
+														<button type="button" class="btn btn-danger"
+															data-dismiss="modal">Chiudi</button>
+													</div>
+
+												</div>
+											</div>
+										</div>
+										
 										<form th:action="@{'/eventowork/delete/'+${eventi[2].id}}"
 											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW mt-1"
@@ -1264,10 +1432,14 @@ ROW SCHIZZO
 					th:if="${utente!=null AND !utente.isEmpty}">
 					<tr>
 						<td style="text-align: center; vertical-align: middle;"
-							th:each="utente: ${utente}"> <div class="container"><img
-							th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}"
-							width="250px" style="margin-bottom: -17px; height: 380px"
-							alt="assunto" class="img-fluid"> </div></td>
+							th:each="utente: ${utente}">
+							<div class="container">
+								<img
+									th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}"
+									width="250px" style="margin-bottom: -17px; height: 380px"
+									alt="assunto" class="img-fluid">
+							</div>
+						</td>
 					</tr>
 					<tr>
 						<td th:each="utente: ${utente}"
@@ -1293,8 +1465,9 @@ ROW SCHIZZO
 				style="margin-top: 50px; display: inline-block">
 				<a th:href="@{/myWork/addVideo/}" th:if="${GMW}"
 					style="background-color: white; border: 0px solid #232323; color: black; font-size: 12px; padding: 8px; width: 150px; float: right; padding-left: 25px;">
-					Aggiungi video</a><h1 style="text-align: center; clear: both;">Il video del mese</h1>
-				
+					Aggiungi video</a>
+				<h1 style="text-align: center; clear: both;">Il video del mese</h1>
+
 				<h3 style="text-align: center;" class="mb-5"
 					th:text="${video.sottoTitolo}"></h3>
 				<iframe width="100%" height="800" th:src="${video.link}"
