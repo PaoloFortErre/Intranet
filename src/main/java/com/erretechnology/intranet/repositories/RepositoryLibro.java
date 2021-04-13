@@ -9,7 +9,7 @@ import com.erretechnology.intranet.models.Libro;
 
 public interface RepositoryLibro extends CrudRepository<Libro, Integer>{
 	
-	@Query("SELECT l FROM Libro l WHERE l.visibile = false")
+	@Query("SELECT l FROM Libro l WHERE l.visibile = false ORDER BY timestampEliminazione DESC")
 	List<Libro> getAllNotVisible();
 	
 	@Query(value = "DELETE FROM book WHERE id = ?1" , nativeQuery = true)

@@ -25,7 +25,7 @@ public class ServicePodcastImpl implements ServicePodcast{
 
 	@Override
 	public List<Podcast> getAllNotVisible() {
-		return repositoryPodcast.findByVisibileFalse(Sort.by("id").descending());
+		return repositoryPodcast.findByVisibileFalse(Sort.by("timestampEliminazione").descending());
 	}
 
 	@Override

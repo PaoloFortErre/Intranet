@@ -46,7 +46,7 @@ public class ServiceCommentoImpl implements ServiceCommento{
 	public List<Commento> getAllNotVisible() {
 		// TODO Auto-generated method stub
 	//	return getAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList());
-		return repositoryCommento.findByVisibileFalse(Sort.by("id"));
+		return repositoryCommento.findByVisibileFalse(Sort.by("timestampEliminazione").descending());
 	}
 
 }

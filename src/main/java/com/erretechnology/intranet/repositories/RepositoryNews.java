@@ -11,7 +11,7 @@ import com.erretechnology.intranet.models.News;
 @Repository
 public interface RepositoryNews extends CrudRepository<News, Integer>{
 	
-	@Query("SELECT n FROM News n WHERE n.visibile = false")
+	@Query("SELECT n FROM News n WHERE n.visibile = false ORDER BY timestampEliminazione DESC")
 	List<News> getAllNotVisible();
 }
  

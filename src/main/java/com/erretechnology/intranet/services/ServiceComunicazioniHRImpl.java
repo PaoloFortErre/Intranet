@@ -35,7 +35,7 @@ public class ServiceComunicazioniHRImpl implements ServiceComunicazioniHR{
 
 	@Override
 	public List<ComunicazioneHR> getAllNotVisible() {
-		return repositoryComunicazioniHR.findByVisibileFalse(Sort.by("id").descending());
+		return repositoryComunicazioniHR.findByVisibileFalse(Sort.by("timestampEliminazione").descending());
 	}
 	@Override
 	public List<ComunicazioneHR> getAllVisible() {

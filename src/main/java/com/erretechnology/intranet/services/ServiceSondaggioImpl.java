@@ -33,7 +33,7 @@ public class ServiceSondaggioImpl implements ServiceSondaggio{
 	}
 	@Override
 	public List<Sondaggio> getAllNotVisible() {
-		return repositorySondaggio.findByVisibileFalse(Sort.by("id").descending());
+		return repositorySondaggio.findByVisibileFalse(Sort.by("timestampEliminazione").descending());
 	}
 	@Override
 	public void delete(Sondaggio s) {

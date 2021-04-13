@@ -78,7 +78,7 @@ public class ServicePostImpl implements ServicePost{
 
 	@Override
 	public List<Post> getAllNotVisible() {
-		return repositoryPost.findByVisibileFalse(Sort.by("id").descending());
+		return repositoryPost.findByVisibileFalse(Sort.by("timestampEliminazione").descending());
 	}
 	
 	@Override
