@@ -333,14 +333,13 @@
                   <img id="myImg" class="picture rounded-circle"
                   th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}" alt="profile_picca">
                 </div>
-                <div class="  bottom-right" th:if="${session.id} == ${utente.utente.id}">
-                  <a class="dropdown fa fa-camera text-white" href="#" id="imageDropdown" title="Clicca per gestire la foto profilo" data-toggle="dropdown">
-                  </a>
+                <div class="bottom-right " th:if="${session.id} == ${utente.utente.id}">
+                  <a class="dropdown fa fa-camera text-white" href="#" id="imageDropdown" title="Clicca per gestire la foto profilo" data-toggle="dropdown"></a>
                   <ul class="dropdown-menu" role="menu" aria-labelledby="imageDropdown" >
                     <form th:action="@{/profile/cambiaFotoProfilo}" method ="post" enctype="multipart/form-data">
-                      <label class="dropdown-item " style="cursor: pointer;" for="scegli">Modifica la foto profilo</label>
+                      <label class="dropdown-item font-weight-bold" style="cursor: pointer;" for="scegli">Modifica la foto profilo</label>
                       <input class="d-none" type="file" name="immagine" id="scegli" accept="image/png, image/jpeg"/>
-                      <label class="dropdown-item" style="cursor: pointer;" for="salva">Salva la foto profilo</label>
+                      <label class="dropdown-item font-weight-bold" style="cursor: pointer;" for="salva">Salva la foto profilo</label>
                       <input class="d-none" type="submit" id="salva"/>
                       <div class="dropdown-divider"></div>
                     </form>
@@ -435,7 +434,7 @@
         <div class="container mt-5">
           <div class="row justify-content-center mt-5">
 
-            <div class="col-xl-10 col-lg-12 col-md-12">
+            <div class="col-xl-10 col-lg-12 col-md-12 col-sm-12 col-xs-12">
               <div class="card position-relative text-end">
                 <img class="top-left" src="/view/Profile/Images/pin_post-it.png" alt="pin-post-it">
                 <div class="card-body" th:if="${utente.descrizione != null}">
