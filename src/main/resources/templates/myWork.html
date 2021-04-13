@@ -974,6 +974,14 @@ ROW SCHIZZO
 										th:src="'data:audio/mp3;base64,' + ${podcast.getAudioData(podcast.podcast)}"
 										type="audio/ogg">
 								</audio>
+								<form th:action="@{'/podcast/deletePodcast/'+${podcast.id}}"
+						th:if="${GMW}" method="get">
+						<button type="submit" name="modifica"
+							style=" color: black; background-color: white; font-size: 12px; padding: 8px; text-decoration: none; width: 128px; border:0px">
+							Elimina
+						
+						</button>
+					</form>
 							</div>
 
 							<!-- Modal footer -->
