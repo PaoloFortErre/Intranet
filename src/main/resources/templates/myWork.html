@@ -226,7 +226,7 @@ table, th, td {
 				</div>
 			</div>
 			<div class="carousel-item">
-				<img src="/view/MyWork/images/slideshow2.png" alt="scarpe"
+				<img src="/view/MyWork/images/slideshow2.png" alt="macchina2"
 					width="100%" height="500px" class="img-fluid">
 				<div class="carousel-caption">
 					<div th:if="${aforisma.size>1}">
@@ -254,7 +254,7 @@ table, th, td {
 			</div>
 
 			<div class="carousel-item">
-				<img src="/view/MyWork/images/slideshow3.png" alt="scarpe"
+				<img src="/view/MyWork/images/slideshow3.png" alt="macchina3"
 					width="100%" height="500px" class="img-fluid">
 				<div class="carousel-caption">
 					<div th:if="${aforisma.size>2}">
@@ -464,7 +464,7 @@ table, th, td {
 			<a class="bottoniGMW mt-1" th:href="@{/cliente/new/}"
 											th:if="${GMW}"
 											style="background-color: transparent; text-align: center; border: 0px solid #232323; display: inline-block; color: white; font-size: 12px; padding: 5px; width: 100px;">
-											<img src="/view/MyWork/images/more.png" width="30%"> Aggiungi
+											<img src="/view/MyWork/images/more.png" width="30%" alt="add"> Aggiungi
 										</a>
 			
 				<table class="table table-borderless" th:if="${nuoviClienti.size>0}">
@@ -746,7 +746,7 @@ table, th, td {
 			<a class="bottoniGMW mt-1" th:href="@{/news/new/}"
 											th:if="${GMW}"
 											style="background-color: transparent; text-align: center; border: 0px solid #232323; display: inline-block; color: white; font-size: 12px; padding: 5px; width: 100px;">
-											<img src="/view/MyWork/images/more.png" width="30%"> Aggiungi
+											<img src="/view/MyWork/images/more.png" width="30%" alt="add"> Aggiungi
 										</a>
 				<table class="table table-borderless"
 					style="vertical-align: middle;" th:if="${newsSlide.size>0}">
@@ -768,7 +768,7 @@ table, th, td {
 										<div class="container">
 											<img
 												th:src="'data:image/png;base64,' + ${newsSlide[0].immagine.getImgData(newsSlide[0].immagine.data)}"
-												alt="Los Angeles" width="400px" style="height: 390px;"
+												alt="News" width="400px" style="height: 390px;"
 												class="img-fluid">
 										</div>
 										<br> <br>
@@ -852,7 +852,7 @@ table, th, td {
 										<div class="container">
 											<img
 												th:src="'data:image/png;base64,' + ${newsSlide[1].immagine.getImgData(newsSlide[1].immagine.data)}"
-												alt="Chicago" width="400px" style="height: 390px"
+												alt="News" width="400px" style="height: 390px"
 												class="img-fluid">
 										</div>
 										<br> <br>
@@ -934,7 +934,7 @@ table, th, td {
 										<div class="container">
 											<img
 												th:src="'data:image/png;base64,' + ${newsSlide[2].immagine.getImgData(newsSlide[2].immagine.data)}"
-												width="400px" style="height: 390px;" alt="news"
+												width="400px" style="height: 390px;" alt="News"
 												class="img-fluid">
 										</div>
 										<br> <br>
@@ -1118,7 +1118,7 @@ ROW SCHIZZO
 			<a class="bottoniGMW mt-1" th:href="@{/eventowork/new/}"
 											th:if="${GMW}"
 											style="background-color: transparent; text-align: center; border: 0px solid #232323; display: inline-block; color: white; font-size: 12px; padding: 5px; width: 100px;">
-											<img src="/view/MyWork/images/more.png" width="30%"> Aggiungi
+											<img src="/view/MyWork/images/more.png" width="30%" alt="add"> Aggiungi
 										</a>
 				<table class="table table-borderless" th:if="${eventi.size > 0}">
 					<tr>
@@ -1140,7 +1140,7 @@ ROW SCHIZZO
 											<img
 												th:src="'data:image/png;base64,' + ${eventi[0].immagine.getImgData(eventi[0].immagine.data)}"
 												alt="evento" width="400px" style="height: 350px;"
-												class="img-fluid">
+												class="img-fluid" alt="evento2">
 										</div>
 										<br> <br>
 										<p style="font-size: 22px; margin-bottom: -5PX"
@@ -1236,8 +1236,8 @@ ROW SCHIZZO
 										<div class="container">
 											<img
 												th:src="'data:image/png;base64,' + ${eventi[1].immagine.getImgData(eventi[1].immagine.data)}"
-												alt="Chicago" width="400px" style="height: 350px;"
-												class="img-fluid">
+												alt="evento" width="400px" style="height: 350px;"
+												class="img-fluid" alt="evento2">
 										</div>
 										<br> <br>
 										<p style="font-size: 22px; margin-bottom: -5PX"
@@ -1331,7 +1331,7 @@ ROW SCHIZZO
 										<div class="container">
 											<img
 												th:src="'data:image/png;base64,' + ${eventi[2].immagine.getImgData(eventi[2].immagine.data)}"
-												width="400px" style="height: 350px;" class="img-fluid">
+												width="400px" style="height: 350px;" class="img-fluid" alt="evento">
 										</div>
 										<br> <br>
 										<p style="font-size: 22px; margin-bottom: -5PX"
@@ -1437,7 +1437,7 @@ ROW SCHIZZO
 								<img
 									th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}"
 									width="250px" style="margin-bottom: -17px; height: 380px"
-									alt="assunto" class="img-fluid">
+									alt="utenteCompleanno" class="img-fluid">
 							</div>
 						</td>
 					</tr>
