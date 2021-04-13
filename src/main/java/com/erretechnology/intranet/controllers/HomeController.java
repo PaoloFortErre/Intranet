@@ -255,7 +255,8 @@ public class HomeController extends BaseController{
 		mav.addObject("libri", libri);
 		mav.addObject("video", video);
 		mav.addObject("utenteDati", u);
-		
+		mav.addObject("categorie", repoCategoria.findAll());
+
 		mav.setViewName("myLife1");
 		return mav;
 	}

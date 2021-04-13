@@ -71,6 +71,7 @@ public class MyLifeController extends BaseController {
 		mav.addObject("aforisma", aforismi);
 		mav.addObject("libri", libri);
 		mav.addObject("video", video);
+		mav.addObject("categorie", repoCategoria.findAll());
 		
 		return mav;
 	}
@@ -250,7 +251,10 @@ public class MyLifeController extends BaseController {
 			FileImmagine img = new FileImmagine();
 			UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(id);
 			img.setAutore(utenteLoggato);
-			img.setData(compressImage(document, 0.5f));
+			if(compressImage(document, 0.5f).length == 0)
+				img.setData(document.getBytes());
+			else
+				img.setData(compressImage(document, 0.5f));
 			img.setTimestamp(Instant.now().getEpochSecond());
 			img.setNomeFile(StringUtils.cleanPath(document.getOriginalFilename()));
 			serviceFileImmagine.insert(img);

@@ -50,7 +50,10 @@ public class CinemaController extends BaseController {
 
 		if(!immagine.getOriginalFilename().isEmpty()) {
 			FileImmagine img = new FileImmagine();
-			img.setData(compressImage(immagine, 0.5f));
+			if(compressImage(immagine, 0.5f).length == 0)
+				img.setData(immagine.getBytes());
+			else
+				img.setData(compressImage(immagine, 0.5f));
 			img.setAutore(utenteLoggato);
 			img.setTimestamp(Instant.now().getEpochSecond());
 			img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
@@ -74,13 +77,12 @@ public class CinemaController extends BaseController {
 	}
 
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-	public String update(@PathVariable int id, String titolo, int categoria, @RequestParam(required=false) MultipartFile immagine, String link,
+	public String update(@PathVariable int id, String titolo, int categoria, @RequestParam(required=false) MultipartFile immagine,
 			HttpSession session, Model model) throws Exception {
 		Cinema cinema = repoCinema.findById(id).get();
 		cinema.setTitolo(titolo);
 		CategoriaCinema categoriaCinema = repoCategoria.findById(categoria).get();
 		cinema.setCategoria(categoriaCinema);
-		cinema.setLink(link);
 		
 		if(!immagine.getOriginalFilename().isEmpty()) {
 			FileImmagine img = new FileImmagine();			

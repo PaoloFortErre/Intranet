@@ -22,7 +22,6 @@ public abstract class Cultura {
 	private UtenteDatiPersonali autore;
 	private boolean visibile;
 	private long timestampEliminazione;
-	private String link;
 
 	public int getId() {
 		return id;
@@ -68,14 +67,5 @@ public abstract class Cultura {
 	public void setAutore(UtenteDatiPersonali autore) {
 		this.autore = autore;
 	}
-
-	public String getLink() {
-		return link;
-	}
-
-	public void setLink(String link) {
-		this.link = link;
-	}
-	
 	
 }
