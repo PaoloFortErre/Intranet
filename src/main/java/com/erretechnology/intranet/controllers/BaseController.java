@@ -162,6 +162,7 @@ public abstract class BaseController {
 	    } catch (IOException e) {
 	        return baos.toByteArray();
 	    }
+	    if(originalImage == null) return baos.toByteArray();
 	    IIOImage image = new IIOImage(originalImage, null, null);
 	    try {
 	        imageWriter.write(null, image, imageWriteParam);

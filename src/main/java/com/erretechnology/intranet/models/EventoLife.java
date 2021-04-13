@@ -9,6 +9,7 @@ public class EventoLife extends Cultura implements MyWorkBean, Evento{
 	
 	private long data;
 	private String luogo;
+	private String link;
 	
 	public EventoLife() {
 
@@ -28,6 +29,14 @@ public class EventoLife extends Cultura implements MyWorkBean, Evento{
 
 	public void setLuogo(String luogo) {
 		this.luogo = luogo;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
 	}
 	
 }

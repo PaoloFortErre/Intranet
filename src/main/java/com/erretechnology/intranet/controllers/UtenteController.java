@@ -210,8 +210,10 @@ public class UtenteController extends BaseController {
 		if (!immagine.getOriginalFilename().isEmpty()) {
 
 			img = new FileImmagine();
-			// img.setData(compressImage(immagine, 0.1f));
-			img.setData(compressImage(immagine, 0.5f));
+			if(compressImage(immagine, 0.5f).length == 0)
+				img.setData(immagine.getBytes());
+			else
+				img.setData(compressImage(immagine, 0.5f));
 			UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(idUser);
 			if (!serviceFileImmagine.contains(img.getData())) {
 				img.setAutore(utenteLoggato);

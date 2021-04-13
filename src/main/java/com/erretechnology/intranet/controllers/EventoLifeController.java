@@ -53,7 +53,10 @@ public class EventoLifeController extends BaseController {
 
 		if(!immagine.getOriginalFilename().isEmpty()) {
 			FileImmagine img = new FileImmagine();
-			img.setData(compressImage(immagine, 0.5f));
+			if(compressImage(immagine, 0.5f).length == 0)
+				img.setData(immagine.getBytes());
+			else
+				img.setData(compressImage(immagine, 0.5f));
 			img.setAutore(utenteLoggato);
 			img.setTimestamp(Instant.now().getEpochSecond());
 			img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
