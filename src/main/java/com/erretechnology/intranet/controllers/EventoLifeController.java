@@ -138,6 +138,7 @@ public class EventoLifeController extends BaseController {
 	public String ripristinaEvento(HttpSession session, int id) {
 		EventoLife e = repoEvento.findById(id).get();
 		e.setVisibile(true);
+		e.setTimestampEliminazione(0);
 		repoEvento.save(e);;
 		return "redirect:/profile/mostraEliminati";
 	}

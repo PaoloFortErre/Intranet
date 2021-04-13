@@ -125,6 +125,7 @@ public class CinemaController extends BaseController {
 	public String ripristinaFilm(int id, HttpSession session) {
 		Cinema cinema = repoCinema.findById(id).get();
 		cinema.setVisibile(true);
+		cinema.setTimestampEliminazione(0);
 		repoCinema.save(cinema);
 		return "redirect:/profile/mostraEliminati";
 		}
