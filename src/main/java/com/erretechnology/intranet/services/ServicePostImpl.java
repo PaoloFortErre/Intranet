@@ -85,7 +85,11 @@ public class ServicePostImpl implements ServicePost{
 	@Override
 	public List<Post> getByAutore(UtenteDatiPersonali autore) {
 		return repositoryPost.findTop6ByAutoreAndVisibileTrueOrderByIdDesc(autore);
-
+	}
+	
+	@Override
+	public List<Post> getAllByAutore(UtenteDatiPersonali autore) {
+		return repositoryPost.findByAutoreAndVisibileTrue(autore);
 	}
 
 	@Override

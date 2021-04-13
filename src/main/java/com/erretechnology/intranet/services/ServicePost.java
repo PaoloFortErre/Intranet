@@ -28,4 +28,6 @@ public interface ServicePost {
 	
 	public List<Post> getByAutore(UtenteDatiPersonali autore);
 
+	public List<Post> getAllByAutore(UtenteDatiPersonali autore);
+
 }

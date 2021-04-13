@@ -6,6 +6,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.erretechnology.intranet.models.Commento;
+import com.erretechnology.intranet.models.Post;
+import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.repositories.RepositoryCommento;
 @Service("serviceCommento")
 public class ServiceCommentoImpl implements ServiceCommento{
@@ -15,7 +17,6 @@ public class ServiceCommentoImpl implements ServiceCommento{
 	
 	@Override
 	public List<Commento> getLastMessage() {
-	//	return repositoryCommento.findAll().stream().filter(x -> x.isVisibile()).sorted(Comparator.comparingInt(Commento::getId).reversed()).collect(Collectors.toList());
 		return repositoryCommento.findByVisibileTrue(Sort.by("id"));
 	}
 
@@ -38,15 +39,16 @@ public class ServiceCommentoImpl implements ServiceCommento{
 
 	@Override
 	public List<Commento> getAll() {
-		// TODO Auto-generated method stub
 		return repositoryCommento.findAll();
 	}
 
 	@Override
 	public List<Commento> getAllNotVisible() {
-		// TODO Auto-generated method stub
-	//	return getAll().stream().filter(x->x.isVisibile() == false).collect(Collectors.toList());
 		return repositoryCommento.findByVisibileFalse(Sort.by("timestampEliminazione").descending());
 	}
-
+	
+	@Override
+	public List<Commento> getAllByAutore(UtenteDatiPersonali autore) {
+		return repositoryCommento.findByAutoreAndVisibileTrue(autore);
+	}
 }
