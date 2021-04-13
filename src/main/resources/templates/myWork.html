@@ -317,13 +317,13 @@ table, th, td {
 							method="post" class="signin-form">
 							<div class="form-group col-12">
 								<label for="frase" style="color: black;">Frase</label> <input
-									class="form-control" type="text" id="frase" name="frase"
+									class="form-control" type="text" id="frase" name="frase" th:placeholder="${aforisma[0].titolo}"
 									required>
 							</div>
 
 							<div class="form-group col-12">
 								<label for="autore" style="color: black;">Autore</label> <input
-									class="form-control" type="text" id="autore" name="autore">
+									class="form-control" type="text" id="autore" name="autore" th:placeholder="${aforisma[0].contenuto}">
 							</div>
 							<div class="form-group col-4" style="float: right">
 								<input class="form-control" type="submit" id="pubblicaSubmit"
@@ -359,13 +359,13 @@ table, th, td {
 							method="post" class="signin-form">
 							<div class="form-group col-12">
 								<label for="frase" style="color: black;">Frase</label> <input
-									class="form-control" type="text" id="frase" name="frase"
+									class="form-control" type="text" id="frase" name="frase" th:placeholder="${aforisma[1].titolo}"
 									required>
 							</div>
 
 							<div class="form-group col-12">
 								<label for="autore" style="color: black;">Autore</label> <input
-									class="form-control" type="text" id="autore" name="autore">
+									class="form-control" type="text" id="autore" name="autore" th:placeholder="${aforisma[1].contenuto}">
 							</div>
 							<div class="form-group col-4" style="float: right">
 								<input class="form-control" type="submit" id="pubblicaSubmit"
@@ -397,18 +397,18 @@ table, th, td {
 
 					<!-- Modal body -->
 					<div class="modal-body" th:if="${aforisma.size>0}">
-						<form th:action="@{/aforisma/update/{id}(id = ${aforisma[0].id})}"
+						<form th:action="@{/aforisma/update/{id}(id = ${aforisma[2].id})}"
 							method="post" class="signin-form">
 							<div class="form-group col-12">
 								<label for="frase" style="color: black;">Frase</label> <input
 									class="form-control" type="text" id="frase" name="frase"
-									th:placeholder="${aforisma[0].titolo}" required>
+									th:placeholder="${aforisma[2].titolo}" required>
 							</div>
 
 							<div class="form-group col-12">
 								<label for="autore" style="color: black;">Autore</label> <input
 									class="form-control" type="text" id="autore"
-									th:placeholder="${aforisma[0].contenuto}" name="autore">
+									th:placeholder="${aforisma[2].contenuto}" name="autore">
 							</div>
 							<div class="form-group col-4" style="float: right">
 								<input class="form-control" type="submit" id="pubblicaSubmit"
@@ -527,7 +527,7 @@ table, th, td {
 															<div class="form-group col-12">
 																<label for="nome" style="color: black;">Nome:</label> <input
 																	class="form-control" type="text" id="nome" name="nome"
-																	required style="color: black">
+																	required style="color: black" th:placeholder="${nuoviClienti[0].titolo}">
 															</div>
 															<div class="form-group col-12">
 																<label for="dataInizio" style="color: black;">Data
@@ -612,7 +612,7 @@ table, th, td {
 															<div class="form-group col-12">
 																<label for="nome" style="color: black;">Nome:</label> <input
 																	class="form-control" type="text" id="nome" name="nome"
-																	required style="color: black">
+																	required style="color: black" th:placeholder="${nuoviClienti[1].titolo}">
 															</div>
 															<div class="form-group col-12">
 																<label for="dataInizio" style="color: black;">Data
@@ -673,7 +673,7 @@ table, th, td {
 															<div class="form-group col-12">
 																<label for="nome" style="color: black;">Nome:</label> <input
 																	class="form-control" type="text" id="nome" name="nome"
-																	required style="color: black">
+																	required style="color: black" th:placeholder="${nuoviClienti[2].titolo}">
 															</div>
 															<div class="form-group col-12">
 																<label for="dataInizio" style="color: black;">Data
@@ -803,13 +803,13 @@ table, th, td {
 															<div class="form-group col-12">
 																<label for="titolo" style="color: black;">Titolo</label>
 																<input class="form-control" type="text" id="titolo"
-																	name="titolo" required>
+																	name="titolo" required th:placeholder="${newsSlide[0].titolo}">
 															</div>
 
 															<div class="form-group col-12">
 																<label for="contenuto" style="color: black;">Contenuto</label>
 																<input class="form-control" type="text" id="contenuto"
-																	name="contenuto">
+																	name="contenuto" th:placeholder="${newsSlide[0].contenuto}">
 															</div>
 
 															<div class="form-group col-12">
@@ -888,13 +888,13 @@ table, th, td {
 															<div class="form-group col-12">
 																<label for="titolo" style="color: black;">Titolo</label>
 																<input class="form-control" type="text" id="titolo"
-																	name="titolo" required>
+																	name="titolo" required th:placeholder="${newsSlide[1].titolo}">
 															</div>
 
 															<div class="form-group col-12">
 																<label for="contenuto" style="color: black;">Contenuto</label>
 																<input class="form-control" type="text" id="contenuto"
-																	name="contenuto">
+																	name="contenuto" th:placeholder="${newsSlide[1].contenuto}">
 															</div>
 
 															<div class="form-group col-12">
@@ -969,13 +969,13 @@ table, th, td {
 															<div class="form-group col-12">
 																<label for="titolo" style="color: black;">Titolo</label>
 																<input class="form-control" type="text" id="titolo"
-																	name="titolo" required>
+																	name="titolo" required th:placeholder="${newsSlide[2].titolo}">
 															</div>
 
 															<div class="form-group col-12">
 																<label for="contenuto" style="color: black;">Contenuto</label>
 																<input class="form-control" type="text" id="contenuto"
-																	name="contenuto">
+																	name="contenuto" th:placeholder="${newsSlide[2].contenuto}">
 															</div>
 
 															<div class="form-group col-12">
@@ -1013,7 +1013,7 @@ table, th, td {
 
 									</div>
 								</div>
-								<br> <br> <br>
+								<br> 
 							</div>
 						</td>
 					</tr>
@@ -1178,12 +1178,12 @@ ROW SCHIZZO
 															<div class="form-group col-12">
 																<label for="titolo" style="color: black;">Titolo</label>
 																<input class="form-control" type="text" id="titolo"
-																	name="titolo" required style="color: black">
+																	name="titolo" required style="color: black" th:placeholder="${eventi[0].titolo}">
 															</div>
 															<div class="form-group col-12">
 																<label for="contenuto" style="color: black;">Contenuto</label>
 																<input class="form-control" type="text" id="contenuto"
-																	name="contenuto" style="color: black">
+																	name="contenuto" style="color: black" th:placeholder="${eventi[0].contenuto}">
 															</div>
 															<div class="form-group col-12">
 																<label for="luogo" style="color: black;">Luogo</label> <input
@@ -1274,17 +1274,17 @@ ROW SCHIZZO
 															<div class="form-group col-12">
 																<label for="titolo" style="color: black;">Titolo</label>
 																<input class="form-control" type="text" id="titolo"
-																	name="titolo" required style="color: black">
+																	name="titolo" required style="color: black" th:placeholder="${eventi[1].titolo}">
 															</div>
 															<div class="form-group col-12">
 																<label for="contenuto" style="color: black;">Contenuto</label>
 																<input class="form-control" type="text" id="contenuto"
-																	name="contenuto" style="color: black">
+																	name="contenuto" style="color: black" th:placeholder="${eventi[1].contenuto}">
 															</div>
 															<div class="form-group col-12">
 																<label for="luogo" style="color: black;">Luogo</label> <input
 																	class="form-control" type="text" id="input"
-																	name="luogo">
+																	name="luogo" >
 															</div>
 															<div class="form-group col-12">
 																<label for="date" style="color: black;">Data</label> <input
@@ -1367,17 +1367,17 @@ ROW SCHIZZO
 															<div class="form-group col-12">
 																<label for="titolo" style="color: black;">Titolo</label>
 																<input class="form-control" type="text" id="titolo"
-																	name="titolo" required style="color: black">
+																	name="titolo" required style="color: black" th:placeholder="${eventi[2].titolo}">
 															</div>
 															<div class="form-group col-12">
 																<label for="contenuto" style="color: black;">Contenuto</label>
 																<input class="form-control" type="text" id="contenuto"
-																	name="contenuto" style="color: black">
+																	name="contenuto" style="color: black" th:placeholder="${eventi[2].contenuto}">
 															</div>
 															<div class="form-group col-12">
 																<label for="luogo" style="color: black;">Luogo</label> <input
 																	class="form-control" type="text" id="input"
-																	name="luogo">
+																	name="luogo" >
 															</div>
 															<div class="form-group col-12">
 																<label for="date" style="color: black;">Data</label> <input

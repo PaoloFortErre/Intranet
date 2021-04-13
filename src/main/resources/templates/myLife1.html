@@ -211,6 +211,7 @@ font-size: 75px;
 	margin: 10px auto;
 	cursor: pointer;
 	border-radius: 4px;
+	text-align: center;
 }
 
 .profile-card-3 img {
@@ -219,7 +220,8 @@ font-size: 75px;
 
 .profile-card-3 .profile-name {
 	position: absolute;
-	left: 30px;
+	text-align: center;
+	left: 10px;
 	bottom: 70px;
 	font-size: 30px;
 	color: #FFF;
@@ -348,7 +350,7 @@ font-size: 75px;
 					title="ferrari" width="100%" height="500" class="img-fluid">
 				<div class="carousel-caption">
 					<div th:if="${aforisma.size>0}">
-						<h1 style="font-weight: 900; " class="h1caption"
+						<h1 style="font-weight: 900;" class="h1caption"
 							th:text="${aforisma[0].titolo}"></h1>
 						<p th:text="${aforisma[0].contenuto}" style="font-style: italic;"></p>
 						<div th:if="${GML}">
@@ -879,9 +881,9 @@ font-size: 75px;
 							th:if="${eventilife[0].immagine!=null}">
 
 
-							<img
+							<a th:href="${eventilife[0].contenuto}" target="blank"><img
 								th:src="'data:image/png;base64,' + ${eventilife[0].immagine.getImgData(eventilife[0].immagine.data)}"
-								style="height: 550px"> <br>
+								style="height: 550px"></a> <br>
 							<h3 th:text="${eventilife[0].titolo}"
 								style="text-align: center; font-size: 30px; font-weight: bold;"
 								class="mt-3"></h3>
