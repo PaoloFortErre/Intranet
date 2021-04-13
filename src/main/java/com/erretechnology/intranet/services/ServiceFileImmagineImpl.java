@@ -37,12 +37,12 @@ public class ServiceFileImmagineImpl implements ServiceFileImmagini{
 	
 	@Override
 	public boolean contains(byte[] data) {
-		return repositoryFileImmagine.findByData(data) != null;
+		return repositoryFileImmagine.findFirstByData(data) != null;
 	}
 
 	@Override
 	public FileImmagine getImmagineByData(byte[] data) {
-		return repositoryFileImmagine.findByData(data);
+		return repositoryFileImmagine.findFirstByData(data);
 	}
 
 }

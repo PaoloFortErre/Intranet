@@ -12,5 +12,5 @@ public interface RepositoryFileImmagine extends JpaRepository<FileImmagine, Inte
 	@Query
 	public FileImmagine findTopByAutore(UtenteDatiPersonali autore, Sort sort);
 	@Query
-	public FileImmagine findByData(byte[] data);
+	public FileImmagine findFirstByData(byte[] data);
 }

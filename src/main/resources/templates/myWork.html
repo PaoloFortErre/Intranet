@@ -396,7 +396,7 @@ table, th, td {
 					</div>
 
 					<!-- Modal body -->
-					<div class="modal-body" th:if="${aforisma.size>0}">
+					<div class="modal-body" th:if="${aforisma.size>2}">
 						<form th:action="@{/aforisma/update/{id}(id = ${aforisma[2].id})}"
 							method="post" class="signin-form">
 							<div class="form-group col-12">
@@ -482,7 +482,7 @@ table, th, td {
 										th:if="${nuoviClienti.size>2}"></li>
 								</ul>
 								<div class="carousel-inner">
-									<div class="carousel-item active">
+									<div class="carousel-item active" th:if="${nuoviClienti.size>0}">
 										<div class="container">
 											<img
 												th:src="'data:image/png;base64,' + ${nuoviClienti[0].immagine.getImgData(nuoviClienti[0].immagine.data)}"
@@ -507,7 +507,7 @@ table, th, td {
 
 
 										<!-- The Modal -->
-										<div class="modal" id="myModal4">
+										<div class="modal" id="myModal4" th:if="${nuoviClienti.size>0}">
 											<div class="modal-dialog">
 												<div class="modal-content">
 
@@ -592,7 +592,7 @@ table, th, td {
 											Modifica</button>
 
 										<!-- The Modal -->
-										<div class="modal" id="myModal5">
+										<div class="modal" id="myModal5" th:if="${nuoviClienti.size>1}">
 											<div class="modal-dialog">
 												<div class="modal-content">
 
@@ -646,13 +646,39 @@ table, th, td {
 
 									
 
-										<button type="submit" name="modifica" class="bottoniGMW mt-1"
-											th:if="${GMW}" data-toggle="modal" data-target="#myModal6"
-											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
-											Elimina</button>
+										<form th:action="@{'/cliente/delete/'+${nuoviClienti[1].id}}"
+											th:if="${GMW}" method="get" style="display: inline-block;">
+											<button type="submit" name="modifica" class="bottoniGMW mt-1"
+												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+												Elimina</button>
+										</form>
+
+									
 
 
-										<!-- The Modal -->
+
+									</div>
+									<div class="carousel-item " th:if="${nuoviClienti.size>2}">
+										<div class="container">
+											<img
+												th:src="'data:image/png;base64,' + ${nuoviClienti[2].immagine.getImgData(nuoviClienti[2].immagine.data)}"
+												alt="Clienti" width="400px" style="height: 300px;"
+												class="img-fluid">
+										</div>
+										<br> <br>
+										<p style="font-size: 22px; margin-bottom: -5px">Una nuova
+											partnership con</p>
+										<h3 th:text="${nuoviClienti[2].titolo}"
+											style="text-align: center; margin: 0 auto; font-weight: 900"></h3>
+										<br>
+										
+											 
+											<button type="submit" name="modifica" class="bottoniGMW" th:if="${GMW}" data-toggle="modal" data-target="#myModal6"
+												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
+												Modifica</button>
+										
+										
+											<!-- The Modal -->
 										<div class="modal" id="myModal6">
 											<div class="modal-dialog">
 												<div class="modal-content">
@@ -704,29 +730,6 @@ table, th, td {
 												</div>
 											</div>
 										</div>
-
-
-
-									</div>
-									<div class="carousel-item " th:if="${nuoviClienti.size>2}">
-										<div class="container">
-											<img
-												th:src="'data:image/png;base64,' + ${nuoviClienti[2].immagine.getImgData(nuoviClienti[2].immagine.data)}"
-												alt="Clienti" width="400px" style="height: 300px;"
-												class="img-fluid">
-										</div>
-										<br> <br>
-										<p style="font-size: 22px; margin-bottom: -5px">Una nuova
-											partnership con</p>
-										<h3 th:text="${nuoviClienti[2].titolo}"
-											style="text-align: center; margin: 0 auto; font-weight: 900"></h3>
-										<br>
-										<form th:action="@{'/cliente/update/'+${nuoviClienti[2].id}}"
-											th:if="${GMW}" method="get" style="display: inline-block;">
-											<button type="submit" name="modifica" class="bottoniGMW"
-												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
-												Modifica</button>
-										</form>
 										
 										<form th:action="@{'/cliente/delete/'+${nuoviClienti[2].id}}"
 											th:if="${GMW}" method="get" style="display: inline-block;">

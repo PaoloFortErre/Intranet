@@ -52,7 +52,8 @@ public class NewsController extends BaseController {
 			if(compressImage(immagine, 0.5f).length == 0)
 				img.setData(immagine.getBytes());
 			else
-				img.setData(compressImage(immagine, 0.5f));			img.setAutore(utenteLoggato);
+				img.setData(compressImage(immagine, 0.5f));			
+			img.setAutore(utenteLoggato);
 			img.setTimestamp(Instant.now().getEpochSecond());
 			img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
 			serviceFileImmagine.insert(img);
@@ -83,7 +84,10 @@ public class NewsController extends BaseController {
 
 		if(!immagine.getOriginalFilename().isEmpty()) {
 			FileImmagine img = new FileImmagine();			
-			img.setData(compressImage(immagine, 0.5f));
+			if(compressImage(immagine, 0.5f).length == 0)
+				img.setData(immagine.getBytes());
+			else
+				img.setData(compressImage(immagine, 0.5f));	
 			if(!serviceFileImmagine.contains(img.getData())) {
 				int idUser = Integer.parseInt(session.getAttribute("id").toString());
 				UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
