@@ -152,11 +152,14 @@ public class HomeController extends BaseController{
 					+ "(?=\\S+$).{8,20}$";
 			Pattern p = Pattern.compile(regex);
 			Matcher m = p.matcher(psw);
+			String token = request.getParameter("token");
+			
 			if(!m.matches()) {
+				mav.addObject("token", token);
 		    	mav.addObject("erroreUtente", "La password deve contenere una lettera maiuscola, una lettera minuscola, un numero ed essere di almeno 8 caratteri");
 		    	return mav;
 			}
-			String token = request.getParameter("token");
+			
 		    Utente utente = serviceUtente.findByResetPasswordToken(token);
 		     
 		    if (utente == null) {
