@@ -444,7 +444,7 @@
 												method="post">
 												<button name="button" type="submit" class="buttonAzioni"
 													style="background-color: #E8E7E7; color: white; margin-left: 290px; border: 0px solid #303030">
-													<img src="/view/MyLife/images/trash.png" width="45%">
+													<img src="/view/MyLife/images/trash.png" width="55%">
 												</button>
 											</form>
 										</div>
@@ -465,8 +465,8 @@
 						                        <form th:action="@{/myLife/editPost(id=${post.id})}" method="post" enctype="multipart/form-data" novalidate>
 						                          <textarea th:class="postModificato + ${post.id}"
 													name="testo" placeholder="Modifica post" cols="20"
-													rows="2.5" id="post" th:text="${post.testo}"
-													style="width: 350px; color: BLACK;" ></textarea><br>
+													rows="4.5" id="post" th:text="${post.testo}"
+													style="width: 430px; color: BLACK;" ></textarea><br>
 												<input type="file" name="document"
 													style="color: black;"
 													th:class="editfoto +  ${post.id}">
@@ -644,7 +644,7 @@
 						                        <form th:action="@{/myLife/editCommento(id=${commento.id})}" method="post">
 						                          <textarea th:class="commentoModificato + ${commento.id}"
 														name="testo" id="post" placeholder="Modifica commento"
-														required rows="2.5" th:text="${commento.testo}"
+														required rows="4.5" th:text="${commento.testo}"
 														style="color: black; width: 430px"></textarea>
 
 						                        </div>
