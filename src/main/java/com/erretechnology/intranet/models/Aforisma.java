@@ -19,7 +19,7 @@ public class Aforisma {
 	@ManyToOne
 	@JoinColumn(name="utente_id")
 	private Utente utente;
-	private boolean visibile;
+//	private boolean visibile;
 	private boolean isLife;
 	
 	public Aforisma() {
@@ -53,14 +53,14 @@ public class Aforisma {
 		this.utente = utente;
 	}
 
-	public boolean isVisibile() {
+	/*public boolean isVisibile() {
 		return visibile;
 	}
 
 	public void setVisibile(boolean visibile) {
 		this.visibile = visibile;
 	}
-
+*/
 	public boolean isLife() {
 		return isLife;
 	}

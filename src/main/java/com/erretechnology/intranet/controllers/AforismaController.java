@@ -45,8 +45,8 @@ public class AforismaController extends BaseController {
 		
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		aforisma.setUtente(repoUtente.findById(idUser).get());
-		aforisma.setVisibile(true);
-		aforisma.setVisibile(true);
+//		aforisma.setVisibile(true);
+//		aforisma.setVisibile(true);
 		aforisma.setLife(true);
 		
 		repoAforisma.save(aforisma);
@@ -59,8 +59,8 @@ public class AforismaController extends BaseController {
 		
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		aforisma.setUtente(repoUtente.findById(idUser).get());
-		aforisma.setVisibile(true);
-		aforisma.setVisibile(true);
+	//	aforisma.setVisibile(true);
+//		aforisma.setVisibile(true);
 		aforisma.setLife(false);
 		
 		repoAforisma.save(aforisma);
@@ -83,7 +83,6 @@ public class AforismaController extends BaseController {
 		Aforisma aforisma = repoAforisma.findById(id).get();
 		aforisma.setFrase(frase);
 		aforisma.setAutore(autore);
-		
 		repoAforisma.save(aforisma);
 		model.addAttribute("aforisma", aforisma);
 		saveLog("modificato una aforisma", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
@@ -98,7 +97,9 @@ public class AforismaController extends BaseController {
 	@RequestMapping("/delete/{id}")
 	public String delete(@PathVariable int id, HttpSession session) {
 		Aforisma aforisma = repoAforisma.findById(id).get();
-		aforisma.setVisibile(false);
+//		aforisma.setVisibile(false);
+		aforisma.setAutore("");
+		aforisma.setFrase("");
 		repoAforisma.save(aforisma);
 		saveLog("eliminato una aforisma", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/aforisma/list";
