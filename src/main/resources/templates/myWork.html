@@ -445,7 +445,7 @@ table, th, td {
 							style="text-align: center; vertical-align: middle;">
 
 							<div id="x123" class="carousel slide" data-ride="carousel">
-
+								
 							<div class="carousel-inner">
 								<div class="carousel-item active" th:if="${nuoveAssunzioni.size>0}">
 									<div class="container">
@@ -509,14 +509,17 @@ table, th, td {
 										<br>
 									</div>
 								</div>
+								<br><br>
+							<ul class="carousel-indicators mt-5">
+								<li data-target="#x123" data-slide-to="0" class="active"
+									th:if="${nuoveAssunzioni.size>1}"></li>
+								<li data-target="#x123" data-slide-to="1"
+									th:if="${nuoveAssunzioni.size>1}"></li>
+								<li data-target="#x123" data-slide-to="2"
+									th:if="${nuoveAssunzioni.size>2}"></li> 
+							</ul>
 							</div>
-								<ul class="carousel-indicators mt-5">
-							<li data-target="#x123" data-slide-to="0" class="active"
-								th:if="${nuoveAssunzioni.size>1}"></li>
-							<li data-target="#x123" data-slide-to="1"
-								th:if="${nuoveAssunzioni.size>1}"></li>
-							<li data-target="#x123" data-slide-to="2"
-								th:if="${nuoveAssunzioni.size>2}"></li> </ul>
+								
 						</td>
 					</tr>
 				</table>
