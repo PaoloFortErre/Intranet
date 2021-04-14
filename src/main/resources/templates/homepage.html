@@ -285,13 +285,13 @@
                 <div th:each="post, i: ${linkedinPost}" th:remove="tag">
 
                   <div th:if="${i.index} == 0" class="carousel-item active" data-interval="3000" >
-                      <a class="fa fa-trash text-danger float-left" th:if=${GMW} th:href="@{/linkedin/cancella(id=${post.id})}" title="Elimina post">Elimina</a>
+                      <a class="fa fa-trash text-danger float-center" th:if=${GMW} th:href="@{/linkedin/cancella(id=${post.id})}" title="Elimina post">Elimina</a>
                     <iframe class="d-block w-100" th:src="${post.link}"
                     height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
 
                   </div>
                   <div th:unless="${i.index} == 0" class="carousel-item" data-interval="3000" >
-                    <a class="fa fa-trash text-danger float-left" th:if=${GMW} th:href="@{/linkedin/cancella(id=${post.id})}" title="Elimina post">Elimina</a>
+                    <a class="fa fa-trash text-danger float-center" th:if=${GMW} th:href="@{/linkedin/cancella(id=${post.id})}" title="Elimina post">Elimina</a>
                     <iframe class="d-block w-100" th:src="${post.link}"
                     height="800" width="570" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
                   </div>
