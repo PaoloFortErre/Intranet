@@ -2,6 +2,7 @@ package com.erretechnology.intranet.controllers;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.thymeleaf.util.ArrayUtils;
 
 import com.erretechnology.intranet.models.Evento;
 import com.erretechnology.intranet.models.FileImmagine;
@@ -287,10 +289,20 @@ public class UtenteController extends BaseController {
 	public Map<String, String> getAllPermessi(@RequestParam("email") String email) {
 		return serviceAuthority.getMapById(serviceUtente.findByEmail(email).getId());
 	}
+	
+	@RequestMapping(value = "/isAdmin")
+	@ResponseBody
+	public Boolean[] isAdmin(@RequestParam("id") String id,@RequestParam("email") String email) {
+		Boolean[] isAdmin = new Boolean[2];
+		isAdmin[0] = serviceUtente.findById(Integer.parseInt(id)).getRuolo().getNome().equals("ADMIN");
+		isAdmin[1] = serviceUtente.findByEmail(email).getRuolo().getNome().equals("ADMIN");
+		return isAdmin;
+	}
 
 	@GetMapping(value = "/addPermesso")
 	public String addPermesso(String email, String list, HttpSession session, Model model) throws Exception {
 		String[] permessi = list.split(",");
+		
 		// Set<String> targetSet = new
 		// CopyOnWriteArraySet<String>(Arrays.asList(permessi));
 		int id_utente = Integer.parseInt(session.getAttribute("id").toString());
@@ -298,6 +310,15 @@ public class UtenteController extends BaseController {
 		if (utenteLoggato.getUtente().getRuolo().getNome().equals("ADMIN")
 				|| utenteLoggato.getUtente().getSetPermessi().contains(servicePermesso.findById("AM"))) {
 			Utente u = serviceUtente.findByEmail(email);
+			if(Arrays.stream(permessi).anyMatch("admin"::equals)) {
+				u.setRuolo(serviceRuolo.getById("ADMIN"));
+				List<String> permessiList = Arrays.stream(permessi).filter(x-> !x.equals("admin")).collect(Collectors.toList());
+				permessi = permessiList.toArray(new String[permessiList.size()]);
+			}else {
+				if(u.getRuolo().getNome().equals("ADMIN"))
+					u.setRuolo(serviceRuolo.getById("USER"));
+			}
+				
 			Set<Permesso> permessiUtente = new HashSet<Permesso>();
 			boolean flag;
 			Set<Permesso> pUtenti = u.getSetPermessi();
@@ -332,7 +353,7 @@ public class UtenteController extends BaseController {
 
 			u.setSetPermessi(permessiUtente);
 			serviceUtente.save(u);
-			saveLog("modificato permessi i permessi di " + serviceDatiPersonali.findByAutore(u).getNome() + " "
+			saveLog("modificato i permessi di " + serviceDatiPersonali.findByAutore(u).getNome() + " "
 					+ serviceDatiPersonali.findByAutore(u).getCognome(), utenteLoggato);
 			return "redirect:/profile/gestisciPermesso";
 		}
