@@ -809,7 +809,7 @@ COLONNA DESTRA
 							<h3 th:text="${film[0].titolo}" style="color: white;"></h3>
 						</div>
 						<p style="color: black">Ecco dove lo potrai trovare:</p>
-						<p th:text="${film[0].cinema.nome}" style="color: blue;">
+						<p th:text="${film[0].contenuto}" style="color: blue;">
 						<div th:if="${GML}">
 							<form th:action="@{'/cinema/update/'+${film[0].id}}"
 								th:if="${GML}" method="get">
@@ -836,7 +836,7 @@ COLONNA DESTRA
 							<h3 th:text="${film[1].titolo}" style="color: white;"></h3>
 						</div>
 						<p style="color: black">Ecco dove lo potrai trovare:</p>
-						<p th:text="${film[1].cinema.nome}" style="color: blue;">
+						<p th:text="${film[1].contenuto}" style="color: blue;">
 						<div th:if="${GML}">
 							<form th:action="@{'/cinema/update/'+${film[1].id}}"
 								th:if="${GML}" method="get">
@@ -863,7 +863,7 @@ COLONNA DESTRA
 							<h3 th:text="${film[2].titolo}" style="color: white;"></h3>
 						</div>
 						<p style="color: black">Ecco dove lo potrai trovare:</p>
-						<p th:text="${film[2].cinema.nome}" style="color: blue;">
+						<p th:text="${film[2].contenuto}" style="color: blue;">
 						<div th:if="${GML}">
 							<form th:action="@{'/cinema/update/'+${film[2].id}}"
 								th:if="${GML}" method="get">
