@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html xmlns:th="http://www.thymeleaf.org" lang="it">
 <head>
 <title>MyLife</title>
@@ -88,6 +89,19 @@
 .carousel-caption {
 	top: 450px;
 }
+@media screen and (max-width: 1600px) {
+	.carousel-caption {
+		top: 190px;
+
+	}
+	.h1caption {
+
+		font-size: 25px;
+	}
+	.carousel-inner img {
+		height: 550px;
+	}
+}
 </style>
 
 </head>
@@ -124,7 +138,7 @@
 						class="fa fa-bell mr-n4"></i>
 				</a>
 					<div
-						class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
+							class="dropdown-menu scrollable-menu dropdown-menu-right dropdown-secondary"
 						th:if="${utenteDati.setNotifiche.size > 0}"
 						aria-labelledby="navbarDropdownMenuLink-5">
 						<div class="dropdown-item waves-effect waves-light"
