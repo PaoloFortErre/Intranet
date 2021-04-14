@@ -448,31 +448,50 @@
 												</button>
 											</form>
 										</div>
-
-										<!-- MODIFICA POST -->
-
 										<div th:if="(${post.autore.id} == ${session.id}) and ${UB}"
 											style="display: inline-block;">
-											<form th:action="@{/myLife/editPost(id=${post.id})}"
-												method="post" enctype="multipart/form-data">
-												<button name="button" type="submit"
-													style="background-color: transparent; color: white; border: 0px solid #303030;"
-													th:onclick="'showAreaPost(' + ${post.id} + ')'"
-													class="buttonAzioni">
-													<img src="/view/MyLife/images/edit.png" width="45%">
-												</button>
-
-												<textarea th:class="postModificato + ${post.id}"
+										<!-- MODAL MODIFICA POST -->
+										<div class="modal" th:id="'postModal' + ${post.id}">
+						                  <div class="modal-dialog">
+						                    <div class="modal-content " >
+						                      <div class="modal-header">
+						                        <h4 class="modal-title" style="color: black;">Modifica il tuo post</h4>
+						                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+						                          <span aria-hidden="true">&times;</span>
+						                        </button>
+						                      </div>
+						                      <div class="modal-body">
+						                        <div class="container">
+						                        <form th:action="@{/myLife/editPost(id=${post.id})}" method="post" enctype="multipart/form-data">
+						                          <textarea th:class="postModificato + ${post.id}"
 													name="testo" placeholder="Modifica post" cols="20"
-													rows="2.5" id="post"
-													style="display: none; width: 350px; color: BLACK;" required></textarea>
+													rows="2.5" id="post" th:text="${post.testo}"
+													style="width: 350px; color: BLACK;" required></textarea><br>
 												<input type="file" name="document"
 													style="display: none; color: black;"
 													th:class="editfoto +  ${post.id}">
-											</form>
+
+						                        </div>
+						                      </div>
+						                      <div class="modal-footer">
+						                        <button type="button" class="btn btn-danger" data-dismiss="modal">ANNULLA</button>
+							                    
+							                 		<button type="submit" class="btn btn-success">CONFERMA</button>
+							                    </form>
+						                      </div>
+						                    </div>
+						                  </div>
+						                </div>
+
+										<!-- MODIFICA POST -->
+										<div class="container text-center mt-2" data-toggle="modal" th:attr="data-target='#postModal' + ${post.id}">
+											<button name="button" type="submit" style="background-color: transparent; 
+												color: white; border: 0px solid #303030;" class="buttonAzioni">
+												<img src="/view/MyLife/images/edit.png" width="45%">
+											</button>
 										</div>
 
-
+									</div>
 
 									</div>
 									<!--  <img th:src="'data:image/png;base64,' + ${utenteDati.settore.getImgData(utenteDati.settore.logo)}"
@@ -606,21 +625,49 @@
 														<img src="/view/MyLife/images/trash.png" width="23px">
 													</button>
 												</form></td>
-
-											<td th:if="${commento.autore.id} == ${session.id} and ${UB}">
-												<form th:action="@{/myLife/editCommento(id=${commento.id})}"
-													method="post">
-													<button name="button" type="submit"
-														th:onclick="'showAreaCommento(' + ${commento.id} + ')'"
-														id="bottoneModifica">
-														<img src="/view/MyLife/images/edit.png" width="23px"
-															style="margin-right: 10px;">
-													</button>
-													<textarea th:class="commentoModificato + ${commento.id}"
+												
+										<td>
+											<div th:if="${commento.autore.id} == ${session.id} and ${UB}"
+											style="display: inline-block;">
+										<!-- MODAL MODIFICA COMMENTO -->
+										<div class="modal" th:id="'commentoModal' + ${commento.id}">
+						                  <div class="modal-dialog">
+						                    <div class="modal-content " >
+						                      <div class="modal-header">
+						                        <h4 class="modal-title" style="color: black;">Modifica il tuo commento</h4>
+						                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+						                          <span aria-hidden="true">&times;</span>
+						                        </button>
+						                      </div>
+						                      <div class="modal-body">
+						                        <div class="container">
+						                        <form th:action="@{/myLife/editCommento(id=${commento.id})}" method="post">
+						                          <textarea th:class="commentoModificato + ${commento.id}"
 														name="testo" id="post" placeholder="Modifica commento"
-														required rows="2.5"
-														style="display: none; color: black; width: 175px"></textarea>
-												</form>
+														required rows="2.5" th:text="${commento.testo}"
+														style="color: black; width: 430px"></textarea>
+
+						                        </div>
+						                      </div>
+						                      <div class="modal-footer">
+						                        <button type="button" class="btn btn-danger" data-dismiss="modal">ANNULLA</button>
+							                    
+							                 		<button type="submit" class="btn btn-success">CONFERMA</button>
+							                    </form>
+						                      </div>
+						                    </div>
+						                  </div>
+						                </div>
+
+										<!-- MODIFICA COMMENTO -->
+										<div class="container text-center mt-2" data-toggle="modal" th:attr="data-target='#commentoModal' + ${commento.id}">
+											<button name="button" id="bottoneModifica">
+												<img src="/view/MyLife/images/edit.png" width="23px" style="margin-right: 10px;">
+											</button>
+										</div>
+
+									</div>	
+													
 											</td>
 										</tr>
 										<tr>
@@ -1028,17 +1075,6 @@ COLONNA DESTRA
 
 	</script>
 	<script>
-		function showAreaCommento(id) {
-
-			document.getElementsByClassName('commentoModificato' + id)[0].style.display = "block";
-
-		}
-
-		function showAreaPost(id) {
-			document.getElementsByClassName('postModificato' + id)[0].style.display = "block";
-			document.getElementsByClassName("editfoto" + id)[0].style.display = "block";
-
-		}
 		function film1() {
 			document.getElementById("secondoFilm").style.display = "none";
 			document.getElementById("primoFilm").style.display = "block";
