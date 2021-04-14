@@ -422,7 +422,12 @@ table, th, td {
 			</div>
 		</div>
 		<br> <br> <br>
+
+
 		<!-- ROW MACCHINA  -->
+
+
+
 		<div class="row mt-5" id="rowmacchina1">
 			<div class="col-xs-12 col-sm-12 col-lg-12 col-xl-12">
 				<br>
@@ -430,29 +435,90 @@ table, th, td {
 
 			</div>
 			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4">
+
 				<table class="table table-borderless"
-					th:if="${nuoveAssunzioni!=null}">
+					th:if="${nuoveAssunzioni.size>0}">
+
 
 					<tr>
-						<td th:each="nuoveAssunzioni :${nuoveAssunzioni}"
-							style="text-align: center; vertical-align: middle;"><a
-							th:href="@{/profile/viewProfile/(id=${nuoveAssunzioni.id})}"><img
-								th:src="'data:image/png;base64,' + ${nuoveAssunzioni.immagine.getImgData(nuoveAssunzioni.immagine.data)}"
-								alt="fotoProfiloUtente" class="img-fluid" width="250px"
-								style="margin-bottom: -17px; height: 380px"></a></td>
-					</tr>
+						<td
+							style="text-align: center; vertical-align: middle;">
 
-					<tr>
-						<td th:each="nuoveAssunzioni :${nuoveAssunzioni}"
-							style="text-align: center;">
-							<p style="font-size: 22px; margin-bottom: -5px">Scopri chi è
-								il nuovo arrivato</p> <a
-							style="font-style: italic; font-weight: 900; font-size: 25px; text-decoration: none;"
-							th:href="@{/profile/viewProfile/(id=${nuoveAssunzioni.id})}"
-							th:text="${nuoveAssunzioni.nome} + ' ' + ${nuoveAssunzioni.cognome}"></a>
+							<div id="x123" class="carousel slide" data-ride="carousel">
+
+							<div class="carousel-inner">
+								<div class="carousel-item active" th:if="${nuoveAssunzioni.size>0}">
+									<div class="container">
+
+										<a
+												th:href="@{/profile/viewProfile/(id=${nuoveAssunzioni[0].id})}"><img
+												th:src="'data:image/png;base64,' + ${nuoveAssunzioni[0].immagine.getImgData(nuoveAssunzioni[0].immagine.data)}"
+												alt="fotoProfiloUtente" class="img-fluid" width="250px" style="height: 380px;">
+										</a>
+									</div>
+
+									<br> <br>
+									<p style="font-size: 22px; margin-bottom: -5px">Scopri chi è
+										il nuovo arrivato</p>
+									<a
+											style="font-style: italic; font-weight: 900; font-size: 25px; text-decoration: none;"
+											th:href="@{/profile/viewProfile/(id=${nuoveAssunzioni[0].id})}"
+											th:text="${nuoveAssunzioni[0].nome} + ' ' + ${nuoveAssunzioni[0].cognome}"></a>
+
+									<br>
+								</div>
+
+									<div class="carousel-item" th:if="${nuoveAssunzioni.size>1}">
+										<div class="container">
+
+											<a
+													th:href="@{/profile/viewProfile/(id=${nuoveAssunzioni[1].id})}"><img
+													th:src="'data:image/png;base64,' + ${nuoveAssunzioni[1].immagine.getImgData(nuoveAssunzioni[1].immagine.data)}"
+													alt="fotoProfiloUtente" class="img-fluid" width="250px" style="height: 380px;">
+											</a>
+										</div>
+
+										<br> <br>
+										<p style="font-size: 22px; margin-bottom: -5px">Scopri chi è
+											il nuovo arrivato</p>
+										<a
+												style="font-style: italic; font-weight: 900; font-size: 25px; text-decoration: none;"
+												th:href="@{/profile/viewProfile/(id=${nuoveAssunzioni[1].id})}"
+												th:text="${nuoveAssunzioni[1].nome} + ' ' + ${nuoveAssunzioni[1].cognome}"></a>
+
+										<br>
+									</div>
+									<div class="carousel-item " th:if="${nuoveAssunzioni.size>2}">
+										<div class="container">
+
+											<a
+													th:href="@{/profile/viewProfile/(id=${nuoveAssunzioni[2].id})}"><img
+													th:src="'data:image/png;base64,' + ${nuoveAssunzioni[2].immagine.getImgData(nuoveAssunzioni[2].immagine.data)}"
+													alt="fotoProfiloUtente" class="img-fluid" width="250px" style="height: 380px;">
+											</a>
+										</div>
+
+										<br> <br>
+										<p style="font-size: 22px; margin-bottom: -5px">Scopri chi è
+											il nuovo arrivato</p>
+										<a
+												style="font-style: italic; font-weight: 900; font-size: 25px; text-decoration: none;"
+												th:href="@{/profile/viewProfile/(id=${nuoveAssunzioni[2].id})}"
+												th:text="${nuoveAssunzioni[2].nome} + ' ' + ${nuoveAssunzioni[2].cognome}"></a>
+
+										<br>
+									</div>
+								</div>
+							</div>
+								<ul class="carousel-indicators mt-5">
+							<li data-target="#x123" data-slide-to="0" class="active"
+								th:if="${nuoveAssunzioni.size>1}"></li>
+							<li data-target="#x123" data-slide-to="1"
+								th:if="${nuoveAssunzioni.size>1}"></li>
+							<li data-target="#x123" data-slide-to="2"
+								th:if="${nuoveAssunzioni.size>2}"></li> </ul>
 						</td>
 					</tr>
-
 				</table>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4">
