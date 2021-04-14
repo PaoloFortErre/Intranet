@@ -8,7 +8,9 @@ public class FilePdf{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	private String settore;
+	@ManyToOne
+	@JoinColumn(name = "settore")
+	private Settore settore;
 	private String nome;
 	private long timestamp;
 	@Lob
@@ -44,11 +46,11 @@ public class FilePdf{
 		this.id = id;
 	}
 	
-	public String getSettore() {
+	public Settore getSettore() {
 		return settore;
 	}
 	
-	public void setSettore(String settore) {
+	public void setSettore(Settore settore) {
 		this.settore = settore;
 	}
 

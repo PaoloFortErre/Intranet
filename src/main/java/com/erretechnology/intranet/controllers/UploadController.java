@@ -80,7 +80,7 @@ public class UploadController extends BaseController{
 		filePdf.setAutore(u);
 		serviceFilePdf.insert(filePdf);
 		saveLog("Inserito un nuovo modulo", u );
-		notificaSelezionati("ha inserito un nuovo modulo!", filePdf.getSettore(), u, "Moduli");
+		notificaSelezionati("ha inserito un nuovo modulo!", filePdf.getSettore().getNomeSettore(), u, "Moduli");
 
 
 		// return success response
