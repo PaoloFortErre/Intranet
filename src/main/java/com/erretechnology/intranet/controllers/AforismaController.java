@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.Aforisma;
 import com.erretechnology.intranet.repositories.RepositoryAforisma;
@@ -68,14 +69,13 @@ public class AforismaController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
-	public String updateForm(@PathVariable int id, Model model) {
+	public ModelAndView updateForm(@PathVariable int id) {
+		ModelAndView mav = new ModelAndView();
 		Aforisma aforisma = repoAforisma.findById(id).get();
-		model.addAttribute("aforisma", aforisma);
-		if(aforisma.isLife()) {
-	        return "redirect:/myLife1/";
-		} else {
-	        return "redirect:/myWork/";
-		}
+		mav.addObject("aforisma", aforisma);
+		mav.addObject("isLife", aforisma.isLife());
+		mav.setViewName("aforismaFormUpdate");
+		return mav;
 	}
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
