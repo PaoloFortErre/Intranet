@@ -16,36 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `aphorism`
---
-
-DROP TABLE IF EXISTS `aphorism`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `aphorism` (
-  `id` int NOT NULL,
-  `autore` varchar(255) DEFAULT NULL,
-  `frase` varchar(255) DEFAULT NULL,
-  `visibile` bit(1) NOT NULL,
-  `utente_id` int DEFAULT NULL,
-  `is_life` bit(1) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKmtwpd9yvofce7wyjublaqsdsp` (`utente_id`),
-  CONSTRAINT `FKmtwpd9yvofce7wyjublaqsdsp` FOREIGN KEY (`utente_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `aphorism`
---
-
-LOCK TABLES `aphorism` WRITE;
-/*!40000 ALTER TABLE `aphorism` DISABLE KEYS */;
-INSERT INTO `aphorism` VALUES (495,'Mahatma Gandhi','Sii il cambiamento che vuoi vedere nel mondo',_binary '',1,_binary '\0'),(497,'Nelson Mandela','Sembra sempre impossibile, finché non viene fatto',_binary '',1,_binary '\0'),(856,'Seneca','Non esiste vento favorevole per chi non sa dove andare',_binary '',1,_binary '\0'),(867,'Confucio','Chi conosce tutte le risposte, non si è fatto tutte le domande',_binary '',1,_binary ''),(869,'Ralph Waldo Emerson','Non andare dove il sentiero ti può portare. Vai invece dove il sentiero non c\'è ancora e lascia dietro di te una traccia',_binary '',1,_binary ''),(871,'Steve Jobs','Ogni sogno a cui rinunci è un pezzo di futuro che smette di esistere',_binary '',1,_binary '');
-/*!40000 ALTER TABLE `aphorism` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Temporary view structure for view `mylife_last_data`
 --
 
@@ -93,7 +63,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `mylife_last_data` AS (select `aphorism`.`id` AS `id`,`aphorism`.`frase` AS `titolo`,`aphorism`.`autore` AS `contenuto`,NULL AS `foto`,NULL AS `timestamp`,'aphorism' AS `tipo` from `aphorism` where ((`aphorism`.`visibile` = '1') and (`aphorism`.`is_life` = '1')) order by `aphorism`.`id` desc limit 3) union (select `event`.`id` AS `id`,`event`.`titolo` AS `titolo`,`event`.`luogo` AS `contenuto`,`event`.`id_immagine` AS `foto`,`event`.`data` AS `timestamp`,'eventi' AS `tipo` from `event` where (`event`.`visibile` = '1') order by `event`.`id` desc limit 2) union (select `cinema`.`id` AS `id`,`cinema`.`titolo` AS `titolo`,`cinema`.`id_categoria` AS `contenuto`,`cinema`.`id_immagine` AS `foto`,NULL AS `timestamp`,'cinema' AS `tipo` from `cinema` where (`cinema`.`visibile` = '1') order by `cinema`.`id` desc limit 3) union (select `book`.`id` AS `id`,`book`.`titolo` AS `titolo`,`book`.`scrittore` AS `contenuto`,`book`.`id_immagine` AS `foto`,NULL AS `timestamp`,'book' AS `tipo` from `book` where (`book`.`visibile` = '1') order by `book`.`id` desc limit 2) union (select `video`.`id` AS `id`,`video`.`sotto_titolo` AS `titolo`,`video`.`link` AS `contenuto`,NULL AS `timestamp`,NULL AS `foto`,'video' AS `tipo` from `video` where (`video`.`pagina` = 'MyLife') order by `video`.`id` desc limit 1) */;
+/*!50001 VIEW `mylife_last_data` AS (select `aphorism`.`id` AS `id`,`aphorism`.`frase` AS `titolo`,`aphorism`.`autore` AS `contenuto`,NULL AS `foto`,NULL AS `timestamp`,'aphorism' AS `tipo` from `aphorism` where ((`aphorism`.`visibile` = '1') and (`aphorism`.`is_life` = '1')) order by `aphorism`.`id` desc limit 3) union (select `event`.`id` AS `id`,`event`.`titolo` AS `titolo`,`event`.`luogo` AS `contenuto`,(select `file_immagini`.`data` from `file_immagini` where (`file_immagini`.`id` = `event`.`id_immagine`)) AS `foto`,`event`.`data` AS `timestamp`,'eventi' AS `tipo` from `event` where (`event`.`visibile` = '1') order by `event`.`id` desc limit 2) union (select `cinema`.`id` AS `id`,`cinema`.`titolo` AS `titolo`,(select `cinema_category`.`nome` from `cinema_category` where (`cinema_category`.`id` = `cinema`.`id_categoria`)) AS `contenuto`,(select `file_immagini`.`data` from `file_immagini` where (`file_immagini`.`id` = `cinema`.`id_immagine`)) AS `foto`,NULL AS `timestamp`,'cinema' AS `tipo` from `cinema` where (`cinema`.`visibile` = '1') order by `cinema`.`id` desc limit 3) union (select `book`.`id` AS `id`,`book`.`titolo` AS `titolo`,`book`.`scrittore` AS `contenuto`,(select `file_immagini`.`data` from `file_immagini` where (`file_immagini`.`id` = `book`.`id_immagine`)) AS `foto`,NULL AS `timestamp`,'book' AS `tipo` from `book` where (`book`.`visibile` = '1') order by `book`.`id` desc limit 4) union (select `video`.`id` AS `id`,`video`.`sotto_titolo` AS `titolo`,`video`.`link` AS `contenuto`,NULL AS `timestamp`,NULL AS `foto`,'video' AS `tipo` from `video` where (`video`.`pagina` = 'MyLife') order by `video`.`id` desc limit 1) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -111,7 +81,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `mywork_last_data` AS (select `aphorism`.`id` AS `id`,NULL AS `foto`,`aphorism`.`frase` AS `titolo`,`aphorism`.`autore` AS `contenuto`,NULL AS `timestamp`,NULL AS `luogo`,'aphorism' AS `tipo` from `aphorism` where ((`aphorism`.`visibile` = '1') and (`aphorism`.`is_life` = '0')) order by `aphorism`.`id` desc limit 3) union (select `news`.`id` AS `id`,`news`.`id_immagine` AS `foto`,`news`.`titolo` AS `titolo`,`news`.`contenuto` AS `contenuto`,`news`.`data` AS `timestamp`,`news`.`luogo` AS `luogo`,'event' AS `tipo` from `news` where ((`news`.`type` = 1) and (`news`.`visibile` = '1')) order by `news`.`id` desc limit 3) union (select `news`.`id` AS `id`,`news`.`id_immagine` AS `foto`,`news`.`titolo` AS `titolo`,`news`.`contenuto` AS `contenuto`,`news`.`data` AS `timestamp`,`news`.`luogo` AS `luogo`,'news' AS `tipo` from `news` where ((`news`.`type` = 0) and (`news`.`visibile` = '1')) order by `news`.`id` desc limit 3) union (select `sondaggio`.`id` AS `id`,NULL AS `foto`,`sondaggio`.`nome_sondaggio` AS `titolo`,`sondaggio`.`link` AS `contenuto`,`sondaggio`.`timestamp` AS `timestamp`,NULL AS `luogo`,'sondaggio' AS `tipo` from `sondaggio` where (`sondaggio`.`visibile` = '1') order by `sondaggio`.`id` desc limit 3) union (select `video`.`id` AS `id`,NULL AS `foto`,`video`.`sotto_titolo` AS `titolo`,`video`.`link` AS `contenuto`,NULL AS `timestamp`,NULL AS `luogo`,'video' AS `tipo` from `video` where (`video`.`pagina` = 'MyWork') order by `video`.`id` desc limit 1) */;
+/*!50001 VIEW `mywork_last_data` AS (select `aphorism`.`id` AS `id`,NULL AS `foto`,`aphorism`.`frase` AS `titolo`,`aphorism`.`autore` AS `contenuto`,NULL AS `timestamp`,NULL AS `luogo`,'aphorism' AS `tipo` from `aphorism` where ((`aphorism`.`visibile` = '1') and (`aphorism`.`is_life` = '0')) order by `aphorism`.`id` desc limit 3) union (select `news`.`id` AS `id`,(select `file_immagini`.`data` from `file_immagini` where (`file_immagini`.`id` = `news`.`id_immagine`)) AS `foto`,`news`.`titolo` AS `titolo`,`news`.`contenuto` AS `contenuto`,`news`.`data` AS `timestamp`,`news`.`luogo` AS `luogo`,'event' AS `tipo` from `news` where ((`news`.`type` = 1) and (`news`.`visibile` = '1')) order by `news`.`id` desc limit 3) union (select `news`.`id` AS `id`,(select `file_immagini`.`data` from `file_immagini` where (`file_immagini`.`id` = `news`.`id_immagine`)) AS `foto`,`news`.`titolo` AS `titolo`,`news`.`contenuto` AS `contenuto`,`news`.`data` AS `timestamp`,`news`.`luogo` AS `luogo`,'news' AS `tipo` from `news` where ((`news`.`type` = 0) and (`news`.`visibile` = '1')) order by `news`.`id` desc limit 3) union (select `sondaggio`.`id` AS `id`,NULL AS `foto`,`sondaggio`.`nome_sondaggio` AS `titolo`,`sondaggio`.`link` AS `contenuto`,`sondaggio`.`timestamp` AS `timestamp`,NULL AS `luogo`,'sondaggio' AS `tipo` from `sondaggio` where (`sondaggio`.`visibile` = '1') order by `sondaggio`.`id` desc limit 3) union (select `video`.`id` AS `id`,NULL AS `foto`,`video`.`sotto_titolo` AS `titolo`,`video`.`link` AS `contenuto`,NULL AS `timestamp`,NULL AS `luogo`,'video' AS `tipo` from `video` where (`video`.`pagina` = 'MyWork') order by `video`.`id` desc limit 1) union (select `client`.`id` AS `id`,(select `file_immagini`.`data` from `file_immagini` where (`file_immagini`.`id` = `client`.`id_immagine`)) AS `foto`,`client`.`nome` AS `titolo`,NULL AS `contenuto`,`client`.`data_inizio` AS `timestamp`,NULL AS `luogo`,'cliente' AS `tipo` from `client` where (`client`.`visibile` = '1') order by `client`.`id` desc limit 3) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -125,4 +95,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-09 10:03:03
+-- Dump completed on 2021-04-14 10:13:00

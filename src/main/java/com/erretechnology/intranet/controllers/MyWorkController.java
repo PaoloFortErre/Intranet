@@ -33,7 +33,6 @@ public class MyWorkController extends BaseController {
 	public ModelAndView primaPagina(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		List<ElementiMyWork> elementi = serviceElementiMyWork.findAll();
-		elementi.stream().filter(x -> x.getFoto() != null).forEach(x -> x.setImmagine(serviceFileImmagine.getImmagine(x.getFoto())));
 		UtenteDatiPersonali u1 = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		mav.addObject("utenteDati", u1);
 		mav.setViewName("myWork");

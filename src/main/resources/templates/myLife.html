@@ -700,10 +700,10 @@ COLONNA DESTRA
 						<li data-target="#demo1" data-slide-to="2" th:if="${eventilife.size>2}"></li>
 					</ul>
 					<br><div class="carousel-inner" th:if="${eventilife.size>0}" >
-						<div class="carousel-item active" th:if="${eventilife[0].immagine!=null}">
+						<div class="carousel-item active" th:if="${eventilife[0].foto!=null}">
 							
 						
-							<img th:src="'data:image/png;base64,' + ${eventilife[0].immagine.getImgData(eventilife[0].immagine.data)}" width="100%" style="height: 450px"  >
+							<img th:src="'data:image/png;base64,' + ${eventilife[0].getImgData(eventilife[0].foto)}" width="100%" style="height: 450px"  >
 							<br>
 								<h3 th:text="${eventilife[0].titolo}" style="text-align: center; font-size: 30px; font-weight: bold; color: #303030" class="mt-3"></h3>
 								<p th:text="${#dates.format(eventilife[0].timestamp*1000, 'dd/MM/yyyy')}"  style="text-align: center; color: #303030" ></p>
@@ -725,7 +725,7 @@ COLONNA DESTRA
 							</div>
 						</div>
 						<div class="carousel-item" th:if="${eventilife.size>1}">
-							<img th:src="'data:image/png;base64,' + ${eventilife[1].immagine.getImgData(eventilife[1].immagine.data)}" style="height: 450px" >
+							<img th:src="'data:image/png;base64,' + ${eventilife[1].getImgData(eventilife[1].foto)}" style="height: 450px" >
 							<br>
 								<h3 th:text="${eventilife[1].titolo}"  style="text-align: center;color: #303030; font-size: 30px; font-weight: bold;" class="mt-3" ></h3>
 								<p th:text="${#dates.format(eventilife[1].timestamp*1000, 'dd/MM/yyyy')}"  style="text-align: center; color: #303030" ></p>
@@ -747,7 +747,7 @@ COLONNA DESTRA
 							</div>
 						</div>
 						<div class="carousel-item" th:if="${eventilife.size>2}">
-							<img th:src="'data:image/png;base64,' + ${eventilife[2].immagine.getImgData(eventilife[2].immagine.data)}" style="height: 450px" >
+							<img th:src="'data:image/png;base64,' + ${eventilife[2].getImgData(eventilife[2].foto)}" style="height: 450px" >
 							<br><h3 th:text="${eventilife[2].titolo}"  style="text-align:  center;color: #303030;font-size: 30px; font-weight: bold;" class="mt-3"></h3>
 								<p th:text="${#dates.format(eventilife[2].timestamp*1000, 'dd/MM/yyyy')}"  style="text-align: center; color: #303030"  ></p>
 						<div style="margin: 0 auto; text-align: center" th:if="${GML}">
@@ -803,7 +803,7 @@ COLONNA DESTRA
 
 						<div class="caption">
 							<img
-								th:src="'data:image/png;base64,' + ${film[0].immagine.getImgData(film[0].immagine.data)}"
+								th:src="'data:image/png;base64,' + ${film[0].getImgData(film[0].foto)}"
 								class="img-fluid">
 
 							<h3 th:text="${film[0].titolo}" style="color: white;"></h3>
@@ -830,7 +830,7 @@ COLONNA DESTRA
 					<div id="secondoFilm" style="display: none;" th:if="${film.size>1}">
 						<div class="caption">
 							<img
-								th:src="'data:image/png;base64,' + ${film[1].immagine.getImgData(film[1].immagine.data)}"
+								th:src="'data:image/png;base64,' + ${film[1].getImgData(film[1].foto)}"
 								class="img-fluid">
 
 							<h3 th:text="${film[1].titolo}" style="color: white;"></h3>
@@ -857,7 +857,7 @@ COLONNA DESTRA
 					<div id="terzoFilm" style="display: none;" th:if="${film.size>2}">
 						<div class="caption">
 							<img
-								th:src="'data:image/png;base64,' + ${film[2].immagine.getImgData(film[2].immagine.data)}"
+								th:src="'data:image/png;base64,' + ${film[2].getImgData(film[2].foto)}"
 								class="img-fluid">
 
 							<h3 th:text="${film[2].titolo}" style="color: white;"></h3>
@@ -915,7 +915,7 @@ COLONNA DESTRA
 					<table id="libri" th:if="${libri.size > 0}">
 						<tr>
 							<td><img
-								th:src="'data:image/png;base64,' + ${libri[0].immagine.getImgData(libri[0].immagine.data)}"
+								th:src="'data:image/png;base64,' + ${libri[0].getImgData(libri[0].foto)}"
 								width="135px" style="padding: 5px;"></td>
 							<td><p th:text="${libri[0].titolo}"
 									STYLE="margin-left: 5px;; color: #303030;"></p>
@@ -944,7 +944,7 @@ COLONNA DESTRA
 						</tr>
 						<tr th:if="${libri.size>1}">
 							<td><img
-								th:src="'data:image/png;base64,' + ${libri[1].immagine.getImgData(libri[1].immagine.data)}"
+								th:src="'data:image/png;base64,' + ${libri[1].getImgData(libri[1].foto)}"
 								width="135px" style="padding: 5px;"></td>
 							<td><p th:text="${libri[1].titolo}"
 									STYLE="margin-left: 5px;; color: #303030;"></p>

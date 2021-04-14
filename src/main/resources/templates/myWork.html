@@ -481,7 +481,7 @@ table, th, td {
 									<div class="carousel-item active" th:if="${nuoviClienti.size>0}">
 										<div class="container">
 											<img
-												th:src="'data:image/png;base64,' + ${nuoviClienti[0].immagine.getImgData(nuoviClienti[0].immagine.data)}"
+												th:src="'data:image/png;base64,' + ${nuoviClienti[0].getImgData(nuoviClienti[0].foto)}"
 												alt="Clienti" width="400px" style="height: 300px;"
 												class="img-fluid">
 										</div>
@@ -570,7 +570,7 @@ table, th, td {
 									<div class="carousel-item " th:if="${nuoviClienti.size>1}">
 										<div class="container">
 											<img
-												th:src="'data:image/png;base64,' + ${nuoviClienti[1].immagine.getImgData(nuoviClienti[1].immagine.data)}"
+												th:src="'data:image/png;base64,' + ${nuoviClienti[1].getImgData(nuoviClienti[1].foto)}"
 												alt="Clienti" width="400px" style="height: 300px;"
 												class="img-fluid">
 										</div>
@@ -657,7 +657,7 @@ table, th, td {
 									<div class="carousel-item " th:if="${nuoviClienti.size>2}">
 										<div class="container">
 											<img
-												th:src="'data:image/png;base64,' + ${nuoviClienti[2].immagine.getImgData(nuoviClienti[2].immagine.data)}"
+												th:src="'data:image/png;base64,' + ${nuoviClienti[2].getImgData(nuoviClienti[2].foto)}"
 												alt="Clienti" width="400px" style="height: 300px;"
 												class="img-fluid">
 										</div>
@@ -766,7 +766,7 @@ table, th, td {
 									<div class="carousel-item active">
 										<div class="container">
 											<img
-												th:src="'data:image/png;base64,' + ${newsSlide[0].immagine.getImgData(newsSlide[0].immagine.data)}"
+												th:src="'data:image/png;base64,' + ${newsSlide[0].getImgData(newsSlide[0].foto)}"
 												alt="News" width="400px" style="height: 390px;"
 												class="img-fluid">
 										</div>
@@ -850,7 +850,7 @@ table, th, td {
 									<div class="carousel-item" th:if="${newsSlide.size>1}">
 										<div class="container">
 											<img
-												th:src="'data:image/png;base64,' + ${newsSlide[1].immagine.getImgData(newsSlide[1].immagine.data)}"
+												th:src="'data:image/png;base64,' + ${newsSlide[1].getImgData(newsSlide[1].foto)}"
 												alt="News" width="400px" style="height: 390px"
 												class="img-fluid">
 										</div>
@@ -932,7 +932,7 @@ table, th, td {
 									<div class="carousel-item" th:if="${newsSlide.size>2}">
 										<div class="container">
 											<img
-												th:src="'data:image/png;base64,' + ${newsSlide[2].immagine.getImgData(newsSlide[2].immagine.data)}"
+												th:src="'data:image/png;base64,' + ${newsSlide[2].getImgData(newsSlide[2].foto)}"
 												width="400px" style="height: 390px;" alt="News"
 												class="img-fluid">
 										</div>
@@ -1137,7 +1137,7 @@ ROW SCHIZZO
 									<div class="carousel-item active">
 										<div class="container">
 											<img
-												th:src="'data:image/png;base64,' + ${eventi[0].immagine.getImgData(eventi[0].immagine.data)}"
+												th:src="'data:image/png;base64,' + ${eventi[0].getImgData(eventi[0].foto)}"
 												alt="evento" width="400px" style="height: 350px;"
 												class="img-fluid" >
 										</div>
@@ -1234,7 +1234,7 @@ ROW SCHIZZO
 									<div class="carousel-item" th:if="${eventi.size > 1}">
 										<div class="container">
 											<img
-												th:src="'data:image/png;base64,' + ${eventi[1].immagine.getImgData(eventi[1].immagine.data)}"
+												th:src="'data:image/png;base64,' + ${eventi[1].getImgData(eventi[1].foto)}"
 												alt="evento" width="400px" style="height: 350px;"
 												class="img-fluid" >
 										</div>
@@ -1329,7 +1329,7 @@ ROW SCHIZZO
 									<div class="carousel-item" th:if="${eventi.size > 2}">
 										<div class="container">
 											<img
-												th:src="'data:image/png;base64,' + ${eventi[2].immagine.getImgData(eventi[2].immagine.data)}"
+												th:src="'data:image/png;base64,' + ${eventi[2].getImgData(eventi[2].foto)}"
 												width="400px" style="height: 350px;" class="img-fluid" alt="evento">
 										</div>
 										<br> <br>

@@ -241,8 +241,6 @@ public class HomeController extends BaseController{
 		ModelAndView mav = new ModelAndView();
 		List<ElementiMyLife> elementi = serviceElementiMyLife.findAll();
 	
-		elementi.stream().filter(x -> x.getTipo().equals("cinema")).forEach(x->x.setCinema(repoCategoria.findById(Integer.parseInt(x.getContenuto())).get()));
-		elementi.stream().filter(x -> x.getFoto() != null).forEach(x -> x.setImmagine(serviceFileImmagine.getImmagine(x.getFoto())));
 		List<ElementiMyLife> evento = elementi.stream().filter(x -> x.getTipo().equals("eventi")).collect(Collectors.toList());
 		List<ElementiMyLife> aforismi = elementi.stream().filter(x -> x.getTipo().equals("aphorism")).collect(Collectors.toList());
 		List<ElementiMyLife> film = elementi.stream().filter(x -> x.getTipo().equals("cinema")).collect(Collectors.toList());

@@ -588,10 +588,10 @@ font-size: 75px;
 				style="text-align: center" th:if="${film.size>0}">
 				<div class="profile-card-2 mt-5">
 					<img
-						th:src="'data:image/png;base64,' + ${film[0].immagine.getImgData(film[0].immagine.data)}"
+						th:src="'data:image/png;base64,' + ${film[0].getImgData(film[0].foto)}"
 						class="img img-responsive" width="100%" height="550px" alt="film">
 					<div class="profile-name" th:text="${film[0].titolo}"></div>
-					<div class="profile-username" th:text="${film[0].cinema.nome}">
+					<div class="profile-username" th:text="${film[0].contenuto}">
 					</div>
 				</div>
 
@@ -675,10 +675,10 @@ font-size: 75px;
 				style="text-align: center;" th:if="${film.size>1}">
 				<div class="profile-card-2 mt-5">
 					<img
-						th:src="'data:image/png;base64,' + ${film[1].immagine.getImgData(film[1].immagine.data)}"
+						th:src="'data:image/png;base64,' + ${film[1].getImgData(film[1].foto)}"
 						class="img img-responsive" width="100%" height="550px" alt="film">
 					<div class="profile-name" th:text="${film[1].titolo}"></div>
-					<div class="profile-username" th:text="${film[1].cinema.nome}"></div>
+					<div class="profile-username" th:text="${film[1].contenuto}"></div>
 				</div>
 				<button type="submit" name="modifica" data-toggle="modal"
 					data-target="#myModal5" th:if="${GML}"
@@ -757,10 +757,10 @@ font-size: 75px;
 				style="text-align: center" th:if="${film.size>2}">
 				<div class="profile-card-2 mt-5">
 					<img
-						th:src="'data:image/png;base64,' + ${film[2].immagine.getImgData(film[2].immagine.data)}"
+						th:src="'data:image/png;base64,' + ${film[2].getImgData(film[2].foto)}"
 						class="img img-responsive" width="100%" height="550px" alt="film">
 					<div class="profile-name" th:text="${film[2].titolo}"></div>
-					<div class="profile-username" th:text="${film[2].cinema.nome}"></div>
+					<div class="profile-username" th:text="${film[2].contenuto}"></div>
 
 				</div>
 				<button type="submit" name="modifica" data-toggle="modal"
@@ -872,11 +872,11 @@ font-size: 75px;
 					<div class="carousel-inner" th:if="${eventilife.size>0}"
 						style="padding: 50px">
 						<div class="carousel-item active"
-							th:if="${eventilife[0].immagine!=null}">
+							th:if="${eventilife[0].foto!=null}">
 
 
 							<a th:href="${eventilife[0].contenuto}" target="blank"><img
-								th:src="'data:image/png;base64,' + ${eventilife[0].immagine.getImgData(eventilife[0].immagine.data)}"
+								th:src="'data:image/png;base64,' + ${eventilife[0].getImgData(eventilife[0].foto)}"
 								style="height: 550px" alt="evento"></a> <br>
 							<h3 th:text="${eventilife[0].titolo}"
 								style="text-align: center; font-size: 30px; font-weight: bold;"
@@ -962,7 +962,7 @@ font-size: 75px;
 						</div>
 						<div class="carousel-item" th:if="${eventilife.size>1}">
 							<a th:href="${eventilife[0].contenuto}" target="blank"><img
-								th:src="'data:image/png;base64,' + ${eventilife[1].immagine.getImgData(eventilife[1].immagine.data)}"
+								th:src="'data:image/png;base64,' + ${eventilife[1].getImgData(eventilife[1].foto)}"
 								style="height: 550px" alt="evento"></a> <br>
 							<h3 th:text="${eventilife[1].titolo}"
 								style="text-align: center; font-size: 30px; font-weight: bold;"
@@ -1048,7 +1048,7 @@ font-size: 75px;
 						</div>
 						<div class="carousel-item" th:if="${eventilife.size>2}">
 							<a th:href="${eventilife[0].contenuto}" target="blank"><img
-								th:src="'data:image/png;base64,' + ${eventilife[2].immagine.getImgData(eventilife[2].immagine.data)}"
+								th:src="'data:image/png;base64,' + ${eventilife[2].getImgData(eventilife[2].foto)}"
 								style="height: 550px" alt="evento"></a> <br>
 							<h3 th:text="${eventilife[2].titolo}"
 								style="text-align: center; font-size: 30px; font-weight: bold;"
@@ -1173,7 +1173,7 @@ font-size: 75px;
 				th:each="libro : ${libri}">
 				<div class="profile-card-3 mt-5">
 					<img
-						th:src="'data:image/png;base64,' + ${libro.immagine.getImgData(libro.immagine.data)}"
+						th:src="'data:image/png;base64,' + ${libro.getImgData(libro.foto)}"
 						class="img img-responsive" width="100%" height="350px" alt="Libro">
 					<div class="profile-name" th:text="${libro.titolo}"></div>
 					<div class="profile-username" th:text="${libro.contenuto}"></div>

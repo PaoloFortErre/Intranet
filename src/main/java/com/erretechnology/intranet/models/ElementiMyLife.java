@@ -1,7 +1,10 @@
 package com.erretechnology.intranet.models;
 
+import java.util.Base64;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -10,32 +13,17 @@ import javax.persistence.Transient;
 public class ElementiMyLife {
 	@Id
 	private int id;
-	private Integer foto;
+	@Lob
+	private byte[] foto;
 	private String titolo;
 	private String contenuto;
 	private Long timestamp;
 	private String tipo;
-	@Transient
-	private FileImmagine immagine;
-	@Transient
-	private CategoriaCinema cinema;
 	
-	public CategoriaCinema getCinema() {
-		return cinema;
-	}
-	public void setCinema(CategoriaCinema cinema) {
-		this.cinema = cinema;
-	}
-	public FileImmagine getImmagine() {
-		return immagine;
-	}
-	public void setImmagine(FileImmagine immagine) {
-		this.immagine = immagine;
-	}
-	public Integer getFoto() {
+	public byte[] getFoto() {
 		return foto;
 	}
-	public void setFoto(Integer foto) {
+	public void setFoto(byte[] foto) {
 		this.foto = foto;
 	}
 	public String getTitolo() {
@@ -65,4 +53,8 @@ public class ElementiMyLife {
 	public int getId() {
 		return id;
 	}
+	
+	public String getImgData(byte[] byteData) {
+        return Base64.getMimeEncoder().encodeToString(byteData);
+    }
 }

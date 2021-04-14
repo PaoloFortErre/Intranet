@@ -1,5 +1,7 @@
 package com.erretechnology.intranet.models;
 
+import java.util.Base64;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -10,25 +12,17 @@ import javax.persistence.Transient;
 public class ElementiMyWork {
 	@Id
 	private int id;
-	private Integer foto;
+	private byte[] foto;
 	private String titolo;
 	private String contenuto;
 	private Long timestamp;
 	private String luogo;
 	private String tipo;
-	@Transient
-	private FileImmagine immagine;
 	
-	public FileImmagine getImmagine() {
-		return immagine;
-	}
-	public void setImmagine(FileImmagine immagine) {
-		this.immagine = immagine;
-	}
-	public Integer getFoto() {
+	public byte[] getFoto() {
 		return foto;
 	}
-	public void setFoto(Integer foto) {
+	public void setFoto(byte[] foto) {
 		this.foto = foto;
 	}
 	public String getTitolo() {
@@ -63,6 +57,10 @@ public class ElementiMyWork {
 	}
 	public int getId() {
 		return id;
-	}	
+	}
+	
+	public String getImgData(byte[] byteData) {
+        return Base64.getMimeEncoder().encodeToString(byteData);
+    }
 	
 }
