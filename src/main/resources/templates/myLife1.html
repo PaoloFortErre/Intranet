@@ -875,7 +875,7 @@ font-size: 75px;
 							th:if="${eventilife[0].foto!=null}">
 
 
-							<a th:href="${eventilife[0].contenuto}" target="blank"><img
+							<a th:href="${eventilife[0].contenuto}" th:if="${eventilife[0].contenuto!=null}" target="blank"><img
 								th:src="'data:image/png;base64,' + ${eventilife[0].getImgData(eventilife[0].foto)}"
 								style="height: 550px" alt="evento"></a> <br>
 							<h3 th:text="${eventilife[0].titolo}"
@@ -961,7 +961,7 @@ font-size: 75px;
 							</div>
 						</div>
 						<div class="carousel-item" th:if="${eventilife.size>1}">
-							<a th:href="${eventilife[0].contenuto}" target="blank"><img
+							<a th:href="${eventilife[1].contenuto}"  th:if="${eventilife[1].contenuto!=null}" target="blank"><img
 								th:src="'data:image/png;base64,' + ${eventilife[1].getImgData(eventilife[1].foto)}"
 								style="height: 550px" alt="evento"></a> <br>
 							<h3 th:text="${eventilife[1].titolo}"
@@ -1047,7 +1047,7 @@ font-size: 75px;
 							</div>
 						</div>
 						<div class="carousel-item" th:if="${eventilife.size>2}">
-							<a th:href="${eventilife[0].contenuto}" target="blank"><img
+							<a th:href="${eventilife[1].contenuto}" th:if="${eventilife[1].contenuto!=null}" target="blank"><img
 								th:src="'data:image/png;base64,' + ${eventilife[2].getImgData(eventilife[2].foto)}"
 								style="height: 550px" alt="evento"></a> <br>
 							<h3 th:text="${eventilife[2].titolo}"
