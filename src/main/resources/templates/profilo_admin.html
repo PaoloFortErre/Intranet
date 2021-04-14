@@ -602,7 +602,6 @@
         </div>
 
         <script>
-<<<<<<< Updated upstream
         $(document).ready(
           function() {
             $.ajax({
@@ -622,29 +621,7 @@
             });
           });
           </script>
-        </body>
-        </html>
-=======
-        	$(document).ready(
-    		function() {
-    			$.ajax({
-    				type : 'POST',
-    				url : "http://localhost:8080/checkManutenzione?",
-    				success : function(data) {
-    					console.log(data);
-	    				if (data){
-	    					$("#btn-manutenzione").addClass("btn btn-success");
-	    					$('#btn-manutenzione').prop('title', 'Disattiva modalità manutenzione');
-	    				}
-	    				else{
-	    					$("#btn-manutenzione").addClass("btn btn-danger");
-	    					$('#btn-manutenzione').prop('title', 'Avvia modalità manutenzione');
-	    				}
-
-    				}
-    			});
-    		});
-        </script>
-      </body>
+  
+       </body>
       </html>
->>>>>>> Stashed changes
+
