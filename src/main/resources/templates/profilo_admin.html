@@ -405,7 +405,7 @@
 		                      <span aria-hidden="true">&times;</span>
 		                    </button>
 		                  </div>
-		                  <div class="modal-body">
+		                  <div class="modal-body" id="modal-body">
 		                    <p style="COLOR: BLACK">Confermi l'attivazione della modalità manutenzione?</p><br>
 		                    <p style="COLOR: BLACK">Gli utenti non riusciranno piu' ad accedere all'intranet aziendale</p>
 		                  </div>
@@ -615,10 +615,16 @@
                 if (data){
                   $("#btn-manutenzione").addClass("btn btn-success");
                   $('#btn-manutenzione').prop('title', 'Disattiva modalità manutenzione');
+                  $('#modal-body').empty();
+                  $('#modal-body').append(" <p style='COLOR: BLACK'>Confermi la disattivazione della modalità manutenzione?</p><br>" +
+                  "<p style='COLOR: BLACK'>Gli utenti riusciranno ad accedere all'intranet aziendale</p> ");
                 }
                 else{
                   $("#btn-manutenzione").addClass("btn btn-danger");
                   $('#btn-manutenzione').prop('title', 'Avvia modalità manutenzione');
+                  $('#modal-body').empty();
+                  $('#modal-body').append(" <p style='COLOR: BLACK'>Confermi l'attivazione della modalità manutenzione?</p><br>" +
+		                   "<p style='COLOR: BLACK'>Gli utenti non riusciranno piu' ad accedere all'intranet aziendale</p> ");
                 }
 
               }
