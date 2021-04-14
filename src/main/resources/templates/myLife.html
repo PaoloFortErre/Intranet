@@ -462,11 +462,11 @@
 						                      </div>
 						                      <div class="modal-body">
 						                        <div class="container">
-						                        <form th:action="@{/myLife/editPost(id=${post.id})}" method="post" enctype="multipart/form-data">
+						                        <form th:action="@{/myLife/editPost(id=${post.id})}" method="post" enctype="multipart/form-data" novalidate>
 						                          <textarea th:class="postModificato + ${post.id}"
 													name="testo" placeholder="Modifica post" cols="20"
 													rows="2.5" id="post" th:text="${post.testo}"
-													style="width: 350px; color: BLACK;" required></textarea><br>
+													style="width: 350px; color: BLACK;" ></textarea><br>
 												<input type="file" name="document"
 													style="display: none; color: black;"
 													th:class="editfoto +  ${post.id}">
