@@ -17,14 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.erretechnology.intranet.models.Aforisma;
-import com.erretechnology.intranet.repositories.RepositoryAforisma;
 import com.erretechnology.intranet.repositories.RepositoryUtente;
 
 @Controller
 @RequestMapping("aforisma")
 public class AforismaController extends BaseController {
-	@Autowired
-	private RepositoryAforisma repoAforisma;
+
 	@Autowired
 	private RepositoryUtente repoUtente;
 	
@@ -49,7 +47,7 @@ public class AforismaController extends BaseController {
 //		aforisma.setVisibile(true);
 		aforisma.setLife(true);
 		
-		repoAforisma.save(aforisma);
+		serviceAforisma.save(aforisma);
 		saveLog("aggiunto una aforisma", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
         return "redirect:/myLife1/";
 	}
@@ -63,7 +61,7 @@ public class AforismaController extends BaseController {
 //		aforisma.setVisibile(true);
 		aforisma.setLife(false);
 		
-		repoAforisma.save(aforisma);
+		serviceAforisma.save(aforisma);
 		saveLog("aggiunto una aforisma", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
         return "redirect:/myWork/";
 	}
@@ -71,7 +69,7 @@ public class AforismaController extends BaseController {
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public ModelAndView updateForm(@PathVariable int id) {
 		ModelAndView mav = new ModelAndView();
-		Aforisma aforisma = repoAforisma.findById(id).get();
+		Aforisma aforisma = serviceAforisma.findById(id);
 		mav.addObject("aforisma", aforisma);
 		mav.addObject("isLife", aforisma.isLife());
 		mav.setViewName("aforismaFormUpdate");
@@ -80,10 +78,10 @@ public class AforismaController extends BaseController {
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	public String update(@PathVariable int id, String frase, String autore, Model model, HttpSession session) {
-		Aforisma aforisma = repoAforisma.findById(id).get();
+		Aforisma aforisma = serviceAforisma.findById(id);
 		aforisma.setFrase(frase);
 		aforisma.setAutore(autore);
-		repoAforisma.save(aforisma);
+		serviceAforisma.save(aforisma);
 		model.addAttribute("aforisma", aforisma);
 		saveLog("modificato una aforisma", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		
@@ -96,11 +94,11 @@ public class AforismaController extends BaseController {
 	
 	@RequestMapping("/delete/{id}")
 	public String delete(@PathVariable int id, HttpSession session) {
-		Aforisma aforisma = repoAforisma.findById(id).get();
+		Aforisma aforisma = serviceAforisma.findById(id);
 //		aforisma.setVisibile(false);
 		aforisma.setAutore("");
 		aforisma.setFrase("");
-		repoAforisma.save(aforisma);
+		serviceAforisma.save(aforisma);
 		saveLog("eliminato una aforisma", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/aforisma/list";
 	}

@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -25,13 +24,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.erretechnology.intranet.models.Cliente;
 import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
-import com.erretechnology.intranet.repositories.RepositoryCliente;
 
 @Controller
 @RequestMapping("cliente")
 public class ClienteController extends BaseController{
-	@Autowired
-	private RepositoryCliente repoCliente;
 
 	@GetMapping("/new")
 	public String form(Model model) {
@@ -68,14 +64,14 @@ public class ClienteController extends BaseController{
 
 		}
 
-		repoCliente.save(cliente);
+		serviceCliente.save(cliente);
 		saveLog("inserito un nuovo cliente", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/myWork/";
 	}
 
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable int id, Model model) {
-		Cliente cliente = repoCliente.findById(id).get();
+		Cliente cliente = serviceCliente.findById(id);
 		model.addAttribute("cliente", cliente);
 		Timestamp date = new Timestamp(cliente.getDataInizio());
 		model.addAttribute("date", date);
@@ -85,7 +81,7 @@ public class ClienteController extends BaseController{
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	public String update(@PathVariable int id, String nome, String dataInizio, @RequestParam(required=false) MultipartFile immagine, 
 			HttpSession session, Model model) throws Exception {
-		Cliente cliente = repoCliente.findById(id).get();
+		Cliente cliente = serviceCliente.findById(id);
 		cliente.setNome(nome);
 
 		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM");
@@ -115,7 +111,7 @@ public class ClienteController extends BaseController{
 
 		}
 
-		repoCliente.save(cliente);
+		serviceCliente.save(cliente);
 		model.addAttribute("cliente", cliente);
 		saveLog("modificato le informazioni di un cliente", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/myWork/";
@@ -123,26 +119,26 @@ public class ClienteController extends BaseController{
 
 	@RequestMapping("/delete/{id}")
 	public String delete(@PathVariable int id, HttpSession session) {
-		Cliente cliente = repoCliente.findById(id).get();
+		Cliente cliente = serviceCliente.findById(id);
 		cliente.setVisibile(false);
 		cliente.setTimestampEliminazione(Instant.now().getEpochSecond());
-		repoCliente.save(cliente);
+		serviceCliente.save(cliente);
 		saveLog("cancellato un nuovo cliente", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/myWork/";
 	}
 	
 	@RequestMapping("/cancellaCliente")
 	public String cancellaCliente(int id, HttpSession session) {
-		repoCliente.deleteById(id);
+		serviceCliente.deleteById(id);
 		return "redirect:/profile/mostraEliminati";
 		}
 	
 	@RequestMapping("/ripristinaCliente")
 	public String ripristinaCliente(int id, HttpSession session) {
-		Cliente cliente = repoCliente.findById(id).get();
+		Cliente cliente = serviceCliente.findById(id);
 		cliente.setVisibile(true);
 		cliente.setTimestampEliminazione(0);
-		repoCliente.save(cliente);
+		serviceCliente.save(cliente);
 		return "redirect:/profile/mostraEliminati";
 		}
 }
