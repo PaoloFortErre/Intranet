@@ -348,10 +348,14 @@
       			  
                 </div>
                 <div class="profile-img-confirm" id="profile-img-confirm" style="display: none;">
-				    <div class="button-profile half green" onclick="save()" style="cursor: pointer;" id="save-img">
-				    	<i class="fa fa-check" aria-hidden="true"></i>
-				    </div>
-				    <div class="button-profile half red" onclick="remove()"  id="cancel-img"><i class="fa fa-remove"  aria-hidden="true"></i></div>
+
+				    <div class="button-profile " onclick="remove()"  style="cursor: pointer; display: inline-block;width:50px; margin: 10px" id="cancel-img">
+                      <img src="/view/Profile/Images/false.png" width="70%">
+                    </div>
+
+                  <div class="button-profile " onclick="save()" style="cursor: pointer; display: inline-block; width:50px; margin: 10px" id="save-img">
+                    <img src="/view/Profile/Images/true.png" width="100%">
+                  </div>
 				</div>
                 
                 <div class="bottom-right " th:if="${session.id} == ${utente.utente.id}">
