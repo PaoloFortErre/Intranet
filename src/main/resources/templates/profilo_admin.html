@@ -332,7 +332,7 @@
                   </div>
                   <div class="modal-body">
                     <div class="container text-center">
-                      <img class="img-fluid immagine-modal" th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}" alt="profile_picca">
+                      <img class="img-fluid immagine-modal" id="myImgModal" th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}" alt="profile_picca">
                     </div>
                   </div>
                 </div>
@@ -360,8 +360,8 @@
                   <a class="dropdown fa fa-camera text-white" href="#" id="imageDropdown" title="Clicca per gestire la foto profilo" data-toggle="dropdown"></a>
                   <ul class="dropdown-menu" role="menu" aria-labelledby="imageDropdown" >
                     <form th:action="@{/profile/cambiaFotoProfilo}" method ="post" enctype="multipart/form-data">
-                      <label class="dropdown-item font-weight-bold" style="cursor: pointer;" for="scegli">Modifica la foto profilo</label>
-                      <input class="d-none" type="file" name="immagine" id="scegli" accept="image/png, image/jpeg"/>
+                      <label class="dropdown-item font-weight-bold" style="cursor: pointer;" for="scegli" >Modifica la foto profilo</label>
+                      <input class="d-none" type="file" name="immagine" id="scegli" accept="image/png, image/jpeg" required/>
                       <label class="dropdown-item font-weight-bold" style="cursor: pointer;" for="salva">Salva la foto profilo</label>
                       <input class="d-none" type="submit" id="salva"/>
                       <div class="dropdown-divider"></div>
@@ -644,6 +644,7 @@
 
 				reader.onload = function(e) {
 					$('#myImg').attr('src', e.target.result);
+					$('#myImgModal').attr('src', e.target.result);
 				}
 				
 				reader.readAsDataURL(input.files[0]); // convert to base64 string
@@ -660,7 +661,9 @@
 		});
 		
 		function remove() {
+			$('#scegli').val("");
 			$('#myImg').attr('src', src);
+			$('#myImgModal').attr('src', src);
 			$('#profile-img-confirm').css("display","none")
 			//$('#delete').empty();
 		}
