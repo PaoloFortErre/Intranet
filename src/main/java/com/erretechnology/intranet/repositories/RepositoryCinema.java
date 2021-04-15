@@ -10,5 +10,5 @@ import com.erretechnology.intranet.models.Cinema;
 public interface RepositoryCinema extends CrudRepository<Cinema, Integer>{
 
 	@Query("SELECT c FROM Cinema c WHERE c.visibile = false ORDER BY timestampEliminazione DESC")
-	List<Cinema> getAllNotVisible();
+	public List<Cinema> getAllNotVisible();
 }

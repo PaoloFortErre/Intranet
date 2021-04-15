@@ -23,13 +23,11 @@ import com.erretechnology.intranet.models.CategoriaCinema;
 import com.erretechnology.intranet.models.Cinema;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.repositories.RepositoryCategoriaCinema;
-import com.erretechnology.intranet.repositories.RepositoryCinema;
 
 @Controller
 @RequestMapping("cinema")
 public class CinemaController extends BaseController {
-	@Autowired
-	private RepositoryCinema repoCinema;
+	
 	@Autowired
 	private RepositoryCategoriaCinema repoCategoria;
 
@@ -62,7 +60,7 @@ public class CinemaController extends BaseController {
 
 		}
 
-		repoCinema.save(cinema);
+		serviceCinema.save(cinema);
 		saveLog("inserito un cinema", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		notificaTutti("ha inserito un nuovo film consigliato dalla redazione!", utenteLoggato, "MyLife");
 		return "redirect:/myLife1/";
@@ -70,7 +68,7 @@ public class CinemaController extends BaseController {
 
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable int id, Model model) {
-		Cinema cinema = repoCinema.findById(id).get();
+		Cinema cinema = serviceCinema.findById(id);
 		model.addAttribute("cinema", cinema);
 		model.addAttribute("categorie", repoCategoria.findAll());
 		return "cinemaFormUpdate";
@@ -79,7 +77,7 @@ public class CinemaController extends BaseController {
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	public String update(@PathVariable int id, String titolo, int categoria, @RequestParam(required=false) MultipartFile immagine,
 			HttpSession session, Model model) throws Exception {
-		Cinema cinema = repoCinema.findById(id).get();
+		Cinema cinema = serviceCinema.findById(id);
 		cinema.setTitolo(titolo);
 		CategoriaCinema categoriaCinema = repoCategoria.findById(categoria).get();
 		cinema.setCategoria(categoriaCinema);
@@ -104,7 +102,7 @@ public class CinemaController extends BaseController {
 
 		}
 
-		repoCinema.save(cinema);
+		serviceCinema.save(cinema);
 		model.addAttribute("cinema", cinema);
 		saveLog("modificato le informazioni di un cinema", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/myLife1/";
@@ -112,26 +110,26 @@ public class CinemaController extends BaseController {
 
 	@RequestMapping("/delete/{id}")
 	public String delete(@PathVariable int id, HttpSession session) {
-		Cinema cinema = repoCinema.findById(id).get();
+		Cinema cinema = serviceCinema.findById(id);
 		cinema.setVisibile(false);
 		cinema.setTimestampEliminazione(Instant.now().getEpochSecond());
-		repoCinema.save(cinema);
+		serviceCinema.save(cinema);
 		saveLog("cancellato un cinema", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/myLife1/";
 	}
 	
 	@RequestMapping("/cancellaFilm")
 	public String cancellaFilm(int id, HttpSession session) {
-		repoCinema.deleteById(id);
+		serviceCinema.deleteById(id);
 		return "redirect:/profile/mostraEliminati";
 		}
 	
 	@RequestMapping("/ripristinaFilm")
 	public String ripristinaFilm(int id, HttpSession session) {
-		Cinema cinema = repoCinema.findById(id).get();
+		Cinema cinema = serviceCinema.findById(id);
 		cinema.setVisibile(true);
 		cinema.setTimestampEliminazione(0);
-		repoCinema.save(cinema);
+		serviceCinema.save(cinema);
 		return "redirect:/profile/mostraEliminati";
 		}
 	

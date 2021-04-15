@@ -21,12 +21,17 @@ import org.springframework.web.multipart.MultipartFile;
 import com.erretechnology.intranet.models.Log;
 import com.erretechnology.intranet.models.Notifica;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
+import com.erretechnology.intranet.repositories.RepositoryCliente;
+import com.erretechnology.intranet.services.ServiceAforisma;
 import com.erretechnology.intranet.services.ServiceAuthority;
+import com.erretechnology.intranet.services.ServiceCinema;
+import com.erretechnology.intranet.services.ServiceCliente;
 import com.erretechnology.intranet.services.ServiceCommento;
 import com.erretechnology.intranet.services.ServiceCommentoModificato;
 import com.erretechnology.intranet.services.ServiceComunicazioniHR;
 import com.erretechnology.intranet.services.ServiceElementiMyLife;
 import com.erretechnology.intranet.services.ServiceElementiMyWork;
+import com.erretechnology.intranet.services.ServiceEventoLife;
 import com.erretechnology.intranet.services.ServiceFileImmagini;
 import com.erretechnology.intranet.services.ServiceFilePdf;
 import com.erretechnology.intranet.services.ServiceLog;
@@ -83,7 +88,15 @@ public abstract class BaseController {
 	protected ServiceVideo serviceVideo;
 	@Autowired
 	protected ServiceNotifica serviceNotifica;
-	
+	@Autowired
+	protected ServiceAforisma serviceAforisma;
+	@Autowired
+	protected ServiceCinema serviceCinema;
+	@Autowired
+	protected ServiceCliente serviceCliente;
+	@Autowired
+	protected ServiceEventoLife serviceEventoLife;
+
 	protected void saveLog(String testo, UtenteDatiPersonali autore) {
 		Log log = new Log();
 		log.setTimestamp(Instant.now().getEpochSecond());
