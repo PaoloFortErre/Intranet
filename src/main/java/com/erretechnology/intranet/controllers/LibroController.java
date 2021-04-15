@@ -4,7 +4,6 @@ import java.time.Instant;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -21,13 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.Libro;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
-import com.erretechnology.intranet.repositories.RepositoryLibro;
 
 @Controller
 @RequestMapping("libro")
 public class LibroController extends BaseController {
-	@Autowired
-	private RepositoryLibro repoLibro;	
 
 	@GetMapping("/new")
 	public String form(Model model) {
@@ -57,7 +53,7 @@ public class LibroController extends BaseController {
 
 		}
 
-		repoLibro.save(libro);
+		serviceLibro.save(libro);
 		saveLog("inserito un libro", utenteLoggato);
 		notificaTutti("ha inserito un nuovo libro consigliato dalla redazione!", utenteLoggato, "MyLife");
 		return "redirect:/myLife1/";
@@ -65,7 +61,7 @@ public class LibroController extends BaseController {
 
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
 	public String updateForm(@PathVariable int id, Model model) {
-		Libro libro = repoLibro.findById(id).get();
+		Libro libro = serviceLibro.findById(id);
 		model.addAttribute("libro", libro);
 		return "libroFormUpdate";
 	}
@@ -73,7 +69,7 @@ public class LibroController extends BaseController {
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	public String update(@PathVariable int id, String titolo, String scrittore ,@RequestParam(required=false) MultipartFile immagine,
 			HttpSession session, Model model) throws Exception{
-		Libro libro = repoLibro.findById(id).get();
+		Libro libro = serviceLibro.findById(id);
 		libro.setTitolo(titolo);
 		libro.setScrittore(scrittore);
 
@@ -97,7 +93,7 @@ public class LibroController extends BaseController {
 
 		}
 
-		repoLibro.save(libro);
+		serviceLibro.save(libro);
 		model.addAttribute("libro", libro);
 		saveLog("modificato le informazioni di un libro", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/myLife1/";
@@ -105,26 +101,26 @@ public class LibroController extends BaseController {
 
 	@RequestMapping("/delete/{id}")
 	public String delete(@PathVariable int id, HttpSession session) {
-		Libro libro = repoLibro.findById(id).get();
+		Libro libro = serviceLibro.findById(id);
 		libro.setVisibile(false);
 		libro.setTimestampEliminazione(Instant.now().getEpochSecond());
-		repoLibro.save(libro);
+		serviceLibro.save(libro);
 		saveLog("cancellato un libro", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/myLife1/";
 	}
 	
 	@RequestMapping("/cancellaLibro")
 	public String cancellaLibro(HttpSession session, int id) {
-		repoLibro.deleteById(id);
+		serviceLibro.deleteById(id);
 		return "redirect:/profile/mostraEliminati";
 	}
 	
 	@RequestMapping("/ripristinaLibro")
 	public String ripristinaLibro(HttpSession session, int id) {
-		Libro l = repoLibro.findById(id).get();
+		Libro l = serviceLibro.findById(id);
 		l.setVisibile(true);
 		l.setTimestampEliminazione(0);
-		repoLibro.save(l);
+		serviceLibro.save(l);
 		return "redirect:/profile/mostraEliminati";
 	}
 	

@@ -21,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.erretechnology.intranet.models.Log;
 import com.erretechnology.intranet.models.Notifica;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
-import com.erretechnology.intranet.repositories.RepositoryCliente;
 import com.erretechnology.intranet.services.ServiceAforisma;
 import com.erretechnology.intranet.services.ServiceAuthority;
 import com.erretechnology.intranet.services.ServiceCinema;
@@ -32,9 +31,13 @@ import com.erretechnology.intranet.services.ServiceComunicazioniHR;
 import com.erretechnology.intranet.services.ServiceElementiMyLife;
 import com.erretechnology.intranet.services.ServiceElementiMyWork;
 import com.erretechnology.intranet.services.ServiceEventoLife;
+import com.erretechnology.intranet.services.ServiceEventoWork;
 import com.erretechnology.intranet.services.ServiceFileImmagini;
 import com.erretechnology.intranet.services.ServiceFilePdf;
+import com.erretechnology.intranet.services.ServiceLibro;
+import com.erretechnology.intranet.services.ServiceLinkedin;
 import com.erretechnology.intranet.services.ServiceLog;
+import com.erretechnology.intranet.services.ServiceNews;
 import com.erretechnology.intranet.services.ServiceNotifica;
 import com.erretechnology.intranet.services.ServicePermesso;
 import com.erretechnology.intranet.services.ServicePodcast;
@@ -96,6 +99,15 @@ public abstract class BaseController {
 	protected ServiceCliente serviceCliente;
 	@Autowired
 	protected ServiceEventoLife serviceEventoLife;
+	@Autowired
+	protected ServiceEventoWork serviceEventoWork;
+	@Autowired
+	protected ServiceLibro serviceLibro;
+	@Autowired
+	protected ServiceLinkedin serviceLinkedin;
+	@Autowired
+	protected ServiceNews serviceNews;
+	
 
 	protected void saveLog(String testo, UtenteDatiPersonali autore) {
 		Log log = new Log();
