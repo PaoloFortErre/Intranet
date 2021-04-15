@@ -96,7 +96,7 @@ public class UtenteController extends BaseController {
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(id);
 		if (u.getId() == serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())).getId())
 			return primaPagina(session);
-		mav.addObject("post", servicePost.getByAutore(u));
+		mav.addObject("post", servicePost.getByAutore(u).get());
 		mav.setViewName("profilo_admin");
 		mav.addObject("utente", u);
 		mav.addObject("utenteDati", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
