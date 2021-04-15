@@ -1418,27 +1418,101 @@ ROW SCHIZZO
 			</div>
 			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4">
 				<table class="table table-borderless"
-					th:if="${utente!=null AND !utente.isEmpty}">
+					th:if="${utente.size>0}">
 					<tr>
 						<td style="text-align: center; vertical-align: middle;"
-							th:each="utente: ${utente}">
+							>
+
+							<div id="demo55" class="carousel slide" data-ride="carousel">
+								<ul class="carousel-indicators">
+									<li data-target="#demo55" data-slide-to="0" class="active"
+										th:if="${utente.size>1}"></li>
+									<li data-target="#demo55" data-slide-to="1"
+										th:if="${utente.size>1}"></li>
+									<li data-target="#demo55" data-slide-to="2"
+										th:if="${utente.size>2}"></li>
+								</ul>
+								<div class="carousel-inner">
+									<div class="carousel-item active" th:if="${utente.size>0}">
+										<div class="container">
+											<img
+													th:src="'data:image/png;base64,' + ${utente[0].immagine.getImgData(utente[0].immagine.data)}"
+													alt="Clienti" width="400px" style="height: 300px;"
+													class="img-fluid">
+										</div>
+
+										<br> <br>
+										<p
+												style="font-size: 22px; margin-bottom: -5PX">
+											Hai già fatto gli auguri a <br> <a
+												th:href="@{/profile/viewProfile/(id=${utente[0].id})}"
+												style="font-style: italic; font-weight: 900; font-size: 25px; margin-bottom: -5PX; text-decoration: none;"
+												th:text="${utente[0].nome} + ' ' + ${utente[0].cognome}"> </a> ?
+										</p>
+
+
+										<br>
+									</div>
+									<div class="carousel-item " th:if="${utente.size>1}">
+										<div class="container">
+											<img
+													th:src="'data:image/png;base64,' + ${utente[1].immagine.getImgData(utente[1].immagine.data)}"
+													alt="Clienti" width="400px" style="height: 300px;"
+													class="img-fluid">
+										</div>
+
+										<br> <br>
+										<p
+												style="font-size: 22px; margin-bottom: -5PX">
+											Hai già fatto gli auguri a <br> <a
+												th:href="@{/profile/viewProfile/(id=${utente[1].id})}"
+												style="font-style: italic; font-weight: 900; font-size: 25px; margin-bottom: -5PX; text-decoration: none;"
+												th:text="${utente[1].nome} + ' ' + ${utente[1].cognome}"> </a> ?
+										</p>
+
+
+										<br>
+									</div>
+									<div class="carousel-item " th:if="${utente.size>2}">
+										<div class="container">
+											<img
+													th:src="'data:image/png;base64,' + ${utente[2].immagine.getImgData(utente[2].immagine.data)}"
+													alt="Clienti" width="400px" style="height: 300px;"
+													class="img-fluid">
+										</div>
+
+										<br> <br>
+										<p
+												style="font-size: 22px; margin-bottom: -5PX">
+											Hai già fatto gli auguri a <br> <a
+												th:href="@{/profile/viewProfile/(id=${utente[2].id})}"
+												style="font-style: italic; font-weight: 900; font-size: 25px; margin-bottom: -5PX; text-decoration: none;"
+												th:text="${utente[2].nome} + ' ' + ${utente[2].cognome}"> </a> ?
+										</p>
+
+
+										<br>
+									</div>
+								</div>
+							</div>
+
+
 							<div class="container">
 								<img
-									th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}"
 									width="250px" style="margin-bottom: -17px; height: 380px"
 									alt="utenteCompleanno" class="img-fluid">
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td th:each="utente: ${utente}"
+						<!--<td th:each="utente: ${utente}"
 							style="text-align: center; vertical-align: middle;"><p
 								style="font-size: 22px; margin-bottom: -5PX">
 								Hai già fatto gli auguri a <br> <a
 									th:href="@{/profile/viewProfile/(id=${utente.id})}"
 									style="font-style: italic; font-weight: 900; font-size: 25px; margin-bottom: -5PX; text-decoration: none;"
 									th:text="${utente.nome} + ' ' + ${utente.cognome}"> </a> ?
-							<p></td>
+							<p></td>-->
 					</tr>
 				</table>
 			</div>
