@@ -46,8 +46,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		.antMatchers("/file/" , "file/upload" , "/file/deleteFilePdf").access("hasAuthority('GM')")
 		.antMatchers("/profile/gestisciPermesso" , "/profile/registra" , "/profile/cancellaUtente", "/maintain-enable" ,
 				"/maintain-disable").access("hasAuthority('AM')")
-		.antMatchers("/myLife/*", "/profile/*", "/homepage", "/file/*", "/myWork/*" , "/homepage/*", "/myLife1/*" , "/moduli/*", "/aforisma/*",
-				"/cinema/*","/cliente/*", "/eventolife/*", "/eventowork/*", "/categoriacinema/*", "/libro/*", "/linkedin/*" , "/news/*",
+		.antMatchers("/myLife/**", "/profile/**", "/homepage", "/file/**", "/myWork/**" , "/homepage/**", "/myLife1/**" , "/moduli/**", "/aforisma/**",
+				"/cinema/**","/cliente/**", "/eventolife/**", "/eventowork/**", "/categoriacinema/**", "/libro/**", "/linkedin/**" , "/news/**",
 				"/podcast/*", "/comunicazioniHr/*").access("isAuthenticated()")
 		.antMatchers("/", "/login" , "/manutenzione").permitAll()
 		.antMatchers("/maintain-enable", "/maintain-disable").access("isAuthenticated")
