@@ -40,7 +40,6 @@
     overflow-x: hidden;
     box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 0.35);
   }
-
   /*
   *  STYLE Scrollbar
   */
@@ -232,6 +231,26 @@
       background: #55ACEE;
       color: white;
     }
+	
+	.profile-img-confirm{
+	  display: -webkit-box;
+	  display: -webkit-flex;
+	  display: -ms-flexbox;
+	  display: flex;
+	  width: 100%;
+	}
+	
+	.button-profile.half{
+	  width: 50%;
+	}
+	
+	.green{
+	  background-color: #15ae6b;
+	}
+	
+	.red{
+	  background-color: #ae0000;
+	}
 
     </style>
 
@@ -326,8 +345,18 @@
                 <div data-toggle="modal" data-target="#ProfileModal">
                   <img id="myImg" class="picture rounded-circle"
                   th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}" alt="profile_picca">
+      			  
                 </div>
+                <div class="profile-img-confirm" id="profile-img-confirm" style="display: none;">
+				    <div class="button-profile half green" onclick="save()" style="cursor: pointer;" id="save-img">
+				    	<i class="fa fa-check" aria-hidden="true"></i>
+				    </div>
+				    <div class="button-profile half red" onclick="remove()"  id="cancel-img"><i class="fa fa-remove"  aria-hidden="true"></i></div>
+				</div>
+                
                 <div class="bottom-right " th:if="${session.id} == ${utente.utente.id}">
+                
+               
                   <a class="dropdown fa fa-camera text-white" href="#" id="imageDropdown" title="Clicca per gestire la foto profilo" data-toggle="dropdown"></a>
                   <ul class="dropdown-menu" role="menu" aria-labelledby="imageDropdown" >
                     <form th:action="@{/profile/cambiaFotoProfilo}" method ="post" enctype="multipart/form-data">
@@ -342,6 +371,7 @@
                       <input class="d-none" type="submit" value="Elimina foto profilo" id="elimina">
                     </form>
                   </ul>
+                  
                 </div>
               </div>
               <!-- IMPOSTAZIONI PROFILO -->
@@ -606,6 +636,51 @@
         </div>
 
         <script>
+        var src = document.getElementById("myImg").src;
+        
+        function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+					$('#myImg').attr('src', e.target.result);
+				}
+				
+				reader.readAsDataURL(input.files[0]); // convert to base64 string
+			}
+		}
+
+		$("#scegli").change( function() {
+			readURL(this);
+			$('#profile-img-confirm').css("display","block")
+			/*$('#delete').empty();
+			$('#delete').append("<button type='button' class='close' aria-label='Close' onclick='remove()'>" +
+			"<span aria-hidden='true' style='color: red; font-size: 22px; margin-right: 20px; opacity: 0.9'>" + "X" + "</span>" +
+			"</button>");*/
+		});
+		
+		function remove() {
+			$('#myImg').attr('src', src);
+			$('#profile-img-confirm').css("display","none")
+			//$('#delete').empty();
+		}
+		function save(){
+			let dati = document.getElementById("myImg").src;
+			let comma_index = dati.indexOf(",");
+	    	dati = dati.substr(comma_index + 1);
+	    	let nome = document.getElementById("scegli").value;
+	    	let backslash_index = nome.indexOf("h") +1;
+	    	nome = nome.substr(backslash_index + 1);
+			 $.ajax({
+	              type : 'POST',
+	              url : "http://localhost:8080/profile/cambiaFotoProfilo",
+	              data: {dati: dati, nome: nome},
+	              success : function(data) {
+	            	  location.reload();
+	              }
+			 });
+		}
+        
         $(document).ready(
           function() {
             $.ajax({

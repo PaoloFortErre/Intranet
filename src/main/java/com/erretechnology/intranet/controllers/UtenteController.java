@@ -3,6 +3,7 @@ package com.erretechnology.intranet.controllers;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -203,22 +204,31 @@ public class UtenteController extends BaseController {
 	}
 
 	@PostMapping(value = "/cambiaFotoProfilo")
-	public String modificaFoto(@RequestParam(required = false) MultipartFile immagine, HttpSession session)
+	public String modificaFoto(@RequestParam(required = false) MultipartFile immagine, @RequestParam(required = false) String dati, 
+			@RequestParam(required = false) String nome, HttpSession session)
 			throws Exception {
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		FileImmagine img = null;
-		if (!immagine.getOriginalFilename().isEmpty()) {
+		if ((immagine != null && !immagine.getOriginalFilename().isEmpty()) || !dati.isEmpty()) {
 
 			img = new FileImmagine();
-			if(compressImage(immagine, 0.5f).length == 0)
-				img.setData(immagine.getBytes());
+			/*if(compressImage(immagine, 0.5f).length == 0)
+				*/
+			if(immagine == null) 
+				img.setData(Base64.getDecoder().decode(dati.getBytes("UTF-8")));
 			else
-				img.setData(compressImage(immagine, 0.5f));
+				img.setData(immagine.getBytes());
+			
+			/*else
+				img.setData(compressImage(immagine, 0.5f));*/
 			UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(idUser);
 			if (!serviceFileImmagine.contains(img.getData())) {
 				img.setAutore(utenteLoggato);
 				img.setTimestamp(Instant.now().getEpochSecond());
-				img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
+				if(immagine == null)
+					img.setNomeFile(nome);
+				else
+					img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
 				serviceFileImmagine.insert(img);
 				utenteLoggato.setImmagine(img);
 			} else {
