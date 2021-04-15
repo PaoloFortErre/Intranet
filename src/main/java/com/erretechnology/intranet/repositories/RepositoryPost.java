@@ -1,7 +1,6 @@
 package com.erretechnology.intranet.repositories;
 
 import java.util.List;
-
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,7 +17,8 @@ public interface RepositoryPost extends JpaRepository<Post, Integer>{
 	public List<Post> findByVisibileTrue(Sort sort);
 	
 	@Query
-	public List<Post> findByVisibileFalse(Sort sort);
+	public  List<Post> findByVisibileFalse(Sort sort);
+	
 	@Query
 	public List<Post> findByAutore(UtenteDatiPersonali u);
 	

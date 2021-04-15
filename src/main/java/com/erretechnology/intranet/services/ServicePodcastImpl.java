@@ -1,8 +1,10 @@
 package com.erretechnology.intranet.services;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import com.erretechnology.intranet.models.Podcast;
 import com.erretechnology.intranet.repositories.RepositoryPodcast;
@@ -24,8 +26,9 @@ public class ServicePodcastImpl implements ServicePodcast{
 	}
 
 	@Override
-	public List<Podcast> getAllNotVisible() {
-		return repositoryPodcast.findByVisibileFalse(Sort.by("timestampEliminazione").descending());
+	@Async
+	public CompletableFuture<List<Podcast>> getAllNotVisible() {
+		return CompletableFuture.completedFuture(repositoryPodcast.findByVisibileFalse(Sort.by("timestampEliminazione").descending()));
 	}
 
 	@Override

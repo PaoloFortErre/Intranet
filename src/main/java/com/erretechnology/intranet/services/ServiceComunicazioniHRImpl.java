@@ -1,8 +1,11 @@
 package com.erretechnology.intranet.services;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import com.erretechnology.intranet.models.ComunicazioneHR;
 import com.erretechnology.intranet.repositories.RepositoryComunicazioniHR;
@@ -34,8 +37,9 @@ public class ServiceComunicazioniHRImpl implements ServiceComunicazioniHR{
 	}
 
 	@Override
-	public List<ComunicazioneHR> getAllNotVisible() {
-		return repositoryComunicazioniHR.findByVisibileFalse(Sort.by("timestampEliminazione").descending());
+	@Async
+	public CompletableFuture<List<ComunicazioneHR>> getAllNotVisible() {
+		return CompletableFuture.completedFuture(repositoryComunicazioniHR.findByVisibileFalse(Sort.by("timestampEliminazione").descending()));
 	}
 	@Override
 	public List<ComunicazioneHR> getAllVisible() {

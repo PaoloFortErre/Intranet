@@ -1,6 +1,7 @@
 package com.erretechnology.intranet.services;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,7 +25,7 @@ public interface ServicePost {
 
 	public void remove(Post p);
 
-	public List<Post> getAllNotVisible();
+	public CompletableFuture<List<Post>> getAllNotVisible();
 	
 	public List<Post> getByAutore(UtenteDatiPersonali autore);
 

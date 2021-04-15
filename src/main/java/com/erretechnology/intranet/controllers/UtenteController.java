@@ -27,8 +27,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.thymeleaf.util.ArrayUtils;
-
 import com.erretechnology.intranet.models.Evento;
 import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.Notifica;
@@ -452,17 +450,17 @@ public class UtenteController extends BaseController {
 		eventi.addAll(repositoryEventoLife.getAllNotVisible());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("gestione_suprema");
-		mav.addObject("post", servicePost.getAllNotVisible().stream().filter(x->x.getAutore().getUtente().getAttivo()).collect(Collectors.toList()));
-		mav.addObject("commenti", serviceCommento.getAllNotVisible().stream().filter(x->x.getAutore().getUtente().getAttivo()).collect(Collectors.toList()));
+		mav.addObject("post", servicePost.getAllNotVisible().get().stream().filter(x->x.getAutore().getUtente().getAttivo()).collect(Collectors.toList()));
+		mav.addObject("commenti", serviceCommento.getAllNotVisible().get().stream().filter(x->x.getAutore().getUtente().getAttivo()).collect(Collectors.toList()));
 		mav.addObject("news", repositoryNews.getAllNotVisible());
-		mav.addObject("comunicazioniHR", serviceComunicazioni.getAllNotVisible());
-		mav.addObject("moduli", serviceFilePdf.getAllNotVisible());
+		mav.addObject("comunicazioniHR", serviceComunicazioni.getAllNotVisible().get());
+		mav.addObject("moduli", serviceFilePdf.getAllNotVisible().get());
 		mav.addObject("eventi", eventi);
-		mav.addObject("podcast", servicePodcast.getAllNotVisible());
+		mav.addObject("podcast", servicePodcast.getAllNotVisible().get());
 		mav.addObject("libri", repositoryLibro.getAllNotVisible());
 		mav.addObject("film", repositoryFilm.getAllNotVisible());
 		mav.addObject("client", repositoryCliente.getAllNotVisible());
-		mav.addObject("sondaggi", serviceSondaggio.getAllNotVisible());
+		mav.addObject("sondaggi", serviceSondaggio.getAllNotVisible().get());
 		return mav;
 	}
 

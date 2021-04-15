@@ -1,6 +1,7 @@
 package com.erretechnology.intranet.services;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import com.erretechnology.intranet.models.ComunicazioneHR;
 
@@ -13,7 +14,7 @@ public interface ServiceComunicazioniHR {
 
 	public void remove(ComunicazioneHR hr);
 	public List<ComunicazioneHR> getAllVisible();
-	public List<ComunicazioneHR> getAllNotVisible();
+	public CompletableFuture<List<ComunicazioneHR>> getAllNotVisible();
 	public List<ComunicazioneHR> findFirst10ByVisibileTrueOrderByIdDesc();
 	
 	

@@ -1,9 +1,11 @@
 package com.erretechnology.intranet.services;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.erretechnology.intranet.models.Sondaggio;
@@ -32,8 +34,9 @@ public class ServiceSondaggioImpl implements ServiceSondaggio{
 		return repositorySondaggio.findByAutore(autore);
 	}
 	@Override
-	public List<Sondaggio> getAllNotVisible() {
-		return repositorySondaggio.findByVisibileFalse(Sort.by("timestampEliminazione").descending());
+	@Async
+	public CompletableFuture<List<Sondaggio>> getAllNotVisible() {
+		return CompletableFuture.completedFuture(repositorySondaggio.findByVisibileFalse(Sort.by("timestampEliminazione").descending()));
 	}
 	@Override
 	public void delete(Sondaggio s) {

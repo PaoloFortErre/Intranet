@@ -1,6 +1,7 @@
 package com.erretechnology.intranet.services;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -33,8 +34,8 @@ public class ServiceFilePdfImpl implements ServiceFilePdf {
 	}
 
 	@Override
-	public List<FilePdf> getAllNotVisible() {
-		return repositoryFilePdf.findByVisibileFalse(Sort.by("timestampEliminazione").descending());
+	public CompletableFuture<List<FilePdf>> getAllNotVisible() {
+		return CompletableFuture.completedFuture(repositoryFilePdf.findByVisibileFalse(Sort.by("timestampEliminazione").descending()));
 	}
 	
 	@Override

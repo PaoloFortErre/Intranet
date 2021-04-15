@@ -2,6 +2,7 @@ package com.erretechnology.intranet.services;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.erretechnology.intranet.models.Post;
@@ -78,8 +80,9 @@ public class ServicePostImpl implements ServicePost{
 	}
 
 	@Override
-	public List<Post> getAllNotVisible() {
-		return repositoryPost.findByVisibileFalse(Sort.by("timestampEliminazione").descending());
+	@Async
+	public CompletableFuture<List<Post>> getAllNotVisible() {
+		return CompletableFuture.completedFuture(repositoryPost.findByVisibileFalse(Sort.by("timestampEliminazione").descending()));
 	}
 	
 	@Override

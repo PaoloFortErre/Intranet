@@ -1,6 +1,7 @@
 package com.erretechnology.intranet.services;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import com.erretechnology.intranet.models.FilePdf;
 
@@ -13,5 +14,5 @@ public interface ServiceFilePdf {
 
 	public void remove(FilePdf modulo);
 	public List<FilePdf> getAllVisible();
-	public List<FilePdf> getAllNotVisible();
+	public CompletableFuture<List<FilePdf>> getAllNotVisible();
 }
