@@ -188,7 +188,233 @@ footer {
 	color-stop(0.72, rgb(73,125,189)),
 	color-stop(0.86, rgb(28,58,148)));
 }
+.logo {
+	opacity: 0.5;
+}
 
+.logo:hover {
+	opacity: 1;
+}
+
+.nav-link:hover {
+	color: #ECF260;
+}
+
+.carousel-inner img {
+	height: 900px;
+}
+
+@media screen and (max-width: 1800px) {
+	.carousel-inner img {
+		height: 550px;
+	}
+
+}
+
+.carousel-caption {
+	top: 370px;
+}
+
+.h1caption {
+	font-size: 75px;
+}
+
+
+
+
+@media screen and (max-width: 1600px) {
+	.carousel-caption {
+		top: 240px;
+	}
+	.h1caption {
+
+		font-size: 25px;
+	}
+}
+
+
+
+#rowmacchina1 {
+	background-image: url('/view/MyWork/images/makkinina.png');
+	width: 102%;
+	height: 700px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	margin-top: 1000px
+}
+
+@media screen and (max-width: 1000px) {
+	div#rowmacchina1 {
+		height: 1800px;
+		width: 105%;
+	}
+}
+
+#rowmacchina2 {
+	background-image: url('/view/MyWork/images/schizzo.png');
+	width: 102%;
+	height: 700px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	margin-top: 1000px
+}
+/* 같같같같같같같같� MY LIFE 1 같같같같같같같같같� */
+.card-cointer {
+	box-shadow: 0px 20px 21px 3px rgba(255, 255, 255, 0.31);
+	padding: 100px 0px;
+	-webkit-perspective: 1000;
+	perspective: 1000;
+}
+
+.profile-card-2 {
+	box-shadow: 0px 20px 21px 3px rgba(255, 255, 255, 0.31);
+	max-width: 380px;
+	background-color: #FFF;
+	box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
+	background-position: center;
+	overflow: hidden;
+	position: relative;
+	margin: 10px auto;
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+.profile-card-2 img {
+	transition: all linear 0.25s;
+}
+
+.profile-card-2 .profile-name {
+	position: absolute;
+	left: 30px;
+	bottom: 70px;
+	font-size: 30px;
+	color: #FFF;
+	text-shadow: 0px 0px 50px rgba(0, 0, 0, 1);
+	font-weight: bold;
+	transition: all linear 0.25s;
+}
+
+.profile-card-2 .profile-icons {
+	position: absolute;
+	bottom: 30px;
+	right: 30px;
+	color: #FFF;
+	transition: all linear 0.25s;
+}
+
+.profile-card-2 .profile-username {
+	position: absolute;
+	bottom: 50px;
+	left: 30px;
+	color: #FFF;
+	font-size: 13px;
+	transition: all linear 0.25s;
+	text-shadow: 0px 0px 20px rgba(0, 0, 0, 1);
+}
+
+.profile-card-2 .profile-icons .fa {
+	margin: 5px;
+}
+
+.profile-card-2:hover img {
+	filter: grayscale(90%);
+}
+
+.profile-card-2:hover .profile-name {
+	bottom: 80px;
+	color: white;
+	font-size: 50px;
+	font-weight: 900;
+}
+
+.profile-card-2:hover .profile-username {
+	bottom: 60px;
+	font-size: 20px;
+}
+
+.profile-card-2:hover .profile-icons {
+	right: 40px;
+}
+
+@media screen and (max-width: 990px) {
+	#col1 {
+		margin-left: 0px;
+	}
+}
+
+.profile-card-3 {
+	box-shadow: 0px 20px 21px 3px rgba(255, 255, 255, 0.31);
+	max-width: 380px;
+	background-color: #FFF;
+	box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
+	background-position: center;
+	overflow: hidden;
+	position: relative;
+	margin: 10px auto;
+	cursor: pointer;
+	border-radius: 4px;
+	text-align: center;
+}
+
+.profile-card-3 img {
+	transition: all linear 0.25s;
+}
+
+.profile-card-3 .profile-name {
+	position: absolute;
+	text-align: center;
+	left: 10px;
+	bottom: 70px;
+	font-size: 30px;
+	color: #FFF;
+	text-shadow: 0px 0px 50px rgba(0, 0, 0, 1);
+	font-weight: bold;
+	transition: all linear 0.25s;
+}
+
+.profile-card-3 .profile-icons {
+	position: absolute;
+	bottom: 30px;
+	right: 30px;
+	color: #FFF;
+	transition: all linear 0.25s;
+}
+
+.profile-card-3 .profile-username {
+	position: absolute;
+	bottom: 50px;
+	left: 30px;
+	color: #FFF;
+	font-size: 13px;
+	transition: all linear 0.25s;
+	text-shadow: 0px 0px 20px rgba(0, 0, 0, 1);
+}
+
+.profile-card-3 .profile-icons .fa {
+	margin: 5px;
+}
+
+.profile-card-3:hover img {
+	filter: grayscale(100%);
+}
+
+.profile-card-3:hover .profile-name {
+	bottom: 80px;
+	color: white;
+}
+
+.profile-card-3:hover .profile-username {
+	bottom: 60px;
+	font-size: 20px;
+}
+@media screen and (max-width: 1000px) {
+	div#rowmacchina2 {
+		height: 2000px;
+		width: 105%;
+	}
+}
 #post {
 	width: 720px;
 	background-color: #E3E2E2;
