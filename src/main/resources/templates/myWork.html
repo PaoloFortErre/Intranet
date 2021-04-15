@@ -1424,7 +1424,7 @@ ROW SCHIZZO
 							>
 
 							<div id="demo55" class="carousel slide" data-ride="carousel">
-								<ul class="carousel-indicators">
+								<br><br><ul class="carousel-indicators ">
 									<li data-target="#demo55" data-slide-to="0" class="active"
 										th:if="${utente.size>1}"></li>
 									<li data-target="#demo55" data-slide-to="1"
@@ -1451,7 +1451,7 @@ ROW SCHIZZO
 										</p>
 
 
-										<br>
+										<br> <br>
 									</div>
 									<div class="carousel-item " th:if="${utente.size>1}">
 										<div class="container">
@@ -1471,7 +1471,7 @@ ROW SCHIZZO
 										</p>
 
 
-										<br>
+										<br> <br>
 									</div>
 									<div class="carousel-item " th:if="${utente.size>2}">
 										<div class="container">
@@ -1491,28 +1491,14 @@ ROW SCHIZZO
 										</p>
 
 
-										<br>
+										<br><br>
 									</div>
 								</div>
 							</div>
 
 
-							<div class="container">
-								<img
-									width="250px" style="margin-bottom: -17px; height: 380px"
-									alt="utenteCompleanno" class="img-fluid">
-							</div>
+
 						</td>
-					</tr>
-					<tr>
-						<!--<td th:each="utente: ${utente}"
-							style="text-align: center; vertical-align: middle;"><p
-								style="font-size: 22px; margin-bottom: -5PX">
-								Hai già fatto gli auguri a <br> <a
-									th:href="@{/profile/viewProfile/(id=${utente.id})}"
-									style="font-style: italic; font-weight: 900; font-size: 25px; margin-bottom: -5PX; text-decoration: none;"
-									th:text="${utente.nome} + ' ' + ${utente.cognome}"> </a> ?
-							<p></td>-->
 					</tr>
 				</table>
 			</div>
