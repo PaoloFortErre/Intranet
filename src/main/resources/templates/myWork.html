@@ -42,8 +42,7 @@ table, th, td {
 </head>
 
 <body
-	th:with="GMW = ${#authorization.expression('hasAuthority(''GMW'')')}"
-	onresize="myFunction()">
+	th:with="GMW = ${#authorization.expression('hasAuthority(''GMW'')')}">
 
 
 
@@ -1044,7 +1043,7 @@ ROW SCHIZZO
 									style="font-style: italic; font-weight: 900; font-size: 25px; margin-bottom: -5PX;">
 									Rosario </span>
 							</p>
-							<button type="button" data-toggle="modal" data-target="#myModal"
+							<button type="button" th:if="${podcast.size > 0}" data-toggle="modal" data-target="#myModal"
 								style="background-color: transparent; border: 0px solid; font-size: 12px">
 								Ascolta gli ultimi podcast<img
 									src="/view/MyWork/images/record.png" alt="podcast icona"
@@ -1509,23 +1508,5 @@ ROW SCHIZZO
 			</div>
 		</div>
 	</footer>
-
-	<script>
-	
-
-
-		function myFunction() {
-			var w = window.outerWidth;
-			if (w <= 950) {
-
-				document.getElementById("utente-foto-profilo").style.display = "none";
-				document.getElementById("scrittaProfilo").style.display = "block";
-
-			} else {
-				document.getElementById("utente-foto-profilo").style.display = "block";
-				document.getElementById("scrittaProfilo").style.display = "none";
-			}
-		}
-		</script>
 </body>
 </html>
