@@ -3,6 +3,7 @@ package com.erretechnology.intranet.controllers;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import javax.servlet.http.HttpSession;
@@ -36,7 +37,7 @@ public class MyLifeController extends BaseController {
 	private RepositoryCategoriaCinema repoCategoria;
 
 	@GetMapping(value = "/")
-	public ModelAndView primaPagina(HttpSession session, @RequestParam("page") Optional<Integer> page) {
+	public ModelAndView primaPagina(HttpSession session, @RequestParam("page") Optional<Integer> page) throws InterruptedException, ExecutionException {
 		int currentPage = page.orElse(1); 
 
 		//	List<Post> messaggi = service.getLastMessage();
@@ -46,7 +47,7 @@ public class MyLifeController extends BaseController {
 		List<ElementiMyLife> aforismi = elementi.stream().filter(x -> x.getTipo().equals("aphorism")).collect(Collectors.toList());
 		List<ElementiMyLife> film = elementi.stream().filter(x -> x.getTipo().equals("cinema")).collect(Collectors.toList());
 		List<ElementiMyLife> libri = elementi.stream().filter(x -> x.getTipo().equals("book")).collect(Collectors.toList());
-		VideoDelGiorno video = serviceVideo.getLastVideo("MyLife");
+		VideoDelGiorno video = serviceVideo.getLastVideo("MyLife").get();
 		
 		Page<Post> postPage= servicePost.findPaginated(PageRequest.of(currentPage - 1, 5));
 
@@ -269,12 +270,12 @@ public class MyLifeController extends BaseController {
 	} 
 
 	@GetMapping (value= "/profiliUtenti")
-	public ModelAndView comunicazioniHr(HttpSession session) {
+	public ModelAndView comunicazioniHr(HttpSession session) throws InterruptedException, ExecutionException {
 		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("utenteDati", u);
-		mav.addObject("utenti", serviceDatiPersonali.getAll().stream().filter(x->x.getUtente().getAttivo()).collect(Collectors.toList()));
+		mav.addObject("utenti", serviceDatiPersonali.getAll().get().stream().filter(x->x.getUtente().getAttivo()).collect(Collectors.toList()));
 		mav.setViewName("profiliUtenti");
 		return mav;
 	}

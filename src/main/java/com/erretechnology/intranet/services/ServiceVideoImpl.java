@@ -1,6 +1,9 @@
 package com.erretechnology.intranet.services;
 
+import java.util.concurrent.CompletableFuture;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.erretechnology.intranet.models.VideoDelGiorno;
@@ -13,9 +16,9 @@ public class ServiceVideoImpl implements ServiceVideo{
 	RepositoryVideo repositoryVideo;
 
 	@Override
-	public VideoDelGiorno getLastVideo(String nomePagina) {
-		// TODO Auto-generated method stub
-		return repositoryVideo.findTopByPaginaOrderByIdDesc(nomePagina);
+	@Async
+	public CompletableFuture<VideoDelGiorno> getLastVideo(String nomePagina) {
+		return CompletableFuture.completedFuture(repositoryVideo.findTopByPaginaOrderByIdDesc(nomePagina));
 	}
 
 	@Override

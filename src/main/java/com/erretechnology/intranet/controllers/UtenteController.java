@@ -14,8 +14,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.regex.*;
 import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,12 +45,6 @@ import com.erretechnology.intranet.models.Post;
 import com.erretechnology.intranet.models.Sondaggio;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.models.Utility;
-import com.erretechnology.intranet.repositories.RepositoryCinema;
-import com.erretechnology.intranet.repositories.RepositoryCliente;
-import com.erretechnology.intranet.repositories.RepositoryEventoLife;
-import com.erretechnology.intranet.repositories.RepositoryEventoWork;
-import com.erretechnology.intranet.repositories.RepositoryLibro;
-import com.erretechnology.intranet.repositories.RepositoryNews;
 
 @Controller
 @RequestMapping(value = "profile")
@@ -82,10 +74,10 @@ public class UtenteController extends BaseController {
 	}
 
 	@GetMapping(value = "/userList")
-	public ModelAndView userList() {
+	public ModelAndView userList() throws InterruptedException, ExecutionException {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("usersList");
-		mav.addObject("utenti", serviceDatiPersonali.getAll().stream().filter(x -> x.getUtente().getAttivo())
+		mav.addObject("utenti", serviceDatiPersonali.getAll().get().stream().filter(x -> x.getUtente().getAttivo())
 				.collect(Collectors.toList()));
 		return mav;
 	}
@@ -278,10 +270,10 @@ public class UtenteController extends BaseController {
 	}
 
 	@GetMapping(value = "/gestisciPermesso")
-	public ModelAndView Permesso(HttpSession session) {
+	public ModelAndView Permesso(HttpSession session) throws InterruptedException, ExecutionException {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("gestisci_ruolo");
-		mav.addObject("utenti", serviceDatiPersonali.getAll().stream()
+		mav.addObject("utenti", serviceDatiPersonali.getAll().get().stream()
 				.filter(x->x.getId() != Integer.parseInt(session.getAttribute("id").toString())).collect(Collectors.toList()));
 		return mav;
 	}
@@ -385,7 +377,7 @@ public class UtenteController extends BaseController {
 		if (serviceUtente.findById(utenteLoggato.getId()).getRuolo().getNome().equals("ADMIN")
 				|| utenteLoggato.getUtente().getSetPermessi().contains(servicePermesso.findById("AM"))) {
 			mav.setViewName("eliminaUtente");
-			mav.addObject("utenti", serviceDatiPersonali.getAll().stream().filter(x -> x.getUtente().getAttivo() && 
+			mav.addObject("utenti", serviceDatiPersonali.getAll().get().stream().filter(x -> x.getUtente().getAttivo() && 
 					x.getId() != Integer.parseInt(session.getAttribute("id").toString()))
 					.collect(Collectors.toList()));
 			return mav;

@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
@@ -18,7 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.erretechnology.intranet.models.ComunicazioneHR;
 import com.erretechnology.intranet.models.ElementiMyWork;
 import com.erretechnology.intranet.models.Podcast;
 import com.erretechnology.intranet.models.Sondaggio;
@@ -30,18 +31,45 @@ import com.erretechnology.intranet.models.VideoDelGiorno;
 public class MyWorkController extends BaseController {
 
 	@GetMapping(value = "/")
-	public ModelAndView primaPagina(HttpSession session) {
+	public ModelAndView primaPagina(HttpSession session) throws InterruptedException, ExecutionException {
 		ModelAndView mav = new ModelAndView();
 		List<ElementiMyWork> elementi = serviceElementiMyWork.findAll();
+		CompletableFuture<List<Podcast>> listPodcast = servicePodcast.getAll();
+		CompletableFuture<List<UtenteDatiPersonali>> utenti = serviceDatiPersonali.getAll();
+		CompletableFuture<VideoDelGiorno> video = serviceVideo.getLastVideo("MyWork");
+		CompletableFuture<List<ElementiMyWork>> clienti = findWorkElement(elementi, "cliente");
+		CompletableFuture<List<ElementiMyWork>> news = findWorkElement(elementi, "news");
+		CompletableFuture<List<ElementiMyWork>> sondaggi = findWorkElement(elementi, "sondaggi");
+		CompletableFuture<List<ElementiMyWork>> aforismi = findWorkElement(elementi, "aphorism");
+		CompletableFuture<List<ElementiMyWork>> eventi = findWorkElement(elementi, "event");
 		UtenteDatiPersonali u1 = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		mav.addObject("utenteDati", u1);
 		mav.setViewName("myWork");
 		Calendar calendar = Calendar.getInstance(), calUtente = Calendar.getInstance();
 		calendar.setTimeInMillis(Instant.now().getEpochSecond()*1000);
-		List<UtenteDatiPersonali> utenti = serviceDatiPersonali.getAll();
 		List<UtenteDatiPersonali> utentiCompleanno = new LinkedList<UtenteDatiPersonali>();
+		
+		CompletableFuture.allOf(listPodcast, utenti, video, clienti, news, sondaggi, aforismi, eventi).join();
+		
+		mav.addObject("podcast", listPodcast.get());
+		/*if(listPodcast.size() != 0 && listPodcast!= null) {
+			Podcast primoPodcast = listPodcast.get(listPodcast.size()-1);
+			mav.addObject("primoPodcast", primoPodcast);
+			listPodcast.remove(listPodcast.size()-1);
+			mav.addObject("altriPodcast", listPodcast.stream().limit(3).sorted(Comparator.comparingInt(Podcast::getId).reversed()).collect(Collectors.toList()));
+		}*/
+		
+		mav.addObject("nuoviClienti", clienti.get());
+		mav.addObject("newsSlide", news.get());
+		mav.addObject("sonadggi", sondaggi.get());
+		mav.addObject("aforisma", aforismi.get());
+		mav.addObject("eventi", eventi.get());
+		
+		
+		mav.addObject("video", video.get());
 
-		for(UtenteDatiPersonali u : utenti) {
+		//mav.addObject("video", serviceVideo.getLastVideo("MyWork"));
+		for(UtenteDatiPersonali u : utenti.get()) {
 			calUtente.setTimeInMillis(u.getDataNascita()*1000);
 
 			if((calendar.get(Calendar.MONTH))==(calUtente.get(Calendar.MONTH)) && (calendar.get(Calendar.DAY_OF_MONTH))==(calUtente.get(Calendar.DAY_OF_MONTH)) && u.isVisualizzaDataNascita() == true) {
@@ -50,53 +78,13 @@ public class MyWorkController extends BaseController {
 		}
 		mav.addObject("utente", utentiCompleanno);
 
-		List<UtenteDatiPersonali> nuoviUtenti = utenti.stream()
+		List<UtenteDatiPersonali> nuoviUtenti = utenti.get().stream()
 				.sorted(Comparator.comparingInt(UtenteDatiPersonali::getId).reversed())
 				.filter(x->x.getUtente().getAttivo()==true)
 				.limit(3)
 				.collect(Collectors.toList());
 	//	setMAV(mav, nuoviUtenti, 0, 6, "nuoviAssunti");
 		mav.addObject("nuoveAssunzioni", nuoviUtenti);
-		
-		List<Podcast> listPodcast = servicePodcast.getAll();
-		mav.addObject("podcast", listPodcast);
-		/*if(listPodcast.size() != 0 && listPodcast!= null) {
-			Podcast primoPodcast = listPodcast.get(listPodcast.size()-1);
-			mav.addObject("primoPodcast", primoPodcast);
-			listPodcast.remove(listPodcast.size()-1);
-			mav.addObject("altriPodcast", listPodcast.stream().limit(3).sorted(Comparator.comparingInt(Podcast::getId).reversed()).collect(Collectors.toList()));
-		}*/
-		
-
-		List<ElementiMyWork> clienti= elementi.stream().filter(x -> x.getTipo().equals("cliente")).collect(Collectors.toList());
-		mav.addObject("nuoviClienti", clienti);
-
-		List<ElementiMyWork> news= elementi.stream().filter(x -> x.getTipo().equals("news")).collect(Collectors.toList());
-		mav.addObject("newsSlide", news);
-
-		
-		List<ElementiMyWork> sondaggi = elementi.stream().filter(x -> x.getTipo().equals("sondaggi")).collect(Collectors.toList());
-		/*setMAV(mav, sondaggi , 0, 6, "sondaggi");*/
-		mav.addObject("sonadggi", sondaggi);
-		
-		List<ComunicazioneHR> comunicazione = serviceComunicazioni.getAll();
-		if(comunicazione.size()==0) {
-			mav.addObject("comunicazioni", null);		
-		}
-		else {
-			mav.addObject("comunicazioni", comunicazione.get(comunicazione.size()-1));
-		}
-		List<ElementiMyWork> aforismi = elementi.stream().filter(x -> x.getTipo().equals("aphorism")).collect(Collectors.toList());
-		mav.addObject("aforisma", aforismi);
-		
-		List<ElementiMyWork> eventi = elementi.stream().filter(x -> x.getTipo().equals("event")).collect(Collectors.toList());
-		mav.addObject("eventi", eventi);
-		
-		VideoDelGiorno video = serviceVideo.getLastVideo("MyWork");
-		mav.addObject("video", video);
-
-		//mav.addObject("video", serviceVideo.getLastVideo("MyWork"));
-		
 		return mav;
 		
 		

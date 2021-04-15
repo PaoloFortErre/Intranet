@@ -21,8 +21,9 @@ public class ServicePodcastImpl implements ServicePodcast{
 	}
 
 	@Override
-	public List<Podcast> getAll() {
-		return repositoryPodcast.findByVisibileTrueGroupByNome();
+	@Async
+	public CompletableFuture<List<Podcast>> getAll() {
+		return CompletableFuture.completedFuture(repositoryPodcast.findByVisibileTrueGroupByNome());
 	}
 
 	@Override
