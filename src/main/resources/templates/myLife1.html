@@ -621,7 +621,7 @@
 				<div id="demo1" class="carousel slide" data-ride="carousel">
 
 					<ul class="carousel-indicators mt-2">
-						<li data-target="#demo1" data-slide-to="0" class="active"></li>
+						<li data-target="#demo1" data-slide-to="0" class="active" th:if="${eventilife.size>0}"></li>
 						<li data-target="#demo1" data-slide-to="1"
 							th:if="${eventilife.size>1}"></li>
 						<li data-target="#demo1" data-slide-to="2"

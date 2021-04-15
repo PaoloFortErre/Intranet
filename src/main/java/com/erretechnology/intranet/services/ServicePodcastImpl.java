@@ -22,7 +22,7 @@ public class ServicePodcastImpl implements ServicePodcast{
 
 	@Override
 	public List<Podcast> getAll() {
-		return repositoryPodcast.findByVisibileTrue(Sort.by("id").descending());
+		return repositoryPodcast.findByVisibileTrueGroupByNome();
 	}
 
 	@Override

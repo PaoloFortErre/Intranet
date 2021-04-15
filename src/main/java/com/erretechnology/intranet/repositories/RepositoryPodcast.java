@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import com.erretechnology.intranet.models.Podcast;
 
 public interface RepositoryPodcast extends JpaRepository<Podcast, Integer>{
-	@Query
-	public List<Podcast> findByVisibileTrue(Sort sort);
+	@Query("FROM Podcast p group by p.nome order by p.timestamp desc")
+	public List<Podcast> findByVisibileTrueGroupByNome();
 	
 	@Query
 	public List<Podcast> findByVisibileFalse(Sort sort);
