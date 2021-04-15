@@ -126,7 +126,7 @@ table, th, td {
 						<div th:if="${GMW}">
 
 							<button type="submit" name="modifica" data-toggle="modal"
-								data-target="#myModal3"
+								data-target="#myModal1"
 								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 8px; width: 150px;">
 								Modifica aforisma
 								<!-- <img src="/view/MyWork/images/edit.png" width="50px" height="20px">-->
@@ -181,7 +181,7 @@ table, th, td {
 						<div th:if="${GMW}">
 
 							<button type="submit" name="modifica" data-toggle="modal"
-								data-target="#myModal1"
+								data-target="#myModal3"
 								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 8px; width: 150px;">
 								Modifica aforisma
 								<!-- <img src="/view/MyWork/images/edit.png" width="50px" height="20px">-->
@@ -229,8 +229,8 @@ table, th, td {
 					</div>
 
 					<!-- Modal body -->
-					<div class="modal-body" th:if="${aforisma.size>2}">
-						<form th:action="@{/aforisma/update/{id}(id = ${aforisma[2].id})}"
+					<div class="modal-body" th:if="${aforisma.size>0}">
+						<form th:action="@{/aforisma/update/{id}(id = ${aforisma[0].id})}"
 							method="post" class="signin-form">
 							<div class="form-group col-12">
 								<label for="frase" style="color: black;">Frase</label> <input
