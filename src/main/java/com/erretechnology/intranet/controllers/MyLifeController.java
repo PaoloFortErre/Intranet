@@ -3,6 +3,7 @@ package com.erretechnology.intranet.controllers;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -43,11 +44,11 @@ public class MyLifeController extends BaseController {
 		//	List<Post> messaggi = service.getLastMessage();
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		List<ElementiMyLife> elementi = serviceElementiMyLife.findAll();
-		List<ElementiMyLife> evento = elementi.stream().filter(x -> x.getTipo().equals("eventi")).collect(Collectors.toList());
-		List<ElementiMyLife> aforismi = elementi.stream().filter(x -> x.getTipo().equals("aphorism")).collect(Collectors.toList());
-		List<ElementiMyLife> film = elementi.stream().filter(x -> x.getTipo().equals("cinema")).collect(Collectors.toList());
-		List<ElementiMyLife> libri = elementi.stream().filter(x -> x.getTipo().equals("book")).collect(Collectors.toList());
-		VideoDelGiorno video = serviceVideo.getLastVideo("MyLife").get();
+		CompletableFuture<List<ElementiMyLife>> evento = findLifeElement(elementi, "eventi");// elementi.stream().filter(x -> x.getTipo().equals("eventi")).collect(Collectors.toList());
+		CompletableFuture<List<ElementiMyLife>> aforismi = findLifeElement(elementi, "aphorism");//elementi.stream().filter(x -> x.getTipo().equals("aphorism")).collect(Collectors.toList());
+		CompletableFuture<List<ElementiMyLife>> film = findLifeElement(elementi, "cinema");// elementi.stream().filter(x -> x.getTipo().equals("cinema")).collect(Collectors.toList());
+		CompletableFuture<List<ElementiMyLife>> libri = findLifeElement(elementi, "book");// elementi.stream().filter(x -> x.getTipo().equals("book")).collect(Collectors.toList());
+		CompletableFuture<VideoDelGiorno> video = serviceVideo.getLastVideo("MyLife");
 		
 		Page<Post> postPage= servicePost.findPaginated(PageRequest.of(currentPage - 1, 5));
 
@@ -64,12 +65,13 @@ public class MyLifeController extends BaseController {
 					.collect(Collectors.toList());	
 			mav.addObject("pageNumbers", pageNumbers);
 		}
-		
-		mav.addObject("film", film);
-		mav.addObject("eventilife", evento);
-		mav.addObject("aforisma", aforismi);
-		mav.addObject("libri", libri);
-		mav.addObject("video", video);
+		CompletableFuture.allOf(evento, aforismi, video, film, libri).join();
+
+		mav.addObject("film", film.get());
+		mav.addObject("eventilife", evento.get());
+		mav.addObject("aforisma", aforismi.get());
+		mav.addObject("libri", libri.get());
+		mav.addObject("video", video.get());
 		mav.addObject("categorie", repoCategoria.findAll());
 		
 		return mav;

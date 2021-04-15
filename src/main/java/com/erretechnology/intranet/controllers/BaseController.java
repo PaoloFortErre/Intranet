@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.erretechnology.intranet.models.ElementiMyLife;
 import com.erretechnology.intranet.models.ElementiMyWork;
 import com.erretechnology.intranet.models.Log;
 import com.erretechnology.intranet.models.Notifica;
@@ -203,6 +204,11 @@ public abstract class BaseController {
 
 	@Async
 	protected CompletableFuture<List<ElementiMyWork>> findWorkElement(List<ElementiMyWork> list, String tipo){
+		return CompletableFuture.completedFuture(list.stream().filter(x -> x.getTipo().equals(tipo)).collect(Collectors.toList()));
+	}
+	
+	@Async
+	protected CompletableFuture<List<ElementiMyLife>> findLifeElement(List<ElementiMyLife> list, String tipo){
 		return CompletableFuture.completedFuture(list.stream().filter(x -> x.getTipo().equals(tipo)).collect(Collectors.toList()));
 	}
 
