@@ -281,10 +281,11 @@ public class UtenteController extends BaseController {
 	}
 
 	@GetMapping(value = "/gestisciPermesso")
-	public ModelAndView Permesso(/* int id */) {
+	public ModelAndView Permesso(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("gestisci_ruolo");
-		mav.addObject("utenti", serviceDatiPersonali.getAll());
+		mav.addObject("utenti", serviceDatiPersonali.getAll().stream()
+				.filter(x->x.getId() != Integer.parseInt(session.getAttribute("id").toString())).collect(Collectors.toList()));
 		return mav;
 	}
 
@@ -387,7 +388,8 @@ public class UtenteController extends BaseController {
 		if (serviceUtente.findById(utenteLoggato.getId()).getRuolo().getNome().equals("ADMIN")
 				|| utenteLoggato.getUtente().getSetPermessi().contains(servicePermesso.findById("AM"))) {
 			mav.setViewName("eliminaUtente");
-			mav.addObject("utenti", serviceDatiPersonali.getAll().stream().filter(x -> x.getUtente().getAttivo())
+			mav.addObject("utenti", serviceDatiPersonali.getAll().stream().filter(x -> x.getUtente().getAttivo() && 
+					x.getId() != Integer.parseInt(session.getAttribute("id").toString()))
 					.collect(Collectors.toList()));
 			return mav;
 		}
