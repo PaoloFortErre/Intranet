@@ -1,6 +1,7 @@
 package com.erretechnology.intranet.services;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import com.erretechnology.intranet.models.Cliente;
 
@@ -12,5 +13,5 @@ public interface ServiceCliente {
 	
 	public Cliente findById(int id);
 	
-	public List<Cliente> getAllNotVisible();
+	public CompletableFuture<List<Cliente>> getAllNotVisible();
 }

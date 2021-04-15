@@ -2,8 +2,10 @@ package com.erretechnology.intranet.services;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.erretechnology.intranet.models.Utente;
@@ -30,6 +32,8 @@ public class ServiceUtenteImpl implements ServiceUtente{
 	public List<Utente> getAll() {
 		return userRepository.findAll();
 	}
+	
+	
 	@Override
 	public Utente findByEmail(String email) {
 	//	return getAll().stream().filter(x -> x.getEmail().equals(email)).findFirst().get();
@@ -61,6 +65,13 @@ public class ServiceUtenteImpl implements ServiceUtente{
 		if(findByEmail(email)!= null) return true;
 		return false;
 	//	return getAll().stream().filter(x-> x.getEmail().equals(email)).count() == 1;
+	}
+
+	@Override
+	@Async
+	public CompletableFuture<Integer> findNumberOfActiveUsers() {
+		// TODO Auto-generated method stub
+		return CompletableFuture.completedFuture(userRepository.countByAttivoTrue());
 	}
 
 }

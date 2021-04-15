@@ -27,7 +27,7 @@ public interface ServicePost {
 
 	public CompletableFuture<List<Post>> getAllNotVisible();
 	
-	public List<Post> getByAutore(UtenteDatiPersonali autore);
+	public CompletableFuture<List<Post>> getByAutore(UtenteDatiPersonali autore);
 
 	public List<Post> getAllByAutore(UtenteDatiPersonali autore);
 

@@ -1,8 +1,11 @@
 package com.erretechnology.intranet.services;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.erretechnology.intranet.models.Log;
@@ -22,8 +25,9 @@ public class ServiceLogImpl implements ServiceLog{
 
 
 	@Override
-	public List<Log> findLogById(UtenteDatiPersonali u) {
-		return repositoryLog.findByUtente(u, Sort.by("id").descending());
+	@Async
+	public CompletableFuture<List<Log>> findLogById(UtenteDatiPersonali u) {
+		return CompletableFuture.completedFuture(repositoryLog.findByUtente(u, Sort.by("id").descending()));
 /*		return repositoryLog.findAll().stream()
 				.filter(x-> x.getUtente().getId() == id)
 				.sorted(Comparator.comparingInt(Log::getId).reversed())
@@ -32,8 +36,9 @@ public class ServiceLogImpl implements ServiceLog{
 
 
 	@Override
-	public List<Log> findAll() {
-		return repositoryLog.findAll(Sort.by("id").descending());
+	@Async
+	public CompletableFuture<List<Log>> findAll() {
+		return CompletableFuture.completedFuture(repositoryLog.findAll(Sort.by("id").descending()));
 		// TODO Auto-generated method stub
 		//return repositoryLog.findAll().stream().sorted(Comparator.comparingInt(Log::getId).reversed())
 			//	.collect(Collectors.toList());
@@ -42,8 +47,8 @@ public class ServiceLogImpl implements ServiceLog{
 
 
 	@Override
-	public List<Log> findLastFive() {
-		return repositoryLog.findFirst5ByOrderByIdDesc();
+	public CompletableFuture<List<Log>> findLastFive() {
+		return CompletableFuture.completedFuture(repositoryLog.findFirst5ByOrderByIdDesc());
 		// TODO Auto-generated method stub
 	/*	return repositoryLog.findAll().stream().sorted(Comparator.comparingInt(Log::getId).reversed())
 				.limit(5).collect(Collectors.toList());
@@ -51,10 +56,11 @@ public class ServiceLogImpl implements ServiceLog{
 	}
 
 
-	@Override
-	public List<Log> findLastFiveLogById(UtenteDatiPersonali id) {
+	@Override	
+	@Async
+	public CompletableFuture<List<Log>> findLastFiveLogById(UtenteDatiPersonali id) {
 		// TODO Auto-generated method stub
-		return repositoryLog.findFirst5ByUtenteOrderByIdDesc(id);
+		return CompletableFuture.completedFuture(repositoryLog.findFirst5ByUtenteOrderByIdDesc(id));
 	/*	return repositoryLog.findAll().stream()
 				.filter(x-> x.getUtente().getId() == id)
 				.sorted(Comparator.comparingInt(Log::getId).reversed())

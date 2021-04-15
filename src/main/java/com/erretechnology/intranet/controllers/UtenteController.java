@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.regex.*;
@@ -30,11 +31,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.erretechnology.intranet.models.Cinema;
+import com.erretechnology.intranet.models.Cliente;
 import com.erretechnology.intranet.models.Commento;
 import com.erretechnology.intranet.models.ComunicazioneHR;
 import com.erretechnology.intranet.models.Evento;
 import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.FilePdf;
+import com.erretechnology.intranet.models.Log;
 import com.erretechnology.intranet.models.Notifica;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.Permesso;
@@ -68,21 +72,24 @@ public class UtenteController extends BaseController {
 	RepositoryCliente repositoryCliente;
 
 	@GetMapping(value = "/")
-	public ModelAndView primaPagina(HttpSession session) {
+	public ModelAndView primaPagina(HttpSession session) throws Exception, ExecutionException {
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		ModelAndView mav = new ModelAndView();
+		mav.setViewName("profilo_admin");
+		CompletableFuture<List<Log>> logs;
+		CompletableFuture<List<Post>> post = servicePost.getByAutore(u);
+		CompletableFuture<Integer> attivi = serviceUtente.findNumberOfActiveUsers();
 		if (serviceUtente.findById(u.getId()).getRuolo().getNome().equals("ADMIN")) {
-			mav.addObject("log", serviceLog.findLastFive());
-	//		mav.addObject("allLog", serviceLog.findAll());
+			logs = serviceLog.findLastFive();
 			mav.addObject("admin", true);
 		} else {
-//			mav.addObject("allLog", serviceLog.findLogById(u));
 			mav.addObject("admin", false);
-			mav.addObject("log", serviceLog.findLastFiveLogById(u));
+			logs = serviceLog.findLastFiveLogById(u);
 		}
-		mav.addObject("post", servicePost.getByAutore(u));
-		mav.setViewName("profilo_admin");
-		mav.addObject("attivi", serviceUtente.getAll().stream().filter(x -> x.getAttivo()).count());
+		CompletableFuture.allOf(logs, post, attivi).join();
+		mav.addObject("log", logs.get());
+		mav.addObject("post", post.get());
+		mav.addObject("attivi", attivi.get());
 		mav.addObject("utente", u);
 		return mav;
 	}
@@ -97,7 +104,7 @@ public class UtenteController extends BaseController {
 	}
 
 	@GetMapping(value = "/viewProfile")
-	public ModelAndView viewUserProfile(HttpSession session, int id) {
+	public ModelAndView viewUserProfile(HttpSession session, int id) throws ExecutionException, Exception {
 		ModelAndView mav = new ModelAndView();
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(id);
 		if (u.getId() == serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())).getId())
@@ -108,7 +115,7 @@ public class UtenteController extends BaseController {
 		mav.addObject("utenteDati", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return mav;
 	}
-	
+
 	@GetMapping(value = "/eliminaNotifica/{id}")
 	public String elimina(HttpSession session, @PathVariable int id) {
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
@@ -119,14 +126,14 @@ public class UtenteController extends BaseController {
 		serviceDatiPersonali.save(u);
 
 		switch(n.getDestinazione()) {
-			case "MyWork":
-				return "redirect:/myWork/";
-			case "MyLife":
-				return "redirect:/myLife1/";
-			case "HR":
-				return "redirect:/comunicazioniHr/";
-			case "Moduli":
-				return "redirect:/moduli/";
+		case "MyWork":
+			return "redirect:/myWork/";
+		case "MyLife":
+			return "redirect:/myLife1/";
+		case "HR":
+			return "redirect:/comunicazioniHr/";
+		case "Moduli":
+			return "redirect:/moduli/";
 		}
 		return "redirect:/profile/";
 	}
@@ -166,7 +173,7 @@ public class UtenteController extends BaseController {
 	@PostMapping(value = "/paginaModificaPassword")
 	public ModelAndView cambiaPaginaModificaPagina(@RequestParam("vecchiaPassword") String vPsw,
 			@RequestParam("nuovaPassword") String nPsw, @RequestParam("cNuovaPassword") String cNPsw,
-			HttpSession session, Model model) {
+			HttpSession session, Model model) throws ExecutionException, Exception {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String regex = "^(?=.*[0-9])" + "(?=.*[a-z])(?=.*[A-Z])" + "(?=\\S+$).{8,20}$";
 		ModelAndView mav = new ModelAndView();
@@ -214,19 +221,19 @@ public class UtenteController extends BaseController {
 	@PostMapping(value = "/cambiaFotoProfilo")
 	public String modificaFoto(@RequestParam(required = false) MultipartFile immagine, @RequestParam(required = false) String dati, 
 			@RequestParam(required = false) String nome, HttpSession session)
-			throws Exception {
+					throws Exception {
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		FileImmagine img = null;
 		if ((immagine != null && !immagine.getOriginalFilename().isEmpty()) || !dati.isEmpty()) {
 
 			img = new FileImmagine();
 			/*if(compressImage(immagine, 0.5f).length == 0)
-				*/
+			 */
 			if(immagine == null) 
 				img.setData(Base64.getDecoder().decode(dati.getBytes("UTF-8")));
 			else
 				img.setData(immagine.getBytes());
-			
+
 			/*else
 				img.setData(compressImage(immagine, 0.5f));*/
 			UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(idUser);
@@ -251,17 +258,20 @@ public class UtenteController extends BaseController {
 
 	// PAGINA ATTIVITA' RECENTI
 	@GetMapping(value = "/mostra_log")
-	public ModelAndView mostraLog(HttpSession session) {
+	public ModelAndView mostraLog(HttpSession session) throws InterruptedException, ExecutionException {
 		ModelAndView mav = new ModelAndView();
+		CompletableFuture<List<Log>> logs;
 		mav.setViewName("mostra_tutto_log");
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		if (serviceUtente.findById(u.getId()).getRuolo().getNome().equals("ADMIN")) {
-			mav.addObject("allLog", serviceLog.findAll());
+			logs = serviceLog.findAll();
 			mav.addObject("admin", true);
-		} else {
-			mav.addObject("allLog", serviceLog.findLogById(u));
+		} else 
+		{
+			logs = serviceLog.findLogById(u);
 			mav.addObject("admin", false);
 		}
+		mav.addObject("allLog", logs.get());
 		return mav;
 	}
 
@@ -306,7 +316,7 @@ public class UtenteController extends BaseController {
 	public Map<String, String> getAllPermessi(@RequestParam("email") String email) {
 		return serviceAuthority.getMapById(serviceUtente.findByEmail(email).getId());
 	}
-	
+
 	@RequestMapping(value = "/isAdmin")
 	@ResponseBody
 	public Boolean[] isAdmin(@RequestParam("id") String id,@RequestParam("email") String email) {
@@ -319,7 +329,7 @@ public class UtenteController extends BaseController {
 	@GetMapping(value = "/addPermesso")
 	public String addPermesso(String email, String list, HttpSession session, Model model) throws Exception {
 		String[] permessi = list.split(",");
-		
+
 		// Set<String> targetSet = new
 		// CopyOnWriteArraySet<String>(Arrays.asList(permessi));
 		int id_utente = Integer.parseInt(session.getAttribute("id").toString());
@@ -335,7 +345,7 @@ public class UtenteController extends BaseController {
 				if(u.getRuolo().getNome().equals("ADMIN"))
 					u.setRuolo(serviceRuolo.getById("USER"));
 			}
-				
+
 			Set<Permesso> permessiUtente = new HashSet<Permesso>();
 			boolean flag;
 			Set<Permesso> pUtenti = u.getSetPermessi();
@@ -467,14 +477,17 @@ public class UtenteController extends BaseController {
 		if (!u.getUtente().getRuolo().getNome().equals("ADMIN"))
 			throw new Exception("Fidati. Prima chiedi i permessi");
 		List<Evento> eventi = repositoryEventoWork.getAllNotVisible();
+		eventi.addAll(repositoryEventoLife.getAllNotVisible());
 		CompletableFuture<List<Post>> posts = servicePost.getAllNotVisible();
 		CompletableFuture<List<Commento>> commenti = serviceCommento.getAllNotVisible();
 		CompletableFuture<List<ComunicazioneHR>> comunicazioni = serviceComunicazioni.getAllNotVisible();
 		CompletableFuture<List<FilePdf>> moduli = serviceFilePdf.getAllNotVisible();
 		CompletableFuture<List<Podcast>> podcast = servicePodcast.getAllNotVisible();
 		CompletableFuture<List<Sondaggio>> sondaggi = serviceSondaggio.getAllNotVisible();
-		CompletableFuture.allOf(posts, commenti, comunicazioni, moduli,podcast, sondaggi).join();
-		eventi.addAll(repositoryEventoLife.getAllNotVisible());
+		CompletableFuture<List<Cliente>> clienti = serviceCliente.getAllNotVisible();
+		CompletableFuture<List<Cinema>> film = serviceCinema.getAllNotVisible();
+		CompletableFuture.allOf(posts, commenti, comunicazioni, moduli, podcast, sondaggi, clienti, film).join();
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("gestione_suprema");
 		mav.addObject("post", posts.get().stream().filter(x->x.getAutore().getUtente().getAttivo()).collect(Collectors.toList()));
@@ -485,8 +498,8 @@ public class UtenteController extends BaseController {
 		mav.addObject("eventi", eventi);
 		mav.addObject("podcast", podcast.get());
 		mav.addObject("libri", repositoryLibro.getAllNotVisible());
-		mav.addObject("film", repositoryFilm.getAllNotVisible());
-		mav.addObject("client", repositoryCliente.getAllNotVisible());
+		mav.addObject("film", film.get());
+		mav.addObject("client", clienti.get());
 		mav.addObject("sondaggi", sondaggi.get());
 		return mav;
 	}

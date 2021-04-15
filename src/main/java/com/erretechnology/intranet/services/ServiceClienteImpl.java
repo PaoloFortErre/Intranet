@@ -1,8 +1,10 @@
 package com.erretechnology.intranet.services;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.erretechnology.intranet.models.Cliente;
@@ -27,8 +29,9 @@ public class ServiceClienteImpl implements ServiceCliente {
 		repositoryCliente.deleteById(id);
 	}
 	@Override
-	public List<Cliente> getAllNotVisible() {
-		return repositoryCliente.getAllNotVisible();
+	@Async
+	public CompletableFuture<List<Cliente>> getAllNotVisible() {
+		return CompletableFuture.completedFuture(repositoryCliente.getAllNotVisible());
 	}
 
 }

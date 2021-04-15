@@ -86,8 +86,9 @@ public class ServicePostImpl implements ServicePost{
 	}
 	
 	@Override
-	public List<Post> getByAutore(UtenteDatiPersonali autore) {
-		return repositoryPost.findTop6ByAutoreAndVisibileTrueOrderByIdDesc(autore);
+	@Async
+	public CompletableFuture<List<Post>> getByAutore(UtenteDatiPersonali autore) {
+		return CompletableFuture.completedFuture(repositoryPost.findTop6ByAutoreAndVisibileTrueOrderByIdDesc(autore));
 	}
 	
 	@Override

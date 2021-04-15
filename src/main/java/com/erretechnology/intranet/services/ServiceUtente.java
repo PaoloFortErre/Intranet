@@ -1,12 +1,15 @@
 package com.erretechnology.intranet.services;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+
 import com.erretechnology.intranet.models.Utente;
 
 
 public interface ServiceUtente {
 	public void save(Utente u);
 	public void saveUtente(Utente u);
+	public CompletableFuture<Integer> findNumberOfActiveUsers();
 	public List<Utente> getAll();
 	public Utente findByEmail(String email);
 	public Utente findByResetPasswordToken(String token);

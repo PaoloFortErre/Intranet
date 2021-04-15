@@ -1,6 +1,7 @@
 package com.erretechnology.intranet.services;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import com.erretechnology.intranet.models.Cinema;
 
@@ -12,5 +13,5 @@ public interface ServiceCinema {
 	
 	public Cinema findById(int id);
 	
-	public List<Cinema> getAllNotVisible();
+	public CompletableFuture<List<Cinema>> getAllNotVisible();
 }

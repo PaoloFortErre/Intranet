@@ -10,4 +10,5 @@ public interface RepositoryUtente extends JpaRepository<Utente, Integer>{
 	
 	public Utente findByEmail(String email);
 	public Utente findByTokenResetPassword(String tokenResetPassword);
+	public Integer countByAttivoTrue();
 }
