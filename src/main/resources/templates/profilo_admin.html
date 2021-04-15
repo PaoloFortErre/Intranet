@@ -683,7 +683,7 @@
 	              url : "http://localhost:8080/profile/cambiaFotoProfilo",
 	              data: {dati: dati, nome: nome},
 	              success : function(data) {
-	            	  location.reload();
+	            	  window.location = window.location;
 	              }
 			 });
 		}

@@ -347,8 +347,10 @@
 				<h1 style="text-align: center; clear: both;">Film e Serie TV</h1>
 
 
-				<h5 style="text-align: center; font-style: italic">Ecco gli
+				<h5 th:if="${film.size > 0}"style="text-align: center; font-style: italic">Ecco gli
 					ultimi titoli selezionati da ERRE:</h5>
+				<h5 th:unless="${film.size > 0}"style="text-align: center; font-style: italic">Per il momento 
+				non ci sono titoli selezionati da ERRE</h5>
 
 			</div>
 
@@ -609,8 +611,10 @@
 				</div>
 				<h1 style="text-align: center; clear: both;">Eventi</h1>
 
-				<h5 style="text-align: center; font-style: italic">Ecco gli
+				<h5 th:if="${eventilife.size > 0}"style="text-align: center; font-style: italic">Ecco gli
 					ultimi eventi selezionati da ERRE:</h5>
+				<h5 th:unless="${eventilife.size > 0}"style="text-align: center; font-style: italic">Per il momento
+					non ci sono eventi selezionati da ERRE</h5>
 
 			</div>
 
@@ -924,8 +928,10 @@
 				</div>
 				<h1 style="text-align: center; clear: both;">Libri</h1>
 
-				<h5 style="text-align: center; font-style: italic">Ecco una
+				<h5 th:if="${libri.size > 0}" style="text-align: center; font-style: italic">Ecco una
 					lista di libri selezionata da ERRE:</h5>
+				<h5 th:unless="${libri.size > 0}" style="text-align: center; font-style: italic">Per il momento
+					non ci sono libri selezionati da ERRE</h5>
 
 			</div>
 			<div class="col-xs-6 col-sm-6 col-lg-3 col-xl-3 "
