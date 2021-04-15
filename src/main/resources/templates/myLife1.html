@@ -38,8 +38,7 @@
 	rel='stylesheet' type='text/css'>
 </head>
 <body ng-app=""
-	th:with="GML = ${#authorization.expression('hasAuthority(''GML'')')}"
-	onresize="myFunction()">
+	th:with="GML = ${#authorization.expression('hasAuthority(''GML'')')}">
 
 	<nav class="navbar navbar-expand-lg bg-dark navbar-dark justify-content-end">
 	<a class="navbar-brand logo" th:href="@{/homepage/}"><img
@@ -1008,72 +1007,6 @@
 				</form>
 
 			</div>
-			<!--  <div class="col-xs-6 col-sm-6 col-lg-3 col-xl-3 " style="text-align: center">
-				<div class="profile-card-3 mt-5">
-					<img
-					th:src="'data:image/png;base64,' + ${libri[1].immagine.getImgData(libri[1].immagine.data)}"
-						class="img img-responsive" width="100%" height="350px">
-					<div class="profile-name" th:text="${libri[1].titolo}"></div>
-					<div class="profile-username" th:text="${libri[1].contenuto}"></div>
-				</div>
-				<form th:action="@{'/libro/update/'+${libri[1].id}}"
-										th:if="${GML}" method="get" style="display: inline-block">
-										<button type="submit" name="modifica"
-								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
-										Modifica
-										</button>
-									</form>
-									<form th:action="@{'/libro/delete/'+${libri[1].id}}"
-										th:if="${GML}" method="get" style="display: inline-block">
-										<button type="submit" name="modifica"
-								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
-										Elimina</button>
-									</form>
-			</div>
-	<div class="col-xs-6 col-sm-6 col-lg-3 col-xl-3 " style="text-align: center">
-				<div class="profile-card-3 mt-5">
-					<img
-					th:src="'data:image/png;base64,' + ${libri[2].immagine.getImgData(libri[2].immagine.data)}"
-						class="img img-responsive" width="100%" height="350px">
-					<div class="profile-name" th:text="${libri[2].titolo}"></div>
-					<div class="profile-username" th:text="${libri[2].contenuto}"></div>
-				</div>
-				<form th:action="@{'/libro/update/'+${libri[2].id}}"
-										th:if="${GML}" method="get" style="display: inline-block">
-										<button type="submit" name="modifica"
-								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
-										Modifica
-										</button>
-									</form>
-									<form th:action="@{'/libro/delete/'+${libri[2].id}}"
-										th:if="${GML}" method="get" style="display: inline-block">
-										<button type="submit" name="modifica"
-								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
-										Elimina</button>
-									</form>
-			</div>
-	<div class="col-xs-6 col-sm-6 col-lg-3 col-xl-3 " style="text-align: center">
-				<div class="profile-card-3 mt-5">
-					<img
-					th:src="'data:image/png;base64,' + ${libri[3].immagine.getImgData(libri[3].immagine.data)}"
-						class="img img-responsive" width="100%" height="350px">
-					<div class="profile-name" th:text="${libri[3].titolo}"></div>
-					<div class="profile-username" th:text="${libri[3].contenuto}"></div>
-				</div>
-				<form th:action="@{'/libro/update/'+${libri[3].id}}"
-										th:if="${GML}" method="get" style="display: inline-block">
-										<button type="submit" name="modifica"
-								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
-										Modifica
-										</button>
-									</form>
-									<form th:action="@{'/libro/delete/'+${libri[3].id}}"
-										th:if="${GML}" method="get" style="display: inline-block">
-										<button type="submit" name="modifica"
-								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
-										Elimina</button>
-									</form>
-			</div>-->
 		</div>
 
 		<div class="row" th:if="${video!=null}">
