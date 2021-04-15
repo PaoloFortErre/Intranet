@@ -37,6 +37,36 @@ body {
 	height: 50px;
 }
 
+.caption {
+	font-family: "Source Sans Pro", sans-serif;
+	font-size: 10px;
+	float: left;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	overflow: hidden;
+}
+/* 같같같 CAPTION CAROUSEL EVENTI MYLIFE 같같같같같*/
+.caption img {
+	float: left;
+	margin: 0;
+	padding: 0;
+	background: #fff;
+	border: none;
+}
+
+.caption h3 {
+	float: right;
+	margin: 0;
+	padding: 10px;
+	width: 100%;
+	color: #dedede;
+	background: #222; /* browser che non supportano rgba */
+	background: rgba(0, 0, 0, 0.7);
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
 .col-sinistra {
 	border-radius: 6px 6px 6px 6px;
 	background-color: #E8E7E7;
@@ -86,7 +116,7 @@ body {
 nav {
 	
 	font-size: 20px;
-	
+
 	
 	
 	

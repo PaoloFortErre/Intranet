@@ -267,7 +267,9 @@
     <!-- PANNELLO LINKEDIN-->
     <div class="container mt-2">
        <div class="row justify-content-center">
-      	 <a th:if=${GMW} class="btn btn-primary" th:href="@{/linkedin/new}">Aggiungi post Linkedin</a>
+      	 <a th:if="${GMW}"  th:href="@{/linkedin/new}"
+            style="background-color: transparent; text-align: center; border: 0px solid #232323; display: inline-block; color: white; font-size: 12px; padding: 5px;">
+           <img src="/view/MyWork/images/more.png" width="30%" alt="add"> Aggiungi post Linkedin</a>
        </div>
        <div class="row justify-content-center">
         <div class="col-xl-8 col-lg-8 col-md-9 col-sm-auto col-xs-7 mr-4" th:if="${linkedinPost.size > 0}">
