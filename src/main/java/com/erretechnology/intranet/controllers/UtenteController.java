@@ -58,19 +58,6 @@ import com.erretechnology.intranet.repositories.RepositoryNews;
 @RequestMapping(value = "profile")
 public class UtenteController extends BaseController {
 
-	@Autowired
-	RepositoryNews repositoryNews;
-	@Autowired
-	RepositoryEventoLife repositoryEventoLife;
-	@Autowired
-	RepositoryEventoWork repositoryEventoWork;
-	@Autowired
-	RepositoryLibro repositoryLibro;
-	@Autowired
-	RepositoryCinema repositoryFilm;
-	@Autowired
-	RepositoryCliente repositoryCliente;
-
 	@GetMapping(value = "/")
 	public ModelAndView primaPagina(HttpSession session) throws Exception, ExecutionException {
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
@@ -476,8 +463,8 @@ public class UtenteController extends BaseController {
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		if (!u.getUtente().getRuolo().getNome().equals("ADMIN"))
 			throw new Exception("Fidati. Prima chiedi i permessi");
-		List<Evento> eventi = repositoryEventoWork.getAllNotVisible();
-		eventi.addAll(repositoryEventoLife.getAllNotVisible());
+		List<Evento> eventi = serviceEventoWork.getAllNotVisible();
+		eventi.addAll(serviceEventoLife.getAllNotVisible());
 		CompletableFuture<List<Post>> posts = servicePost.getAllNotVisible();
 		CompletableFuture<List<Commento>> commenti = serviceCommento.getAllNotVisible();
 		CompletableFuture<List<ComunicazioneHR>> comunicazioni = serviceComunicazioni.getAllNotVisible();
@@ -492,12 +479,12 @@ public class UtenteController extends BaseController {
 		mav.setViewName("gestione_suprema");
 		mav.addObject("post", posts.get().stream().filter(x->x.getAutore().getUtente().getAttivo()).collect(Collectors.toList()));
 		mav.addObject("commenti", commenti.get().stream().filter(x->x.getAutore().getUtente().getAttivo()).collect(Collectors.toList()));
-		mav.addObject("news", repositoryNews.getAllNotVisible());
+		mav.addObject("news", serviceNews.getAllNotVisible());
 		mav.addObject("comunicazioniHR", comunicazioni.get());
 		mav.addObject("moduli", moduli.get());
 		mav.addObject("eventi", eventi);
 		mav.addObject("podcast", podcast.get());
-		mav.addObject("libri", repositoryLibro.getAllNotVisible());
+		mav.addObject("libri", serviceLibro.getAllNotVisible());
 		mav.addObject("film", film.get());
 		mav.addObject("client", clienti.get());
 		mav.addObject("sondaggi", sondaggi.get());
