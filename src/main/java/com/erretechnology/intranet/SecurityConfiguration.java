@@ -48,7 +48,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 				"/maintain-disable").access("hasAuthority('AM')")
 		.antMatchers("/myLife/*", "/profile/*", "/homepage", "/file/*", "/myWork/*" , "/homepage/*", "/myLife1/*" , "/moduli/*", "/aforisma/*",
 				"/cinema/*","/cliente/*", "/eventolife/*", "/eventowork/*", "/categoriacinema/*", "/libro/*", "/linkedin/*" , "/news/*",
-				"/podcast/*").access("isAuthenticated()")
+				"/podcast/*", "/comunicazioniHr/*").access("isAuthenticated()")
 		.antMatchers("/", "/login" , "/manutenzione").permitAll()
 		.antMatchers("/maintain-enable", "/maintain-disable").access("isAuthenticated")
 		.and()
