@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.time.Instant;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -221,7 +222,7 @@ public class HomeController extends BaseController{
 	}
 	
 	@GetMapping (value= "/comunicazioniHr")
-	public ModelAndView comunicazioniHr(HttpSession session) {
+	public ModelAndView comunicazioniHr(HttpSession session) throws InterruptedException, ExecutionException {
 		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		ModelAndView mav = new ModelAndView();
 		List<ElementiMyWork> elementi = serviceElementiMyWork.findAll();
@@ -236,7 +237,7 @@ public class HomeController extends BaseController{
 	}
 	
 	@GetMapping (value= "/myLife1")
-	public ModelAndView MyLife1(HttpSession session) {
+	public ModelAndView MyLife1(HttpSession session) throws InterruptedException, ExecutionException {
 		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		ModelAndView mav = new ModelAndView();
 		List<ElementiMyLife> elementi = serviceElementiMyLife.findAll();
@@ -245,7 +246,7 @@ public class HomeController extends BaseController{
 		List<ElementiMyLife> aforismi = elementi.stream().filter(x -> x.getTipo().equals("aphorism")).collect(Collectors.toList());
 		List<ElementiMyLife> film = elementi.stream().filter(x -> x.getTipo().equals("cinema")).collect(Collectors.toList());
 		List<ElementiMyLife> libri = elementi.stream().filter(x -> x.getTipo().equals("book")).collect(Collectors.toList());
-		VideoDelGiorno video = serviceVideo.getLastVideo("MyLife"); 
+		VideoDelGiorno video = serviceVideo.getLastVideo("MyLife").get(); 
 		
 		mav.addObject("film", film);
 		mav.addObject("eventilife", evento);

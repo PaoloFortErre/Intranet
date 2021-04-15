@@ -1,10 +1,11 @@
 package com.erretechnology.intranet.services;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import com.erretechnology.intranet.controllers.BaseController;
 import com.erretechnology.intranet.models.Permesso;
 import com.erretechnology.intranet.models.Ruolo;
 import com.erretechnology.intranet.models.Utente;
@@ -12,11 +13,20 @@ import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.repositories.RepositoryUtenteDatiPersonali;
 
 @Service("serviceUtenteDati")
-public class ServiceUtenteDatiPersonaliImpl extends BaseController implements ServiceUtenteDatiPersonali {
+public class ServiceUtenteDatiPersonaliImpl implements ServiceUtenteDatiPersonali {
 
 	@Autowired
 	RepositoryUtenteDatiPersonali repositoryUtenteDatiPersonali;
-	
+	@Autowired
+	ServiceRuolo serviceRuolo;
+	@Autowired
+    ServicePermesso servicePermesso;
+	@Autowired
+    ServiceUtente serviceUtente;
+	@Autowired
+    ServiceSettore serviceSettore;
+	@Autowired
+    ServiceFileImmagini serviceFileImmagine;
 
 	@Override
 	public void save(UtenteDatiPersonali utente) {
@@ -31,8 +41,9 @@ public class ServiceUtenteDatiPersonaliImpl extends BaseController implements Se
 		return null;*/
 	}
 	@Override
-	public List<UtenteDatiPersonali> getAll() {
-		return repositoryUtenteDatiPersonali.findAll();
+	@Async
+	public CompletableFuture<List<UtenteDatiPersonali>> getAll() {
+		return CompletableFuture.completedFuture(repositoryUtenteDatiPersonali.findAll());
 	}
 
 	@Override

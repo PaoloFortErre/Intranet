@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.Instant;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 import javax.imageio.IIOImage;
@@ -16,8 +17,10 @@ import javax.imageio.stream.ImageOutputStream;
 import javax.imageio.stream.MemoryCacheImageOutputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.erretechnology.intranet.models.ElementiMyWork;
 import com.erretechnology.intranet.models.Log;
 import com.erretechnology.intranet.models.Notifica;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
@@ -197,4 +200,11 @@ public abstract class BaseController {
 	    }
 	    return baos.toByteArray();
 	}
+
+	@Async
+	protected CompletableFuture<List<ElementiMyWork>> findWorkElement(List<ElementiMyWork> list, String tipo){
+		return CompletableFuture.completedFuture(list.stream().filter(x -> x.getTipo().equals(tipo)).collect(Collectors.toList()));
+	}
+
+
 }
