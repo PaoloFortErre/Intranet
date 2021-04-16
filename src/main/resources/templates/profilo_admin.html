@@ -31,7 +31,6 @@
 
   body {
     background-color: black;
-    background-image: url("/view/Profile/Images/bg-profile.jpg");
     background-repeat: no-repeat;
     background-size: auto;
     color:#F3F3F3;
@@ -256,13 +255,13 @@
 
   </head>
 
-  <body>
+  <body th:style="'background-image:url(' + @{/view/Profile/Images/bg-profile.jpg} + ');'">
     <!--NAVBAR CON LINK A PAGINE E LINK A SITO ERRE-->
     <div class="row align-items-center">
       <nav
       class="navbar navbar-expand-md bg-dark navbar-dark justify-content-end">
       <a class="navbar-brand logo" th:href="@{/homepage/}"><img
-        src="/view/MyWork/images/casabianca.png" width="30px"
+        th:src="@{/view/MyWork/images/casabianca.png}" width="30px"
         alt="homeBianca.png" style="opacity: 0.9" class="ml-3"></a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -350,15 +349,15 @@
                 <div class="profile-img-confirm" id="profile-img-confirm" style="display: none;">
 
 				    <div class="button-profile " onclick="remove()"  style="cursor: pointer; display: inline-block;width:50px; margin: 10px" id="cancel-img">
-                      <img src="/view/Profile/Images/false.png" width="70%">
+                      <img th:src="@{/view/Profile/Images/false.png}" width="70%">
                     </div>
 
                   <div class="button-profile " onclick="save()" style="cursor: pointer; display: inline-block; width:50px; margin: 10px" id="save-img">
-                    <img src="/view/Profile/Images/true.png" width="100%">
+                    <img th:src="@{/view/Profile/Images/true.png}" width="100%">
                   </div>
 				</div>
                 
-                <div class="bottom-right " th:if="${session.id} == ${utente.utente.id}">
+                <div class="bottom-right" th:if="${session.id} == ${utente.utente.id}">
                 
                
                   <a class="dropdown fa fa-camera text-white" href="#" id="imageDropdown" title="Clicca per gestire la foto profilo" data-toggle="dropdown"></a>
@@ -451,14 +450,14 @@
 	              <!-- MODALITA' MANUTENZIONE-->
 	              <div class="container text-center mt-2" data-toggle="modal" data-target="#manutenzione">
 	                <button id="btn-manutenzione" type="button" th:if="${AM}" >
-	                  <img class="img-fluid w-25" src="/view/Profile/Images/manutenzione-icona.png" alt="ingranaggio" style=" color: blue; ">
+	                  <img class="img-fluid w-25" th:src="@{/view/Profile/Images/manutenzione-icona.png}" alt="ingranaggio" style=" color: blue; ">
 	                </button>
 	              </div>
               </div>
 
               <!-- PANNELLO GESTIONE UTENTI -->
               <div class="container shadow text-center rounded pr-n2 pl-n2" th:if="${AM}" style="position: relative; background-color: #f8f9fa">
-                <img class="top-left" src="/view/Profile/Images/pin_post-it.png" alt="pin-post-it">
+                <img class="top-left" th:src="@{/view/Profile/Images/pin_post-it.png}" alt="pin-post-it">
                 <div class="container text-white mt-3 pt-3">
                   <h1 class="h1 text-center mt-3 text-dark" th:text="${attivi}" style="font-weight: 800 !important">"</h1>
                   <h3 class="h3" style="color:#303030; ">UTENTI REGISTRATI</h3>
@@ -491,7 +490,7 @@
 
             <div class="col-xl-10 col-lg-12 col-md-12 col-sm-12 col-xs-12">
               <div class="card position-relative text-end">
-                <img class="top-left" src="/view/Profile/Images/pin_post-it.png" alt="pin-post-it">
+                <img class="top-left" th:src="@{/view/Profile/Images/pin_post-it.png}" alt="pin-post-it">
                 <div class="card-body" th:if="${utente.descrizione != null}">
                   <h3 class="h3 card-title text-center" style="color:#303030; font-weight: 600;">Una breve descrizione di me stesso</h3>
                   <h5  class="h5 ml-2 mr-2" th:text="${utente.descrizione}" style="color:#303030"></h5>
@@ -562,7 +561,7 @@
                 </div>
 
                 <div class="card shadow position-relative mt-3 ">
-                  <img class="top-left" src="/view/Profile/Images/pin_post-it.png" alt="pin-post-it">
+                  <img class="top-left" th:src="@{/view/Profile/Images/pin_post-it.png}" alt="pin-post-it">
 
                   <div data-toggle="modal" th:attr="data-target='#postModal' + ${post.id}">
                     <img style="cursor: pointer" th:if="${post.immagine} != null" th:src="'data:image/png;base64,' + ${post.immagine.getImgData(post.immagine.data)}" class="card-img-top" alt="immagine-post" >
@@ -594,7 +593,7 @@
               <div class="container bg-gradient-warning">
 
                 <div class="card border border border-danger shadow text-center mb-5" style="color:#303030; border: 5px !important; position: relative" >
-                  <img class="img-fluid top-left" src="/view/Profile/Images/pin_post-it.png" alt="pin-post-it">
+                  <img class="img-fluid top-left" th:src="@{/view/Profile/Images/pin_post-it.png}" alt="pin-post-it">
                   <div class="card-header">
                     <h5 class="h5"><b>ATTIVITA' RECENTI</b></h5>
                     <small>Anteprima di quello che hai fatto di recente</small>
