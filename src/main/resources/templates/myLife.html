@@ -514,10 +514,11 @@
 
 												<!-- Modal body -->
 												<div class="modal-body" th:each="utente : ${post.setUtenti}"
-													th:if="${post.setUtenti.size > 0}"
-													style="background-color: #B9CAF0;">
-													<p th:text="${utente.nome} + ' ' + ${utente.cognome}"
-														style="color: #303030"></p>
+													th:if="${post.setUtenti.size > 0}" style="background-color: #B9CAF0;" ><a th:href="@{/profile/viewProfile/(id=${utente.id})}" >
+													<img th:src="'data:image/jpeg;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}"
+													title="utente" class="immagineUtente img-fluid" style="border-radius: 50%;"></a>
+													<a th:href="@{/profile/viewProfile/(id=${utente.id})}" >
+													<span th:text="${utente.nome} + ' ' + ${utente.cognome}" th:href="@{/profile/viewProfile/(id=${utente.id})}" style="color: #303030" /></a>
 												</div>
 
 												<!-- Modal footer -->
@@ -1070,18 +1071,6 @@ COLONNA DESTRA
 				return false;
 			}
 
-		}
-		function myFunction() {
-			var w = window.outerWidth;
-			if (w <= 950) {
-
-				document.getElementById("utente-foto-profilo").style.display = "none";
-				document.getElementById("scrittaProfilo").style.display = "block";
-
-			} else {
-				document.getElementById("utente-foto-profilo").style.display = "block";
-				document.getElementById("scrittaProfilo").style.display = "none";
-			}
 		}
 
 		$(document).ready(
