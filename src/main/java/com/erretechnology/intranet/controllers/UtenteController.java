@@ -470,7 +470,7 @@ public class UtenteController extends BaseController {
 		CompletableFuture<List<News>> news = serviceNews.getAllNotVisible(); 
 		CompletableFuture<List<Libro>> libro = serviceLibro.getAllNotVisible(); 
 		CompletableFuture.allOf(posts, commenti, comunicazioni, moduli, podcast, sondaggi, clienti, film, news, libro, eventiWork).join();
-
+		eventiWork.get().addAll(eventiLife.get());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("gestione_suprema");
 		mav.addObject("post", posts.get().stream().filter(x->x.getAutore().getUtente().getAttivo()).collect(Collectors.toList()));
@@ -478,7 +478,7 @@ public class UtenteController extends BaseController {
 		mav.addObject("news", news.get());
 		mav.addObject("comunicazioniHR", comunicazioni.get());
 		mav.addObject("moduli", moduli.get());
-		mav.addObject("eventi", eventiWork.get().addAll(eventiLife.get()));
+		mav.addObject("eventi", eventiWork.get());
 		mav.addObject("podcast", podcast.get());
 		mav.addObject("libri", libro.get());
 		mav.addObject("film", film.get());
