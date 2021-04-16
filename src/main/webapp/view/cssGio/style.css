@@ -6,7 +6,7 @@ h1, h2, h3, h4, h5, textarea, p, label, input, button, a {
 }
 
 body {
-	background-color: black;
+	background-color: #000000;
 	background-image: url("/view/MyWork/images/carbonio.jpg");
 	background-position: center;
 	background-repeat: no-repeat;
