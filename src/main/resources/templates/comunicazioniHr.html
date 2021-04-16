@@ -217,7 +217,7 @@ style="font-size: 10px; color: black"></p>
 
 				<br>
 				<button type="submit" name="modifica" th:if="${GS}" data-toggle="modal" data-target="#myModal1"
-						style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 8px; width: 70px; margin-bottom: 5px;">
+						style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 3px; width: 70px; margin-bottom: 5px;">
 					Modifica
 				</button>
 			<!-- The Modal -->
@@ -265,10 +265,10 @@ style="font-size: 10px; color: black"></p>
 
 			<form
 					th:action="@{'/myWork/deleteSondaggio/' +${sondaggi.id}}"
-					th:if="${GS}" method="post">
+					th:if="${GS}" method="post" style="display: inline-block">
 
 				<button type="submit" name="modifica"
-						style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 8px; width: 70px;">
+						style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 3px; width: 70px;">
 					Elimina
 				</button>
 			</form>
