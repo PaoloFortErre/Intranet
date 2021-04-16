@@ -141,7 +141,7 @@ public class MyWorkController extends BaseController {
 			s.setTimestampEliminazione(Instant.now().getEpochSecond());
 			serviceSondaggio.save(s);
 			saveLog("cancellato un sondaggio", autore);
-			return "redirect:/myWork/";
+			return "redirect:/comunicazioniHr/";
 	}
 
 	@GetMapping(value = "/addSondaggio")
