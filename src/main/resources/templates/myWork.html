@@ -28,7 +28,7 @@
 	rel='stylesheet' type='text/css'>
 
 
-<link rel="stylesheet" th:href="@{//view/cssGio/style.}">
+<link rel="stylesheet" th:href="@{/view/cssGio/style.css}">
 <style>
 td, th, tr {
 	color: white;
@@ -116,7 +116,7 @@ table, th, td {
 		<div class="carousel-inner">
 			<div class="carousel-item active">
 
-				<img src="@{/view/MyWork/images/ferrari1.png}" alt="ferrari"
+				<img th:src="@{/view/MyWork/images/ferrari1.png}" alt="ferrari"
 					title="ferrari" class="img-fluid" width=" 100%" height="500px" style=" filter:brightness(50%);">
 				<div class="carousel-caption">
 					<div th:if="${aforisma.size>0}">
