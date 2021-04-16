@@ -29,7 +29,7 @@
 	integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
 	crossorigin="anonymous"></script>
 
-	<link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
+	<link rel="stylesheet" content-type="" th:href="@{/view/cssGio/style.css}">
 
 	<style media="screen">
 	.image-cont {
@@ -75,7 +75,7 @@
 
 	<nav class="navbar navbar-expand-lg bg-dark navbar-dark justify-content-end">
 		<a class="navbar-brand logo" th:href="@{/homepage/}">
-			<img src="/view/MyWork/images/casabianca.png" width="30px" alt="homeBianca.png" style="opacity: 0.9" class="img-fluid">
+			<img th:src="@{/view/MyWork/images/casabianca.png}" width="30px" alt="homeBianca.png" style="opacity: 0.9" class="img-fluid">
 		</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 				<span class="navbar-toggler-icon"></span>
@@ -163,7 +163,7 @@ style="font-size: 10px; color: black"></p>
 			<div class="container-fluid text-center mb-3" th:if="${GHR}">
 				<a class="aggiungi" th:href="@{/file/hr}"
 				style="text-decoration: none; color: #F3F3F3;"> <img
-				class="mr-5" src="/view/MyWork/images/more.png" width="30px">Aggiungi
+				class="mr-5" th:src="@{/view/MyWork/images/more.png}" width="30px">Aggiungi
 				o elimina comunicazioni
 			</a>
 		</div>
@@ -171,11 +171,11 @@ style="font-size: 10px; color: black"></p>
 		<div class="container">
 			<div id="comunicazione" class="mt-3 mb-3"
 			th:each="comunicazione: ${comunicazioni}">
-			<img src="/view/MyWork/images/pdf-icon.png" style="float: right;"
+			<img th:src="@{/view/MyWork/images/pdf-icon.png}" style="float: right;"
 			width="30px"> <a
 			th:href="@{/file/downloadFileHR(id=${comunicazione.id})}"
 			th:download="${comunicazione.nome}" style="text-align: right">
-			<img src="/view/MyWork/images/download.png.png"
+			<img th:src="@{/view/MyWork/images/download.png.png}"
 			style="float: right;" width="35px">
 		</a>
 		<p
@@ -204,12 +204,12 @@ style="font-size: 10px; color: black"></p>
 
 	<div class="container text-center mb-3" th:if="${GS}">
 		<a class="aggiungi" th:href="@{/myWork/addSondaggio}" style="text-decoration: none; color: #F3F3F3;">
-			<img class="mr-5" src="/view/MyWork/images/more.png" width="30px">Aggiungi sondaggio
+			<img class="mr-5" th:src="@{/view/MyWork/images/more.png}" width="30px">Aggiungi sondaggio
 		</a>
 	</div>
 	<div id="comunicazione" class="row mb-3 mt-3" th:each="sondaggi : ${sondaggi}">
 		<div class="col-xs-2 col-sm-2 col-lg-2 col-xl-2 ">
-			<img src="/view/MyWork/images/surveymonkey.png" width="50px" class="mr-5">
+			<img th:src="@{/view/MyWork/images/surveymonkey.png}" width="50px" class="mr-5">
 		</div>
 		<div class="col-xs-10 col-sm-10 col-lg-10 col-xl-10 ">
 			<p th:text="${sondaggi.titolo}"></p>
@@ -294,11 +294,11 @@ style="font-size: 10px; color: black"></p>
 	style="margin-top: 15px; padding-top: 15px;">
 	<div class="col-sm-4 col-lg-4">
 		<a href="https://erretechnology.com/" target="blank"><img
-			src="/view/MyWork/images/errelogowhite.png" height="80px"
+			th:src="@{/view/MyWork/images/errelogowhite.png}" height="80px"
 			alt="erre_logo" style="margin: auto"></a>
 		</div>
 		<div class="col-sm-4 col-lg-4">
-			<img src="/view/MyWork/images/thegate.png" width="100%"
+			<img th:src="@{/view/MyWork/images/thegate.png}" width="100%"
 			style="margin: auto;">
 			<p style="color: #F3F3F3; text-align: center; font-size: 20px;">
 				Supporto: +39 011 197 429 00</p>

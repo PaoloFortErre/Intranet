@@ -34,7 +34,7 @@
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css"
 	rel="stylesheet" />
-<link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
+<link rel="stylesheet" content-type="" th:href="@{/view/cssGio/style.css}">
 <link href='https://fonts.googleapis.com/css?family=Montserrat'
 	rel='stylesheet' type='text/css'>
 
@@ -46,7 +46,7 @@
 
 <nav class="navbar navbar-expand-lg bg-dark navbar-dark justify-content-end">
 	<a class="navbar-brand logo" th:href="@{/homepage/}"><img
-			src="/view/MyWork/images/casabianca.png" width="30px"
+			th:src="@{/view/MyWork/images/casabianca.png}" width="30px"
 			alt="homeBianca.png" style="opacity: 0.9" class="img-fluid"></a> 
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
@@ -112,7 +112,7 @@
 		</ul>
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<img src="/view/MyLife/images/mylife1.png" alt="ferrari"
+				<img th:src="@{/view/MyLife/images/mylife1.png}" alt="ferrari"
 					title="ferrari" width="100%" height="500" class="img-fluid" style=" filter:brightness(50%);">
 				<div class="carousel-caption" th:if="${aforisma.size>0}">
 					<h1
@@ -138,7 +138,7 @@
 				</div>
 			</div>
 			<div class="carousel-item">
-				<img src="/view/MyLife/images/mylife2.png" alt="scarpe" width="100%"
+				<img th:src="@{/view/MyLife/images/mylife2.png}" alt="scarpe" width="100%"
 					height="500" class="img-fluid" style=" filter:brightness(50%);">
 				<div class="carousel-caption" th:if="${aforisma.size>1}" >
 					<h1
@@ -164,7 +164,7 @@
 				</div>
 			</div>
 			<div class="carousel-item">
-				<img src="/view/MyLife/images/mylife3.png" alt="scarpe" width="100%"
+				<img th:src="@{/view/MyLife/images/mylife3.png}" alt="scarpe" width="100%"
 					height="500" class="img-fluid" style=" filter:brightness(50%);">
 				<div class="carousel-caption" th:if="${aforisma.size>2}">
 					<h1
@@ -217,7 +217,7 @@
 			<div class="col-xs-2 col-sm-4 col-lg-2">
 				<div class="col-sinistra">
 
-					<img src="/view/MyLife/images/tori.jpg" width="100%"
+					<img th:src="@{/view/MyLife/images/tori.jpg}" width="100%"
 						style="border-radius: 6px 6px 0px 0px"> <img
 						th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
 						alt="utente" title="utente" class="immagineUtente fixed"
@@ -271,7 +271,7 @@
 									<button type="button" data-toggle="modal"
 										style="background-color: #E8E7E7; color: #303030; border: 0px solid #E8E7E7"
 										data-target="#myModal">
-										Immagine<img src="/view/MyLife/images/img.png"
+										Immagine<img th:src="@{/view/MyLife/images/img.png}"
 											style="width: 30px; height: 30px; display: inline-block; margin-left: 5px;">
 									</button>
 
@@ -379,7 +379,7 @@
 												method="post">
 												<button name="button" type="submit" class="buttonAzioni"
 													style="background-color: #E8E7E7; color: white; margin-left: 290px; border: 0px solid #303030">
-													<img src="/view/MyLife/images/trash.png" width="55%">
+													<img th:src="@{/view/MyLife/images/trash.png}" width="55%">
 												</button>
 											</form>
 										</div>
@@ -422,7 +422,7 @@
 										<div class="container text-center mt-2" data-toggle="modal" th:attr="data-target='#postModal' + ${post.id}">
 											<button name="button" type="submit" style="background-color: transparent; 
 												color: white; border: 0px solid #303030;" class="buttonAzioni">
-												<img src="/view/MyLife/images/edit.png" width="45%">
+												<img th:src="@{/view/MyLife/images/edit.png}" width="45%">
 											</button>
 										</div>
 
@@ -452,7 +452,7 @@
 									</div>
 									<div>
 
-										<img src="/view/MyWork/images/like2.png" width="30"
+										<img th:src="@{/view/MyWork/images/like2.png}" width="30"
 												style="margin-left: 17px;" th:if="${post.setUtenti.size > 0}"><button type="button" th:if="${post.setUtenti.size > 0}"
 											data-toggle="modal"
 											th:data-target="${'#myModalLike' + post.id}"
@@ -477,7 +477,7 @@
 
 													</div>
 												</div> -->
-												<img src="/view/MyWork/images/like.png" width="20"
+												<img th:src="@{/view/MyWork/images/like.png}" width="20"
 													th:id="'imgLike' + ${post.id}"> Mi piace
 											</button>
 
@@ -491,7 +491,7 @@
 													</script> -->
 										<button class="CommentaBtn"
 											th:onclick="'mostraTextarea(' + ${post.id} + ')'">
-											<img src="/view/MyWork/images/comment.png" width="20">Commenta
+											<img th:src="@{/view/MyWork/images/comment.png}" width="20">Commenta
 										</button>
 									</div>
 
@@ -558,7 +558,7 @@
 													th:action="@{/myLife/deleteCommento(id=${commento.id})}"
 													method="post">
 													<button name="button" type="submit" id="bottoneElimina">
-														<img src="/view/MyLife/images/trash.png" width="23px">
+														<img th:src="@{/view/MyLife/images/trash.png}" width="23px">
 													</button>
 												</form></td>
 												
@@ -598,7 +598,7 @@
 										<!-- MODIFICA COMMENTO -->
 										<div class="container text-center mt-2" data-toggle="modal" th:attr="data-target='#commentoModal' + ${commento.id}">
 											<button name="button" id="bottoneModifica">
-												<img src="/view/MyLife/images/edit.png" width="23px" style="margin-right: 10px;">
+												<img th:src="@{/view/MyLife/images/edit.png}" width="23px" style="margin-right: 10px;">
 											</button>
 										</div>
 
@@ -666,7 +666,7 @@ COLONNA DESTRA
 				<div>
 					<div th:if="${GML}">
 						<br> <a th:href="@{/eventolife/new/}"> <img
-							src="/view/MyWork/images/moreb.png" width="30px"
+							th:src="@{/view/MyWork/images/moreb.png}" width="30px"
 							style="float: right; margin-bottom: 10px;"></a>
 					</div>
 
@@ -764,7 +764,7 @@ COLONNA DESTRA
 					<br>
 					<div>
 						<a th:href="@{/cinema/new/}"> <img
-							src="/view/MyWork/images/moreb.png" width="30px"
+							th:src="@{/view/MyWork/images/moreb.png}" width="30px"
 							style="float: right; margin-bottom: 10px;"></a>
 					</div>
 				</div>
@@ -798,14 +798,14 @@ COLONNA DESTRA
 								th:if="${GML}" method="get">
 								<button type="submit" name="modifica"
 									style="background-color: transparent; border: 0px solid #232323;">
-									<img src="/view/MyWork/images/editb.png" width="38%">
+									<img th:src="@{/view/MyWork/images/editb.png}" width="38%">
 								</button>
 							</form>
 							<form th:action="@{'/cinema/delete/'+${film[0].id}}"
 								th:if="${GML}" method="get">
 								<button type="submit" name="modifica"
 									style="background-color: transparent; border: 0px solid #232323;">
-									<img src="/view/MyLife/images/trash.png" width="38%">
+									<img th:src="@{/view/MyLife/images/trash.png}" width="38%">
 								</button>
 							</form>
 						</div>
@@ -825,14 +825,14 @@ COLONNA DESTRA
 								th:if="${GML}" method="get">
 								<button type="submit" name="modifica"
 									style="background-color: transparent; border: 0px solid #232323;">
-									<img src="/view/MyWork/images/editb.png" width="38%">
+									<img th:src="@{/view/MyWork/images/editb.png}" width="38%">
 								</button>
 							</form>
 							<form th:action="@{'/cinema/delete/'+${film[1].id}}"
 								th:if="${GML}" method="get">
 								<button type="submit" name="modifica"
 									style="background-color: transparent; border: 0px solid #232323;">
-									<img src="/view/MyLife/images/trash.png" width="38%">
+									<img th:src="@{/view/MyLife/images/trash.png}" width="38%">
 								</button>
 							</form>
 						</div>
@@ -852,14 +852,14 @@ COLONNA DESTRA
 								th:if="${GML}" method="get">
 								<button type="submit" name="modifica"
 									style="background-color: transparent; border: 0px solid #232323;">
-									<img src="/view/MyWork/images/editb.png" width="38%">
+									<img th:src="@{/view/MyWork/images/editb.png}" width="38%">
 								</button>
 							</form>
 							<form th:action="@{'/cinema/delete/'+${film[2].id}}"
 								th:if="${GML}" method="get">
 								<button type="submit" name="modifica"
 									style="background-color: transparent; border: 0px solid #232323;">
-									<img src="/view/MyLife/images/trash.png" width="38%">
+									<img th:src="@{/view/MyLife/images/trash.png}" width="38%">
 								</button>
 							</form>
 						</div>
@@ -884,7 +884,7 @@ COLONNA DESTRA
 				<div>
 					<div th:if="${GML}">
 						<a th:href="@{/libro/new}"> <img
-							src="/view/MyWork/images/moreb.png" width="30px"
+							th:src="@{/view/MyWork/images/moreb.png}" width="30px"
 							style="float: right; margin-bottom: 10px;"></a>
 					</div>
 					<h2 id="culturaPiemonte">Libri</h2>
@@ -911,7 +911,7 @@ COLONNA DESTRA
 										th:if="${GML}" method="get">
 										<button type="submit" name="modifica"
 											style="background-color: transparent; border: 0px solid #232323; float: right;">
-											<img src="/view/MyWork/images/editb.png" style="float: right"
+											<img th:src="@{/view/MyWork/images/editb.png}" style="float: right"
 												width="38%">
 										</button>
 									</form>
@@ -919,7 +919,7 @@ COLONNA DESTRA
 										th:if="${GML}" method="get">
 										<button type="submit" name="modifica"
 											style="background-color: transparent; border: 0px solid #232323;">
-											<img src="/view/MyLife/images/trash.png" width="38%">
+											<img th:src="@{/view/MyLife/images/trash.png}" width="38%">
 										</button>
 									</form>
 
@@ -939,7 +939,7 @@ COLONNA DESTRA
 										th:if="${GML}" method="get">
 										<button type="submit" name="modifica"
 											style="background-color: transparent; border: 0px solid #232323; float: right;">
-											<img src="/view/MyWork/images/editb.png" style="float: right"
+											<img th:src="@{/view/MyWork/images/editb.png}" style="float: right"
 												width="38%">
 										</button>
 									</form>
@@ -947,7 +947,7 @@ COLONNA DESTRA
 										th:if="${GML}" method="get">
 										<button type="submit" name="modifica"
 											style="background-color: transparent; border: 0px solid #232323;">
-											<img src="/view/MyLife/images/trash.png" width="38%">
+											<img th:src="@{/view/MyLife/images/trash.png}" width="38%">
 										</button>
 									</form>
 
@@ -987,11 +987,11 @@ COLONNA DESTRA
 				style="margin-top: 15px; padding-top: 15px;">
 				<div class="col-auto ">
 					<a href="https://erretechnology.com/" target="blank"> <img
-						src="/view/MyWork/images/errelogowhite.png" height="80px"
+						th:src="@{/view/MyWork/images/errelogowhite.png}" height="80px"
 						alt="erre_logo" style="margin: auto"></a>
 				</div>
 				<div class="col-auto">
-					<img src="/view/MyWork/images/thegate.png" width="100%"
+					<img th:src="@{/view/MyWork/images/thegate.png}" width="100%"
 						style="margin: auto;">
 					<p style="color: #F3F3F3; text-align: center; font-size: 20px;">
 						Supporto: +39 011 197 429 00</p>
