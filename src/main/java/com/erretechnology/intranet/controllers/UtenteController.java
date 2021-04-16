@@ -152,7 +152,7 @@ public class UtenteController extends BaseController {
 	}
 
 	@PostMapping(value = "/paginaModificaPassword")
-	public ModelAndView cambiaPaginaModificaPagina(@RequestParam("vecchiaPassword") String vPsw,
+	public ModelAndView cambiaPassword(@RequestParam("vecchiaPassword") String vPsw,
 			@RequestParam("nuovaPassword") String nPsw, @RequestParam("cNuovaPassword") String cNPsw,
 			HttpSession session, Model model) throws ExecutionException, Exception {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -200,20 +200,14 @@ public class UtenteController extends BaseController {
 	}
 
 	@PostMapping(value = "/cambiaFotoProfilo")
-	public String modificaFoto(@RequestParam(required = false) MultipartFile immagine, @RequestParam(required = false) String dati, 
-			@RequestParam(required = false) String nome, HttpSession session)
+	public String modificaFoto(@RequestParam(required = false) String dati, @RequestParam(required = false) String nome, HttpSession session)
 					throws Exception {
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		FileImmagine img = null;
-		if ((immagine != null && !immagine.getOriginalFilename().isEmpty()) || !dati.isEmpty()) {
+		if (!dati.isEmpty()) {
 
 			img = new FileImmagine();
-			/*if(compressImage(immagine, 0.5f).length == 0)
-			 */
-			if(immagine == null) 
-				img.setData(Base64.getDecoder().decode(dati.getBytes("UTF-8")));
-			else
-				img.setData(immagine.getBytes());
+			img.setData(Base64.getDecoder().decode(dati.getBytes("UTF-8")));
 
 			/*else
 				img.setData(compressImage(immagine, 0.5f));*/
@@ -221,10 +215,7 @@ public class UtenteController extends BaseController {
 			if (!serviceFileImmagine.contains(img.getData())) {
 				img.setAutore(utenteLoggato);
 				img.setTimestamp(Instant.now().getEpochSecond());
-				if(immagine == null)
-					img.setNomeFile(nome);
-				else
-					img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
+				img.setNomeFile(nome);
 				serviceFileImmagine.insert(img);
 				utenteLoggato.setImmagine(img);
 			} else {

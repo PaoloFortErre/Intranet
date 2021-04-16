@@ -362,14 +362,10 @@
                 
                
                   <a class="dropdown fa fa-camera text-white" href="#" id="imageDropdown" title="Clicca per gestire la foto profilo" data-toggle="dropdown"></a>
-                  <ul class="dropdown-menu" role="menu" aria-labelledby="imageDropdown" >
-                    <form th:action="@{/profile/cambiaFotoProfilo}" method ="post" enctype="multipart/form-data">
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="imageDropdown">
                       <label class="dropdown-item font-weight-bold" style="cursor: pointer;" for="scegli" >Modifica la foto profilo</label>
                       <input class="d-none" type="file" name="immagine" id="scegli" accept="image/png, image/jpeg" required/>
-                      <label class="dropdown-item font-weight-bold" style="cursor: pointer;" for="salva">Salva la foto profilo</label>
-                      <input class="d-none" type="submit" id="salva"/>
                       <div class="dropdown-divider"></div>
-                    </form>
                     <form th:action="@{/profile/eliminaFotoProfilo}" method ="post">
                       <label class="dropdown-item font-weight-bold text-danger" style="cursor: pointer;" for="elimina">Elimina la foto profilo</label>
                       <input class="d-none" type="submit" value="Elimina foto profilo" id="elimina">
