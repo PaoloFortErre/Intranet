@@ -36,7 +36,9 @@ import com.erretechnology.intranet.models.ComunicazioneHR;
 import com.erretechnology.intranet.models.Evento;
 import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.FilePdf;
+import com.erretechnology.intranet.models.Libro;
 import com.erretechnology.intranet.models.Log;
+import com.erretechnology.intranet.models.News;
 import com.erretechnology.intranet.models.Notifica;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.Permesso;
@@ -455,8 +457,8 @@ public class UtenteController extends BaseController {
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		if (!u.getUtente().getRuolo().getNome().equals("ADMIN"))
 			throw new Exception("Fidati. Prima chiedi i permessi");
-		List<Evento> eventi = serviceEventoWork.getAllNotVisible();
-		eventi.addAll(serviceEventoLife.getAllNotVisible());
+		CompletableFuture<List<Evento>> eventiWork = serviceEventoWork.getAllNotVisible();
+		CompletableFuture<List<Evento>> eventiLife = serviceEventoLife.getAllNotVisible();
 		CompletableFuture<List<Post>> posts = servicePost.getAllNotVisible();
 		CompletableFuture<List<Commento>> commenti = serviceCommento.getAllNotVisible();
 		CompletableFuture<List<ComunicazioneHR>> comunicazioni = serviceComunicazioni.getAllNotVisible();
@@ -465,18 +467,20 @@ public class UtenteController extends BaseController {
 		CompletableFuture<List<Sondaggio>> sondaggi = serviceSondaggio.getAllNotVisible();
 		CompletableFuture<List<Cliente>> clienti = serviceCliente.getAllNotVisible();
 		CompletableFuture<List<Cinema>> film = serviceCinema.getAllNotVisible();
-		CompletableFuture.allOf(posts, commenti, comunicazioni, moduli, podcast, sondaggi, clienti, film).join();
+		CompletableFuture<List<News>> news = serviceNews.getAllNotVisible(); 
+		CompletableFuture<List<Libro>> libro = serviceLibro.getAllNotVisible(); 
+		CompletableFuture.allOf(posts, commenti, comunicazioni, moduli, podcast, sondaggi, clienti, film, news, libro, eventiWork).join();
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("gestione_suprema");
 		mav.addObject("post", posts.get().stream().filter(x->x.getAutore().getUtente().getAttivo()).collect(Collectors.toList()));
 		mav.addObject("commenti", commenti.get().stream().filter(x->x.getAutore().getUtente().getAttivo()).collect(Collectors.toList()));
-		mav.addObject("news", serviceNews.getAllNotVisible());
+		mav.addObject("news", news.get());
 		mav.addObject("comunicazioniHR", comunicazioni.get());
 		mav.addObject("moduli", moduli.get());
-		mav.addObject("eventi", eventi);
+		mav.addObject("eventi", eventiWork.get().addAll(eventiLife.get()));
 		mav.addObject("podcast", podcast.get());
-		mav.addObject("libri", serviceLibro.getAllNotVisible());
+		mav.addObject("libri", libro.get());
 		mav.addObject("film", film.get());
 		mav.addObject("client", clienti.get());
 		mav.addObject("sondaggi", sondaggi.get());

@@ -5,7 +5,6 @@ import java.util.Base64;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "mywork_last_data")

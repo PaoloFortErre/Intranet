@@ -1,6 +1,7 @@
 package com.erretechnology.intranet.services;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,8 +29,8 @@ public class ServiceEventoLifeImpl implements ServiceEventoLife {
 		repositoryEventoLife.deleteById(id);
 	}
 	@Override
-	public List<Evento> getAllNotVisible() {
-		return repositoryEventoLife.getAllNotVisible();
+	public CompletableFuture<List<Evento>> getAllNotVisible() {
+		return CompletableFuture.completedFuture(repositoryEventoLife.getAllNotVisible());
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.erretechnology.intranet.services;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import com.erretechnology.intranet.models.Libro;
 
@@ -12,5 +13,5 @@ public interface ServiceLibro {
 	
 	public Libro findById(int id);
 	
-	public List<Libro> getAllNotVisible();
+	public CompletableFuture<List<Libro>> getAllNotVisible();
 }

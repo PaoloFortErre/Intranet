@@ -1,6 +1,7 @@
 package com.erretechnology.intranet.services;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import com.erretechnology.intranet.models.News;
 
@@ -12,5 +13,5 @@ public interface ServiceNews {
 	
 	public News findById(int id);
 	
-	public List<News> getAllNotVisible();
+	public CompletableFuture<List<News>> getAllNotVisible();
 }

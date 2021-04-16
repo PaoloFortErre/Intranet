@@ -1,8 +1,10 @@
 package com.erretechnology.intranet.services;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.erretechnology.intranet.models.Libro;
@@ -27,8 +29,9 @@ public class ServiceLibroImpl implements ServiceLibro {
 		repositoryLibro.deleteById(id);
 	}
 	@Override
-	public List<Libro> getAllNotVisible() {
-		return repositoryLibro.getAllNotVisible();
+	@Async
+	public CompletableFuture<List<Libro>> getAllNotVisible() {
+		return CompletableFuture.completedFuture(repositoryLibro.getAllNotVisible());
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.erretechnology.intranet.services;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import com.erretechnology.intranet.models.Evento;
 import com.erretechnology.intranet.models.EventoWork;
@@ -13,5 +14,5 @@ public interface ServiceEventoWork {
 	
 	public EventoWork findById(int id);
 	
-	public List<Evento> getAllNotVisible();
+	public CompletableFuture<List<Evento>> getAllNotVisible();
 }
