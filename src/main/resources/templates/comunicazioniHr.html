@@ -70,7 +70,7 @@
 </style>
 
 </head>
-<body onresize="myFunction()" th:with="GHR = ${#authorization.expression('hasAuthority(''GHR'')')}, GS = ${#authorization.expression('hasAuthority(''GS'')')}">
+<body th:with="GHR = ${#authorization.expression('hasAuthority(''GHR'')')}, GS = ${#authorization.expression('hasAuthority(''GS'')')}">
 
 	<nav class="navbar navbar-expand-lg bg-dark navbar-dark justify-content-end">
 		<a class="navbar-brand logo" th:href="@{/homepage/}">
@@ -216,25 +216,27 @@ style="font-size: 10px; color: black"></p>
 
 
 				<br>
-				<button type="submit" name="modifica" th:if="${GS}" data-toggle="modal" data-target="#myModal1"
+			<div th:if="${GS}">
+				<button type="submit" name="modifica"  data-toggle="modal" th:attr="data-target='#myModal' + ${sondaggi.id}"
 						style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 3px; width: 70px; margin-bottom: 5px;">
 					Modifica
 				</button>
 			<!-- The Modal -->
-			<div class="modal" id="myModal1" th:if="${sondaggi!=null}">
+			<div class="modal" th:id="'myModal' + ${sondaggi.id}" th:if="${sondaggi!=null}">
 				<div class="modal-dialog">
 					<div class="modal-content">
 
 						<!-- Modal Header -->
 						<div class="modal-header">
 							<h4 class="modal-title" style="color: black;">
-								Modifica cliente</h4>
+								Modifica sondaggio</h4>
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 						</div>
 
 						<!-- Modal body -->
 						<div class="modal-body">
-							<form th:object="${sondaggio}" th:action="@{/myWork/sondaggi}"
+						<h1 th:text="${sondaggi.id}"></h1>
+							<form th:object="${sondaggio}" th:action="@{'/myWork/modificaSondaggio/' +${sondaggi.id}}"
 								  method="post" enctype="multipart/form-data"  class="signin-form">
 
 								<div class="form-group col-12">
@@ -248,7 +250,7 @@ style="font-size: 10px; color: black"></p>
 								</div>
 
 								<div class="form-group col-4">
-									<input class="form-control" type="submit" id="pubblicaSubmit" value="Pubblica">
+									<input class="form-control" type="submit" id="pubblicaSubmit" value="Modifica">
 								</div>
 							</form>
 						</div>
@@ -260,18 +262,21 @@ style="font-size: 10px; color: black"></p>
 						</div>
 
 					</div>
+					
 				</div>
 			</div>
-
 			<form
 					th:action="@{'/myWork/deleteSondaggio/' +${sondaggi.id}}"
-					th:if="${GS}" method="post" style="display: inline-block">
+					method="post" style="display: inline-block">
 
-				<button type="submit" name="modifica"
+				<button type="submit" name="elimina"
 						style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 3px; width: 70px;">
 					Elimina
 				</button>
 			</form>
+			</div>
+
+			
 		</div>
 	</div>
 </div>

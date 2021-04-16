@@ -122,25 +122,15 @@ public class MyWorkController extends BaseController {
 	}
 
 	
-	@GetMapping(value = "/modificaSondaggio/{id}")
-	public String modificaSondaggio(@PathVariable int id, Model model) {
+	@PostMapping(value = "/modificaSondaggio/{id}")
+	public String modificaSondaggio(@PathVariable int id,@ModelAttribute("sondaggio") Sondaggio sondaggio, HttpSession session) {
 		//controllare permesso GS
-		model.addAttribute("sondaggio", serviceSondaggio.findById(id));
-		return "sondaggiFormUpdate";
-	}
-	@PostMapping(value = "/sondaggiFormUpdate/{id}")
-	public String paginaModificaSondaggio(@PathVariable int id,String nomeSondaggio, String link, HttpSession session, Model model) {
-		//controllare permesso GS
-		Sondaggio sondaggio = serviceSondaggio.findById(id);
-		sondaggio.setLink(link);
-		if(nomeSondaggio!=null)
-		sondaggio.setNomeSondaggio(nomeSondaggio);
-		serviceSondaggio.save(sondaggio);
-		model.addAttribute("sondaggio", serviceSondaggio.findById(id));
-
+		Sondaggio sondaggioOld = serviceSondaggio.findById(id);
+		sondaggioOld.setNomeSondaggio(sondaggio.getNomeSondaggio());
+		sondaggioOld.setLink(sondaggio.getLink());
+		serviceSondaggio.save(sondaggioOld);
 		saveLog("modificato un sondaggio", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-	
-		return "redirect:/myWork/";
+		return "redirect:/comunicazioniHr/";
 	}
 	@PostMapping(value = "/deleteSondaggio/{id}")
 	public String deleteMessaggio(@PathVariable int id, HttpSession session) {
