@@ -33,7 +33,6 @@
 
   body {
     background-color: black;
-    background-image: url("/view/MyWork/images/carbonio.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     color:#F3F3F3;
@@ -42,7 +41,6 @@
   }
 
   #myInput {
-    background-image: url('/view/Profile/Images/search_icon.png');
     background-position: 2px 8px;
     background-repeat: no-repeat;
     background-size: 6%;
@@ -54,7 +52,7 @@
   }
 
   #myInput2{
-    background-image: url('/view/Profile/Images/search_icon.png');
+    
     background-position: 2px 8px;
     background-repeat: no-repeat;
     background-size: 6%;
@@ -83,7 +81,7 @@
 
 </style>
 </head>
-<body th:with="AM = ${#authorization.expression('hasAuthority(''AM'')')}">
+<body th:with="AM = ${#authorization.expression('hasAuthority(''AM'')')}" th:style="'background-image: url(' + @{/view/Login/images/bg.jpg} +');'">
   <div class="container-fluid mw-75 mt-3 mb-3 mr-5 ml-3">
     <div class="row justify-content-center">
       <div class="col-1">
@@ -98,10 +96,10 @@
         <a class="btn btn-primary mb-2" th:href="@{/profile/}">TORNA INDIETRO</a>
         <div class="container text-center" >
           <div th:if="${admin}">
-            <input class="h3" type="text" id="myInput" onkeyup="myFunction()" placeholder="Filtra per cognome" title="Cerca con nome utente" >
+            <input class="h3" type="text" id="myInput" th:style="'background-image: url(' + @{/view/Profile/Images/search_icon.png} + ');'" onkeyup="myFunction()" placeholder="Filtra per cognome" title="Cerca con nome utente" >
           </div>
           <div class="container text-center">
-            <input class="h3" type="text" id="myInput2" onkeyup="myFunction2()" placeholder="Filtra per attività" title="Cerca con attività" >
+            <input class="h3" type="text" id="myInput2" th:style="'background-image: url(' + @{/view/Profile/Images/search_icon.png} + ');'" onkeyup="myFunction2()" placeholder="Filtra per attività" title="Cerca con attività" >
           </div>
 
         </div>
