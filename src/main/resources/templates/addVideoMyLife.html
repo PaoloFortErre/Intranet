@@ -21,11 +21,10 @@
 	<!-- Latest compiled JavaScript -->
 	<script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
+	<link rel="stylesheet" content-type="" th:href="@{/view/cssGio/style.css}">
 <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
 	<style>
 	body{
-		background-image: url("/view/MyWork/images/background.png");
 		background-repeat: no-repeat, repeat;
 		background-attachment: fixed;
 
@@ -42,7 +41,7 @@
 
 </head>
 
-<body >
+<body th:style="'background-image: url(' + @{/view/Login/images/bg.jpg} +');'">
 
 	<div class="container">
 		<div class="row">
@@ -53,7 +52,7 @@
 
 				<p style="text-align: right; margin-bottom: 30px;display: inline-block;">
 					<a class="mr-2" th:href="@{/myLife1/}" style="color: #F3F3F3;">
-						<img src="/view/MyWork/images/frecciasinistra.png" style="display: inline-block;" width="20%">Torna indietro
+						<img th:src="@{/view/MyWork/images/frecciasinistra.png}" style="display: inline-block;" width="20%">Torna indietro
 					</a>
 				</p><br>
 				
@@ -75,19 +74,19 @@
 
         <p style="font-size: 20px; font-weight: 900; color: #303030"> PASSO 1: </p>
  		<p  style="color: #303030">  Scegliere il video da condividere (Youtube/Vimeo) e aprire il link come per riprodurlo </p>
- 		<img src="/view/MyWork/images/riproduci.png" width="100%" >
+ 		<img th:src="@{/view/MyWork/images/riproduci.png}" width="100%" >
  		<br><br>
  		<p style="font-size: 20px; font-weight: 900; color: #303030"> PASSO 2: </p>
  		<p  style="color: #303030"> Selezionare "Condividi" a destra sotto la riproduzione </p>
- 		<img src="/view/MyWork/images/condividi.png" width="100%" >
+ 		<img th:src="@{/view/MyWork/images/condividi.png}" width="100%" >
  		<br><br>
  		<p style="font-size: 20px; font-weight: 900; color: #303030"> PASSO 3: </p>
  		<p  style="color: #303030"> Selezionare "Incorpora"</p>
- 		<img src="/view/MyWork/images/incorpora.png" width="100%" >
+ 		<img th:src="@{/view/MyWork/images/incorpora.png}" width="100%" >
  		<br><br>
  		<p style="font-size: 20px; font-weight: 900; color: #303030"> PASSO 4: </p>
  		<p  style="color: #303030"> Copiare la parte di testo (link) evidenziata in giallo senza le virgolette</p>
- 		<img src="/view/MyWork/images/evidenzia.png" width="100%" >
+ 		<img th:src="@{/view/MyWork/images/evidenzia.png}" width="100%" >
         </div>
 
         <!-- Modal footer -->
