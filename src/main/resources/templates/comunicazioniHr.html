@@ -71,7 +71,7 @@
 
 </head>
 <body th:with="GHR = ${#authorization.expression('hasAuthority(''GHR'')')}, GS = ${#authorization.expression('hasAuthority(''GS'')')}"
-	  th:style="'background-image: url(' + @{view/MyWork/images/carbonio.jpg} +');'">
+	  th:style="'background-image: url(' + @{/view/MyWork/images/carbonio.jpg} +');'">
 
 	<nav class="navbar navbar-expand-lg bg-dark navbar-dark justify-content-end">
 		<a class="navbar-brand logo" th:href="@{/homepage/}">
