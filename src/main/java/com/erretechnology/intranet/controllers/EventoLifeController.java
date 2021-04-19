@@ -89,7 +89,8 @@ public class EventoLifeController extends BaseController {
 		Timestamp timestamp = new Timestamp(formettedDate.getTime()/1000);  
 		evento.setData(timestamp.getTime());
 		evento.setLink(link);
-
+		int idUser = Integer.parseInt(session.getAttribute("id").toString());
+		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
 		if(!immagine.getOriginalFilename().isEmpty()) {
 			FileImmagine img = new FileImmagine();			
 			if(compressImage(immagine, 0.5f).length == 0)
@@ -97,8 +98,7 @@ public class EventoLifeController extends BaseController {
 			else
 				img.setData(compressImage(immagine, 0.5f));	
 			if(!serviceFileImmagine.contains(img.getData())) {
-				int idUser = Integer.parseInt(session.getAttribute("id").toString());
-				UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
+				
 				img.setAutore(utenteLoggato);
 				img.setTimestamp(Instant.now().getEpochSecond());
 				img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
@@ -112,7 +112,7 @@ public class EventoLifeController extends BaseController {
 
 		serviceEventoLife.save(evento);
 		model.addAttribute("evento", evento);
-		saveLog("modificato un evento", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+		saveLog("modificato un evento", utenteLoggato);
 
 		return "redirect:/myLife1/";
 	}
