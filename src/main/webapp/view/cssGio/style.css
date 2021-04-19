@@ -7,7 +7,6 @@ h1, h2, h3, h4, h5, textarea, p, label, input, button, a {
 
 body {
 	background-color: #000000;
-	background-image: url("/view/MyWork/images/carbonio.jpg");
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -265,7 +264,6 @@ footer {
 
 
 #rowmacchina1 {
-	background-image: url('/view/MyWork/images/makkinina.png');
 	width: 102%;
 	height: 700px;
 	background-position: center;
@@ -282,7 +280,6 @@ footer {
 }
 
 #rowmacchina2 {
-	background-image: url('/view/MyWork/images/schizzo.png');
 	width: 102%;
 	height: 700px;
 	background-position: center;
