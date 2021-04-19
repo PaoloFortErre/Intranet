@@ -102,8 +102,10 @@
 
             <p th:text="${message}" th:if="${message ne null}"
             class="alert alert-info"></p>
-            <form th:action="@{/file/uploadHR}" th:object="${comunicazioneHR}"
+            <form th:action="@{/file/uploadHR}" th:object="${comunicazioneHR}" onsubmit="return validateForm()"
             method="post" enctype="multipart/form-data" class="signin-form">
+            <div id="message-error" class="row justify-content-center mt-2">
+			  	</div>
             <div class="form-group col-12">
               <label for="nome">Descrizione (max 40 )</label>
               <input type="text" name="nome" th:field="*{descrizione}" class="form-control" id="input" maxlength="40" required>
@@ -145,6 +147,15 @@
       }
     }
   }
+  
+  function validateForm(){
+		if(document.getElementById("input").value.trim() == ""){
+			let p = "<p class='p text-danger'>Il campo descrizione non puo' contenere solo spazi</p>" + "<br>";
+	   		 $("#message-error > p").remove();
+	   		 $("#message-error").append(p);
+	   		 return false;
+		} return true;
+	}
 </script>
 </body>
 </html>

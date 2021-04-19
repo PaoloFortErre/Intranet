@@ -217,10 +217,12 @@
 					<!-- Modal body -->
 					<div class="modal-body" th:if="${aforisma.size>0}">
 						<form th:action="@{/aforisma/update/{id}(id = ${aforisma[0].id})}"
-							method="post" class="signin-form">
+							method="post" class="signin-form" onsubmit="return validateForm()">
+							<div id="message-error0" class="row justify-content-center mt-2">
+			  				</div>
 							<div class="form-group col-12">
 								<label for="frase" style="color: black;">Frase</label> <input
-									class="form-control" type="text" id="frase" name="frase"
+									class="form-control" type="text" id="frase0" name="frase"
 									required th:placeholder="${aforisma[0].titolo}">
 							</div>
 
@@ -259,11 +261,13 @@
 
 					<!-- Modal body -->
 					<div class="modal-body" th:if="${aforisma.size>1}">
-						<form th:action="@{/aforisma/update/{id}(id = ${aforisma[1].id})}"
+						<form th:action="@{/aforisma/update/{id}(id = ${aforisma[1].id})}" onsubmit="return validateForm()"
 							method="post" class="signin-form">
+							<div id="message-error1" class="row justify-content-center mt-2">
+			  	</div>
 							<div class="form-group col-12">
 								<label for="frase" style="color: black;">Frase</label> <input
-									class="form-control" type="text" id="frase" name="frase"
+									class="form-control" type="text" id="frase1" name="frase"
 									required  th:placeholder="${aforisma[1].titolo}">
 							</div>
 
@@ -303,11 +307,13 @@
 
 					<!-- Modal body -->
 					<div class="modal-body" th:if="${aforisma.size>2}">
-						<form th:action="@{/aforisma/update/{id}(id = ${aforisma[2].id})}"
+						<form th:action="@{/aforisma/update/{id}(id = ${aforisma[2].id})}" onsubmit="return validateForm()"
 							method="post" class="signin-form">
+							<div id="message-error2" class="row justify-content-center mt-2">
+			  	</div>
 							<div class="form-group col-12">
 								<label for="frase" style="color: black;">Frase</label> <input
-									class="form-control" type="text" id="frase" name="frase"
+									class="form-control" type="text" id="frase2" name="frase"
 									required  th:placeholder="${aforisma[2].titolo}">
 							</div>
 
@@ -384,12 +390,14 @@
 
 							<!-- Modal body -->
 							<div class="modal-body">
-								<form th:action="@{/cinema/update/{id}(id = ${film[0].id})}"
+								<form th:action="@{/cinema/update/{id}(id = ${film[0].id})}" onsubmit="return validateForm()"
 									th:object="${cinema}" method="post"
 									enctype="multipart/form-data">
+									<div id="message-error3" class="row justify-content-center mt-2">
+			  	</div>
 									<div class="form-group col-12">
 										<label for="titolo" style="color: black;">Titolo</label> <input
-											class="form-control" type="text" id="titolo" name="titolo"
+											class="form-control" type="text" id="titolo0" name="titolo"
 											required th:placeholder="${film[0].titolo}">
 									</div>
 									<div class="form-group col-12">
@@ -466,12 +474,14 @@
 
 							<!-- Modal body -->
 							<div class="modal-body">
-								<form th:action="@{/cinema/update/{id}(id = ${film[1].id})}"
+								<form th:action="@{/cinema/update/{id}(id = ${film[1].id})}" onsubmit="return validateForm()"
 									th:object="${cinema}" method="post"
 									enctype="multipart/form-data">
+									<div id="message-error4" class="row justify-content-center mt-2">
+			  	</div>
 									<div class="form-group col-12">
 										<label for="titolo" style="color: black;">Titolo</label> <input
-											class="form-control" type="text" id="titolo" name="titolo"
+											class="form-control" type="text" id="titolo1" name="titolo"
 											required th:placeholder="${film[1].titolo}">
 									</div>
 									<div class="form-group col-12">
@@ -546,12 +556,14 @@
 
 							<!-- Modal body -->
 							<div class="modal-body">
-								<form th:action="@{/cinema/update/{id}(id = ${film[2].id})}"
+								<form th:action="@{/cinema/update/{id}(id = ${film[2].id})}" onsubmit="return validateForm()"
 									th:object="${cinema}" method="post"
 									enctype="multipart/form-data">
+									<div id="message-error5" class="row justify-content-center mt-2">
+			  	</div>
 									<div class="form-group col-12">
 										<label for="titolo" style="color: black;">Titolo</label> <input
-											class="form-control" type="text" id="titolo" name="titolo"
+											class="form-control" type="text" id="titolo2" name="titolo"
 											required th:placeholder="${film[2].titolo}">
 									</div>
 									<div class="form-group col-12">
@@ -670,11 +682,13 @@
 											<div class="modal-body">
 												<form class="signin-form"
 													th:action="@{/eventolife/update/{id}(id = ${eventilife[0].id})}"
-													th:object="${evento}" method="post"
+													th:object="${evento}" method="post" onsubmit="return validateForm()"
 													enctype="multipart/form-data">
+													<div id="message-error6" class="row justify-content-center mt-2">
+			  	</div>
 													<div class="form-group col-12">
 														<label for="titolo" style="color: black;">Titolo</label> <input
-															class="form-control" type="text" id="titolo"
+															class="form-control" type="text" id="titoloEvento0"
 															name="titolo" required style="color: black" th:placeholder="${eventilife[0].titolo}">
 													</div>
 													<div class="form-group col-12">
@@ -756,11 +770,13 @@
 											<div class="modal-body">
 												<form class="signin-form"
 													th:action="@{/eventolife/update/{id}(id = ${eventilife[1].id})}"
-													th:object="${evento}" method="post"
+													th:object="${evento}" method="post" onsubmit="return validateForm()"
 													enctype="multipart/form-data">
+													<div id="message-error7" class="row justify-content-center mt-2">
+			  	</div>
 													<div class="form-group col-12">
 														<label for="titolo" style="color: black;">Titolo</label> <input
-															class="form-control" type="text" id="titolo"
+															class="form-control" type="text" id="titoloEvento1"
 															name="titolo" required style="color: black" th:placeholder="${eventilife[1].titolo}">
 													</div>
 													<div class="form-group col-12">
@@ -841,12 +857,14 @@
 											<!-- Modal body -->
 											<div class="modal-body">
 												<form class="signin-form"
-													th:action="@{/eventolife/update/{id}(id = ${eventilife[3].id})}"
+													th:action="@{/eventolife/update/{id}(id = ${eventilife[2].id})}" onsubmit="return validateForm()"
 													th:object="${evento}" method="post"
 													enctype="multipart/form-data">
+													<div id="message-error8" class="row justify-content-center mt-2">
+			  	</div>
 													<div class="form-group col-12">
 														<label for="titolo" style="color: black;">Titolo</label> <input
-															class="form-control" type="text" id="titolo"
+															class="form-control" type="text" id="titoloEvento2"
 															name="titolo" required style="color: black" th:placeholder="${eventilife[2].titolo}">
 													</div>
 													<div class="form-group col-12">
@@ -944,13 +962,13 @@
 					<div class="profile-username" th:text="${libro.contenuto}"></div>
 				</div>
 				<button type="submit" name="modifica" data-toggle="modal"
-					data-target="#myModal10" th:if="${GML}"
+					th:attr="data-target='#myModal' + ${libro.id}" th:if="${GML}"
 					style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
 					Modifica</button>
 
 
 				<!-- The Modal -->
-				<div class="modal" id="myModal10">
+				<div class="modal" th:id="'myModal' + ${libro.id}">
 					<div class="modal-dialog">
 						<div class="modal-content">
 
@@ -963,11 +981,13 @@
 
 							<!-- Modal body -->
 							<div class="modal-body">
-								<form th:action="@{/libro/update/{id}(id = ${libro.id})}"
+								<form th:action="@{/libro/update/{id}(id = ${libro.id})}" th:onsubmit="'return validateForm(' + ${libro.id}+ ')'"
 									method="post" enctype="multipart/form-data">
+									<div th:id="'message-error' + ${libro.id}" class="row justify-content-center mt-2">
+			  	</div>
 									<div class="form-group col-12">
 										<label for="titolo" style="color: black;">Titolo</label> <input
-											class="form-control" type="text" id="titolo" name="titolo"
+											class="form-control" type="text" th:id="'titoloLibro' + ${libro.id}" name="titolo"
 											required th:placeholder="${libro.titolo}">
 									</div>
 									<div class="form-group col-12">
@@ -1057,5 +1077,80 @@
 			</div>
 		</div>
 	</footer>
+<script>
+function validateForm(id){
+	if(document.getElementById("frase0") != null && document.getElementById("frase0").value != "" && 
+		document.getElementById("frase0").value.trim() == ""){
+		let p = "<p class='p text-danger'>Il campo frase non puo' contenere solo spazi</p>" + "<br>";
+   		 $("#message-error0 > p").remove();
+   		 $("#message-error0").append(p);
+   		 return false;
+	}
+	if(document.getElementById("frase1") != null && document.getElementById("frase1").value != "" && 
+		document.getElementById("frase1").value.trim() == ""){
+		let p = "<p class='p text-danger'>Il campo frase non puo' contenere solo spazi</p>" + "<br>";
+   		 $("#message-error1 > p").remove();
+   		 $("#message-error1").append(p);
+   		 return false;
+	}
+	if(document.getElementById("frase2 ") != null && document.getElementById("frase2").value != "" && 
+		document.getElementById("frase2").value.trim() == ""){
+		let p = "<p class='p text-danger'>Il campo frase non puo' contenere solo spazi</p>" + "<br>";
+   		 $("#message-error2 > p").remove();
+   		 $("#message-error2").append(p);
+   		 return false;
+	}
+	if(document.getElementById("titolo0") != null && document.getElementById("titolo0").value != "" && 
+			document.getElementById("titolo0").value.trim() == ""){
+		let p = "<p class='p text-danger'>Il campo titolo non puo' contenere solo spazi</p>" + "<br>";
+   		 $("#message-error3 > p").remove();
+   		 $("#message-error3").append(p);
+   		 return false;
+	}
+	if(document.getElementById("titolo1") != null &&document.getElementById("titolo1").value != "" && 
+			document.getElementById("titolo1").value.trim() == ""){
+		let p = "<p class='p text-danger'>Il campo titolo non puo' contenere solo spazi</p>" + "<br>";
+   		 $("#message-error4 > p").remove();
+   		 $("#message-error4").append(p);
+   		 return false;
+	}
+	if(document.getElementById("titolo2") != null &&document.getElementById("titolo2").value != "" && 
+			document.getElementById("titolo2").value.trim() == ""){
+		let p = "<p class='p text-danger'>Il campo titolo non puo' contenere solo spazi</p>" + "<br>";
+   		 $("#message-error5 > p").remove();
+   		 $("#message-error5").append(p);
+   		 return false;
+	}
+	if(document.getElementById("titoloEvento0") != null &&document.getElementById("titoloEvento0").value != "" && 
+			document.getElementById("titoloEvento0").value.trim() == ""){
+		let p = "<p class='p text-danger'>Il campo titolo non puo' contenere solo spazi</p>" + "<br>";
+   		 $("#message-error6 > p").remove();
+   		 $("#message-error6").append(p);
+   		 return false;
+	}
+	if(document.getElementById("titoloEvento1") != null &&document.getElementById("titoloEvento1").value != "" && 
+			document.getElementById("titoloEvento1").value.trim() == ""){
+		let p = "<p class='p text-danger'>Il campo titolo non puo' contenere solo spazi</p>" + "<br>";
+   		 $("#message-error7 > p").remove();
+   		 $("#message-error7").append(p);
+   		 return false;
+	}
+	if(document.getElementById("titoloEvento2") != null &&document.getElementById("titoloEvento2").value != "" && 
+			document.getElementById("titoloEvento2").value.trim() == ""){
+		let p = "<p class='p text-danger'>Il campo titolo non puo' contenere solo spazi</p>" + "<br>";
+   		 $("#message-error8 > p").remove();
+   		 $("#message-error8").append(p);
+   		 return false;
+	}
+	if(document.getElementById("titoloLibro" + id) != null && document.getElementById("titoloLibro" + id).value != "" && 
+			document.getElementById("titoloLibro" + id).value.trim() == ""){
+		let p = "<p class='p text-danger'>Il campo titolo non puo' contenere solo spazi</p>" + "<br>";
+   		 $("#message-error" + id + " > p").remove();
+   		 $("#message-error" + id).append(p);
+   		 return false;
+	}
+	return true;
+}
+</script>
 </body>
 </html>

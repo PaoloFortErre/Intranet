@@ -495,7 +495,9 @@
                   <h3 class="h3 card-title text-center" style="color:#303030; font-weight: 600;">Una breve descrizione di me stesso</h3>
                   <h5  class="h5 ml-2 mr-2" th:text="${utente.descrizione}" style="color:#303030"></h5>
                   <div th:if="${session.id} == ${utente.utente.id}">
-                    <form th:action="@{/profile/modificaDescrizione}" method="post">
+                    <form th:action="@{/profile/modificaDescrizione}" onsubmit="return validateForm()" method="post">
+                    	<div id="message-error" class="row justify-content-center mt-2">
+			  	</div>
                       <div class="form-group">
                         <textarea class="form-control ml-2 mr-2" id="exampleFormControlTextarea1" name="descrizione" placeholder="Modifica la tua descrizione"
                         cols="35" rows="3" maxlength="499" required style="resize: none"></textarea>
@@ -509,7 +511,9 @@
                 <div class="card-body" th:unless="${utente.descrizione != null}">
                   <h3 class="h3 card-title text-center" style="color:#303030; font-weight: 600;">Non è presente nessuna descrizione</h3>
                   <div th:if="${session.id} == ${utente.utente.id}">
-                    <form th:action="@{/profile/modificaDescrizione}" method="post">
+                    <form th:action="@{/profile/modificaDescrizione}" onsubmit="return validateForm()" method="post">
+                    <div id="message-error" class="row justify-content-center mt-2">
+			  	</div>
                       <div class="form-group">
                         <textarea class="form-control ml-2 mr-2" id="exampleFormControlTextarea1" name="descrizione" placeholder="Modifica la tua descrizione"
                         cols="35" rows="3" maxlength="499" required style="resize: none"></textarea>
@@ -708,6 +712,17 @@
               }
             });
           });
+        
+        
+        function validateForm(){
+        	if(document.getElementById("exampleFormControlTextarea1").value.trim() == ""){
+        		let p = "<p class='p text-danger'>Il campo descrizione non puo' contenere solo spazi</p>" + "<br>";
+           		 $("#message-error > p").remove();
+           		 $("#message-error").append(p);
+           		 return false;
+        	}
+        	return true;
+        }
           </script>
 
        </body>

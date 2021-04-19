@@ -56,8 +56,10 @@
 					</a>
 				</p>
 
-				<form th:action="@{/libro/insert}" th:object="${libro}"
+				<form th:action="@{/libro/insert}" th:object="${libro}" onsubmit="return validateForm()"
 				method="post" enctype="multipart/form-data"  class="signin-form">
+				<div id="message-error" class="row justify-content-center mt-2">
+			  	</div>
 
 				<div class="form-group col-12">
 					<label for="titolo">Titolo</label>
@@ -81,4 +83,15 @@
 	</div>
 </div>
 </body>
+<script>
+function validateForm(){
+	if(document.getElementById("titolo").value.trim() == ""){
+		let p = "<p class='p text-danger'>Il campo titolo non puo' contenere solo spazi</p>" + "<br>";
+   		 $("#message-error > p").remove();
+   		 $("#message-error").append(p);
+   		 return false;
+	}
+	return true;
+}
+</script>
 </html>

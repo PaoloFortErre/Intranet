@@ -41,15 +41,17 @@
       <div class="col-8 text-center mt-5">
         <div class="container border border-white mt-5" style="background-color: #303030;">
           <h1 class="h1 mb-3 mt-1">AGGIUNGI UTENTE</h1>
-          <form  th:action="@{/profile/eseguiRegistrazione}" method="post" enctype="utf8">
+          <form  th:action="@{/profile/eseguiRegistrazione}" onsubmit="return validateForm()" method="post" enctype="utf8">
+          <div id="message-error" class="row justify-content-center mt-2">
+			  	</div>
             <div class="form-row justify-content-center">
               <div class="form-group col-xl-6 col-lg-6 col-md-10 col-sm-10 col-xs-10">
                 <label >Nome</label>
-                <input class="form-control" th:field="${user.nome}" required/>
+                <input class="form-control" id="nome" th:field="${user.nome}" required/>
               </div>
               <div class="form-group col-xl-6 col-lg-6 col-md-10 col-sm-10 col-xs-10">
                 <label >Cognome</label>
-                <input class="form-control " th:field="${user.cognome}" required/>
+                <input class="form-control " id="cognome" th:field="${user.cognome}" required/>
               </div>
             </div>
             <div class="form-row justify-content-center">
@@ -65,7 +67,7 @@
             <div class="form-row justify-content-center">
               <div class="form-group col-xl-6 col-lg-6 col-md-10 col-sm-10 col-xs-10">
                 <label >Password</label>
-                <input class="form-control" type="password" th:name="password" required/>
+                <input class="form-control" id="password" type="password" th:name="password" required/>
               </div>
               <div class="form-group col-xl-6 col-lg-6 col-md-10 col-sm-10 col-xs-10 ">
                 <label for="settore">Settore</label>
@@ -129,6 +131,30 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
     crossorigin="anonymous"></script>
+    <script>
+    function validateForm(){
+	if(document.getElementById("nome").value.trim() == ""){
+		let p = "<p class='p text-danger'>Il campo nome non puo' contenere solo spazi</p>" + "<br>";
+   		 $("#message-error > p").remove();
+   		 $("#message-error").append(p);
+   		 return false;
+	}
+	if(document.getElementById("cognome").value.trim() == ""){
+		let p = "<p class='p text-danger'>Il campo cognome non puo' contenere solo spazi</p>" + "<br>";
+   		 $("#message-error > p").remove();
+   		 $("#message-error").append(p);
+   		 return false;
+	}
+	if(document.getElementById("password").value.trim() == ""){
+		let p = "<p class='p text-danger'>Il campo password non puo' contenere solo spazi</p>" + "<br>";
+   		 $("#message-error > p").remove();
+   		 $("#message-error").append(p);
+   		 return false;
+	}
+	</script>
+	return true;
+}
+</script>
 
   </body>
   </html>

@@ -53,8 +53,10 @@
 						<img th:src="@{/view/MyWork/images/frecciasinistra.png}" style="display: inline-block;" width="20%">Torna indietro
 					</a>
 				</p>
-				<form th:action="@{/news/insert}" th:object="${news}"
+				<form th:action="@{/news/insert}" th:object="${news}" onsubmit="return validateForm()"
 				method="post" enctype="multipart/form-data"  class="signin-form">
+				<div id="message-error" class="row justify-content-center mt-2">
+			  	</div>
 
 				<div class="form-group col-12">
 					<label for="titolo">Titolo</label>
@@ -78,5 +80,16 @@
 		</div>
 	</div>
 </div>
+<script>
+function validateForm(){
+	if(document.getElementById("input").value.trim() == ""){
+		let p = "<p class='p text-danger'>Il campo titolo non puo' contenere solo spazi</p>" + "<br>";
+   		 $("#message-error > p").remove();
+   		 $("#message-error").append(p);
+   		 return false;
+	}
+	return true;
+}
+</script>
 </body>
 </html>

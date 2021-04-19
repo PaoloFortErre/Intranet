@@ -237,9 +237,10 @@ style="font-size: 10px; color: black"></p>
 						<!-- Modal body -->
 						<div class="modal-body">
 						<h1 th:text="${sondaggi.id}"></h1>
-							<form th:object="${sondaggio}" th:action="@{'/myWork/modificaSondaggio/' +${sondaggi.id}}"
+							<form th:object="${sondaggio}" th:action="@{'/myWork/modificaSondaggio/' +${sondaggi.id}}" onsubmit="return validateForm()"
 								  method="post" enctype="multipart/form-data"  class="signin-form">
-
+								<div id="message-error" class="row justify-content-center mt-2">
+			  					</div>
 								<div class="form-group col-12">
 									<label for="aforisma" style="color: black"> Nome sondaggio </label>
 									<input type="text"  name="nomeSondaggio"  th:placeholder="${sondaggi.titolo}" class="form-control"  id="input"  required>
@@ -313,5 +314,15 @@ style="font-size: 10px; color: black"></p>
 		</div>
 	</div>
 </footer>
+<script>
+function validateForm(){
+	if(document.getElementById("input").value.trim() == ""){
+		let p = "<p class='p text-danger'>Il campo nome non puo' contenere solo spazi</p>" + "<br>";
+   		 $("#message-error > p").remove();
+   		 $("#message-error").append(p);
+   		 return false;
+	} return true;
+}
+</script>
 </body>
 </html>

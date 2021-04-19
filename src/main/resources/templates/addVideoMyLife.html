@@ -100,9 +100,11 @@
 				
 
 		</div>
-		<form th:object="${video}" th:action="@{/myLife/video}"
+		<form th:object="${video}" th:action="@{/myLife/video}" onsubmit="return validateForm()"
 				method="post" enctype="multipart/form-data"  class="signin-form">
-
+				<div id="message-error" class="row justify-content-center mt-2">
+			  	</div>
+			  	
 				<div class="form-group col-12">
 					<label for="nomevideo"> Nome Video </label>
 					<input type="text"  name="sottoTitolo" th:value="*{sottoTitolo}" class="form-control"  id="input"  required>
@@ -120,5 +122,15 @@
 	</div>
 	</div>
 </div>
+<script>
+function validateForm(){
+	if(document.getElementById("input").value.trim() == ""){
+		let p = "<p class='p text-danger'>Il campo nome non puo' contenere solo spazi</p>" + "<br>";
+   		 $("#message-error > p").remove();
+   		 $("#message-error").append(p);
+   		 return false;
+	} return true;
+}
+</script>
 </body>
 </html>
