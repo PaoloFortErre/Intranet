@@ -14,7 +14,6 @@
       font-family: 'Noto Sans', sans-serif;
       color:#616161 /*#757575*/;
       background-color: black;
-      background-image: url(/view/Login/images/bg.jpg);
     }
 
     .container {
@@ -140,7 +139,7 @@
     }
   </style>
 </head>
-<body>
+<body th:style="'background-image:url(' + @{/view/Login/images/bg.jpg} + ');'">
 
   <div class="container">
     <div class="box">
