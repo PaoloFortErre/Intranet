@@ -21,7 +21,6 @@
   <style media="screen">
   body {
     background-color: black;
-    background-image: url("/view/MyWork/images/carbonio.jpg");
     background-repeat: no-repeat;
     background-size: cover, contain;
     color:#F3F3F3;
@@ -29,7 +28,7 @@
   }
   </style>
 </head>
-<body>
+<body th:style="'background-image:url(' + @{/view/MyWork/images/carbonio.jpg} + ');'">
   <div class="container">
 
     <!-- ROW CON INPUT -->
@@ -117,7 +116,7 @@
 
         <div class="col">
           <a href="https://erretechnology.com/" target="blank"><img
-            src="/view/MyWork/images/errelogowhite.png" height="80px"
+            th:src="@{/view/MyWork/images/errelogowhite.png}" height="80px"
             alt="erre_logo"></a>
         </div>
       </div>
