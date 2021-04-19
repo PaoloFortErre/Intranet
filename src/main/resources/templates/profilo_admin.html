@@ -22,7 +22,7 @@
   <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
   <script
   src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
   crossorigin="anonymous"></script>
@@ -32,7 +32,7 @@
   body {
     background-color: black;
     background-repeat: no-repeat;
-    background-size: auto;
+    background-size: cover;
     color:#F3F3F3;
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
@@ -230,7 +230,7 @@
       background: #55ACEE;
       color: white;
     }
-	
+
 	.profile-img-confirm{
 	  display: -webkit-box;
 	  display: -webkit-flex;
@@ -238,15 +238,15 @@
 	  display: flex;
 	  width: 100%;
 	}
-	
+
 	.button-profile.half{
 	  width: 50%;
 	}
-	
+
 	.green{
 	  background-color: #15ae6b;
 	}
-	
+
 	.red{
 	  background-color: #ae0000;
 	}
@@ -344,7 +344,7 @@
                 <div data-toggle="modal" data-target="#ProfileModal">
                   <img id="myImg" class="picture rounded-circle"
                   th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}" alt="profile_picca">
-      			  
+
                 </div>
                 <div class="profile-img-confirm" id="profile-img-confirm" style="display: none;">
 
@@ -356,10 +356,10 @@
                     <img th:src="@{/view/Profile/Images/true.png}" width="100%">
                   </div>
 				</div>
-                
+
                 <div class="bottom-right" th:if="${session.id} == ${utente.utente.id}">
-                
-               
+
+
                   <a class="dropdown fa fa-camera text-white" href="#" id="imageDropdown" title="Clicca per gestire la foto profilo" data-toggle="dropdown"></a>
                   <ul class="dropdown-menu" role="menu" aria-labelledby="imageDropdown">
                       <label class="dropdown-item font-weight-bold" style="cursor: pointer;" for="scegli" >Modifica la foto profilo</label>
@@ -370,7 +370,7 @@
                       <input class="d-none" type="submit" value="Elimina foto profilo" id="elimina">
                     </form>
                   </ul>
-                  
+
                 </div>
               </div>
               <!-- IMPOSTAZIONI PROFILO -->
@@ -418,13 +418,13 @@
             </div>
 
 
-            
-            
+
+
             <!-- SOLO PER ADMIN NUMERO UTENTI E GESTIONE SITO -->
             <div class="col-xl-4 col-lg-4 col-sm-9 col-xs-6" th:if="${session.id} == ${utente.utente.id}" th:with="AM = ${#authorization.expression('hasAuthority(''AM'')')}">
-			  
+
 			  <div th:if="${AM}">
-			  <!--  MODAL PER BOTTONE MANUTENZIONE--> 
+			  <!--  MODAL PER BOTTONE MANUTENZIONE-->
 				  <div class="modal" id="manutenzione" tabindex="-1" aria-labelledby="manutenzione" aria-hidden="true">
 		              <div class="modal-dialog">
 		                <div class="modal-content">
@@ -636,7 +636,7 @@
 
         <script>
         var src = document.getElementById("myImg").src;
-        
+
         function readURL(input) {
 			if (input.files && input.files[0]) {
 				var reader = new FileReader();
@@ -645,7 +645,7 @@
 					$('#myImg').attr('src', e.target.result);
 					$('#myImgModal').attr('src', e.target.result);
 				}
-				
+
 				reader.readAsDataURL(input.files[0]); // convert to base64 string
 			}
 		}
@@ -658,7 +658,7 @@
 			"<span aria-hidden='true' style='color: red; font-size: 22px; margin-right: 20px; opacity: 0.9'>" + "X" + "</span>" +
 			"</button>");*/
 		});
-		
+
 		function remove() {
 			$('#scegli').val("");
 			$('#myImg').attr('src', src);
@@ -682,7 +682,7 @@
 	              }
 			 });
 		}
-        
+
         $(document).ready(
           function() {
             $.ajax({
@@ -708,7 +708,6 @@
             });
           });
           </script>
-  
+
        </body>
       </html>
-

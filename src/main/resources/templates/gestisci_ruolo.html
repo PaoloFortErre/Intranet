@@ -113,7 +113,7 @@
 
 	      });
 	  var id = "[[${session.id}]]";
-	  $.get( window.location.origin + "/intranet-0.0.1-SNAPSHOT" + "/profile/isAdmin?id=" + id + "&email=" + email, function( data ) { 
+	  $.get( window.location.origin + "/intranet-0.0.1-SNAPSHOT" + "/profile/isAdmin?id=" + id + "&email=" + email, function( data ) {
 		  if(data[0]){
 	          let value = "rendi Admin l utente";
 	          let checkbox;
@@ -124,7 +124,7 @@
 	        	  checkbox = "<input class='form-check-input' type='checkbox' value='admin' id='invalidCheckisAdmin'>"+
 	          "<label class='form-check-label' for='invalidCheckisAdmin'>" + value + "</label>" + "<br>";
 	          }
-	          
+
 	          $("#gruppo_check").append(checkbox);
 	        }
 
