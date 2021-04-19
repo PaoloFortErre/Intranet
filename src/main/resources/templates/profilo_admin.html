@@ -682,12 +682,13 @@
 	              }
 			 });
 		}
-
+		
+		var path = "[[@{/checkManutenzione?}]]";
         $(document).ready(
           function() {
             $.ajax({
               type : 'POST',
-              url : window.location.origin + "/intranet-0.0.1-SNAPSHOT" + "/checkManutenzione?",
+              url : path,
               success : function(data) {
                 if (data){
                   $("#btn-manutenzione").addClass("btn btn-success");

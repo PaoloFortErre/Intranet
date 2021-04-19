@@ -1076,13 +1076,14 @@ COLONNA DESTRA
 		$(document).ready(
 			function() {
 				var bottoni = document.getElementsByClassName("miPiaceBtn");
+				var path = "[[@{/myLife/autorePost?id=}]]";
 				for (var i = 0; i < bottoni.length; i++) {
 					var id = bottoni[i].id;
 					var last_index = id.indexOf("e");
 					id = id.substr(last_index + 1);
 					$.ajax({
 						type : 'GET',
-						url : window.location.origin + "/intranet-0.0.1-SNAPSHOT" + "/myLife/autorePost?id="+ id,
+						url : path + id,
 						async : false,
 						success : function(data) {
 							if (data) {
