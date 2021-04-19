@@ -25,7 +25,7 @@
 
   </style>
 </head>
-<body>
+<body th:style="'background-image: url(' + @{view/MyWork/images/bacgkround.png} +');'">
   <div id="header" class="container-fluid">
     <div class="row mt-3 mb-5 justify-content-center">
       <div class="col-auto">
@@ -79,7 +79,7 @@
         </div>
         <div class="container text-right mb-2">
           <a href="#header" style="text-decoration: none; color: white;">Torna su<img width="35px"
-            src="/view/Admin/images/up_arrow.png" alt="upArrow"> </a>
+            th:src="@{view/Admin/images/up_arrow.png}" alt="upArrow"> </a>
           </div>
           <table  class="table bg-white table-striped table-hover table-bordered">
             <thead class="thead-dark text-center">
@@ -100,9 +100,9 @@
                 <td>
                   <div class="img-fluid text-center">
                     <a th:href="@{/libro/ripristinaLibro/(id=${libro.id})}"><img title="ripristina elemento"
-                      width="27px" src="/view/Admin/images/restore_icon.png" alt="restore"></a>
+                      width="27px" th:src="@{/view/Admin/images/restore_icon.png}" alt="restore"></a>
                       <a th:href="@{/libro/cancellaLibro/(id=${libro.id})}"><img title="elimina elemento" class=""
-                        width="27px" src="/view/Admin/images/delete_icon.png" alt="delete"></a>
+                        width="27px" th:src="@{/view/Admin/images/delete_icon.png}" alt="delete"></a>
                       </div>
                     </td>
                   </tr>
@@ -116,7 +116,7 @@
               </div>
               <div class="container text-right mb-2">
                 <a href="#header" style="text-decoration: none; color: white;">Torna su<img width="35px"
-                  src="/view/Admin/images/up_arrow.png" alt="upArrow"> </a>
+                  th:src="@{/view/Admin/images/up_arrow.png}" alt="upArrow"> </a>
                 </div>
                 <table  class="table bg-white table-striped table-hover table-bordered">
                   <thead class="thead-dark text-center">
@@ -137,9 +137,9 @@
                       <td>
                         <div class="img-fluid text-center">
                           <a th:href="@{/cinema/ripristinaFilm/(id=${film.id})}"><img title="ripristina elemento"
-                            width="27px" src="/view/Admin/images/restore_icon.png" alt="restore"></a>
+                            width="27px" th:src="@{/view/Admin/images/restore_icon.png}" alt="restore"></a>
                             <a th:href="@{/cinema/cancellaFilm/(id=${film.id})}"><img title="elimina elemento" class=""
-                              width="27px" src="/view/Admin/images/delete_icon.png" alt="delete"></a>
+                              width="27px" th:src="@{/view/Admin/images/delete_icon.png}" alt="delete"></a>
                             </div>
                           </td>
                         </tr>
@@ -159,7 +159,7 @@
                     </div>
                     <div class="container text-right mb-2">
                       <a href="#header" style="text-decoration: none; color: white;">Torna su<img width="35px"
-                        src="/view/Admin/images/up_arrow.png" alt="upArrow"> </a>
+                        th:src="@{/view/Admin/images/up_arrow.png}" alt="upArrow"> </a>
                       </div>
                       <table  class="table bg-white table-striped table-hover table-bordered">
                         <thead class="thead-dark text-center">
@@ -178,9 +178,9 @@
                             <td>
                               <div class="img-fluid text-center">
                                 <a th:href="@{/cliente/ripristinaCliente/(id=${clienti.id})}"><img title="ripristina elemento"
-                                  width="27px" src="/view/Admin/images/restore_icon.png" alt="restore"></a>
+                                  width="27px" th:src="@{/view/Admin/images/restore_icon.png}" alt="restore"></a>
                                   <a th:href="@{/cliente/cancellaCliente/(id=${clienti.id})}"><img title="elimina elemento" class=""
-                                    width="27px" src="/view/Admin/images/delete_icon.png" alt="delete"></a>
+                                    width="27px" th:src="@{/view/Admin/images/delete_icon.png}" alt="delete"></a>
                                   </div>
                                 </td>
                               </tr>
@@ -194,7 +194,7 @@
                           </div>
                           <div class="container text-right mb-2">
                             <a href="#header" style="text-decoration: none; color: white;">Torna su<img width="35px"
-                              src="/view/Admin/images/up_arrow.png" alt="upArrow"> </a>
+                              th:src="@{/view/Admin/images/up_arrow.png}" alt="upArrow"> </a>
                             </div>
                             <table  class="table bg-white table-striped table-hover table-bordered">
                               <thead class="thead-dark text-center">
@@ -215,9 +215,9 @@
                                   <td>
                                     <div class="img-fluid text-center">
                                       <a th:href="@{/myLife/ripristinaCommento/(id=${commenti.id})}"><img title="ripristina elemento"
-                                        width="27px" src="/view/Admin/images/restore_icon.png" alt="restore"></a>
+                                        width="27px" th:src="@{/view/Admin/images/restore_icon.png}" alt="restore"></a>
                                         <a th:href="@{/myLife/cancellaCommento/(id=${commenti.id})}"><img title="elimina elemento" class=""
-                                          width="27px" src="/view/Admin/images/delete_icon.png" alt="delete"></a>
+                                          width="27px" th:src="@{/view/Admin/images/delete_icon.png}" alt="delete"></a>
                                         </div>
                                       </td>
                                     </tr>
@@ -237,7 +237,7 @@
                                 </div>
                                 <div class="container text-right mb-2">
                                   <a href="#header" style="text-decoration: none; color: white;">Torna su<img width="35px"
-                                    src="/view/Admin/images/up_arrow.png" alt="upArrow"> </a>
+                                    th:src="@{/view/Admin/images/up_arrow.png}" alt="upArrow"> </a>
                                   </div>
                                   <table class="table bg-white table-striped table-hover table-bordered">
                                     <thead class="thead-dark text-center">
@@ -258,9 +258,9 @@
                                         <td>
                                           <div class="img-fluid text-center">
                                             <a th:href="@{/myLife/ripristinaPost/(id=${post.id})}"><img title="ripristina elemento"
-                                              width="27px" src="/view/Admin/images/restore_icon.png" alt="restore"></a>
+                                              width="27px" th:src="@{/view/Admin/images/restore_icon.png}" alt="restore"></a>
                                               <a th:href="@{/myLife/cancellaPost/(id=${post.id})}"><img title="elimina elemento" class=""
-                                                width="27px" src="/view/Admin/images/delete_icon.png" alt="delete"></a>
+                                                width="27px" th:src="@{/view/Admin/images/delete_icon.png}" alt="delete"></a>
                                               </div>
                                             </td>
                                           </tr>
@@ -274,7 +274,7 @@
                                       </div>
                                       <div class="container text-right mb-2">
                                         <a href="#header" style="text-decoration: none; color: white;">Torna su<img width="35px"
-                                          src="/view/Admin/images/up_arrow.png" alt="upArrow"> </a>
+                                          th:src="@{/view/Admin/images/up_arrow.png}" alt="upArrow"> </a>
                                         </div>
                                         <table  class="table bg-white table-striped table-hover table-bordered">
                                           <thead class="thead-dark text-center">
@@ -295,9 +295,9 @@
                                               <td>
                                                 <div class="img-fluid text-center">
                                                   <a th:href="@{/file/ripristinaComunicazioneHR/(id=${comunicazioniHr.id})}"><img title="ripristina elemento"
-                                                    width="27px" src="/view/Admin/images/restore_icon.png" alt="restore"></a>
+                                                    width="27px" th:src="@{/view/Admin/images/restore_icon.png}" alt="restore"></a>
                                                     <a th:href="@{/file/cancellaComunicazioneHR/(id=${comunicazioniHr.id})}"><img title="elimina elemento" class=""
-                                                      width="27px" src="/view/Admin/images/delete_icon.png" alt="delete"></a>
+                                                      width="27px" th:src="@{/view/Admin/images/delete_icon.png}" alt="delete"></a>
                                                     </div>
                                                   </td>
                                                 </tr>
@@ -317,7 +317,7 @@
                                             </div>
                                             <div class="container text-right mb-2">
                                               <a href="#header" style="text-decoration: none; color: white;">Torna su<img width="35px"
-                                                src="/view/Admin/images/up_arrow.png" alt="upArrow"> </a>
+                                                th:src="@{/view/Admin/images/up_arrow.png}" alt="upArrow"> </a>
                                               </div>
                                               <table  class="table bg-white table-striped table-hover table-bordered">
                                                 <thead class="thead-dark text-center">
@@ -340,9 +340,9 @@
                                                     <td>
                                                       <div class="img-fluid text-center">
                                                         <a th:href="@{/file/ripristinaModulo/(id=${moduli.id})}"><img title="ripristina elemento"
-                                                          width="27px" src="/view/Admin/images/restore_icon.png" alt="restore"></a>
+                                                          width="27px" th:src="@{/view/Admin/images/restore_icon.png}" alt="restore"></a>
                                                           <a th:href="@{/file/cancellaModulo/(id=${moduli.id})}"><img title="elimina elemento" class=""
-                                                            width="27px" src="/view/Admin/images/delete_icon.png" alt="delete"></a>
+                                                            width="27px" th:src="@{/view/Admin/images/delete_icon.png}" alt="delete"></a>
                                                           </div>
                                                         </td>
                                                       </tr>
@@ -356,7 +356,7 @@
                                                   </div>
                                                   <div class="container text-right mb-2">
                                                     <a href="#header" style="text-decoration: none; color: white;">Torna su<img width="35px"
-                                                      src="/view/Admin/images/up_arrow.png" alt="upArrow"> </a>
+                                                      th:src="@{/view/Admin/images/up_arrow.png}" alt="upArrow"> </a>
                                                     </div>
                                                     <table  class="table bg-white table-striped table-hover table-bordered">
                                                       <thead class="thead-dark text-center">
@@ -375,9 +375,9 @@
                                                           <td>
                                                             <div class="img-fluid text-center">
                                                               <a th:href="@{/podcast/ripristinaPodcast/(id=${podcast.id})}"><img title="ripristina elemento"
-                                                                width="27px" src="/view/Admin/images/restore_icon.png" alt="restore"></a>
+                                                                width="27px" th:src="@{/view/Admin/images/restore_icon.png}" alt="restore"></a>
                                                                 <a th:href="@{/podcast/cancellaPodcast/(id=${podcast.id})}"><img title="elimina elemento" class=""
-                                                                  width="27px" src="/view/Admin/images/delete_icon.png" alt="delete"></a>
+                                                                  width="27px" th:src="@{/view/Admin/images/delete_icon.png}" alt="delete"></a>
                                                                 </div>
                                                               </td>
                                                             </tr>
@@ -397,7 +397,7 @@
                                                         </div>
                                                         <div class="container text-right mb-2">
                                                           <a href="#header" style="text-decoration: none; color: white;">Torna su<img width="35px"
-                                                            src="/view/Admin/images/up_arrow.png" alt="upArrow"> </a>
+                                                            th:src="@{/view/Admin/images/up_arrow.png}" alt="upArrow"> </a>
                                                           </div>
                                                           <table  class="table bg-white table-striped table-hover table-bordered">
                                                             <thead class="thead-dark text-center">
@@ -418,9 +418,9 @@
                                                                 <td>
                                                                   <div class="img-fluid text-center">
                                                                     <a th:href="@{/myWork/ripristinaSondaggio/(id=${sondaggio.id})}"><img title="ripristina elemento"
-                                                                      width="27px" src="/view/Admin/images/restore_icon.png" alt="restore"></a>
+                                                                      width="27px" th:src="@{/view/Admin/images/restore_icon.png}" alt="restore"></a>
                                                                       <a th:href="@{/myWork/cancellaSondaggio/(id=${sondaggio.id})}"><img title="elimina elemento" class=""
-                                                                        width="27px" src="/view/Admin/images/delete_icon.png" alt="delete"></a>
+                                                                        width="27px" th:src="@{/view/Admin/images/delete_icon.png}" alt="delete"></a>
                                                                       </div>
                                                                     </td>
                                                                   </tr>
@@ -434,7 +434,7 @@
                                                               </div>
                                                               <div class="container text-right mb-2">
                                                                 <a href="#header" style="text-decoration: none; color: white;">Torna su<img width="35px"
-                                                                  src="/view/Admin/images/up_arrow.png" alt="upArrow"> </a>
+                                                                  th:src="@{/view/Admin/images/up_arrow.png}" alt="upArrow"> </a>
                                                                 </div>
                                                                 <table  class="table bg-white table-striped table-hover table-bordered">
                                                                   <thead class="thead-dark text-center">
@@ -455,9 +455,9 @@
                                                                       <td>
                                                                         <div class="img-fluid text-center">
                                                                           <a th:href="@{/news/ripristinaNews/(id=${news.id})}"><img title="ripristina elemento"
-                                                                            width="27px" src="/view/Admin/images/restore_icon.png" alt="restore"></a>
+                                                                            width="27px" th:src="@{/view/Admin/images/restore_icon.png}" alt="restore"></a>
                                                                             <a th:href="@{/news/cancellaNews/(id=${news.id})}"><img title="elimina elemento" class=""
-                                                                              width="27px" src="/view/Admin/images/delete_icon.png" alt="delete"></a>
+                                                                              width="27px" th:src="@{/view/Admin/images/delete_icon.png}" alt="delete"></a>
                                                                             </div>
                                                                           </td>
                                                                         </tr>
@@ -477,7 +477,7 @@
                                                                     </div>
                                                                     <div class="container text-right mb-2">
                                                                       <a href="#header" style="text-decoration: none; color: white;">Torna su<img width="35px"
-                                                                        src="/view/Admin/images/up_arrow.png" alt="upArrow"> </a>
+                                                                        th:src="@{/view/Admin/images/up_arrow.png}" alt="upArrow"> </a>
                                                                       </div>
                                                                       <table  class="table bg-white table-striped table-hover table-bordered">
                                                                         <thead class="thead-dark text-center">
@@ -498,15 +498,15 @@
                                                                             <td>
                                                                               <div class="img-fluid text-center" th:if ="${evento instanceof T(com.erretechnology.intranet.models.EventoLife)}">
                                                                                 <a th:href="@{/eventolife/ripristinaEvento/(id=${evento.id})}"><img title="ripristina elemento"
-                                                                                  width="27px" src="/view/Admin/images/restore_icon.png" alt="restore"></a>
+                                                                                  width="27px" th:src="@{/view/Admin/images/restore_icon.png}" alt="restore"></a>
                                                                                   <a th:href="@{/eventolife/cancellaEvento/(id=${evento.id})}"><img title="elimina elemento" class=""
-                                                                                    width="27px" src="/view/Admin/images/delete_icon.png" alt="delete"></a>
+                                                                                    width="27px" th:src="@{/view/Admin/images/delete_icon.png}" alt="delete"></a>
                                                                                   </div>
                                                                                   <div class="img-fluid text-center" th:if ="${evento instanceof T(com.erretechnology.intranet.models.EventoWork)}">
                                                                                 <a th:href="@{/eventowork/ripristinaEvento/(id=${evento.id})}"><img title="ripristina elemento"
-                                                                                  width="27px" src="/view/Admin/images/restore_icon.png" alt="restore"></a>
+                                                                                  width="27px" th:src="@{/view/Admin/images/restore_icon.png}" alt="restore"></a>
                                                                                   <a th:href="@{/eventowork/cancellaEvento/(id=${evento.id})}"><img title="elimina elemento" class=""
-                                                                                    width="27px" src="/view/Admin/images/delete_icon.png" alt="delete"></a>
+                                                                                    width="27px" th:src="@{/view/Admin/images/delete_icon.png}" alt="delete"></a>
                                                                                   </div>
                                                                                 </td>
                                                                               </tr>
