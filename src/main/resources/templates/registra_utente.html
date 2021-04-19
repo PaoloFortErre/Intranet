@@ -100,7 +100,7 @@
             <div class="form-row justify-content-center">
               <div class="form-group col-10">
                 <select class="form-control" name="id_riattivato" id="id_riattivato" required>
-                  <option value="null">Utente</option>
+                  <option value="">Utente</option>
                   <option th:each="utente : ${utenti_non_attivi}" th:name ="id_riattivato" th:value="${utente.id}" th:text="${utente.nome} + ' ' + ${utente.cognome} + ' '+ '_'+ ' '+ '_'+ ' '+ ${utente.utente.email} ">
                   </select>
                 </div>
