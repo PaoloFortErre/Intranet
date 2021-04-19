@@ -34,17 +34,17 @@
 	rel='stylesheet' type='text/css'>
 
 
-<link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
+<link rel="stylesheet" content-type="" th:href="@{/view/cssGio/style.css}">
 
 </head>
-<body>
+<body th:style="'background-image: url(' + @{/view/MyWork/images/carbonio.jpg} +');'">
 
 
 
 	<nav
 		class="navbar navbar-expand-md bg-dark navbar-dark justify-content-end">
 		<a class="navbar-brand" th:href="@{/homepage/}"><img
-			src="/view/MyWork/images/casabianca.png" width="30px"
+			th:src="@{/view/MyWork/images/casabianca.png}" width="30px"
 			alt="homeBianca.png" style="opacity: 0.9" class="img-fluid"></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#collapsibleNavbar">
@@ -153,11 +153,11 @@
 				style="margin-top: 15px; padding-top: 15px;">
 				<div class="col-sm-4 col-lg-4">
 					<a href="https://erretechnology.com/" target="blank"><img
-						src="/view/MyWork/images/errelogowhite.png" height="80px"
+						th:src="@{/view/MyWork/images/errelogowhite.png}" height="80px"
 						alt="erre_logo" style="margin: auto"></a>
 				</div>
 				<div class="col-sm-4 col-lg-4">
-					<img src="/view/MyWork/images/thegate.png" width="100%"
+					<img th:src="@{/view/MyWork/images/thegate.png}" width="100%"
 						style="margin: auto;">
 					<p style="color: #F3F3F3; text-align: center; font-size: 20px;">
 						Supporto: +39 011 197 429 00</p>
@@ -172,25 +172,5 @@
 			</div>
 		</div>
 	</footer>
-
-<script>
-	function myFunction() {
-		var w = window.outerWidth;
-		if (w <= 950) {
-
-			document.getElementById("utente-foto-profilo").style.display = "none";
-			document.getElementById("scrittaProfilo").style.display = "block";
-
-		} else {
-			document.getElementById("utente-foto-profilo").style.display = "block";
-			document.getElementById("scrittaProfilo").style.display = "none";
-		}
-	}
-	
-	
-	
-	
-	
-	</script>
 </body>
 </html>
