@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.time.Instant;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -242,21 +243,22 @@ public class HomeController extends BaseController{
 		ModelAndView mav = new ModelAndView();
 		List<ElementiMyLife> elementi = serviceElementiMyLife.findAll();
 	
-		List<ElementiMyLife> evento = elementi.stream().filter(x -> x.getTipo().equals("eventi")).collect(Collectors.toList());
-		List<ElementiMyLife> aforismi = elementi.stream().filter(x -> x.getTipo().equals("aphorism")).collect(Collectors.toList());
-		List<ElementiMyLife> film = elementi.stream().filter(x -> x.getTipo().equals("cinema")).collect(Collectors.toList());
-		List<ElementiMyLife> libri = elementi.stream().filter(x -> x.getTipo().equals("book")).collect(Collectors.toList());
-		VideoDelGiorno video = serviceVideo.getLastVideo("MyLife").get(); 
+		CompletableFuture<List<ElementiMyLife>> evento = findLifeElement(elementi, "eventi");// elementi.stream().filter(x -> x.getTipo().equals("eventi")).collect(Collectors.toList());
+		CompletableFuture<List<ElementiMyLife>> aforismi = findLifeElement(elementi, "aphorism");//elementi.stream().filter(x -> x.getTipo().equals("aphorism")).collect(Collectors.toList());
+		CompletableFuture<List<ElementiMyLife>> film = findLifeElement(elementi, "cinema");// elementi.stream().filter(x -> x.getTipo().equals("cinema")).collect(Collectors.toList());
+		CompletableFuture<List<ElementiMyLife>> libri = findLifeElement(elementi, "book");// elementi.stream().filter(x -> x.getTipo().equals("book")).collect(Collectors.toList());
+		CompletableFuture<VideoDelGiorno> video = serviceVideo.getLastVideo("MyLife");
 		
-		mav.addObject("film", film);
-		mav.addObject("eventilife", evento);
-		mav.addObject("aforisma", aforismi);
-		mav.addObject("libri", libri);
-		mav.addObject("video", video);
-		mav.addObject("utenteDati", u);
-		mav.addObject("categorie", repoCategoria.findAll());
+		CompletableFuture.allOf(evento, aforismi, video, film, libri).join();
 
+		mav.addObject("film", film.get());
+		mav.addObject("eventilife", evento.get());
+		mav.addObject("aforisma", aforismi.get());
+		mav.addObject("libri", libri.get());
+		mav.addObject("video", video.get());
+		mav.addObject("categorie", repoCategoria.findAll());
 		mav.setViewName("myLife1");
+		mav.addObject("utenteDati", u);
 		return mav;
 	}
 	
