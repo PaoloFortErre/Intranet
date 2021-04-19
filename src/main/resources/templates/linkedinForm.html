@@ -26,45 +26,24 @@
 
 <style>
 body{
-	background-image: url("/view/MyWork/images/background.png");
 	  background-repeat: no-repeat, repeat;
 	    background-attachment: fixed;
 
 
 }
-#input {
-	background-color: #E2E2E2;
-	border-radius: 0px 0px 0px 0px;
-	border: 0px solid #E2E2E2;
-
-}
-</style>
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"> </script>
-
-
-	<style>
-	body{
-		background-image: url("/view/MyWork/images/background.png");
-		background-repeat: no-repeat, repeat;
-		background-attachment: fixed;
-
-
-	}
-	#input, #input2 {
+#input, #input2 {
 		background-color: #E2E2E2;
 		border-radius: 0px 0px 0px 0px;
 		border: 0px solid #E2E2E2;
 
 	}
-
-
-
 </style>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"> </script>
 
 </head>
 
-<body >
+<body th:style="'background-image: url(' + @{/view/MyWork/images/background.png} +');'">
 
 	<div class="container">
 		<div class="row">
@@ -75,7 +54,7 @@ body{
 
 				<p style="text-align: right; margin-bottom: 30px;display: inline-block;">
 					<a class="mr-2" th:href="@{/homepage/}" style="color: #F3F3F3;">
-						<img src="/view/MyWork/images/frecciasinistra.png" style="display: inline-block;" width="20%">Torna indietro
+						<img th:src="@{/view/MyWork/images/frecciasinistra.png}" style="display: inline-block;" width="20%">Torna indietro
 					</a>
 				</p> <br>
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin-left: 12px; font-size: 18px">

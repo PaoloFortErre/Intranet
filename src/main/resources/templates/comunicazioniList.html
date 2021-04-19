@@ -20,18 +20,17 @@
   <!-- Latest compiled JavaScript -->
   <script
   src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" content-type="" href="/view/cssGio/style.css">
+  <link rel="stylesheet" content-type="" th:href="@{/view/cssGio/style.css}">
 
   <style>
   body {
-    background-image: url("/view/MyWork/images/background.png");
     background-repeat: no-repeat, repeat;
     background-attachment: fixed;
   }
 
   </style>
 </head>
-<body th:style="'background-image: url(' + @{view/MyWork/images/background.png} +');'">
+<body th:style="'background-image: url(' + @{/view/MyWork/images/background.png} +');'">
  	<div class="container-fluid">
   		<h2 class="h2 text-center mb-3">Tutte le comunicazioni</h2>
 		<div class="container text-center">
@@ -57,7 +56,7 @@
            	 <td></td>
               <td th:text="${#dates.format(comunicazione.timestamp*1000, 'dd/MM/yyyy')}"></td>
               <td>
-                <img th:src="{}/view/MyWork/images/pdf-icon.png}" width="4%">
+                <img th:src="@{/view/MyWork/images/pdf-icon.png}" width="4%">
                 <a th:href="@{/file/downloadFileHR(id=${comunicazione.id})}"
                 th:text="${comunicazione.nome}" th:download="${comunicazione.nome}" style="color: #303030"></a>
               </td>

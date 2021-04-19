@@ -675,7 +675,7 @@
 	    	nome = nome.substr(backslash_index + 1);
 			 $.ajax({
 	              type : 'POST',
-	              url : window.location.origin + "/profile/cambiaFotoProfilo",
+	              url : window.location.origin + "/intranet-0.0.1-SNAPSHOT"+ "/profile/cambiaFotoProfilo",
 	              data: {dati: dati, nome: nome},
 	              success : function(data) {
 	            	  window.location = window.location;
@@ -687,7 +687,7 @@
           function() {
             $.ajax({
               type : 'POST',
-              url : window.location.origin + "/checkManutenzione?",
+              url : window.location.origin + "/intranet-0.0.1-SNAPSHOT" + "/checkManutenzione?",
               success : function(data) {
                 if (data){
                   $("#btn-manutenzione").addClass("btn btn-success");
