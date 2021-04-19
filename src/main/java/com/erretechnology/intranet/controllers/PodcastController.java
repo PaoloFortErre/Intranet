@@ -89,7 +89,7 @@ public class PodcastController extends BaseController {
 
 	@GetMapping(value = "/updatePodcast/{id}")
 	public String updatePodcast(@ModelAttribute("date") Utility data, @RequestParam(name = "file" , required=false) MultipartFile file,
-			@ModelAttribute("podcast") Podcast podcast, @PathVariable int id) {
+			@ModelAttribute("podcast") Podcast podcast, @PathVariable int id, HttpSession session) {
 		Podcast oldPodcast = servicePodcast.getById(id);
 		try {
 			oldPodcast.setTimestamp(Instant.now().getEpochSecond());
@@ -100,7 +100,7 @@ public class PodcastController extends BaseController {
 			if(data.getDate() != null)
 				oldPodcast.setDataPodcast(Timestamp.valueOf(data.getDate().atStartOfDay()).getTime() / 1000);
 			servicePodcast.save(oldPodcast);
-			saveLog("modificato un podcast",oldPodcast.getUtente());
+			saveLog("modificato un podcast",serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

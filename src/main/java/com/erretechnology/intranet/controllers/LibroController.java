@@ -72,7 +72,9 @@ public class LibroController extends BaseController {
 		Libro libro = serviceLibro.findById(id);
 		libro.setTitolo(titolo);
 		libro.setScrittore(scrittore);
-
+		int idUser = Integer.parseInt(session.getAttribute("id").toString());
+		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
+		
 		if(!immagine.getOriginalFilename().isEmpty()) {
 			FileImmagine img = new FileImmagine();			
 			if(compressImage(immagine, 0.5f).length == 0)
@@ -80,8 +82,6 @@ public class LibroController extends BaseController {
 			else
 				img.setData(compressImage(immagine, 0.5f));	
 			if(!serviceFileImmagine.contains(img.getData())) {
-				int idUser = Integer.parseInt(session.getAttribute("id").toString());
-				UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
 				img.setAutore(utenteLoggato);
 				img.setTimestamp(Instant.now().getEpochSecond());
 				img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
@@ -95,7 +95,7 @@ public class LibroController extends BaseController {
 
 		serviceLibro.save(libro);
 		model.addAttribute("libro", libro);
-		saveLog("modificato le informazioni di un libro", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+		saveLog("modificato le informazioni di un libro", utenteLoggato);
 		return "redirect:/myLife1/";
 	}
 

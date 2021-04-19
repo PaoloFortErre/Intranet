@@ -2,7 +2,6 @@ package com.erretechnology.intranet.controllers;
 
 import java.io.UnsupportedEncodingException;
 import java.time.Instant;
-import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -27,7 +26,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.erretechnology.intranet.models.ElementiMyLife;
 import com.erretechnology.intranet.models.ElementiMyWork;
-import com.erretechnology.intranet.models.FilePdf;
 import com.erretechnology.intranet.models.Manutenzione;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
@@ -269,7 +267,7 @@ public class HomeController extends BaseController{
 		
 	
 		mav.addObject("user", u);
-		mav.addObject("filePdf", serviceFilePdf.findAll().stream().filter(x->x.isVisibile()).sorted(Comparator.comparingLong(FilePdf::getTimestamp).reversed()).collect(Collectors.toList()));
+		mav.addObject("filePdf", serviceFilePdf.getAllVisible());
 		mav.setViewName("moduli");
 		return mav;
 	}

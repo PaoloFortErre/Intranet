@@ -40,7 +40,7 @@ public class ServiceFilePdfImpl implements ServiceFilePdf {
 	
 	@Override
 	public List<FilePdf> getAllVisible() {
-		return repositoryFilePdf.findByVisibileTrue(Sort.by("id").descending());
+		return repositoryFilePdf.findByVisibileTrue(Sort.by("timestamp").descending());
 	}
 
 }

@@ -77,6 +77,8 @@ public class NewsController extends BaseController {
 		News news = serviceNews.findById(id);
 		news.setTitolo(titolo);
 		news.setContenuto(contenuto);
+		int idUser = Integer.parseInt(session.getAttribute("id").toString());
+		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
 
 		if(!immagine.getOriginalFilename().isEmpty()) {
 			FileImmagine img = new FileImmagine();			
@@ -85,8 +87,7 @@ public class NewsController extends BaseController {
 			else
 				img.setData(compressImage(immagine, 0.5f));	
 			if(!serviceFileImmagine.contains(img.getData())) {
-				int idUser = Integer.parseInt(session.getAttribute("id").toString());
-				UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
+				
 				img.setAutore(utenteLoggato);
 				img.setTimestamp(Instant.now().getEpochSecond());
 				img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
@@ -99,7 +100,7 @@ public class NewsController extends BaseController {
 
 		serviceNews.save(news);
 		model.addAttribute("news", news);
-		saveLog("modificato una news", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+		saveLog("modificato una news", utenteLoggato);
 		return "redirect:/myWork/";
 	}
 	

@@ -86,12 +86,13 @@ public class UtenteController extends BaseController {
 	public ModelAndView viewUserProfile(HttpSession session, int id) throws ExecutionException, Exception {
 		ModelAndView mav = new ModelAndView();
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(id);
-		if (u.getId() == serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())).getId())
+		UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		if (u.getId() == utenteLoggato.getId())
 			return primaPagina(session);
 		mav.addObject("post", servicePost.getByAutore(u).get());
 		mav.setViewName("profilo_admin");
 		mav.addObject("utente", u);
-		mav.addObject("utenteDati", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
+		mav.addObject("utenteDati", utenteLoggato);
 		return mav;
 	}
 

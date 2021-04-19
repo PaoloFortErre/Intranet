@@ -173,7 +173,7 @@ public class MyLifeController extends BaseController {
 			CommentoModificato cm = new CommentoModificato();
 			cm.setTesto(tmp);
 			cm.setTimestamp(c.getTimestamp());
-			c.setTimestamp(Instant.now().getEpochSecond());
+		//	c.setTimestamp(Instant.now().getEpochSecond());
 			cm.setCommento(c);
 			cm.setTimestamp(c.getTimestamp());
 			c.setTimestamp(Instant.now().getEpochSecond());
