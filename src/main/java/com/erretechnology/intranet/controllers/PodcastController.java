@@ -81,7 +81,7 @@ public class PodcastController extends BaseController {
 	public String eliminaPodcast(HttpSession session, int id) {
 		Podcast p = servicePodcast.getById(id);
 		servicePodcast.remove(p);
-		return "redirect:/profile/mostraEliminati";
+		return "redirect:/profilo/mostra-eliminati";
 	}
 	
 	@GetMapping(value ="/ripristina")
@@ -90,6 +90,6 @@ public class PodcastController extends BaseController {
 		p.setVisibile(true);
 		p.setTimestampEliminazione(0);
 		servicePodcast.save(p);;
-		return "redirect:/profile/mostraEliminati";
+		return "redirect:/profilo/mostra-eliminati";
 	}
 }

@@ -82,7 +82,7 @@
       <div class="col">
         <div class="container-fluid border border-white mt-5">
           <h3 class="h3 text-center mb-5 mt-1">ASSEGNA PERMESSI AD UN UTENTE</h3>
-          <form class="" th:action="@{/profile/addPermesso(email = ${email} , flag = ${flag})}" method="post">
+          <form class="" th:action="@{/profilo/aggiungi-permesso(email = ${email} , flag = ${flag})}" method="post">
             <div class="form-row ">
               <div class="form-group ml-4 col-lg-10">
                 <select id="nome_cognome" class="form-control ml-4" name="" id="">
@@ -166,7 +166,7 @@
     function sendAjaxRequest() {
       var nome = $("#email").val();
       $("#gruppo_check").empty();
-      $.get( "http://localhost:8080/profile/getPermessiMancanti?email=" + nome, function( data ) {
+      $.get( "http://localhost:8080/profilo/get-permessi-mancanti?email=" + nome, function( data ) {
         $.each(data, function(key, value) {
           let checkbox = "<input class='form-check-input' type='checkbox' value="+key+" id='invalidCheck'"+key+">" + "<label class="form-check-label" for="">" + value + "
           </label>" ;
@@ -174,7 +174,7 @@
         });
       });
 
-      $.get( "http://localhost:8080/profile/getAllPermessi?email=" + email, function( data ) {
+      $.get( "http://localhost:8080/profilo/get-permessi?email=" + email, function( data ) {
         $.each(data, function(key, value) {
           let option = "<option value = " + key + ">" + value +  "</option>";
           $("#TuttiPermessi").append(option);

@@ -105,7 +105,7 @@ public class LibroController extends BaseController {
 	@RequestMapping("/cancella")
 	public String cancellaLibro(HttpSession session, int id) {
 		serviceLibro.deleteById(id);
-		return "redirect:/profile/mostraEliminati";
+		return "redirect:/profilo/mostra-eliminati";
 	}
 	
 	@RequestMapping("/ripristina")
@@ -114,7 +114,7 @@ public class LibroController extends BaseController {
 		l.setVisibile(true);
 		l.setTimestampEliminazione(0);
 		serviceLibro.save(l);
-		return "redirect:/profile/mostraEliminati";
+		return "redirect:/profilo/mostra-eliminati";
 	}
 	
 	

@@ -35,7 +35,7 @@
     <!-- ROW CON INPUT -->
     <div class="row mt-5">
       <div class="col">
-        <a class="btn btn-primary" th:href="@{/profile/}">TORNA INDIETRO</a>
+        <a class="btn btn-primary" th:href="@{/profilo/}">TORNA INDIETRO</a>
     </div>
 
     <div class="col-8 text-center mt-5">
@@ -46,7 +46,7 @@
     		<p class="p text-warning">[[${messaggio}]]</p>
 	  	</div>
 
-        <form method="post" th:action="@{/profile/elimina}">
+        <form method="post" th:action="@{/profilo/elimina}">
           <div class="form-row ">
             <div class="form-group ml-5 col-lg-10">
               <select class="form-control ml-2" name="id_eliminato" id="id_eliminato">

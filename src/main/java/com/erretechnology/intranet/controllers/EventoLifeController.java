@@ -123,7 +123,7 @@ public class EventoLifeController extends BaseController {
 	@GetMapping(value ="/cancella")
 	public String eliminaEvento(HttpSession session, int id) {
 		serviceEventoLife.deleteById(id);
-		return "redirect:/profile/mostraEliminati";
+		return "redirect:/profilo/mostra-eliminati";
 	}
 	
 	@GetMapping(value ="/ripristina")
@@ -132,6 +132,6 @@ public class EventoLifeController extends BaseController {
 		e.setVisibile(true);
 		e.setTimestampEliminazione(0);
 		serviceEventoLife.save(e);;
-		return "redirect:/profile/mostraEliminati";
+		return "redirect:/profilo/mostra-eliminati";
 	}
 }

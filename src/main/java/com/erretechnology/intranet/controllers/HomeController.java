@@ -200,7 +200,7 @@ public class HomeController extends BaseController{
 		
 		if(serviceDatiPersonali.findById(u.getId()).getPasswordCambiata())
 			return "redirect:/homepage";
-		return "redirect:/profile/cambioPassword";
+		return "redirect:/profilo/cambio-password";
 	}
 
 	// Login form with error
@@ -251,7 +251,7 @@ public class HomeController extends BaseController{
 		Manutenzione m = repositoryManutenzione.findById(1031).get();
 		m.setManutenzione(!m.getManutenzione());
 		repositoryManutenzione.save(m);
-		return "redirect:/profile/";
+		return "redirect:/profilo/";
     }
 	
 	@PostMapping("checkManutenzione")

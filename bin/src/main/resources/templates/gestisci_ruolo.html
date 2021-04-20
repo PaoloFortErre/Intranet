@@ -50,14 +50,14 @@
     <div class="row mt-5">
 
       <div class="col">
-        <a class="btn btn-primary" th:href="@{/profile/}">TORNA INDIETRO</a>
+        <a class="btn btn-primary" th:href="@{/profilo/}">TORNA INDIETRO</a>
       </div>
 
       <div class="col-8 text-center mt-5">
         <div class="container-fluid text-center border border-white mt-5" style="background-color: #303030;">
           <h3 class="h3 text-center mb-4 mt-2">ASSEGNA PERMESSI AD UN UTENTE</h3>
 
-          <form class="" th:action="@{/profile/addPermesso(email = ${email}, permessi = )}"  method="post">
+          <form class="" th:action="@{/profilo/aggiungi-permesso(email = ${email}, permessi = )}"  method="post">
             <div class="form-row ml-5">
               <div class="form-group ml-5 pl-3">
 	            <div id="text" class="row justify-content-center mt-2">
@@ -98,7 +98,7 @@
       var last_index = email.lastIndexOf(" ");
   	  email = email.substr(last_index+1);
 
-  	  $.get( "http://localhost:8080/profile/getPermessiMancanti?email=" + email, function( data ) {
+  	  $.get( "http://localhost:8080/profilo/get-permessi-mancanti?email=" + email, function( data ) {
         $.each(data, function(key, value) {
           let checkbox = "<input class='form-check-input' type='checkbox' value="+key+" id='invalidCheck"+key+"'>"+
           "<label class='form-check-label' for='invalidCheck"+key+"'>" + value + "</label>" + "<br>";
@@ -107,7 +107,7 @@
 
       });
 
-	  $.get( "http://localhost:8080/profile/getAllPermessi?email=" + email, function( data ) {
+	  $.get( "http://localhost:8080/profilo/get-permessi?email=" + email, function( data ) {
 	        $.each(data, function(key, value) {
 	          let checkbox = "<input class='form-check-input' type='checkbox' value="+key+" id='invalidCheck"+key+"' checked>"+
 	          "<label class='form-check-label' for='invalidCheck'"+key+">" + value + "</label>" + "<br>";
@@ -138,7 +138,7 @@
     	var email = $("#nome_cognome").val();
         var last_index = email.lastIndexOf(" ");
     	  email = email.substr(last_index+1);
-    	 $.get("http://localhost:8080/profile/addPermesso?email=" + email + "&list=" + sList, function( data) {
+    	 $.get("http://localhost:8080/profilo/aggiungi-permesso?email=" + email + "&list=" + sList, function( data) {
     		 let checkbox = "<p class='p text-danger'>Permessi modificati</p>" + "<br>";
 	          $("#text").append(checkbox);
     	 });

@@ -47,7 +47,7 @@ import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.models.Utility;
 
 @Controller
-@RequestMapping(value = "profile")
+@RequestMapping(value = "profilo")
 public class UtenteController extends BaseController {
 
 	@GetMapping(value = "/")
@@ -73,16 +73,7 @@ public class UtenteController extends BaseController {
 		return mav;
 	}
 
-	@GetMapping(value = "/userList")
-	public ModelAndView userList() throws InterruptedException, ExecutionException {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("usersList");
-		mav.addObject("utenti", serviceDatiPersonali.getAll().get().stream().filter(x -> x.getUtente().getAttivo())
-				.collect(Collectors.toList()));
-		return mav;
-	}
-
-	@GetMapping(value = "/viewProfile")
+	@GetMapping(value = "/visualizza")
 	public ModelAndView viewUserProfile(HttpSession session, int id) throws ExecutionException, Exception {
 		ModelAndView mav = new ModelAndView();
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(id);
@@ -96,7 +87,7 @@ public class UtenteController extends BaseController {
 		return mav;
 	}
 
-	@GetMapping(value = "/eliminaNotifica/{id}")
+	@GetMapping(value = "/elimina-notifica/{id}")
 	public String elimina(HttpSession session, @PathVariable int id) {
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		Notifica n = serviceNotifica.findById(id);
@@ -115,32 +106,32 @@ public class UtenteController extends BaseController {
 		case "Moduli":
 			return "redirect:/my-work/comunicazioni/moduli/";
 		default:
-			return "redirect:/profile/";
+			return "redirect:/profilo/";
 		}
 		
 	}
 
-	@PostMapping(value = "/modificaDescrizione")
+	@PostMapping(value = "/modifica-descrizione")
 	public String modificaDescrizione(@ModelAttribute("utente") UtenteDatiPersonali utente, HttpSession session) {
 		int id_utente = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(id_utente);
 		utenteLoggato.setDescrizione(utente.getDescrizione());
 		serviceDatiPersonali.save(utenteLoggato);
 		saveLog("aggiornato la descrizione", utenteLoggato);
-		return "redirect:/profile/";
+		return "redirect:/profilo/";
 	}
 
-	@PostMapping(value = "/eliminaFotoProfilo")
+	@PostMapping(value = "/elimina-foto")
 	public String eliminaFotoProfilo(@ModelAttribute("utente") UtenteDatiPersonali utente, HttpSession session) {
 		int id_utente = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(id_utente);
 		utenteLoggato.setImmagine(serviceFileImmagine.getImmagine(63));
 		serviceDatiPersonali.save(utenteLoggato);
 		saveLog("eliminato la foto profilo", utenteLoggato);
-		return "redirect:/profile/";
+		return "redirect:/profilo/";
 	}
 
-	@RequestMapping(value = "/cambioPassword", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/cambio-password", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView cambioPassword(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("cambiaPassword");
@@ -152,7 +143,7 @@ public class UtenteController extends BaseController {
 		return mav;
 	}
 
-	@PostMapping(value = "/paginaModificaPassword")
+	@PostMapping(value = "/pagina-modifica-password")
 	public ModelAndView cambiaPassword(@RequestParam("vecchiaPassword") String vPsw,
 			@RequestParam("nuovaPassword") String nPsw, @RequestParam("cNuovaPassword") String cNPsw,
 			HttpSession session, Model model) throws ExecutionException, Exception {
@@ -200,7 +191,7 @@ public class UtenteController extends BaseController {
 		return mav;
 	}
 
-	@PostMapping(value = "/cambiaFotoProfilo")
+	@PostMapping(value = "/modifica-foto")
 	public String modificaFoto(@RequestParam(required = false) String dati, @RequestParam(required = false) String nome, HttpSession session)
 					throws Exception {
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
@@ -226,11 +217,11 @@ public class UtenteController extends BaseController {
 			saveLog("modificato l'immagine del profilo", utenteLoggato);
 
 		}
-		return "redirect:/profile/";
+		return "redirect:/profilo/";
 	}
 
 	// PAGINA ATTIVITA' RECENTI
-	@GetMapping(value = "/mostra_log")
+	@GetMapping(value = "/mostra-log")
 	public ModelAndView mostraLog(HttpSession session) throws InterruptedException, ExecutionException {
 		ModelAndView mav = new ModelAndView();
 		CompletableFuture<List<Log>> logs;
@@ -248,7 +239,7 @@ public class UtenteController extends BaseController {
 		return mav;
 	}
 
-	@PostMapping(value = "/setVisualizzazione")
+	@PostMapping(value = "/set-visualizzazione")
 	public String modificaVisualizazzioneDataNascita(HttpSession session,
 			/* HttpServletRequest request */ @RequestParam("set") String value) {
 		// String value = request.getParameter("set");
@@ -260,10 +251,10 @@ public class UtenteController extends BaseController {
 			utenteLoggato.setVisualizzaDataNascita(false);
 		serviceDatiPersonali.save(utenteLoggato);
 		saveLog("modificato la visualizzazione del compleanno", utenteLoggato);
-		return "redirect:/profile/";
+		return "redirect:/profilo/";
 	}
 
-	@GetMapping(value = "/gestisciPermesso")
+	@GetMapping(value = "/gestisci-permessi")
 	public ModelAndView Permesso(HttpSession session) throws InterruptedException, ExecutionException {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("gestisci_ruolo");
@@ -272,7 +263,7 @@ public class UtenteController extends BaseController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/getPermessiMancanti")
+	@RequestMapping(value = "/get-permessi-mancanti")
 	@ResponseBody
 	public Map<String, String> getPermessiMancanti(@RequestParam("email") String email) {
 		List<String> list1 = servicePermesso.getAll().stream().map(x -> x.getNome()).collect(Collectors.toList());
@@ -284,13 +275,13 @@ public class UtenteController extends BaseController {
 		return permessiMancanti;
 	}
 
-	@RequestMapping(value = "/getAllPermessi")
+	@RequestMapping(value = "/get-permessi")
 	@ResponseBody
 	public Map<String, String> getAllPermessi(@RequestParam("email") String email) {
 		return serviceAuthority.getMapById(serviceUtente.findByEmail(email).getId());
 	}
 
-	@RequestMapping(value = "/isAdmin")
+	@RequestMapping(value = "/is-admin")
 	@ResponseBody
 	public Boolean[] isAdmin(@RequestParam("id") String id,@RequestParam("email") String email) {
 		Boolean[] isAdmin = new Boolean[2];
@@ -299,7 +290,7 @@ public class UtenteController extends BaseController {
 		return isAdmin;
 	}
 
-	@GetMapping(value = "/addPermesso")
+	@GetMapping(value = "/aggiungi-permesso")
 	public String addPermesso(String email, String list, HttpSession session, Model model) throws Exception {
 		String[] permessi = list.split(",");
 
@@ -355,12 +346,12 @@ public class UtenteController extends BaseController {
 			serviceUtente.save(u);
 			saveLog("modificato i permessi di " + serviceDatiPersonali.findByAutore(u).getNome() + " "
 					+ serviceDatiPersonali.findByAutore(u).getCognome(), utenteLoggato);
-			return "redirect:/profile/gestisciPermesso";
+			return "redirect:/profilo/gestisci-permessi";
 		}
 		throw new Exception("Non hai i permessi per svolgere quest'azione");
 	}
 
-	@GetMapping(value = "/cancellaUtente")
+	@GetMapping(value = "/cancella-utente")
 	public ModelAndView rimuoviUtente(HttpSession session, boolean flag, String messaggio, Model model)
 			throws Exception {
 		if (flag)
@@ -396,7 +387,7 @@ public class UtenteController extends BaseController {
 		return mav;
 	}
 
-	@PostMapping(value = "/eseguiRegistrazione")
+	@PostMapping(value = "/esegui-registrazione")
 	public ModelAndView addUtente(@ModelAttribute("user") UtenteDatiPersonali utenteDP,
 			@RequestParam("email") String email, @RequestParam("password") String password,
 			@RequestParam("settore") String settore, Utility data, Model model) {
@@ -444,7 +435,7 @@ public class UtenteController extends BaseController {
 				"L'utente " + utente.getNome() + " " + utente.getCognome() + " è stato disattivato", model);
 	}
 
-	@GetMapping(value = "/mostraEliminati")
+	@GetMapping(value = "/mostra-eliminati")
 	public ModelAndView mostraNonAttivi(HttpSession session) throws Exception {
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		if (!u.getUtente().getRuolo().getNome().equals("ADMIN"))

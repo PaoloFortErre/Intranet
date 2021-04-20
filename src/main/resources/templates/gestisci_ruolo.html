@@ -49,7 +49,7 @@
     <div class="row mt-5">
 
       <div class="col">
-        <a class="btn btn-primary" th:href="@{/profile/}">TORNA INDIETRO</a>
+        <a class="btn btn-primary" th:href="@{/profilo/}">TORNA INDIETRO</a>
       </div>
 
       <div class="col-8 text-center mt-5">
@@ -94,7 +94,7 @@
       var email = $("#nome_cognome").val();
       var last_index = email.lastIndexOf(" ");
   	  email = email.substr(last_index+1);
-  	var path = "[[@{/profile/getPermessiMancanti?email=}]]";
+  	var path = "[[@{/profilo/get-permessi-mancanti?email=}]]";
 
   	  $.get( path + email, function( data ) {
         $.each(data, function(key, value) {
@@ -105,7 +105,7 @@
 
       });
   	  
-  	path = "[[@{/profile/getAllPermessi?email=}]]";
+  	path = "[[@{/profilo/get-permessi?email=}]]";
 
 	  $.get( path + email, function( data ) {
 	        $.each(data, function(key, value) {
@@ -116,7 +116,7 @@
 
 	      });
 	  var id = "[[${session.id}]]";
-	  path = "[[@{/profile/isAdmin?id=}]]";
+	  path = "[[@{/profilo/is-admin?id=}]]";
 	  $.get( path + id + "&email=" + email, function( data ) {
 		  if(data[0]){
 	          let value = "rendi Admin l utente";
@@ -155,7 +155,7 @@
     	var email = $("#nome_cognome").val();
         var last_index = email.lastIndexOf(" ");
     	  email = email.substr(last_index+1);
-    	  var path = "[[@{/profile/addPermesso?email=}]]";
+    	  var path = "[[@{/profilo/aggiungi-permesso?email=}]]";
     	 $.get(path + email + "&list=" + sList, function( data) {
     		 let checkbox = "<p class='p text-danger'>Permessi modificati</p>" + "<br>";
     		 $("#text > p").remove();

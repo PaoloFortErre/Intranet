@@ -125,7 +125,7 @@ public class EventoWorkController extends BaseController {
 	@GetMapping(value ="/cancella")
 	public String eliminaEvento(HttpSession session, int id) {
 		serviceEventoWork.deleteById(id);
-		return "redirect:/profile/mostraEliminati";
+		return "redirect:/profilo/mostra-eliminati";
 	}
 	
 	@GetMapping(value ="/ripristina")
@@ -134,6 +134,6 @@ public class EventoWorkController extends BaseController {
 		e.setVisibile(true);
 		e.setTimestampEliminazione(0);
 		serviceEventoWork.save(e);;
-		return "redirect:/profile/mostraEliminati";
+		return "redirect:/profilo/mostra-eliminati";
 	}
 }
