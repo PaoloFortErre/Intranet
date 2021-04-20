@@ -111,8 +111,8 @@
 					title="ferrari" width="100%" height="500" class="img-fluid" style=" filter:brightness(50%);">
 				<div class="carousel-caption">
 					<div th:if="${aforisma.size>0}">
-						<h1 style="font-weight: 900;" class="h1caption"
-							th:text="${aforisma[0].titolo}"></h1>
+						<p style="font-weight: 900;" class="h1 h1caption"
+							th:text="${aforisma[0].titolo}"></p>
 						<p th:text="${aforisma[0].contenuto}" style="font-style: italic;"></p>
 						<div th:if="${GML}">
 
