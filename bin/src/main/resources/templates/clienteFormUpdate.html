@@ -59,7 +59,7 @@
 					<img src="/view/MyWork/images/frecciasinistra.png" style="display: inline-block;" width="20%">Torna indietro
 				</a>
 			</p>
-			<form th:action="@{/cliente/update/{id}(id = ${cliente.id})}" th:object="${cliente}" method="post" enctype="multipart/form-data">
+			<form th:action="@{/my-work/clienti/update/{id}(id = ${cliente.id})}" th:object="${cliente}" method="post" enctype="multipart/form-data">
 				<div class="form-group col-8">
 					<label for="nome">Nome:</label>
 					<input class="form-control" type="text" id="nome" name="nome" th:field="*{nome}" style="color: black">

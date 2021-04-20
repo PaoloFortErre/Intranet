@@ -23,10 +23,10 @@ import com.erretechnology.intranet.models.News;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 
 @Controller
-@RequestMapping("news")
+@RequestMapping("my-work/news")
 public class NewsController extends BaseController {
 	
-	@GetMapping("/new")
+	@GetMapping("/aggiungi")
 	public String form(Model model) {
 		model.addAttribute("news", new News()); 
 		return "newsForm";
@@ -63,14 +63,6 @@ public class NewsController extends BaseController {
 		notificaTutti("ha inserito una news su MyWork!", utenteLoggato, "MyWork");
 		return "redirect:/myWork/";
 	}
-	
-	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
-	public String updateForm(@PathVariable int id, Model model) {
-		News news = serviceNews.findById(id);
-		model.addAttribute("news", news);
-		return "newsFormUpdate";
-	}
-	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	public String update(@PathVariable int id, String titolo, String contenuto,
 			@RequestParam(required=false) MultipartFile immagine, HttpSession session, Model model) throws Exception {
@@ -114,13 +106,13 @@ public class NewsController extends BaseController {
 		return "redirect:/myWork/";
 	}
 	
-	@GetMapping(value ="/cancellaNews")
+	@GetMapping(value ="/cancella")
 	public String eliminaNews(HttpSession session, int id) {
 		serviceNews.deleteById(id);
 		return "redirect:/profile/mostraEliminati";
 	}
 	
-	@GetMapping(value ="/ripristinaNews")
+	@GetMapping(value ="/ripristina")
 	public String ripristinaNews(HttpSession session, int id) {
 		News n = serviceNews.findById(id);
 		n.setVisibile(true);

@@ -57,7 +57,7 @@
 			</a>
 			</p>
 
-			<form th:action="@{/news/update/{id}(id = ${news.id})}" th:object="${news}" method="post" enctype="multipart/form-data">
+			<form th:action="@{/my-work/news/update/{id}(id = ${news.id})}" th:object="${news}" method="post" enctype="multipart/form-data">
 				<div class="form-group col-12">
 					<label for="titolo">Titolo</label>
 				  <input class="form-control" type="text" id="titolo" name="titolo" th:field="*{titolo}">

@@ -177,9 +177,9 @@
                             <td th:utext="${#dates.format(clienti.timestampEliminazione*1000, 'dd/MM/yyyy, HH:mm')}"></td>
                             <td>
                               <div class="img-fluid text-center">
-                                <a th:href="@{/cliente/ripristinaCliente/(id=${clienti.id})}"><img title="ripristina elemento"
+                                <a th:href="@{/my-work/clienti/ripristina/(id=${clienti.id})}"><img title="ripristina elemento"
                                   width="27px" th:src="@{/view/Admin/images/restore_icon.png}" alt="restore"></a>
-                                  <a th:href="@{/cliente/cancellaCliente/(id=${clienti.id})}"><img title="elimina elemento" class=""
+                                  <a th:href="@{/my-work/clienti/cancella/(id=${clienti.id})}"><img title="elimina elemento" class=""
                                     width="27px" th:src="@{/view/Admin/images/delete_icon.png}" alt="delete"></a>
                                   </div>
                                 </td>
@@ -454,9 +454,9 @@
                                                                       <td th:utext="${#dates.format(news.timestampEliminazione*1000, 'dd/MM/yyyy, HH:mm')}"></td>
                                                                       <td>
                                                                         <div class="img-fluid text-center">
-                                                                          <a th:href="@{/news/ripristinaNews/(id=${news.id})}"><img title="ripristina elemento"
+                                                                          <a th:href="@{/my-work/news/ripristina/(id=${news.id})}"><img title="ripristina elemento"
                                                                             width="27px" th:src="@{/view/Admin/images/restore_icon.png}" alt="restore"></a>
-                                                                            <a th:href="@{/news/cancellaNews/(id=${news.id})}"><img title="elimina elemento" class=""
+                                                                            <a th:href="@{/my-work/news/cancella/(id=${news.id})}"><img title="elimina elemento" class=""
                                                                               width="27px" th:src="@{/view/Admin/images/delete_icon.png}" alt="delete"></a>
                                                                             </div>
                                                                           </td>
@@ -503,9 +503,9 @@
                                                                                     width="27px" th:src="@{/view/Admin/images/delete_icon.png}" alt="delete"></a>
                                                                                   </div>
                                                                                   <div class="img-fluid text-center" th:if ="${evento instanceof T(com.erretechnology.intranet.models.EventoWork)}">
-                                                                                <a th:href="@{/eventowork/ripristinaEvento/(id=${evento.id})}"><img title="ripristina elemento"
+                                                                                <a th:href="@{/my-work/eventi/ripristina/(id=${evento.id})}"><img title="ripristina elemento"
                                                                                   width="27px" th:src="@{/view/Admin/images/restore_icon.png}" alt="restore"></a>
-                                                                                  <a th:href="@{/eventowork/cancellaEvento/(id=${evento.id})}"><img title="elimina elemento" class=""
+                                                                                  <a th:href="@{/my-work/eventi/cancella/(id=${evento.id})}"><img title="elimina elemento" class=""
                                                                                     width="27px" th:src="@{/view/Admin/images/delete_icon.png}" alt="delete"></a>
                                                                                   </div>
                                                                                 </td>

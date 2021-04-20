@@ -90,7 +90,7 @@ public class MyWorkController extends BaseController {
 		
 	}
 	
-	@GetMapping(value = "/addVideo")
+	@GetMapping(value = "/aggiungi-video")
 	public ModelAndView setVideo(HttpSession session, String link) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("addVideo");

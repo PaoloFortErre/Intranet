@@ -26,10 +26,10 @@ import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 
 @Controller
-@RequestMapping("cliente")
+@RequestMapping("/my-work/clienti")
 public class ClienteController extends BaseController{
 
-	@GetMapping("/new")
+	@GetMapping("/aggiungi")
 	public String form(Model model) {
 		model.addAttribute("cliente", new Cliente()); 
 		return "clienteForm";
@@ -66,15 +66,6 @@ public class ClienteController extends BaseController{
 		serviceCliente.save(cliente);
 		saveLog("inserito un nuovo cliente", utenteLoggato);
 		return "redirect:/myWork/";
-	}
-
-	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
-	public String updateForm(@PathVariable int id, Model model) {
-		Cliente cliente = serviceCliente.findById(id);
-		model.addAttribute("cliente", cliente);
-		Timestamp date = new Timestamp(cliente.getDataInizio());
-		model.addAttribute("date", date);
-		return "clienteFormUpdate";
 	}
 
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
@@ -126,13 +117,13 @@ public class ClienteController extends BaseController{
 		return "redirect:/myWork/";
 	}
 	
-	@RequestMapping("/cancellaCliente")
+	@RequestMapping("/cancella")
 	public String cancellaCliente(int id, HttpSession session) {
 		serviceCliente.deleteById(id);
 		return "redirect:/profile/mostraEliminati";
 		}
 	
-	@RequestMapping("/ripristinaCliente")
+	@RequestMapping("/ripristina")
 	public String ripristinaCliente(int id, HttpSession session) {
 		Cliente cliente = serviceCliente.findById(id);
 		cliente.setVisibile(true);

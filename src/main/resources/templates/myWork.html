@@ -450,7 +450,7 @@ table, th, td {
 			</div>
 			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4">
 			
-			<a class="bottoniGMW mt-1" th:href="@{/cliente/new/}"
+			<a class="bottoniGMW mt-1" th:href="@{/my-work/clienti/aggiungi/}"
 											th:if="${GMW}"
 											style="background-color: transparent; text-align: center; border: 0px solid #232323; display: inline-block; color: white; font-size: 12px; padding: 5px; width: 100px;">
 											<img th:src="@{/view/MyWork/images/more.png}" width="30%" alt="add"> Aggiungi cliente
@@ -510,7 +510,7 @@ table, th, td {
 													<!-- Modal body -->
 													<div class="modal-body">
 														<form
-															th:action="@{/cliente/update/{id}(id = ${nuoviClienti[0].id})}"
+															th:action="@{/my-work/clienti/update/{id}(id = ${nuoviClienti[0].id})}"
 															th:object="${cliente}" method="post" onsubmit="return validateForm()"
 															enctype="multipart/form-data">
 															<div id="message-error3" class="row justify-content-center mt-2"></div>
@@ -552,7 +552,7 @@ table, th, td {
 
 
 										
-										<form th:action="@{'/cliente/delete/'+${nuoviClienti[0].id}}" 
+										<form th:action="@{'/my-work/clienti/delete/'+${nuoviClienti[0].id}}" 
 											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW mt-1"
 												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
@@ -596,7 +596,7 @@ table, th, td {
 													<!-- Modal body -->
 													<div class="modal-body">
 														<form
-															th:action="@{/cliente/update/{id}(id = ${nuoviClienti[1].id})}"
+															th:action="@{/my-work/clienti/update/{id}(id = ${nuoviClienti[1].id})}"
 															th:object="${cliente}" method="post" onsubmit="return validateForm()"
 															enctype="multipart/form-data">
 															<div id="message-error4" class="row justify-content-center mt-2"></div>
@@ -637,7 +637,7 @@ table, th, td {
 
 									
 
-										<form th:action="@{'/cliente/delete/'+${nuoviClienti[1].id}}"
+										<form th:action="@{'/my-work/clienti/delete/'+${nuoviClienti[1].id}}"
 											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW mt-1"
 												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
@@ -684,7 +684,7 @@ table, th, td {
 													<!-- Modal body -->
 													<div class="modal-body">
 														<form
-															th:action="@{/cliente/update/{id}(id = ${nuoviClienti[2].id})}"
+															th:action="@{/my-work/clienti/update/{id}(id = ${nuoviClienti[2].id})}"
 															th:object="${cliente}" method="post" onsubmit="return validateForm()"
 															enctype="multipart/form-data">
 															<div id="message-error5" class="row justify-content-center mt-2"></div>
@@ -723,7 +723,7 @@ table, th, td {
 											</div>
 										</div>
 										
-										<form th:action="@{'/cliente/delete/'+${nuoviClienti[2].id}}"
+										<form th:action="@{'/my-work/clienti/delete/'+${nuoviClienti[2].id}}"
 											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW mt-1"
 												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
@@ -738,7 +738,7 @@ table, th, td {
 				</table>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4">
-			<a class="bottoniGMW mt-1" th:href="@{/news/new/}"
+			<a class="bottoniGMW mt-1" th:href="@{/my-work/news/aggiungi/}"
 											th:if="${GMW}"
 											style="background-color: transparent; text-align: center; border: 0px solid #232323; display: inline-block; color: white; font-size: 12px; padding: 5px; width: 100px;">
 											<img th:src="@{/view/MyWork/images/more.png}" width="30%" alt="add"> Aggiungi news
@@ -792,7 +792,7 @@ table, th, td {
 													<!-- Modal body -->
 													<div class="modal-body">
 														<form
-															th:action="@{/news/update/{id}(id = ${newsSlide[0].id})}"
+															th:action="@{/my-work/news/update/{id}(id = ${newsSlide[0].id})}"
 															th:object="${news}" method="post" onsubmit="return validateForm()"
 															enctype="multipart/form-data">
 															<div id="message-error6" class="row justify-content-center mt-2"></div>
@@ -835,7 +835,7 @@ table, th, td {
 
 
 										
-										<form th:action="@{'/news/delete/'+${newsSlide[0].id}}"
+										<form th:action="@{'/my-work/news/delete/'+${newsSlide[0].id}}"
 											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW mt-1"
 												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
@@ -878,7 +878,7 @@ table, th, td {
 													<!-- Modal body -->
 													<div class="modal-body">
 														<form
-															th:action="@{/news/update/{id}(id = ${newsSlide[1].id})}"
+															th:action="@{/my-work/news/update/{id}(id = ${newsSlide[1].id})}"
 															th:object="${news}" method="post" onsubmit="return validateForm()"
 															enctype="multipart/form-data">
 															<div id="message-error7" class="row justify-content-center mt-2"></div>
@@ -919,7 +919,7 @@ table, th, td {
 											</div>
 										</div>
 										
-										<form th:action="@{'/news/delete/'+${newsSlide[1].id}}"
+										<form th:action="@{'/my-work/news/delete/'+${newsSlide[1].id}}"
 											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW mt-1"
 												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
@@ -960,7 +960,7 @@ table, th, td {
 													<!-- Modal body -->
 													<div class="modal-body">
 														<form
-															th:action="@{/news/update/{id}(id = ${newsSlide[2].id})}"
+															th:action="@{/my-work/news/update/{id}(id = ${newsSlide[2].id})}"
 															th:object="${news}" method="post" onsubmit="return validateForm()"
 															enctype="multipart/form-data">
 															<div id="message-error8" class="row justify-content-center mt-2"></div>
@@ -1002,7 +1002,7 @@ table, th, td {
 										</div>
 
 				
-										<form th:action="@{'/news/delete/'+${newsSlide[2].id}}"
+										<form th:action="@{'/my-work/news/delete/'+${newsSlide[2].id}}"
 											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW mt-1"
 												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
@@ -1113,7 +1113,7 @@ ROW SCHIZZO
 				</div>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4">
-			<a class="bottoniGMW mt-1" th:href="@{/eventowork/new/}"
+			<a class="bottoniGMW mt-1" th:href="@{/my-work/eventi/aggiungi/}"
 											th:if="${GMW}"
 											style="background-color: transparent; text-align: center; border: 0px solid #232323; display: inline-block; color: white; font-size: 12px; padding: 5px; width: 100px;">
 											<img th:src="@{/view/MyWork/images/more.png}" width="30%" alt="add"> Aggiungi evento
@@ -1170,7 +1170,7 @@ ROW SCHIZZO
 													<!-- Modal body -->
 													<div class="modal-body">
 														<form class="signin-form"
-															th:action="@{/eventowork/update/{id}(id = ${eventi[0].id})}"
+															th:action="@{/my-work/eventi/update/{id}(id = ${eventi[0].id})}"
 															th:object="${evento}" method="post" onsubmit="return validateForm()"
 															enctype="multipart/form-data">
 															<div id="message-error9" class="row justify-content-center mt-2"></div>
@@ -1222,7 +1222,7 @@ ROW SCHIZZO
 										</div>
 
 										
-										<form th:action="@{'/eventowork/delete/'+${eventi[0].id}}"
+										<form th:action="@{'/my-work/eventi/delete/'+${eventi[0].id}}"
 											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW mt-1"
 												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
@@ -1267,7 +1267,7 @@ ROW SCHIZZO
 													<!-- Modal body -->
 													<div class="modal-body">
 														<form class="signin-form"
-															th:action="@{/eventowork/update/{id}(id = ${eventi[1].id})}"
+															th:action="@{/my-work/eventi/update/{id}(id = ${eventi[1].id})}"
 															th:object="${evento}" method="post" onsubmit="return validateForm()"
 															enctype="multipart/form-data">
 															<div id="message-error10" class="row justify-content-center mt-2"></div>
@@ -1319,7 +1319,7 @@ ROW SCHIZZO
 										</div>
 
 										
-										<form th:action="@{'/eventowork/delete/'+${eventi[1].id}}"
+										<form th:action="@{'/my-work/eventi/delete/'+${eventi[1].id}}"
 											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW mt-1"
 												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
@@ -1361,7 +1361,7 @@ ROW SCHIZZO
 													<!-- Modal body -->
 													<div class="modal-body">
 														<form class="signin-form"
-															th:action="@{/eventowork/update/{id}(id = ${eventi[2].id})}"
+															th:action="@{/my-work/eventi/update/{id}(id = ${eventi[2].id})}"
 															th:object="${evento}" method="post" onsubmit="return validateForm()"
 															enctype="multipart/form-data">
 															<div id="message-error11" class="row justify-content-center mt-2"></div>
@@ -1412,7 +1412,7 @@ ROW SCHIZZO
 											</div>
 										</div>
 										
-										<form th:action="@{'/eventowork/delete/'+${eventi[2].id}}"
+										<form th:action="@{'/my-work/eventi/delete/'+${eventi[2].id}}"
 											th:if="${GMW}" method="get" style="display: inline-block;">
 											<button type="submit" name="modifica" class="bottoniGMW mt-1"
 												style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
@@ -1524,7 +1524,7 @@ ROW SCHIZZO
 			<div class="col-xs-0 col-sm-0 col-lg-2 col-xl-2 mt-5"></div>
 			<div class="col-xs-12 col-sm-12 col-lg-8 col-xl-8 mt-5"
 				style="margin-top: 50px; display: inline-block">
-				<a th:href="@{/myWork/addVideo/}" th:if="${GMW}"
+				<a th:href="@{/myWork/aggiungi-video/}" th:if="${GMW}"
 					style="background-color: white; border: 0px solid #232323; color: black; font-size: 12px; padding: 8px; width: 150px; float: right; padding-left: 25px;">
 					Aggiungi video</a>
 				<h1 style="text-align: center; clear: both;">Il video del mese</h1>

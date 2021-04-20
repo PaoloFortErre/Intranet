@@ -77,7 +77,7 @@ public class MyLifeController extends BaseController {
 		return mav;
 	}
 	
-	@GetMapping(value = "/addVideo")
+	@GetMapping(value = "/aggiungi-video")
 	public ModelAndView setVideo(HttpSession session, String link) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("addVideoMyLife");

@@ -25,10 +25,10 @@ import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 
 @Controller
-@RequestMapping("eventowork")
+@RequestMapping("my-work/eventi")
 public class EventoWorkController extends BaseController {
 
-	@GetMapping("/new")
+	@GetMapping("/aggiungi")
 	public String formLife(Model model) {
 		model.addAttribute("evento", new EventoWork()); 
 		return "eventoWorkForm";
@@ -70,15 +70,6 @@ public class EventoWorkController extends BaseController {
 		saveLog("inserito un nuovo evento", utenteLoggato);
 		notificaTutti("ha inserito un nuovo evento su MyWork!", utenteLoggato, "MyWork");
 		return "redirect:/myWork/";
-	}
-
-	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
-	public String updateForm(@PathVariable int id, Model model) {
-		EventoWork evento = serviceEventoWork.findById(id);
-		model.addAttribute("evento", evento);
-		Timestamp date = new Timestamp(evento.getData()*1000);
-		model.addAttribute("date", date);
-		return "eventoWorkUpdate";
 	}
 
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
@@ -131,13 +122,13 @@ public class EventoWorkController extends BaseController {
 	}
 	
 	
-	@GetMapping(value ="/cancellaEvento")
+	@GetMapping(value ="/cancella")
 	public String eliminaEvento(HttpSession session, int id) {
 		serviceEventoWork.deleteById(id);
 		return "redirect:/profile/mostraEliminati";
 	}
 	
-	@GetMapping(value ="/ripristinaEvento")
+	@GetMapping(value ="/ripristina")
 	public String ripristinaEvento(HttpSession session, int id) {
 		EventoWork e = serviceEventoWork.findById(id);
 		e.setVisibile(true);

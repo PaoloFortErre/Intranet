@@ -247,7 +247,7 @@ table, th, td {
 						<div class="title2">
 							<div th:if="${GMW}">
 								
-								<a th:href="@{/cliente/new/}"> <img
+								<a th:href="@{/my-work/clienti/aggiungi/}"> <img
 									src="/view/MyWork/images/moreb.png" width=7%
 									style="float: right">
 								</a>
@@ -289,7 +289,7 @@ table, th, td {
 								<td th:each="cliente: ${nuoviClienti}"><p
 										th:text="${#dates.format(cliente.dataInizio, 'MMMM yyyy')}" style="margin-top: 4px; color: black">
 									</p> <br>
-									<form th:action="@{'/cliente/update/'+${cliente.id}}"
+									<form th:action="@{'/my-work/clienti/update/'+${cliente.id}}"
 										th:if="${GMW}" method="get">
 										<button type="submit" name="modifica"
 											style="background-color: transparent; border: 0px solid #232323; float: right;">
@@ -297,7 +297,7 @@ table, th, td {
 												width="38%">
 										</button>
 									</form>
-									<form th:action="@{'/cliente/delete/'+${cliente.id}}"
+									<form th:action="@{'/my-work/clienti/delete/'+${cliente.id}}"
 										th:if="${GMW}" method="get">
 										<button type="submit" name="modifica"
 											style="background-color: transparent; border: 0px solid #232323; float: right;">
@@ -712,7 +712,7 @@ table, th, td {
 
 	<div class="row">
 		<br><br><div th:if="${GMW}">
-			<a th:href="@{/news/new/}"> <img
+			<a th:href="@{/my-work/news/aggiungi/}"> <img
 				src="/view/MyWork/images/more.png" width="30px"
 				style="float: right; margin-bottom: 10px;"></a>
 		</div>
@@ -742,7 +742,7 @@ table, th, td {
 
 					<div class="col-sm-8 col-md-8 col-lg-8">
 						<h3 style="font-weight: 900" th:text="${news.titolo}"></h3>
-						<form th:action="@{'/news/update/'+${news.id}}" th:if="${GMW}"
+						<form th:action="@{'/my-work/news/update/'+${news.id}}" th:if="${GMW}"
 							method="get">
 							<button type="submit" name="modifica"
 								style="background-color: #232323; border: 0px solid #232323; float: right;">
@@ -750,7 +750,7 @@ table, th, td {
 									width="38%">
 							</button>
 						</form>
-						<form th:action="@{'/news/delete/'+${news.id}}" th:if="${GMW}"
+						<form th:action="@{'/my-work/news/delete/'+${news.id}}" th:if="${GMW}"
 							method="get">
 							<button type="submit" name="modifica"
 								style="background-color: #232323; border: 0px solid #232323; float: right;">
@@ -788,7 +788,7 @@ table, th, td {
 						<div class="row" style="padding: 10px;">
 							<div class="col-sm-8 col-md-8 col-lg-8">
 								<h3 style="font-weight: 900" th:text="${news2.titolo}"></h3>
-								<form th:action="@{'/news/update/'+${news2.id}}" th:if="${GMW}"
+								<form th:action="@{'/my-work/news/update/'+${news2.id}}" th:if="${GMW}"
 									method="get">
 									<button type="submit" name="modifica"
 										style="background-color: #232323; border: 0px solid #232323; float: right;">
@@ -796,7 +796,7 @@ table, th, td {
 											width="38%">
 									</button>
 								</form>
-								<form th:action="@{'/news/delete/'+${news2.id}}" th:if="${GMW}"
+								<form th:action="@{'/my-work/news/delete/'+${news2.id}}" th:if="${GMW}"
 									method="get">
 									<button type="submit" name="modifica"
 										style="background-color: #232323; border: 0px solid #232323; float: right;">
@@ -969,16 +969,16 @@ table, th, td {
 								th:text="${eventi[0].titolo}"></p>
 							<p style="font-size: 15px;" th:text="${eventi[0].luogo}"></p>
 
-							<form th:action="@{'/eventowork/update/'+${eventi[0].id}}"
+							<form th:action="@{'/my-work/eventi/update/'+${eventi[0].id}}"
 								th:if="${GMW}" method="get">
 								<button type="submit" name="modifica" class="bottoniGMW"
 									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
 									Modifica</button>
-							</form> <a th:href="@{/eventowork/new/}" th:if="${GMW}"
+							</form> <a th:href="@{/my-work/eventi/aggiungi/}" th:if="${GMW}"
 							class="bottoniGMW mt-1"
 							style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">Aggiungi
 						</a>
-							<form th:action="@{'/eventowork/delete/'+${eventi[0].id}}"
+							<form th:action="@{'/my-work/eventi/delete/'+${eventi[0].id}}"
 								th:if="${GMW}" method="get">
 								<button type="submit" name="modifica" class="bottoniGMW mt-1"
 									style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
