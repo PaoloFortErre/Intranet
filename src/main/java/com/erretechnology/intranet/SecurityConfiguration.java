@@ -38,17 +38,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		http.formLogin()
 		.loginPage("/login").failureUrl("/login-error").successForwardUrl("/setSession").and()
 		.authorizeRequests()
-		.antMatchers("/podcast/*", "/cliente/*", "/evento/newWork/*", "/news/new/*").access("hasAuthority('GMW')")
-		.antMatchers("/myWork/addSondaggio", "/myWork/sondaggi", "/myWork/modificaSondaggio/*" , 
-				     "/myWork/deleteSondaggio/*" , "/myWork/sondaggiFormUpdate/*").access("hasAuthority('GS')")
-		.antMatchers("/evento/newLife/", "/cinema/new/", "/libro/new").access("hasAuthority('GML')")
-		.antMatchers("/file/hr" , "file/uploadHR" , "/file/deleteFileHR").access("hasAuthority('GHR')")
-		.antMatchers("/file/" , "file/upload" , "/file/deleteFilePdf").access("hasAuthority('GM')")
+		.antMatchers("/my-work/podcast/**", "/my-work/clienti/**", "/my-work/eventi/**", "/my-work/news/**").access("hasAuthority('GMW')")
+		.antMatchers("/my-work/comunicazioni/sondaggi/**").access("hasAuthority('GS')")
+		.antMatchers("/my-life/eventi/**", "/my-life/film-serie/**", "/my-life/libri/**").access("hasAuthority('GML')")
+		.antMatchers("/my-work/comunicazioni/hr/upload" , "/my-work/comunicazioni/hr" , "/my-work/comunicazioni/hr/delete").access("hasAuthority('GHR')")
+		.antMatchers("/my-work/comunicazioni/moduli/aggiungi" , "/my-work/comunicazioni/moduli/upload", "/my-work/comunicazioni/moduli/delete").access("hasAuthority('GM')")
 		.antMatchers("/profile/gestisciPermesso" , "/profile/registra" , "/profile/cancellaUtente", "/maintain-enable" ,
 				"/maintain-disable").access("hasAuthority('AM')")
-		.antMatchers("/myLife/**", "/profile/**", "/homepage", "/file/**", "/myWork/**" , "/homepage/**", "/myLife1/**" , "/moduli/**", "/aforisma/**",
-				"/cinema/**","/cliente/**", "/eventolife/**", "/eventowork/**", "/categoriacinema/**", "/libro/**", "/linkedin/**" , "/news/**",
-				"/podcast/*", "/comunicazioniHr/*").access("isAuthenticated()")
+		.antMatchers("/myLife/**", "/profile/**", "/homepage", "/my-work/**" , "/homepage/**", "/myLife1/**" , "/aforisma/**",
+				"/linkedin/**" , "/my-work/**").access("isAuthenticated()")
 		.antMatchers("/", "/login" , "/manutenzione").permitAll()
 		.antMatchers("/maintain-enable", "/maintain-disable").access("isAuthenticated")
 		.and()
