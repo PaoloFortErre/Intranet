@@ -345,7 +345,7 @@
 			<div class="col-xs-12 col-sm-12 col-lg-12 col-xl-12 mb-1">
 
 				<div style="float: right">
-					<a th:href="@{/cinema/new/}" th:if="${GML}"
+					<a th:href="@{/my-life/film-serie/aggiungi/}" th:if="${GML}"
 						style="background-color: white; border: 0px solid #232323; color: black; font-size: 12px; padding: 8px; width: 150px; float: right; padding-left: 25px;">
 						Aggiungi nuovo</a>
 				</div>
@@ -390,7 +390,7 @@
 
 							<!-- Modal body -->
 							<div class="modal-body">
-								<form th:action="@{/cinema/update/{id}(id = ${film[0].id})}" onsubmit="return validateForm()"
+								<form th:action="@{/my-life/film-serie/update/{id}(id = ${film[0].id})}" onsubmit="return validateForm()"
 									th:object="${cinema}" method="post"
 									enctype="multipart/form-data">
 									<div id="message-error3" class="row justify-content-center mt-2">
@@ -436,7 +436,7 @@
 
 
 
-				<form th:action="@{'/cinema/delete/'+${film[0].id}}" th:if="${GML}"
+				<form th:action="@{'/my-life/film-serie/delete/'+${film[0].id}}" th:if="${GML}"
 					method="get" style="display: inline-block;">
 					<button type="submit" name="modifica"
 						style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
@@ -474,7 +474,7 @@
 
 							<!-- Modal body -->
 							<div class="modal-body">
-								<form th:action="@{/cinema/update/{id}(id = ${film[1].id})}" onsubmit="return validateForm()"
+								<form th:action="@{/my-life/film-serie/update/{id}(id = ${film[1].id})}" onsubmit="return validateForm()"
 									th:object="${cinema}" method="post"
 									enctype="multipart/form-data">
 									<div id="message-error4" class="row justify-content-center mt-2">
@@ -516,7 +516,7 @@
 						</div>
 					</div>
 				</div>
-				<form th:action="@{'/cinema/delete/'+${film[1].id}}" th:if="${GML}"
+				<form th:action="@{'/my-life/film-serie/delete/'+${film[1].id}}" th:if="${GML}"
 					method="get" style="display: inline-block;">
 					<button type="submit" name="modifica"
 						style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
@@ -556,7 +556,7 @@
 
 							<!-- Modal body -->
 							<div class="modal-body">
-								<form th:action="@{/cinema/update/{id}(id = ${film[2].id})}" onsubmit="return validateForm()"
+								<form th:action="@{/my-life/film-serie/update/{id}(id = ${film[2].id})}" onsubmit="return validateForm()"
 									th:object="${cinema}" method="post"
 									enctype="multipart/form-data">
 									<div id="message-error5" class="row justify-content-center mt-2">
@@ -598,7 +598,7 @@
 						</div>
 					</div>
 				</div>
-				<form th:action="@{'/cinema/delete/'+${film[2].id}}" th:if="${GML}"
+				<form th:action="@{'/my-life/film-serie/delete/'+${film[2].id}}" th:if="${GML}"
 					method="get" style="display: inline-block;">
 					<button type="submit" name="modifica"
 						style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
@@ -616,7 +616,7 @@
 			<div class="col-xs-12 col-sm-12 col-lg-12 col-xl-12 mt-5 ">
 
 				<div style="float: right">
-					<a th:href="@{/eventolife/new/}" th:if="${GML}"
+					<a th:href="@{/my-life/eventi/aggiungi/}" th:if="${GML}"
 						style="background-color: white; border: 0px solid #232323; color: black; font-size: 12px; padding: 8px; width: 150px; float: right; padding-left: 25px;">
 						Aggiungi evento</a>
 				</div>
@@ -681,7 +681,7 @@
 											<!-- Modal body -->
 											<div class="modal-body">
 												<form class="signin-form"
-													th:action="@{/eventolife/update/{id}(id = ${eventilife[0].id})}"
+													th:action="@{/my-life/eventi/update/{id}(id = ${eventilife[0].id})}"
 													th:object="${evento}" method="post" onsubmit="return validateForm()"
 													enctype="multipart/form-data">
 													<div id="message-error6" class="row justify-content-center mt-2">
@@ -729,7 +729,7 @@
 										</div>
 									</div>
 								</div>
-								<form th:action="@{'/eventolife/delete/'+${eventilife[0].id}}"
+								<form th:action="@{'/my-life/eventi/delete/'+${eventilife[0].id}}"
 									th:if="${GML}" method="get" style="display: inline-block;">
 									<button type="submit" name="modifica"
 										style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
@@ -769,7 +769,7 @@
 											<!-- Modal body -->
 											<div class="modal-body">
 												<form class="signin-form"
-													th:action="@{/eventolife/update/{id}(id = ${eventilife[1].id})}"
+													th:action="@{/my-life/eventi/update/{id}(id = ${eventilife[1].id})}"
 													th:object="${evento}" method="post" onsubmit="return validateForm()"
 													enctype="multipart/form-data">
 													<div id="message-error7" class="row justify-content-center mt-2">
@@ -817,7 +817,7 @@
 										</div>
 									</div>
 								</div>
-								<form th:action="@{'/eventolife/delete/'+${eventilife[1].id}}"
+								<form th:action="@{'/my-life/eventi/delete/'+${eventilife[1].id}}"
 									th:if="${GML}" method="get" style="display: inline-block;">
 									<button type="submit" name="modifica"
 										style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
@@ -857,7 +857,7 @@
 											<!-- Modal body -->
 											<div class="modal-body">
 												<form class="signin-form"
-													th:action="@{/eventolife/update/{id}(id = ${eventilife[2].id})}" onsubmit="return validateForm()"
+													th:action="@{/my-life/eventi/update/{id}(id = ${eventilife[2].id})}" onsubmit="return validateForm()"
 													th:object="${evento}" method="post"
 													enctype="multipart/form-data">
 													<div id="message-error8" class="row justify-content-center mt-2">
@@ -905,7 +905,7 @@
 										</div>
 									</div>
 								</div>
-								<form th:action="@{'/eventolife/delete/'+${eventilife[2].id}}"
+								<form th:action="@{'/my-life/eventi/delete/'+${eventilife[2].id}}"
 									th:if="${GML}" method="get" style="display: inline-block;">
 									<button type="submit" name="modifica"
 										style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
@@ -939,7 +939,7 @@
 			<div class="col-xs-12 col-sm-12 col-lg-12 col-xl-12 mt-5 ">
 				<br>
 				<div style="float: right">
-					<a th:href="@{/libro/new/}" th:if="${GML}"
+					<a th:href="@{/my-life/libri/aggiungi/}" th:if="${GML}"
 						style="background-color: white; border: 0px solid #232323; color: black; font-size: 12px; padding: 8px; width: 150px; float: right; padding-left: 25px;">
 						Aggiungi libro</a>
 				</div>
@@ -981,7 +981,7 @@
 
 							<!-- Modal body -->
 							<div class="modal-body">
-								<form th:action="@{/libro/update/{id}(id = ${libro.id})}" th:onsubmit="'return validateForm(' + ${libro.id}+ ')'"
+								<form th:action="@{/my-life/libri/update/{id}(id = ${libro.id})}" th:onsubmit="'return validateForm(' + ${libro.id}+ ')'"
 									method="post" enctype="multipart/form-data">
 									<div th:id="'message-error' + ${libro.id}" class="row justify-content-center mt-2">
 			  	</div>
@@ -1019,7 +1019,7 @@
 						</div>
 					</div>
 				</div>
-				<form th:action="@{'/libro/delete/'+${libro.id}}" th:if="${GML}"
+				<form th:action="@{'/my-life/libri/delete/'+${libro.id}}" th:if="${GML}"
 					method="get" style="display: inline-block">
 					<button type="submit" name="modifica"
 						style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">

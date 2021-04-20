@@ -225,7 +225,7 @@
 						</div>
 						<div class="col-sm-8 col-md-10 col-lg-10">
 							<div class="form-group">
-								<form th:action="@{/myLife/addPost}"
+								<form th:action="@{/myLife/add-post}"
 									enctype="multipart/form-data" id="myForm" method="post">
 									<label for="testo"></label>
 									<textarea class="form-control" rows="2" cols="30" name="testo"
@@ -335,7 +335,7 @@
 											th:if="(${DS} or ${post.autore.id} == ${session.id}) and ${UB}"
 											style="display: inline-block; color: #303030;">
 
-											<form th:action="@{/myLife/deletePost(id=${post.id})}"
+											<form th:action="@{/myLife/delete-post(id=${post.id})}"
 												method="post">
 												<button name="button" type="submit" class="buttonAzioni"
 													style="display: inline-block; background-color: #E8E7E7; color: white; margin-left: 290px; border: 0px solid #303030">
@@ -348,7 +348,7 @@
 
 										<div th:if="(${post.autore.id} == ${session.id}) and ${UB}"
 											style="display: inline-block;">
-											<form th:action="@{/myLife/editPost(id=${post.id})}"
+											<form th:action="@{/myLife/edit-post(id=${post.id})}"
 												method="post">
 												<button name="button" type="submit"
 													style="display: inline-block; background-color: #E8E7E7; color: white; margin-left: -10px; border: 0px solid #303030"
@@ -414,7 +414,7 @@
 													th:if="(${DS} or ${commento.autore.id} == ${session.id} or ${post.autore.id} == ${session.id}) and ${UB}"><br>
 													<br> <br>
 													<form
-														th:action="@{/myLife/deleteCommento(id=${commento.id})}"
+														th:action="@{/myLife/delete-commento(id=${commento.id})}"
 														method="post">
 														<button name="button" type="submit" id="bottoneElimina">
 															<img src="/view/MyLife/images/trash.png" width="300%">
@@ -423,7 +423,7 @@
 
 												<td th:if="${commento.autore.id} == ${session.id} and ${UB}">
 													<form
-														th:action="@{/myLife/editCommento(id=${commento.id})}"
+														th:action="@{/myLife/edit-commento(id=${commento.id})}"
 														method="post">
 														<button name="button" type="submit"
 															th:onclick="'showAreaCommento(' + ${commento.id} + ')'"
@@ -446,7 +446,7 @@
 									</div>
 									<br>
 									<div th:if="${UB}">
-										<form th:action="@{/myLife/addCommento(idPost=${post.id})}"
+										<form th:action="@{/myLife/add-commento(idPost=${post.id})}"
 											method="post">
 											<label for="testo"></label>
 											<textarea id="post" name="testo" rows="2" cols="30"
@@ -592,7 +592,7 @@ COLONNA DESTRA
 				<div th:if="${GML}">
 					<br>
 					<div>
-						<a th:href="@{/cinema/new/}"> <img
+						<a th:href="@{/my-life/film-serie/aggiungi/}"> <img
 							src="/view/MyWork/images/moreb.png" width="30px"
 							style="float: right; margin-bottom: 10px;"></a>
 					</div>
@@ -652,7 +652,7 @@ COLONNA DESTRA
 
 
 								<td>
-									<form th:action="@{'/cinema/update/'+${film1.id}}"
+									<form th:action="@{'/my-life/film-serie/update/'+${film1.id}}"
 										th:if="${GML}" method="get">
 										<button type="submit" name="modifica"
 											style="background-color: transparent; border: 0px solid #232323;">
@@ -662,7 +662,7 @@ COLONNA DESTRA
 								</td>
 
 								<td>
-									<form th:action="@{'/cinema/update/'+${film2.id}}"
+									<form th:action="@{'/my-life/film-serie/update/'+${film2.id}}"
 										th:if="${GML}" method="get">
 										<button type="submit" name="modifica"
 											style="background-color: transparent; border: 0px solid #232323;">
@@ -671,7 +671,7 @@ COLONNA DESTRA
 									</form>
 								</td>
 								<td>
-									<form th:action="@{'/cinema/update/'+${film3.id}}"
+									<form th:action="@{'/my-life/film-serie/update/'+${film3.id}}"
 										th:if="${GML}" method="get">
 										<button type="submit" name="modifica"
 											style="background-color: transparent; border: 0px solid #232323;">
@@ -686,7 +686,7 @@ COLONNA DESTRA
 			<br><br>	<hr style="border: 1px solid #c9c9c9"><br>
 				<div>
 					<div th:if="${GML}">
-						<a th:href="@{/libro/new}"> <img
+						<a th:href="@{/my-life/libri/aggiungi}"> <img
 							src="/view/MyWork/images/moreb.png" width="30px"
 							style="float: right; margin-bottom: 10px;"></a>
 					</div>
@@ -710,7 +710,7 @@ COLONNA DESTRA
 									th:text="${libri.autore}"></p>
 
 								<div th:if="${GML}">
-									<form th:action="@{'/libro/update/'+${libri.id}}"
+									<form th:action="@{'/my-life/libri/update/'+${libri.id}}"
 										th:if="${GML}" method="get">
 										<button type="submit" name="modifica"
 											style="background-color: transparent; border: 0px solid #232323; float: right;">
@@ -731,7 +731,7 @@ COLONNA DESTRA
 									style="FONT-size: 10px; font-style: italic; text-align: right; color: #303030;"
 									th:text="${libri1.autore}"></p>
 								<div th:if="${GML}">
-									<form th:action="@{'/libro/update/'+${libri1.id}}"
+									<form th:action="@{'/my-life/libri/update/'+${libri1.id}}"
 										th:if="${GML}" method="get">
 										<button type="submit" name="modifica"
 											style="background-color: transparent; border: 0px solid #232323; float: right;">

@@ -87,7 +87,7 @@ public class MyLifeController extends BaseController {
 		return mav;
 	}
 	
-	@GetMapping(value = "/autorePost")
+	@GetMapping(value = "/autore-post")
 	@ResponseBody
 	public int autorePost(int id, HttpSession session) {
 		Post p = servicePost.findById(id);
@@ -105,7 +105,7 @@ public class MyLifeController extends BaseController {
 		return "redirect:/myLife1/";
 	}
 	
-	@PostMapping(value = "/likePost")
+	@PostMapping(value = "/like-post")
 	public String likePost(int id, HttpSession session) {
 		UtenteDatiPersonali utente = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		Post p = servicePost.findById(id);
@@ -129,7 +129,7 @@ public class MyLifeController extends BaseController {
 		return "redirect:/myLife/";
 	}
 
-	@PostMapping(value = "/editPost")
+	@PostMapping(value = "/edit-post")
 	public String updatePost(int id, HttpSession session, Post post,  @RequestParam(required=false) MultipartFile document) throws Exception {
 		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
 		Post p = servicePost.findById(id);
@@ -162,7 +162,7 @@ public class MyLifeController extends BaseController {
 		throw new Exception("Non hai i permessi per svolgere quest'azione");
 	}
 
-	@PostMapping(value = "/editCommento")
+	@PostMapping(value = "/edit-commento")
 	public String updateCommento(int id, HttpSession session, Commento commento) throws Exception {
 		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
 		Commento c = serviceCommento.findById(id);
@@ -185,7 +185,7 @@ public class MyLifeController extends BaseController {
 		throw new Exception("Non hai i permessi per svolgere quest'azione");
 	}
 
-	@PostMapping(value = "/deletePost")
+	@PostMapping(value = "/delete-post")
 	public String deletePost(/*@ModelAttribute Post post*/ int id, HttpSession session) throws Exception {
 		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
 		//int autoreId = servicePost.findById(id).getAutore().getId();
@@ -205,7 +205,7 @@ public class MyLifeController extends BaseController {
 
 	}
 
-	@PostMapping(value = "/deleteCommento")
+	@PostMapping(value = "/delete-commento")
 	public String deleteCommento(/*@ModelAttribute Post post*/ int id, HttpSession session) throws Exception {
 		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
 		// int autoreId = serviceCommento.findById(id).getAutore().getId();
@@ -228,7 +228,7 @@ public class MyLifeController extends BaseController {
 
 	}
 
-	@PostMapping(value = "/addCommento")
+	@PostMapping(value = "/add-commento")
 	public String inserisciCommento(Commento commento, HttpSession session, int idPost) {
 		int id = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(id);
@@ -243,7 +243,7 @@ public class MyLifeController extends BaseController {
 		return "redirect:/myLife/";
 	}
 
-	@PostMapping(value = "/addPost")
+	@PostMapping(value = "/add-post")
 	public String inserisciPost(Post post, HttpSession session, @RequestParam(required=false) MultipartFile document) throws Exception {
 		//	String mail = session.getAttribute("email").toString();
 		int id = Integer.parseInt(session.getAttribute("id").toString());
@@ -271,7 +271,7 @@ public class MyLifeController extends BaseController {
 
 	} 
 
-	@GetMapping (value= "/profiliUtenti")
+	@GetMapping (value= "/profili-utenti")
 	public ModelAndView comunicazioniHr(HttpSession session) throws InterruptedException, ExecutionException {
 		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		ModelAndView mav = new ModelAndView();
@@ -282,14 +282,14 @@ public class MyLifeController extends BaseController {
 		return mav;
 	}
 	
-	@GetMapping(value ="/cancellaPost")
+	@GetMapping(value ="/cancella-post")
 	public String eliminaPost(HttpSession session, int id) {
 		Post p = servicePost.findById(id);
 		servicePost.remove(p);
 		return "redirect:/profile/mostraEliminati";
 	}
 	
-	@GetMapping(value ="/ripristinaPost")
+	@GetMapping(value ="/ripristina-post")
 	public String ripristinaPost(HttpSession session, int id) {
 		Post p = servicePost.findById(id);
 		p.setVisibile(true);
@@ -298,14 +298,14 @@ public class MyLifeController extends BaseController {
 		return "redirect:/profile/mostraEliminati";
 	}
 	
-	@GetMapping(value ="/cancellaCommento")
+	@GetMapping(value ="/cancella-commento")
 	public String eliminaCommento(HttpSession session, int id) {
 		Commento c = serviceCommento.findById(id);
 		serviceCommento.delete(c);
 		return "redirect:/profile/mostraEliminati";
 	}
 	
-	@GetMapping(value ="/ripristinaCommento")
+	@GetMapping(value ="/ripristina-commento")
 	public String ripristinaCommento(HttpSession session, int id) {
 		Commento c = serviceCommento.findById(id);
 		c.setVisibile(true);

@@ -59,7 +59,7 @@
 				</a>
 			</p>
 
-			<form th:action="@{/cinema/update/{id}(id = ${cinema.id})}" th:object="${cinema}" method="post" enctype="multipart/form-data">
+			<form th:action="@{/my-life/film-serie/update/{id}(id = ${cinema.id})}" th:object="${cinema}" method="post" enctype="multipart/form-data">
 				<div class="form-group col-10">
 					<label for="titolo">Titolo</label>
 					<input class="form-control" type="text" id="titolo" name="titolo" th:field="*{titolo}" >

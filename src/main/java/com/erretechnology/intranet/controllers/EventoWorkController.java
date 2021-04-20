@@ -129,7 +129,7 @@ public class EventoWorkController extends BaseController {
 	}
 	
 	@GetMapping(value ="/ripristina")
-	public String ripristinaEvento(HttpSession session, int id) {
+	public String ripristina(HttpSession session, int id) {
 		EventoWork e = serviceEventoWork.findById(id);
 		e.setVisibile(true);
 		e.setTimestampEliminazione(0);

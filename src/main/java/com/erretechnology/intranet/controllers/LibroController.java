@@ -22,10 +22,10 @@ import com.erretechnology.intranet.models.Libro;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 
 @Controller
-@RequestMapping("libro")
+@RequestMapping("/my-life/libri")
 public class LibroController extends BaseController {
 
-	@GetMapping("/new")
+	@GetMapping("/aggiungi")
 	public String form(Model model) {
 		model.addAttribute("libro", new Libro()); 
 		return "libroForm";
@@ -57,13 +57,6 @@ public class LibroController extends BaseController {
 		saveLog("inserito un libro", utenteLoggato);
 		notificaTutti("ha inserito un nuovo libro consigliato dalla redazione!", utenteLoggato, "MyLife");
 		return "redirect:/myLife1/";
-	}
-
-	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
-	public String updateForm(@PathVariable int id, Model model) {
-		Libro libro = serviceLibro.findById(id);
-		model.addAttribute("libro", libro);
-		return "libroFormUpdate";
 	}
 
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
@@ -109,13 +102,13 @@ public class LibroController extends BaseController {
 		return "redirect:/myLife1/";
 	}
 	
-	@RequestMapping("/cancellaLibro")
+	@RequestMapping("/cancella")
 	public String cancellaLibro(HttpSession session, int id) {
 		serviceLibro.deleteById(id);
 		return "redirect:/profile/mostraEliminati";
 	}
 	
-	@RequestMapping("/ripristinaLibro")
+	@RequestMapping("/ripristina")
 	public String ripristinaLibro(HttpSession session, int id) {
 		Libro l = serviceLibro.findById(id);
 		l.setVisibile(true);
