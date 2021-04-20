@@ -7,7 +7,7 @@
 <body>
 
 <div th:each="utente:${utenti}">
-<a th:href="@{/profile/viewProfile/(id=${utente.id})}" th:text="${utente.nome} + ' ' + ${utente.cognome}"></a>
+<a th:href="@{/profilo/visualizza/(id=${utente.id})}" th:text="${utente.nome} + ' ' + ${utente.cognome}"></a>
 </div>
 
 

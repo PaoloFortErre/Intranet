@@ -72,7 +72,7 @@ table, th, td {
 						<a href="http://polyedro.erretechnology.com/www/" target="blank">POLYEDRO</a>
 					</div>
 					<div style="position: relative; float: right">
-						<a th:href="@{/profile/}"><img
+						<a th:href="@{/profilo/}"><img
 							th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
 							alt="utente" title="utente" class="immagineUtente"
 							id="utente-foto-profilo"
@@ -179,7 +179,7 @@ table, th, td {
 							<th:block>
 								<tr>
 									<td th:each="nuovoUtente: ${nuoviAssunti}"><a
-										th:href="@{/profile/viewProfile/(id=${nuovoUtente.id})}"><img
+										th:href="@{/profilo/visualizza/(id=${nuovoUtente.id})}"><img
 											th:src="'data:image/png;base64,' + ${nuovoUtente.immagine.getImgData(nuovoUtente.immagine.data)}"
 											alt="fotoProfiloUtente" class="img-fluid" width="140px"
 											height="140px" style="border-radius: 50%;"></a></td>
@@ -188,7 +188,7 @@ table, th, td {
 							<th:block>
 								<tr>
 									<td th:each="nuovoUtente: ${nuoviAssunti}"> <br><a
-										th:href="@{/profile/viewProfile/(id=${nuovoUtente.id})}"
+										th:href="@{/profilo/visualizza/(id=${nuovoUtente.id})}"
 										th:text="${nuovoUtente.nome} + ' ' + ${nuovoUtente.cognome}"
 										style="color: #303030; font-size: 15px; font-weight: 700; font-size: 19px;"></a></td>
 
@@ -212,7 +212,7 @@ table, th, td {
 							<th:block>
 								<tr>
 									<td th:each="nuovoUtente: ${nuoviAssunti2}"><a
-										th:href="@{/profile/viewProfile/(id=${nuovoUtente.id})}"><img
+										th:href="@{/profilo/visualizza/(id=${nuovoUtente.id})}"><img
 											th:src="'data:image/png;base64,' + ${nuovoUtente.immagine.getImgData(nuovoUtente.immagine.data)}"
 											alt="fotoProfiloUtente" class="img-fluid" width="140px"
 											height="140px" ></a></td>
@@ -221,7 +221,7 @@ table, th, td {
 							<th:block>
 								<tr>
 									<td th:each="nuovoUtente: ${nuoviAssunti2}"> <br><a
-										th:href="@{/profile/viewProfile/(id=${nuovoUtente.id})}"
+										th:href="@{/profilo/visualizza/(id=${nuovoUtente.id})}"
 										th:text="${nuovoUtente.nome} + ' ' + ${nuovoUtente.cognome}"
 										style="color: #303030; font-size: 15px; font-weight: 700; font-size: 19px;"></a></td>
 
@@ -546,11 +546,11 @@ table, th, td {
 					
 				<div>
 					<div th:each="utente: ${utente}">
-						<a th:href="@{/profile/viewProfile/(id=${utente.id})}"><img
+						<a th:href="@{/profilo/visualizza/(id=${utente.id})}"><img
 							th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}"
 							alt="fotoProfiloUtente" title="Foto profilo dell'utente"
 							width="28%" height="28%" style="margin-top: 10px;"></a> <a
-							th:href="@{/profile/viewProfile/(id=${utente.id})}"
+							th:href="@{/profilo/visualizza/(id=${utente.id})}"
 							th:text="${utente.nome} + ' ' + ${utente.cognome}"
 							style="color: #303030; font-size: 15px;"></a>
 

@@ -171,7 +171,7 @@ public class MyWorkController extends BaseController {
 	public String eliminaSondaggio(HttpSession session, int id) {
 		Sondaggio s = serviceSondaggio.findById(id);
 		serviceSondaggio.delete(s);
-		return "redirect:/profile/mostraEliminati";
+		return "redirect:/profilo/mostra-eliminati";
 	}
 	
 	@GetMapping(value ="/sondaggi/ripristina")
@@ -180,6 +180,6 @@ public class MyWorkController extends BaseController {
 		s.setVisibile(true);
 		s.setTimestampEliminazione(0);
 		serviceSondaggio.save(s);
-		return "redirect:/profile/mostraEliminati";
+		return "redirect:/profilo/mostra-eliminati";
 	}
 }

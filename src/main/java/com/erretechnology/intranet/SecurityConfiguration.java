@@ -43,9 +43,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		.antMatchers("/my-life/eventi/**", "/my-life/film-serie/**", "/my-life/libri/**").access("hasAuthority('GML')")
 		.antMatchers("/my-work/comunicazioni/hr/upload" , "/my-work/comunicazioni/hr" , "/my-work/comunicazioni/hr/delete").access("hasAuthority('GHR')")
 		.antMatchers("/my-work/comunicazioni/moduli/aggiungi" , "/my-work/comunicazioni/moduli/upload", "/my-work/comunicazioni/moduli/delete").access("hasAuthority('GM')")
-		.antMatchers("/profile/gestisciPermesso" , "/profile/registra" , "/profile/cancellaUtente", "/maintain-enable" ,
+		.antMatchers("/profilo/gestisci-permesso" , "/profilo/registra" , "/profilo/cancella-utente", "/maintain-enable" ,
 				"/maintain-disable").access("hasAuthority('AM')")
-		.antMatchers("/myLife/**", "/profile/**", "/homepage", "/my-work/**" , "/homepage/**", "/myLife1/**" , "/aforisma/**",
+		.antMatchers("/myLife/**", "/profilo/**", "/homepage", "/my-work/**" , "/homepage/**", "/myLife1/**" , "/aforisma/**",
 				"/linkedin/**" , "/my-work/**").access("isAuthenticated()")
 		.antMatchers("/", "/login" , "/manutenzione").permitAll()
 		.antMatchers("/maintain-enable", "/maintain-disable").access("isAuthenticated")

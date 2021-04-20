@@ -190,7 +190,7 @@
               <h6 class="card-title text-center" style="color:#303030">Una breve descrizione di me stesso:</h6>
               <p class="card-text" th:text="${utente.descrizione}" style="color:#303030"></p>
               <div th:if="${session.id} == ${utente.utente.id}">
-                <form th:action="@{/profile/modificaDescrizione}" method="post">
+                <form th:action="@{/profilo/modifica-descrizione}" method="post">
                   <div class="form-group">
                     <textarea class="form-control" id="exampleFormControlTextarea1" name="descrizione" placeholder="Modifica la tua descrizione"
                     cols="35" rows="3" maxlength="255" required></textarea>
@@ -216,13 +216,13 @@
               GESTISCI FOTO PROFILO
             </button>
             <div class="dropdown-menu">
-              <form th:action="@{/profile/cambiaFotoProfilo}" method ="post" enctype="multipart/form-data">
+              <form th:action="@{/profilo/modifica-foto}" method ="post" enctype="multipart/form-data">
                 <label class="dropdown-item font-weight-bold" style="cursor: pointer;" for="scegli">SCEGLI LA TUA FOTO PROFILO</label>
                 <input class="d-none" type="file" name="immagine" id="scegli" accept="image/png, image/jpeg"/>
                 <label class="dropdown-item font-weight-bold" style="cursor: pointer;" for="salva">SALVA LA FOTO PROFILO</label>
                 <input class="d-none" type="submit" id="salva"/>
                 <div class="dropdown-divider"></div>
-                <form th:action="@{/profile/eliminaFotoProfilo}" method ="post">
+                <form th:action="@{/profilo/elimina-foto}" method ="post">
                   <label class="dropdown-item font-weight-bold text-danger" style="cursor: pointer;" for="elimina">ELIMINA LA FOTO PROFILO</label>
                   <input class="d-none" type="submit" value="Elimina foto profilo" id="elimina">
                 </form>
@@ -236,7 +236,7 @@
               IMPOSTAZIONI
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <form th:action="@{/profile/setVisualizzazione}" method ="post">
+              <form th:action="@{/profilo/set-visualizzazione}" method ="post">
                 <div class="form-check pr-1 font-weight-bold">
                   VUOI CONDIVIDERE LA TUA DATA DI NASCITA?<br>
                   <input type="radio" style="cursor: pointer;" id="set" name="set" value="Si" th:checked="${utente.visualizzaDataNascita}">
@@ -247,7 +247,7 @@
                 </div>
               </form>
               <div class="dropdown-divider bg-primary"></div>
-              <a class="dropdown-item mt-1" th:href="@{/profile/cambioPassword}" method="post"><b>CAMBIO PASSWORD</b></a>
+              <a class="dropdown-item mt-1" th:href="@{/profilo/cambio-password}" method="post"><b>CAMBIO PASSWORD</b></a>
               <div class="dropdown-divider bg-primary"></div>
               <a class="dropdown-item mt-1" th:href="@{/logout}"><b>LOGOUT</b></a>
             </div>
@@ -284,7 +284,7 @@
                   </tbody>
                 </table>
                 <div class="container text-center">
-                  <form th:action="@{/profile/mostra_log}" method="get">
+                  <form th:action="@{/profilo/mostra-log}" method="get">
                     <button type="submit" class="btn btn-primary mb-1">Vedi tutte</button>
                   </form>
                 </div>
@@ -307,10 +307,10 @@
                 GESTISCI GLI UTENTI
               </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item font-weight-bold" th:href="@{/profile/registra}">AGGIUNGI O RIATTIVA UTENTE</a>
-                <a class="dropdown-item text-danger font-weight-bold mt-2" th:href="@{/profile/cancellaUtente}">ELIMINA UTENTE</a>
+                <a class="dropdown-item font-weight-bold" th:href="@{/profilo/registra}">AGGIUNGI O RIATTIVA UTENTE</a>
+                <a class="dropdown-item text-danger font-weight-bold mt-2" th:href="@{/profilo/cancella-utente}">ELIMINA UTENTE</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item font-weight-bold" th:href="@{/profile/gestisciPermesso}">GESTISCI I PERMESSI DEGLI UTENTI</a>
+                <a class="dropdown-item font-weight-bold" th:href="@{/profilo/gestisci-permessi}">GESTISCI I PERMESSI DEGLI UTENTI</a>
               </div>
             </div>
 

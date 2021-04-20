@@ -93,7 +93,7 @@
           <h2 class="h2 text-center mb-3 mt-3">Attività recenti</h2><h2 th:if="${admin}" class="h2 text-center mb-3 mt-3">degli utenti</h2>
         </span>
 
-        <a class="btn btn-primary mb-2" th:href="@{/profile/}">TORNA INDIETRO</a>
+        <a class="btn btn-primary mb-2" th:href="@{/profilo/}">TORNA INDIETRO</a>
         <div class="container text-center" >
           <div th:if="${admin}">
             <input class="h3" type="text" id="myInput" th:style="'background-image: url(' + @{/view/Profile/Images/search_icon.png} + ');'" onkeyup="myFunction()" placeholder="Filtra per cognome" title="Cerca con nome utente" >

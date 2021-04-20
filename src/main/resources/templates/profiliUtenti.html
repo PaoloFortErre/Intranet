@@ -77,7 +77,7 @@
       					</a>
       					<div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary" th:if="${utenteDati.setNotifiche.size > 0}" aria-labelledby="navbarDropdownMenuLink-5" >
       						<div class="dropdown-item waves-effect waves-light" th:each="i:${#numbers.sequence(utenteDati.setNotifiche.size() - 1, 0, -1)}" th:with="notifica=${utenteDati.setNotifiche[i]}">
-      							<a th:href="@{/profile/eliminaNotifica/{id}(id = ${notifica.id})}"><div>
+      							<a th:href="@{/profilo/elimina-notifica/{id}(id = ${notifica.id})}"><div>
       							<p class="font-weight-bold" th:text="${notifica.utente.nome} + ' ' + ${notifica.utente.cognome}+ ' ' " style="COLOR: BLACK"></p>
       							<p class="mt-n3" th:text="${notifica.descrizione}" style="COLOR: BLACK"></p>
       							<p class="p mt-n2" th:utext="${#dates.format(notifica.timestamp*1000, 'dd/MM/yyyy, HH:mm')}" style="font-size: 10px; color: black"></p>
@@ -88,9 +88,9 @@
       				</li>
 						
 						<li class="nav-item mr-3 mt-3"><a class="nav-link"
-					th:href="@{/profile/}" target="blank" id="scrittaProfilo"
+					th:href="@{/profilo/}" target="blank" id="scrittaProfilo"
 					style="display: none;">PROFILO</a></li>
-				<li class="nav-item"><a th:href="@{/profile/}"><img
+				<li class="nav-item"><a th:href="@{/profilo/}"><img
 						th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
 						alt="utente" title="utente" class="immagineUtente img-fluid"
 						id="utente-foto-profilo" style="border-radius: 50%;"></a></li>
@@ -127,12 +127,12 @@
 						style="margin: 0 auto; position: absolute; left: 37%; top: 88px; border: 1px solid #BEC3CC">
 					<br> <br> <br><br>
 					<div style="margin: 0 auto; text-align: center">
-						<p ><a th:href="@{/profile/viewProfile/(id=${utente.id})}"
+						<p ><a th:href="@{/profilo/visualizza/(id=${utente.id})}"
 							th:text="${utente.nome} + ' ' + ${utente.cognome}"
 							style="color: #303030; font-weight: 600; font-size: 18px;"></a></p> <br>
 						<p th:text="${utente.settore.getNomeSettore}"
 							style="color: #303030; opacity: 0.7;"></p>
-						<a th:href="@{/profile/viewProfile/(id=${utente.id})}"
+						<a th:href="@{/profilo/visualizza/(id=${utente.id})}"
 							id="submitPost"
 							style="margin: 0 auto; padding: 7px; padding-left: 10px; padding-right: 10px;">
 							Profilo </a>

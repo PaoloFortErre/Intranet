@@ -113,7 +113,7 @@ public class CinemaController extends BaseController {
 	@RequestMapping("/cancella")
 	public String cancella(int id, HttpSession session) {
 		serviceCinema.deleteById(id);
-		return "redirect:/profile/mostraEliminati";
+		return "redirect:/profilo/mostra-eliminati";
 		}
 	
 	@RequestMapping("/ripristina")
@@ -122,7 +122,7 @@ public class CinemaController extends BaseController {
 		cinema.setVisibile(true);
 		cinema.setTimestampEliminazione(0);
 		serviceCinema.save(cinema);
-		return "redirect:/profile/mostraEliminati";
+		return "redirect:/profilo/mostra-eliminati";
 		}
 	
 }

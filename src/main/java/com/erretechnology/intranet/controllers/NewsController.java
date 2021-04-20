@@ -109,7 +109,7 @@ public class NewsController extends BaseController {
 	@GetMapping(value ="/cancella")
 	public String eliminaNews(HttpSession session, int id) {
 		serviceNews.deleteById(id);
-		return "redirect:/profile/mostraEliminati";
+		return "redirect:/profilo/mostra-eliminati";
 	}
 	
 	@GetMapping(value ="/ripristina")
@@ -118,7 +118,7 @@ public class NewsController extends BaseController {
 		n.setVisibile(true);
 		n.setTimestampEliminazione(0);
 		serviceNews.save(n);;
-		return "redirect:/profile/mostraEliminati";
+		return "redirect:/profilo/mostra-eliminati";
 	}
 	
 }

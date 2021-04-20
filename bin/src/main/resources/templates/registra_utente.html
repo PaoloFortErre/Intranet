@@ -35,14 +35,14 @@
     <!-- ROW CON INPUT -->
     <div class="row mt-5 mb-5">
       <div class="col">
-        <a class="btn btn-primary" th:href="@{/profile/}">TORNA INDIETRO</a>
+        <a class="btn btn-primary" th:href="@{/profilo/}">TORNA INDIETRO</a>
       </div>
 
       <!--AGGIUNGI UTENTE-->
       <div class="col-8 text-center mt-5">
         <div class="container border border-white mt-5" style="background-color: #303030;">
           <h1 class="h1 mb-3 mt-1">AGGIUNGI UTENTE</h1>
-          <form  th:action="@{/profile/eseguiRegistrazione}" method="post" enctype="utf8">
+          <form  th:action="@{/profilo/esegui-registrazione}" method="post" enctype="utf8">
             <div class="form-row ml-2">
               <div class="form-group col-auto ml-5">
                 <label >Nome</label>
@@ -100,7 +100,7 @@
     		<p class="p text-warning">[[${riattiva}]]</p>
 	  	  </div>
 
-          <form class="" method="post" th:action="@{/profile/riattiva}">
+          <form class="" method="post" th:action="@{/profilo/riattiva}">
             <div class="form-row ml-5">
               <div class="form-group col-10 ml-4">
                 <select class="form-control" name="id_riattivato" id="id_riattivato">

@@ -120,7 +120,7 @@ public class ClienteController extends BaseController{
 	@RequestMapping("/cancella")
 	public String cancellaCliente(int id, HttpSession session) {
 		serviceCliente.deleteById(id);
-		return "redirect:/profile/mostraEliminati";
+		return "redirect:/profilo/mostra-eliminati";
 		}
 	
 	@RequestMapping("/ripristina")
@@ -129,6 +129,6 @@ public class ClienteController extends BaseController{
 		cliente.setVisibile(true);
 		cliente.setTimestampEliminazione(0);
 		serviceCliente.save(cliente);
-		return "redirect:/profile/mostraEliminati";
+		return "redirect:/profilo/mostra-eliminati";
 		}
 }

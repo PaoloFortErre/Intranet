@@ -286,7 +286,7 @@ public class MyLifeController extends BaseController {
 	public String eliminaPost(HttpSession session, int id) {
 		Post p = servicePost.findById(id);
 		servicePost.remove(p);
-		return "redirect:/profile/mostraEliminati";
+		return "redirect:/profilo/mostra-eliminati";
 	}
 	
 	@GetMapping(value ="/ripristina-post")
@@ -295,14 +295,14 @@ public class MyLifeController extends BaseController {
 		p.setVisibile(true);
 		p.setTimestampEliminazione(0);
 		servicePost.save(p);
-		return "redirect:/profile/mostraEliminati";
+		return "redirect:/profilo/mostra-eliminati";
 	}
 	
 	@GetMapping(value ="/cancella-commento")
 	public String eliminaCommento(HttpSession session, int id) {
 		Commento c = serviceCommento.findById(id);
 		serviceCommento.delete(c);
-		return "redirect:/profile/mostraEliminati";
+		return "redirect:/profilo/mostra-eliminati";
 	}
 	
 	@GetMapping(value ="/ripristina-commento")
@@ -311,7 +311,7 @@ public class MyLifeController extends BaseController {
 		c.setVisibile(true);
 		c.setTimestampEliminazione(0);
 		serviceCommento.save(c);;
-		return "redirect:/profile/mostraEliminati";
+		return "redirect:/profilo/mostra-eliminati";
 	}
 
 }

@@ -170,7 +170,7 @@ public class UploadController extends BaseController{
 	public String eliminaComunicazioneHR(HttpSession session, int id) {
 		ComunicazioneHR hr = serviceComunicazioni.findById(id);
 		serviceComunicazioni.remove(hr);
-		return "redirect:/profile/mostraEliminati";
+		return "redirect:/profilo/mostra-eliminati";
 	}
 	
 	@GetMapping(value ="/hr/ripristina")
@@ -179,14 +179,14 @@ public class UploadController extends BaseController{
 		hr.setVisibile(true);
 		hr.setTimestampEliminazione(0);
 		serviceComunicazioni.save(hr);;
-		return "redirect:/profile/mostraEliminati";
+		return "redirect:/profilo/mostra-eliminati";
 	}
 	
 	@GetMapping(value ="/moduli/cancella")
 	public String eliminaModulo(HttpSession session, int id) {
 		FilePdf file = serviceFilePdf.findById(id);
 		serviceFilePdf.remove(file);
-		return "redirect:/profile/mostraEliminati";
+		return "redirect:/profilo/mostra-eliminati";
 	}
 	
 	@GetMapping(value ="/moduli/ripristina")
@@ -195,6 +195,6 @@ public class UploadController extends BaseController{
 		file.setVisibile(true);
 		file.setTimestampEliminazione(0);
 		serviceFilePdf.insert(file);;
-		return "redirect:/profile/mostraEliminati";
+		return "redirect:/profilo/mostra-eliminati";
 	}
 }

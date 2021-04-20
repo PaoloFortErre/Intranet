@@ -292,7 +292,7 @@
                   </a>
                   <div id="dropdown" class="notifiche  dropdown-menu scrollable-menu dropdown-menu-right dropdown-secondary" th:if="${utente.setNotifiche.size() > 0}" aria-labelledby="navbarDropdownMenuLink-5" >
                     <div class="dropdown-item waves-effect waves-light" th:each="i:${#numbers.sequence(utente.setNotifiche.size() - 1, 0, -1)}" th:with="notifica=${utente.setNotifiche[i]}">
-                      <a th:href="@{/profile/eliminaNotifica/{id}(id = ${notifica.id})}"><div>
+                      <a th:href="@{/profilo/elimina-notifica/{id}(id = ${notifica.id})}"><div>
                         <p class="font-weight-bold" th:text="${notifica.utente.nome} + ' ' + ${notifica.utente.cognome}+ ' ' " style="COLOR: BLACK"></p>
                         <p class="mt-n3" th:text="${notifica.descrizione}" style="COLOR: BLACK"></p>
                         <p class="p mt-n2" th:utext="${#dates.format(notifica.timestamp*1000, 'dd/MM/yyyy, HH:mm')}" style="font-size: 10px; color: black"></p>
@@ -303,7 +303,7 @@
                 </li>
 
                 <li class="nav-item ml-3 mr-n5">
-                  <a th:href="@{/profile/}" th:if="${session.id} != ${utente.id}">
+                  <a th:href="@{/profilo/}" th:if="${session.id} != ${utente.id}">
                     <img th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
                     alt="utente" title="utente" class="img-fluid picture2 rounded-circle">
                   </a>
@@ -365,7 +365,7 @@
                       <label class="dropdown-item font-weight-bold" style="cursor: pointer;" for="scegli" >Modifica la foto profilo</label>
                       <input class="d-none" type="file" name="immagine" id="scegli" accept="image/png, image/jpeg" required/>
                       <div class="dropdown-divider"></div>
-                    <form th:action="@{/profile/eliminaFotoProfilo}" method ="post">
+                    <form th:action="@{/profilo/elimina-foto}" method ="post">
                       <label class="dropdown-item font-weight-bold text-danger" style="cursor: pointer;" for="elimina">Elimina la foto profilo</label>
                       <input class="d-none" type="submit" value="Elimina foto profilo" id="elimina">
                     </form>
@@ -379,7 +379,7 @@
                   Impostazioni profilo
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <form th:action="@{/profile/setVisualizzazione}" method ="post">
+                  <form th:action="@{/profilo/set-visualizzazione}" method ="post">
                     <div class="form-check pr-1 font-weight-bold">
                       Vuoi condividere la tua data di nascita?<br>
                       <input type="radio" style="cursor: pointer;" id="set" name="set" value="Si" th:checked="${utente.visualizzaDataNascita}">
@@ -390,14 +390,14 @@
                     </div>
                   </form>
                   <div class="dropdown-divider bg-primary"></div>
-                  <a class="dropdown-item mt-1" th:href="@{/profile/cambioPassword}" method="post"><b>Cambio password</b></a>
+                  <a class="dropdown-item mt-1" th:href="@{/profilo/cambio-password}" method="post"><b>Cambio password</b></a>
                   <div class="dropdown-divider bg-primary"></div>
                   <a class="dropdown-item mt-1" th:href="@{/logout}"><b>Logout</b></a>
                 </div>
               </div>
               <!-- GESTIONE PER ADMIN -->
               <div class="ml-4" th:if="${admin}">
-                <a class="btn btn-primary mt-3" th:href="@{/profile/mostraEliminati}" method="get">Gestione per admin</a>
+                <a class="btn btn-primary mt-3" th:href="@{/profilo/mostra-eliminati}" method="get">Gestione per admin</a>
               </div>
             </div>
 
@@ -470,10 +470,10 @@
                       Gestisci gli utenti
                     </button>
                     <div class="dropdown-menu ">
-                      <a class="dropdown-item font-weight-bold" th:href="@{/profile/registra}">Aggiungi o riattiva utente</a>
-                      <a class="dropdown-item text-danger mt-2 font-weight-bold" th:href="@{/profile/cancellaUtente}">Elimina utente</a>
+                      <a class="dropdown-item font-weight-bold" th:href="@{/profilo/registra}">Aggiungi o riattiva utente</a>
+                      <a class="dropdown-item text-danger mt-2 font-weight-bold" th:href="@{/profilo/cancella-utente}">Elimina utente</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item font-weight-bold" th:href="@{/profile/gestisciPermesso}">Gestisci i permessi degli utenti</a>
+                      <a class="dropdown-item font-weight-bold" th:href="@{/profilo/gestisci-permessi}">Gestisci i permessi degli utenti</a>
                     </div>
                   </div>
                 </div>
@@ -495,7 +495,7 @@
                   <h3 class="h3 card-title text-center" style="color:#303030; font-weight: 600;">Una breve descrizione di me stesso</h3>
                   <h5  class="h5 ml-2 mr-2" th:text="${utente.descrizione}" style="color:#303030"></h5>
                   <div th:if="${session.id} == ${utente.utente.id}">
-                    <form th:action="@{/profile/modificaDescrizione}" onsubmit="return validateForm()" method="post">
+                    <form th:action="@{/profilo/modifica-descrizione}" onsubmit="return validateForm()" method="post">
                     	<div id="message-error" class="row justify-content-center mt-2">
 			  	</div>
                       <div class="form-group">
@@ -511,7 +511,7 @@
                 <div class="card-body" th:unless="${utente.descrizione != null}">
                   <h3 class="h3 card-title text-center" style="color:#303030; font-weight: 600;">Non è presente nessuna descrizione</h3>
                   <div th:if="${session.id} == ${utente.utente.id}">
-                    <form th:action="@{/profile/modificaDescrizione}" onsubmit="return validateForm()" method="post">
+                    <form th:action="@{/profilo/modifica-descrizione}" onsubmit="return validateForm()" method="post">
                     <div id="message-error" class="row justify-content-center mt-2">
 			  	</div>
                       <div class="form-group">
@@ -623,7 +623,7 @@
                       </tbody>
                     </table>
                     <div class="container text-center">
-                      <form th:action="@{/profile/mostra_log}" method="get">
+                      <form th:action="@{/profilo/mostra-log}" method="get">
                         <button type="submit" class="btn btn-primary mb-1">Vedi tutte</button>
                       </form>
                     </div>
@@ -679,7 +679,7 @@
 	    	nome = nome.substr(backslash_index + 1);
 			 $.ajax({
 	              type : 'POST',
-	              url : window.location.origin + "/intranet-0.0.1-SNAPSHOT"+ "/profile/cambiaFotoProfilo",
+	              url : window.location.origin + "/intranet-0.0.1-SNAPSHOT"+ "/profilo/modifica-foto",
 	              data: {dati: dati, nome: nome},
 	              success : function(data) {
 	            	  window.location = window.location;

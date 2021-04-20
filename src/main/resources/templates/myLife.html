@@ -80,7 +80,7 @@
 							th:each="i:${#numbers.sequence(utenteDati.setNotifiche.size() - 1, 0, -1)}"
 							th:with="notifica=${utenteDati.setNotifiche[i]}">
 							<a
-								th:href="@{/profile/eliminaNotifica/{id}(id = ${notifica.id})}"><div>
+								th:href="@{/profilo/elimina-notifica/{id}(id = ${notifica.id})}"><div>
 									<p class="font-weight-bold"
 										th:text="${notifica.utente.nome} + ' ' + ${notifica.utente.cognome}+ ' ' "
 										style="COLOR: BLACK"></p>
@@ -93,7 +93,7 @@
 							<hr>
 						</div>
 					</div></li>
-					<li class="nav-item"><a th:href="@{/profile/}"><img
+					<li class="nav-item"><a th:href="@{/profilo/}"><img
 						th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
 						alt="utente" title="utente" class="immagineUtente img-fluid"
 						id="utente-foto-profilo" style="border-radius: 50%;"></a></li>
@@ -224,7 +224,7 @@
 						style="margin: 0 auto; position: absolute; left: 32%; top: 57px;">
 					<br> <br> <br> <br>
 					<div style="margin: 0 auto; text-align: center">
-						<a th:href="@{/profile/viewProfile/(id=${utenteDati.id})}"
+						<a th:href="@{/profilo/visualizza/(id=${utenteDati.id})}"
 							th:text="${utenteDati.nome} + ' ' + ${utenteDati.cognome}"
 							style="color: #303030; font-weight: 600; font-size: 18px;"></a> <br>
 						<p th:text="${utenteDati.settore.getNomeSettore}"
@@ -232,7 +232,7 @@
 					</div>
 					<br>
 					<div id="prof">
-						<a th:href="@{/profile/}" id="gestisciProfilo"> Gestisci il
+						<a th:href="@{/profilo/}" id="gestisciProfilo"> Gestisci il
 							tuo profilo</a>
 					</div>
 					<div id="prof2">
@@ -359,7 +359,7 @@
 
 
 									<div class="col-sm-9 col-md-9 col-lg-9">
-										<a th:href="@{/profile/viewProfile/(id=${post.autore.id})}"
+										<a th:href="@{/profilo/visualizza/(id=${post.autore.id})}"
 											th:text="${post.autore.nome} + ' ' + ${post.autore.cognome}"
 											style="display: inline-block; color: #303030; font-weight: 600; font-size: 20px;"></a>
 
@@ -514,11 +514,11 @@
 
 												<!-- Modal body -->
 												<div class="modal-body" th:each="utente : ${post.setUtenti}"
-													th:if="${post.setUtenti.size > 0}" style="background-color: #B9CAF0;" ><a th:href="@{/profile/viewProfile/(id=${utente.id})}" >
+													th:if="${post.setUtenti.size > 0}" style="background-color: #B9CAF0;" ><a th:href="@{/profilo/visualizza/(id=${utente.id})}" >
 													<img th:src="'data:image/jpeg;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}"
 													title="utente" class="immagineUtente img-fluid" style="border-radius: 50%;"></a>
-													<a th:href="@{/profile/viewProfile/(id=${utente.id})}" >
-													<span th:text="${utente.nome} + ' ' + ${utente.cognome}" th:href="@{/profile/viewProfile/(id=${utente.id})}" style="color: #303030" /></a>
+													<a th:href="@{/profilo/visualizza/(id=${utente.id})}" >
+													<span th:text="${utente.nome} + ' ' + ${utente.cognome}" th:href="@{/profilo/visualizza/(id=${utente.id})}" style="color: #303030" /></a>
 												</div>
 
 												<!-- Modal footer -->
@@ -541,7 +541,7 @@
 											<td><img
 												th:src="'data:image/jpeg;base64,' + ${commento.autore.immagine.getImgData(commento.autore.immagine.data)}"
 												width="50px" style="border-radius: 50%"> <a
-												th:href="@{/profile/viewProfile/(id=${commento.autore.id})}"
+												th:href="@{/profilo/visualizza/(id=${commento.autore.id})}"
 												class="nomeCommento"
 												th:text="${commento.autore.nome} + ' ' + ${commento.autore.cognome}"
 												style="color: #303030; font-size: 14px;"></a>
