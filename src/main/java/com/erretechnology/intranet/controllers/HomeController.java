@@ -176,14 +176,6 @@ public class HomeController extends BaseController{
     	mav.addObject("errorePassword", "Le due password non corrispondono");
     	return mav;
 	}
-	
-	//Permission manager
-	@GetMapping(value = "/permission_manager")
-	public ModelAndView permissionManager() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("permissionManager");
-		return mav;
-	}
 
 	// Homepage
 	@GetMapping(value = "/homepage")
@@ -267,17 +259,4 @@ public class HomeController extends BaseController{
 	public Boolean checkManutenzione() {
 		return repositoryManutenzione.findById(1031).get().getManutenzione();
 	}
-	/*
-	@GetMapping("/maintain-disable")
-    public String disableMaintanince(HttpSession session) throws Exception {
-		if(!serviceUtente.findById(Integer.parseInt(session.getAttribute("id").toString())).getRuolo().getNome().equals("ADMIN")) {
-			throw new Exception("non hai i permessi per svolgere quest'azione");
-		}
-		System.err.println("manutenzione disattivata");
-		Manutenzione m = repositoryManutenzione.findById(1031).get();
-		m.setManutenzione(false);
-		repositoryManutenzione.save(m);
-		return "redirect:/";
-    }
-*/
 }

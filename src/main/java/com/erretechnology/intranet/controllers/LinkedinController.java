@@ -17,7 +17,7 @@ import com.erretechnology.intranet.models.PostLinkedin;
 @RequestMapping("linkedin")
 public class LinkedinController extends BaseController {
 	
-	@GetMapping("/new")
+	@GetMapping("/aggiungi")
 	public String form(Model model) {
 		model.addAttribute("linkedin", new PostLinkedin()); 
 		return "linkedinForm";
