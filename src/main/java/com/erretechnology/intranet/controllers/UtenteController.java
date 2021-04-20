@@ -107,15 +107,17 @@ public class UtenteController extends BaseController {
 
 		switch(n.getDestinazione()) {
 		case "MyWork":
-			return "redirect:/myWork/";
+			return "redirect:/my-work/";
 		case "MyLife":
 			return "redirect:/myLife1/";
 		case "HR":
-			return "redirect:/comunicazioniHr/";
+			return "redirect:/my-work/comunicazioni/";
 		case "Moduli":
-			return "redirect:/moduli/";
+			return "redirect:/my-work/comunicazioni/moduli/";
+		default:
+			return "redirect:/profile/";
 		}
-		return "redirect:/profile/";
+		
 	}
 
 	@PostMapping(value = "/modificaDescrizione")

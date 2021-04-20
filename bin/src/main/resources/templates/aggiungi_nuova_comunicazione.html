@@ -45,10 +45,10 @@
       <table>
         <tr th:each="comunicazione: ${comunicazioni}">
           <td>
-            <img src="/view/MyWork/images/pdf-icon.png" style="float: left;" width="30px"><a th:href="@{/file/downloadFileHR(id=${comunicazione.id})}" th:text="${comunicazione.nome}" th:download="${comunicazione.nome}" style="color: #F3F3F3; "></a>
+            <img src="/view/MyWork/images/pdf-icon.png" style="float: left;" width="30px"><a th:href="@{/my-work/comunicazioni/hr/download(id=${comunicazione.id})}" th:text="${comunicazione.nome}" th:download="${comunicazione.nome}" style="color: #F3F3F3; "></a>
           </td>
           <td>
-            <form th:action="@{/file/deleteFileHR(id=${comunicazione.id})}" method="post">
+            <form th:action="@{/my-work/comunicazioni/hr/delete(id=${comunicazione.id})}" method="post">
               <button type="submit" id="bottoneModifica" style="float: right;">Elimina</button>
             </form>
           </td>
@@ -75,7 +75,7 @@
             </a>
           </p>
 
-          <form th:action="@{/file/uploadHR}" th:object="${comunicazioneHR}"
+          <form th:action="@{/my-work/comunicazioni/hr/upload}" th:object="${comunicazioneHR}"
           method="post" enctype="multipart/form-data" class="signin-form">
           <p th:text="${message}" th:if="${message ne null}"
           class="alert alert-primary"></p>

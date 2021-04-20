@@ -63,7 +63,7 @@ public class AforismaController extends BaseController {
 		
 		serviceAforisma.save(aforisma);
 		saveLog("aggiunto una aforisma", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-        return "redirect:/myWork/";
+        return "redirect:/my-work/";
 	}
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
@@ -88,7 +88,7 @@ public class AforismaController extends BaseController {
 		if(aforisma.isLife()) {
 	        return "redirect:/myLife1/";
 		} else {
-	        return "redirect:/myWork/";
+	        return "redirect:/my-work/";
 		}
 	}
 	

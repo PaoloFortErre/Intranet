@@ -63,7 +63,7 @@ public class PodcastController extends BaseController {
 		saveLog("inserito un nuovo podcast",utente);
 		notificaTutti("ha inserito un nuovo podcast di Rosario! Buon ascolto!", utente, "MyWork");
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/myWork/");
+		mav.setViewName("redirect:/my-work/");
 		return mav;
 	}
 
@@ -74,7 +74,7 @@ public class PodcastController extends BaseController {
 		p.setVisibile(false);
 		servicePodcast.save(p);
 		saveLog("eliminato il podcast con "  + p.getNome(), p.getUtente());
-		return "redirect:/myWork/";
+		return "redirect:/my-work/";
 	}
 	
 	@GetMapping(value ="/cancella")

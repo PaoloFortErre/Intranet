@@ -294,9 +294,9 @@
                                               <td th:utext="${#dates.format(comunicazioniHr.timestampEliminazione*1000, 'dd/MM/yyyy, HH:mm')}"></td>
                                               <td>
                                                 <div class="img-fluid text-center">
-                                                  <a th:href="@{/file/ripristinaComunicazioneHR/(id=${comunicazioniHr.id})}"><img title="ripristina elemento"
+                                                  <a th:href="@{/my-work/comunicazioni/hr/ripristina/(id=${comunicazioniHr.id})}"><img title="ripristina elemento"
                                                     width="27px" th:src="@{/view/Admin/images/restore_icon.png}" alt="restore"></a>
-                                                    <a th:href="@{/file/cancellaComunicazioneHR/(id=${comunicazioniHr.id})}"><img title="elimina elemento" class=""
+                                                    <a th:href="@{/my-work/comunicazioni/hr/cancella/(id=${comunicazioniHr.id})}"><img title="elimina elemento" class=""
                                                       width="27px" th:src="@{/view/Admin/images/delete_icon.png}" alt="delete"></a>
                                                     </div>
                                                   </td>
@@ -339,9 +339,9 @@
                                                     <td th:utext="${#dates.format(moduli.timestampEliminazione*1000, 'dd/MM/yyyy, HH:mm')}"></td>
                                                     <td>
                                                       <div class="img-fluid text-center">
-                                                        <a th:href="@{/file/ripristinaModulo/(id=${moduli.id})}"><img title="ripristina elemento"
+                                                        <a th:href="@{/my-work/comunicazioni/moduli/ripristina/(id=${moduli.id})}"><img title="ripristina elemento"
                                                           width="27px" th:src="@{/view/Admin/images/restore_icon.png}" alt="restore"></a>
-                                                          <a th:href="@{/file/cancellaModulo/(id=${moduli.id})}"><img title="elimina elemento" class=""
+                                                          <a th:href="@{/my-work/comunicazioni/moduli/cancella/(id=${moduli.id})}"><img title="elimina elemento" class=""
                                                             width="27px" th:src="@{/view/Admin/images/delete_icon.png}" alt="delete"></a>
                                                           </div>
                                                         </td>
@@ -417,9 +417,9 @@
                                                                 <td th:utext="${#dates.format(sondaggio.timestampEliminazione*1000, 'dd/MM/yyyy, HH:mm')}"></td>
                                                                 <td>
                                                                   <div class="img-fluid text-center">
-                                                                    <a th:href="@{/myWork/ripristinaSondaggio/(id=${sondaggio.id})}"><img title="ripristina elemento"
+                                                                    <a th:href="@{/my-work/sondaggi/ripristina/(id=${sondaggio.id})}"><img title="ripristina elemento"
                                                                       width="27px" th:src="@{/view/Admin/images/restore_icon.png}" alt="restore"></a>
-                                                                      <a th:href="@{/myWork/cancellaSondaggio/(id=${sondaggio.id})}"><img title="elimina elemento" class=""
+                                                                      <a th:href="@{/my-work/sondaggi/cancella/(id=${sondaggio.id})}"><img title="elimina elemento" class=""
                                                                         width="27px" th:src="@{/view/Admin/images/delete_icon.png}" alt="delete"></a>
                                                                       </div>
                                                                     </td>

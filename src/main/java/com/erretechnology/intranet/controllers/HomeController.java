@@ -7,7 +7,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.erretechnology.intranet.models.ElementiMyLife;
-import com.erretechnology.intranet.models.ElementiMyWork;
 import com.erretechnology.intranet.models.Manutenzione;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
@@ -220,21 +218,6 @@ public class HomeController extends BaseController{
 		return "loginPage";
 	}
 	
-	@GetMapping (value= "/comunicazioniHr")
-	public ModelAndView comunicazioniHr(HttpSession session) throws InterruptedException, ExecutionException {
-		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
-		ModelAndView mav = new ModelAndView();
-		List<ElementiMyWork> elementi = serviceElementiMyWork.findAll();
-		List<ElementiMyWork> sondaggi = elementi.stream().filter(x -> x.getTipo().equals("sondaggio")).limit(7).collect(Collectors.toList());
-		
-		mav.addObject("sondaggi", sondaggi);
-		
-		mav.addObject("utenteDati", u);
-		mav.addObject("comunicazioni", serviceComunicazioni.findFirst10ByVisibileTrueOrderByIdDesc());
-		mav.setViewName("comunicazioniHr");
-		return mav;
-	}
-	
 	@GetMapping (value= "/myLife1")
 	public ModelAndView MyLife1(HttpSession session) throws InterruptedException, ExecutionException {
 		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
@@ -260,17 +243,7 @@ public class HomeController extends BaseController{
 		return mav;
 	}
 	
-	@GetMapping (value= "/moduli")
-	public ModelAndView moduli(HttpSession session) {
-		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
-		ModelAndView mav = new ModelAndView();
-		
 	
-		mav.addObject("user", u);
-		mav.addObject("filePdf", serviceFilePdf.getAllVisible());
-		mav.setViewName("moduli");
-		return mav;
-	}
 	
 	@GetMapping(value = "/manutenzione")
 	public ModelAndView manutenzione() {

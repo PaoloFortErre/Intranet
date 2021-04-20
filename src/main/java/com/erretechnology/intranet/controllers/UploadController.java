@@ -26,24 +26,14 @@ import com.erretechnology.intranet.models.FilePdf;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 
 @Controller
-@RequestMapping(value = "file")
+@RequestMapping(value = "my-work/comunicazioni")
 public class UploadController extends BaseController{
 
-	@GetMapping(value = "/")
+	@GetMapping(value = "/moduli/aggiungi")
 	public ModelAndView uploadMAV() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("upload");
 		mav.addObject("filePdf", new FilePdf());
-		return mav;
-	}
-
-	@GetMapping(value = "/moduli")
-	public ModelAndView moduliMAV(HttpSession session) {
-		ModelAndView mav = new ModelAndView(); 
-		mav.setViewName("aggiungi_nuova_comunicazione");
-		mav.addObject("comunicazioneHR", new ComunicazioneHR());
-		mav.addObject("comunicazioni", serviceFilePdf.findAll().stream().filter(x->x.isVisibile()).sorted(Comparator.comparingLong(FilePdf::getTimestamp).reversed()).collect(Collectors.toList()));
-		mav.addObject("user", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return mav;
 	}
 
@@ -56,19 +46,24 @@ public class UploadController extends BaseController{
 		mav.addObject("user", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return mav;
 	}
+	@GetMapping (value= "/moduli")
+	public ModelAndView moduli(HttpSession session) {
+		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		ModelAndView mav = new ModelAndView();
+		
+	
+		mav.addObject("user", u);
+		mav.addObject("filePdf", serviceFilePdf.getAllVisible());
+		mav.setViewName("moduli");
+		return mav;
+	}
 
 
 
-	@PostMapping(value = "/upload")
+	@PostMapping(value = "/moduli/upload")
 	public String uploadPdf(@RequestParam("file") MultipartFile file, RedirectAttributes attributes, 
 			@ModelAttribute("filePdf") FilePdf filePdf, HttpSession session) throws Exception{
 		UtenteDatiPersonali u =  serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
-		// check if file is empty
-		if (file.isEmpty()) {
-			attributes.addFlashAttribute("message", "Please select a file to upload.");
-			return "redirect:/file/";
-		}
-
 		// normalize the file path
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
@@ -79,26 +74,18 @@ public class UploadController extends BaseController{
 		filePdf.setVisibile(true);
 		filePdf.setAutore(u);
 		serviceFilePdf.insert(filePdf);
-		saveLog("Inserito un nuovo modulo", u );
+		saveLog("inserito un nuovo modulo", u );
 		notificaSelezionati("ha inserito un nuovo modulo!", filePdf.getSettore().getNomeSettore(), u, "Moduli");
 
-
-		// return success response
-		attributes.addFlashAttribute("message", "You successfully uploaded " + fileName + '!');
-
-		return "redirect:/moduli/";
+		return "redirect:/my-work/comunicazioni/moduli/";
 	}
 
 
 
-	@PostMapping(value = "/uploadHR")
+	@PostMapping(value = "/hr/upload")
 	public String uploadPdfHR(@RequestParam("file") MultipartFile file, RedirectAttributes attributes, 
 			@ModelAttribute("comunicazioneHR")  ComunicazioneHR filePdfHR, HttpSession session) throws Exception{
-		// check if file is empty
-		if (file.isEmpty()) {
-			attributes.addFlashAttribute("message", "Please select a file to upload.");
-			return "redirect:/file/hr";
-		}
+
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 		// save the file on the local file system
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
@@ -111,14 +98,10 @@ public class UploadController extends BaseController{
 		saveLog("inserito una nuova Comunicazione HR", u);
 		notificaTutti("ha inserito una nuova ComunicazioneHR!", u, "HR");
 
-
-		// return success response
-		attributes.addFlashAttribute("message", "Hai caricato con successo la comunicazione!");
-
-		return "redirect:/file/hr";
+		return "redirect:/my-work/comunicazioni/hr";
 	}	
 
-	@PostMapping(value = "/deleteFilePdf")
+	@PostMapping(value = "/moduli/delete")
 	public String deleteMessaggio(int id, HttpSession session) throws Exception {
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		if( autore.getUtente().getSetPermessi().contains(servicePermesso.findById("GM"))) {
@@ -128,13 +111,13 @@ public class UploadController extends BaseController{
 
 			serviceFilePdf.insert(pdf);
 			saveLog("cancellato un modulo", autore);
-			return "redirect:/moduli/";
+			return "redirect:/my-work/comunicazioni/moduli/";
 		} 
 		throw new Exception("Non hai i permessi per svolgere quest'azione");
 
 	}
 
-	@PostMapping(value = "/deleteFileHR")
+	@PostMapping(value = "/hr/delete")
 	public String deleteComunicazioneHR(int id, HttpSession session) throws Exception {
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		if( autore.getUtente().getSetPermessi().contains(servicePermesso.findById("GHR"))) {
@@ -144,20 +127,20 @@ public class UploadController extends BaseController{
 			serviceComunicazioni.save(pdf);
 			
 			saveLog("cancellato una comunicazione hr", autore);
-			return "redirect:/file/hr";
+			return "redirect:/my-work/comunicazioni/hr";
 		} 
 		throw new Exception("Non hai i permessi per svolgere quest'azione");
 	}
 
 
-	@GetMapping(value = "/downloadFile")
+	@GetMapping(value = "/moduli/download")
 	public ResponseEntity<Resource> downloadModulo(int id, HttpSession session) {
 		FilePdf pdf = serviceFilePdf.findById(id);
 		return downloadFile(pdf.getData(), pdf.getNome(), session);
 
 	}
 
-	@GetMapping(value = "/downloadFileHR")
+	@GetMapping(value = "/hr/download")
 	public ResponseEntity<Resource> downloadHR(int id, HttpSession session) {
 		ComunicazioneHR pdf = serviceComunicazioni.findById(id);
 		return downloadFile(pdf.getData(), pdf.getNome(), session);
@@ -175,7 +158,7 @@ public class UploadController extends BaseController{
 				.body(new ByteArrayResource(data));
 	}
 
-	@GetMapping(value = "/comunicazioniList")
+	@GetMapping(value = "/hr/elenco")
 	public ModelAndView listComunicazioni() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("comunicazioniList");
@@ -183,14 +166,14 @@ public class UploadController extends BaseController{
 		return mav;
 	}
 	
-	@GetMapping(value ="/cancellaComunicazioneHR")
+	@GetMapping(value ="/hr/cancella")
 	public String eliminaComunicazioneHR(HttpSession session, int id) {
 		ComunicazioneHR hr = serviceComunicazioni.findById(id);
 		serviceComunicazioni.remove(hr);
 		return "redirect:/profile/mostraEliminati";
 	}
 	
-	@GetMapping(value ="/ripristinaComunicazioneHR")
+	@GetMapping(value ="/hr/ripristina")
 	public String ripristinaComunicazioneHR(HttpSession session, int id) {
 		ComunicazioneHR hr = serviceComunicazioni.findById(id);
 		hr.setVisibile(true);
@@ -199,14 +182,14 @@ public class UploadController extends BaseController{
 		return "redirect:/profile/mostraEliminati";
 	}
 	
-	@GetMapping(value ="/cancellaModulo")
+	@GetMapping(value ="/moduli/cancella")
 	public String eliminaModulo(HttpSession session, int id) {
 		FilePdf file = serviceFilePdf.findById(id);
 		serviceFilePdf.remove(file);
 		return "redirect:/profile/mostraEliminati";
 	}
 	
-	@GetMapping(value ="/ripristinaModulo")
+	@GetMapping(value ="/moduli/ripristina")
 	public String ripristinaModulo(HttpSession session, int id) {
 		FilePdf file = serviceFilePdf.findById(id);
 		file.setVisibile(true);

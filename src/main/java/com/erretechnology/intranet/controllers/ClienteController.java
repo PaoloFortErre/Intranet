@@ -65,7 +65,7 @@ public class ClienteController extends BaseController{
 
 		serviceCliente.save(cliente);
 		saveLog("inserito un nuovo cliente", utenteLoggato);
-		return "redirect:/myWork/";
+		return "redirect:/my-work/";
 	}
 
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
@@ -104,7 +104,7 @@ public class ClienteController extends BaseController{
 		serviceCliente.save(cliente);
 		model.addAttribute("cliente", cliente);
 		saveLog("modificato le informazioni di un cliente",utenteLoggato);
-		return "redirect:/myWork/";
+		return "redirect:/my-work/";
 	}
 
 	@RequestMapping("/delete/{id}")
@@ -114,7 +114,7 @@ public class ClienteController extends BaseController{
 		cliente.setTimestampEliminazione(Instant.now().getEpochSecond());
 		serviceCliente.save(cliente);
 		saveLog("cancellato un nuovo cliente", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		return "redirect:/myWork/";
+		return "redirect:/my-work/";
 	}
 	
 	@RequestMapping("/cancella")

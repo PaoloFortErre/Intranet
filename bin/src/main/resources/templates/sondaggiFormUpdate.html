@@ -51,9 +51,9 @@ body{
 <h4 style="text-align: left; margin-bottom:5px;"> Inserisci un nuovo sondaggio:
 </h4 ><hr style="background-color: #F3F3F3; ">
 <img src="/view/MyWork/images/frecciasinistra.png" style="display: inline-block;" width="5%">
-				<p style="text-align: right; margin-bottom: 50px;display: inline-block;"><a th:href="@{/myWork/}" style="color: #F3F3F3;">Torna indietro </a></p>
+				<p style="text-align: right; margin-bottom: 50px;display: inline-block;"><a th:href="@{/my-work/}" style="color: #F3F3F3;">Torna indietro </a></p>
 
-	<form th:object="${sondaggio}" th:action="@{/myWork/sondaggi}"
+	<form th:object="${sondaggio}" th:action="@{/my-work/sondaggi}"
 		method="post" enctype="multipart/form-data"  class="signin-form">
 
 		<div class="form-group">

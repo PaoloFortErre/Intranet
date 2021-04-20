@@ -26,7 +26,7 @@ import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.models.VideoDelGiorno;
 
 @Controller
-@RequestMapping(value = "myWork")
+@RequestMapping(value = "my-work")
 public class MyWorkController extends BaseController {
 
 	@GetMapping(value = "/")
@@ -105,7 +105,7 @@ public class MyWorkController extends BaseController {
 		serviceVideo.save(video);
 		saveLog("aggiornato il video su myWork", autore);
 		notificaTutti("ha inserito un nuovo video su MyWork!", autore, "MyWork");
-		return "redirect:/myWork/";
+		return "redirect:/my-work/";
 	}
 	
 	@PostMapping(value = "/sondaggi")
@@ -117,11 +117,11 @@ public class MyWorkController extends BaseController {
 		serviceSondaggio.save(sondaggio);
 		saveLog("creato un nuovo sondaggio", autore);
 		notificaTutti("ha inserito un nuovo sondaggio!", autore, "MyWork");
-		return "redirect:/comunicazioniHr/";
+		return "redirect:/my-work/comunicazioni/";
 	}
 
 	
-	@PostMapping(value = "/modificaSondaggio/{id}")
+	@PostMapping(value = "/sondaggi/modifica/{id}")
 	public String modificaSondaggio(@PathVariable int id,@ModelAttribute("sondaggio") Sondaggio sondaggio, HttpSession session) {
 		//controllare permesso GS
 		Sondaggio sondaggioOld = serviceSondaggio.findById(id);
@@ -129,9 +129,25 @@ public class MyWorkController extends BaseController {
 		sondaggioOld.setLink(sondaggio.getLink());
 		serviceSondaggio.save(sondaggioOld);
 		saveLog("modificato un sondaggio", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		return "redirect:/comunicazioniHr/";
+		return "redirect:/my-work/comunicazioni/";
 	}
-	@PostMapping(value = "/deleteSondaggio/{id}")
+	
+	@GetMapping (value= "/comunicazioni")
+	public ModelAndView comunicazioniHr(HttpSession session) throws InterruptedException, ExecutionException {
+		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		ModelAndView mav = new ModelAndView();
+		List<ElementiMyWork> elementi = serviceElementiMyWork.findAll();
+		List<ElementiMyWork> sondaggi = elementi.stream().filter(x -> x.getTipo().equals("sondaggio")).limit(7).collect(Collectors.toList());
+		
+		mav.addObject("sondaggi", sondaggi);
+		
+		mav.addObject("utenteDati", u);
+		mav.addObject("comunicazioni", serviceComunicazioni.findFirst10ByVisibileTrueOrderByIdDesc());
+		mav.setViewName("comunicazioniHr");
+		return mav;
+	}
+	
+	@PostMapping(value = "/sondaggi/delete/{id}")
 	public String deleteMessaggio(@PathVariable int id, HttpSession session) {
 		//controllare permesso GS
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
@@ -140,10 +156,10 @@ public class MyWorkController extends BaseController {
 			s.setTimestampEliminazione(Instant.now().getEpochSecond());
 			serviceSondaggio.save(s);
 			saveLog("cancellato un sondaggio", autore);
-			return "redirect:/comunicazioniHr/";
+			return "redirect:/my-work/comunicazioni/";
 	}
 
-	@GetMapping(value = "/addSondaggio")
+	@GetMapping(value = "/sondaggi/aggiungi")
 	public ModelAndView addSondaggio() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("addSondaggio");
@@ -151,14 +167,14 @@ public class MyWorkController extends BaseController {
 		return mav;		
 	}
 	
-	@GetMapping(value ="/cancellaSondaggio")
+	@GetMapping(value ="/sondaggi/cancella")
 	public String eliminaSondaggio(HttpSession session, int id) {
 		Sondaggio s = serviceSondaggio.findById(id);
 		serviceSondaggio.delete(s);
 		return "redirect:/profile/mostraEliminati";
 	}
 	
-	@GetMapping(value ="/ripristinaSondaggio")
+	@GetMapping(value ="/sondaggi/ripristina")
 	public String ripristinaNews(HttpSession session, int id) {
 		Sondaggio s = serviceSondaggio.findById(id);
 		s.setVisibile(true);

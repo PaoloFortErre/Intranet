@@ -89,17 +89,17 @@
 				</li>
 				<li class="nav-item mr-3 mt-3">
 					<a class="nav-link"
-					th:href="@{/myWork/}">MY WORK
+					th:href="@{/my-work/}">MY WORK
 				</a>
 			</li>
 			<li class="nav-item mr-3 mt-3 active">
 				<a class="nav-link"
-				th:href="@{/comunicazioniHr/}">COMUNICAZIONI HR
+				th:href="@{/my-work/comunicazioni/}">COMUNICAZIONI HR
 			</a>
 		</li>
 		<li class="nav-item mr-3 mt-3">
 			<a class="nav-link"
-			th:href="@{/moduli/}">MODULI
+			th:href="@{/my-work/comunicazioni/moduli/}">MODULI
 		</a>
 	</li>
 	<li class="nav-item mr-3 mt-3"><a class="nav-link"
@@ -161,7 +161,7 @@ style="font-size: 10px; color: black"></p>
 				<h2 class="h2">COMUNICAZIONI</h2>
 			</div>
 			<div class="container-fluid text-center mb-3" th:if="${GHR}">
-				<a class="aggiungi" th:href="@{/file/hr}"
+				<a class="aggiungi" th:href="@{/my-work/comunicazioni/hr}"
 				style="text-decoration: none; color: #F3F3F3;"> <img
 				class="mr-5" th:src="@{/view/MyWork/images/more.png}" width="30px">Aggiungi
 				o elimina comunicazioni
@@ -173,7 +173,7 @@ style="font-size: 10px; color: black"></p>
 			th:each="comunicazione: ${comunicazioni}">
 			<img th:src="@{/view/MyWork/images/pdf-icon.png}" style="float: right;"
 			width="30px"> <a
-			th:href="@{/file/downloadFileHR(id=${comunicazione.id})}"
+			th:href="@{/my-work/comunicazioni/hr/download(id=${comunicazione.id})}"
 			th:download="${comunicazione.nome}" style="text-align: right">
 			<img th:src="@{/view/MyWork/images/download.png.png}"
 			style="float: right;" width="35px">
@@ -187,7 +187,7 @@ style="font-size: 10px; color: black"></p>
 </div>
 <div class="container-fluid  text-center">
 	<a class="btn mt-2" style="background-color: blue; color: #f3f3f3"
-	th:href="@{/file/comunicazioniList}"
+	th:href="@{/my-work/comunicazioni/hr/elenco}"
 	type="button" name="button">Visualizza tutto</a>
 </div>
 
@@ -203,7 +203,7 @@ style="font-size: 10px; color: black"></p>
 	</div>
 
 	<div class="container text-center mb-3" th:if="${GS}">
-		<a class="aggiungi" th:href="@{/myWork/addSondaggio}" style="text-decoration: none; color: #F3F3F3;">
+		<a class="aggiungi" th:href="@{/my-work/sondaggi/aggiungi}" style="text-decoration: none; color: #F3F3F3;">
 			<img class="mr-5" th:src="@{/view/MyWork/images/more.png}" width="30px">Aggiungi sondaggio
 		</a>
 	</div>
@@ -237,7 +237,7 @@ style="font-size: 10px; color: black"></p>
 						<!-- Modal body -->
 						<div class="modal-body">
 						<h1 th:text="${sondaggi.id}"></h1>
-							<form th:object="${sondaggio}" th:action="@{'/myWork/modificaSondaggio/' +${sondaggi.id}}" onsubmit="return validateForm()"
+							<form th:object="${sondaggio}" th:action="@{'/myWork/sondaggi/modifica/' +${sondaggi.id}}" onsubmit="return validateForm()"
 								  method="post" enctype="multipart/form-data"  class="signin-form">
 								<div id="message-error" class="row justify-content-center mt-2">
 			  					</div>
@@ -268,7 +268,7 @@ style="font-size: 10px; color: black"></p>
 				</div>
 			</div>
 			<form
-					th:action="@{'/myWork/deleteSondaggio/' +${sondaggi.id}}"
+					th:action="@{'/myWork/sondaggi/delete/' +${sondaggi.id}}"
 					method="post" style="display: inline-block">
 
 				<button type="submit" name="elimina"

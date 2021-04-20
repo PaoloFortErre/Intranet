@@ -35,7 +35,7 @@
   		<h2 class="h2 text-center mb-3">Tutte le comunicazioni</h2>
 		<div class="container text-center">
 		  <p style="text-align: right; margin-bottom: 30px;display: inline-block;">
-            <a class="mr-2" th:href="@{/comunicazioniHr/}" style="color: #F3F3F3;">
+            <a class="mr-2" th:href="@{/my-work/comunicazioni/}" style="color: #F3F3F3;">
               <img th:src="@{/view/MyWork/images/frecciasinistra.png}" style="display: inline-block;" width="20%">Torna indietro
             </a>
           </p>
@@ -57,7 +57,7 @@
               <td th:text="${#dates.format(comunicazione.timestamp*1000, 'dd/MM/yyyy')}"></td>
               <td>
                 <img th:src="@{/view/MyWork/images/pdf-icon.png}" width="4%">
-                <a th:href="@{/file/downloadFileHR(id=${comunicazione.id})}"
+                <a th:href="@{/my-work/comunicazioni/hr/download(id=${comunicazione.id})}"
                 th:text="${comunicazione.nome}" th:download="${comunicazione.nome}" style="color: #303030"></a>
               </td>
               <td th:text="${comunicazione.descrizione}"></td>

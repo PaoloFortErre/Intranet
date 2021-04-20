@@ -69,7 +69,7 @@ public class EventoWorkController extends BaseController {
 		serviceEventoWork.save(evento);
 		saveLog("inserito un nuovo evento", utenteLoggato);
 		notificaTutti("ha inserito un nuovo evento su MyWork!", utenteLoggato, "MyWork");
-		return "redirect:/myWork/";
+		return "redirect:/my-work/";
 	}
 
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
@@ -107,7 +107,7 @@ public class EventoWorkController extends BaseController {
 		model.addAttribute("evento", evento);
 		saveLog("modificato un evento", utenteLoggato);
 
-		return "redirect:/myWork/";
+		return "redirect:/my-work/";
 	}
 
 	@RequestMapping("/delete/{id}")
@@ -118,7 +118,7 @@ public class EventoWorkController extends BaseController {
 		serviceEventoWork.save(evento);
 		saveLog("eliminato un evento", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 
-		return "redirect:/myWork/";
+		return "redirect:/my-work/";
 	}
 	
 	

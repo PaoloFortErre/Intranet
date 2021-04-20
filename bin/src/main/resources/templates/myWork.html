@@ -62,10 +62,10 @@ table, th, td {
 						<a th:href="@{/myLife/}">MY LIFE</a>
 					</div>
 					<div class="content" style="display: inline-block">
-						<a th:href="@{/comunicazioniHr/}">COMUNICAZIONI HR</a>
+						<a th:href="@{/my-work/comunicazioni/}">COMUNICAZIONI HR</a>
 					</div>
 					<div class="content" style="display: inline-block">
-						<a th:href="@{/moduli/}">MODULI</a>
+						<a th:href="@{/my-work/comunicazioni/moduli/}">MODULI</a>
 					</div>
 					<div class="content" style="display: inline-block">
 						<a href="http://polyedro.erretechnology.com/www/" target="blank">POLYEDRO</a>
@@ -380,7 +380,7 @@ table, th, td {
 					<div class="modal-header2">
 						<div th:if="${GMW}">
 
-							<a th:href="@{/myWork/addSondaggio/}"> <img
+							<a th:href="@{/my-work/sondaggi/aggiungi/}"> <img
 								src="/view/MyWork/images/more.png" width=7% style="float: right">
 							</a>
 						</div>
@@ -413,7 +413,7 @@ table, th, td {
 										th:text="${sondaggio.nomeSondaggio}"
 										style="color: #f3f3f3; text-decoration: none; font-size: 17px;"></a>
 										<form
-											th:action="@{'/myWork/modificaSondaggio/'+${sondaggio.id}}"
+											th:action="@{'/myWork/sondaggi/modifica/'+${sondaggio.id}}"
 											th:if="${GMW}" method="get">
 											<br>
 											<button type="submit" name="modifica"
@@ -451,7 +451,7 @@ table, th, td {
 										style="color: #f3f3f3; text-decoration: none; font-size: 17px;"></a>
 
 										<form
-											th:action="@{'/myWork/modificaSondaggio/'+${sondaggio1.id}}"
+											th:action="@{'/myWork/sondaggi/modifica/'+${sondaggio1.id}}"
 											th:if="${GMW}" method="get">
 											<br>
 											<button type="submit" name="modifica"
@@ -489,7 +489,7 @@ table, th, td {
 							<tr>
 								<td style="text-align: center;">
 									<h4 th:text="${comunicazione.nome}" style="color: black;"></h4>
-									<a th:href="@{/file/downloadFileHR(id=${comunicazione.id})}"
+									<a th:href="@{/my-work/comunicazioni/hr/download(id=${comunicazione.id})}"
 									th:download="${comunicazione.nome}" style="text-align: right">
 										<img src="/view/MyWork/images/download.png" width="30px">
 								</a>
@@ -498,7 +498,7 @@ table, th, td {
 						</table>
 					</div>
 					<div style="margin-left: 150px;">
-						<a th:href="@{/comunicazioniHr}"
+						<a th:href="@{/my-work/comunicazioni}"
 							style="text-decoration: none; color: black; font-size: 13px; text-align: right;">
 							<br>Vedi tutte <img
 							src="/view/MyWork/images/freccianera.png" width="30px"

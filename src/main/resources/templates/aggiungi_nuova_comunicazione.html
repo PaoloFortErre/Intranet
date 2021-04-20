@@ -42,7 +42,7 @@
         <h2 class="h2 text-center mb-3">Tutte le comunicazioni</h2>
         <div class="container text-center">
           <p style="text-align: right; margin-bottom: 30px;display: inline-block;">
-            <a class="mr-2" th:href="@{/comunicazioniHr/}" style="color: #F3F3F3;">
+            <a class="mr-2" th:href="@{/my-work/comunicazioni/}" style="color: #F3F3F3;">
               <img th:src="@{/view/MyWork/images/frecciasinistra.png}" style="display: inline-block;" width="20%">Torna indietro
             </a>
           </p>
@@ -66,11 +66,11 @@
                 <td th:text="${comunicazione.descrizione}" style="word-wrap: break-word;"></td>
                 <td>
                   <img th:src="@{/view/MyWork/images/pdf-icon.png}" width="7%">
-                  <a th:href="@{/file/downloadFileHR(id=${comunicazione.id})}"
+                  <a th:href="@{/my-work/comunicazioni/hr/download(id=${comunicazione.id})}"
                   th:text="${comunicazione.nome}" th:download="${comunicazione.nome}" style="color: #303030"></a>
                 </td>
                 <td>
-                  <form th:action="@{/file/deleteFileHR(id=${comunicazione.id})}" method="post">
+                  <form th:action="@{/my-work/comunicazioni/hr/delete(id=${comunicazione.id})}" method="post">
                     <button class="btn btn-danger" type="submit">Elimina</button>
                   </form>
                 </td>
@@ -82,7 +82,6 @@
           var table = tables[tables.length - 1];
           var rows = table.rows;
           for(var i = 0, td; i < rows.length; i++){
-            console.log("ciao");
             td = document.createElement('td');
             td.appendChild(document.createTextNode(i + 1));
             rows[i].insertBefore(td, rows[i].firstChild);
@@ -102,7 +101,7 @@
 
             <p th:text="${message}" th:if="${message ne null}"
             class="alert alert-info"></p>
-            <form th:action="@{/file/uploadHR}" th:object="${comunicazioneHR}" onsubmit="return validateForm()"
+            <form th:action="@{/my-work/comunicazioni/hr/upload}" th:object="${comunicazioneHR}" onsubmit="return validateForm()"
             method="post" enctype="multipart/form-data" class="signin-form">
             <div id="message-error" class="row justify-content-center mt-2">
 			  	</div>

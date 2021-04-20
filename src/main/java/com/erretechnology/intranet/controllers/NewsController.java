@@ -61,7 +61,7 @@ public class NewsController extends BaseController {
 		serviceNews.save(news);
 		saveLog("aggiunto una news", utenteLoggato);
 		notificaTutti("ha inserito una news su MyWork!", utenteLoggato, "MyWork");
-		return "redirect:/myWork/";
+		return "redirect:/my-work/";
 	}
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	public String update(@PathVariable int id, String titolo, String contenuto,
@@ -93,7 +93,7 @@ public class NewsController extends BaseController {
 		serviceNews.save(news);
 		model.addAttribute("news", news);
 		saveLog("modificato una news", utenteLoggato);
-		return "redirect:/myWork/";
+		return "redirect:/my-work/";
 	}
 	
 	@RequestMapping("/delete/{id}")
@@ -103,7 +103,7 @@ public class NewsController extends BaseController {
 		news.setTimestampEliminazione(Instant.now().getEpochSecond());
 		serviceNews.save(news);
 		saveLog("eliminato una news", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		return "redirect:/myWork/";
+		return "redirect:/my-work/";
 	}
 	
 	@GetMapping(value ="/cancella")

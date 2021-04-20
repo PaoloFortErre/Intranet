@@ -40,7 +40,7 @@
 				</div>
 
 				<div class="content" style="display: inline-block; color: #ECF260;">
-					<a th:href="@{/comunicazioniHr/}">COMUNICAZIONI HR</a>
+					<a th:href="@{/my-work/comunicazioni/}">COMUNICAZIONI HR</a>
 				</div>
 				<div class="content" style="display: inline-block">
 					<a style="color: #ECF260; text-decoration: none">MODULI</a>
@@ -65,7 +65,7 @@
 	<div class="container" th:with="GM = ${#authorization.expression('hasAuthority(''GM'')')}">
 		<div th:if="${GM}">
 		<br><br><br>
-			<a th:href="@{/file/}" style="color: #F3F3F3; text-decoration: none;" > <img src="/view/MyWork/images/more.png" width="30px" style="float: left; margin-bottom: 10px;">&nbsp;&nbsp;Aggiungi nuovo modulo</a>
+			<a th:href="@{/my-work/comunicazioni/}" style="color: #F3F3F3; text-decoration: none;" > <img src="/view/MyWork/images/more.png" width="30px" style="float: left; margin-bottom: 10px;">&nbsp;&nbsp;Aggiungi nuovo modulo</a>
 			<br>
 			<br>
 		</div>
@@ -85,12 +85,12 @@
 						<h4 style="display: inline-block; padding-left: 8px;"><strong>Modulo:</strong></h4><h4 style="padding: 8px; display: inline-block;" th:text="${pdf.nome}"></h4>
 						<img src="/view/MyWork/images/pdf-icon.png"
 							style="float: right; margin: 8px;" width="30px">
-							<form th:action="@{/file/deleteFilePdf(id=${pdf.id})}" th:if="${admin}" method="post">
+							<form th:action="@{/my-work/comunicazioni/moduli/delete(id=${pdf.id})}" th:if="${admin}" method="post">
 						<button type="submit"  id="bottoneModulo"> <img src="/view/MyWork/images/trash.png" width="50%"></button>
 					</form>
 					</div>
 					<div id="modulo-body">
-						<a th:href="@{/file/downloadFile(id=${pdf.id})}"
+						<a th:href="@{/my-work/comunicazioni/moduli/download(id=${pdf.id})}"
 							 th:download="${pdf.nomeFile}"
 							style="text-align: right; padding: 8px;"> <img
 							src="/view/MyWork/images/download.png.png" width="30px"

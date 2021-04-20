@@ -45,7 +45,7 @@
 							<a   style="color:#ECF260; text-decoration: none;">COMUNICAZIONI HR</a>
 						</div>
 						<div class="content" style="display: inline-block">
-							<a th:href="@{/moduli/}">MODULI</a>
+							<a th:href="@{/my-work/comunicazioni/moduli/}">MODULI</a>
 						</div>
 						<div class="content" style="display: inline-block">
 							<a href="http://polyedro.erretechnology.com/www/" target="blank">POLYEDRO</a>
@@ -68,7 +68,7 @@
 		<div class="row" style="margin-top: 50px">
 		<div class="col-xs-10 col-sm-10 col-md-6 col-lg-6" th:with="GHR = ${#authorization.expression('hasAuthority(''GHR'')')}">
 		<div th:if="${GHR}">
-			<a th:href="@{/file/hr}" style="text-decoration: none; color: #F3F3F3;"> <img src="/view/MyWork/images/more.png" width="30px" style="float: left; margin-bottom: 10px;">&nbsp;&nbsp;Aggiungi nuova comunicazione</a>
+			<a th:href="@{/my-work/comunicazioni/hr}" style="text-decoration: none; color: #F3F3F3;"> <img src="/view/MyWork/images/more.png" width="30px" style="float: left; margin-bottom: 10px;">&nbsp;&nbsp;Aggiungi nuova comunicazione</a>
 			<br>
 			<br>
 		</div>
@@ -78,7 +78,7 @@
 		 <img src="/view/MyWork/images/pdf-icon.png" style="float: right;" width="30px">
 		 <p th:text="${#dates.format(comunicazione.timestamp*1000, 'dd/MM/yyyy')}"> </p>
 		<h3 th:text="${comunicazione.nome}"> </h3>
-		<a th:href="@{/file/downloadFileHR(id=${comunicazione.id})}"  th:download="${comunicazione.nome}" style="text-align: right">
+		<a th:href="@{/my-work/comunicazioni/hr/download(id=${comunicazione.id})}"  th:download="${comunicazione.nome}" style="text-align: right">
 				 <img src="/view/MyWork/images/download.png.png" width="30px"></a>
 
 		</div>
