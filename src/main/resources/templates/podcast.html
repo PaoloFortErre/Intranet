@@ -53,7 +53,7 @@
 					<div th:if="${errore != null}" class="row justify-content-center mt-2">
 			          <p class="p text-danger">[[${errore}]]</p>
 			        </div>
-					<form th:action="@{/podcast/uploadPodcast}" th:object="${podcast}" method="post" enctype="multipart/form-data" class="signin-form">
+					<form th:action="@{/my-work/podcast/upload}" th:object="${podcast}" method="post" enctype="multipart/form-data" class="signin-form">
 						<div class="form-group col-5">
 							<label for="date1">Data pubblicazione</label><br>
 							<input class="form-control" id="date1" type="date" th:field="${date.date}" required placeholder="Inserisci la data in formato gg/mm/aaaa" style="color: black;">

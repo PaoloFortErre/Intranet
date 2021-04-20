@@ -374,9 +374,9 @@
                                                           <td th:utext="${#dates.format(podcast.timestampEliminazione*1000, 'dd/MM/yyyy, HH:mm')}"></td>
                                                           <td>
                                                             <div class="img-fluid text-center">
-                                                              <a th:href="@{/podcast/ripristinaPodcast/(id=${podcast.id})}"><img title="ripristina elemento"
+                                                              <a th:href="@{/my-work/podcast/ripristina/(id=${podcast.id})}"><img title="ripristina elemento"
                                                                 width="27px" th:src="@{/view/Admin/images/restore_icon.png}" alt="restore"></a>
-                                                                <a th:href="@{/podcast/cancellaPodcast/(id=${podcast.id})}"><img title="elimina elemento" class=""
+                                                                <a th:href="@{/my-work/podcast/cancella/(id=${podcast.id})}"><img title="elimina elemento" class=""
                                                                   width="27px" th:src="@{/view/Admin/images/delete_icon.png}" alt="delete"></a>
                                                                 </div>
                                                               </td>

@@ -1,6 +1,5 @@
 package com.erretechnology.intranet.controllers;
 
-import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.Instant;
 
@@ -23,7 +22,7 @@ import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.models.Utility;
 
 @Controller
-@RequestMapping("podcast")
+@RequestMapping("/my-work/podcast")
 public class PodcastController extends BaseController {
 
 	@GetMapping(value = "/")
@@ -38,7 +37,7 @@ public class PodcastController extends BaseController {
 		return mav;
 	}
 
-	@PostMapping(value = "/uploadPodcast")
+	@PostMapping(value = "/upload")
 	public ModelAndView uploadPodcast(Utility data, @RequestParam("file") MultipartFile file,
 			@ModelAttribute("podcast") Podcast podcast, HttpSession session, Model model) throws Exception{
 		if (file.isEmpty()) {
@@ -68,7 +67,7 @@ public class PodcastController extends BaseController {
 		return mav;
 	}
 
-	@GetMapping(value = "/deletePodcast/{id}")
+	@GetMapping(value = "/delete/{id}")
 	public String deletePodcast(@PathVariable int id) {
 		Podcast p = servicePodcast.getById(id);
 		p.setTimestampEliminazione(Instant.now().getEpochSecond());
@@ -77,45 +76,15 @@ public class PodcastController extends BaseController {
 		saveLog("eliminato il podcast con "  + p.getNome(), p.getUtente());
 		return "redirect:/myWork/";
 	}
-
-	@GetMapping(value = "/podcastFormUpdate/{id}")
-	public ModelAndView updatePodcast(@PathVariable int id) {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("podcastFormUpdate");
-		mav.addObject("podcast", servicePodcast.getById(id));
-		mav.addObject("date", new Utility());
-		return mav;
-	}
-
-	@GetMapping(value = "/updatePodcast/{id}")
-	public String updatePodcast(@ModelAttribute("date") Utility data, @RequestParam(name = "file" , required=false) MultipartFile file,
-			@ModelAttribute("podcast") Podcast podcast, @PathVariable int id, HttpSession session) {
-		Podcast oldPodcast = servicePodcast.getById(id);
-		try {
-			oldPodcast.setTimestamp(Instant.now().getEpochSecond());
-			if(file != null)
-				oldPodcast.setPodcast(file.getBytes());
-			if(podcast.getNome() != null)
-				oldPodcast.setNome(podcast.getNome());
-			if(data.getDate() != null)
-				oldPodcast.setDataPodcast(Timestamp.valueOf(data.getDate().atStartOfDay()).getTime() / 1000);
-			servicePodcast.save(oldPodcast);
-			saveLog("modificato un podcast",serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return "redirect:/myWork/";
-	}
 	
-	@GetMapping(value ="/cancellaPodcast")
+	@GetMapping(value ="/cancella")
 	public String eliminaPodcast(HttpSession session, int id) {
 		Podcast p = servicePodcast.getById(id);
 		servicePodcast.remove(p);
 		return "redirect:/profile/mostraEliminati";
 	}
 	
-	@GetMapping(value ="/ripristinaPodcast")
+	@GetMapping(value ="/ripristina")
 	public String ripristinaModulo(HttpSession session, int id) {
 		Podcast p = servicePodcast.getById(id);
 		p.setVisibile(true);

@@ -203,7 +203,7 @@ table, th, td {
 				style="margin-top: 20px;">
 				<div id="quadrato-podcast">
 					<div th:if="${GMW}">
-						<a th:href="@{/podcast/}"> <img
+						<a th:href="@{/my-work/podcast/}"> <img
 							src="/view/MyWork/images/more.png" width="30px"
 							style="float: right; margin-bottom: 10px; margin-left: 1px"></a>
 					</div>
@@ -227,7 +227,7 @@ table, th, td {
 								type="audio/ogg">
 						</audio> <br>
 						<form
-							th:action="@{'/podcast/podcastFormUpdate/'+${primoPodcast.id}}"
+							th:action="@{'/my-work/podcast/podcastFormUpdate/'+${primoPodcast.id}}"
 							th:if="${GMW}" method="get">
 							<button type="submit" name="modifica"
 								style="background-color: transparent; border: 0px solid #232323;">
@@ -258,7 +258,7 @@ table, th, td {
 									type="audio/ogg">
 							</audio><br><br>
 							<form
-								th:action="@{'/podcast/podcastFormUpdate/'+${altriPodcast.id}}"
+								th:action="@{'/my-work/podcast/podcastFormUpdate/'+${altriPodcast.id}}"
 								th:if="${GMW}" method="get">
 								<button type="submit" name="modifica"
 									style="background-color: transparent; border: 0px solid #232323;">

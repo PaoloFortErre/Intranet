@@ -55,7 +55,7 @@
 			</a>
 			</p>
 
-			<form th:action="@{/podcast/updatePodcast/{id}(id = ${podcast.id})}" th:object="${podcast}" method="get" enctype="multipart/form-data">
+			<form th:action="@{/my-work/podcast/updatePodcast/{id}(id = ${podcast.id})}" th:object="${podcast}" method="get" enctype="multipart/form-data">
 				<div class="form-group col-12">
 					<label for="nome">Nome:</label>
 				  <input class="form-control" type="text" name="nome" th:field="${podcast.nome}">

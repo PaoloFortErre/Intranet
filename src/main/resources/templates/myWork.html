@@ -1059,7 +1059,7 @@ ROW SCHIZZO
 									width="12%">
 							</button>
 							<br>
-							<a th:href="@{/podcast/}" th:if="${GMW}"
+							<a th:href="@{/my-work/podcast/}" th:if="${GMW}"
 									style="background-color: transparent; text-align: center; border: 0px solid #232323; display: inline-block; color: white; font-size: 12px; padding: 5px; width: 100px;">
 											<img th:src="@{/view/MyWork/images/more.png}" width="30%"> Aggiungi podcast </a>
 							</td>
@@ -1093,7 +1093,7 @@ ROW SCHIZZO
 										th:src="'data:audio/mp3;base64,' + ${podcast.getAudioData(podcast.podcast)}"
 										type="audio/ogg">
 								</audio>
-								<form th:action="@{'/podcast/deletePodcast/'+${podcast.id}}"
+								<form th:action="@{'/my-work/podcast/delete/'+${podcast.id}}"
 									th:if="${GMW}" method="get">
 									<button type="submit" name="modifica"
 										style="color: black; background-color: white; font-size: 12px; padding: 8px; text-decoration: none; width: 128px; border: 0px">
