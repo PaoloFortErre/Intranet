@@ -63,7 +63,7 @@ public class CinemaController extends BaseController {
 		serviceCinema.save(cinema);
 		saveLog("inserito un cinema", utenteLoggato);
 		notificaTutti("ha inserito un nuovo film consigliato dalla redazione!", utenteLoggato, "MyLife");
-		return "redirect:/myLife1/";
+		return "redirect:/my-life1/";
 	}
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
@@ -97,7 +97,7 @@ public class CinemaController extends BaseController {
 		serviceCinema.save(cinema);
 		model.addAttribute("cinema", cinema);
 		saveLog("modificato le informazioni di un cinema", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		return "redirect:/myLife1/";
+		return "redirect:/my-life1/";
 	}
 
 	@RequestMapping("/delete/{id}")
@@ -107,7 +107,7 @@ public class CinemaController extends BaseController {
 		cinema.setTimestampEliminazione(Instant.now().getEpochSecond());
 		serviceCinema.save(cinema);
 		saveLog("cancellato un cinema", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		return "redirect:/myLife1/";
+		return "redirect:/my-life1/";
 	}
 	
 	@RequestMapping("/cancella")

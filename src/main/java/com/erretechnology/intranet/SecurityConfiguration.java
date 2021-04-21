@@ -45,7 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		.antMatchers("/my-work/comunicazioni/moduli/aggiungi" , "/my-work/comunicazioni/moduli/upload", "/my-work/comunicazioni/moduli/delete").access("hasAuthority('GM')")
 		.antMatchers("/profilo/gestisci-permesso" , "/profilo/registra" , "/profilo/cancella-utente", "/maintain-enable" ,
 				"/maintain-disable").access("hasAuthority('AM')")
-		.antMatchers("/myLife/**", "/profilo/**", "/homepage", "/my-work/**" , "/homepage/**", "/myLife1/**" , "/aforisma/**",
+		.antMatchers("/my-life/**", "/profilo/**", "/homepage", "/my-work/**" , "/homepage/**", "/my-life1/**" , "/aforisma/**",
 				"/linkedin/**" , "/my-work/**").access("isAuthenticated()")
 		.antMatchers("/", "/login" , "/manutenzione").permitAll()
 		.antMatchers("/maintain-enable", "/maintain-disable").access("isAuthenticated")

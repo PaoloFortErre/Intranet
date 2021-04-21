@@ -214,9 +214,9 @@
                                   <td th:utext="${#dates.format(commenti.timestampEliminazione*1000, 'dd/MM/yyyy, HH:mm')}"></td>
                                   <td>
                                     <div class="img-fluid text-center">
-                                      <a th:href="@{/myLife/ripristina-commento/(id=${commenti.id})}"><img title="ripristina elemento"
+                                      <a th:href="@{/my-life/ripristina-commento/(id=${commenti.id})}"><img title="ripristina elemento"
                                         width="27px" th:src="@{/view/Admin/images/restore_icon.png}" alt="restore"></a>
-                                        <a th:href="@{/myLife/cancella-commento/(id=${commenti.id})}"><img title="elimina elemento" class=""
+                                        <a th:href="@{/my-life/cancella-commento/(id=${commenti.id})}"><img title="elimina elemento" class=""
                                           width="27px" th:src="@{/view/Admin/images/delete_icon.png}" alt="delete"></a>
                                         </div>
                                       </td>
@@ -257,9 +257,9 @@
                                         <td th:utext="${#dates.format(post.timestampEliminazione*1000, 'dd/MM/yyyy, HH:mm')}"></td>
                                         <td>
                                           <div class="img-fluid text-center">
-                                            <a th:href="@{/myLife/ripristina-post/(id=${post.id})}"><img title="ripristina elemento"
+                                            <a th:href="@{/my-life/ripristina-post/(id=${post.id})}"><img title="ripristina elemento"
                                               width="27px" th:src="@{/view/Admin/images/restore_icon.png}" alt="restore"></a>
-                                              <a th:href="@{/myLife/cancella-post/(id=${post.id})}"><img title="elimina elemento" class=""
+                                              <a th:href="@{/my-life/cancella-post/(id=${post.id})}"><img title="elimina elemento" class=""
                                                 width="27px" th:src="@{/view/Admin/images/delete_icon.png}" alt="delete"></a>
                                               </div>
                                             </td>

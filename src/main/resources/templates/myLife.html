@@ -236,7 +236,7 @@
 							tuo profilo</a>
 					</div>
 					<div id="prof2">
-						<a th:href="@{/myLife/profili-utenti/}" id="gestisciProfilo">
+						<a th:href="@{/my-life/profili-utenti/}" id="gestisciProfilo">
 							Vedi il profilo dei tuoi colleghi</a>
 					</div>
 					<br>
@@ -261,7 +261,7 @@
 						</div>
 						<div class="col-sm-8 col-md-10 col-lg-10">
 							<div class="form-group">
-								<form th:action="@{/myLife/add-post}"
+								<form th:action="@{/my-life/add-post}"
 									enctype="multipart/form-data" id="myForm1" method="post"
 									onsubmit="return validateForm()">
 									<label for="testo"></label>
@@ -375,7 +375,7 @@
 											th:if="(${DS} or ${post.autore.id} == ${session.id}) and ${UB}"
 											style="display: inline-block; color: #303030;">
 
-											<form th:action="@{/myLife/delete-post(id=${post.id})}"
+											<form th:action="@{/my-life/delete-post(id=${post.id})}"
 												method="post">
 												<button name="button" type="submit" class="buttonAzioni"
 													style="background-color: #E8E7E7; color: white; margin-left: 290px; border: 0px solid #303030">
@@ -397,7 +397,7 @@
 						                      </div>
 						                      <div class="modal-body">
 						                        <div class="container">
-						                        <form th:action="@{/myLife/edit-post(id=${post.id})}" method="post" enctype="multipart/form-data" novalidate>
+						                        <form th:action="@{/my-life/edit-post(id=${post.id})}" method="post" enctype="multipart/form-data" novalidate>
 						                          <textarea th:class="postModificato + ${post.id}"
 													name="testo" placeholder="Modifica post" cols="20"
 													rows="4.5" id="post" th:text="${post.testo}"
@@ -467,7 +467,7 @@
 
 										<br>
 										<hr>
-										<form th:action="@{/myLife/like-post(id=${post.id})}"
+										<form th:action="@{/my-life/like-post(id=${post.id})}"
 											method="post" style="display: inline-block;">
 											<button type="submit" class="miPiaceBtn"
 												th:id="'postLike' + ${post.id}" th:value="${post.id}">
@@ -556,7 +556,7 @@
 												th:if="(${DS} or ${commento.autore.id} == ${session.id} or ${post.autore.id} == ${session.id}) and ${UB}"><br>
 												<br> <br>
 												<form
-													th:action="@{/myLife/delete-commento(id=${commento.id})}"
+													th:action="@{/my-life/delete-commento(id=${commento.id})}"
 													method="post">
 													<button name="button" type="submit" id="bottoneElimina">
 														<img th:src="@{/view/MyLife/images/trash.png}" width="23px">
@@ -578,7 +578,7 @@
 						                      </div>
 						                      <div class="modal-body">
 						                        <div class="container">
-						                        <form th:action="@{/myLife/edit-commento(id=${commento.id})}" method="post">
+						                        <form th:action="@{/my-life/edit-commento(id=${commento.id})}" method="post">
 						                          <textarea th:class="commentoModificato + ${commento.id}"
 														name="testo" id="post" placeholder="Modifica commento"
 														required rows="4.5" th:text="${commento.testo}"
@@ -618,7 +618,7 @@
 								<br>
 								<div th:if="${UB}" th:id="'commentoArea' + ${post.id}"
 									style="display: none">
-									<form th:action="@{/myLife/add-commento(idPost=${post.id})}"
+									<form th:action="@{/my-life/add-commento(idPost=${post.id})}"
 										method="post">
 										<label for="testo"></label>
 
@@ -648,7 +648,7 @@
 						style="margin: 0 auto; margin-bottom: 20px; background-color: #303030">
 						<tr>
 							<td th:each="pageNumber : ${pageNumbers}"><a
-								th:href="@{/myLife/(page=${pageNumber})}"
+								th:href="@{/my-life/(page=${pageNumber})}"
 								th:text="${pageNumber}"
 								th:class="${pageNumber==messaggi.number + 1 } ? active"
 								style="color: #F3F3F3; font-size: 18px; padding: 10px;"> </a><br>
@@ -967,7 +967,7 @@ COLONNA DESTRA
 		<div class="col-xs-12 col-sm-12 col-lg-8 col-xl-8 mt-5"
 			style="margin-top: 50px;">
 			<h1 style="text-align: center;">Il video del mese</h1>
-			<a th:href="@{/myLife/aggiungi-videoMyLife/}" th:if="${GML}"
+			<a th:href="@{/my-life/aggiungi-videoMyLife/}" th:if="${GML}"
 				style="background-color: white; border: 0px solid #232323; color: black; font-size: 12px; padding: 8px; width: 150px; float: right; padding-left: 25px;">
 				Aggiungi video</a>
 			<h3 style="text-align: center;" class="mb-5"
@@ -1083,7 +1083,7 @@ COLONNA DESTRA
 		$(document).ready(
 			function() {
 				var bottoni = document.getElementsByClassName("miPiaceBtn");
-				var path = "[[@{/myLife/autore-post?id=}]]";
+				var path = "[[@{/my-life/autore-post?id=}]]";
 				for (var i = 0; i < bottoni.length; i++) {
 					var id = bottoni[i].id;
 					var last_index = id.indexOf("e");

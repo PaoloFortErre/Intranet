@@ -98,16 +98,16 @@ public class UtenteController extends BaseController {
 		serviceDatiPersonali.save(u);
 
 		switch(n.getDestinazione()) {
-		case "MyWork":
-			return "redirect:/my-work/";
-		case "MyLife":
-			return "redirect:/myLife1/";
-		case "HR":
-			return "redirect:/my-work/comunicazioni/";
-		case "Moduli":
-			return "redirect:/my-work/comunicazioni/moduli/";
-		default:
-			return "redirect:/profilo/";
+			case "MyWork":
+				return "redirect:/my-work/";
+			case "MyLife":
+				return "redirect:/my-life1/";
+			case "HR":
+				return "redirect:/my-work/comunicazioni/";
+			case "Moduli":
+				return "redirect:/my-work/comunicazioni/moduli/";
+			default:
+				return "redirect:/profilo/";
 		}
 		
 	}

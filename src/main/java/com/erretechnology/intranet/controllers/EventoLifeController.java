@@ -66,7 +66,7 @@ public class EventoLifeController extends BaseController {
 		serviceEventoLife.save(evento);
 		saveLog("inserito un nuovo evento", utenteLoggato);
 		notificaTutti("ha inserito un nuovo evento su MyLife!", utenteLoggato, "MyLife");
-		return "redirect:/myLife1/";
+		return "redirect:/my-life1/";
 	}
 
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
@@ -105,7 +105,7 @@ public class EventoLifeController extends BaseController {
 		model.addAttribute("evento", evento);
 		saveLog("modificato un evento", utenteLoggato);
 
-		return "redirect:/myLife1/";
+		return "redirect:/my-life1/";
 	}
 
 	@RequestMapping("/delete/{id}")
@@ -116,7 +116,7 @@ public class EventoLifeController extends BaseController {
 		serviceEventoLife.save(evento);
 		saveLog("eliminato un evento", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 
-		return "redirect:/myLife1/";
+		return "redirect:/my-life1/";
 	}
 	
 	

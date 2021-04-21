@@ -225,7 +225,7 @@
 						</div>
 						<div class="col-sm-8 col-md-10 col-lg-10">
 							<div class="form-group">
-								<form th:action="@{/myLife/add-post}"
+								<form th:action="@{/my-life/add-post}"
 									enctype="multipart/form-data" id="myForm" method="post">
 									<label for="testo"></label>
 									<textarea class="form-control" rows="2" cols="30" name="testo"
@@ -335,7 +335,7 @@
 											th:if="(${DS} or ${post.autore.id} == ${session.id}) and ${UB}"
 											style="display: inline-block; color: #303030;">
 
-											<form th:action="@{/myLife/delete-post(id=${post.id})}"
+											<form th:action="@{/my-life/delete-post(id=${post.id})}"
 												method="post">
 												<button name="button" type="submit" class="buttonAzioni"
 													style="display: inline-block; background-color: #E8E7E7; color: white; margin-left: 290px; border: 0px solid #303030">
@@ -348,7 +348,7 @@
 
 										<div th:if="(${post.autore.id} == ${session.id}) and ${UB}"
 											style="display: inline-block;">
-											<form th:action="@{/myLife/edit-post(id=${post.id})}"
+											<form th:action="@{/my-life/edit-post(id=${post.id})}"
 												method="post">
 												<button name="button" type="submit"
 													style="display: inline-block; background-color: #E8E7E7; color: white; margin-left: -10px; border: 0px solid #303030"
@@ -414,7 +414,7 @@
 													th:if="(${DS} or ${commento.autore.id} == ${session.id} or ${post.autore.id} == ${session.id}) and ${UB}"><br>
 													<br> <br>
 													<form
-														th:action="@{/myLife/delete-commento(id=${commento.id})}"
+														th:action="@{/my-life/delete-commento(id=${commento.id})}"
 														method="post">
 														<button name="button" type="submit" id="bottoneElimina">
 															<img src="/view/MyLife/images/trash.png" width="300%">
@@ -423,7 +423,7 @@
 
 												<td th:if="${commento.autore.id} == ${session.id} and ${UB}">
 													<form
-														th:action="@{/myLife/edit-commento(id=${commento.id})}"
+														th:action="@{/my-life/edit-commento(id=${commento.id})}"
 														method="post">
 														<button name="button" type="submit"
 															th:onclick="'showAreaCommento(' + ${commento.id} + ')'"
@@ -446,7 +446,7 @@
 									</div>
 									<br>
 									<div th:if="${UB}">
-										<form th:action="@{/myLife/add-commento(idPost=${post.id})}"
+										<form th:action="@{/my-life/add-commento(idPost=${post.id})}"
 											method="post">
 											<label for="testo"></label>
 											<textarea id="post" name="testo" rows="2" cols="30"
@@ -475,7 +475,7 @@
 						style="margin: 0 auto; margin-bottom: 20px; background-color: #303030">
 						<tr>
 							<td th:each="pageNumber : ${pageNumbers}"><a
-								th:href="@{/myLife/(page=${pageNumber})}"
+								th:href="@{/my-life/(page=${pageNumber})}"
 								th:text="${pageNumber}"
 								th:class="${pageNumber==messaggi.number + 1 } ? active"
 								style="color: #F3F3F3; font-size: 18px; padding: 10px;"> </a><br>

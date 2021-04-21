@@ -56,7 +56,7 @@ public class LibroController extends BaseController {
 		serviceLibro.save(libro);
 		saveLog("inserito un libro", utenteLoggato);
 		notificaTutti("ha inserito un nuovo libro consigliato dalla redazione!", utenteLoggato, "MyLife");
-		return "redirect:/myLife1/";
+		return "redirect:/my-life1/";
 	}
 
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
@@ -89,7 +89,7 @@ public class LibroController extends BaseController {
 		serviceLibro.save(libro);
 		model.addAttribute("libro", libro);
 		saveLog("modificato le informazioni di un libro", utenteLoggato);
-		return "redirect:/myLife1/";
+		return "redirect:/my-life1/";
 	}
 
 	@RequestMapping("/delete/{id}")
@@ -99,7 +99,7 @@ public class LibroController extends BaseController {
 		libro.setTimestampEliminazione(Instant.now().getEpochSecond());
 		serviceLibro.save(libro);
 		saveLog("cancellato un libro", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
-		return "redirect:/myLife1/";
+		return "redirect:/my-life1/";
 	}
 	
 	@RequestMapping("/cancella")

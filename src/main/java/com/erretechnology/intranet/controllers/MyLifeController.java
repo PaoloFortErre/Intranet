@@ -32,7 +32,7 @@ import com.erretechnology.intranet.models.VideoDelGiorno;
 import com.erretechnology.intranet.repositories.RepositoryCategoriaCinema;
 
 @Controller
-@RequestMapping(value = "myLife")
+@RequestMapping(value = "my-life")
 public class MyLifeController extends BaseController {
 	@Autowired
 	private RepositoryCategoriaCinema repoCategoria;
@@ -102,7 +102,7 @@ public class MyLifeController extends BaseController {
 		video.setPagina("MyLife");
 		serviceVideo.save(video);
 		saveLog("aggiornato il video su myLife", autore);
-		return "redirect:/myLife1/";
+		return "redirect:/my-life1/";
 	}
 	
 	@PostMapping(value = "/like-post")
@@ -126,7 +126,7 @@ public class MyLifeController extends BaseController {
 			notificaSingola("ha messo mi piace al tuo post", p.getAutore(), utente, "MyLife");
 		}
 			
-		return "redirect:/myLife/";
+		return "redirect:/my-life/";
 	}
 
 	@PostMapping(value = "/edit-post")
@@ -157,7 +157,7 @@ public class MyLifeController extends BaseController {
 			servicePost.save(p);
 			servicePostModificato.save(pm);
 			saveLog("modificato un post in bacheca", autore);
-			return "redirect:/myLife/";
+			return "redirect:/my-life/";
 		}
 		throw new Exception("Non hai i permessi per svolgere quest'azione");
 	}
@@ -180,7 +180,7 @@ public class MyLifeController extends BaseController {
 			serviceCommento.save(c);
 			serviceCommentoModificato.save(cm);
 			saveLog("modificato un commento in bacheca" ,  autore);
-			return "redirect:/myLife/";
+			return "redirect:/my-life/";
 		}
 		throw new Exception("Non hai i permessi per svolgere quest'azione");
 	}
@@ -198,7 +198,7 @@ public class MyLifeController extends BaseController {
 			servicePost.save(p);
 			//System.out.println("cancellazione post: RIUSCITO");
 			saveLog("cancellato un post in bacheca", autore);
-			return "redirect:/myLife/";
+			return "redirect:/my-life/";
 		}
 		//System.out.println("cancellazione post: PERMESSO NEGATO");
 		throw new Exception("Non hai i permessi per svolgere quest'azione");
@@ -221,7 +221,7 @@ public class MyLifeController extends BaseController {
 			serviceCommento.save(c);
 			//System.out.println("cancellazione post: RIUSCITO");
 			saveLog("cancellato un commento in bacheca", serviceDatiPersonali.findById(sessionId));
-			return "redirect:/myLife/";
+			return "redirect:/my-life/";
 		}
 		//System.out.println("cancellazione post: PERMESSO NEGATO");
 		throw new Exception("Non hai i permessi per svolgere quest'azione");
@@ -240,7 +240,7 @@ public class MyLifeController extends BaseController {
 		serviceCommento.save(commento);
 		notificaSingola("ha commentato il tuo post", autorePost, autore, "MyLife");
 		saveLog("risposto a un post in bacheca", autore);
-		return "redirect:/myLife/";
+		return "redirect:/my-life/";
 	}
 
 	@PostMapping(value = "/add-post")
@@ -267,7 +267,7 @@ public class MyLifeController extends BaseController {
 
 		servicePost.save(post);
 		saveLog("scritto in bacheca", autore);
-		return "redirect:/myLife/";
+		return "redirect:/my-life/";
 
 	} 
 

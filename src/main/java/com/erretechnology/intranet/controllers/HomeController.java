@@ -210,7 +210,7 @@ public class HomeController extends BaseController{
 		return "loginPage";
 	}
 	
-	@GetMapping (value= "/myLife1")
+	@GetMapping (value= "/my-life1")
 	public ModelAndView MyLife1(HttpSession session) throws InterruptedException, ExecutionException {
 		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		ModelAndView mav = new ModelAndView();
