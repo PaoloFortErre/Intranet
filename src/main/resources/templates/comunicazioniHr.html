@@ -237,7 +237,7 @@ style="font-size: 10px; color: black"></p>
 						<!-- Modal body -->
 						<div class="modal-body">
 						<h1 th:text="${sondaggi.id}"></h1>
-							<form th:object="${sondaggio}" th:action="@{'/myWork/sondaggi/modifica/' +${sondaggi.id}}" onsubmit="return validateForm()"
+							<form th:object="${sondaggio}" th:action="@{'/my-work/sondaggi/modifica/' +${sondaggi.id}}" onsubmit="return validateForm()"
 								  method="post" enctype="multipart/form-data"  class="signin-form">
 								<div id="message-error" class="row justify-content-center mt-2">
 			  					</div>
@@ -268,7 +268,7 @@ style="font-size: 10px; color: black"></p>
 				</div>
 			</div>
 			<form
-					th:action="@{'/myWork/sondaggi/delete/' +${sondaggi.id}}"
+					th:action="@{'/my-work/sondaggi/delete/' +${sondaggi.id}}"
 					method="post" style="display: inline-block">
 
 				<button type="submit" name="elimina"
