@@ -677,9 +677,10 @@
 	    	let nome = document.getElementById("scegli").value;
 	    	let backslash_index = nome.indexOf("h") +1;
 	    	nome = nome.substr(backslash_index + 1);
+	    	let path = "[[@{/profilo/modifica-foto}]]";
 			 $.ajax({
 	              type : 'POST',
-	              url : window.location.origin + "/intranet-0.0.1-SNAPSHOT"+ "/profilo/modifica-foto",
+	              url : path,
 	              data: {dati: dati, nome: nome},
 	              success : function(data) {
 	            	  window.location = window.location;
@@ -687,7 +688,7 @@
 			 });
 		}
 		
-		var path = "[[@{/checkManutenzione?}]]";
+		var path = "[[@{/checkManutenzione}]]";
         $(document).ready(
           function() {
             $.ajax({
