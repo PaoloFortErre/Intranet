@@ -374,8 +374,8 @@ table, th, td {
 								<div class="carousel-item active" th:if="${nuoveAssunzioni.size>0}">
 									<div class="container">
 
-										<a
-												th:href="@{/profilo/visualizza/(id=${nuoveAssunzioni[0].id})}"><img
+										<a	th:onclick="nome([[${nuoveAssunzioni[0].id}]], 'nuoviAssunti')" 
+											th:id="'nuoviAssunti' + ${nuoveAssunzioni[0].id}" style="cursor:pointer;"><img
 												th:src="'data:image/png;base64,' + ${nuoveAssunzioni[0].immagine.getImgData(nuoveAssunzioni[0].immagine.data)}"
 												alt="fotoProfiloUtente" class="img-fluid" width="250px" style="height: 380px;">
 										</a>
@@ -385,8 +385,9 @@ table, th, td {
 									<p style="font-size: 22px; margin-bottom: -5px">Scopri chi è
 										il nuovo arrivato</p>
 									<a
-											style="font-style: italic; font-weight: 900; font-size: 25px; text-decoration: none;"
-											th:href="@{/profilo/visualizza/(id=${nuoveAssunzioni[0].id})}"
+											style="cursor:pointer; font-style: italic; font-weight: 900; font-size: 25px; text-decoration: none;"
+											th:onclick="nome([[${nuoveAssunzioni[0].id}]], 'nuoviAssuntiImg')" 
+											th:id="'nuoviAssuntiImg' + ${nuoveAssunzioni[0].id}"
 											th:text="${nuoveAssunzioni[0].nome} + ' ' + ${nuoveAssunzioni[0].cognome}"></a>
 
 									<br>
@@ -395,8 +396,8 @@ table, th, td {
 									<div class="carousel-item" th:if="${nuoveAssunzioni.size>1}">
 										<div class="container">
 
-											<a
-													th:href="@{/profilo/visualizza/(id=${nuoveAssunzioni[1].id})}"><img
+											<a th:onclick="nome([[${nuoveAssunzioni[1].id}]], 'nuoviAssunti')" 
+												th:id="'nuoviAssunti' + ${nuoveAssunzioni[1].id}" style="cursor:pointer;"><img
 													th:src="'data:image/png;base64,' + ${nuoveAssunzioni[1].immagine.getImgData(nuoveAssunzioni[1].immagine.data)}"
 													alt="fotoProfiloUtente" class="img-fluid" width="250px" style="height: 380px;">
 											</a>
@@ -406,8 +407,9 @@ table, th, td {
 										<p style="font-size: 22px; margin-bottom: -5px">Scopri chi è
 											il nuovo arrivato</p>
 										<a
-												style="font-style: italic; font-weight: 900; font-size: 25px; text-decoration: none;"
-												th:href="@{/profilo/visualizza/(id=${nuoveAssunzioni[1].id})}"
+												style="cursor:pointer; font-style: italic; font-weight: 900; font-size: 25px; text-decoration: none;"
+												th:onclick="nome([[${nuoveAssunzioni[1].id}]], 'nuoviAssuntiImg')" 
+												th:id="'nuoviAssuntiImg' + ${nuoveAssunzioni[1].id}"
 												th:text="${nuoveAssunzioni[1].nome} + ' ' + ${nuoveAssunzioni[1].cognome}"></a>
 
 										<br>
@@ -415,8 +417,8 @@ table, th, td {
 									<div class="carousel-item " th:if="${nuoveAssunzioni.size>2}">
 										<div class="container">
 
-											<a
-													th:href="@{/profilo/visualizza/(id=${nuoveAssunzioni[2].id})}"><img
+											<a th:onclick="nome([[${nuoveAssunzioni[2].id}]], 'nuoviAssunti')" 
+											   th:id="'nuoviAssunti' + ${nuoveAssunzioni[2].id}" style="cursor:pointer;"><img
 													th:src="'data:image/png;base64,' + ${nuoveAssunzioni[2].immagine.getImgData(nuoveAssunzioni[2].immagine.data)}"
 													alt="fotoProfiloUtente" class="img-fluid" width="250px" style="height: 380px;">
 											</a>
@@ -426,8 +428,9 @@ table, th, td {
 										<p style="font-size: 22px; margin-bottom: -5px">Scopri chi è
 											il nuovo arrivato</p>
 										<a
-												style="font-style: italic; font-weight: 900; font-size: 25px; text-decoration: none;"
-												th:href="@{/profilo/visualizza/(id=${nuoveAssunzioni[2].id})}"
+												style="cursor:pointer; font-style: italic; font-weight: 900; font-size: 25px; text-decoration: none;"
+												th:onclick="nome([[${nuoveAssunzioni[2].id}]], 'nuoviAssuntiImg')" 
+												th:id="'nuoviAssuntiImg' + ${nuoveAssunzioni[2].id}"
 												th:text="${nuoveAssunzioni[2].nome} + ' ' + ${nuoveAssunzioni[2].cognome}"></a>
 
 										<br>
@@ -1457,8 +1460,9 @@ ROW SCHIZZO
 										<p
 												style="font-size: 22px; margin-bottom: -5PX">
 											Hai già fatto gli auguri a <br> <a
-												th:href="@{/profilo/visualizza/(id=${utente[0].id})}"
-												style="font-style: italic; font-weight: 900; font-size: 25px; margin-bottom: -5PX; text-decoration: none;"
+												th:onclick="nome([[${utente[0].id}]], 'compleanno')" 
+												th:id="'compleanno' + ${utente[0].id}"
+												style="cursor:pointer; font-style: italic; font-weight: 900; font-size: 25px; margin-bottom: -5PX; text-decoration: none;"
 												th:text="${utente[0].nome} + ' ' + ${utente[0].cognome}"> </a> ?
 										</p>
 
@@ -1477,8 +1481,9 @@ ROW SCHIZZO
 										<p
 												style="font-size: 22px; margin-bottom: -5PX">
 											Hai già fatto gli auguri a <br> <a
-												th:href="@{/profilo/visualizza/(id=${utente[1].id})}"
-												style="font-style: italic; font-weight: 900; font-size: 25px; margin-bottom: -5PX; text-decoration: none;"
+												th:onclick="nome([[${utente[1].id}]], 'compleanno')" 
+												th:id="'compleanno' + ${utente[1].id}"
+												style="cursor:pointer; font-style: italic; font-weight: 900; font-size: 25px; margin-bottom: -5PX; text-decoration: none;"
 												th:text="${utente[1].nome} + ' ' + ${utente[1].cognome}"> </a> ?
 										</p>
 
@@ -1497,8 +1502,9 @@ ROW SCHIZZO
 										<p
 												style="font-size: 22px; margin-bottom: -5PX">
 											Hai già fatto gli auguri a <br> <a
-												th:href="@{/profilo/visualizza/(id=${utente[2].id})}"
-												style="font-style: italic; font-weight: 900; font-size: 25px; margin-bottom: -5PX; text-decoration: none;"
+												th:onclick="nome([[${utente[2].id}]], 'compleanno')" 
+												th:id="'compleanno' + ${utente[2].id}"
+												style="cursor:pointer; font-style: italic; font-weight: 900; font-size: 25px; margin-bottom: -5PX; text-decoration: none;"
 												th:text="${utente[2].nome} + ' ' + ${utente[2].cognome}"> </a> ?
 										</p>
 
@@ -1668,6 +1674,12 @@ function validateForm(){
 	}
 	
 	return true;
+}
+
+function nome(id, type){
+	var path = "[[@{/profilo/visualizza/?id=}]]";
+	document.getElementById(type + id).href += path + btoa(id);
+	console.log(document.getElementById(id).href);
 }
 </script>
 </body>

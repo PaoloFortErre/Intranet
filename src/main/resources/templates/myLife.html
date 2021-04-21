@@ -42,7 +42,7 @@
 </head>
 <body ng-app=""
 	th:with="GML = ${#authorization.expression('hasAuthority(''GML'')')}"
-	onresize="myFunction()" th:style="'background-image: url(' + @{/view/MyWork/images/carbonio.jpg} +');'">
+	th:style="'background-image: url(' + @{/view/MyWork/images/carbonio.jpg} +');'">
 
 <nav class="navbar navbar-expand-lg bg-dark navbar-dark justify-content-end">
 	<a class="navbar-brand logo" th:href="@{/homepage/}"><img
@@ -224,7 +224,7 @@
 						style="margin: 0 auto; position: absolute; left: 32%; top: 57px;">
 					<br> <br> <br> <br>
 					<div style="margin: 0 auto; text-align: center">
-						<a th:href="@{/profilo/visualizza/(id=${utenteDati.id})}"
+						<a th:href="@{/profilo/}"
 							th:text="${utenteDati.nome} + ' ' + ${utenteDati.cognome}"
 							style="color: #303030; font-weight: 600; font-size: 18px;"></a> <br>
 						<p th:text="${utenteDati.settore.nomeSettore}"
@@ -359,9 +359,9 @@
 
 
 									<div class="col-sm-9 col-md-9 col-lg-9">
-										<a th:href="@{/profilo/visualizza/(id=${post.autore.id})}"
+										<a  th:onclick="nome([[${post.autore.id}]], 'post')" th:id="'post' + ${post.autore.id}"
 											th:text="${post.autore.nome} + ' ' + ${post.autore.cognome}"
-											style="display: inline-block; color: #303030; font-weight: 600; font-size: 20px;"></a>
+											style="cursor:pointer; display: inline-block; color: #303030; font-weight: 600; font-size: 20px;"></a>
 
 										<!--  <h4
 											style="display: inline-block; color: #303030; font-weight: 600;"
@@ -514,11 +514,12 @@
 
 												<!-- Modal body -->
 												<div class="modal-body" th:each="utente : ${post.setUtenti}"
-													th:if="${post.setUtenti.size > 0}" style="background-color: #B9CAF0;" ><a th:href="@{/profilo/visualizza/(id=${utente.id})}" >
+													th:if="${post.setUtenti.size > 0}" style="background-color: #B9CAF0;" >
+													<a th:onclick="nome([[${utente.id}]], 'like')" th:id="'like' + ${utente.id}" style="cursor:pointer;">
 													<img th:src="'data:image/jpeg;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}"
 													title="utente" class="immagineUtente img-fluid" style="border-radius: 50%;"></a>
-													<a th:href="@{/profilo/visualizza/(id=${utente.id})}" >
-													<span th:text="${utente.nome} + ' ' + ${utente.cognome}" th:href="@{/profilo/visualizza/(id=${utente.id})}" style="color: #303030" /></a>
+													<a th:onclick="nome([[${utente.id}]], 'span')" th:id="'span' + ${utente.id}" >
+													<span th:text="${utente.nome} + ' ' + ${utente.cognome}" style="cursor:pointer; color: #303030" /></a>
 												</div>
 
 												<!-- Modal footer -->
@@ -541,10 +542,10 @@
 											<td><img
 												th:src="'data:image/jpeg;base64,' + ${commento.autore.immagine.getImgData(commento.autore.immagine.data)}"
 												width="50px" style="border-radius: 50%"> <a
-												th:href="@{/profilo/visualizza/(id=${commento.autore.id})}"
+												th:onclick="nome([[${commento.autore.id}]], 'commento')" th:id="'commento' + ${commento.autore.id}"
 												class="nomeCommento"
 												th:text="${commento.autore.nome} + ' ' + ${commento.autore.cognome}"
-												style="color: #303030; font-size: 14px;"></a>
+												style="cursor:pointer; color: #303030; font-size: 14px;"></a>
 
 
 												<p
@@ -1060,6 +1061,12 @@ COLONNA DESTRA
 			$('#previewImg').val("");
 			$('#delete').hide();
 			document.getElementById("post").required = true;
+		}
+		
+		function nome(id, type){
+			var path = "[[@{/profilo/visualizza/?id=}]]";
+			document.getElementById(type + id).href += path + btoa(id);
+			console.log(document.getElementById(id).href);
 		}
 
 		function validateForm() {

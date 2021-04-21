@@ -74,9 +74,10 @@ public class UtenteController extends BaseController {
 	}
 
 	@GetMapping(value = "/visualizza")
-	public ModelAndView viewUserProfile(HttpSession session, int id) throws ExecutionException, Exception {
+	public ModelAndView viewUserProfile(HttpSession session, String id) throws ExecutionException, Exception {
 		ModelAndView mav = new ModelAndView();
-		UtenteDatiPersonali u = serviceDatiPersonali.findById(id);
+		int idUtente = Integer.parseInt(new String(Base64.getDecoder().decode(id)));
+		UtenteDatiPersonali u = serviceDatiPersonali.findById(idUtente);
 		UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		if (u.getId() == utenteLoggato.getId())
 			return primaPagina(session);
