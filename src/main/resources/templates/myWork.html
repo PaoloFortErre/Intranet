@@ -759,7 +759,7 @@ table, th, td {
 						<td style="text-align: center; vertical-align: middle;">
 
 							<div id="demo1" class="carousel slide" data-ride="carousel">
-								<ul class="carousel-indicators">
+								<ul class="carousel-indicators mt-2" style="margin-top: 9px;">
 									<li data-target="#demo1" data-slide-to="0" class="active"
 										th:if="${newsSlide.size>1}"></li>
 									<li data-target="#demo1" data-slide-to="1"
@@ -775,7 +775,7 @@ table, th, td {
 												alt="News" width="400px" style="height: 390px;"
 												class="img-fluid">
 										</div>
-										<br> <br>
+										<br>
 										<h3 th:text="${newsSlide[0].titolo}"
 											style="text-align: center; margin: 0 auto"></h3>
 										<br>
@@ -860,7 +860,7 @@ table, th, td {
 												alt="News" width="400px" style="height: 390px"
 												class="img-fluid">
 										</div>
-										<br> <br>
+										<br>
 										<h3 th:text="${newsSlide[1].titolo}"
 											style="text-align: center; margin: 0 auto"></h3>
 

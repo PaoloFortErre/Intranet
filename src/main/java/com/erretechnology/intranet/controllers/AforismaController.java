@@ -23,7 +23,7 @@ public class AforismaController extends BaseController {
 	
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	public String update(@PathVariable int id, String frase, String autore, Model model, HttpSession session, @RequestParam(required = false) MultipartFile immagine) throws IllegalStateException, IOException {
-		String path = "/Users/a.zaffalon/Documents/GitHub/Intranet/src/main/webapp";
+		String path = "/Users/giosi/OneDrive/Documenti/GitHub/Intranet/src/main/webapp";
 		String folder;
 		Aforisma aforisma = serviceAforisma.findById(id);
 		aforisma.setFrase(frase);
