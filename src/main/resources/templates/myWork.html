@@ -759,14 +759,14 @@ table, th, td {
 						<td style="text-align: center; vertical-align: middle;">
 
 							<div id="demo1" class="carousel slide" data-ride="carousel">
-								<div><ul class="carousel-indicators mt-2" style="margin-top: 9px;">
+								<ul class="carousel-indicators mt-2" style="margin-top: 9px;">
 									<li data-target="#demo1" data-slide-to="0" class="active"
 										th:if="${newsSlide.size>1}"></li>
 									<li data-target="#demo1" data-slide-to="1"
 										th:if="${newsSlide.size>1}"></li>
 									<li data-target="#demo1" data-slide-to="2"
 										th:if="${newsSlide.size>2}"></li>
-								</ul></div>
+								</ul>
 								<div class="carousel-inner" th:if="${newsSlide.size>0}">
 									<div class="carousel-item active">
 										<div class="container">
@@ -778,9 +778,6 @@ table, th, td {
 										<br>
 										<h3 th:text="${newsSlide[0].titolo}"
 											style="text-align: center; margin: 0 auto"></h3>
-										<br>
-
-
 										<button type="submit" name="modifica" class="bottoniGMW"
 											th:if="${GMW}" data-toggle="modal" data-target="#myModal7"
 											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
