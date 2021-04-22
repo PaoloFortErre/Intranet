@@ -38,7 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		http.formLogin()
 		.loginPage("/login").failureUrl("/login-error").successForwardUrl("/setSession").and()
 		.authorizeRequests()
-		.antMatchers("/my-work/podcast/**", "/my-work/clienti/**", "/my-work/eventi/**", "/my-work/news/**").access("hasAuthority('GMW')")
+		.antMatchers("/my-work/podcast/**", "/my-work/clienti/**", "/my-work/eventi/**", "/my-work/news/**", "/linkedin/**").access("hasAuthority('GMW')")
 		.antMatchers("/my-work/comunicazioni/sondaggi/**").access("hasAuthority('GS')")
 		.antMatchers("/my-life/eventi/**", "/my-life/film-serie/**", "/my-life/libri/**").access("hasAuthority('GML')")
 		.antMatchers("/my-work/comunicazioni/hr/upload" , "/my-work/comunicazioni/hr" , "/my-work/comunicazioni/hr/delete").access("hasAuthority('GHR')")
