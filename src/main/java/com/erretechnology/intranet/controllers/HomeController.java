@@ -3,15 +3,21 @@ package com.erretechnology.intranet.controllers;
 import java.io.UnsupportedEncodingException;
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.repository.query.Param;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -25,6 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.erretechnology.intranet.models.ElementiMyLife;
 import com.erretechnology.intranet.models.Manutenzione;
+import com.erretechnology.intranet.models.Post;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.models.Utility;
@@ -211,17 +218,35 @@ public class HomeController extends BaseController{
 	}
 	
 	@GetMapping (value= "/my-life1")
-	public ModelAndView MyLife1(HttpSession session) throws InterruptedException, ExecutionException {
-		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
-		ModelAndView mav = new ModelAndView();
+	public ModelAndView MyLife1(HttpSession session, @RequestParam("page") Optional<Integer> page) throws Exception,InterruptedException, ExecutionException {
+		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		if(!u.getUtente().getRuolo().getNome().equals("ADMIN")) throw new Exception("non hai i permessi necessari per quest'azione");
+		int currentPage = page.orElse(1); 
+
+		//	List<Post> messaggi = service.getLastMessage();
+		
 		List<ElementiMyLife> elementi = serviceElementiMyLife.findAll();
-	
 		CompletableFuture<List<ElementiMyLife>> evento = findLifeElement(elementi, "eventi");// elementi.stream().filter(x -> x.getTipo().equals("eventi")).collect(Collectors.toList());
 		CompletableFuture<List<ElementiMyLife>> aforismi = findLifeElement(elementi, "aphorism");//elementi.stream().filter(x -> x.getTipo().equals("aphorism")).collect(Collectors.toList());
 		CompletableFuture<List<ElementiMyLife>> film = findLifeElement(elementi, "cinema");// elementi.stream().filter(x -> x.getTipo().equals("cinema")).collect(Collectors.toList());
 		CompletableFuture<List<ElementiMyLife>> libri = findLifeElement(elementi, "book");// elementi.stream().filter(x -> x.getTipo().equals("book")).collect(Collectors.toList());
 		CompletableFuture<VideoDelGiorno> video = serviceVideo.getLastVideo("MyLife");
 		
+		Page<Post> postPage= servicePost.findPaginated(PageRequest.of(currentPage - 1, 5));
+
+
+		//System.out.println(evento.size());
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("myLife");
+		mav.addObject("messaggi", postPage);
+		mav.addObject("utenteDati", u);
+		int totalPages = postPage.getTotalPages();
+		if (totalPages > 0) {
+			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+					.boxed()
+					.collect(Collectors.toList());	
+			mav.addObject("pageNumbers", pageNumbers);
+		}
 		CompletableFuture.allOf(evento, aforismi, video, film, libri).join();
 
 		mav.addObject("film", film.get());
@@ -230,8 +255,7 @@ public class HomeController extends BaseController{
 		mav.addObject("libri", libri.get());
 		mav.addObject("video", video.get());
 		mav.addObject("categorie", repoCategoria.findAll());
-		mav.setViewName("myLife1");
-		mav.addObject("utenteDati", u);
+		
 		return mav;
 	}
 	

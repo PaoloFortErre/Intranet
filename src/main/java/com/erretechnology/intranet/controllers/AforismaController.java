@@ -42,7 +42,7 @@ public class AforismaController extends BaseController {
 		saveLog("modificato una aforisma", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		
 		if(aforisma.isLife()) {
-	        return "redirect:/my-life1/";
+	        return "redirect:/my-life/";
 		} else {
 	        return "redirect:/my-work/";
 		}

@@ -2,15 +2,11 @@ package com.erretechnology.intranet.controllers;
 
 import java.time.Instant;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,33 +34,17 @@ public class MyLifeController extends BaseController {
 	private RepositoryCategoriaCinema repoCategoria;
 
 	@GetMapping(value = "/")
-	public ModelAndView primaPagina(HttpSession session, @RequestParam("page") Optional<Integer> page) throws InterruptedException, ExecutionException {
-		int currentPage = page.orElse(1); 
-
-		//	List<Post> messaggi = service.getLastMessage();
-		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+	public ModelAndView primaPagina(HttpSession session) throws InterruptedException, ExecutionException {
+		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
+		ModelAndView mav = new ModelAndView();
 		List<ElementiMyLife> elementi = serviceElementiMyLife.findAll();
+	
 		CompletableFuture<List<ElementiMyLife>> evento = findLifeElement(elementi, "eventi");// elementi.stream().filter(x -> x.getTipo().equals("eventi")).collect(Collectors.toList());
 		CompletableFuture<List<ElementiMyLife>> aforismi = findLifeElement(elementi, "aphorism");//elementi.stream().filter(x -> x.getTipo().equals("aphorism")).collect(Collectors.toList());
 		CompletableFuture<List<ElementiMyLife>> film = findLifeElement(elementi, "cinema");// elementi.stream().filter(x -> x.getTipo().equals("cinema")).collect(Collectors.toList());
 		CompletableFuture<List<ElementiMyLife>> libri = findLifeElement(elementi, "book");// elementi.stream().filter(x -> x.getTipo().equals("book")).collect(Collectors.toList());
 		CompletableFuture<VideoDelGiorno> video = serviceVideo.getLastVideo("MyLife");
 		
-		Page<Post> postPage= servicePost.findPaginated(PageRequest.of(currentPage - 1, 5));
-
-
-		//System.out.println(evento.size());
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("myLife");
-		mav.addObject("messaggi", postPage);
-		mav.addObject("utenteDati", u);
-		int totalPages = postPage.getTotalPages();
-		if (totalPages > 0) {
-			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
-					.boxed()
-					.collect(Collectors.toList());	
-			mav.addObject("pageNumbers", pageNumbers);
-		}
 		CompletableFuture.allOf(evento, aforismi, video, film, libri).join();
 
 		mav.addObject("film", film.get());
@@ -73,7 +53,8 @@ public class MyLifeController extends BaseController {
 		mav.addObject("libri", libri.get());
 		mav.addObject("video", video.get());
 		mav.addObject("categorie", repoCategoria.findAll());
-		
+		mav.setViewName("myLife1");
+		mav.addObject("utenteDati", u);
 		return mav;
 	}
 	
@@ -102,7 +83,7 @@ public class MyLifeController extends BaseController {
 		video.setPagina("MyLife");
 		serviceVideo.save(video);
 		saveLog("aggiornato il video su myLife", autore);
-		return "redirect:/my-life1/";
+		return "redirect:/my-life/";
 	}
 	
 	@PostMapping(value = "/like-post")
