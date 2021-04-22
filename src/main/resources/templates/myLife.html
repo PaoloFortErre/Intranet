@@ -111,10 +111,10 @@
 
 		</ul>
 		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<img th:src="@{/view/MyLife/images/mylife1.png}" alt="ferrari"
+			<div class="carousel-item active" th:if="${aforisma.size>0}">
+				<img th:src="@{${aforisma[0].immagine}}" alt="ferrari"
 					title="ferrari" width="100%" height="500" class="img-fluid" style=" filter:brightness(50%);">
-				<div class="carousel-caption" th:if="${aforisma.size>0}">
+				<div class="carousel-caption" >
 					<h1
 						style="font-weight: 900; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"
 						th:text="${aforisma[0].titolo}"></h1>
@@ -134,10 +134,10 @@
 					</div>
 				</div>
 			</div>
-			<div class="carousel-item">
-				<img th:src="@{/view/MyLife/images/mylife2.png}" alt="scarpe" width="100%"
+			<div class="carousel-item" th:if="${aforisma.size>1}" >
+				<img th:src="@{${aforisma[1].immagine}}" alt="scarpe" width="100%"
 					height="500" class="img-fluid" style=" filter:brightness(50%);">
-				<div class="carousel-caption" th:if="${aforisma.size>1}" >
+				<div class="carousel-caption" >
 					<h1
 						style="font-weight: 900; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"
 						th:text="${aforisma[1].titolo}"></h1>
@@ -157,10 +157,10 @@
 					</div>
 				</div>
 			</div>
-			<div class="carousel-item">
-				<img th:src="@{/view/MyLife/images/mylife3.png}" alt="scarpe" width="100%"
+			<div class="carousel-item" th:if="${aforisma.size>2}">
+				<img th:src="@{${aforisma[2].immagine}}" alt="scarpe" width="100%"
 					height="500" class="img-fluid" style=" filter:brightness(50%);">
-				<div class="carousel-caption" th:if="${aforisma.size>2}">
+				<div class="carousel-caption" >
 					<h1
 						style="font-weight: 900; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"
 						th:text="${aforisma[2].titolo}"></h1>
@@ -216,7 +216,7 @@
 		<!-- Modal body -->
 		<div class="modal-body" th:if="${aforisma.size>0}">
 			<form th:action="@{/aforisma/update/{id}(id = ${aforisma[0].id})}"
-				method="post" class="signin-form">
+				method="post" class="signin-form"  enctype="multipart/form-data">
 				<div id="message-error0" class="row justify-content-center mt-2">
   				</div>
 				<div class="form-group col-12">
@@ -228,10 +228,12 @@
 				<div class="form-group col-12">
 					<label for="autore" style="color: black;">Autore</label> <input
 						class="form-control" type="text" id="autore" name="autore" th:placeholder="${aforisma[0].contenuto}">
+					<br><input type="file" name="immagine" id="img"
+									accept="image/png, image/jpeg ,image/jpg" style="color:black;"> 
 				</div>
 				<div class="form-group col-4" style="float: right">
 					<input class="form-control" type="submit" id="pubblicaSubmit"
-						value="Salva">
+						value="Salva"> 
 				</div>
 			</form>
 		</div>
@@ -261,7 +263,7 @@
 		<!-- Modal body -->
 		<div class="modal-body" th:if="${aforisma.size>1}">
 			<form th:action="@{/aforisma/update/{id}(id = ${aforisma[1].id})}"
-				method="post" class="signin-form">
+				method="post" class="signin-form"  enctype="multipart/form-data">
 				<div id="message-error1" class="row justify-content-center mt-2">
   	</div>
 				<div class="form-group col-12">
@@ -273,6 +275,8 @@
 				<div class="form-group col-12">
 					<label for="autore" style="color: black;">Autore</label> <input
 						class="form-control" type="text" id="autore" name="autore" th:placeholder="${aforisma[1].contenuto}">
+					<br><input type="file" name="immagine" id="img"
+									accept="image/png, image/jpeg ,image/jpg" style="color:black;"> 
 				</div>
 				<div class="form-group col-4" style="float: right">
 					<input class="form-control" type="submit" id="pubblicaSubmit"
@@ -307,7 +311,7 @@
 		<!-- Modal body -->
 		<div class="modal-body" th:if="${aforisma.size>2}">
 			<form th:action="@{/aforisma/update/{id}(id = ${aforisma[2].id})}"
-				method="post" class="signin-form">
+				method="post" class="signin-form"  enctype="multipart/form-data">
 				<div id="message-error2" class="row justify-content-center mt-2">
   	</div>
 				<div class="form-group col-12">
@@ -319,6 +323,8 @@
 				<div class="form-group col-12">
 					<label for="autore" style="color: black;">Autore</label> <input
 						class="form-control" type="text" id="autore" name="autore"  th:placeholder="${aforisma[2].contenuto}">
+					<br><input type="file" name="immagine" id="img"
+									accept="image/png, image/jpeg ,image/jpg" style="color:black;"> 
 				</div>
 				<div class="form-group col-4" style="float: right">
 					<input class="form-control" type="submit" id="pubblicaSubmit"

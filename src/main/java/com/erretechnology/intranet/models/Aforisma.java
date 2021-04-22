@@ -19,9 +19,18 @@ public class Aforisma {
 	@ManyToOne
 	@JoinColumn(name="utente_id")
 	private Utente utente;
-//	private boolean visibile;
+	private String immagine;
+	//	private boolean visibile;
 	private boolean isLife;
 	
+	public String getImmagine() {
+		return immagine;
+	}
+
+	public void setImmagine(String immagine) {
+		this.immagine = immagine;
+	}
+
 	public Aforisma() {
 	}
 
