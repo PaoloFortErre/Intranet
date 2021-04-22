@@ -116,7 +116,7 @@ public class MyWorkController extends BaseController {
 		sondaggio.setVisibile(true);
 		serviceSondaggio.save(sondaggio);
 		saveLog("creato un nuovo sondaggio", autore);
-		notificaTutti("ha inserito un nuovo sondaggio!", autore, "MyWork");
+		notificaTutti("ha inserito un nuovo sondaggio!", autore, "HR");
 		return "redirect:/my-work/comunicazioni/";
 	}
 
