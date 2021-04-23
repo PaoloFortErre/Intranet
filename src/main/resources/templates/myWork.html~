@@ -464,7 +464,7 @@ table, th, td {
 					</tr>
 					<tr><td style="text-align: center; vertical-align: middle;">
 						<a type="button" th:href="@{/my-life/profili-utenti/}"
-								style="background-color: transparent; border: 0px solid; font-size: 12px; margin-bottom: 5px;">
+								style="background-color: transparent; border: 0px solid; font-size: 12px; margin-bottom: 50px;">
 							Vedi il profilo degli altri colleghi <img th:src="@{/view/MyWork/images/iconpe.png}" width="10%">
 						</a>
 					</td></tr>
