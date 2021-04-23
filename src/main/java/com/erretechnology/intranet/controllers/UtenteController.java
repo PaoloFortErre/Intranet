@@ -259,8 +259,8 @@ public class UtenteController extends BaseController {
 	public ModelAndView Permesso(HttpSession session) throws InterruptedException, ExecutionException {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("gestisci_ruolo");
-		mav.addObject("utenti", serviceDatiPersonali.getAll().get().stream()
-				.filter(x->x.getId() != Integer.parseInt(session.getAttribute("id").toString())).collect(Collectors.toList()));
+		mav.addObject("utenti", serviceDatiPersonali.getAll().get().stream().filter(x->x.getId() != Integer.parseInt(session.getAttribute("id").toString()))
+				.sorted((x1, x2)-> x1.getCognome().compareTo(x2.getCognome())).collect(Collectors.toList()));
 		return mav;
 	}
 
@@ -364,7 +364,7 @@ public class UtenteController extends BaseController {
 				|| utenteLoggato.getUtente().getSetPermessi().contains(servicePermesso.findById("AM"))) {
 			mav.setViewName("eliminaUtente");
 			mav.addObject("utenti", serviceDatiPersonali.getAll().get().stream().filter(x -> x.getUtente().getAttivo() && 
-					x.getId() != Integer.parseInt(session.getAttribute("id").toString()))
+					x.getId() != Integer.parseInt(session.getAttribute("id").toString())).sorted((x1, x2)-> x1.getCognome().compareTo(x2.getCognome()))
 					.collect(Collectors.toList()));
 			return mav;
 		}
@@ -384,7 +384,8 @@ public class UtenteController extends BaseController {
 		mav.addObject("password", new String());
 		mav.addObject("settore", new String());
 		mav.addObject("date", new Utility());
-		mav.addObject("utenti_non_attivi", serviceDatiPersonali.getInattivi());
+		mav.addObject("utenti_non_attivi", serviceDatiPersonali.getInattivi().stream()
+				.sorted((x1, x2)-> x1.getCognome().compareTo(x2.getCognome())).collect(Collectors.toList()));
 		return mav;
 	}
 
