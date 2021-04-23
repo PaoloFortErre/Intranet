@@ -1069,6 +1069,12 @@ ROW SCHIZZO
 									style="font-style: italic; font-weight: 900; font-size: 25px; margin-bottom: -5PX;">
 									Rosario </span>
 							</p>
+							<button type="button" th:if="${podcast.size > 0}" data-toggle="modal" data-target="#myModal"
+								style="background-color: transparent; border: 0px solid; font-size: 12px">
+								Ascolta gli ultimi podcast<img
+									th:src="@{/view/MyWork/images/record.png}" alt="podcast icona"
+									width="12%">
+							</button>
 
 							<br>
 							<a th:href="@{/my-work/podcast/}" th:if="${GMW}"
