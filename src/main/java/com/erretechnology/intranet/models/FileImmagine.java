@@ -26,6 +26,11 @@ public class FileImmagine{
 	@JoinColumn(name = "id_autore")
 	private UtenteDatiPersonali autore;
 
+	
+	public Integer getId() {
+		return id;
+	}
+
 	public UtenteDatiPersonali getAutore() {
 		return autore;
 	}

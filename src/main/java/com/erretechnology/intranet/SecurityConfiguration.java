@@ -10,10 +10,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.erretechnology.intranet.repositories.RepositoryManutenzione;
-import com.erretechnology.intranet.services.ServiceUtente;
+import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
 
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
@@ -21,9 +21,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Autowired
 	DataSource dataSource;
 	@Autowired
-	ServiceUtente serviceUtente;
-	@Autowired
-	RepositoryManutenzione repositoryManutenzione;
+	ServiceUtenteDatiPersonali serviceDatiPersonali;
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -48,8 +46,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		.antMatchers("/my-life/**", "/my-life1/**", "/profilo/**", "/homepage", "/my-work/**" , "/homepage/**", "/aforisma/**",
 				"/linkedin/**" , "/my-work/**").access("isAuthenticated()")
 		.antMatchers("/", "/login" , "/manutenzione").permitAll()
-		.antMatchers("/maintain-enable", "/maintain-disable").access("isAuthenticated")
-		.and()
+		.antMatchers("/maintain-enable", "/maintain-disable", "/profilo/cambio-password").access("isAuthenticated")
+		.and().addFilterAfter(new ChangePasswordFilter(serviceDatiPersonali), UsernamePasswordAuthenticationFilter.class)
 		.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
 		.and()
 		.exceptionHandling().accessDeniedPage("/error")

@@ -116,19 +116,25 @@ public class UtenteController extends BaseController {
 	public String modificaDescrizione(@ModelAttribute("utente") UtenteDatiPersonali utente, HttpSession session) {
 		int id_utente = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(id_utente);
-		utenteLoggato.setDescrizione(utente.getDescrizione());
-		serviceDatiPersonali.save(utenteLoggato);
-		saveLog("aggiornato la descrizione", utenteLoggato);
+		if(!utente.getDescrizione().equals(utenteLoggato.getDescrizione())) {
+			utenteLoggato.setDescrizione(utente.getDescrizione());
+			serviceDatiPersonali.save(utenteLoggato);
+			saveLog("aggiornato la descrizione", utenteLoggato);
+		}
+		
 		return "redirect:/profilo/";
 	}
 
 	@PostMapping(value = "/elimina-foto")
-	public String eliminaFotoProfilo(@ModelAttribute("utente") UtenteDatiPersonali utente, HttpSession session) {
+	public String eliminaFotoProfilo(HttpSession session) {
 		int id_utente = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(id_utente);
-		utenteLoggato.setImmagine(serviceFileImmagine.getImmagine(63));
-		serviceDatiPersonali.save(utenteLoggato);
-		saveLog("eliminato la foto profilo", utenteLoggato);
+		if(utenteLoggato.getImmagine().getId() != 63) {
+			utenteLoggato.setImmagine(serviceFileImmagine.getImmagine(63));
+			serviceDatiPersonali.save(utenteLoggato);
+			saveLog("eliminato la foto profilo", utenteLoggato);
+		}
+		
 		return "redirect:/profilo/";
 	}
 
@@ -205,17 +211,19 @@ public class UtenteController extends BaseController {
 			/*else
 				img.setData(compressImage(immagine, 0.5f));*/
 			UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(idUser);
-			if (!serviceFileImmagine.contains(img.getData())) {
-				img.setAutore(utenteLoggato);
-				img.setTimestamp(Instant.now().getEpochSecond());
-				img.setNomeFile(nome);
-				serviceFileImmagine.insert(img);
-				utenteLoggato.setImmagine(img);
-			} else {
-				utenteLoggato.setImmagine(serviceFileImmagine.getImmagineByData(img.getData()));
+			if(!Arrays.equals(utenteLoggato.getImmagine().getData(), img.getData())) {
+				if (!serviceFileImmagine.contains(img.getData())) {
+					img.setAutore(utenteLoggato);
+					img.setTimestamp(Instant.now().getEpochSecond());
+					img.setNomeFile(nome);
+					serviceFileImmagine.insert(img);
+					utenteLoggato.setImmagine(img);
+				} else {
+					utenteLoggato.setImmagine(serviceFileImmagine.getImmagineByData(img.getData()));
+				}
+				serviceDatiPersonali.save(utenteLoggato);
+				saveLog("modificato l'immagine del profilo", utenteLoggato);
 			}
-			serviceDatiPersonali.save(utenteLoggato);
-			saveLog("modificato l'immagine del profilo", utenteLoggato);
 
 		}
 		return "redirect:/profilo/";
@@ -241,17 +249,18 @@ public class UtenteController extends BaseController {
 	}
 
 	@PostMapping(value = "/set-visualizzazione")
-	public String modificaVisualizazzioneDataNascita(HttpSession session,
-			/* HttpServletRequest request */ @RequestParam("set") String value) {
-		// String value = request.getParameter("set");
+	public String modificaVisualizazzioneDataNascita(HttpSession session, @RequestParam("set") String value) {
 		int id_utente = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(id_utente);
-		if (value.equals("Si")) {
-			utenteLoggato.setVisualizzaDataNascita(true);
-		} else
-			utenteLoggato.setVisualizzaDataNascita(false);
-		serviceDatiPersonali.save(utenteLoggato);
-		saveLog("modificato la visualizzazione del compleanno", utenteLoggato);
+		if(value.equals("Si") && !utenteLoggato.isVisualizzaDataNascita() || value.equals("No") && utenteLoggato.isVisualizzaDataNascita()){
+			if (value.equals("Si")) {
+				utenteLoggato.setVisualizzaDataNascita(true);
+			} else 
+				utenteLoggato.setVisualizzaDataNascita(false);
+			serviceDatiPersonali.save(utenteLoggato);
+			saveLog("modificato la visualizzazione del compleanno", utenteLoggato);
+		}
+		
 		return "redirect:/profilo/";
 	}
 
