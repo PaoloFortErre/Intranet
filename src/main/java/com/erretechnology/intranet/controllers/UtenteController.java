@@ -207,9 +207,6 @@ public class UtenteController extends BaseController {
 
 			img = new FileImmagine();
 			img.setData(Base64.getDecoder().decode(dati.getBytes("UTF-8")));
-
-			/*else
-				img.setData(compressImage(immagine, 0.5f));*/
 			UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(idUser);
 			if(!Arrays.equals(utenteLoggato.getImmagine().getData(), img.getData())) {
 				if (!serviceFileImmagine.contains(img.getData())) {

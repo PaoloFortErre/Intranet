@@ -428,7 +428,7 @@
 														un'immagine da condividere</h4>
 												</div>
 												<div class="modal-body">
-													<input type="file" name="document" id="img"
+													<input type="file" name="document" id="img1"
 														accept="image/png, image/jpeg ,image/jpg" style="color: black;" />
 												</div>
 												<div class="modal-footer">
@@ -1653,13 +1653,13 @@ COLONNA DESTRA
 			}
 		}
 
-		$("#img").change(function() {
+		$("#img1").change(function() {
 			document.getElementById("post").required = false;
 			readURL(this);
 		});
 
 		function remove() {
-			$('#img').val("");
+			$('#img1').val("");
 			$('#previewImg').val("");
 			$('#delete').hide();
 			document.getElementById("post").required = true;
@@ -1673,7 +1673,7 @@ COLONNA DESTRA
 
 		function validateForm() {
 			var x = document.forms["myForm1"]["post"].value;
-			var y = document.getElementById("img").value;
+			var y = document.getElementById("img1").value;
 
 			if (y == "" && x == "") {
 				swal("Scrivi qualcosa per pubblicare il post");

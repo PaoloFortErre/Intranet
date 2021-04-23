@@ -210,7 +210,7 @@ public class HomeController extends BaseController{
 		return "redirect:/profilo/cambio-password";
 	}
 
-	// Login form with error
+	
 	@GetMapping("/login-error")
 	public String loginError(Model model, Utente utente) {
 		model.addAttribute("loginError", true);

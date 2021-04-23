@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.erretechnology.intranet.models.Cliente;
-import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 
 @Controller
@@ -48,20 +46,9 @@ public class ClienteController extends BaseController{
 		cliente.setVisibile(true);
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
-		
-		if(!immagine.getOriginalFilename().isEmpty()) {
-			FileImmagine img = new FileImmagine();
-			if(compressImage(immagine, 0.5f).length == 0)
-				img.setData(immagine.getBytes());
-			else
-				img.setData(compressImage(immagine, 0.5f));
-			img.setAutore(utenteLoggato);
-			img.setTimestamp(Instant.now().getEpochSecond());
-			img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
-			serviceFileImmagine.insert(img);
-			cliente.setLogo(img);
 
-		}
+		if(!immagine.getOriginalFilename().isEmpty()) 
+			cliente.setLogo(salvaImmagine(immagine, utenteLoggato));
 
 		serviceCliente.save(cliente);
 		saveLog("inserito un nuovo cliente", utenteLoggato);
@@ -82,24 +69,8 @@ public class ClienteController extends BaseController{
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
 
-		if(!immagine.getOriginalFilename().isEmpty()) {
-			FileImmagine img = new FileImmagine();			
-			if(compressImage(immagine, 0.5f).length == 0)
-				img.setData(immagine.getBytes());
-			else
-				img.setData(compressImage(immagine, 0.5f));
-			if(!serviceFileImmagine.contains(img.getData())) {
-				
-				img.setAutore(utenteLoggato);
-				img.setTimestamp(Instant.now().getEpochSecond());
-				img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
-				serviceFileImmagine.insert(img);
-				cliente.setLogo(img);
-			}else {
-				cliente.setLogo(serviceFileImmagine.getImmagineByData(img.getData()));
-			}
-
-		}
+		if(!immagine.getOriginalFilename().isEmpty()) 
+			cliente.setLogo(salvaImmagine(immagine, utenteLoggato));
 
 		serviceCliente.save(cliente);
 		model.addAttribute("cliente", cliente);
@@ -116,13 +87,13 @@ public class ClienteController extends BaseController{
 		saveLog("cancellato un nuovo cliente", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return "redirect:/my-work/";
 	}
-	
+
 	@RequestMapping("/cancella")
 	public String cancellaCliente(int id, HttpSession session) {
 		serviceCliente.deleteById(id);
 		return "redirect:/profilo/mostra-eliminati";
-		}
-	
+	}
+
 	@RequestMapping("/ripristina")
 	public String ripristinaCliente(int id, HttpSession session) {
 		Cliente cliente = serviceCliente.findById(id);
@@ -130,5 +101,5 @@ public class ClienteController extends BaseController{
 		cliente.setTimestampEliminazione(0);
 		serviceCliente.save(cliente);
 		return "redirect:/profilo/mostra-eliminati";
-		}
+	}
 }

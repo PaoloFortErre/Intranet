@@ -18,41 +18,16 @@ import javax.imageio.stream.MemoryCacheImageOutputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.erretechnology.intranet.models.ElementiMyLife;
 import com.erretechnology.intranet.models.ElementiMyWork;
+import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.Log;
 import com.erretechnology.intranet.models.Notifica;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
-import com.erretechnology.intranet.services.ServiceAforisma;
-import com.erretechnology.intranet.services.ServiceAuthority;
-import com.erretechnology.intranet.services.ServiceCinema;
-import com.erretechnology.intranet.services.ServiceCliente;
-import com.erretechnology.intranet.services.ServiceCommento;
-import com.erretechnology.intranet.services.ServiceCommentoModificato;
-import com.erretechnology.intranet.services.ServiceComunicazioniHR;
-import com.erretechnology.intranet.services.ServiceElementiMyLife;
-import com.erretechnology.intranet.services.ServiceElementiMyWork;
-import com.erretechnology.intranet.services.ServiceEventoLife;
-import com.erretechnology.intranet.services.ServiceEventoWork;
-import com.erretechnology.intranet.services.ServiceFileImmagini;
-import com.erretechnology.intranet.services.ServiceFilePdf;
-import com.erretechnology.intranet.services.ServiceLibro;
-import com.erretechnology.intranet.services.ServiceLinkedin;
-import com.erretechnology.intranet.services.ServiceLog;
-import com.erretechnology.intranet.services.ServiceNews;
-import com.erretechnology.intranet.services.ServiceNotifica;
-import com.erretechnology.intranet.services.ServicePermesso;
-import com.erretechnology.intranet.services.ServicePodcast;
-import com.erretechnology.intranet.services.ServicePost;
-import com.erretechnology.intranet.services.ServicePostModificato;
-import com.erretechnology.intranet.services.ServiceRuolo;
-import com.erretechnology.intranet.services.ServiceSettore;
-import com.erretechnology.intranet.services.ServiceSondaggio;
-import com.erretechnology.intranet.services.ServiceUtente;
-import com.erretechnology.intranet.services.ServiceUtenteDatiPersonali;
-import com.erretechnology.intranet.services.ServiceVideo;
+import com.erretechnology.intranet.services.*;
 
 public abstract class BaseController {
 	@Autowired
@@ -111,7 +86,7 @@ public abstract class BaseController {
 	protected ServiceLinkedin serviceLinkedin;
 	@Autowired
 	protected ServiceNews serviceNews;
-	
+
 
 	protected void saveLog(String testo, UtenteDatiPersonali autore) {
 		Log log = new Log();
@@ -120,7 +95,7 @@ public abstract class BaseController {
 		log.setAzione(testo);
 		serviceLog.save(log);
 	}
-	
+
 	protected void notificaSingola(String testo, UtenteDatiPersonali utente, UtenteDatiPersonali utenteCreatore, String destinazione) {
 		if(utente.equals(utenteCreatore)) return;
 		Notifica n = new Notifica();
@@ -132,9 +107,9 @@ public abstract class BaseController {
 		serviceNotifica.save(n);
 		utente.addNotifica(n);
 		serviceDatiPersonali.save(utente);
-		
+
 	}
-	
+
 	protected void notificaTutti(String testo, UtenteDatiPersonali utenteCreatore, String destinazione) {
 		Notifica n = new Notifica();
 		n.setDescrizione(testo);
@@ -152,7 +127,7 @@ public abstract class BaseController {
 		}
 		serviceNotifica.save(n);
 	}
-	
+
 	protected void notificaSelezionati(String testo, String settore, UtenteDatiPersonali utenteCreatore, String destinazione) {
 		Notifica n = new Notifica();
 		n.setDescrizione(testo);
@@ -170,43 +145,60 @@ public abstract class BaseController {
 		}
 		serviceNotifica.save(n);
 	}
-	
+
 	protected byte[] compressImage(MultipartFile mpFile, float qualita) {
-	    float quality = qualita;
-	    String imageName = mpFile.getOriginalFilename();
-	    String imageExtension = imageName.substring(imageName.lastIndexOf(".") + 1);
-	    ImageWriter imageWriter = ImageIO.getImageWritersByFormatName(imageExtension).next();
-	    ImageWriteParam imageWriteParam = imageWriter.getDefaultWriteParam();
-	    if(!imageExtension.equalsIgnoreCase("png")) {
-	    	imageWriteParam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
-	    	imageWriteParam.setCompressionQuality(quality);
-	    	
-	    }
-	    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-	    ImageOutputStream imageOutputStream = new MemoryCacheImageOutputStream(baos);
-	    imageWriter.setOutput(imageOutputStream);
-	    BufferedImage originalImage = null;
-	    try (InputStream inputStream = mpFile.getInputStream()) {
-	        originalImage = ImageIO.read(inputStream); 
-	    } catch (IOException e) {
-	        return baos.toByteArray();
-	    }
-	    if(originalImage == null) return baos.toByteArray();
-	    IIOImage image = new IIOImage(originalImage, null, null);
-	    try {
-	        imageWriter.write(null, image, imageWriteParam);
-	    } catch (IOException e) {
-	    } finally {
-	        imageWriter.dispose();
-	    }
-	    return baos.toByteArray();
+		float quality = qualita;
+		String imageName = mpFile.getOriginalFilename();
+		String imageExtension = imageName.substring(imageName.lastIndexOf(".") + 1);
+		ImageWriter imageWriter = ImageIO.getImageWritersByFormatName(imageExtension).next();
+		ImageWriteParam imageWriteParam = imageWriter.getDefaultWriteParam();
+		if(!imageExtension.equalsIgnoreCase("png")) {
+			imageWriteParam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+			imageWriteParam.setCompressionQuality(quality);
+
+		}
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ImageOutputStream imageOutputStream = new MemoryCacheImageOutputStream(baos);
+		imageWriter.setOutput(imageOutputStream);
+		BufferedImage originalImage = null;
+		try (InputStream inputStream = mpFile.getInputStream()) {
+			originalImage = ImageIO.read(inputStream); 
+		} catch (IOException e) {
+			return baos.toByteArray();
+		}
+		if(originalImage == null) return baos.toByteArray();
+		IIOImage image = new IIOImage(originalImage, null, null);
+		try {
+			imageWriter.write(null, image, imageWriteParam);
+		} catch (IOException e) {
+		} finally {
+			imageWriter.dispose();
+		}
+		return baos.toByteArray();
+	}
+	
+	protected FileImmagine salvaImmagine(MultipartFile immagine, UtenteDatiPersonali utenteLoggato) throws IOException {
+		FileImmagine img = new FileImmagine();			
+		if(compressImage(immagine, 0.5f).length == 0)
+			img.setData(immagine.getBytes());
+		else
+			img.setData(compressImage(immagine, 0.5f));	
+		if(!serviceFileImmagine.contains(img.getData())) {
+			img.setAutore(utenteLoggato);
+			img.setTimestamp(Instant.now().getEpochSecond());
+			img.setNomeFile(StringUtils.cleanPath(immagine.getOriginalFilename()));
+			serviceFileImmagine.insert(img);
+			return img;
+		}else {
+			return serviceFileImmagine.getImmagineByData(img.getData());
+		}
 	}
 
 	@Async
 	protected CompletableFuture<List<ElementiMyWork>> findWorkElement(List<ElementiMyWork> list, String tipo){
 		return CompletableFuture.completedFuture(list.stream().filter(x -> x.getTipo().equals(tipo)).collect(Collectors.toList()));
 	}
-	
+
 	@Async
 	protected CompletableFuture<List<ElementiMyLife>> findLifeElement(List<ElementiMyLife> list, String tipo){
 		return CompletableFuture.completedFuture(list.stream().filter(x -> x.getTipo().equals(tipo)).collect(Collectors.toList()));

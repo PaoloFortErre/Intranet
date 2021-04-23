@@ -51,12 +51,6 @@ public class MyWorkController extends BaseController {
 		CompletableFuture.allOf(listPodcast, utenti, video, clienti, news, sondaggi, aforismi, eventi).join();
 		
 		mav.addObject("podcast", listPodcast.get());
-		/*if(listPodcast.size() != 0 && listPodcast!= null) {
-			Podcast primoPodcast = listPodcast.get(listPodcast.size()-1);
-			mav.addObject("primoPodcast", primoPodcast);
-			listPodcast.remove(listPodcast.size()-1);
-			mav.addObject("altriPodcast", listPodcast.stream().limit(3).sorted(Comparator.comparingInt(Podcast::getId).reversed()).collect(Collectors.toList()));
-		}*/
 		
 		mav.addObject("nuoviClienti", clienti.get());
 		mav.addObject("newsSlide", news.get());

@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.erretechnology.intranet.models.Commento;
 import com.erretechnology.intranet.models.CommentoModificato;
 import com.erretechnology.intranet.models.ElementiMyLife;
-import com.erretechnology.intranet.models.FileImmagine;
 import com.erretechnology.intranet.models.Post;
 import com.erretechnology.intranet.models.PostModificato;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
@@ -107,7 +105,7 @@ public class MyLifeController extends BaseController {
 			notificaSingola("ha messo mi piace al tuo post", p.getAutore(), utente, "MyLife");
 		}
 			
-		return "redirect:/my-life/";
+		return "redirect:/my-life1/";
 	}
 
 	@PostMapping(value = "/edit-post")
@@ -123,22 +121,12 @@ public class MyLifeController extends BaseController {
 			pm.setTimestamp(p.getTimestamp());
 			pm.setPost(p);
 			p.setTimestamp(Instant.now().getEpochSecond());
-			if(!document.getOriginalFilename().isEmpty()) {
-				FileImmagine img = new FileImmagine();
-				img.setAutore(autore);
-				if(compressImage(document, 0.5f).length == 0)
-					img.setData(document.getBytes());
-				else
-					img.setData(compressImage(document, 0.5f));	
-				img.setTimestamp(Instant.now().getEpochSecond());
-				img.setNomeFile(StringUtils.cleanPath(document.getOriginalFilename()));
-				serviceFileImmagine.insert(img);
-				p.setImmagine(img);
-			}
+			if(!document.getOriginalFilename().isEmpty()) 
+				p.setImmagine(salvaImmagine(document, serviceDatiPersonali.findById(sessionId)));
 			servicePost.save(p);
 			servicePostModificato.save(pm);
 			saveLog("modificato un post in bacheca", autore);
-			return "redirect:/my-life/";
+			return "redirect:/my-life1/";
 		}
 		throw new Exception("Non hai i permessi per svolgere quest'azione");
 	}
@@ -161,7 +149,7 @@ public class MyLifeController extends BaseController {
 			serviceCommento.save(c);
 			serviceCommentoModificato.save(cm);
 			saveLog("modificato un commento in bacheca" ,  autore);
-			return "redirect:/my-life/";
+			return "redirect:/my-life1/";
 		}
 		throw new Exception("Non hai i permessi per svolgere quest'azione");
 	}
@@ -179,7 +167,7 @@ public class MyLifeController extends BaseController {
 			servicePost.save(p);
 			//System.out.println("cancellazione post: RIUSCITO");
 			saveLog("cancellato un post in bacheca", autore);
-			return "redirect:/my-life/";
+			return "redirect:/my-life1/";
 		}
 		//System.out.println("cancellazione post: PERMESSO NEGATO");
 		throw new Exception("Non hai i permessi per svolgere quest'azione");
@@ -202,7 +190,7 @@ public class MyLifeController extends BaseController {
 			serviceCommento.save(c);
 			//System.out.println("cancellazione post: RIUSCITO");
 			saveLog("cancellato un commento in bacheca", serviceDatiPersonali.findById(sessionId));
-			return "redirect:/my-life/";
+			return "redirect:/my-life1/";
 		}
 		//System.out.println("cancellazione post: PERMESSO NEGATO");
 		throw new Exception("Non hai i permessi per svolgere quest'azione");
@@ -221,7 +209,7 @@ public class MyLifeController extends BaseController {
 		serviceCommento.save(commento);
 		notificaSingola("ha commentato il tuo post", autorePost, autore, "MyLife");
 		saveLog("risposto a un post in bacheca", autore);
-		return "redirect:/my-life/";
+		return "redirect:/my-life1/";
 	}
 
 	@PostMapping(value = "/add-post")
@@ -232,23 +220,12 @@ public class MyLifeController extends BaseController {
 		post.setAutore(autore);
 		post.setTimestamp(Instant.now().getEpochSecond());
 		post.setVisibile(true);
-		if(!document.getOriginalFilename().isEmpty()) {
-			FileImmagine img = new FileImmagine();
-			UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(id);
-			img.setAutore(utenteLoggato);
-			if(compressImage(document, 0.5f).length == 0)
-				img.setData(document.getBytes());
-			else
-				img.setData(compressImage(document, 0.5f));
-			img.setTimestamp(Instant.now().getEpochSecond());
-			img.setNomeFile(StringUtils.cleanPath(document.getOriginalFilename()));
-			serviceFileImmagine.insert(img);
-			post.setImmagine(img);
-		}
+		if(!document.getOriginalFilename().isEmpty()) 
+			post.setImmagine(salvaImmagine(document, autore));
 
 		servicePost.save(post);
 		saveLog("scritto in bacheca", autore);
-		return "redirect:/my-life/";
+		return "redirect:/my-life1/";
 
 	} 
 
