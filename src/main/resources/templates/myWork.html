@@ -766,25 +766,18 @@ table, th, td {
 						<td style="text-align: center; vertical-align: middle;">
 
 							<div id="demo1" class="carousel slide" data-ride="carousel">
-								<ul class="carousel-indicators mt-2" style="margin-top: 9px;">
-									<li data-target="#demo1" data-slide-to="0" class="active"
-										th:if="${newsSlide.size>1}"></li>
-									<li data-target="#demo1" data-slide-to="1"
-										th:if="${newsSlide.size>1}"></li>
-									<li data-target="#demo1" data-slide-to="2"
-										th:if="${newsSlide.size>2}"></li>
-								</ul>
 								<div class="carousel-inner" th:if="${newsSlide.size>0}">
 									<div class="carousel-item active">
 										<div class="container">
 											<img
 												th:src="'data:image/png;base64,' + ${newsSlide[0].getImgData(newsSlide[0].foto)}"
-												alt="News" width="400px" style="height: 390px;"
+												alt="News" width="400px" style="height: 350px;"
 												class="img-fluid">
 										</div>
 										<br>
 										<h3 th:text="${newsSlide[0].titolo}"
 											style="text-align: center; margin: 0 auto"></h3>
+										<br>
 										<button type="submit" name="modifica" class="bottoniGMW"
 											th:if="${GMW}" data-toggle="modal" data-target="#myModal7"
 											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
@@ -861,15 +854,13 @@ table, th, td {
 										<div class="container">
 											<img
 												th:src="'data:image/png;base64,' + ${newsSlide[1].getImgData(newsSlide[1].foto)}"
-												alt="News" width="400px" style="height: 390px"
+												alt="News" width="400px" style="height: 350px"
 												class="img-fluid">
 										</div>
 										<br>
 										<h3 th:text="${newsSlide[1].titolo}"
 											style="text-align: center; margin: 0 auto"></h3>
-
 										<br>
-
 										<button type="submit" name="modifica" class="bottoniGMW"
 											th:if="${GMW}" data-toggle="modal" data-target="#myModal8"
 											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
@@ -944,14 +935,13 @@ table, th, td {
 										<div class="container">
 											<img
 												th:src="'data:image/png;base64,' + ${newsSlide[2].getImgData(newsSlide[2].foto)}"
-												width="400px" style="height: 390px;" alt="News"
+												width="400px" style="height: 350px;" alt="News"
 												class="img-fluid">
 										</div>
-										<br> <br>
+										<br>
 										<h3 th:text="${newsSlide[2].titolo}"
 											style="text-align: center; margin: 0 auto"></h3>
-										<br>
-
+											<br>
 										<button type="submit" name="modifica" class="bottoniGMW"
 											th:if="${GMW}" data-toggle="modal" data-target="#myModal9"
 											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
@@ -1024,7 +1014,15 @@ table, th, td {
 
 									</div>
 								</div>
-								<br> 
+								<br><br>
+								<ul class="carousel-indicators mt-2" style="margin-top: 9px;">
+									<li data-target="#demo1" data-slide-to="0" class="active"
+										th:if="${newsSlide.size>1}"></li>
+									<li data-target="#demo1" data-slide-to="1"
+										th:if="${newsSlide.size>1}"></li>
+									<li data-target="#demo1" data-slide-to="2"
+										th:if="${newsSlide.size>2}"></li>
+								</ul> 
 							</div>
 						</td>
 					</tr>
