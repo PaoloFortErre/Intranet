@@ -789,7 +789,7 @@
 						style="margin: 0 auto; margin-bottom: 20px; background-color: #303030">
 						<tr>
 							<td th:each="pageNumber : ${pageNumbers}"><a
-								th:href="@{/my-life/(page=${pageNumber})}"
+								th:href="@{/my-life1/(page=${pageNumber})}"
 								th:text="${pageNumber}"
 								th:class="${pageNumber==messaggi.number + 1 } ? active"
 								style="color: #F3F3F3; font-size: 18px; padding: 10px;"> </a><br>
