@@ -127,6 +127,11 @@ nav {
 			<br>
 			<br>
 		</div>
+		<div th:if="${filePdf==null}" style="margin-top: 100px; margin-bottom: 300px;">
+
+			<h4 style="color: white; margin: 0 auto;"> Non ci sono moduli da visualizzare </h4>
+
+		</div>
 		<div class="row" style="margin-top: 50px" th:if="${filePdf!=null}">
 
 			<div class="col-xs-9 col-sm-9 col-md-6 col-lg-6 col-xl-6"
