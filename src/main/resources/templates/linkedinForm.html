@@ -57,6 +57,8 @@ body{
 						<img th:src="@{/view/MyWork/images/frecciasinistra.png}" style="display: inline-block;" width="20%">Torna indietro
 					</a>
 				</p> <br>
+				
+				<!-- TUTORIAL PER INSERIRE POST LINKEDIN -->
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin-left: 12px; font-size: 18px">
     Come inserire il link giusto
   </button> <br>
@@ -98,9 +100,10 @@ body{
 
 				<br><form th:action="@{/linkedin/insert}" th:object="${linkedin}"
 				method="post" class="signin-form">
-
+				
+				<!--  FORM INSERIMENTO LINKEDIN POST -->
 				<div class="form-group col-12">
-					<label for="aforisma">Link</label>
+					<label for="linkedin">Link</label>
 					<input class="form-control" type="url" name="linkedin" id="input" th:field="*{link}" required>
 				</div>
 				<div class="form-group col-4">

@@ -53,9 +53,9 @@ nav {
 </head>
 <body ng-app=""
 	th:with="GML = ${#authorization.expression('hasAuthority(''GML'')')}" onresize="myFunction()"
-	  th:style="'background-image: url(' + @{/view/MyWork/images/carbonio.jpg} +');'"
->
-
+	  th:style="'background-image: url(' + @{/view/MyWork/images/carbonio.jpg} +');'">
+	
+	<!-- NAVBAR -->
 	<nav class="navbar navbar-expand-lg bg-dark navbar-dark justify-content-end">
 	<a class="navbar-brand logo" th:href="@{/homepage/}"><img
 			th:src="@{/view/MyWork/images/casabianca.png}" width="30px"
@@ -157,19 +157,14 @@ nav {
 							 th:download="${pdf.nome}"
 							style="text-align: right; padding: 8px;"> <img
 							th:src="@{/view/MyWork/images/download.png.png}" width="30px"
-							style="float: right;" class="img-responsive"></a>
-							
-						
+							style="float: right;" class="img-responsive"></a>	
 					</div>
 				</div>
-
-
-
 			</div>
-
-
+			
 		</div>
 	</div>
+	
 	<!-- PANNELLO FOOTER CON INFO-->
 	<footer class="align-items-center">
 		<div class="container align-items-center mt-4"
