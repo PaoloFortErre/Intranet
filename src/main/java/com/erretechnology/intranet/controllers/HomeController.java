@@ -222,20 +222,16 @@ public class HomeController extends BaseController{
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		if(!u.getUtente().getRuolo().getNome().equals("ADMIN")) throw new Exception("non hai i permessi necessari per quest'azione");
 		int currentPage = page.orElse(1); 
-
-		//	List<Post> messaggi = service.getLastMessage();
 		
 		List<ElementiMyLife> elementi = serviceElementiMyLife.findAll();
-		CompletableFuture<List<ElementiMyLife>> evento = findLifeElement(elementi, "eventi");// elementi.stream().filter(x -> x.getTipo().equals("eventi")).collect(Collectors.toList());
-		CompletableFuture<List<ElementiMyLife>> aforismi = findLifeElement(elementi, "aphorism");//elementi.stream().filter(x -> x.getTipo().equals("aphorism")).collect(Collectors.toList());
-		CompletableFuture<List<ElementiMyLife>> film = findLifeElement(elementi, "cinema");// elementi.stream().filter(x -> x.getTipo().equals("cinema")).collect(Collectors.toList());
-		CompletableFuture<List<ElementiMyLife>> libri = findLifeElement(elementi, "book");// elementi.stream().filter(x -> x.getTipo().equals("book")).collect(Collectors.toList());
+		CompletableFuture<List<ElementiMyLife>> evento = findLifeElement(elementi, "eventi");
+		CompletableFuture<List<ElementiMyLife>> aforismi = findLifeElement(elementi, "aphorism");
+		CompletableFuture<List<ElementiMyLife>> film = findLifeElement(elementi, "cinema");
+		CompletableFuture<List<ElementiMyLife>> libri = findLifeElement(elementi, "book");
 		CompletableFuture<VideoDelGiorno> video = serviceVideo.getLastVideo("MyLife");
 		
 		Page<Post> postPage= servicePost.findPaginated(PageRequest.of(currentPage - 1, 5));
 
-
-		//System.out.println(evento.size());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myLife");
 		mav.addObject("messaggi", postPage);

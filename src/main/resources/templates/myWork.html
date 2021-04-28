@@ -54,7 +54,7 @@ table, th, td {
 
 
 	
-	
+<!-- NAVBAR  -->
 	<nav class="navbar navbar-expand-lg bg-dark navbar-dark justify-content-end">
 	<a class="navbar-brand logo" th:href="@{/homepage/}"><img
 			th:src="@{/view/MyWork/images/casabianca.png}" width="30px"
@@ -111,7 +111,7 @@ table, th, td {
     </ul>
   </div>  
 </nav>
-
+<!-- CAROUSEL GRANDE CON FOTO E AFORISMI -->
 	<div id="demo" class="carousel slide" data-ride="carousel"
 		style="width: 100%">
 		<ul class="carousel-indicators">
@@ -217,6 +217,7 @@ table, th, td {
 				<h1 style="text-align: center" class="mb-3">Le ultime novità</h1>
 
 			</div>
+			<!-- NUOVE ASSUNZIONI -->
 			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4">
 
 				<table class="table table-borderless"
@@ -275,6 +276,8 @@ table, th, td {
 					</td></tr>
 				</table>
 			</div>
+
+			<!-- NUOVI CLIENTI -->
 			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4">
 			
 			<a class="bottoniGMW mt-1" th:href="@{/my-work/clienti/aggiungi/}"
@@ -323,7 +326,7 @@ table, th, td {
 
 
 
-										<!-- The Modal -->
+										<!-- The Modal CLIENTE1-->
 										<div class="modal" th:id="'myModal' + ${cliente.id}">
 											<div class="modal-dialog">
 												<div class="modal-content">
@@ -397,6 +400,8 @@ table, th, td {
 					</tr>
 				</table>
 			</div>
+
+			<!-- NEWS  -->
 			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4">
 			<a class="bottoniGMW mt-1" th:href="@{/my-work/news/aggiungi/}"
 											th:if="${GMW}"
@@ -428,7 +433,7 @@ table, th, td {
 											style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 5px; width: 100px;">
 											Modifica</button>
 
-										<!-- The Modal -->
+										<!-- The Modal NEWS-->
 										<div class="modal" th:id="'myModal' + ${news.id}" style="color: black">
 											<div class="modal-dialog">
 												<div class="modal-content">
@@ -529,6 +534,8 @@ ROW SCHIZZO
 					fuori</h1>
 
 			</div>
+
+			<!-- I PODCAST DI ROSARIO -->
 			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4">
 				<table class="table table-borderless">
 					<tr>
@@ -559,10 +566,9 @@ ROW SCHIZZO
 							</td>
 					</tr>
 				</table>
-				<!-- Button to Open the Modal -->
 
 
-				<!-- The Modal -->
+				<!-- The Modal PODCAST-->
 				<div class="modal" id="myModal" style="color: #303030">
 					<div class="modal-dialog">
 						<div class="modal-content">
@@ -606,6 +612,8 @@ ROW SCHIZZO
 					</div>
 				</div>
 			</div>
+
+			<!-- EVENTI MYWORK -->
 			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4">
 			<a class="bottoniGMW mt-1" th:href="@{/my-work/eventi/aggiungi/}"
 											th:if="${GMW}"
@@ -650,7 +658,7 @@ ROW SCHIZZO
 											Modifica</button>
 
 
-										<!-- The Modal -->
+										<!-- The Modal EVENTI-->
 										<div class="modal" th:id="'myModal' + ${evento.id}" style="color: black">
 											<div class="modal-dialog">
 												<div class="modal-content">
@@ -737,6 +745,8 @@ ROW SCHIZZO
 					</tr>
 				</table>
 			</div>
+
+			<!-- COMPLEANNO -->
 			<div class="col-xs-12 col-sm-12 col-lg-4 col-xl-4">
 				<table class="table table-borderless"
 					th:if="${utente.size>0}">
@@ -830,7 +840,7 @@ ROW SCHIZZO
 
 
 
-
+		<!-- VIDEO DEL MESE -->
 
 		<div class="row" th:if="${video!=null}">
 			<div class="col-xs-0 col-sm-0 col-lg-2 col-xl-2 mt-5"></div>
