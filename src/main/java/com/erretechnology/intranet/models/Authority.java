@@ -5,7 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
-
+/*
+ * 	MODELLO PER LA VIEW AUTHORITIES COMPRENDENTE I PERMESSI PER OGNI UTENTE
+ */
 @Entity
 @Table(name = "authorities")
 @IdClass(AuthorityId.class)

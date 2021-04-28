@@ -7,7 +7,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
+/*
+ * 	MODELLO PER TENERE TRACCIA DEI POST MODIFICATI
+ */
 @Entity
 @Table(name = "old_post")
 public class PostModificato {

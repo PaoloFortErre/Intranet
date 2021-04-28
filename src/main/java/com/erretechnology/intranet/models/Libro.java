@@ -2,7 +2,9 @@ package com.erretechnology.intranet.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
+/*
+ * 	MODELLO PER I LIBRI, PRESENTI IN MYLIFE
+ */
 @Entity
 @Table(name = "book")
 public class Libro extends Cultura {

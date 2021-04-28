@@ -7,7 +7,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
+/*
+ * 	MODELLO PER I LOG, OVVERO TUTTE LE AZIONI CHE GLI UTENTI FARANNO SUL SITO
+ */
 @Entity
 @Table(name = "log")
 public class Log {

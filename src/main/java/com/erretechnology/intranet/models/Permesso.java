@@ -8,7 +8,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
+/*
+ * 	MODELLO PER I PERMESSI CHE POSSONO ESSERE ASSEGNATI AGLI UTENTI
+ */
 @Entity
 @Table(name = "permissions")
 public class Permesso {

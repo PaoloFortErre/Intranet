@@ -6,7 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
-
+/*
+ * 	MODELLO PER LA VIEW CHE INCORPORA GLI ELEMENTI VISUALIZZATI SULLA PAGINA MYLIFE
+ */
 @Entity
 @Table(name = "mylife_last_data")
 public class ElementiMyLife {

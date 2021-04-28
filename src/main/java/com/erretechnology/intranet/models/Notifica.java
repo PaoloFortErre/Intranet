@@ -11,7 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-
+/*
+ * 	MODELLO PER LE NOTIFICA DEGLI UTENTI
+ */
 @Entity
 public class Notifica {
 	@Id

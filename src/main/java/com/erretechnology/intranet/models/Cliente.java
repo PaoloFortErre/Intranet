@@ -7,7 +7,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
+/*
+ * 	MODELLO PER I CLIENTI, PRESENTI IN MYWORK
+ */
 @Entity
 @Table(name = "client")
 public class Cliente {

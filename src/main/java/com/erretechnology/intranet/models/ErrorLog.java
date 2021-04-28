@@ -4,7 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+/*
+ * 	MODELLO PER IL SALVATAGGIO DEI MESSAGGI DI ERRORE RISCONTRATI SUL SITO
+ */
 @Entity
 public class ErrorLog {
 	@Id

@@ -5,7 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
+/*
+ * 	MODELLO PER I POST DI LINKEDIN, PRESENTI SULLA HOMEPAGE
+ */
 @Entity
 @Table(name = "linkedin")
 public class PostLinkedin {

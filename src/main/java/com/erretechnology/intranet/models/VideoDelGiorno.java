@@ -5,7 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
+/*
+ * 	MODELLO PER I VIDEO, PRESENTI SU MYLIFE E MYWORK
+ */
 @Entity
 @Table(name = "Video")
 public class VideoDelGiorno {

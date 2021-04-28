@@ -2,7 +2,9 @@ package com.erretechnology.intranet.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
+/*
+ * 	MODELLO PER GLI EVENTI MYLIFE
+ */
 @Entity
 @Table(name = "event")
 public class EventoLife extends Cultura implements MyWorkBean, Evento{

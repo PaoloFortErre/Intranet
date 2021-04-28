@@ -5,7 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
+/*
+ * 	MODELLO PER LA CATEGORIA DEI FILM (AMAZON PRIME VIDEO, NETFLIX...) PRESENTE IN MYLIFE
+ */
 @Entity
 @Table(name="cinema_category")
 public class CategoriaCinema {

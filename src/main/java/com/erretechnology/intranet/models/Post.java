@@ -1,4 +1,3 @@
-
 package com.erretechnology.intranet.models;
 
 import java.util.HashSet;
@@ -18,7 +17,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
+/*
+ * 	MODELLO PER I POST IN BACHECA, PRESENTI SULA VERSIONE ALTERNATIVA DI MYLIFE
+ */
 @Entity
 @Table(name = "post")
 public class Post {

@@ -1,7 +1,9 @@
 package com.erretechnology.intranet.models;
 
 import javax.persistence.*;
-
+/*
+ * 	MODELLO PER I SONDAGGI, PRESENTI NELLA PAGINA COMUNICAZIONI HR
+ */
 @Entity
 @Table(name = "sondaggio")
 public class Sondaggio implements MyWorkBean {

@@ -17,7 +17,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-
+/*
+ * 	MODELLO PER GLI UTENTI, UTILIZZATO PER IL LOGIN E I PERMESSI
+ */
 @Entity
 @Table(name = "users", uniqueConstraints={@UniqueConstraint(columnNames={"email"})})
 public class Utente{

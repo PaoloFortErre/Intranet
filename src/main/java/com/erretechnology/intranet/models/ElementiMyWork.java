@@ -5,7 +5,9 @@ import java.util.Base64;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
+/*
+ * 	MODELLO PER LA VIEW CHE INCORPORA GLI ELEMENTI VISUALIZZATI SULLA PAGINA MYWORK
+ */
 @Entity
 @Table(name = "mywork_last_data")
 public class ElementiMyWork {

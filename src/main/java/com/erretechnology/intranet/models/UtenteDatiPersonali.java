@@ -12,7 +12,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
+/*
+ * 	MODELLO PER TENERE TRACCIA DEI DATI DEGLI UTENTI, ONE2ONE CON LA TABELLA UTENTE
+ */
 @Entity
 @Table(name = "DatiUtente")
 public class UtenteDatiPersonali implements Serializable, MyWorkBean{

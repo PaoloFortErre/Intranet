@@ -2,7 +2,9 @@ package com.erretechnology.intranet.models;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-
+/*
+ * 	MODELLO PER GLI EVENTI MYWORK
+ */
 @Entity
 @DiscriminatorValue("1")
 public class EventoWork extends Novita implements Evento {

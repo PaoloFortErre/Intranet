@@ -3,7 +3,9 @@ package com.erretechnology.intranet.models;
 import java.util.Base64;
 
 import javax.persistence.*;
-
+/*
+ * 	MODELLO PER TENERE TRACCIA DEI VARI SETTORI DI ERRE (PRO, TECHNOLOGY, LAB E GES)
+ */
 @Entity
 @Table(name = "settore")
 public class Settore {

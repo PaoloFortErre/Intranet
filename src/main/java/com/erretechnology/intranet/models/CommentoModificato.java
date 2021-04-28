@@ -8,7 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
+/*
+ * 	MODELLO PER TENERE TRACCIA DEI COMMENTI MODIFICATI
+ */
 @Entity
 @Table(name = "old_comment")
 public class CommentoModificato /*extends Post*/ {

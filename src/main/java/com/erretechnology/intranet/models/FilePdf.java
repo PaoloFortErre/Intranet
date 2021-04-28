@@ -1,7 +1,9 @@
 package com.erretechnology.intranet.models;
 
 import javax.persistence.*;
-
+/*
+ * 	MODELLO PER I MODULI, RAGGIUNGIBILI DALLA NAVBAR DEL SITO
+ */
 @Entity
 @Table(name = "filePdf")
 public class FilePdf{

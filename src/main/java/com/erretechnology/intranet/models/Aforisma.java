@@ -8,7 +8,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
+/*
+ * 	MODELLO PER GLI AFORISMI, PRESENTI IN MYWORK E MYLIFE
+ */
 @Entity
 @Table(name = "aphorism")
 public class Aforisma {

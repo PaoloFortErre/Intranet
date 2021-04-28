@@ -10,6 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+/*
+ * 	MODELLO PER TENERE TRACCIA DELLE IMMAGINE CARICATE DAGLI UTENTI
+ */
 
 @Entity
 @Table(name = "fileImmagini")

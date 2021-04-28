@@ -10,7 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
+/*
+ * 	MODELLO PER I PODCAST DI ROSARIO, PRESENTI SU MYWORK
+ */
 @Entity
 @Table(name = "podcast")
 public class Podcast {

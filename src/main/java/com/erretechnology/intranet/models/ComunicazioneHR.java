@@ -8,7 +8,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
+/*
+ * 	MODELLO PER LE COMUNICAZIONI HR, RAGGIUNGIBILI TRAMITE LA NAVBAR DEL SITO
+ */
 @Entity
 @Table(name = "ComunicazioneHR")
 public class ComunicazioneHR {

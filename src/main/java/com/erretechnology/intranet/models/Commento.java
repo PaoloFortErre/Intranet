@@ -8,7 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
+/*
+ * 	MODELLO PER I COMMENTI AI POST, PRESENTI IN MYLIFE (VERSIONE CON BACHECA)
+ */
 @Entity
 @Table(name = "comment")
 public class Commento /*extends Post*/ {

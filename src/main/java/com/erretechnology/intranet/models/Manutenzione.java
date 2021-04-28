@@ -1,6 +1,11 @@
 package com.erretechnology.intranet.models;
 
 import javax.persistence.*;
+
+/*
+ * 	MODELLO CHE MANTIENE IL BOOLEANO PER SAPERE SE IL SITO È IN MANUTENZIONE O MENO
+ */
+
 @Entity
 @Table(name = "maintenance")
 public class Manutenzione {
