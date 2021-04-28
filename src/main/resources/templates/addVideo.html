@@ -59,6 +59,8 @@
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin-left: 12px; font-size: 18px">
     Come inserire il link giusto
   </button> <br>
+  
+  <!-- MODAL PER MOSTRARE IL TUTORIAL -->
     <div class="modal" id="myModal" style="color: #303030">
     <div class="modal-dialog" >
       <div class="modal-content" style="width: 700px; margin: 0 auto;">
@@ -97,6 +99,7 @@
       </div>
     </div>
   </div> <br>
+  <!-- FORM PER INSERIRE VIDEO -->
 				<form th:object="${video}" th:action="@{/my-work/video}" onsubmit="return validateForm()"
 				method="post" enctype="multipart/form-data"  class="signin-form">
 				<div id="message-error" class="row justify-content-center mt-2">
