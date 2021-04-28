@@ -53,6 +53,7 @@
 					<div th:if="${errore != null}" class="row justify-content-center mt-2">
 			          <p class="p text-danger">[[${errore}]]</p>
 			        </div>
+			        <!-- FORM AGGIUNGI PODCAST -->
 					<form th:action="@{/my-work/podcast/upload}" th:object="${podcast}" method="post" enctype="multipart/form-data" class="signin-form">
 						<div class="form-group col-5">
 							<label for="date1">Data pubblicazione</label><br>
