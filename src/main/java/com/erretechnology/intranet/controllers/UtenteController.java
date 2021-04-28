@@ -50,6 +50,11 @@ import com.erretechnology.intranet.models.Utility;
 @RequestMapping(value = "profilo")
 public class UtenteController extends BaseController {
 
+	/*
+	 * Funzione per la visualizzazione del proprio profilo, carica la lista dei post inseriti in bacheca,
+	 * i log dell'utente (o di tutti gli utenti nel caso dell'admin) e le informazioni sull'utente dalla sessione
+	 * come foto e descrizione (visualizzate in front-end)
+	 */
 	@GetMapping(value = "/")
 	public ModelAndView primaPagina(HttpSession session) throws Exception, ExecutionException {
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
@@ -72,6 +77,10 @@ public class UtenteController extends BaseController {
 		mav.addObject("utente", u);
 		return mav;
 	}
+	
+	/*
+	 * Funzione per la visualizzazione di un profilo diverso dal proprio
+	 */
 
 	@GetMapping(value = "/visualizza")
 	public ModelAndView viewUserProfile(HttpSession session, String id) throws ExecutionException, Exception {
@@ -87,6 +96,10 @@ public class UtenteController extends BaseController {
 		mav.addObject("utenteDati", utenteLoggato);
 		return mav;
 	}
+	/*
+	 * Funzione richiamata quando viene cliccato su una notifica.
+	 * La notifica viene eliminata si indirizza l'utente sulla pagina specificata dalla notifica stessa
+	 */
 
 	@GetMapping(value = "/elimina-notifica/{id}")
 	public String elimina(HttpSession session, @PathVariable int id) {
@@ -111,6 +124,10 @@ public class UtenteController extends BaseController {
 		}
 		
 	}
+	
+	/*
+	 * Funzione per modificare la descrizione di un utente (compare sul proprio profilo)
+	 */
 
 	@PostMapping(value = "/modifica-descrizione")
 	public String modificaDescrizione(@ModelAttribute("utente") UtenteDatiPersonali utente, HttpSession session) {
@@ -124,6 +141,11 @@ public class UtenteController extends BaseController {
 		
 		return "redirect:/profilo/";
 	}
+	
+	/*
+	 * Quando un utente elimina la sua foto profilo senza caricarne una nuova, viene inserita
+	 * una immagine di default presente in DB
+	 */
 
 	@PostMapping(value = "/elimina-foto")
 	public String eliminaFotoProfilo(HttpSession session) {
@@ -137,6 +159,10 @@ public class UtenteController extends BaseController {
 		
 		return "redirect:/profilo/";
 	}
+	
+	/*
+	 * La funzione rimanda al form per il cambio password
+	 */
 
 	@RequestMapping(value = "/cambio-password", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView cambioPassword(HttpSession session) {
@@ -149,6 +175,14 @@ public class UtenteController extends BaseController {
 				.findById(Integer.parseInt(session.getAttribute("id").toString())).getPasswordCambiata());
 		return mav;
 	}
+	
+	/*
+	 * Funzione per il cambio password, controlla prima la correttezza dei dati (vecchia password corretta
+	 * nuova password = conferma nuova password), poi confronta la nuova password con una espressione regolare
+	 * (la password deve contenere almeno una maiuscolo, una minuscolo, un numero ed essere compresa tra 8 e 20
+	 * caratteri). Se tutti i controlli vanno a buon fine viene cambiata la password di un utente.
+	 * L'utente viene rimandato a questa pagina anche la prima volta che accede alla intranet per settare la propria password
+	 */
 
 	@PostMapping(value = "/pagina-modifica-password")
 	public ModelAndView cambiaPassword(@RequestParam("vecchiaPassword") String vPsw,
@@ -197,7 +231,9 @@ public class UtenteController extends BaseController {
 				.findById(Integer.parseInt(session.getAttribute("id").toString())).getPasswordCambiata());
 		return mav;
 	}
-
+	/*
+	 * Funzione che permette di modificare la propria foto profilo
+	 */
 	@PostMapping(value = "/modifica-foto")
 	public String modificaFoto(@RequestParam(required = false) String dati, @RequestParam(required = false) String nome, HttpSession session)
 					throws Exception {
@@ -226,7 +262,10 @@ public class UtenteController extends BaseController {
 		return "redirect:/profilo/";
 	}
 
-	// PAGINA ATTIVITA' RECENTI
+	/*
+	 * Funziona che permette di controllare tutte le azioni che ha fatto l'utente.
+	 * Se l'utente è ADMIN, può vedere le azioni di tutti gli utenti registrati alla intranet
+	 */
 	@GetMapping(value = "/mostra-log")
 	public ModelAndView mostraLog(HttpSession session) throws InterruptedException, ExecutionException {
 		ModelAndView mav = new ModelAndView();
@@ -245,6 +284,10 @@ public class UtenteController extends BaseController {
 		return mav;
 	}
 
+	/*
+	 * La funzione permette di rendere pubblica la propria data di nascita
+	 * e di apparire sulla pagina mywork il giorno del compleanno... auguri :)
+	 */
 	@PostMapping(value = "/set-visualizzazione")
 	public String modificaVisualizazzioneDataNascita(HttpSession session, @RequestParam("set") String value) {
 		int id_utente = Integer.parseInt(session.getAttribute("id").toString());
@@ -261,6 +304,10 @@ public class UtenteController extends BaseController {
 		return "redirect:/profilo/";
 	}
 
+	/*
+	 * La funzione rimanda a un form per modificare i permessi di un utente (solo l'admin ha la possibilità
+	 * di richiamare questa funzione
+	 */
 	@GetMapping(value = "/gestisci-permessi")
 	public ModelAndView Permesso(HttpSession session) throws InterruptedException, ExecutionException {
 		ModelAndView mav = new ModelAndView();
@@ -269,6 +316,10 @@ public class UtenteController extends BaseController {
 				.sorted((x1, x2)-> x1.getCognome().compareTo(x2.getCognome())).collect(Collectors.toList()));
 		return mav;
 	}
+	
+	/*
+	 * restituisce la lista dei permessi che un utente non possiede al momento
+	 */
 
 	@RequestMapping(value = "/get-permessi-mancanti")
 	@ResponseBody
@@ -281,12 +332,17 @@ public class UtenteController extends BaseController {
 		permessiMancanti.keySet().removeAll(getAllPermessi(email).keySet());
 		return permessiMancanti;
 	}
+	
+	/*
+	 * restituisce la lista dei permessi che un utente possiede al momento
+	 */
 
 	@RequestMapping(value = "/get-permessi")
 	@ResponseBody
 	public Map<String, String> getAllPermessi(@RequestParam("email") String email) {
 		return serviceAuthority.getMapById(serviceUtente.findByEmail(email).getId());
 	}
+	
 
 	@RequestMapping(value = "/is-admin")
 	@ResponseBody
@@ -297,6 +353,10 @@ public class UtenteController extends BaseController {
 		return isAdmin;
 	}
 
+	
+	/*
+	 * La funzione permette di modificare i permessi di un utente (la lista dei permessi arriva dal front-end)
+	 */
 	@GetMapping(value = "/aggiungi-permesso")
 	public String addPermesso(String email, String list, HttpSession session, Model model) throws Exception {
 		String[] permessi = list.split(",");
@@ -357,6 +417,11 @@ public class UtenteController extends BaseController {
 		}
 		throw new Exception("Non hai i permessi per svolgere quest'azione");
 	}
+	
+	/*
+	 * La funzione serve per indirizzare al form per la rimozione di un utente, solo l'ADMIN ha l'accesso
+	 * a questa funzione
+	 */
 
 	@GetMapping(value = "/cancella-utente")
 	public ModelAndView rimuoviUtente(HttpSession session, boolean flag, String messaggio, Model model)
@@ -377,7 +442,10 @@ public class UtenteController extends BaseController {
 		throw new Exception("Non hai i permessi per svolgere quest'azione");
 	}
 
-	// form Registrazione
+	/*
+	 * La funzione indirizza al form per registrare un nuovo utente, solo l'ADMIN ha l'accesso a questa
+	 * funzione
+	 */
 	@GetMapping(value = "/registra")
 	public ModelAndView registrazione(Model model, String nome, String messaggio, boolean flag) {
 		if (flag) {
@@ -394,6 +462,10 @@ public class UtenteController extends BaseController {
 				.sorted((x1, x2)-> x1.getCognome().compareTo(x2.getCognome())).collect(Collectors.toList()));
 		return mav;
 	}
+	/*
+	 * La funzione permette di registrare un nuovo utente alla intranet e di inserirlo all'interno del DB.
+	 * La funzione contiene un'espressione regolare che controlla che l'email sia semanticamente corretta.
+	 */
 
 	@PostMapping(value = "/esegui-registrazione")
 	public ModelAndView addUtente(@ModelAttribute("user") UtenteDatiPersonali utenteDP,
@@ -416,6 +488,10 @@ public class UtenteController extends BaseController {
 			return registrazione(model, "aggiungi2", "Registrazione effettuata con successo", true);
 		}
 	}
+	
+	/*
+	 * La funzione serve per riattivare un utente già registrato alla intranet ma che ha avuto un soft delete
+	 */
 
 	@PostMapping(value = "/riattiva")
 	public ModelAndView riattiva(@RequestParam("id_riattivato") int id, Model model) {
@@ -430,6 +506,10 @@ public class UtenteController extends BaseController {
 				"L'utente " + utente.getNome() + " " + utente.getCognome() + " è stato riattivato", true);
 	}
 
+	/*
+	 * La funzione effettua un soft delete su un utente
+	 */
+	
 	@PostMapping(value = "/elimina")
 	public ModelAndView rimuovi(@RequestParam("id_eliminato") int id, Model model, HttpSession session)
 			throws Exception {
@@ -443,11 +523,17 @@ public class UtenteController extends BaseController {
 				"L'utente " + utente.getNome() + " " + utente.getCognome() + " è stato disattivato", model);
 	}
 
+	/*
+	 * La funzione indirizza a una pagina accessibile solo agli admin. In questa pagina sarà possibile vedere
+	 * tutti gli elementi che hanno ricevuto un soft delete dagli utenti e/o dai moderatori. L'admin avrà la 
+	 * possibilità di ripristinare gli elementi o di eliminarli definitivamente dalla intranet (AZIONE IRREVERSIBILE)
+	 */
+	
 	@GetMapping(value = "/mostra-eliminati")
 	public ModelAndView mostraNonAttivi(HttpSession session) throws Exception {
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		if (!u.getUtente().getRuolo().getNome().equals("ADMIN"))
-			throw new Exception("Fidati. Prima chiedi i permessi");
+			throw new Exception("Solo un ADMIN può accedere a questa pagina");
 		CompletableFuture<List<Evento>> eventiWork = serviceEventoWork.getAllNotVisible();
 		CompletableFuture<List<Evento>> eventiLife = serviceEventoLife.getAllNotVisible();
 		CompletableFuture<List<Post>> posts = servicePost.getAllNotVisible();
