@@ -29,6 +29,9 @@ import com.erretechnology.intranet.models.UtenteDatiPersonali;
 @RequestMapping(value = "my-work/comunicazioni")
 public class UploadController extends BaseController{
 
+	/*
+	 * Funzione che inidirizza al form per aggiungere un modulo
+	 */
 	@GetMapping(value = "/moduli/aggiungi")
 	public ModelAndView uploadMAV() {
 		ModelAndView mav = new ModelAndView();
@@ -36,6 +39,11 @@ public class UploadController extends BaseController{
 		mav.addObject("filePdf", new FilePdf());
 		return mav;
 	}
+	
+	/*
+	 * Funzione che permette di visualizzare tutte le comunicazione HR inserite e non cancellate
+	 * Permette inoltre di aggiungere una nuova
+	 */
 
 	@GetMapping(value = "/hr")
 	public ModelAndView hrMAV(HttpSession session) {
@@ -46,6 +54,9 @@ public class UploadController extends BaseController{
 		mav.addObject("user", serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return mav;
 	}
+	/*
+	 * Funzione che permette di visualizzare tutti i moduli non cancellati
+	 */
 	@GetMapping (value= "/moduli")
 	public ModelAndView moduli(HttpSession session) {
 		UtenteDatiPersonali u  = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
@@ -59,15 +70,15 @@ public class UploadController extends BaseController{
 	}
 
 
-
+	/*
+	 * Funzione per l'inserimento fisico dei moduli in DB 
+	 */
 	@PostMapping(value = "/moduli/upload")
 	public String uploadPdf(@RequestParam("file") MultipartFile file, RedirectAttributes attributes, 
 			@ModelAttribute("filePdf") FilePdf filePdf, HttpSession session) throws Exception{
 		UtenteDatiPersonali u =  serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
-		// normalize the file path
+		// la funzione restituisce il nome del file eliminando il path
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-
-		// save the file on the local file system
 		filePdf.setNome(fileName);
 		filePdf.setTimestamp(Instant.now().getEpochSecond());
 		filePdf.setData(file.getBytes());
@@ -81,13 +92,15 @@ public class UploadController extends BaseController{
 	}
 
 
-
+	/*
+	 * Funzione per l'inserimento fisico delle comunicazioni HR in DB 
+	 */
 	@PostMapping(value = "/hr/upload")
 	public String uploadPdfHR(@RequestParam("file") MultipartFile file, RedirectAttributes attributes, 
 			@ModelAttribute("comunicazioneHR")  ComunicazioneHR filePdfHR, HttpSession session) throws Exception{
 
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-		// save the file on the local file system
+		// la funzione restituisce il nome del file eliminando il path
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		filePdfHR.setNome(fileName);
 		filePdfHR.setData(file.getBytes());
@@ -101,6 +114,9 @@ public class UploadController extends BaseController{
 		return "redirect:/my-work/comunicazioni/hr";
 	}	
 
+	/*
+	 *  Funzione per il soft delete di un modulo
+	 */
 	@PostMapping(value = "/moduli/delete")
 	public String deleteMessaggio(int id, HttpSession session) throws Exception {
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
@@ -116,6 +132,10 @@ public class UploadController extends BaseController{
 		throw new Exception("Non hai i permessi per svolgere quest'azione");
 
 	}
+	
+	/*
+	 * Funzione per il soft delete di una comunicazione HR
+	 */
 
 	@PostMapping(value = "/hr/delete")
 	public String deleteComunicazioneHR(int id, HttpSession session) throws Exception {
@@ -132,6 +152,9 @@ public class UploadController extends BaseController{
 		throw new Exception("Non hai i permessi per svolgere quest'azione");
 	}
 
+	/*
+	 * Funzione per richiamare il download su dispositivo di un modulo
+	 */
 
 	@GetMapping(value = "/moduli/download")
 	public ResponseEntity<Resource> downloadModulo(int id, HttpSession session) {
@@ -139,7 +162,9 @@ public class UploadController extends BaseController{
 		return downloadFile(pdf.getData(), pdf.getNome(), session);
 
 	}
-
+	/*
+	 * Funzione per richiamare il download su dispositivo di una comunicazione HR
+	 */
 	@GetMapping(value = "/hr/download")
 	public ResponseEntity<Resource> downloadHR(int id, HttpSession session) {
 		ComunicazioneHR pdf = serviceComunicazioni.findById(id);
@@ -147,7 +172,9 @@ public class UploadController extends BaseController{
 	}
 
 
-
+	/*
+	 * Funzione di downolad vera e propria
+	 */
 	private ResponseEntity<Resource> downloadFile(byte[] data, String nome, HttpSession session) {
 
 		HttpHeaders headers = new HttpHeaders();
@@ -158,6 +185,9 @@ public class UploadController extends BaseController{
 				.body(new ByteArrayResource(data));
 	}
 
+	/*
+	 * Funzione che permette a un utente di visualizare tutte le comunicazioni hr precedentemente inserite
+	 */
 	@GetMapping(value = "/hr/elenco")
 	public ModelAndView listComunicazioni() {
 		ModelAndView mav = new ModelAndView();
@@ -166,12 +196,20 @@ public class UploadController extends BaseController{
 		return mav;
 	}
 	
+	/*
+	 * Funzione per la cancellazione fisica di una comunicazione HR, solo per admin
+	 */
+	
 	@GetMapping(value ="/hr/cancella")
 	public String eliminaComunicazioneHR(HttpSession session, int id) {
 		ComunicazioneHR hr = serviceComunicazioni.findById(id);
 		serviceComunicazioni.remove(hr);
 		return "redirect:/profilo/mostra-eliminati";
 	}
+	
+	/*
+	 * Funzione per il ripristino di una comunicazione HR, solo per admin
+	 */
 	
 	@GetMapping(value ="/hr/ripristina")
 	public String ripristinaComunicazioneHR(HttpSession session, int id) {
@@ -182,12 +220,20 @@ public class UploadController extends BaseController{
 		return "redirect:/profilo/mostra-eliminati";
 	}
 	
+	/*
+	 * Funzione per la cancellazione fisica di un modulo, solo per admin
+	 */
+	
 	@GetMapping(value ="/moduli/cancella")
 	public String eliminaModulo(HttpSession session, int id) {
 		FilePdf file = serviceFilePdf.findById(id);
 		serviceFilePdf.remove(file);
 		return "redirect:/profilo/mostra-eliminati";
 	}
+	
+	/*
+	 * Funzione per il ripristino di un modulo, solo per admin
+	 */
 	
 	@GetMapping(value ="/moduli/ripristina")
 	public String ripristinaModulo(HttpSession session, int id) {

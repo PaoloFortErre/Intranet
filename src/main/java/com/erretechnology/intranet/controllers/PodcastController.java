@@ -21,10 +21,20 @@ import com.erretechnology.intranet.models.Podcast;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
 import com.erretechnology.intranet.models.Utility;
 
+/*
+ * In questo controller si possono modificare, aggiungere, cancellare i podcast di Rosario
+ */
+
 @Controller
 @RequestMapping("/my-work/podcast")
 public class PodcastController extends BaseController {
 
+	/*
+	 * Funzione che reindirizza al form
+	 * che permette di inserire un podcast, 
+	 * viene passato un podcast vuoto
+	 * e la funzione per inserire la data della pubblicazione 
+	 */
 	@GetMapping(value = "/")
 	public ModelAndView uploadMAV(boolean flag, String messaggio, Model model) {
 		if(flag) {
@@ -37,6 +47,11 @@ public class PodcastController extends BaseController {
 		return mav;
 	}
 
+	/*
+	 * La funzione di caricamento podcast. Si controlla prima di tutto la correttezza dei dati inseriti nel form.
+	 * Dopodiché si inserisce il podcast in DB e si indirizza l'utente sulla pagina MYWORK
+	 */
+	
 	@PostMapping(value = "/upload")
 	public ModelAndView uploadPodcast(Utility data, @RequestParam("file") MultipartFile file,
 			@ModelAttribute("podcast") Podcast podcast, HttpSession session, Model model) throws Exception{
@@ -67,6 +82,9 @@ public class PodcastController extends BaseController {
 		return mav;
 	}
 
+	/*
+	 * Funzione per il soft delete del podcast
+	 */
 	@GetMapping(value = "/delete/{id}")
 	public String deletePodcast(@PathVariable int id) {
 		Podcast p = servicePodcast.getById(id);
@@ -77,13 +95,18 @@ public class PodcastController extends BaseController {
 		return "redirect:/my-work/";
 	}
 	
+	/*
+	 * Cancellazione fisica del podcast dal DB, solo l'admin può farlo
+	 */
 	@GetMapping(value ="/cancella")
 	public String eliminaPodcast(HttpSession session, int id) {
 		Podcast p = servicePodcast.getById(id);
 		servicePodcast.remove(p);
 		return "redirect:/profilo/mostra-eliminati";
 	}
-	
+	/*
+	 * Ripristino podcast in soft delete, solo l'admin può farlo
+	 */
 	@GetMapping(value ="/ripristina")
 	public String ripristinaModulo(HttpSession session, int id) {
 		Podcast p = servicePodcast.getById(id);
