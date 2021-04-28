@@ -17,7 +17,6 @@ public class ElementiMyLife {
 	private String titolo;
 	private String contenuto;
 	private Long timestamp;
-	private String immagine;
 	private String tipo;
 	
 	public byte[] getFoto() {
@@ -26,14 +25,6 @@ public class ElementiMyLife {
 	
 	public void setFoto(byte[] foto) {
 		this.foto = foto;
-	}
-	
-	public String getImmagine() {
-		return immagine;
-	}
-	
-	public void setImmagine(String immagine) {
-		this.immagine = immagine;
 	}
 	
 	public void setTimestamp(Long timestamp) {

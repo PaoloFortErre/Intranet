@@ -120,236 +120,91 @@
 
 		</ul>
 		<div class="carousel-inner">
-			<div class="carousel-item active" th:if="${aforisma.size>0}">
-				<img th:src="@{${aforisma[0].immagine}}" alt="ferrari"
-					title="ferrari" width="100%" height="500" class="img-fluid" style=" filter:brightness(50%);">
-				<div class="carousel-caption" >
-					<h1
-						style="font-weight: 900; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"
-						th:text="${aforisma[0].titolo}"></h1>
-					<p th:text="${aforisma[0].contenuto}"
-						style="font-style: italic; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"></p>
-					<div th:if="${GML}">
-						<button type="submit" name="modifica" data-toggle="modal"
-						data-target="#myModal1"
-							style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 8px; width: 150px;">
-							Modifica aforisma
-						</button>
-					<!--  	<a th:href="@{/aforisma/life/new/}"
-							style="display: inline-block; color: black; background-color: white; font-size: 12px; padding: 8px; text-decoration: none; width: 150px;">
-							Aggiungi aforisma <!--  <img src="/view/MyWork/images/more.png" width="30px"  height="20px"
-									style="margin-bottom: 10px; display: inline-block">
-						</a> -->
-					</div>
-				</div>
-			</div>
-			<div class="carousel-item" th:if="${aforisma.size>1}" >
-				<img th:src="@{${aforisma[1].immagine}}" alt="scarpe" width="100%"
-					height="500" class="img-fluid" style=" filter:brightness(50%);">
-				<div class="carousel-caption" >
-					<h1
-						style="font-weight: 900; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"
-						th:text="${aforisma[1].titolo}"></h1>
-					<p th:text="${aforisma[1].contenuto}"
-						style="font-style: italic; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"></p>
-					<div th:if="${GML}">
-					<button type="submit" name="modifica" data-toggle="modal"
-					data-target="#myModal2"
-						style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 8px; width: 150px;">
-						Modifica aforisma
-					</button>
-			<!--  			<a th:href="@{/aforisma/new/}"
-							style="display: inline-block; color: black; background-color: white; font-size: 12px; padding: 8px; text-decoration: none; width: 150px;">
-							Aggiungi aforisma < <img src="/view/MyWork/images/more.png" width="30px"  height="20px"
-									style="margin-bottom: 10px; display: inline-block">
-						</a> -->
-					</div>
-				</div>
-			</div>
-			<div class="carousel-item" th:if="${aforisma.size>2}">
-				<img th:src="@{${aforisma[2].immagine}}" alt="scarpe" width="100%"
-					height="500" class="img-fluid" style=" filter:brightness(50%);">
-				<div class="carousel-caption" >
-					<h1
-						style="font-weight: 900; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"
-						th:text="${aforisma[2].titolo}"></h1>
-					<p th:text="${aforisma[2].contenuto}"
-						style="font-style: italic; text-shadow: 3px 1px 1px rgba(0, 0, 0, 1);"></p>
-					<div th:if="${GML}">
-						<button type="submit" name="modifica" data-toggle="modal"
-						data-target="#myModal3"
-							style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 8px; width: 150px;">
-							Modifica aforisma
-						</button>
-				<!--		<a th:href="@{/aforisma/new/}"
-							style="display: inline-block; color: black; background-color: white; font-size: 12px; padding: 8px; text-decoration: none; width: 150px;">
-							Aggiungi aforisma   <img src="/view/MyWork/images/more.png" width="30px"  height="20px"
-									style="margin-bottom: 10px; display: inline-block">
-						</a>-->
-					</div>
-				</div>
-			</div>
+			<div th:if="${aforisma.size>0}" th:each="aforisma1 : ${aforisma}"
+				th:class="${aforisma1Stat.index} == 0  ? 'carousel-item active':'carousel-item '">
+				<img th:src="'data:image/png;base64,' + ${aforisma1.getImgData(aforisma1.foto)}" th:alt="'myLife' + ${aforisma1Stat.index}" width="100%"
+					height="500" class="img-fluid" style="filter: brightness(50%);">
+				<div class="carousel-caption">
+					<div >
+						<p style="font-weight: 900;" class="h1 h1caption"
+							th:text="${aforisma1.titolo}"></p>
+						<p th:text="${aforisma1.contenuto}" style="font-style: italic;"></p>
+						<div th:if="${GML}">
 
-		</div>
+							<button type="submit" name="modifica" data-toggle="modal"
+								th:attr="data-target='#myModal' + ${aforisma1.id}"
+								style="background-color: white; border: 0px solid #232323; display: inline-block; color: black; font-size: 12px; padding: 8px; width: 150px;">
+								Modifica aforisma</button>
+
+						</div>
+					</div>
+				</div>
+				
+					<div class="modal" th:id="'myModal' + ${aforisma1.id}">
+						<div class="modal-dialog">
+							<div class="modal-content">
+	
+								<!-- Modal Header -->
+								<div class="modal-header">
+									<h4 class="modal-title" style="color: black;">Modifica
+										l'aforisma</h4>
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+								</div>
+	
+								<!-- Modal body -->
+								<div class="modal-body">
+									<form
+										th:action="@{/aforisma/update/{id}(id = ${aforisma1.id})}"
+										method="post" class="signin-form"
+										th:onsubmit="'return validateForm(' + ${aforisma1.id}+ ')'" enctype="multipart/form-data">
+										<div th:id="'message-error' + ${aforisma1.id}"
+											class="row justify-content-center mt-2"></div>
+										<div class="form-group col-12">
+											<label for="frase" style="color: black;">Frase</label> <input
+												class="form-control" type="text" th:id="'titoloAforisma' + ${aforisma1.id}" name="frase"
+												required th:placeholder="${aforisma1.titolo}">
+										</div>
+	
+										<div class="form-group col-12">
+											<label for="autore" style="color: black;">Autore</label> <input
+												class="form-control" type="text" id="autore" name="autore"
+												th:placeholder="${aforisma1.contenuto}"> <br>
+											<input type="file" name="immagine" id="img"
+												accept="image/png, image/jpeg ,image/jpg"
+												style="color: black;">
+										</div>
+										<div class="form-group col-4" style="float: right">
+											<input class="form-control" type="submit" id="pubblicaSubmit"
+												value="Salva">
+										</div>
+									</form>
+								</div>
+	
+								<!-- Modal footer -->
+								<div class="modal-footer">
+									<button type="button" class="btn btn-danger"
+										data-dismiss="modal">Chiudi</button>
+								</div>
+	
+							</div>
+						</div>
+					</div>
+				
+			</div>
+		
 		<a class="carousel-control-prev" href="#demo" data-slide="prev"> <span
 			class="carousel-control-prev-icon"></span>
 		</a> <a class="carousel-control-next" href="#demo" data-slide="next">
 			<span class="carousel-control-next-icon"></span>
 		</a>
 	</div>
+</div>
+<!-- ***************
+ 		FINE HEADER
+      **************
+ -->
 
-
-
-	<!-- ************
-			FINE HEADER
-			***************** -->
 	<div class="container">
-
-	<!-- *******************
-	
-	MODALI PER IL CAROUSEL
-
-******************* -->
-<!-- The Modal -->
-<div class="modal" id="myModal1">
-<div class="modal-dialog">
-	<div class="modal-content">
-
-		<!-- Modal Header -->
-		<div class="modal-header">
-			<h4 class="modal-title" style="color: black;">Modifica
-				l'aforisma</h4>
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-		</div>
-
-		<!-- Modal body -->
-		<div class="modal-body" th:if="${aforisma.size>0}">
-			<form th:action="@{/aforisma/update/{id}(id = ${aforisma[0].id})}"
-				method="post" class="signin-form"  enctype="multipart/form-data">
-				<div id="message-error0" class="row justify-content-center mt-2">
-  				</div>
-				<div class="form-group col-12">
-					<label for="frase" style="color: black;">Frase</label> <input
-						class="form-control" type="text" id="frase0" name="frase"
-						required th:placeholder="${aforisma[0].titolo}">
-				</div>
-
-				<div class="form-group col-12">
-					<label for="autore" style="color: black;">Autore</label> <input
-						class="form-control" type="text" id="autore" name="autore" th:placeholder="${aforisma[0].contenuto}">
-					<br><input type="file" name="immagine" id="img"
-									accept="image/png, image/jpeg ,image/jpg" style="color:black;"> 
-				</div>
-				<div class="form-group col-4" style="float: right">
-					<input class="form-control" type="submit" id="pubblicaSubmit"
-						value="Salva"> 
-				</div>
-			</form>
-		</div>
-
-		<!-- Modal footer -->
-		<div class="modal-footer">
-			<button type="button" class="btn btn-danger" data-dismiss="modal">Chiudi</button>
-		</div>
-
-	</div>
-</div>
-</div>
-
-
-<!-- The Modal CAROUSEL2 -->
-<div class="modal" id="myModal2">
-<div class="modal-dialog">
-	<div class="modal-content">
-
-		<!-- Modal Header -->
-		<div class="modal-header">
-			<h4 class="modal-title" style="color: black;">Modifica
-				l'aforisma</h4>
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-		</div>
-
-		<!-- Modal body -->
-		<div class="modal-body" th:if="${aforisma.size>1}">
-			<form th:action="@{/aforisma/update/{id}(id = ${aforisma[1].id})}"
-				method="post" class="signin-form"  enctype="multipart/form-data">
-				<div id="message-error1" class="row justify-content-center mt-2">
-  	</div>
-				<div class="form-group col-12">
-					<label for="frase" style="color: black;">Frase</label> <input
-						class="form-control" type="text" id="frase1" name="frase"
-						required  th:placeholder="${aforisma[1].titolo}">
-				</div>
-
-				<div class="form-group col-12">
-					<label for="autore" style="color: black;">Autore</label> <input
-						class="form-control" type="text" id="autore" name="autore" th:placeholder="${aforisma[1].contenuto}">
-					<br><input type="file" name="immagine" id="img"
-									accept="image/png, image/jpeg ,image/jpg" style="color:black;"> 
-				</div>
-				<div class="form-group col-4" style="float: right">
-					<input class="form-control" type="submit" id="pubblicaSubmit"
-						value="Salva">
-				</div>
-			</form>
-		</div>
-
-		<!-- Modal footer -->
-		<div class="modal-footer">
-			<button type="button" class="btn btn-danger" data-dismiss="modal">Chiudi</button>
-		</div>
-
-	</div>
-</div>
-</div>
-
-
-
-<!-- The Modal CAROUSEL3-->
-<div class="modal" id="myModal3">
-<div class="modal-dialog">
-	<div class="modal-content">
-
-		<!-- Modal Header -->
-		<div class="modal-header">
-			<h4 class="modal-title" style="color: black;">Modifica
-				l'aforisma</h4>
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-		</div>
-
-		<!-- Modal body -->
-		<div class="modal-body" th:if="${aforisma.size>2}">
-			<form th:action="@{/aforisma/update/{id}(id = ${aforisma[2].id})}"
-				method="post" class="signin-form"  enctype="multipart/form-data">
-				<div id="message-error2" class="row justify-content-center mt-2">
-  	</div>
-				<div class="form-group col-12">
-					<label for="frase" style="color: black;">Frase</label> <input
-						class="form-control" type="text" id="frase2" name="frase"
-						required  th:placeholder="${aforisma[2].titolo}">
-				</div>
-
-				<div class="form-group col-12">
-					<label for="autore" style="color: black;">Autore</label> <input
-						class="form-control" type="text" id="autore" name="autore"  th:placeholder="${aforisma[2].contenuto}">
-					<br><input type="file" name="immagine" id="img"
-									accept="image/png, image/jpeg ,image/jpg" style="color:black;"> 
-				</div>
-				<div class="form-group col-4" style="float: right">
-					<input class="form-control" type="submit" id="pubblicaSubmit"
-						value="Salva">
-				</div>
-			</form>
-		</div>
-
-		<!-- Modal footer -->
-		<div class="modal-footer">
-			<button type="button" class="btn btn-danger" data-dismiss="modal">Chiudi</button>
-		</div>
-
-	</div>
-</div>
-</div>
 
 		<div class="row" style="margin-top: 5%">
 

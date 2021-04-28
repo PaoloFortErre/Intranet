@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -19,15 +20,18 @@ public class Aforisma {
 	@ManyToOne
 	@JoinColumn(name="utente_id")
 	private Utente utente;
-	private String immagine;
+	@Lob
+	private byte[] immagine;
 	//	private boolean visibile;
 	private boolean isLife;
 	
-	public String getImmagine() {
+	
+
+	public byte[] getImmagine() {
 		return immagine;
 	}
 
-	public void setImmagine(String immagine) {
+	public void setImmagine(byte[] immagine) {
 		this.immagine = immagine;
 	}
 
@@ -61,15 +65,7 @@ public class Aforisma {
 	public void setUtente(Utente utente) {
 		this.utente = utente;
 	}
-
-	/*public boolean isVisibile() {
-		return visibile;
-	}
-
-	public void setVisibile(boolean visibile) {
-		this.visibile = visibile;
-	}
-*/
+	
 	public boolean isLife() {
 		return isLife;
 	}
