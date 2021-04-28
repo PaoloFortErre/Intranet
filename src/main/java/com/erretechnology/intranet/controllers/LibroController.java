@@ -36,6 +36,7 @@ public class LibroController extends BaseController {
 		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
 		libro.setAutore(utenteLoggato);
 
+		//controllo se immagine è già presente nel database
 		if(!immagine.getOriginalFilename().isEmpty()) 
 			libro.setCopertina(salvaImmagine(immagine, utenteLoggato));
 
@@ -53,7 +54,8 @@ public class LibroController extends BaseController {
 		libro.setScrittore(scrittore);
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
-		
+
+		//controllo se immagine è già presente nel database
 		if(!immagine.getOriginalFilename().isEmpty()) 
 			libro.setCopertina(salvaImmagine(immagine, utenteLoggato));
 

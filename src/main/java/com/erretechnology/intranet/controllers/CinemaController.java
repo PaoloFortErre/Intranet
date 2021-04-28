@@ -42,7 +42,8 @@ public class CinemaController extends BaseController {
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
 		cinema.setAutore(utenteLoggato);
-
+		
+		//controllo se immagine è già presente nel database
 		if(!immagine.getOriginalFilename().isEmpty()) 
 			cinema.setCopertina(salvaImmagine(immagine, utenteLoggato));
 
@@ -61,6 +62,7 @@ public class CinemaController extends BaseController {
 		cinema.setCategoria(categoriaCinema);
 		UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		
+		//controllo se immagine è già presente nel database
 		if(!immagine.getOriginalFilename().isEmpty()) 
 			cinema.setCopertina(salvaImmagine(immagine, utenteLoggato));
 
