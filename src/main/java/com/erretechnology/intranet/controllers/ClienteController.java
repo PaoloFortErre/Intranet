@@ -37,7 +37,7 @@ public class ClienteController extends BaseController{
 	public String post(@ModelAttribute("cliente") Cliente cliente, @RequestParam(required=false) MultipartFile immagine, 
 			@RequestParam("date") String date, HttpSession session, ModelMap model) throws Exception {
 
-		//formatting date
+		//trasformazione data in timestamp
 		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM");
 		YearMonth yearMonth = YearMonth.parse(date, dateFormat);
 		LocalDate parsedDate = yearMonth.atDay(1);
@@ -46,7 +46,8 @@ public class ClienteController extends BaseController{
 		cliente.setVisibile(true);
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
-
+		
+		//controllo se immagine è già presente nel database
 		if(!immagine.getOriginalFilename().isEmpty()) 
 			cliente.setLogo(salvaImmagine(immagine, utenteLoggato));
 
@@ -61,6 +62,7 @@ public class ClienteController extends BaseController{
 		Cliente cliente = serviceCliente.findById(id);
 		cliente.setNome(nome);
 
+		//trasformazione data in timestamp
 		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM");
 		YearMonth yearMonth = YearMonth.parse(dataInizio, dateFormat);
 		LocalDate parsedDate = yearMonth.atDay(1);
@@ -69,6 +71,7 @@ public class ClienteController extends BaseController{
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
 
+		//controllo se immagine è già presente nel database
 		if(!immagine.getOriginalFilename().isEmpty()) 
 			cliente.setLogo(salvaImmagine(immagine, utenteLoggato));
 

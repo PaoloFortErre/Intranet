@@ -35,7 +35,8 @@ public class EventoLifeController extends BaseController {
 	@PostMapping(value = "/insert")
 	public String post(@ModelAttribute("evento") EventoLife evento, @RequestParam(required=false) MultipartFile immagine, 
 			String date, HttpSession session, ModelMap model) throws Exception {
-
+		
+		//trasformazione data in timestamp
 		Date formettedDate = new SimpleDateFormat("yyyy-MM-dd").parse(date); 
 		Timestamp timestamp = new Timestamp(formettedDate.getTime()/1000);  
 		evento.setData(timestamp.getTime());
@@ -45,6 +46,7 @@ public class EventoLifeController extends BaseController {
 		evento.setAutore(utenteLoggato);
 		evento.setVisibile(true);
 
+		//controllo se immagine è già presente nel database
 		if(!immagine.getOriginalFilename().isEmpty()) 
 			evento.setCopertina(salvaImmagine(immagine, utenteLoggato));
 
@@ -61,12 +63,15 @@ public class EventoLifeController extends BaseController {
 		evento.setTitolo(titolo);
 		evento.setLuogo(luogo);
 
+		//trasformazione data in timestamp
 		Date formettedDate = new SimpleDateFormat("yyyy-MM-dd").parse(date); 
 		Timestamp timestamp = new Timestamp(formettedDate.getTime()/1000);  
 		evento.setData(timestamp.getTime());
 		evento.setLink(link);
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
+		
+		//controllo se immagine è già presente nel database
 		if(!immagine.getOriginalFilename().isEmpty()) 
 			evento.setCopertina(salvaImmagine(immagine, utenteLoggato));
 		serviceEventoLife.save(evento);

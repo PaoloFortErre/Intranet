@@ -36,6 +36,7 @@ public class EventoWorkController extends BaseController {
 	public String post(@ModelAttribute("evento") EventoWork evento, @RequestParam(required=false) MultipartFile immagine, 
 			String date, HttpSession session, ModelMap model) throws Exception {
 
+		//trasformazione data in timestamp
 		Date formettedDate = new SimpleDateFormat("yyyy-MM-dd").parse(date); 
 		Timestamp timestamp = new Timestamp(formettedDate.getTime()/1000);  
 		evento.setData(timestamp.getTime());
@@ -47,6 +48,7 @@ public class EventoWorkController extends BaseController {
 		evento.setAutore(utenteLoggato);
 		evento.setVisibile(true);
 		
+		//controllo se immagine è già presente nel database
 		if(!immagine.getOriginalFilename().isEmpty()) 
 			evento.setCopertina(salvaImmagine(immagine, utenteLoggato));
 
@@ -64,10 +66,13 @@ public class EventoWorkController extends BaseController {
 		evento.setLuogo(luogo);
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
+		
+		//trasformazione data in timestamp
 		Date formettedDate = new SimpleDateFormat("yyyy-MM-dd").parse(date); 
 		Timestamp timestamp = new Timestamp(formettedDate.getTime()/1000);  
 		evento.setData(timestamp.getTime());
 
+		//controllo se immagine è già presente nel database
 		if(!immagine.getOriginalFilename().isEmpty()) 
 			evento.setCopertina(salvaImmagine(immagine, utenteLoggato));
 		

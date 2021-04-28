@@ -39,7 +39,8 @@ public class NewsController extends BaseController {
 		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
 		news.setAutore(utenteLoggato);
 		news.setVisibile(true);
-
+		
+		//controllo se immagine è già presente nel database
 		if(!immagine.getOriginalFilename().isEmpty()) 
 			news.setCopertina(salvaImmagine(immagine, utenteLoggato));
 
@@ -57,6 +58,7 @@ public class NewsController extends BaseController {
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
 
+		//controllo se immagine è già presente nel database
 		if(!immagine.getOriginalFilename().isEmpty()) 
 			news.setCopertina(salvaImmagine(immagine, utenteLoggato));
 
