@@ -46,7 +46,7 @@ public class EventoLifeController extends BaseController {
 		evento.setAutore(utenteLoggato);
 		evento.setVisibile(true);
 
-		//controllo se immagine è già presente nel database
+		//controllo se è stata passata un'immagine
 		if(!immagine.getOriginalFilename().isEmpty()) 
 			evento.setCopertina(salvaImmagine(immagine, utenteLoggato));
 
@@ -71,7 +71,7 @@ public class EventoLifeController extends BaseController {
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
 		
-		//controllo se immagine è già presente nel database
+		//controllo se è stata passata un'immagine
 		if(!immagine.getOriginalFilename().isEmpty()) 
 			evento.setCopertina(salvaImmagine(immagine, utenteLoggato));
 		serviceEventoLife.save(evento);

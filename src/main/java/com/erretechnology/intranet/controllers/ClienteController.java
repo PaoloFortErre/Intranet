@@ -47,7 +47,7 @@ public class ClienteController extends BaseController{
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
 		
-		//controllo se immagine è già presente nel database
+		//controllo se è stata passata un'immagine
 		if(!immagine.getOriginalFilename().isEmpty()) 
 			cliente.setLogo(salvaImmagine(immagine, utenteLoggato));
 
@@ -71,7 +71,7 @@ public class ClienteController extends BaseController{
 		int idUser = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali utenteLoggato= serviceDatiPersonali.findById(idUser);
 
-		//controllo se immagine è già presente nel database
+		//controllo se è stata passata un'immagine
 		if(!immagine.getOriginalFilename().isEmpty()) 
 			cliente.setLogo(salvaImmagine(immagine, utenteLoggato));
 

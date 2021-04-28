@@ -121,6 +121,7 @@ public class MyLifeController extends BaseController {
 			pm.setTimestamp(p.getTimestamp());
 			pm.setPost(p);
 			p.setTimestamp(Instant.now().getEpochSecond());
+			//controllo se è stata passata un'immagine
 			if(!document.getOriginalFilename().isEmpty()) 
 				p.setImmagine(salvaImmagine(document, serviceDatiPersonali.findById(sessionId)));
 			servicePost.save(p);
@@ -142,7 +143,6 @@ public class MyLifeController extends BaseController {
 			CommentoModificato cm = new CommentoModificato();
 			cm.setTesto(tmp);
 			cm.setTimestamp(c.getTimestamp());
-		//	c.setTimestamp(Instant.now().getEpochSecond());
 			cm.setCommento(c);
 			cm.setTimestamp(c.getTimestamp());
 			c.setTimestamp(Instant.now().getEpochSecond());
@@ -155,9 +155,8 @@ public class MyLifeController extends BaseController {
 	}
 
 	@PostMapping(value = "/delete-post")
-	public String deletePost(/*@ModelAttribute Post post*/ int id, HttpSession session) throws Exception {
+	public String deletePost(int id, HttpSession session) throws Exception {
 		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
-		//int autoreId = servicePost.findById(id).getAutore().getId();
 		UtenteDatiPersonali autore = servicePost.findById(id).getAutore();
 		if(sessionId == autore.getId() || 
 		   serviceAuthority.findByUserId(sessionId).stream().filter(x -> x.getIdPermesso().equals("DS")).count() == 1) {
@@ -165,22 +164,18 @@ public class MyLifeController extends BaseController {
 			p.setTimestampEliminazione(Instant.now().getEpochSecond());
 			p.setVisibile(false);
 			servicePost.save(p);
-			//System.out.println("cancellazione post: RIUSCITO");
 			saveLog("cancellato un post in bacheca", autore);
 			return "redirect:/my-life1/";
 		}
-		//System.out.println("cancellazione post: PERMESSO NEGATO");
 		throw new Exception("Non hai i permessi per svolgere quest'azione");
 
 	}
 
 	@PostMapping(value = "/delete-commento")
-	public String deleteCommento(/*@ModelAttribute Post post*/ int id, HttpSession session) throws Exception {
+	public String deleteCommento(int id, HttpSession session) throws Exception {
 		int sessionId = Integer.parseInt(session.getAttribute("id").toString());
-		// int autoreId = serviceCommento.findById(id).getAutore().getId();
 		UtenteDatiPersonali autoreCommento = serviceCommento.findById(id).getAutore();
 		UtenteDatiPersonali autorePost = serviceCommento.findById(id).getPost().getAutore();
-		//Utente utenteLoggato = serviceUtente.findById(sessionId);
 		if(sessionId == autoreCommento.getId() ||
 		   serviceAuthority.findByUserId(sessionId).stream().filter(x-> x.getIdPermesso().equals("DS")).count() == 1 ||
 		   autorePost.getId() == sessionId) {
@@ -188,11 +183,9 @@ public class MyLifeController extends BaseController {
 			c.setVisibile(false);
 			c.setTimestampEliminazione(Instant.now().getEpochSecond());
 			serviceCommento.save(c);
-			//System.out.println("cancellazione post: RIUSCITO");
 			saveLog("cancellato un commento in bacheca", serviceDatiPersonali.findById(sessionId));
 			return "redirect:/my-life1/";
 		}
-		//System.out.println("cancellazione post: PERMESSO NEGATO");
 		throw new Exception("Non hai i permessi per svolgere quest'azione");
 
 	}
@@ -214,12 +207,12 @@ public class MyLifeController extends BaseController {
 
 	@PostMapping(value = "/add-post")
 	public String inserisciPost(Post post, HttpSession session, @RequestParam(required=false) MultipartFile document) throws Exception {
-		//	String mail = session.getAttribute("email").toString();
 		int id = Integer.parseInt(session.getAttribute("id").toString());
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(id);
 		post.setAutore(autore);
 		post.setTimestamp(Instant.now().getEpochSecond());
 		post.setVisibile(true);
+		//controllo se è stata passata un'immagine
 		if(!document.getOriginalFilename().isEmpty()) 
 			post.setImmagine(salvaImmagine(document, autore));
 

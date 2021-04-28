@@ -26,7 +26,8 @@ public class AforismaController extends BaseController {
 		aforisma.setFrase(frase);
 		aforisma.setAutore(autore);
 		UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
-		if(!immagine.isEmpty()) {
+		//controllo se è stata passata un'immagine
+		if(!immagine.getOriginalFilename().isEmpty()) {
 			FileImmagine img = salvaImmagine(immagine, utenteLoggato);
 			aforisma.setImmagine(img.getData());
 		}

@@ -143,14 +143,13 @@ public class MyWorkController extends BaseController {
 	
 	@PostMapping(value = "/sondaggi/delete/{id}")
 	public String deleteMessaggio(@PathVariable int id, HttpSession session) {
-		//controllare permesso GS
 		UtenteDatiPersonali autore = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
-			Sondaggio s =serviceSondaggio.findById(id);
-			s.setVisibile(false);
-			s.setTimestampEliminazione(Instant.now().getEpochSecond());
-			serviceSondaggio.save(s);
-			saveLog("cancellato un sondaggio", autore);
-			return "redirect:/my-work/comunicazioni/";
+		Sondaggio s =serviceSondaggio.findById(id);
+		s.setVisibile(false);
+		s.setTimestampEliminazione(Instant.now().getEpochSecond());
+		serviceSondaggio.save(s);
+		saveLog("cancellato un sondaggio", autore);
+		return "redirect:/my-work/comunicazioni/";
 	}
 
 	@GetMapping(value = "/sondaggi/aggiungi")

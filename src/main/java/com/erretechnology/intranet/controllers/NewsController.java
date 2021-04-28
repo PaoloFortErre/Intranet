@@ -40,7 +40,7 @@ public class NewsController extends BaseController {
 		news.setAutore(utenteLoggato);
 		news.setVisibile(true);
 		
-		//controllo se immagine è già presente nel database
+		//controllo se è stata passata un'immagine
 		if(!immagine.getOriginalFilename().isEmpty()) 
 			news.setCopertina(salvaImmagine(immagine, utenteLoggato));
 
