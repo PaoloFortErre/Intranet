@@ -184,7 +184,7 @@ public class UploadController extends BaseController{
 		saveLog("scaricato il modulo " + nome, serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_PDF_VALUE)
-				.body(new ByteArrayResource(Base64.getDecoder().decode(data.getBytes("UTF-8"))));
+				.body(new ByteArrayResource(Base64.getMimeDecoder().decode(data)));
 	}
 
 	/*
