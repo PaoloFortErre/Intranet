@@ -108,7 +108,7 @@ nav {
 						</div>
 					</div></li>
 					<li class="nav-item"><a th:href="@{/profilo/}"><img
-						th:src="'data:image/jpeg;base64,' + ${user.immagine.getImgData(user.immagine.data)}"
+						th:src="'data:image/jpeg;base64,' + ${user.immagine.data}"
 						alt="utente" title="utente" class="immagineUtente img-fluid"
 						id="utente-foto-profilo" style="border-radius: 50%;"></a></li>
     </ul>
@@ -143,12 +143,13 @@ nav {
 							height="200px">
 					</div>
 					<div id="modulo-titolo">
-						<h4 style="display: inline-block; padding-left: 8px;"><strong>Modulo:</strong></h4><h4 style="padding: 8px; display: inline-block;" th:text="${pdf.nome}"></h4>
+						<h4 style="display: inline-block; padding-left: 8px;">
+							<strong>Modulo:</strong></h4><h4 style="padding: 8px; display: inline-block;" th:text="${pdf.nome}"></h4>
 						<img th:src="@{/view/MyWork/images/pdf-icon.png}"
 							style="float: right; margin: 8px;" width="30px">
 						<form th:action="@{/my-work/comunicazioni/moduli/delete(id=${pdf.id})}" th:if="${GM}" method="post">
 							<button type="submit"  id="bottoneModulo"> <img th:src="@{/view/MyWork/images/trash.png}" width="50%"></button>
-							<img th:src="'data:image/jpeg;base64,' + ${pdf.settore.getImgData(pdf.settore.logo)}"
+							<img th:src="'data:image/jpeg;base64,' + ${pdf.settore.logo}"
 						alt="settore" title="settore" class="img-responsive" width="25%" style="border-radius: 6px 6px 0px 0px">
 						</form>
 					</div>

@@ -101,7 +101,7 @@
 						</div>
 					</div></li>
 					<li class="nav-item"><a th:href="@{/profilo/}"><img
-						th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
+						th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.data}"
 						alt="utente" title="utente" class="immagineUtente img-fluid"
 						id="utente-foto-profilo" style="border-radius: 50%;"></a></li>
     </ul>
@@ -120,7 +120,7 @@
 		<div class="carousel-inner">
 			<div th:if="${aforisma.size>0}" th:each="aforisma1 : ${aforisma}"
 				th:class="${aforisma1Stat.index} == 0  ? 'carousel-item active':'carousel-item '">
-				<img th:src="'data:image/png;base64,' + ${aforisma1.getImgData(aforisma1.foto)}" th:alt="'myLife' + ${aforisma1Stat.index}" width="100%"
+				<img th:src="'data:image/png;base64,' + ${aforisma1.foto}" th:alt="'myLife' + ${aforisma1Stat.index}" width="100%"
 					height="500" class="img-fluid" style="filter: brightness(50%);">
 				<div class="carousel-caption">
 					<div >
@@ -230,7 +230,7 @@
 				th:each="film1 : ${film}">
 				<div class="profile-card-2 mt-4">
 				<img
-						th:src="'data:image/png;base64,' + ${film1.getImgData(film1.foto)}"
+						th:src="'data:image/png;base64,' + ${film1.foto}"
 						class="img img-responsive" width="100%" height="550px" th:alt="'film' + ${film1Stat.index}">
 					<div class="profile-name" th:text="${film1.titolo}"></div>
 					<div class="profile-username" th:text="${film1.contenuto}"></div>
@@ -351,7 +351,7 @@
 							th:if="${evento.foto!=null}">
 							<a th:href="${evento.contenuto}"
 								th:if="${evento.contenuto!=null}" target="blank"><img
-								th:src="'data:image/png;base64,' + ${evento.getImgData(evento.foto)}"
+								th:src="'data:image/png;base64,' + ${evento.foto}"
 								style="height: 550px" width="440px" th:alt="'evento' + ${eventoStat.index}"></a> <br>
 							<h3 th:text="${evento.titolo}"
 								style="text-align: center; font-size: 30px; font-weight: bold;"
@@ -484,7 +484,7 @@
 				th:each="libro : ${libri}">
 				<div class="profile-card-3 mt-5">
 					<img
-						th:src="'data:image/png;base64,' + ${libro.getImgData(libro.foto)}"
+						th:src="'data:image/png;base64,' + ${libro.foto)}"
 						class="img img-responsive" width="100%" height="350px" th:alt="'Libro' + ${libroStat.index}">
 					<div class="profile-name" th:text="${libro.titolo}"></div>
 					<div class="profile-username" th:text="${libro.contenuto}"></div>

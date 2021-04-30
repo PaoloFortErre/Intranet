@@ -103,7 +103,7 @@
 						</div>
 					</div></li>
 					<li class="nav-item"><a th:href="@{/profilo/}"><img
-						th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
+						th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.data}"
 						alt="utente" title="utente" class="immagineUtente img-fluid"
 						id="utente-foto-profilo" style="border-radius: 50%;"></a></li>
     </ul>
@@ -122,7 +122,7 @@
 		<div class="carousel-inner">
 			<div th:if="${aforisma.size>0}" th:each="aforisma1 : ${aforisma}"
 				th:class="${aforisma1Stat.index} == 0  ? 'carousel-item active':'carousel-item '">
-				<img th:src="'data:image/png;base64,' + ${aforisma1.getImgData(aforisma1.foto)}" th:alt="'myLife' + ${aforisma1Stat.index}" width="100%"
+				<img th:src="'data:image/png;base64,' + ${aforisma1.foto}" th:alt="'myLife' + ${aforisma1Stat.index}" width="100%"
 					height="500" class="img-fluid" style="filter: brightness(50%);">
 				<div class="carousel-caption">
 					<div >
@@ -217,7 +217,7 @@
 
 					<img th:src="@{/view/MyLife/images/tori.jpg}" width="100%"
 						style="border-radius: 6px 6px 0px 0px"> <img
-						th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
+						th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.data}"
 						alt="utente" title="utente" class="immagineUtente fixed"
 						style="margin: 0 auto; position: absolute; left: 32%; top: 57px;">
 					<br> <br> <br> <br>
@@ -253,7 +253,7 @@
 
 
 							<img
-								th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
+								th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.data}"
 								alt="utente" title="utente" class="immagineUtente"
 								style="margin: 20px; margin-left: 17px">
 						</div>
@@ -346,10 +346,10 @@
 								<div class="row">
 									<div class="col-sm-3 col-md-3 col-lg-2">
 										<img
-											th:src="'data:image/jpeg;base64,' + ${post.autore.immagine.getImgData(post.autore.immagine.data)}"
+											th:src="'data:image/jpeg;base64,' + ${post.autore.immagine.data}"
 											title="utente" class="immagineUtente"
 											style="margin: 20px; margin-top: 0px"> <img
-											th:src="'data:image/png;base64,' + ${post.autore.settore.getImgData(post.autore.settore.logoBlack)}"
+											th:src="'data:image/png;base64,' + ${post.autore.settore.logoBlack}"
 											width="80%"
 											style="opacity: 0.8; margin: 20px; margin-top: -7px"
 											id="imgSettore">
@@ -427,8 +427,7 @@
 									</div>
 
 									</div>
-									<!--  <img th:src="'data:image/png;base64,' + ${utenteDati.settore.getImgData(utenteDati.settore.logo)}"
-									width="14%" style="opacity: 0.8;">-->
+
 								</div>
 								<!-- CONTENUTO DEL POST -->
 								<div>
@@ -445,7 +444,7 @@
 
 									<div th:if="${post.immagine!=null}">
 										<img
-											th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(post.immagine.data)}"
+											th:src="'data:image/jpeg;base64,' + ${post.immagine.data}"
 											width="100%" height="40%">
 									</div>
 									<div>
@@ -514,7 +513,7 @@
 												<div class="modal-body" th:each="utente : ${post.setUtenti}"
 													th:if="${post.setUtenti.size > 0}" style="background-color: #B9CAF0;" >
 													<a th:onclick="nome([[${utente.id}]], 'like')" th:id="'like' + ${utente.id}" style="cursor:pointer;">
-													<img th:src="'data:image/jpeg;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}"
+													<img th:src="'data:image/jpeg;base64,' + ${utente.immagine.data}"
 													title="utente" class="immagineUtente img-fluid" style="border-radius: 50%;"></a>
 													<a th:onclick="nome([[${utente.id}]], 'span')" th:id="'span' + ${utente.id}" >
 													<span th:text="${utente.nome} + ' ' + ${utente.cognome}" style="cursor:pointer; color: #303030" /></a>
@@ -538,7 +537,7 @@
 									<table id="tableCommento">
 										<tr>
 											<td><img
-												th:src="'data:image/jpeg;base64,' + ${commento.autore.immagine.getImgData(commento.autore.immagine.data)}"
+												th:src="'data:image/jpeg;base64,' + ${commento.autore.immagine.data}"
 												width="50px" style="border-radius: 50%"> <a
 												th:onclick="nome([[${commento.autore.id}]], 'commento')" th:id="'commento' + ${commento.autore.id}"
 												class="nomeCommento"
@@ -685,7 +684,7 @@ COLONNA DESTRA
 						<div class="carousel-item active" th:if="${eventilife[0].foto!=null}">
 							
 						
-							<img th:src="'data:image/png;base64,' + ${eventilife[0].getImgData(eventilife[0].foto)}" width="100%" style="height: 450px"  >
+							<img th:src="'data:image/png;base64,' + ${eventilife[0].foto}" width="100%" style="height: 450px"  >
 							<br>
 								<h3 th:text="${eventilife[0].titolo}" style="text-align: center; font-size: 30px; font-weight: bold; color: #303030" class="mt-3"></h3>
 								<p th:text="${#dates.format(eventilife[0].timestamp*1000, 'dd/MM/yyyy')}"  style="text-align: center; color: #303030" ></p>
@@ -770,7 +769,7 @@ COLONNA DESTRA
 							</div>
 						</div>
 						<div class="carousel-item" th:if="${eventilife.size>1}">
-							<img th:src="'data:image/png;base64,' + ${eventilife[1].getImgData(eventilife[1].foto)}" style="height: 450px" >
+							<img th:src="'data:image/png;base64,' + ${eventilife[1].foto}" style="height: 450px" >
 							<br>
 								<h3 th:text="${eventilife[1].titolo}"  style="text-align: center;color: #303030; font-size: 30px; font-weight: bold;" class="mt-3" ></h3>
 								<p th:text="${#dates.format(eventilife[1].timestamp*1000, 'dd/MM/yyyy')}"  style="text-align: center; color: #303030" ></p>
@@ -855,7 +854,7 @@ COLONNA DESTRA
 							</div>
 						</div>
 						<div class="carousel-item" th:if="${eventilife.size>2}">
-							<img th:src="'data:image/png;base64,' + ${eventilife[2].getImgData(eventilife[2].foto)}" style="height: 450px" >
+							<img th:src="'data:image/png;base64,' + ${eventilife[2].foto}" style="height: 450px" >
 							<br><h3 th:text="${eventilife[2].titolo}"  style="text-align:  center;color: #303030;font-size: 30px; font-weight: bold;" class="mt-3"></h3>
 								<p th:text="${#dates.format(eventilife[2].timestamp*1000, 'dd/MM/yyyy')}"  style="text-align: center; color: #303030"  ></p>
 						<div style="margin: 0 auto; text-align: center" th:if="${GML}">
@@ -974,7 +973,7 @@ COLONNA DESTRA
 
 						<div class="caption">
 							<img
-								th:src="'data:image/png;base64,' + ${film[0].getImgData(film[0].foto)}"
+								th:src="'data:image/png;base64,' + ${film[0].foto}"
 								class="img-fluid">
 
 							<h3 th:text="${film[0].titolo}" style="color: white;"></h3>
@@ -1059,7 +1058,7 @@ COLONNA DESTRA
 					<div id="secondoFilm" style="display: none;" th:if="${film.size>1}">
 						<div class="caption">
 							<img
-								th:src="'data:image/png;base64,' + ${film[1].getImgData(film[1].foto)}"
+								th:src="'data:image/png;base64,' + ${film[1].foto}"
 								class="img-fluid">
 
 							<h3 th:text="${film[1].titolo}" style="color: white;"></h3>
@@ -1141,7 +1140,7 @@ COLONNA DESTRA
 					<div id="terzoFilm" style="display: none;" th:if="${film.size>2}">
 						<div class="caption">
 							<img
-								th:src="'data:image/png;base64,' + ${film[2].getImgData(film[2].foto)}"
+								th:src="'data:image/png;base64,' + ${film[2].foto}"
 								class="img-fluid">
 
 							<h3 th:text="${film[2].titolo}" style="color: white;"></h3>
@@ -1255,7 +1254,7 @@ COLONNA DESTRA
 					<table id="libri" th:if="${libri.size > 0}">
 						<tr>
 							<td><img
-								th:src="'data:image/png;base64,' + ${libri[0].getImgData(libri[0].foto)}"
+								th:src="'data:image/png;base64,' + ${libri[0].foto}"
 								width="135px" style="padding: 5px;"></td>
 							<td><p th:text="${libri[0].titolo}"
 									STYLE="margin-left: 5px;; color: #303030;"></p>
@@ -1335,7 +1334,7 @@ COLONNA DESTRA
 						</tr>
 						<tr th:if="${libri.size>1}">
 							<td><img
-								th:src="'data:image/png;base64,' + ${libri[1].getImgData(libri[1].foto)}"
+								th:src="'data:image/png;base64,' + ${libri[1].foto}"
 								width="135px" style="padding: 5px;"></td>
 							<td><p th:text="${libri[1].titolo}"
 									STYLE="margin-left: 5px;; color: #303030;"></p>

@@ -105,7 +105,7 @@ table, th, td {
 						</div>
 					</div></li>
 					<li class="nav-item"><a th:href="@{/profilo/}"><img
-						th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
+						th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.data}"
 						alt="utente" title="utente" class="immagineUtente img-fluid"
 						id="utente-foto-profilo" style="border-radius: 50%;"></a></li>
     </ul>
@@ -123,7 +123,7 @@ table, th, td {
 		<div class="carousel-inner">
 			<div th:if="${aforisma.size>0}" th:each="aforisma1 : ${aforisma}"
 				th:class="${aforisma1Stat.index} == 0  ? 'carousel-item active':'carousel-item '">
-				<img th:src="'data:image/png;base64,' + ${aforisma1.getImgData(aforisma1.foto)}"
+				<img th:src="'data:image/png;base64,' + ${aforisma1.foto}"
 					th:alt="'myWork' + ${aforisma1Stat.index}" width="100%"
 					height="500" class="img-fluid" style="filter: brightness(50%);">
 				<div class="carousel-caption">
@@ -236,7 +236,7 @@ table, th, td {
 
 										<a	th:onclick="nome([[${assunto.id}]], 'nuoviAssunti')" 
 											th:id="'nuoviAssunti' + ${assunto.id}" style="cursor:pointer;"><img
-												th:src="'data:image/png;base64,' + ${assunto.immagine.getImgData(assunto.immagine.data)}"
+												th:src="'data:image/png;base64,' + ${assunto.immagine.data}"
 												th:alt="'fotoProfiloUtente' + ${assuntoStat.index}" class="img-fluid" width="250px" style="height: 380px;">
 										</a>
 									</div>
@@ -305,7 +305,7 @@ table, th, td {
 										th:class="${clienteStat.index} == 0  ? 'carousel-item active':'carousel-item '">
 										<div class="container">
 											<img
-												th:src="'data:image/png;base64,' + ${cliente.getImgData(cliente.foto)}"
+												th:src="'data:image/png;base64,' + ${cliente.foto}"
 												th:alt="'Clienti' + ${clienteStat.index}" width="400px" style="height: 300px;"
 												class="img-fluid">
 										</div>
@@ -420,7 +420,7 @@ table, th, td {
 										 th:class="${newsStat.index} == 0  ? 'carousel-item active':'carousel-item '">
 										<div class="container">
 											<img
-												th:src="'data:image/png;base64,' + ${news.getImgData(news.foto)}"
+												th:src="'data:image/png;base64,' + ${news.foto}"
 												th:alt="'News' + ${newsStat.index}" width="400px" style="height: 350px;"
 												class="img-fluid">
 										</div>
@@ -590,7 +590,7 @@ ROW SCHIZZO
 								<p th:text="${podcast.nome}" style="color: #303030"></p>
 								<audio controls style="margin-top: 10px;" preload="metadata">
 									<source
-										th:src="'data:audio/mp3;base64,' + ${podcast.getAudioData(podcast.podcast)}"
+										th:src="'data:audio/mp3;base64,' + ${podcast.podcast}"
 										type="audio/ogg">
 								</audio>
 								<form th:action="@{'/my-work/podcast/delete/'+${podcast.id}}"
@@ -639,7 +639,7 @@ ROW SCHIZZO
 										 th:class="${eventoStat.index} == 0  ? 'carousel-item active':'carousel-item '">
 										<div class="container">
 											<img
-												th:src="'data:image/png;base64,' + ${evento.getImgData(evento.foto)}"
+												th:src="'data:image/png;base64,' + ${evento.foto}"
 												th:alt="'evento' + ${eventoStat.index}" width="400px" style="height: 350px;"
 												class="img-fluid" >
 										</div>
@@ -767,7 +767,7 @@ ROW SCHIZZO
 									<div class="carousel-item active" th:if="${utente.size>0}">
 										<div class="container">
 											<img
-													th:src="'data:image/png;base64,' + ${utente[0].immagine.getImgData(utente[0].immagine.data)}"
+													th:src="'data:image/png;base64,' + ${utente[0].immagine.data}"
 													alt="utenteCompleanno" width="400px" style="height: 300px;"
 													class="img-fluid">
 										</div>
@@ -788,7 +788,7 @@ ROW SCHIZZO
 									<div class="carousel-item " th:if="${utente.size>1}">
 										<div class="container">
 											<img
-													th:src="'data:image/png;base64,' + ${utente[1].immagine.getImgData(utente[1].immagine.data)}"
+													th:src="'data:image/png;base64,' + ${utente[1].immagine.data}"
 													alt="utenteCompleanno" width="400px" style="height: 300px;"
 													class="img-fluid">
 										</div>
@@ -809,7 +809,7 @@ ROW SCHIZZO
 									<div class="carousel-item " th:if="${utente.size>2}">
 										<div class="container">
 											<img
-													th:src="'data:image/png;base64,' + ${utente[2].immagine.getImgData(utente[2].immagine.data)}"
+													th:src="'data:image/png;base64,' + ${utente[2].immagine.data}"
 													alt="utenteCompleanno" width="400px" style="height: 300px;"
 													class="img-fluid">
 										</div>
