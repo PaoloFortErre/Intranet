@@ -484,7 +484,7 @@
 				th:each="libro : ${libri}">
 				<div class="profile-card-3 mt-5">
 					<img
-						th:src="'data:image/png;base64,' + ${libro.foto)}"
+						th:src="'data:image/png;base64,' + ${libro.foto}"
 						class="img img-responsive" width="100%" height="350px" th:alt="'Libro' + ${libroStat.index}">
 					<div class="profile-name" th:text="${libro.titolo}"></div>
 					<div class="profile-username" th:text="${libro.contenuto}"></div>

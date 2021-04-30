@@ -72,7 +72,7 @@ table, th, td {
 					</div>
 					<div style="position: relative; float: right">
 						<a th:href="@{/profilo/}"><img
-							th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
+							th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.data}"
 							alt="utente" title="utente" class="immagineUtente"
 							id="utente-foto-profilo"
 							style="margin: 30px; margin-right: 40px;; border-radius: 50%; margin-top: 0px; float: right"></a>
@@ -142,7 +142,7 @@ table, th, td {
 							<th:block>
 								<tr>
 									<td th:each="nuovoUtente: ${nuoviAssunti}"><img
-										th:src="'data:image/png;base64,' + ${nuovoUtente.immagine.getImgData(nuovoUtente.immagine.data)}"
+										th:src="'data:image/png;base64,' + ${nuovoUtente.immagine.data}"
 										alt="fotoProfiloUtente" class="img-fluid" width="120px"
 										height="120px"></td>
 								</tr>
@@ -175,7 +175,7 @@ table, th, td {
 							<th:block>
 								<tr>
 									<td th:each="nuovoUtente: ${nuoviAssunti2}"><img
-										th:src="'data:image/png;base64,' + ${nuovoUtente.immagine.getImgData(nuovoUtente.immagine.data)}"
+										th:src="'data:image/png;base64,' + ${nuovoUtente.immagine.data}"
 										alt="fotoProfiloUtente" class="img-fluid" width="120px"
 										height="120px"></td>
 								</tr>
@@ -223,7 +223,7 @@ table, th, td {
 							style="font-style: italic; font-size: 10px"></p>
 						<audio controls style="margin-top: 10px">
 							<source
-								th:src="'data:audio/mp3;base64,' + ${primoPodcast.getAudioData(primoPodcast.podcast)}"
+								th:src="'data:audio/mp3;base64,' + ${primoPodcast.podcast}"
 								type="audio/ogg">
 						</audio> <br>
 						<form
@@ -254,7 +254,7 @@ table, th, td {
 								style="font-style: italic; font-size: 10px;"></p>
 							<audio controls style="margin-top: 10px">
 								<source
-									th:src="'data:audio/mp3;base64,' + ${altriPodcast.getAudioData(altriPodcast.podcast)}"
+									th:src="'data:audio/mp3;base64,' + ${altriPodcast.podcast}"
 									type="audio/ogg">
 							</audio><br><br>
 							<form
@@ -292,7 +292,7 @@ table, th, td {
 					<div>
 						<div th:each="utente: ${utente}">
 							<img
-								th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}"
+								th:src="'data:image/png;base64,' + ${utente.immagine.data}"
 								alt="fotoProfiloUtente" title="Foto profilo dell'utente"
 								width="28%" height="28%" style="margin-top: 10px;">
 
@@ -341,7 +341,7 @@ table, th, td {
 
 									<div th:if="${cliente.logo!=null}">
 										<img
-											th:src="'data:image/png;base64,' + ${cliente.logo.getImgData(cliente.logo.data)}"
+											th:src="'data:image/png;base64,' + ${cliente.logo.data}"
 											class="img-fluid" width="120px" height="120px">
 									</div>
 								</td>
@@ -533,7 +533,7 @@ table, th, td {
 
 						<div id="evento-immagine" th:if="${eventi.copertina!=null}">
 							<img
-								th:src="'data:image/png;base64,' + ${eventi.copertina.getImgData(eventi.copertina.data)}"
+								th:src="'data:image/png;base64,' + ${eventi.copertina.data}"
 								width="100%" height="330px">
 						</div>
 						<div id="evento-title">
@@ -587,7 +587,7 @@ table, th, td {
 						<div class="evento" style="margin: auto">
 							<div id="evento-immagine" th:if="${eventi2.copertina!=null}">
 								<img
-									th:src="'data:image/png;base64,' + ${eventi2.copertina.getImgData(eventi2.copertina.data)}"
+									th:src="'data:image/png;base64,' + ${eventi2.copertina.data}"
 									width="100%" height="330px">
 							</div>
 							<div id="evento-title">
@@ -680,7 +680,7 @@ table, th, td {
 						</div>
 						<div class="col-sm-4 col-md-4 col-lg-4">
 							<img
-								th:src="'data:image/png;base64,' + ${news.copertina.getImgData(news.copertina.data)}"
+								th:src="'data:image/png;base64,' + ${news.copertina.data}"
 								width="95%" height="160PX" style="float: right; top: 29px;">
 
 						</div>
@@ -718,7 +718,7 @@ table, th, td {
 								</div>
 								<div class="col-sm-4 col-md-4 col-lg-4">
 									<img
-										th:src="'data:image/png;base64,' + ${news2.copertina.getImgData(news2.copertina.data)}"
+										th:src="'data:image/png;base64,' + ${news2.copertina.data}"
 										width="95%" height="160PX" style="float: right; top: 29px;">
 								</div>
 							</div>

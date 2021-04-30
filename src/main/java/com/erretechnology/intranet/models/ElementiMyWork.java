@@ -13,17 +13,17 @@ import javax.persistence.Table;
 public class ElementiMyWork {
 	@Id
 	private int id;
-	private byte[] foto;
+	private String foto;
 	private String titolo;
 	private String contenuto;
 	private Long timestamp;
 	private String luogo;
 	private String tipo;
 	
-	public byte[] getFoto() {
+	public String getFoto() {
 		return foto;
 	}
-	public void setFoto(byte[] foto) {
+	public void setFoto(String foto) {
 		this.foto = foto;
 	}
 	public String getTitolo() {

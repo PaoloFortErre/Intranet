@@ -22,10 +22,10 @@ public class Settore {
 	public void setLogo(String logo) {
 		this.logo = logo;
 	}
-	public String getLogoBlackS() {
+	public String getLogoBlack() {
 		return logoBlack;
 	}
-	public void setLogoBlackS(String logoBlack) {
+	public void setLogoBlack(String logoBlack) {
 		this.logoBlack = logoBlack;
 	}
 	public String getNomeSettore() {

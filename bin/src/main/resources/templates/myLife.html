@@ -93,7 +93,7 @@
 					</div>
 					<div style="position: relative; float: right">
 						<a th:href="@{/profilo/}"><img
-							th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
+							th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.data}"
 							alt="utente" title="utente" class="immagineUtente"
 							id="utente-foto-profilo"
 							style="margin: 30px; margin-right: 40px;; border-radius: 50%; margin-top: 0px;"></a>
@@ -180,7 +180,7 @@
 
 					<img src="/view/MyLife/images/tori.jpg" width="100%"
 						style="border-radius: 6px 6px 0px 0px"> <img
-						th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
+						th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.data}"
 						alt="utente" title="utente" class="immagineUtente"
 						style="margin: 0 auto; position: absolute; left: 32%; top: 57px;">
 					<br> <br> <br> <br>
@@ -219,7 +219,7 @@
 
 
 							<img
-								th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
+								th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.data}"
 								alt="utente" title="utente" class="immagineUtente"
 								style="margin: 20px; margin-left: 17px">
 						</div>
@@ -311,10 +311,10 @@
 								<div class="row">
 									<div class="col-sm-3 col-md-3 col-lg-2">
 										<img
-											th:src="'data:image/jpeg;base64,' + ${post.autore.immagine.getImgData(post.autore.immagine.data)}"
+											th:src="'data:image/jpeg;base64,' + ${post.autore.immagine.data}"
 											title="utente" class="immagineUtente"
 											style="margin: 20px; margin-top: 7px"> <img
-											th:src="'data:image/png;base64,' + ${utenteDati.settore.getImgData(utenteDati.settore.logoBlack)}"
+											th:src="'data:image/png;base64,' + ${utenteDati.settore.logoBlack}"
 											width="80%"
 											style="opacity: 0.8; margin: 20px; margin-top: -7px"
 											id="imgSettore">
@@ -368,7 +368,7 @@
 										<br>
 
 									</div>
-									<!--  <img th:src="'data:image/png;base64,' + ${utenteDati.settore.getImgData(utenteDati.settore.logo)}" 
+									<!--  <img th:src="'data:image/png;base64,' + ${utenteDati.settore.logo}" 
 									width="14%" style="opacity: 0.8;">-->
 								</div>
 								<!-- CONTENUTO DEL POST -->
@@ -386,7 +386,7 @@
 
 									<div th:if="${post.immagine!=null}">
 										<img
-											th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(post.immagine.data)}"
+											th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.data}"
 											width="100%" height="40%">
 									</div>
 
@@ -399,7 +399,7 @@
 										<table id="tableCommento">
 											<tr>
 												<td><img
-													th:src="'data:image/jpeg;base64,' + ${commento.autore.immagine.getImgData(commento.autore.immagine.data)}"
+													th:src="'data:image/jpeg;base64,' + ${commento.autore.immagine.data}"
 													width="16%" style="border-radius: 50%">
 
 													<p class="nomeCommento" th:text="${commento.autore.nome}">
@@ -512,7 +512,7 @@ COLONNA DESTRA
 
 							<div class="caption" th:if="${eventilife.copertina!=null}">
 								<img
-									th:src="'data:image/png;base64,' + ${eventilife.copertina.getImgData(eventilife.copertina.data)}"
+									th:src="'data:image/png;base64,' + ${eventilife.copertina.data}"
 									class="img-responsive" width="450px" height="300px"
 									style="margin: auto;">
 								<h3 th:text="${eventilife.titolo}"></h3>
@@ -550,7 +550,7 @@ COLONNA DESTRA
 							<div th:if="${eventilife1.copertina!=null}">
 								<div class="caption" th:each="eventilife1 : ${eventilife1}">
 									<img
-										th:src="'data:image/png;base64,' + ${eventilife1.copertina.getImgData(eventilife1.copertina.data)}"
+										th:src="'data:image/png;base64,' + ${eventilife1.copertina.data}"
 										class="img-responsive" width="450px" height="100px"
 										style="margin: auto;">
 									<h3 th:text="${eventilife1.titolo}"></h3>
@@ -609,15 +609,15 @@ COLONNA DESTRA
 				<div th:if="${film1!=null}">
 
 					<img
-						th:src="'data:image/png;base64,' + ${film1.copertina.getImgData(film1.copertina.data)}"
+						th:src="'data:image/png;base64,' + ${film1.copertina.data}"
 						class="img-responsive" width="32%"
 						style="display: inline;; color: #303030;"> <img
 						th:if="${film2!=null}"
-						th:src="'data:image/png;base64,' + ${film2.copertina.getImgData(film2.copertina.data)}"
+						th:src="'data:image/png;base64,' + ${film2.copertina.data}"
 						class="img-responsive" width="32%"
 						style="display: inline;; color: #303030;"> <img
 						th:if="${film3!=null}"
-						th:src="'data:image/png;base64,' + ${film3.copertina.getImgData(film3.copertina.data)}"
+						th:src="'data:image/png;base64,' + ${film3.copertina.data}"
 						class="img-responsive" width="33%"
 						style="display: inline;; color: #303030;">
 
@@ -701,7 +701,7 @@ COLONNA DESTRA
 					<table id="libri" th:if="${libri!=null}">
 						<tr>
 							<td><img
-								th:src="'data:image/png;base64,' + ${libri.copertina.getImgData(libri.copertina.data)}"
+								th:src="'data:image/png;base64,' + ${libri.copertina.data}"
 								width="135px" style="padding: 5px;"></td>
 							<td><p th:text="${libri.titolo}"
 									STYLE="margin-left: 5px;; color: #303030;"></p>
@@ -723,7 +723,7 @@ COLONNA DESTRA
 						</tr>
 						<tr>
 							<td><img
-								th:src="'data:image/png;base64,' + ${libri1.copertina.getImgData(libri1.copertina.data)}"
+								th:src="'data:image/png;base64,' + ${libri1.copertina.data}"
 								width="135px" style="padding: 5px;"></td>
 							<td><p th:text="${libri1.titolo}"
 									STYLE="margin-left: 5px;; color: #303030;"></p>

@@ -568,7 +568,7 @@
                   <img class="top-left" th:src="@{/view/Profile/Images/pin_post-it.png}" alt="pin-post-it">
 
                   <div data-toggle="modal" th:attr="data-target='#postModal' + ${post.id}">
-                    <img style="cursor: pointer" th:if="${post.immagine} != null" th:src="'data:image/png;base64,' + ${post.immagine.getImgData(post.immagine.data)}" class="card-img-top" alt="immagine-post" >
+                    <img style="cursor: pointer" th:if="${post.immagine} != null" th:src="'data:image/png;base64,' + ${post.immagine.data}" class="card-img-top" alt="immagine-post" >
                   </div>
                   <div class="card-body rounded border border-dark">
                     <p th:text="${post.testo}" class="font-weight-bold text-dark"></p>
