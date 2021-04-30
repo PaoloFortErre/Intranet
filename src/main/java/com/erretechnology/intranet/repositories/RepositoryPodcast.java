@@ -15,5 +15,5 @@ public interface RepositoryPodcast extends JpaRepository<Podcast, Integer>{
 	public List<Podcast> findByVisibileFalse(Sort sort);
 	
 	@Query
-	public Podcast findByPodcast(byte[] data);
+	public Podcast findByPodcast(String data);
 }

@@ -38,12 +38,12 @@ public class ServicePodcastImpl implements ServicePodcast{
 	}
 
 	@Override
-	public boolean contains(byte[] data) {
+	public boolean contains(String data) {
 		return repositoryPodcast.findByPodcast(data) != null;
 	}
 
 	@Override
-	public Podcast getpodcastByData(byte[] data) {
+	public Podcast getpodcastByData(String data) {
 		return repositoryPodcast.findByPodcast(data);
 	}
 

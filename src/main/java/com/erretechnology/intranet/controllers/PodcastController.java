@@ -63,8 +63,8 @@ public class PodcastController extends BaseController {
 		if(timestampPodcast > Instant.now().getEpochSecond()) {
 			return uploadMAV(true, "La data del podcast non può essere nel futuro", model);
 		}
-		if(servicePodcast.contains(file.getBytes())) {
-			podcast = servicePodcast.getpodcastByData(file.getBytes());
+		if(servicePodcast.contains(podcast.getAudioData(file.getBytes()))) {
+			podcast = servicePodcast.getpodcastByData(podcast.getAudioData(file.getBytes()));
 		}else {
 			podcast.setTimestamp(Instant.now().getEpochSecond());
 			podcast.setPodcast(podcast.getAudioData(file.getBytes()));

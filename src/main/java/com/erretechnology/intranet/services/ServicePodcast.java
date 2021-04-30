@@ -10,8 +10,8 @@ public interface ServicePodcast{
 	public void save(Podcast podcast);
 	public CompletableFuture<List<Podcast>> getAll();
 	public Podcast getById(int id);
-	public boolean contains(byte[] data);
-	public Podcast getpodcastByData(byte[] data);
+	public boolean contains(String data);
+	public Podcast getpodcastByData(String data);
 	public CompletableFuture<List<Podcast>> getAllNotVisible();
 	public void remove(Podcast p);
 }
