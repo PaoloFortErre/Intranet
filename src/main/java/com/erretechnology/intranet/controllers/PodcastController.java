@@ -67,7 +67,7 @@ public class PodcastController extends BaseController {
 			podcast = servicePodcast.getpodcastByData(file.getBytes());
 		}else {
 			podcast.setTimestamp(Instant.now().getEpochSecond());
-			podcast.setPodcast(file.getBytes());
+			podcast.setPodcast(podcast.getAudioData(file.getBytes()));
 		}
 		UtenteDatiPersonali utente = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		podcast.setUtente(utente);

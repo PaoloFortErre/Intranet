@@ -242,9 +242,10 @@ public class UtenteController extends BaseController {
 		if (!dati.isEmpty()) {
 
 			img = new FileImmagine();
-			img.setData(Base64.getDecoder().decode(dati.getBytes("UTF-8")));
+			//img.setData(Base64.getDecoder().decode(dati.getBytes("UTF-8")));
+			img.setData(Base64.getEncoder().encodeToString(dati.getBytes()));
 			UtenteDatiPersonali utenteLoggato = serviceDatiPersonali.findById(idUser);
-			if(!Arrays.equals(utenteLoggato.getImmagine().getData(), img.getData())) {
+			if(!utenteLoggato.getImmagine().getData().equals(img.getData())) {
 				if (!serviceFileImmagine.contains(img.getData())) {
 					img.setAutore(utenteLoggato);
 					img.setTimestamp(Instant.now().getEpochSecond());

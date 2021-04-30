@@ -22,13 +22,21 @@ public class ComunicazioneHR {
 	private String nome;
 	private boolean visibile;
 	private long timestampEliminazione;
-
 	@Lob
-	private byte[] data;
+	private String data;
+	
 	@ManyToOne
 	@JoinColumn(name = "id_autore")
 	private UtenteDatiPersonali utente;
 	
+	
+	
+	public String getData() {
+		return data;
+	}
+	public void setData(String data) {
+		this.data = data;
+	}
 	public int getId() {
 		return id;
 	}
@@ -59,12 +67,6 @@ public class ComunicazioneHR {
 	}
 	public void setVisibile(boolean visibile) {
 		this.visibile = visibile;
-	}
-	public byte[] getData() {
-		return data;
-	}
-	public void setData(byte[] data) {
-		this.data = data;
 	}
 	public String getNome() {
 		return nome;

@@ -1,6 +1,8 @@
 package com.erretechnology.intranet.controllers;
 
+import java.io.UnsupportedEncodingException;
 import java.time.Instant;
+import java.util.Base64;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
@@ -81,7 +83,7 @@ public class UploadController extends BaseController{
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 		filePdf.setNome(fileName);
 		filePdf.setTimestamp(Instant.now().getEpochSecond());
-		filePdf.setData(file.getBytes());
+		filePdf.setData(getImgData(file.getBytes()));
 		filePdf.setVisibile(true);
 		filePdf.setAutore(u);
 		serviceFilePdf.insert(filePdf);
@@ -103,7 +105,7 @@ public class UploadController extends BaseController{
 		// la funzione restituisce il nome del file eliminando il path
 		UtenteDatiPersonali u = serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString()));
 		filePdfHR.setNome(fileName);
-		filePdfHR.setData(file.getBytes());
+		filePdfHR.setData(getImgData(file.getBytes()));
 		filePdfHR.setTimestamp(Instant.now().getEpochSecond());
 		filePdfHR.setUtente(u);
 		filePdfHR.setVisibile(true);
@@ -157,7 +159,7 @@ public class UploadController extends BaseController{
 	 */
 
 	@GetMapping(value = "/moduli/download")
-	public ResponseEntity<Resource> downloadModulo(int id, HttpSession session) {
+	public ResponseEntity<Resource> downloadModulo(int id, HttpSession session) throws UnsupportedEncodingException {
 		FilePdf pdf = serviceFilePdf.findById(id);
 		return downloadFile(pdf.getData(), pdf.getNome(), session);
 
@@ -166,7 +168,7 @@ public class UploadController extends BaseController{
 	 * Funzione per richiamare il download su dispositivo di una comunicazione HR
 	 */
 	@GetMapping(value = "/hr/download")
-	public ResponseEntity<Resource> downloadHR(int id, HttpSession session) {
+	public ResponseEntity<Resource> downloadHR(int id, HttpSession session) throws UnsupportedEncodingException {
 		ComunicazioneHR pdf = serviceComunicazioni.findById(id);
 		return downloadFile(pdf.getData(), pdf.getNome(), session);
 	}
@@ -175,14 +177,14 @@ public class UploadController extends BaseController{
 	/*
 	 * Funzione di downolad vera e propria
 	 */
-	private ResponseEntity<Resource> downloadFile(byte[] data, String nome, HttpSession session) {
+	private ResponseEntity<Resource> downloadFile(String data, String nome, HttpSession session) throws UnsupportedEncodingException {
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Content-Disposition", String.format("attachment; filename=" + nome));    
 		saveLog("scaricato il modulo " + nome, serviceDatiPersonali.findById(Integer.parseInt(session.getAttribute("id").toString())));
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_PDF_VALUE)
-				.body(new ByteArrayResource(data));
+				.body(new ByteArrayResource(Base64.getDecoder().decode(data.getBytes("UTF-8"))));
 	}
 
 	/*

@@ -16,7 +16,7 @@ public class FilePdf{
 	private String nome;
 	private long timestamp;
 	@Lob
-    private byte[] data;
+	private String data;
 	@ManyToOne
 	@JoinColumn(name = "id_autore")
 	private UtenteDatiPersonali autore;
@@ -28,30 +28,30 @@ public class FilePdf{
 		return autore;
 	}
 
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
+	}
+
 	public void setAutore(UtenteDatiPersonali autore) {
 		this.autore = autore;
 	}
 
-	public byte[] getData() {
-		return data;
-	}
-
-	public void setData(byte[] data) {
-		this.data = data;
-	}
-	
 	public Integer getId() {
 		return id;
 	}
-	
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	public Settore getSettore() {
 		return settore;
 	}
-	
+
 	public void setSettore(Settore settore) {
 		this.settore = settore;
 	}

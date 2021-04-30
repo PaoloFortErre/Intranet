@@ -22,7 +22,7 @@ public class Podcast {
 	private int id;
 	private String nome;
 	@Lob
-    private byte[] podcast;
+	private String podcast;
 	private long timestamp;
 	@ManyToOne
 	@JoinColumn(name = "id_autore")
@@ -31,6 +31,12 @@ public class Podcast {
 	private Boolean visibile;
 	private long timestampEliminazione;
 	
+	public String getPodcast() {
+		return podcast;
+	}
+	public void setPodcast(String podcast) {
+		this.podcast = podcast;
+	}
 	public UtenteDatiPersonali getUtente() {
 		return utente;
 	}
@@ -48,12 +54,6 @@ public class Podcast {
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-	public byte[] getPodcast() {
-		return podcast;
-	}
-	public void setPodcast(byte[] podcast) {
-		this.podcast = podcast;
 	}
 	public long getTimestamp() {
 		return timestamp;

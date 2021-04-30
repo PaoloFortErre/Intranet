@@ -23,17 +23,15 @@ public class Aforisma {
 	@JoinColumn(name="utente_id")
 	private Utente utente;
 	@Lob
-	private byte[] immagine;
+	private String immagine;
 	//	private boolean visibile;
 	private boolean isLife;
-	
-	
 
-	public byte[] getImmagine() {
+	public String getImmagine() {
 		return immagine;
 	}
 
-	public void setImmagine(byte[] immagine) {
+	public void setImmagine(String immagine) {
 		this.immagine = immagine;
 	}
 

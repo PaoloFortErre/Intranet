@@ -12,30 +12,30 @@ public class Settore {
 	@Id
 	private String nomeSettore;
 	@Lob
-    private byte[] logo;
+	private String logo;
 	@Lob
-	private byte[] logoBlack;
+	private String logoBlack;
 	
+	public String getLogo() {
+		return logo;
+	}
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
+	public String getLogoBlackS() {
+		return logoBlack;
+	}
+	public void setLogoBlackS(String logoBlack) {
+		this.logoBlack = logoBlack;
+	}
 	public String getNomeSettore() {
 		return nomeSettore;
 	}
 	public void setNomeSettore(String nomeSettore) {
 		this.nomeSettore = nomeSettore;
 	}
-	public byte[] getLogo() {
-		return logo;
-	}
-	public void setLogo(byte[] logo) {
-		this.logo = logo;
-	}
 	
 	public String getImgData(byte[] byteData) {
         return Base64.getMimeEncoder().encodeToString(byteData);
     }
-	public byte[] getLogoBlack() {
-		return logoBlack;
-	}
-	public void setLogoBlack(byte[] logoBlack) {
-		this.logoBlack = logoBlack;
-	}
 }

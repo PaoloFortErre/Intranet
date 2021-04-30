@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.Instant;
+import java.util.Base64;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
@@ -177,12 +178,16 @@ public abstract class BaseController {
 		return baos.toByteArray();
 	}
 	
+	protected String getImgData(byte[] byteData) {
+        return Base64.getMimeEncoder().encodeToString(byteData);
+    }
+	
 	protected FileImmagine salvaImmagine(MultipartFile immagine, UtenteDatiPersonali utenteLoggato) throws IOException {
 		FileImmagine img = new FileImmagine();			
 		if(compressImage(immagine, 0.5f).length == 0)
-			img.setData(immagine.getBytes());
+			img.setData(getImgData(immagine.getBytes()));
 		else
-			img.setData(compressImage(immagine, 0.5f));	
+			img.setData(getImgData(compressImage(immagine, 0.5f)));
 		if(!serviceFileImmagine.contains(img.getData())) {
 			img.setAutore(utenteLoggato);
 			img.setTimestamp(Instant.now().getEpochSecond());

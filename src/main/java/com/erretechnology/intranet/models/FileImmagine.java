@@ -24,12 +24,19 @@ public class FileImmagine{
 	
 	private String nomeFile;
 	@Lob
-    private byte[] data;
+	private String data;
 	@ManyToOne
 	@JoinColumn(name = "id_autore")
-	private UtenteDatiPersonali autore;
-
+	private UtenteDatiPersonali autore;	
 	
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -40,14 +47,6 @@ public class FileImmagine{
 
 	public void setAutore(UtenteDatiPersonali autore) {
 		this.autore = autore;
-	}
-
-	public byte[] getData() {
-		return data;
-	}
-
-	public void setData(byte[] data) {
-		this.data = data;
 	}
 
 	public String getNomeFile() {

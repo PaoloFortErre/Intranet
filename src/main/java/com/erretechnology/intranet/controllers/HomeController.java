@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.erretechnology.intranet.models.ElementiMyLife;
 import com.erretechnology.intranet.models.Manutenzione;
+import com.erretechnology.intranet.models.Podcast;
 import com.erretechnology.intranet.models.Post;
 import com.erretechnology.intranet.models.Utente;
 import com.erretechnology.intranet.models.UtenteDatiPersonali;
@@ -39,6 +40,7 @@ import com.erretechnology.intranet.models.VideoDelGiorno;
 import com.erretechnology.intranet.repositories.RepositoryCategoriaCinema;
 import com.erretechnology.intranet.repositories.RepositoryLinkedin;
 import com.erretechnology.intranet.repositories.RepositoryManutenzione;
+import com.erretechnology.intranet.repositories.RepositoryPodcast;
 
 import net.bytebuddy.utility.RandomString;
 
@@ -53,6 +55,8 @@ public class HomeController extends BaseController{
 	RepositoryManutenzione repositoryManutenzione;
 	@Autowired
 	private RepositoryCategoriaCinema repoCategoria;
+	@Autowired
+	private RepositoryPodcast repoSettore;
 
 	
 	@GetMapping("/")

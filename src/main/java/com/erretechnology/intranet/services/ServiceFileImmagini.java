@@ -14,7 +14,7 @@ public interface ServiceFileImmagini {
 
 	public FileImmagine getLastImmagineByUtente(UtenteDatiPersonali u);
 	
-	public boolean contains(byte[] data);
+	public boolean contains(String data);
 	
-	public FileImmagine getImmagineByData(byte[] data);
+	public FileImmagine getImmagineByData(String data);
 }
