@@ -304,7 +304,7 @@
 
                 <li class="nav-item ml-3 mr-n5">
                   <a th:href="@{/profilo/}" th:if="${session.id} != ${utente.id}">
-                    <img th:src="'data:image/jpeg;base64,' + ${utenteDati.immagine.getImgData(utenteDati.immagine.data)}"
+                    <img th:src="'data:image/png;base64,' + ${utenteDati.immagine.data}"
                     alt="utente" title="utente" class="img-fluid picture2 rounded-circle">
                   </a>
                 </li>
@@ -331,7 +331,7 @@
                   </div>
                   <div class="modal-body">
                     <div class="container text-center">
-                      <img class="img-fluid immagine-modal" id="myImgModal" th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}" alt="profile_picca">
+                      <img class="img-fluid immagine-modal" id="myImgModal" th:src="'data:image/png;base64,' + ${utente.immagine.data}" alt="profile_picca">
                     </div>
                   </div>
                 </div>
@@ -343,7 +343,7 @@
               <div class="profile_pic">
                 <div data-toggle="modal" data-target="#ProfileModal">
                   <img id="myImg" class="picture rounded-circle"
-                  th:src="'data:image/png;base64,' + ${utente.immagine.getImgData(utente.immagine.data)}" alt="profile_picca">
+                  th:src="'data:image/png;base64,' + ${utente.immagine.data}" alt="profile_picca">
 
                 </div>
                 <div class="profile-img-confirm" id="profile-img-confirm" style="display: none;">
@@ -554,7 +554,7 @@
                       </div>
                       <div class="modal-body">
                         <div class="container">
-                          <img class="img-fluid immagine-modal" th:if="${post.immagine} != null" th:src="'data:image/png;base64,' + ${post.immagine.getImgData(post.immagine.data)}" alt="immagine-post-modal" >
+                          <img class="img-fluid immagine-modal" th:if="${post.immagine} != null" th:src="'data:image/png;base64,' + ${post.immagine.data}" alt="immagine-post-modal" >
                         </div>
                       </div>
                       <div class="modal-footer">
